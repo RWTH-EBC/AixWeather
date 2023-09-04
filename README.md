@@ -56,7 +56,9 @@ You may use the imported package [Wetterdienst](https://github.com/earthobservat
 
 **Test Reference Years (TRY)**: 
 
-[Handbuch](https://www.bbsr.bund.de/BBSR/DE/forschung/programme/zb/Auftragsforschung/5EnergieKlimaBauen/2013/testreferenzjahre/try-handbuch.pdf). TRY data can be downloaded from the DWD (sign up required but for free) [TRY data sets](https://www.bbsr.bund.de/BBSR/DE/forschung/programme/zb/Auftragsforschung/5EnergieKlimaBauen/2013/testreferenzjahre/01-start.html;jsessionid=5D9912D230EB887C1F831671303A8A0F.live21304?nn=2544408&pos=2). 
+[Handbuch](https://www.bbsr.bund.de/BBSR/DE/forschung/programme/zb/Auftragsforschung/5EnergieKlimaBauen/2013/testreferenzjahre/try-handbuch.pdf). 
+
+TRY data can be downloaded from the DWD (sign up required but for free) [TRY data sets](https://www.bbsr.bund.de/BBSR/DE/forschung/programme/zb/Auftragsforschung/5EnergieKlimaBauen/2013/testreferenzjahre/01-start.html;jsessionid=5D9912D230EB887C1F831671303A8A0F.live21304?nn=2544408&pos=2). 
 
 Additional information on suitability of TRY data (last update: 2019):
 There are typical TRY datasets grouped by the year of publication:
@@ -73,9 +75,12 @@ and the global radiation!
 
 **EnergyPlus (EPW)**: 
 
-for format information, see output formats. Online sources for EPW data: https://climate.onebuilding.org/default.html and https://www.ladybug.tools/epwmap/
+for format information, see output formats. 
+
+Online sources for EPW data: https://climate.onebuilding.org/default.html and https://www.ladybug.tools/epwmap/
 
 **ERC data:**
+
 This data is from the weather station of the Institute for Energy Efficient Buildings and Indoor Climate (RWTH). Access requires user credentials. Such credentials are pre-defined if you use the WebApp.
 
 ## Output formats
@@ -86,11 +91,13 @@ This data is from the weather station of the Institute for Energy Efficient Buil
 
 **Modelica ReaderTMY3:**
 
-TMY3 reader from the [IBPSA](https://github.com/ibpsa/modelica-ibpsa) library used in the [AixLib](https://github.com/RWTH-EBC/AixLib) library: [OpenModelica](https://build.openmodelica.org/Documentation/Buildings.BoundaryConditions.WeatherData.ReaderTMY3.html).
+TMY3 reader from the [IBPSA](https://github.com/ibpsa/modelica-ibpsa) library used in the [AixLib](https://github.com/RWTH-EBC/AixLib) library. Model info at [OpenModelica](https://build.openmodelica.org/Documentation/Buildings.BoundaryConditions.WeatherData.ReaderTMY3.html).
 It claims to use mainly [TMY3 data](https://www.nrel.gov/docs/fy08osti/43156.pdf), though we found that the pressure is used in mbar instead of Pa. Further deviations possible.
 
-Additional information for AixLib users:
+Additional information for AixLib users.
+
 Weatherdata usage in the low order model (LOM):
+
 Used in LOM:
 - TDryBul
 - RelHum
