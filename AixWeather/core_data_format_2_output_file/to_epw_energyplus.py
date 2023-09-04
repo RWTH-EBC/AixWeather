@@ -7,13 +7,9 @@ import datetime as dt
 import pandas as pd
 import numpy as np
 
-from core.core_data_format_2_output_file import utils_2output
-from core.imports.utils_import import MetaData
-from core.transformation_functions import (
-    time_observation_transformations,
-    auxiliary,
-    pass_through_handling,
-)
+from AixWeather.core_data_format_2_output_file import utils_2output
+from AixWeather.imports.utils_import import MetaData
+from AixWeather.transformation_functions import auxiliary, time_observation_transformations, pass_through_handling
 
 """
 format_epw information:

@@ -11,7 +11,7 @@ import pandas as pd
 
 from tests import utils_4_tests
 from config.definitions import ROOT_DIR
-from core.imports.utils_import import MetaData
+from AixWeather.imports.utils_import import MetaData
 from project_class import ProjectClassDWDHistorical
 
 

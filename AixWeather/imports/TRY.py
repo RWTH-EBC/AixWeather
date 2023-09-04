@@ -10,7 +10,7 @@ import geopandas as gpd
 from geopy.geocoders import Nominatim
 from shapely.geometry import Point
 
-from core.imports.utils_import import MetaData
+from AixWeather.imports.utils_import import MetaData
 
 
 def _handle_TRY_type(path: str):

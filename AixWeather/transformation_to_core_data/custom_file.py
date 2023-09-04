@@ -5,14 +5,9 @@ directory for requirements of the returned df.
 
 import pandas as pd
 
-from core.imports.utils_import import MetaData
-from core.transformation_functions import (
-    unit_conversions,
-    time_observation_transformations,
-    auxiliary,
-    variable_transformations,
-    pass_through_handling,
-)
+from AixWeather.imports.utils_import import MetaData
+from AixWeather.transformation_functions import auxiliary, time_observation_transformations, variable_transformations, \
+    pass_through_handling, unit_conversions
 
 format_costum = {
     "variable_name_from_your_costum_data": {

@@ -3,32 +3,31 @@ import pandas as pd
 
 from abc import ABC, abstractmethod
 
-from core.imports.DWD import (
+from AixWeather.imports.DWD import (
     import_DWD_historical,
     import_DWD_forecast,
     import_meta_DWD_historical,
     import_meta_DWD_forecast,
 )
-from core.imports.ERC import import_ERC, import_meta_from_ERC
-from core.imports.TRY import load_try_from_file, load_try_meta_from_file
-from core.imports.EPW import load_epw_from_file, load_epw_meta_from_file
-from core.imports.custom_file import load_custom_meta_data, load_custom_from_file
-from core.transformation_to_core_data.DWD import (
+from AixWeather.imports.ERC import import_ERC, import_meta_from_ERC
+from AixWeather.imports.TRY import load_try_from_file, load_try_meta_from_file
+from AixWeather.imports.EPW import load_epw_from_file, load_epw_meta_from_file
+from AixWeather.imports.custom_file import load_custom_meta_data, load_custom_from_file
+from AixWeather.transformation_to_core_data.DWD import (
     DWD_historical_to_core_data,
     DWD_forecast_2_core_data,
 )
-from core.transformation_to_core_data.ERC import ERC_to_core_data
-from core.transformation_to_core_data.TRY import TRY_to_core_data
-from core.transformation_to_core_data.EPW import EPW_to_core_data
-from core.transformation_to_core_data.custom_file import custom_to_core_data
-from core.core_data_format_2_output_file.unconverted_to_x import (
+from AixWeather.transformation_to_core_data.ERC import ERC_to_core_data
+from AixWeather.transformation_to_core_data.TRY import TRY_to_core_data
+from AixWeather.transformation_to_core_data.EPW import EPW_to_core_data
+from AixWeather.transformation_to_core_data.custom_file import custom_to_core_data
+from AixWeather.core_data_format_2_output_file.unconverted_to_x import (
     to_pickle,
     to_json,
     to_csv,
 )
-from core.core_data_format_2_output_file.to_mos_TMY3 import to_mos
-from core.core_data_format_2_output_file.to_epw_energyplus import to_epw
-from core.core_data_format_2_output_file import utils_2output
+from AixWeather.core_data_format_2_output_file.to_mos_TMY3 import to_mos
+from AixWeather.core_data_format_2_output_file.to_epw_energyplus import to_epw
 
 
 class ProjectClassGeneral(ABC):

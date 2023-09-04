@@ -8,7 +8,7 @@ import pandas as pd
 
 import requests
 
-from core.imports.utils_import import MetaData
+from AixWeather.imports.utils_import import MetaData
 
 key_list = [
     "4121.weatherstation.temperature",

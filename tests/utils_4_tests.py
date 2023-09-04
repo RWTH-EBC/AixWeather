@@ -9,8 +9,8 @@ import shutil
 import os.path
 import pandas as pd
 
-from core.core_data_format_2_output_file import utils_2output
-from core.imports.utils_import import MetaData
+from AixWeather.core_data_format_2_output_file import utils_2output
+from AixWeather.imports.utils_import import MetaData
 
 
 def load_mos(folder_tests, file_name):

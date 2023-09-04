@@ -4,7 +4,7 @@ This module contains auxiliary functions for data transformation, e.g. time shif
 
 import pandas as pd
 
-from core.transformation_functions import auxiliary
+from AixWeather.transformation_functions import auxiliary
 
 
 def create_pass_through_variables(df_shifted, df_no_shift, format, transform_func, meta):

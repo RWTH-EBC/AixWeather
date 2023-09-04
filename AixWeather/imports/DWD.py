@@ -11,7 +11,7 @@ import pandas as pd
 
 from wetterdienst.provider.dwd.mosmix import DwdMosmixRequest, DwdMosmixType
 
-from core.imports import utils_import
+from AixWeather.imports import utils_import
 import config.definitions as defin
 
 

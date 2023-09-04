@@ -1,13 +1,8 @@
 import pandas as pd
 
-from core.imports.utils_import import MetaData
-from core.transformation_functions import (
-    unit_conversions,
-    time_observation_transformations,
-    auxiliary,
-    variable_transformations,
-    pass_through_handling,
-)
+from AixWeather.imports.utils_import import MetaData
+from AixWeather.transformation_functions import auxiliary, time_observation_transformations, variable_transformations, \
+    pass_through_handling, unit_conversions
 
 """
 format_TRY_15_45 information 

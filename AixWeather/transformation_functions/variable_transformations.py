@@ -8,7 +8,7 @@ import numpy as np
 
 import pvlib
 
-from core.imports.utils_import import MetaData
+from AixWeather.imports.utils_import import MetaData
 
 
 def approximate_opaque_from_total_skycover(total_sky_cover):
