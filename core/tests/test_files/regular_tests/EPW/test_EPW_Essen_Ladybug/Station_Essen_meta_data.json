@@ -1,0 +1,21 @@
+{
+    "_station_name": "Essen",
+    "station_id": "UnknownStationID",
+    "_altitude": 152.0,
+    "_latitude": 51.4,
+    "_longitude": 6.96,
+    "input_source": "EPW",
+    "timezone": 1.0,
+    "executed_transformations": {
+        "DirHorRad": [
+            "GlobHorRad",
+            "DiffHorRad"
+        ]
+    },
+    "executed_transformations_no_shift": {
+        "DirHorRad": [
+            "GlobHorRad",
+            "DiffHorRad"
+        ]
+    }
+}
