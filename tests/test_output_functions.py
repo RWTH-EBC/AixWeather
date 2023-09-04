@@ -9,7 +9,7 @@ import json
 
 import pandas as pd
 
-from core.tests import utils_4_tests
+from tests import utils_4_tests
 from config.definitions import ROOT_DIR
 from core.imports.utils_import import MetaData
 from project_class import ProjectClassDWDHistorical
@@ -20,7 +20,7 @@ class BaseOutputFunction(unittest.TestCase):
         cls.c = ProjectClassDWDHistorical(start=start, end=end, station=station)
         cls.folder_tests = os.path.join(
             ROOT_DIR,
-            f"core/tests/test_files/regular_tests/output_functions/test_{name}",
+            f"tests/test_files/regular_tests/output_functions/test_{name}",
         )
         cls.start_formatted = start.strftime("%Y%m%d")
         cls.end_formatted = end.strftime("%Y%m%d")

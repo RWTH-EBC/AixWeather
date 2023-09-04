@@ -7,7 +7,7 @@ import unittest
 
 from project_class import ProjectClassEPW
 from config.definitions import ROOT_DIR
-from core.tests import utils_4_tests
+from tests import utils_4_tests
 
 
 class BaseEPW(unittest.TestCase):
@@ -15,7 +15,7 @@ class BaseEPW(unittest.TestCase):
     def init_and_run_EPW(cls, name: str, path: str):
         cls.c = ProjectClassEPW(path=path)
         cls.folder_tests = os.path.join(
-            ROOT_DIR, f"core/tests/test_files/regular_tests/EPW/test_{name}"
+            ROOT_DIR, f"tests/test_files/regular_tests/EPW/test_{name}"
         )
 
         utils_4_tests.run_all_functions(cls.c)
@@ -37,7 +37,7 @@ class TestEPWEssenLadybug(BaseEPW, utils_4_tests.RegressionTestsClass):
             "EPW_Essen_Ladybug",
             os.path.join(
                 ROOT_DIR,
-                r"core/tests/test_files/regular_tests/EPW/test_EPW_Essen_Ladybug/"
+                r"tests/test_files/regular_tests/EPW/test_EPW_Essen_Ladybug/"
                 "input/DEU_NW_Essen_104100_TRY2035_05_Wint_BBSR.epw",
             ),
         )

@@ -7,7 +7,7 @@ import unittest
 
 from project_class import ProjectClassTRY
 from config.definitions import ROOT_DIR
-from core.tests import utils_4_tests
+from tests import utils_4_tests
 
 
 class BaseTRY(unittest.TestCase):
@@ -15,7 +15,7 @@ class BaseTRY(unittest.TestCase):
     def init_and_run_TRY(cls, name: str, path: str):
         cls.c = ProjectClassTRY(path=path)
         cls.folder_tests = os.path.join(
-            ROOT_DIR, f"core/tests/test_files/regular_tests/TRY/test_{name}"
+            ROOT_DIR, f"tests/test_files/regular_tests/TRY/test_{name}"
         )
 
         utils_4_tests.run_all_functions(cls.c)
@@ -37,7 +37,7 @@ class TestDWDTRY2015(BaseTRY, utils_4_tests.RegressionTestsClass):
             "TRY2015",
             os.path.join(
                 ROOT_DIR,
-                r"core/tests/test_files/regular_tests/TRY/"
+                r"tests/test_files/regular_tests/TRY/"
                 "test_TRY2015/input/TRY2015_507931060546_Jahr.dat",
             ),
         )
@@ -50,7 +50,7 @@ class TestDWDTRY2015Sommer(BaseTRY, utils_4_tests.RegressionTestsClass):
             "TRY2015_Sommer",
             os.path.join(
                 ROOT_DIR,
-                r"core/tests/test_files/regular_tests/TRY/"
+                r"tests/test_files/regular_tests/TRY/"
                 "test_TRY2015_Sommer/input/TRY2015_507931060546_Somm.dat",
             ),
         )
@@ -63,7 +63,7 @@ class TestDWDTRY2045(BaseTRY, utils_4_tests.RegressionTestsClass):
             "TRY2045",
             os.path.join(
                 ROOT_DIR,
-                r"core/tests/test_files/regular_tests/TRY/"
+                r"tests/test_files/regular_tests/TRY/"
                 "test_TRY2045/input/TRY2045_507931060546_Jahr.dat",
             ),
         )

@@ -20,7 +20,7 @@ class BaseDWDForecast(unittest.TestCase):
     def init_and_run_DWD_forecast(cls, name: str, station):
         cls.c = ProjectClassDWDForecast(station=station)
         cls.folder_tests = os.path.join(
-            ROOT_DIR, f"core/tests/test_files/regular_tests/DWD_forecast/test_{name}"
+            ROOT_DIR, f"tests/test_files/regular_tests/DWD_forecast/test_{name}"
         )
 
         utils_4_tests.run_all_functions(cls.c)
@@ -44,7 +44,7 @@ class TestDWDForecastFromImportedData(
         name = "06710_august_2023"
         cls.c = ProjectClassDWDForecast(station=station)
         cls.folder_tests = os.path.join(
-            ROOT_DIR, f"core/tests/test_files/regular_tests/DWD_forecast/test_{name}"
+            ROOT_DIR, f"tests/test_files/regular_tests/DWD_forecast/test_{name}"
         )
 
         # import "imported data" and "meta_data"

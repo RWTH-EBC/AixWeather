@@ -10,7 +10,7 @@ from parameterized import parameterized
 
 from config.definitions import ROOT_DIR
 from project_class import ProjectClassDWDHistorical
-from core.tests import utils_4_tests
+from tests import utils_4_tests
 
 
 class BaseDWDHistorical(unittest.TestCase):
@@ -20,7 +20,7 @@ class BaseDWDHistorical(unittest.TestCase):
     ):
         cls.c = ProjectClassDWDHistorical(start=start, end=end, station=station)
         cls.folder_tests = os.path.join(
-            ROOT_DIR, f"core/tests/test_files/regular_tests/DWD_hist/test_{name}"
+            ROOT_DIR, f"tests/test_files/regular_tests/DWD_hist/test_{name}"
         )
         cls.start_formatted = start.strftime("%Y%m%d")
         cls.end_formatted = end.strftime("%Y%m%d")

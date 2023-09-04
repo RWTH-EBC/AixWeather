@@ -6,7 +6,7 @@ import os.path
 import unittest
 import datetime as dt
 
-from core.tests import utils_4_tests
+from tests import utils_4_tests
 from config.definitions import ROOT_DIR
 from project_class import ProjectClassERC
 
@@ -22,7 +22,7 @@ class BaseERC(unittest.TestCase):
     ):
         cls.c = ProjectClassERC(start=start, end=end, cred=cred)
         cls.folder_tests = os.path.join(
-            ROOT_DIR, f"core/tests/test_files/regular_tests/ERC_hist/test_{name}"
+            ROOT_DIR, f"tests/test_files/regular_tests/ERC_hist/test_{name}"
         )
         cls.start_formatted = start.strftime("%Y%m%d")
         cls.end_formatted = end.strftime("%Y%m%d")
