@@ -6,7 +6,7 @@ import os
 import unittest
 import pandas as pd
 
-from project_class import ProjectClassTRY
+from AixWeather.project_class import ProjectClassTRY
 from config.definitions import ROOT_DIR
 
 

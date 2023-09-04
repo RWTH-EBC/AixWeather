@@ -5,7 +5,7 @@ includes unittests for EPW data
 import os
 import unittest
 
-from project_class import ProjectClassEPW
+from AixWeather.project_class import ProjectClassEPW
 from config.definitions import ROOT_DIR
 from tests import utils_4_tests
 
