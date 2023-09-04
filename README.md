@@ -1,3 +1,5 @@
+![E.ON EBC RWTH Aachen University](./docs/_static/EBC_Logo.png)
+
 # AixWeather
 **A weather data generation tool for building energy system simulations. Pull, Transform, Export.**
 
