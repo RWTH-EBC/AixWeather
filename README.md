@@ -1,6 +1,6 @@
 ![E.ON EBC RWTH Aachen University](./docs/_static/EBC_Logo.png)
 
-[![DOI](Todo)](Todo)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.03861/status.svg)](Todo_DOI)
 [![pylint](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/pylint/pylint.svg )](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/pylint/pylint.html)
 [![documentation](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/docs/doc.svg)](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/docs/index.html)
 [![coverage](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/coverage/badge.svg)](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/coverage)
