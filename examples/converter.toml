@@ -1,0 +1,5 @@
+[[ExampleFile]]
+filename = "examples/e1_pull_DWD_historical_to_all_output_formats.py"
+func_name = "e1_pull_DWD_historical_to_all_output_formats"
+md_path = "docs/source/examples"
+ipynb_path = "docs/jupyter_notebooks"

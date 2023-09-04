@@ -1,0 +1,9 @@
+[run]
+omit =
+    # omit all test directories
+    */test*
+	# omit examples
+	*/examples*
+source =
+	ebcpy
+source = AixWeather
