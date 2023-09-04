@@ -1,5 +1,12 @@
 ![E.ON EBC RWTH Aachen University](./docs/_static/EBC_Logo.png)
 
+[![DOI](Todo)](Todo)
+[![pylint](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/pylint/pylint.svg )](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/pylint/pylint.html)
+[![documentation](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/docs/doc.svg)](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/docs/index.html)
+[![coverage](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/coverage/badge.svg)](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/coverage)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![build](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/build/build.svg)](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/build/build.svg)
+
 # AixWeather
 **A weather data generation tool for building energy system simulations. Pull, Transform, Export.**
 
