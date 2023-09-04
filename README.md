@@ -1,9 +1,10 @@
-# ebc-weather-tool - weather data for simulations
+# AixWeather
+**A weather data generation tool for building energy system simulations. Pull, Transform, Export.**
 
 ## WebApp
 
 For fast and easy accees use the WebApp.
-The repository **[EBC-Weather-Tool-WebApp](https://github.com/RWTH-EBC/EBC-Weather-Tool-WebApp)** contains the corresponding WebApp for this repo.
+The repository **[AixWeather-WebApp](https://github.com/RWTH-EBC/AixWeather-WebApp)** contains the corresponding WebApp for this repo.
 This repository contains the functionalities, which can be used for automated weather data generation. 
 
 ## How to use
