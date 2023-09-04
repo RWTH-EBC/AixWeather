@@ -33,7 +33,7 @@ For each data origin a class is defined. See the examples to know how to use the
 
 **Overview**
 
-![Weather Data Tool Diagram](doc/Overview_WeatherTool.drawio.png)
+![Weather Data Tool Diagram](docs/Overview_WeatherTool.drawio.png)
 
 **Known limitations:**
 - only hourly data
