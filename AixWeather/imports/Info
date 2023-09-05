@@ -1,4 +1,0 @@
-Here all data imports should be handled, e.g. pulling data from dwd.
-
-
-Output is a dataframe that is as raw as possible (but with some datetime as index)

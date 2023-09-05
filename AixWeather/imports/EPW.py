@@ -7,10 +7,15 @@ import pandas as pd
 from AixWeather.imports.utils_import import MetaData
 
 
-def load_epw_meta_from_file(path: str):
+def load_epw_meta_from_file(path: str) -> MetaData:
     """
-    Loads an EPW file from a path and parses the header for
-    meta information and saves it in the meta_class.
+    Load an EPW file from a specified path and parse the file header for metadata.
+
+    Args:
+        path (str): The file path to the EPW file to be loaded.
+
+    Returns:
+        MetaData: An object containing the parsed metadata from the EPW file.
     """
 
     meta = MetaData()
@@ -31,16 +36,17 @@ def load_epw_meta_from_file(path: str):
     return meta
 
 
-def load_epw_from_file(path):
+def load_epw_from_file(path: str) -> pd.DataFrame:
     """
-    Import data from EPW file and convert them into df
+    Import data from an EPW file and convert it into a DataFrame.
 
-        Parameters:
-            path: (string) absolute path to file
+    Args:
+        path (str): The absolute path to the EPW file.
 
-        Return:
-            df
+    Returns:
+        pd.DataFrame: A DataFrame containing the imported data from the EPW file.
     """
+
 
     # Find the row number for "DATA PERIODS" to determine where the data starts
     with open(path, "r") as file:

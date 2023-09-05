@@ -10,8 +10,19 @@ from AixWeather.core_data_format_2_output_file import utils_2output
 from AixWeather.imports.utils_import import MetaData
 
 
-def to_pickle(core_df: pd.DataFrame, meta: MetaData):
-    """create a pickle file from the core data"""
+def to_pickle(
+    core_df: pd.DataFrame,
+    meta: MetaData
+):
+    """Create and save a pickle file from the core data.
+
+    Args:
+        core_df (pd.DataFrame): DataFrame containing core data.
+        meta (MetaData): Metadata associated with the data.
+
+    Returns:
+        pd.DataFrame: DataFrame containing the weather data formatted as core data.
+    """
 
     core_df = core_df.copy()
     filename = f"Station_{meta.station_name}.pkl"
@@ -28,8 +39,19 @@ def to_pickle(core_df: pd.DataFrame, meta: MetaData):
     return core_df
 
 
-def to_json(core_df: pd.DataFrame, meta: MetaData):
-    """create JSON files from the core data"""
+def to_json(
+    core_df: pd.DataFrame,
+    meta: MetaData
+):
+    """Create and save a json file from the core data.
+
+    Args:
+        core_df (pd.DataFrame): DataFrame containing core data.
+        meta (MetaData): Metadata associated with the data.
+
+    Returns:
+        pd.DataFrame: DataFrame containing the weather data formatted as core data.
+    """
 
     core_df = core_df.copy()
 
@@ -51,8 +73,19 @@ def to_json(core_df: pd.DataFrame, meta: MetaData):
     return core_df
 
 
-def to_csv(core_df: pd.DataFrame, meta: MetaData):
-    """Export DataFrame to a CSV file and save meta data"""
+def to_csv(
+    core_df: pd.DataFrame,
+    meta: MetaData
+):
+    """Create and save a csv file from the core data.
+
+    Args:
+        core_df (pd.DataFrame): DataFrame containing core data.
+        meta (MetaData): Metadata associated with the data.
+
+    Returns:
+        pd.DataFrame: DataFrame containing the weather data formatted as core data.
+    """
 
     core_df = core_df.copy()
 

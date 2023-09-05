@@ -21,7 +21,11 @@ def import_DWD_historical(start: dt.datetime, station: str) -> pd.DataFrame:
     (https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/) and
     format them into a dataframe.
 
-    return:
+    Args:
+        start: defines how much data must be pulled
+        station: station id of the DWD
+
+    Returns:
         Dataframe weather data from DWD that is as raw as possible.
     """
     measurements = [
@@ -88,7 +92,13 @@ def import_DWD_historical(start: dt.datetime, station: str) -> pd.DataFrame:
 def import_DWD_forecast(station: str) -> pd.DataFrame:
     """
     Import weather forecast data from the DWD (German Weather Service) for a specified station.
-    For debugging: station 01028
+
+    Args:
+        station (str): Station ID of the DWD for which forecast data is to be imported.
+                       For debugging purposes: station 01028.
+
+    Returns:
+        pd.DataFrame: DataFrame containing weather forecast data from the DWD.
     """
 
     ### pull forecast data using the package wetterdienst

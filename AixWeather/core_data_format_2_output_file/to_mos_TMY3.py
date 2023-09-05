@@ -54,15 +54,25 @@ format_modelica_TMY3 = {
 }
 
 
-def to_mos(core_df, meta: MetaData, start, stop, fillna):
-    """create a mos file from the Weatherdata class
+def to_mos(
+    core_df: pd.DataFrame,
+    meta: MetaData,
+    start: dt.datetime,
+    stop: dt.datetime,
+    fillna: bool
+) -> pd.DataFrame:
+    """Create a MOS file from the core data.
 
-    param:
-        start:          datetime obj of which the data should begin
-        stop:           datetime obj of which the data should end
-        src:            data source for details
-    return:
-        df:
+    Args:
+        core_df (pd.DataFrame): DataFrame containing core data.
+        meta (MetaData): Metadata associated with the weather data.
+        start (dt.datetime): Timestamp for the start of the MOS file.
+        stop (dt.datetime): Timestamp for the end of the MOS file.
+        fillna (bool): Boolean indicating whether NaN values should be filled.
+
+    Returns:
+        pd.DataFrame: DataFrame containing the weather data formatted for MOS export,
+                      excluding metadata.
     """
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(

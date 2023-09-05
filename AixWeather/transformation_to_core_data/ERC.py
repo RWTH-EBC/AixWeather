@@ -28,9 +28,16 @@ format_ERC = {
 }
 
 
-def ERC_to_core_data(df_import: pd.DataFrame, meta: MetaData):
+def ERC_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
     """
-    format df raw weatherdata from DWD historical into core data format
+    Transform imported ERC (Energy Research Center) weather data into core data format.
+
+    Args:
+        df_import (pd.DataFrame): The DataFrame containing imported ERC weather data.
+        meta (MetaData): Metadata associated with the data.
+
+    Returns:
+        pd.DataFrame: The transformed DataFrame in the core data format.
     """
 
     ### evaluate correctness of format

@@ -25,12 +25,11 @@ def load_custom_from_file(path):
     """
     Import data from file and convert them into df
 
-        Parameters:
-            path: (string) absolute path to file
+    Args:
+        path: absolute path to file
 
-        Return:
-            df
-
+    Returns:
+        pd.Dataframe: as raw as possible but with some datetimeindex
     """
 
     ### load file to Dataframe

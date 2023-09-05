@@ -26,8 +26,16 @@ format_TRY_15_45 = {
 
 def TRY_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
     """
-    Converts TRY 2015 and 2045 input data to core_data
+    Transform imported TRY data of the formats 2015 and 2045 into the core data format.
+
+    Args:
+        df_import (pd.DataFrame): The DataFrame containing imported TRY weather data.
+        meta (MetaData): Metadata associated with the data.
+
+    Returns:
+        pd.DataFrame: The transformed DataFrame in the core data format.
     """
+
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
         core_format=auxiliary.format_core_data, other_format=format_TRY_15_45

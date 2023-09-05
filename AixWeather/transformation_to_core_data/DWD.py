@@ -108,9 +108,18 @@ format_DWD_forecast = {
 
 def DWD_historical_to_core_data(
     df_import: pd.DataFrame, start: datetime, stop: datetime, meta: MetaData
-):
+) -> pd.DataFrame:
     """
-    format df raw weatherdata from DWD historical into core data format
+    Transform imported weather data from DWD historical format into core data format.
+
+    Args:
+        df_import (pd.DataFrame): The DataFrame containing imported weather data from DWD.
+        start (datetime): The timestamp for the start of the desired data range (will be extended for interpolation).
+        stop (datetime): The timestamp for the end of the desired data range (will be extended for interpolation).
+        meta (MetaData): Metadata associated with the data.
+
+    Returns:
+        pd.DataFrame: The transformed DataFrame in the core data format.
     """
 
     ### evaluate correctness of format
@@ -188,7 +197,18 @@ def DWD_historical_to_core_data(
     return df
 
 
-def DWD_forecast_2_core_data(df_import: pd.DataFrame, meta: MetaData):
+def DWD_forecast_2_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
+    """
+    Transform imported weather forecast data from DWD into core data format.
+
+    Args:
+        df_import (pd.DataFrame): The DataFrame containing imported weather forecast data from DWD.
+        meta (MetaData): Metadata associated with the data.
+
+    Returns:
+        pd.DataFrame: The transformed DataFrame in the core data format.
+    """
+
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
         core_format=auxiliary.format_core_data, other_format=format_DWD_forecast

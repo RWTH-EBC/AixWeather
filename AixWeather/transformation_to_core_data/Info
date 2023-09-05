@@ -1,9 +1,0 @@
-Here all data that has been imported through the import files should be transformed to the unique core data format (see documentations!)
-Data Output is always the same:
-Timezone: UTC
-Measurement at indicated time (not e.g. for the following hour)
-Hourly data
-Index is a datetimeindex
-Always same set of variables named (core_data)
-Missing values are displayed as nan
-Missing variables are shown anyway filled with nan

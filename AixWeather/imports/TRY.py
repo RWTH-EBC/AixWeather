@@ -13,9 +13,17 @@ from shapely.geometry import Point
 from AixWeather.imports.utils_import import MetaData
 
 
-def _handle_TRY_type(path: str):
+def _handle_TRY_type(path: str) -> tuple:
     """
-    Gets the TRY format type, currently only allows to use 2017 year.
+    Determine the TRY format type based on the provided file path.
+
+    Args:
+        path (str): The file path to the TRY dataset file.
+
+    Returns:
+        tuple: A tuple containing the TRY year (int) and the header row number (int).
+    Raises:
+        ValueError: If the TRY format cannot be detected through the file name or is not supported.
     """
 
     ### get type of TRY, i.e. the year of the TRY
@@ -54,11 +62,15 @@ def _handle_TRY_type(path: str):
     return TRY_year, header_row
 
 
-def load_try_meta_from_file(path: str):
+def load_try_meta_from_file(path: str) -> MetaData:
     """
-    Loads a try file from a path and parses the header for
-    meta information and saves it in the meta_class.
+    Load a TRY file from a specified path and parse the header for metadata.
 
+    Args:
+        path (str): The file path to the TRY file to be loaded.
+
+    Returns:
+        MetaData: An object containing the parsed metadata from the TRY file.
     """
 
     meta = MetaData()
@@ -144,17 +156,17 @@ def load_try_meta_from_file(path: str):
     return meta
 
 
-def load_try_from_file(path):
+def load_try_from_file(path: str) -> pd.DataFrame:
     """
-    Import data from TRY file and convert them into df
+    Import data from a TRY file and convert it into a DataFrame.
 
-        Parameters:
-            path: (string) absolute path to file
+    Args:
+        path (str): The absolute path to the TRY file.
 
-        Return:
-            df
-
+    Returns:
+        pd.DataFrame: A DataFrame containing the imported data from the TRY file.
     """
+
 
     TRY_year, header_row = _handle_TRY_type(path)
 

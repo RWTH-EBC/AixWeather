@@ -16,31 +16,41 @@ def approximate_opaque_from_total_skycover(total_sky_cover):
     return opaque_sky_cover
 
 
-def calculate_dew_point_temp(dry_bulb_temp, rel_hum):
-    """Calculate dew point temperature -> fairly accurate for
-       humidity above 50% maybe get better formula!?
-    param:
-        df/float:    DryBulbTemp in °C
-        df/float:    RelHum in %
-    return:
-        df/float:    DewPointTemp in °C
+def calculate_dew_point_temp(dry_bulb_temp: pd.Series, rel_hum: pd.Series) -> pd.Series:
+    """
+    Calculate the dew point temperature using a simplified formula.
+
+    This function estimates the dew point temperature in degrees Celsius based on the given dry bulb temperature
+    and relative humidity. Please note that this formula is fairly accurate for humidity above 50%. For more
+    precise calculations, consider using a more advanced formula.
+
+    Args:
+        dry_bulb_temp (pd.Series): The dry bulb temperature in degrees Celsius.
+        rel_hum (pd.Series): The relative humidity in percentage.
+
+    Returns:
+        pd.Series: The estimated dew point temperature in degrees Celsius.
     """
     dew_point_temp = dry_bulb_temp - (100 - rel_hum) / 5
     return dew_point_temp
 
 
-def calculate_direct_horizontal_radiation(glob_hor_rad, diff_hor_rad):
-    """Calculate direct horizontal radiation by substracting
-    global horizontal radiation with diffuse horizontal radiation
-
-    Checked by Martin Rätz (08.08.2023)
-
-    param:
-        df/float:    GlobHorRad in Wh/m^2
-        df/float:    DiffHorRad in Wh/m^2
-    return:
-        df/float:    direct horizontal radiation in Wh/m^2
+def calculate_direct_horizontal_radiation(
+    glob_hor_rad: pd.Series, diff_hor_rad: pd.Series
+) -> pd.Series:
     """
+    Calculate direct horizontal radiation by subtracting diffuse horizontal radiation from global horizontal radiation.
+
+    Checked by Martin Rätz on 08.08.2023.
+
+    Args:
+        glob_hor_rad (pd.Series): Global horizontal radiation in Wh/m^2.
+        diff_hor_rad (pd.Series): Diffuse horizontal radiation in Wh/m^2.
+
+    Returns:
+        pd.Series: The estimated direct horizontal radiation in Wh/m^2.
+    """
+
     dir_hor_rad = glob_hor_rad - diff_hor_rad
     if isinstance(dir_hor_rad, pd.Series):
         dir_hor_rad.clip(0, inplace=True)
@@ -50,18 +60,24 @@ def calculate_direct_horizontal_radiation(glob_hor_rad, diff_hor_rad):
     return dir_hor_rad
 
 
-def calculate_global_horizontal_radiation(dir_hor_rad, diff_hor_rad):
-    """Calculate Global horizontal radiation on a horizontal plane
-    by adding direct horizontal radiation with diffuse horizontal radiation.
-
-    Checked by Martin Rätz (08.08.2023) using:
-    https://pvpmc.sandia.gov/modeling-steps/1-weather-design-inputs/irradiance-insolation/global-horizontal-irradiance/
-    param:
-        df/float:    DirHorRad in Wh/m^2
-        df/float:    DiffHorRad in Wh/m^2
-    return:
-        df/float:    Global normal radiation in Wh/m^2
+def calculate_global_horizontal_radiation(
+    dir_hor_rad: pd.Series, diff_hor_rad: pd.Series
+) -> pd.Series:
     """
+    Calculate global horizontal radiation on a horizontal plane by adding direct horizontal radiation
+    with diffuse horizontal radiation.
+
+    Checked by Martin Rätz on 08.08.2023 using:
+    https://pvpmc.sandia.gov/modeling-steps/1-weather-design-inputs/irradiance-insolation/global-horizontal-irradiance/
+
+    Args:
+        dir_hor_rad (pd.Series): Direct horizontal radiation in Wh/m^2.
+        diff_hor_rad (pd.Series): Diffuse horizontal radiation in Wh/m^2.
+
+    Returns:
+        pd.Series: The estimated global horizontal radiation in Wh/m^2.
+    """
+
     glob_hor_rad = dir_hor_rad + diff_hor_rad
 
     # if value < 0 set as 0
@@ -74,35 +90,43 @@ def calculate_global_horizontal_radiation(dir_hor_rad, diff_hor_rad):
     return glob_hor_rad
 
 
-def calculate_horizontal_infrared_radiation(dry_bulb_temp, dew_point_temp, opaque_sky_cover):
+def calculate_horizontal_infrared_radiation(
+    dry_bulb_temp: pd.Series, dew_point_temp: pd.Series, opaque_sky_cover: pd.Series
+) -> pd.Series:
     """
-    Calculate horizontal infrared radiation according to:
-    https://www.energyplus.net/sites/default/files/docs/site_v8.3.0/EngineeringReference/05-Climate/index.html
-    by using sky emissivity according to:
+    Calculate horizontal infrared radiation using the provided inputs.
+
+    Calculation details can be found at:
     https://www.energyplus.net/sites/default/files/docs/site_v8.3.0/EngineeringReference/05-Climate/index.html
 
-    param:
-        df/float:    DryBulbTemp in °C
-        df/float:    DewPointTemp in °C
-        df/float:    OpaqueSkyCover in tenths
-    return:
-        df/float:    HorInfra in Wh/m^2
+    Sky emissivity is considered in the calculation as per the above reference.
+
+    Args:
+        dry_bulb_temp (pd.Series): Dry bulb temperature in degrees Celsius.
+        dew_point_temp (pd.Series): Dew point temperature in degrees Celsius.
+        opaque_sky_cover (pd.Series): Opaque sky cover in tenths.
+
+    Returns:
+        pd.Series: The estimated horizontal infrared radiation in Wh/m^2.
     """
+
     # change to Kelvin
     dry_bulb_temp = dry_bulb_temp + 273.15
     dew_point_tem = dew_point_temp + 273.15
 
     sky_emissivity = (0.787 + 0.764 * np.log(dew_point_tem / 273.0)) * (
-            1.0
-            + 0.0224 * opaque_sky_cover
-            - 0.0035 * np.power(opaque_sky_cover, 2)
-            + 0.00028 * np.power(opaque_sky_cover, 3)
+        1.0
+        + 0.0224 * opaque_sky_cover
+        - 0.0035 * np.power(opaque_sky_cover, 2)
+        + 0.00028 * np.power(opaque_sky_cover, 3)
     )
     """equation 3 from Sky Radiation Modeling
     https://www.energyplus.net/sites/default/files/docs/site_v8.3.0/
     EngineeringReference/05-Climate/index.html"""
 
-    hor_infra = sky_emissivity * 5.6697 * np.power(10.0, -8.0) * np.power(dry_bulb_temp, 4)
+    hor_infra = (
+        sky_emissivity * 5.6697 * np.power(10.0, -8.0) * np.power(dry_bulb_temp, 4)
+    )
     """equation 2 from Sky Radiation Modeling 
     https://www.energyplus.net/sites/default/files/docs/site_v8.3.0/EngineeringReference/05-Climate/index.html
     """
@@ -117,8 +141,9 @@ def calculate_normal_from_horizontal_direct_radiation(
 ):
     """
     Calculates the Direct Normal Irradiance (DNI) from Direct Horizontal Irradiance (DHI).
+    Values will be set to zero when the sun is below 5° angle from the horizon.
 
-    Parameters:
+    Args:
         latitude (float): The latitude of the location in degrees.
         longitude (float): The longitude of the location in degrees.
         utc_time (pd.DatetimeIndex): The timestamps for which the DNI is to be calculated, in UTC.
@@ -126,7 +151,6 @@ def calculate_normal_from_horizontal_direct_radiation(
 
     Returns:
         pd.Series: The calculated Direct Normal Irradiance (DNI) in W/m^2 for each timestamp.
-        Values will be set to zero when the sun is below 5° angle from the horizon.
     """
 
     # Calculate the solar zenith angle for each time
@@ -149,22 +173,24 @@ def calculate_normal_from_horizontal_direct_radiation(
 # wrapping functions ------------------------------------------
 def robust_transformation(
     df: pd.DataFrame, desired_variable: str, transformation_function, *args: str
-):
+) -> tuple[pd.DataFrame, dict]:
     """
-    Applies a transformation function to calculate the desired variable in the DataFrame
-    if the variable is missing or contains only NaN values. Skips the transformation if
+    Apply a transformation function to calculate the desired variable in the DataFrame
+    if the variable is missing or contains only NaN values. Skip the transformation if
     any required column (specified in args) is missing to perform the calculation.
 
-    Parameters:
-        df: DataFrame containing the data.
-        desired_variable: Name of the variable to which the transformation should be applied.
+    Args:
+        df (pd.DataFrame): DataFrame containing the data.
+        desired_variable (str): Name of the variable to which the transformation should be applied.
         transformation_function: Function to apply to the desired variable.
-        *args: Additional arguments required for the transformation function. Can be column
-               names (str) or other values (all other types).
+        *args: Additional arguments required for the transformation function.
+               These can be column names (str) or other values (all other types).
 
     Returns:
-        DataFrame with the transformation applied to the desired variable.
+        tuple[pd.DataFrame, dict]: A tuple containing the updated DataFrame with the transformation applied
+        to the desired variable and a dictionary indicating which variables were used for the calculation.
     """
+
     # Feed back whether calculation was done and with which variables
     calc_status = {}
 
@@ -206,20 +232,27 @@ def robust_transformation(
     return df, calc_status
 
 
-def variable_transform_all(df, meta: MetaData):
+def variable_transform_all(
+    df: pd.DataFrame, meta: MetaData
+) -> tuple[pd.DataFrame, dict]:
     """
+    Transform and compute missing variables for the given DataFrame based on specified calculations.
+    This function performs multiple transformations on the DataFrame to calculate all completely
+    missing variables. The applied calculations for each variable are tracked in the
+    'calc_overview' dictionary.
+
     You can add all variable transformations here.
     Respect a meaningful order.
 
-    Transforms and computes missing variables for the given dataframe based on
-    specified calculations.
-    This function performs multiple transformations on the dataframe to calculate missing variables.
-    The applied calculations for each variable are tracked in the 'calc_overview' dictionary.
+    Args:
+        df (pd.DataFrame): The DataFrame containing the data to be transformed.
+        meta (MetaData): Metadata associated with the data.
 
     Returns:
-    - DataFrame: Transformed dataframe with computed variables.
-    - dict: A dictionary ('calc_overview') tracking the calculations applied to the dataframe.
+        tuple[pd.DataFrame, dict]: A tuple containing the transformed DataFrame with computed variables
+        and a dictionary ('calc_overview') tracking the calculations applied to the DataFrame.
     """
+
     # track if calculations are applied
     calc_overview = {}
 
@@ -233,7 +266,11 @@ def variable_transform_all(df, meta: MetaData):
     )
     calc_overview.update(calc_status)
     df, calc_status = robust_transformation(
-        df, "DirHorRad", calculate_direct_horizontal_radiation, "GlobHorRad", "DiffHorRad"
+        df,
+        "DirHorRad",
+        calculate_direct_horizontal_radiation,
+        "GlobHorRad",
+        "DiffHorRad",
     )
     calc_overview.update(calc_status)
     df, calc_status = robust_transformation(

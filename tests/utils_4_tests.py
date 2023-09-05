@@ -57,6 +57,13 @@ def delete_created_result_files():
 
 
 def run_all_functions(project_class_instance):
+    """
+    This function runs a series of methods on a project class instance to import and process weather data. It is
+    intended for testing and validation purposes.
+
+    Args:
+        project_class_instance: An instance of a project class inheriting from ProjectClassGeneral.
+    """
     project_class_instance.import_data()
     project_class_instance.data_2_core_data()
 
@@ -68,6 +75,20 @@ def run_all_functions(project_class_instance):
 
 
 class RegressionTestsClass:
+    """
+    A class containing regression tests for validating the output files of the project.
+
+    This class defines a set of test methods to compare the project's output with desired reference data.
+
+    Methods:
+        test_core_data(): Test the core weather data against a reference pickle file.
+        test_meta_data(): Test the project's metadata against a reference JSON file.
+        test_output_json(): Test the project's JSON output against a reference JSON file.
+        test_output_csv(): Test the project's CSV output against a reference CSV file.
+        test_output_mos(): Test the project's MOS output against a reference MOS file.
+        test_output_epw(): Test the project's EPW output against a reference EPW file.
+    """
+
     def test_core_data(self):
         df_core_desired = pd.read_pickle(
             os.path.join(self.folder_tests, f"Station_{self.city}.pkl")

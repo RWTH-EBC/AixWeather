@@ -6,6 +6,17 @@ from unidecode import unidecode
 
 
 class MetaData:
+    """
+    A class for storing metadata information about a weather station.
+
+    Attributes:
+        station_name (str): The name of the weather station.
+        station_id (str): The ID (DWD or KML grid ID) of the weather station.
+        altitude (float): The altitude of the weather station in meters.
+        latitude (float): The latitude of the weather station in degree.
+        longitude (float): The longitude of the weather station in degree.
+        input_source (str): The source of input data for the station.
+    """
     def __init__(self, **kwargs: str):
         self._station_name: str = "UnknownStationName"
         self.station_id: str = "UnknownStationID"

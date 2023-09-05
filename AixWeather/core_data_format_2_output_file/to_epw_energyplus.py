@@ -66,8 +66,26 @@ format_epw = {
 }
 
 
-def to_epw(core_df, meta: MetaData, start, stop, fillna: bool):
-    """create an epw file from the core data"""
+def to_epw(
+    core_df: pd.DataFrame,
+    meta: MetaData,
+    start: dt.datetime,
+    stop: dt.datetime,
+    fillna: bool
+) -> pd.DataFrame:
+    """Create an EPW file from the core data.
+
+    Args:
+        core_df (pd.DataFrame): DataFrame containing core data.
+        meta (MetaData): Metadata associated with the weather data.
+        start (dt.datetime): Timestamp for the start of the EPW file.
+        stop (dt.datetime): Timestamp for the end of the EPW file.
+        fillna (bool): Boolean indicating whether NaN values should be filled.
+
+    Returns:
+        pd.DataFrame: DataFrame containing the weather data formatted for EPW export,
+                      excluding metadata.
+    """
 
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(

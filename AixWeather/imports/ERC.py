@@ -5,6 +5,7 @@ contains functions to handle data within ERC
 from tkinter import *
 import json
 import pandas as pd
+from datetime import datetime
 
 import requests
 
@@ -22,8 +23,14 @@ key_list = [
 ]
 
 
-def load_credentials_ERC_weather_data():
-    """A function to return Username to access ERC data"""
+def load_credentials_ERC_weather_data() -> tuple:
+    """
+    GUI to return the username and password needed to access ERC weather data.
+
+    Returns:
+        tuple: The username and password required for accessing ERC weather data.
+    """
+
 
     tk_window = Tk()
     tk_window.geometry("400x150")
@@ -52,14 +59,17 @@ def load_credentials_ERC_weather_data():
     return (username.get(), password.get())
 
 
-def import_ERC(start, stop, cred):
+def import_ERC(start: datetime, stop: datetime, cred: tuple) -> pd.DataFrame:
     """
-    import weather data from aedifion ERC
-    :param cred:        tuple       data credentials
-    :param start:   datetime obj    data start
-    :param stop:    datetime obj    data stop
+    Import weather data from aedifion ERC weather station (credentials required).
 
-    :return:    DF of unfiltered and unparsed weather data from DWD.
+    Args:
+        start (datetime): Datetime object representing the data start.
+        stop (datetime): Datetime object representing the data stop.
+        cred (tuple): Aedifion credentials.
+
+    Returns:
+        pd.DataFrame: DataFrame containing as raw as possible weather data from aedifion ERC.
     """
 
     # import cred if not given
@@ -102,7 +112,13 @@ def import_ERC(start, stop, cred):
     return weather_df_tot
 
 
-def import_meta_from_ERC():
+def import_meta_from_ERC() -> MetaData:
+    """
+    Import (specify) metadata from ERC.
+
+    Returns:
+        MetaData: A MetaData object containing station information for ERC.
+    """
 
     meta = MetaData()
     meta.station_id = "ERC"
@@ -116,12 +132,17 @@ def import_meta_from_ERC():
 def _json2df(
     data: json = None, data_point_id: str = None, short: bool = True
 ) -> pd.DataFrame:
-    """Transform the JSON returned by GET /v2/datapoint/timeseries
-     to a Pandas dataframe that is indexed by time.
+    """
+    Transform the JSON returned by GET /v2/datapoint/timeseries to a Pandas DataFrame
+    indexed by time.
 
-    :param str data_point_id: Use dataPointID as column name for values (default: value)
-    :param bool short: whether the given json is in short format or not
-    :return: a Pandas dataframe
+    Args:
+        data (json): The JSON data to be transformed into a DataFrame.
+        data_point_id (str): Use dataPointID as the column name for values (default: value).
+        short (bool): Whether the given JSON is in short format or not.
+
+    Returns:
+        pd.DataFrame: A Pandas DataFrame containing the transformed data.
     """
     if short:
         data = [[pd.to_datetime(t[0], utc=True), t[1]] for t in data]

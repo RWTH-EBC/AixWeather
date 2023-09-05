@@ -33,12 +33,36 @@ from AixWeather.core_data_format_2_output_file.to_epw_energyplus import to_epw
 class ProjectClassGeneral(ABC):
     """
     An abstract base class representing a general project.
-    For each origin of weather data a project class inherits from this class.
+
+    For each source of weather data, a project class should inherit from this class
+    and implement specific methods for data import and transformation.
+
+    Attributes:
+        fillna (bool): A flag indicating whether NaN values should be filled in the output formats.
+        start (pd.Timestamp or None): The start date of the project data (sometimes inferred by the inheriting class).
+        end (pd.Timestamp or None): The end date of the project data (can be None).
+
+    Properties:
+        imported_data (pd.DataFrame): The imported weather data.
+        core_data (pd.DataFrame): The weather data in a standardized core format.
+        output_data_df (pd.DataFrame): The output data frame (depending on last triggered output method).
+        meta_data: Metadata associated with weather data origin.
+
+    Methods:
+        import_data(): An abstract method to import data from the specific source.
+        data_2_core_data(): An abstract method to transform imported data into core data format.
+        core_2_mos(): Convert core data to MOS format.
+        core_2_epw(): Convert core data to EPW format.
+        core_2_csv(): Convert core data to CSV format.
+        core_2_json(): Convert core data to JSON format.
+        core_2_pickle(): Convert core data to Pickle format.
     """
 
     def __init__(self, **kwargs):
         # User-settable attributes
-        self.fillna = kwargs.get("fillna", True) # defines whether nan should be filled in the output formats
+        self.fillna = kwargs.get(
+            "fillna", True
+        )  # defines whether nan should be filled in the output formats
 
         # User-settable or placeholder depending on data origin
         self.start = kwargs.get("start", None)
@@ -49,7 +73,6 @@ class ProjectClassGeneral(ABC):
         self.core_data: pd.DataFrame = None
         self.output_data_df: pd.DataFrame = None
         self.meta_data = None
-
 
     @property
     def core_data(self):
@@ -93,7 +116,18 @@ class ProjectClassGeneral(ABC):
     def core_2_pickle(self):
         self.output_df_pickle = to_pickle(self.core_data, self.meta_data)
 
+
 class ProjectClassDWDHistorical(ProjectClassGeneral):
+    """
+    A class representing a project for importing and processing historical weather data
+    from DWD (Deutscher Wetterdienst).
+
+    For common attributes, properties, and methods, refer to the base class.
+
+    Attributes:
+        station (str): The identifier of the DWD weather station associated with the data.
+    """
+
     def __init__(self, start: dt.datetime, end: dt.datetime, station: str, **kwargs):
         super().__init__(start=start, end=end, **kwargs)
         self.station = station
@@ -116,6 +150,16 @@ class ProjectClassDWDHistorical(ProjectClassGeneral):
 
 
 class ProjectClassDWDForecast(ProjectClassGeneral):
+    """
+    A class representing a project for importing and processing weather forecast data
+    from DWD (Deutscher Wetterdienst).
+
+    For common attributes, properties, and methods, refer to the base class.
+
+    Attributes:
+        station (str): The identifier of the KML grid associated with the forecast data.
+    """
+
     def __init__(self, station: str, **kwargs):
         super().__init__(**kwargs)
         self.station = station
@@ -132,7 +176,19 @@ class ProjectClassDWDForecast(ProjectClassGeneral):
 
 
 class ProjectClassERC(ProjectClassGeneral):
-    def __init__(self, start: dt.datetime, end: dt.datetime, cred: tuple = None, **kwargs):
+    """
+    A class representing a project for importing and processing weather data
+    from the ERC (Energy Research Center).
+
+    For common attributes, properties, and methods, refer to the base class.
+
+    Attributes:
+        cred (tuple): A tuple containing credentials or authentication information for accessing the data source.
+    """
+
+    def __init__(
+        self, start: dt.datetime, end: dt.datetime, cred: tuple = None, **kwargs
+    ):
         super().__init__(start=start, end=end, **kwargs)
         self.cred = cred
         self.start_hour_earlier = start - dt.timedelta(hours=2)
@@ -149,6 +205,16 @@ class ProjectClassERC(ProjectClassGeneral):
 
 
 class ProjectClassTRY(ProjectClassGeneral):
+    """
+    A class representing a project for importing and processing weather data
+    from TRY (Test Reference Year) format.
+
+    For common attributes, properties, and methods, refer to the base class.
+
+    Attributes:
+        path (str): The absolute file path to the TRY weather data.
+    """
+
     def __init__(self, path, **kwargs):
         super().__init__(**kwargs)
         self.path = path
@@ -166,6 +232,16 @@ class ProjectClassTRY(ProjectClassGeneral):
 
 
 class ProjectClassEPW(ProjectClassGeneral):
+    """
+    A class representing a project for importing and processing weather data
+    from EPW (EnergyPlus Weather) format.
+
+    For common attributes, properties, and methods, refer to the base class.
+
+    Attributes:
+        path (str): The absolute file path to the EPW weather data.
+    """
+
     def __init__(self, path, **kwargs):
         super().__init__(**kwargs)
         self.path = path
@@ -183,6 +259,17 @@ class ProjectClassEPW(ProjectClassGeneral):
 
 
 class ProjectClassCustom(ProjectClassGeneral):
+    """
+    A class representing a project for importing and processing custom weather data.
+    Modify this class and its functions to create your own weather data pipeline
+    and consider to create a pull request to add the pipeline to the repository.
+
+    For common attributes, properties, and methods, refer to the base class.
+
+    Attributes:
+        path (str): The file path to the custom weather data.
+    """
+
     def __init__(self, path, **kwargs):
         super().__init__(**kwargs)
         self.path = path

@@ -5,12 +5,32 @@ This module contains auxiliary functions for data transformation, e.g. time shif
 import pandas as pd
 
 from AixWeather.transformation_functions import auxiliary
+from AixWeather.imports.utils_import import MetaData
 
 
-def create_pass_through_variables(df_shifted, df_no_shift, format, transform_func, meta):
+def create_pass_through_variables(
+    df_shifted: pd.DataFrame,
+    df_no_shift: pd.DataFrame,
+    format: dict,
+    transform_func,
+    meta: MetaData,
+):
     """
-    add unshifted data for possible later direct use from df_noshift
-    to df, to avoid back and forth interpolating
+    This function adds unshifted data from the `df_no_shift` DataFrame to the `df_shifted` DataFrame to
+    prevent unnecessary interpolation of values. It takes into account the required shifting and performs
+    transformations. The appropriate pass-through variables (unshifted variables) are added to the dataframe
+    with a suffix specifying the shifting that would be required for them. Calculated (transformed) variables
+    are only added if the variables they were calculated from all have the same shifting (time of measurement).
+
+    Args:
+        df_shifted (pd.DataFrame): The DataFrame with shifted data.
+        df_no_shift (pd.DataFrame): The DataFrame with unshifted data.
+        format (dict): A dictionary specifying the format (required shifting) of the data.
+        transform_func: The transformation function from the import2core data process.
+        meta (MetaData): Metadata associated with the data.
+
+    Returns:
+        pd.DataFrame: The modified `df_shifted` DataFrame with added pass-through variables.
     """
 
     print("\nApply transformation for pass through variables.")
@@ -24,7 +44,9 @@ def create_pass_through_variables(df_shifted, df_no_shift, format, transform_fun
         ):  # imputed variables need the shift according to their used variables
             shift = value["time_of_meas_shift"]
             if shift is not None:
-                df_shifted[f"{value['core_name']}_no_{shift}"] = df_no_shift[value["core_name"]]
+                df_shifted[f"{value['core_name']}_no_{shift}"] = df_no_shift[
+                    value["core_name"]
+                ]
 
     ### add unshifted variables that have been imputed from other variables
     for (
@@ -85,12 +107,29 @@ def create_pass_through_variables(df_shifted, df_no_shift, format, transform_fun
             # add to df
             shift = list(used_variables_shifts.values())[0]
             if shift is not None:
-                df_shifted[f"{desired_variable}_no_{shift}"] = df_no_shift[desired_variable]
+                df_shifted[f"{desired_variable}_no_{shift}"] = df_no_shift[
+                    desired_variable
+                ]
 
     return df_shifted
 
 
 def _find_pass_through_core_names(columns: list, output_format: dict) -> list:
+    """
+    Identify pass-through variable names based on the output format and their column suffix.
+
+    This function analyzes a list of column names and identifies those that represent pass-through
+    core variables based on the provided output format. It takes into account suffix mappings
+    to match the required shifting.
+
+    Args:
+        columns (list): A list of column names to analyze.
+        output_format (dict): A dictionary specifying the desired format and shifting of the data.
+
+    Returns:
+        list: A list of column names representing pass-through variables that shall actually be passed through.
+    """
+
     selected_columns = []
     suffix_mapping = {"_no_prec2ind": "ind2prec", "_no_foll2ind": "ind2foll"}
 
@@ -108,13 +147,22 @@ def _find_pass_through_core_names(columns: list, output_format: dict) -> list:
     return selected_columns
 
 
-def _find_full_hour_shift_core_names(df: pd.DataFrame, output_format: dict) -> list:
+def _find_and_apply_full_hour_shifts(df: pd.DataFrame, output_format: dict) -> tuple:
     """
-    Finds variables that are in total shifted by an full hour and does that shift
-    to avoid to interpolate twice.
+    Find variables that require a full-hour shift to avoid double interpolation.
 
-    return the found variables and the changed df
+    This function identifies pass-through variables in the DataFrame `df` that are specified in the `output_format`
+    to be shifted by a full hour in total. It performs the necessary full hour shift on these variables to prevent
+    double interpolation.
+
+    Args:
+        df (pd.DataFrame): The DataFrame containing data to be shifted.
+        output_format (dict): A dictionary specifying the desired format and shifting of the data.
+
+    Returns:
+        tuple: List of added pass-through variables and the modified DataFrame.
     """
+
     selected_columns = []
     suffix_mapping_forward = {"_no_prec2ind": "ind2foll"}
     suffix_mapping_backward = {"_no_foll2ind": "ind2prec"}
@@ -141,10 +189,26 @@ def _find_full_hour_shift_core_names(df: pd.DataFrame, output_format: dict) -> l
     return selected_columns, df
 
 
-def pass_through_measurements_with_back_and_forth_interpolating(core2output_df, format_outputter):
-    # get variables that can be passed through
-    pass_trough_variables = _find_pass_through_core_names(core2output_df.columns, format_outputter)
-    shift_full_hour_variables, core2output_df = _find_full_hour_shift_core_names(
+def pass_through_measurements_with_back_and_forth_interpolating(
+    core2output_df: pd.DataFrame, format_outputter: dict
+) -> pd.DataFrame:
+    """
+    Insert pass-through measurements to the output dataframe to
+    avoid back-and-forth or double shifting interpolation.
+
+    It deletes the double interpolated variables and inserts the pass-through ones where applicable.
+
+    Args:
+        core2output_df (pd.DataFrame): DataFrame containing core data in the process of core2outputfile.
+        format_outputter (dict): Dictionary specifying the format of output data.
+
+    Returns:
+        pd.DataFrame: The modified `core2output_df` DataFrame with pass-through variables.                    shifted variables.
+    """
+    pass_trough_variables = _find_pass_through_core_names(
+        core2output_df.columns, format_outputter
+    )
+    shift_full_hour_variables, core2output_df = _find_and_apply_full_hour_shifts(
         core2output_df, format_outputter
     )
 
