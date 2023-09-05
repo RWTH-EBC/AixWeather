@@ -6,7 +6,7 @@
     "_longitude": 6.024,
     "input_source": "DWD Historical",
     "station_exists_since": "01.04.2011",
-    "station_exists_until": "26.08.2023",
+    "station_exists_until": "03.09.2023",
     "executed_transformations": {
         "OpaqueSkyCover": [
             "TotalSkyCover"

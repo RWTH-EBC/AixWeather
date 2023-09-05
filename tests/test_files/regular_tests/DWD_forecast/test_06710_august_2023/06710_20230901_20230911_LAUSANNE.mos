@@ -9,7 +9,7 @@ double tab1(240,30)
 #DATA PERIODS, data available from 2023-09-01 11:00:00 (second=21034800) to 2023-09-11 10:00:00 (second=21895200)
 # info: TMY3Reader requirement: Time 0 = 01.01. 00:00:00 at local time (see time zone above)
 #
-#USED DATA-COLLECTOR: ebc-weather-tool with input source DWD Forecast (collected at 2023-09-01 15:07:52.586411) "-0" marks not available data
+#USED DATA-COLLECTOR: ebc-weather-tool with input source DWD Forecast (collected at 2023-09-05 17:11:50.520085) "-0" marks not available data
 #Info: The AixLib/IBPSA TMY3reader requires the below mentioned units and measurement times. Last Check: 28.02.2022
 #C1 Time in seconds. Beginning of a year is 0s.
 #C2 Dry bulb temperature in Celsius at indicated time
