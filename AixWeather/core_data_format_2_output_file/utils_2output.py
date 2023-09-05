@@ -16,7 +16,11 @@ def results_file_path(filename: str, folder_path: str = None) -> str:
     """
     # if required specify folder_path e.g. for Django WebApp
     if folder_path is None:
-        filepath = os.path.join(f"{ROOT_DIR}", "results", filename)
-    else:
-        filepath = os.path.join(folder_path, filename)
+        folder_path = os.path.join(f"{ROOT_DIR}", "results")
+
+    # Ensure that the results folder exists
+    os.makedirs(folder_path, exist_ok=True)
+
+    # create file path
+    filepath = os.path.join(folder_path, filename)
     return filepath
