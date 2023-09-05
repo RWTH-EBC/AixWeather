@@ -592,7 +592,7 @@ def to_epw(
         return data_list, df
 
     ### merge all header lines and the data to be saved in a .epw file
-    with open(file_path, "w", newline="") as file:
+    with open(file_path, "w", newline="", encoding="latin1") as file:
         writer = csv.writer(file)
         writer.writerows(
             [
