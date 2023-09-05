@@ -81,11 +81,17 @@ class ProjectClassGeneral(ABC):
     @core_data.setter
     def core_data(self, value: pd.DataFrame):
         if value is not None:
-            # only real pd.NA values
             for column in value.columns:
+                # only real pd.NA values
+                # force strings to be NaN
                 value[column] = pd.to_numeric(
                     value[column], errors="coerce"
-                )  # force strings to be NaN
+                )
+                # round floats for unit test compatibility across different machines
+                digits_2_round = 5
+                if value[column].dtype == "float64":
+                    value[column] = value[column].round(digits_2_round)
+
             self._core_data = value
 
     @abstractmethod

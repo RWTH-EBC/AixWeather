@@ -42,7 +42,7 @@ class MetaData:
 
     @altitude.setter
     def altitude(self, value: float) -> None:
-        self._altitude = self._ensure_float(value)
+        self._altitude = round(self._ensure_float(value), 5)
 
     @property
     def latitude(self) -> float:
@@ -50,7 +50,7 @@ class MetaData:
 
     @latitude.setter
     def latitude(self, value: float) -> None:
-        self._latitude = self._ensure_float(value)
+        self._latitude = round(self._ensure_float(value), 5)
 
     @property
     def longitude(self) -> float:
@@ -58,7 +58,7 @@ class MetaData:
 
     @longitude.setter
     def longitude(self, value: float) -> None:
-        self._longitude = self._ensure_float(value)
+        self._longitude = round(self._ensure_float(value), 5)
 
     def _ensure_float(self, value):
         if value is not None:
