@@ -14,7 +14,7 @@ from AixWeather.project_class import ProjectClassERC
 # password="xxxxx"
 # cred = (username, password)
 
-
+@unittest.skip("Dont test ERC data as there are no credentials available for testing.")
 class BaseERC(unittest.TestCase):
     @classmethod
     def init_and_run_ERC(
@@ -36,7 +36,7 @@ class BaseERC(unittest.TestCase):
     def tearDownClass(cls) -> None:
         utils_4_tests.delete_created_result_files()
 
-
+@unittest.skip("Dont test ERC data as there are no credentials available for testing.")
 class TestERC10Days(BaseERC):
     """
     Attention at some day this pull will move from recent folder
