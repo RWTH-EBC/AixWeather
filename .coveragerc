@@ -4,6 +4,4 @@ omit =
     */test*
 	# omit examples
 	*/examples*
-source =
-	ebcpy
 source = AixWeather
