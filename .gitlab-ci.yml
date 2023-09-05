@@ -15,6 +15,7 @@ variables:
   TEST_ENGINE: "PYTEST"
   GIT_REPO: "RWTH-EBC/AixWeather"
   EXAMPLE_CONVERTER_CONFIG: AixWeather/examples/converter.toml
+  EXCLUDE_PYTHON: 37, 38
 
 include:
   - project: 'EBC/EBC_all/gitlab_ci/templates'
