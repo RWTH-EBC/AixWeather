@@ -164,6 +164,7 @@ class RegressionTestsClass:
             self.folder_tests,
             f"{self.station_id}_{self.start_formatted}_{self.end_formatted}_{self.city}.epw",
         )
+        self.maxDiff = None
         self.assertEqual(
             epw_desired[:1000], epw_created[:1000], "First 1000 characters don't match!"
         )
