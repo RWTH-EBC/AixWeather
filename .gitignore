@@ -1,110 +1,49 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
- *.pyc
-*.py[cod]
-*$py.class
+# Ignore the following files in GIT #
+######################################
 
-# exclude media folder data
-media/*
-tmp_df*/
-# exception of the folder itself by keeping gitkeep
-!media/.gitkeep 
+# Python compiled files #
+#########################
+*.pyc
+*.orig
 
-# C extensions
-*.so
+# Output-Files #
+########################
+/results
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-Scripts/
+#Eclipse Settings #
+#####################
+/.settings
+.project
+.pydevproject
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+#Spyder Settings #
+#####################
+.spyderproject
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+#PyCharm Settings #
+#####################
+.idea
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
-*.log
-local_settings.py
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
-
-# Jupyter Notebook
+# Jupyter Notebook #
+#####################
 .ipynb_checkpoints
 
-# pyenv
-.python-version
+#Unit tests #
+#####################
+.cache/
+__pycache__/
+.coverage
+.pytest_cache
 
-# celery beat schedule file
-celerybeat-schedule
+#pip install #
+#####################
+*.egg-info/
+*.egg/
+*.eggs
+dist
+*.pypirc
 
-# SageMath parsed files
-*.sage.py
+#ignore docs#
+#####################
 
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-
-# pycharm
-.idea
+docs/_build

@@ -1,8 +1,8 @@
 import datetime as dt
 
 # choose the project class according to the desired weather data origin
-from project_class import ProjectClassDWDHistorical
-from core.data_quality_checks import plot_heatmap_missing_values_daily
+from AixWeather.project_class import ProjectClassDWDHistorical
+from AixWeather.data_quality_checks import plot_heatmap_missing_values_daily
 
 
 # initiate the project class which contains or creates all variables and functions
