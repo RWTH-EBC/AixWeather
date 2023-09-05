@@ -37,8 +37,8 @@ class TestDWDTRY2015(BaseTRY, utils_4_tests.RegressionTestsClass):
             "TRY2015",
             os.path.join(
                 ROOT_DIR,
-                r"tests//test_files//regular_tests//TRY//"
-                "test_TRY2015//input//TRY2015_507931060546_Jahr.dat",
+                r"tests/test_files/regular_tests/TRY/"
+                "test_TRY2015/input/TRY2015_507931060546_Jahr.dat",
             ),
         )
 
