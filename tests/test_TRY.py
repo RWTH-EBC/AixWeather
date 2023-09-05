@@ -51,7 +51,7 @@ class TestDWDTRY2015Sommer(BaseTRY, utils_4_tests.RegressionTestsClass):
             os.path.join(
                 ROOT_DIR,
                 r"tests/test_files/regular_tests/TRY/"
-                "test_TRY2015_Sommer/input/TRY2015_507931060546_Somm.txt",
+                "test_TRY2015_Sommer/input/TRY2015_507931060546_Somm.dat",
             ),
         )
 
