@@ -62,7 +62,7 @@ setuptools.setup(
         'weather', 'BES', 'converter',
         'simulation', 'building', 'energy'
     ],
-    packages=setuptools.find_packages(),#exclude=['tests', 'tests.*', 'img']),
+    packages=setuptools.find_packages(exclude=['tests', 'tests.*', 'img']),
     setup_requires=SETUP_REQUIRES,
     install_requires=INSTALL_REQUIRES,
 )
