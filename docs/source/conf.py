@@ -61,7 +61,7 @@ source_suffix = ['.rst', '.md']
 master_doc = 'index'
 
 # General information about the project.
-project = 'AixWeather'
+project = 'aixweather'
 copyright = '2023, EON EBC'
 author = 'EON EBC'
 
