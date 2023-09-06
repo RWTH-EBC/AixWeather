@@ -1,4 +1,5 @@
 stages:
+# - test
  - doc
  - deploy
  - code_quality
