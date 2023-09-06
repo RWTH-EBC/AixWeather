@@ -11,6 +11,7 @@ from parameterized import parameterized
 from config.definitions import ROOT_DIR
 from aixweather.project_class import ProjectClassDWDHistorical
 from tests import utils_4_tests
+from aixweather.core_data_format_2_output_file import utils_2output
 
 
 class BaseDWDHistorical(unittest.TestCase):
@@ -23,7 +24,7 @@ class BaseDWDHistorical(unittest.TestCase):
             start=start,
             end=end,
             station=station,
-            abs_result_folder_path=abs_result_folder_pathname,
+            abs_result_folder_path=abs_result_folder_path,
         )
         cls.folder_tests = os.path.join(
             ROOT_DIR, f"tests/test_files/regular_tests/DWD_hist/test_{name}"

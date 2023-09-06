@@ -13,6 +13,7 @@ from tests import utils_4_tests
 from config.definitions import ROOT_DIR
 from aixweather.imports.utils_import import MetaData
 from aixweather.project_class import ProjectClassDWDHistorical
+from aixweather.core_data_format_2_output_file import utils_2output
 
 
 class BaseOutputFunction(unittest.TestCase):
@@ -22,7 +23,7 @@ class BaseOutputFunction(unittest.TestCase):
             start=start,
             end=end,
             station=station,
-            abs_result_folder_path=abs_result_folder_pathname,
+            abs_result_folder_path=abs_result_folder_path,
         )
         cls.folder_tests = os.path.join(
             ROOT_DIR,

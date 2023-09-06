@@ -20,7 +20,7 @@ class BaseDWDForecast(unittest.TestCase):
     def init_and_run_DWD_forecast(cls, name: str, station):
         abs_result_folder_path = os.path.join(utils_2output.result_folder_path(), name)
         cls.c = ProjectClassDWDForecast(
-            station=station, abs_result_folder_path=abs_result_folder_pathname
+            station=station, abs_result_folder_path=abs_result_folder_path
         )
         cls.folder_tests = os.path.join(
             ROOT_DIR, f"tests/test_files/regular_tests/DWD_forecast/test_{name}"

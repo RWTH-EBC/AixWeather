@@ -6,6 +6,7 @@ import os
 import unittest
 
 from aixweather.project_class import ProjectClassEPW
+from aixweather.core_data_format_2_output_file import utils_2output
 from config.definitions import ROOT_DIR
 from tests import utils_4_tests
 
@@ -15,7 +16,7 @@ class BaseEPW(unittest.TestCase):
     def init_and_run_EPW(cls, name: str, path: str):
         abs_result_folder_path = os.path.join(utils_2output.result_folder_path(), name)
         cls.c = ProjectClassEPW(
-            path=path, abs_result_folder_path=abs_result_folder_pathname
+            path=path, abs_result_folder_path=abs_result_folder_path
         )
         cls.folder_tests = os.path.join(
             ROOT_DIR, f"tests/test_files/regular_tests/EPW/test_{name}"
