@@ -14,7 +14,7 @@ variables:
   PYTHON_PACKAGE_NAME: "AixWeather"
   TEST_ENGINE: "PYTEST"
   GIT_REPO: "RWTH-EBC/AixWeather"
-  EXAMPLE_CONVERTER_CONFIG: AixWeather/examples/converter.toml
+  EXAMPLE_CONVERTER_CONFIG: examples/converter.toml
   EXCLUDE_PYTHON: 37, 38
 
 include:
