@@ -445,13 +445,13 @@ def to_epw(
         start_epw = start + dt.timedelta(hours=1)
 
         ### measurement time conversion
-        #df = time_observation_transformations.shift_time_by_dict(format_epw, df)
+        df = time_observation_transformations.shift_time_by_dict(format_epw, df)
 
         ### if possible avoid back and forth interpolating -> pass through
         ### variables without shifting
-        #df = pass_through_handling.pass_through_measurements_with_back_and_forth_interpolating(
+        # df = pass_through_handling.pass_through_measurements_with_back_and_forth_interpolating(
         #    df, format_epw
-        #)
+        # )
 
         ### select only desired period
         df = time_observation_transformations.truncate_data_from_start_to_stop(
