@@ -59,7 +59,8 @@ def to_mos(
     meta: MetaData,
     start: dt.datetime,
     stop: dt.datetime,
-    fillna: bool
+    fillna: bool,
+    result_folder: str = None
 ) -> pd.DataFrame:
     """Create a MOS file from the core data.
 
@@ -225,7 +226,7 @@ def to_mos(
         f"{meta.station_id}_{start.strftime('%Y%m%d')}_{stop.strftime('%Y%m%d')}"
         f"_{meta.station_name}.mos"
     )
-    filepath = utils_2output.results_file_path(filename)
+    filepath = utils_2output.results_file_path(filename, result_folder)
 
     df.to_csv(
         filepath,
