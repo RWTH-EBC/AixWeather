@@ -89,7 +89,7 @@ class ProjectClassGeneral(ABC):
                 )
                 # round floats for unit test compatibility across different machines
                 digits_2_round = 5
-                if value[column].dtype == "float64":
+                if value[column].dtype == "float":
                     value[column] = value[column].round(digits_2_round)
 
             self._core_data = value
