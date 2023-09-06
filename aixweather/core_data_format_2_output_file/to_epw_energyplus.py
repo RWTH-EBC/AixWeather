@@ -445,7 +445,7 @@ def to_epw(
         start_epw = start + dt.timedelta(hours=1)
 
         ### measurement time conversion
-        # df = time_observation_transformations.shift_time_by_dict(format_epw, df)
+        df = time_observation_transformations.shift_time_by_dict(format_epw, df)
 
         ### if possible avoid back and forth interpolating -> pass through
         ### variables without shifting
