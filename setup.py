@@ -27,7 +27,7 @@ INSTALL_REQUIRES = [
 # Add all open-source packages to setup-requires
 SETUP_REQUIRES = INSTALL_REQUIRES.copy()
 
-with open(Path(__file__).parent.joinpath("AixWeather", "__init__.py"), "r") as file:
+with open(Path(__file__).parent.joinpath("aixweather", "__init__.py"), "r") as file:
     for line in file.readlines():
         if line.startswith("__version__"):
             VERSION = line.replace("__version__", "").split("=")[1].strip().replace("'", "").replace('"', '')
