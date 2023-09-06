@@ -3,7 +3,7 @@ change this file to your custom requirements (only import and perform as
 little preprocessing as possible)
 """
 
-from AixWeather.imports.utils_import import MetaData
+from aixweather.imports.utils_import import MetaData
 
 
 def load_custom_meta_data():

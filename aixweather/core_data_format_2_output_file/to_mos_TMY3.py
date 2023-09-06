@@ -6,9 +6,9 @@ import calendar
 import datetime as dt
 import pandas as pd
 
-from AixWeather.imports.utils_import import MetaData
-from AixWeather.core_data_format_2_output_file import utils_2output
-from AixWeather.transformation_functions import auxiliary, time_observation_transformations, pass_through_handling
+from aixweather.imports.utils_import import MetaData
+from aixweather.core_data_format_2_output_file import utils_2output
+from aixweather.transformation_functions import auxiliary, time_observation_transformations, pass_through_handling
 
 """
 format_modelica_TMY3 information:

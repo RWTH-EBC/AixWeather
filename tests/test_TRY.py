@@ -5,7 +5,7 @@ includes unittests for different TRY datasets
 import os
 import unittest
 
-from AixWeather.project_class import ProjectClassTRY
+from aixweather.project_class import ProjectClassTRY
 from config.definitions import ROOT_DIR
 from tests import utils_4_tests
 

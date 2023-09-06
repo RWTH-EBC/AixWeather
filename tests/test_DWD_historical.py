@@ -9,7 +9,7 @@ import datetime as dt
 from parameterized import parameterized
 
 from config.definitions import ROOT_DIR
-from AixWeather.project_class import ProjectClassDWDHistorical
+from aixweather.project_class import ProjectClassDWDHistorical
 from tests import utils_4_tests
 
 

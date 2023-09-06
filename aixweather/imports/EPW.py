@@ -4,7 +4,7 @@ import epw files
 
 import pandas as pd
 
-from AixWeather.imports.utils_import import MetaData
+from aixweather.imports.utils_import import MetaData
 
 
 def load_epw_meta_from_file(path: str) -> MetaData:

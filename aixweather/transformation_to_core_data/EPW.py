@@ -4,14 +4,14 @@ This module includes a function to transform EPW data to core data format.
 
 import pandas as pd
 
-from AixWeather.imports.utils_import import MetaData
-from AixWeather.transformation_functions import (
+from aixweather.imports.utils_import import MetaData
+from aixweather.transformation_functions import (
     auxiliary,
     time_observation_transformations,
     variable_transformations,
     pass_through_handling,
 )
-from AixWeather.core_data_format_2_output_file.to_epw_energyplus import (
+from aixweather.core_data_format_2_output_file.to_epw_energyplus import (
     format_epw as format_epw_export,
 )
 

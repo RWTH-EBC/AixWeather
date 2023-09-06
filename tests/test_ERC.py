@@ -8,7 +8,7 @@ import datetime as dt
 
 from tests import utils_4_tests
 from config.definitions import ROOT_DIR
-from AixWeather.project_class import ProjectClassERC
+from aixweather.project_class import ProjectClassERC
 
 # username="xxxxx@eonerc.rwth-aachen.de"
 # password="xxxxx"
