@@ -69,7 +69,7 @@ author = 'EON EBC'
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
-# Get the version from ebcpys __init__.py:
+# Get the version from AixWeather __init__.py:
 with open(Path(__file__).parents[2].joinpath(project, "__init__.py"), "r") as file:
     for line in file.readlines():
         if line.startswith("__version__"):
