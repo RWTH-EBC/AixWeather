@@ -203,7 +203,7 @@ def pass_through_measurements_with_back_and_forth_interpolating(
         format_outputter (dict): Dictionary specifying the format of output data.
 
     Returns:
-        pd.DataFrame: The modified `core2output_df` DataFrame with pass-through variables.                    shifted variables.
+        pd.DataFrame: The modified `core2output_df` DataFrame with pass-through variables.
     """
     pass_trough_variables = _find_pass_through_core_names(
         core2output_df.columns, format_outputter
