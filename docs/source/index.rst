@@ -5,22 +5,7 @@
 
 About ebcpy
 -------------------
-
-.. mdinclude::  ../../README.md
-
 .. toctree::
    :maxdepth: 2
 
-   examples
    code/modules
-   Contribution
-   Reproduction
-   version_his
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
