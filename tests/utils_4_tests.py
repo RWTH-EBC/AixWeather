@@ -159,7 +159,7 @@ class RegressionTestsClass:
         )
         self.assertEqual(mos_desired, mos_created)
 
-    # due to CI Linux Issues this is temporary disabled -> activate when problem solved
+    # due to CI Linux Issues this is temporary disabled -> activate when problem solved 
     # def test_output_epw(self):
     #     epw_desired, epw_created = load_epw(
     #         self.folder_tests,
