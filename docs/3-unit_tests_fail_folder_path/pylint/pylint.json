@@ -1003,7 +1003,7 @@
         },
         {
             "type": "convention",
-            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
+            "module": "e1_pull_DWD_historical_to_all_output_formats",
             "obj": "",
             "line": 39,
             "column": 0,
@@ -1014,7 +1014,7 @@
         },
         {
             "type": "convention",
-            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
+            "module": "e1_pull_DWD_historical_to_all_output_formats",
             "obj": "",
             "line": 1,
             "column": 0,
@@ -1025,7 +1025,7 @@
         },
         {
             "type": "convention",
-            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
+            "module": "e1_pull_DWD_historical_to_all_output_formats",
             "obj": "",
             "line": 1,
             "column": 0,
@@ -1036,7 +1036,7 @@
         },
         {
             "type": "convention",
-            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
+            "module": "e1_pull_DWD_historical_to_all_output_formats",
             "obj": "e1_pull_DWD_historical_to_all_output_formats",
             "line": 3,
             "column": 0,
@@ -1047,7 +1047,7 @@
         },
         {
             "type": "convention",
-            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
+            "module": "e1_pull_DWD_historical_to_all_output_formats",
             "obj": "e1_pull_DWD_historical_to_all_output_formats",
             "line": 3,
             "column": 0,
@@ -1058,7 +1058,7 @@
         },
         {
             "type": "convention",
-            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
+            "module": "e1_pull_DWD_historical_to_all_output_formats",
             "obj": "e1_pull_DWD_historical_to_all_output_formats",
             "line": 5,
             "column": 4,
@@ -1069,7 +1069,7 @@
         },
         {
             "type": "convention",
-            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
+            "module": "e1_pull_DWD_historical_to_all_output_formats",
             "obj": "e1_pull_DWD_historical_to_all_output_formats",
             "line": 8,
             "column": 4,
@@ -1080,7 +1080,7 @@
         },
         {
             "type": "convention",
-            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
+            "module": "e1_pull_DWD_historical_to_all_output_formats",
             "obj": "e1_pull_DWD_historical_to_all_output_formats",
             "line": 24,
             "column": 4,
@@ -2395,7 +2395,7 @@
             "column": 0,
             "path": "tests/utils_4_tests.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_DWD_forecast:[62:68]\n==test_output_functions:[64:72]\n        cls.c.core_2_pickle()\n        cls.c.core_2_json()\n        cls.c.core_2_mos()\n        cls.c.core_2_epw()\n        cls.c.core_2_csv()\n\n    # ignore core_data and meta_data tests\n    def test_core_data(self):",
+            "message": "Similar lines in 2 files\n==test_DWD_forecast:[62:68]\n==test_output_functions:[64:72]\n        cls.c.core_2_pickle()\n        cls.c.core_2_json()\n        cls.c.core_2_mos()\n        cls.c.core_2_epw()\n        cls.c.core_2_csv()\n",
             "message-id": "R0801"
         }
     ],
@@ -2452,7 +2452,7 @@
                 "statement": 3,
                 "warning": 0
             },
-            "examples.e1_pull_DWD_historical_to_all_output_formats": {
+            "e1_pull_DWD_historical_to_all_output_formats": {
                 "convention": 8,
                 "error": 0,
                 "fatal": 0,
@@ -2563,9 +2563,9 @@
                 "aixweather.data_quality_checks"
             ],
             "pandas": [
+                "test_output_functions",
                 "utils_4_tests",
                 "test_DWD_forecast",
-                "test_output_functions",
                 "aixweather.project_class"
             ],
             "aixweather.imports.DWD": [
@@ -2608,52 +2608,52 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
-                "examples.e1_pull_DWD_historical_to_all_output_formats",
-                "test_DWD_historical",
                 "test_output_functions",
+                "test_EPW",
                 "test_ERC",
+                "e1_pull_DWD_historical_to_all_output_formats",
                 "test_TRY",
                 "test_DWD_forecast",
-                "test_EPW"
+                "test_DWD_historical"
             ],
             "aixweather.data_quality_checks": [
-                "examples.e1_pull_DWD_historical_to_all_output_formats"
+                "e1_pull_DWD_historical_to_all_output_formats"
             ],
             "parameterized.parameterized": [
-                "test_DWD_historical",
-                "test_DWD_forecast"
+                "test_DWD_forecast",
+                "test_DWD_historical"
             ],
             "aixweather.imports.utils_import": [
+                "test_output_functions",
                 "utils_4_tests",
-                "test_DWD_forecast",
-                "test_output_functions"
+                "test_DWD_forecast"
             ],
             "aixweather.core_data_format_2_output_file.utils_2output": [
-                "test_DWD_historical",
-                "test_output_functions",
-                "test_TRY",
-                "test_ERC",
-                "test_DWD_forecast",
                 "utils_4_tests",
-                "test_EPW"
+                "test_output_functions",
+                "test_EPW",
+                "test_ERC",
+                "test_TRY",
+                "test_DWD_forecast",
+                "test_DWD_historical"
             ],
             "config.definitions": [
-                "test_DWD_historical",
                 "test_output_functions",
-                "test_TRY",
+                "test_EPW",
                 "test_ERC",
+                "test_TRY",
                 "test_DWD_forecast",
-                "test_EPW"
+                "test_DWD_historical"
             ],
             "utils_4_tests": [
                 "test_DWD_forecast"
             ],
             "tests": [
-                "test_DWD_historical",
                 "test_output_functions",
-                "test_TRY",
+                "test_EPW",
                 "test_ERC",
-                "test_EPW"
+                "test_TRY",
+                "test_DWD_historical"
             ]
         },
         "duplicated_lines": {
@@ -2736,7 +2736,7 @@
                 "statement": 3,
                 "warning": 0
             },
-            "examples.e1_pull_DWD_historical_to_all_output_formats": {
+            "e1_pull_DWD_historical_to_all_output_formats": {
                 "convention": 8,
                 "error": 0,
                 "fatal": 0,
@@ -2849,8 +2849,8 @@
             "pandas": [
                 "utils_4_tests",
                 "test_DWD_forecast",
-                "test_output_functions",
-                "aixweather.project_class"
+                "aixweather.project_class",
+                "test_output_functions"
             ],
             "aixweather.imports.DWD": [
                 "aixweather.project_class"
@@ -2892,16 +2892,16 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
-                "examples.e1_pull_DWD_historical_to_all_output_formats",
-                "test_DWD_historical",
                 "test_output_functions",
+                "test_EPW",
                 "test_ERC",
+                "e1_pull_DWD_historical_to_all_output_formats",
                 "test_TRY",
                 "test_DWD_forecast",
-                "test_EPW"
+                "test_DWD_historical"
             ],
             "aixweather.data_quality_checks": [
-                "examples.e1_pull_DWD_historical_to_all_output_formats"
+                "e1_pull_DWD_historical_to_all_output_formats"
             ],
             "parameterized.parameterized": [
                 "test_DWD_forecast",
@@ -2913,31 +2913,31 @@
                 "test_output_functions"
             ],
             "aixweather.core_data_format_2_output_file.utils_2output": [
-                "test_DWD_historical",
+                "utils_4_tests",
                 "test_output_functions",
+                "test_EPW",
                 "test_ERC",
                 "test_TRY",
                 "test_DWD_forecast",
-                "utils_4_tests",
-                "test_EPW"
+                "test_DWD_historical"
             ],
             "config.definitions": [
-                "test_DWD_historical",
                 "test_output_functions",
+                "test_EPW",
                 "test_ERC",
                 "test_TRY",
                 "test_DWD_forecast",
-                "test_EPW"
+                "test_DWD_historical"
             ],
             "utils_4_tests": [
                 "test_DWD_forecast"
             ],
             "tests": [
-                "test_DWD_historical",
                 "test_output_functions",
-                "test_TRY",
+                "test_EPW",
                 "test_ERC",
-                "test_EPW"
+                "test_TRY",
+                "test_DWD_historical"
             ]
         },
         "duplicated_lines": {
