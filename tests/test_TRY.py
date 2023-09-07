@@ -14,7 +14,10 @@ from tests import utils_4_tests
 class BaseTRY(unittest.TestCase):
     @classmethod
     def init_and_run_TRY(cls, name: str, path: str):
-        cls.c = ProjectClassTRY(path=path)
+        abs_result_folder_path = os.path.join(utils_2output.result_folder_path(), name)
+        cls.c = ProjectClassTRY(
+            path=path, abs_result_folder_path=abs_result_folder_path
+        )
         cls.folder_tests = os.path.join(
             ROOT_DIR, f"tests/test_files/regular_tests/TRY/test_{name}"
         )
@@ -28,7 +31,7 @@ class BaseTRY(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls) -> None:
-        utils_4_tests.delete_created_result_files()
+        utils_4_tests.delete_created_result_files(cls.c.abs_result_folder_path)
 
 
 class TestDWDTRY2015(BaseTRY, utils_4_tests.RegressionTestsClass):

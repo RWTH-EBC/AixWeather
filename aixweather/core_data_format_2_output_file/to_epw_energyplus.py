@@ -71,7 +71,8 @@ def to_epw(
     meta: MetaData,
     start: dt.datetime,
     stop: dt.datetime,
-    fillna: bool
+    fillna: bool,
+    result_folder: str = None
 ) -> pd.DataFrame:
     """Create an EPW file from the core data.
 
@@ -99,7 +100,7 @@ def to_epw(
         f"_{meta.station_name}.epw"
     )
     # get file path to safe data to
-    file_path = utils_2output.results_file_path(filename)
+    file_path = utils_2output.results_file_path(filename, result_folder)
 
     ### create header lines
     def line1_location(

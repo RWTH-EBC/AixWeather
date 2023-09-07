@@ -19,7 +19,13 @@ class BaseDWDHistorical(unittest.TestCase):
     def init_and_run_DWD_historical(
         cls, name: str, start: dt.datetime, end: dt.datetime, station=15000
     ):
-        cls.c = ProjectClassDWDHistorical(start=start, end=end, station=station)
+        abs_result_folder_path = os.path.join(utils_2output.result_folder_path(), name)
+        cls.c = ProjectClassDWDHistorical(
+            start=start,
+            end=end,
+            station=station,
+            abs_result_folder_path=abs_result_folder_path,
+        )
         cls.folder_tests = os.path.join(
             ROOT_DIR, f"tests/test_files/regular_tests/DWD_hist/test_{name}"
         )
@@ -33,12 +39,10 @@ class BaseDWDHistorical(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls) -> None:
-        utils_4_tests.delete_created_result_files()
+        utils_4_tests.delete_created_result_files(cls.c.abs_result_folder_path)
 
 
-class TestDWDHistorical1Year(
-    BaseDWDHistorical, utils_4_tests.RegressionTestsClass
-):
+class TestDWDHistorical1Year(BaseDWDHistorical, utils_4_tests.RegressionTestsClass):
     """
     Attention at some day this pull will move from recent folder
     to historic folder, update desired outcome with new dates
@@ -51,9 +55,7 @@ class TestDWDHistorical1Year(
         )
 
 
-class TestDWDHistorical10Days(
-    BaseDWDHistorical, utils_4_tests.RegressionTestsClass
-):
+class TestDWDHistorical10Days(BaseDWDHistorical, utils_4_tests.RegressionTestsClass):
     """
     Attention at some day this pull will move from recent folder
     to historic folder, update desired outcome with new dates

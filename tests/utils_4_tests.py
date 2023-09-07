@@ -13,10 +13,10 @@ from aixweather.core_data_format_2_output_file import utils_2output
 from aixweather.imports.utils_import import MetaData
 
 
-def load_mos(folder_tests, file_name):
+def load_mos(folder_tests, result_folder, file_name):
     with open(os.path.join(folder_tests, file_name), "r") as file:
         mos_desired = file.read()
-    with open(utils_2output.results_file_path(file_name), "r") as file:
+    with open(utils_2output.results_file_path(file_name, result_folder), "r") as file:
         mos_created = file.read()
     # delete time of data pull
     pattern = r"\(collected at \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6}\)"
@@ -25,35 +25,33 @@ def load_mos(folder_tests, file_name):
     return mos_desired, mos_created
 
 
-def load_epw(folder_tests, file_name):
+def load_epw(folder_tests, result_folder, file_name):
     with open(os.path.join(folder_tests, file_name), "r") as file:
         epw_desired = file.read()
-    with open(utils_2output.results_file_path(file_name), "r") as file:
+    with open(utils_2output.results_file_path(file_name, result_folder), "r") as file:
         epw_created = file.read()
     return epw_desired, epw_created
 
 
-def load_json(folder_tests, file_name):
+def load_json(folder_tests, result_folder, file_name):
     with open(os.path.join(folder_tests, file_name), "r") as file:
         json_desired = json.load(file)
-    with open(utils_2output.results_file_path(file_name), "r") as file:
+    with open(utils_2output.results_file_path(file_name, result_folder), "r") as file:
         json_created = json.load(file)
     return json_desired, json_created
 
 
-def load_csv(folder_tests, file_name):
+def load_csv(folder_tests, result_folder, file_name):
     csv_desired = pd.read_csv(os.path.join(folder_tests, file_name))
-    csv_created = pd.read_csv(utils_2output.results_file_path(file_name))
+    csv_created = pd.read_csv(utils_2output.results_file_path(file_name, result_folder))
     return csv_desired, csv_created
 
 
-def delete_created_result_files():
-    # cleans results folder
-    file_path = utils_2output.results_file_path("temp.txt")
-    directory_path = os.path.dirname(file_path)
-    if os.path.exists(directory_path):
-        shutil.rmtree(directory_path)
-        os.makedirs(directory_path)
+def delete_created_result_files(result_folder):
+    # delete results folder
+    if os.path.exists(result_folder):
+        shutil.rmtree(result_folder)
+
 
 
 def run_all_functions(project_class_instance):
@@ -121,7 +119,7 @@ class RegressionTestsClass:
 
     def test_output_json(self):
         json_desired, json_created = load_json(
-            self.folder_tests, f"Station_{self.city}.json"
+            self.folder_tests, self.c.abs_result_folder_path, f"Station_{self.city}.json"
         )
         json_desired = json.dumps(json_desired, sort_keys=True)
         json_created = json.dumps(json_created, sort_keys=True)
@@ -140,13 +138,13 @@ class RegressionTestsClass:
 
     def test_output_csv(self):
         csv_desired, csv_created = load_csv(
-            self.folder_tests, f"Station_{self.city}.csv"
+            self.folder_tests, self.c.abs_result_folder_path, f"Station_{self.city}.csv"
         )
         pd.testing.assert_frame_equal(csv_desired, csv_created)
 
     def test_output_mos(self):
         mos_desired, mos_created = load_mos(
-            self.folder_tests,
+            self.folder_tests, self.c.abs_result_folder_path,
             f"{self.station_id}_{self.start_formatted}_{self.end_formatted}_{self.city}.mos",
         )
         self.assertEqual(
@@ -161,7 +159,7 @@ class RegressionTestsClass:
 
     def test_output_epw(self):
         epw_desired, epw_created = load_epw(
-            self.folder_tests,
+            self.folder_tests, self.c.abs_result_folder_path,
             f"{self.station_id}_{self.start_formatted}_{self.end_formatted}_{self.city}.epw",
         )
         self.maxDiff = None

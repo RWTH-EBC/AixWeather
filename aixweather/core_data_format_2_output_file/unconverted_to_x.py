@@ -12,7 +12,8 @@ from aixweather.imports.utils_import import MetaData
 
 def to_pickle(
     core_df: pd.DataFrame,
-    meta: MetaData
+    meta: MetaData,
+    result_folder: str = None
 ):
     """Create and save a pickle file from the core data.
 
@@ -27,8 +28,8 @@ def to_pickle(
     core_df = core_df.copy()
     filename = f"Station_{meta.station_name}.pkl"
     meta_filename = f"Station_{meta.station_name}_meta_data.pkl"
-    file_path = utils_2output.results_file_path(filename)
-    meta_file_path = utils_2output.results_file_path(meta_filename)
+    file_path = utils_2output.results_file_path(filename, result_folder)
+    meta_file_path = utils_2output.results_file_path(meta_filename, result_folder)
 
     core_df.to_pickle(file_path)
     with open(meta_file_path, "wb") as file:
@@ -41,7 +42,8 @@ def to_pickle(
 
 def to_json(
     core_df: pd.DataFrame,
-    meta: MetaData
+    meta: MetaData,
+    result_folder: str = None
 ):
     """Create and save a json file from the core data.
 
@@ -57,8 +59,8 @@ def to_json(
 
     filename = f"Station_{meta.station_name}.json"
     meta_filename = f"Station_{meta.station_name}_meta_data.json"
-    file_path = utils_2output.results_file_path(filename)
-    meta_file_path = utils_2output.results_file_path(meta_filename)
+    file_path = utils_2output.results_file_path(filename, result_folder)
+    meta_file_path = utils_2output.results_file_path(meta_filename, result_folder)
 
     # Convert DataFrame to JSON and save to file
     core_df.to_json(file_path, orient="records")
@@ -75,7 +77,8 @@ def to_json(
 
 def to_csv(
     core_df: pd.DataFrame,
-    meta: MetaData
+    meta: MetaData,
+    result_folder: str = None
 ):
     """Create and save a csv file from the core data.
 
@@ -91,8 +94,8 @@ def to_csv(
 
     filename = f"Station_{meta.station_name}.csv"
     meta_filename = f"Station_{meta.station_name}_meta_data.json"
-    file_path = utils_2output.results_file_path(filename)
-    meta_file_path = utils_2output.results_file_path(meta_filename)
+    file_path = utils_2output.results_file_path(filename, result_folder)
+    meta_file_path = utils_2output.results_file_path(meta_filename, result_folder)
 
     core_df.to_csv(file_path, index=True)
 
