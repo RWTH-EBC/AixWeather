@@ -222,7 +222,8 @@
     <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span><span class="p">,</span>
     <span class="n">start</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span>
     <span class="n">stop</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span>
-    <span class="n">fillna</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">fillna</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">result_folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a MOS file from the core data.</span>
 
@@ -388,7 +389,7 @@
         <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">station_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">start</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">stop</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">station_name</span><span class="si">}</span><span class="s2">.mos&quot;</span>
     <span class="p">)</span>
-    <span class="n">filepath</span> <span class="o">=</span> <span class="n">utils_2output</span><span class="o">.</span><span class="n">results_file_path</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">filepath</span> <span class="o">=</span> <span class="n">utils_2output</span><span class="o">.</span><span class="n">results_file_path</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">result_folder</span><span class="p">)</span>
 
     <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
         <span class="n">filepath</span><span class="p">,</span>

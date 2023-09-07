@@ -175,7 +175,8 @@
 
 <div class="viewcode-block" id="to_pickle"><a class="viewcode-back" href="../../../code/aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.unconverted_to_x.to_pickle">[docs]</a><span class="k">def</span> <span class="nf">to_pickle</span><span class="p">(</span>
     <span class="n">core_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
-    <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span>
+    <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span><span class="p">,</span>
+    <span class="n">result_folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create and save a pickle file from the core data.</span>
 
@@ -190,8 +191,8 @@
     <span class="n">core_df</span> <span class="o">=</span> <span class="n">core_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Station_</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">station_name</span><span class="si">}</span><span class="s2">.pkl&quot;</span>
     <span class="n">meta_filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Station_</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">station_name</span><span class="si">}</span><span class="s2">_meta_data.pkl&quot;</span>
-    <span class="n">file_path</span> <span class="o">=</span> <span class="n">utils_2output</span><span class="o">.</span><span class="n">results_file_path</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="n">meta_file_path</span> <span class="o">=</span> <span class="n">utils_2output</span><span class="o">.</span><span class="n">results_file_path</span><span class="p">(</span><span class="n">meta_filename</span><span class="p">)</span>
+    <span class="n">file_path</span> <span class="o">=</span> <span class="n">utils_2output</span><span class="o">.</span><span class="n">results_file_path</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">result_folder</span><span class="p">)</span>
+    <span class="n">meta_file_path</span> <span class="o">=</span> <span class="n">utils_2output</span><span class="o">.</span><span class="n">results_file_path</span><span class="p">(</span><span class="n">meta_filename</span><span class="p">,</span> <span class="n">result_folder</span><span class="p">)</span>
 
     <span class="n">core_df</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">meta_file_path</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
@@ -204,7 +205,8 @@
 
 <div class="viewcode-block" id="to_json"><a class="viewcode-back" href="../../../code/aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.unconverted_to_x.to_json">[docs]</a><span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span>
     <span class="n">core_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
-    <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span>
+    <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span><span class="p">,</span>
+    <span class="n">result_folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create and save a json file from the core data.</span>
 
@@ -220,8 +222,8 @@
 
     <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Station_</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">station_name</span><span class="si">}</span><span class="s2">.json&quot;</span>
     <span class="n">meta_filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Station_</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">station_name</span><span class="si">}</span><span class="s2">_meta_data.json&quot;</span>
-    <span class="n">file_path</span> <span class="o">=</span> <span class="n">utils_2output</span><span class="o">.</span><span class="n">results_file_path</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="n">meta_file_path</span> <span class="o">=</span> <span class="n">utils_2output</span><span class="o">.</span><span class="n">results_file_path</span><span class="p">(</span><span class="n">meta_filename</span><span class="p">)</span>
+    <span class="n">file_path</span> <span class="o">=</span> <span class="n">utils_2output</span><span class="o">.</span><span class="n">results_file_path</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">result_folder</span><span class="p">)</span>
+    <span class="n">meta_file_path</span> <span class="o">=</span> <span class="n">utils_2output</span><span class="o">.</span><span class="n">results_file_path</span><span class="p">(</span><span class="n">meta_filename</span><span class="p">,</span> <span class="n">result_folder</span><span class="p">)</span>
 
     <span class="c1"># Convert DataFrame to JSON and save to file</span>
     <span class="n">core_df</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
@@ -238,7 +240,8 @@
 
 <div class="viewcode-block" id="to_csv"><a class="viewcode-back" href="../../../code/aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.unconverted_to_x.to_csv">[docs]</a><span class="k">def</span> <span class="nf">to_csv</span><span class="p">(</span>
     <span class="n">core_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
-    <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span>
+    <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span><span class="p">,</span>
+    <span class="n">result_folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create and save a csv file from the core data.</span>
 
@@ -254,8 +257,8 @@
 
     <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Station_</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">station_name</span><span class="si">}</span><span class="s2">.csv&quot;</span>
     <span class="n">meta_filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Station_</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">station_name</span><span class="si">}</span><span class="s2">_meta_data.json&quot;</span>
-    <span class="n">file_path</span> <span class="o">=</span> <span class="n">utils_2output</span><span class="o">.</span><span class="n">results_file_path</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="n">meta_file_path</span> <span class="o">=</span> <span class="n">utils_2output</span><span class="o">.</span><span class="n">results_file_path</span><span class="p">(</span><span class="n">meta_filename</span><span class="p">)</span>
+    <span class="n">file_path</span> <span class="o">=</span> <span class="n">utils_2output</span><span class="o">.</span><span class="n">results_file_path</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">result_folder</span><span class="p">)</span>
+    <span class="n">meta_file_path</span> <span class="o">=</span> <span class="n">utils_2output</span><span class="o">.</span><span class="n">results_file_path</span><span class="p">(</span><span class="n">meta_filename</span><span class="p">,</span> <span class="n">result_folder</span><span class="p">)</span>
 
     <span class="n">core_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 

@@ -234,7 +234,8 @@
     <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span><span class="p">,</span>
     <span class="n">start</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span>
     <span class="n">stop</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span>
-    <span class="n">fillna</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">fillna</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">result_folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an EPW file from the core data.</span>
 
@@ -262,7 +263,7 @@
         <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">station_name</span><span class="si">}</span><span class="s2">.epw&quot;</span>
     <span class="p">)</span>
     <span class="c1"># get file path to safe data to</span>
-    <span class="n">file_path</span> <span class="o">=</span> <span class="n">utils_2output</span><span class="o">.</span><span class="n">results_file_path</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">file_path</span> <span class="o">=</span> <span class="n">utils_2output</span><span class="o">.</span><span class="n">results_file_path</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">result_folder</span><span class="p">)</span>
 
     <span class="c1">### create header lines</span>
     <span class="k">def</span> <span class="nf">line1_location</span><span class="p">(</span>
