@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 import pandas as pd
 
+from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
 from aixweather.transformation_functions import auxiliary, time_observation_transformations, variable_transformations, \
     pass_through_handling, unit_conversions
@@ -124,7 +125,7 @@ def DWD_historical_to_core_data(
 
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
-        core_format=auxiliary.format_core_data, other_format=format_DWD_historical
+        core_format=definitions.format_core_data, other_format=format_DWD_historical
     )
 
     ### format raw data for further operations
@@ -168,7 +169,7 @@ def DWD_historical_to_core_data(
 
     def transform_DWD_historical(df):
         # drop unnecessary variables
-        df = auxiliary.force_data_variable_convention(df, auxiliary.format_core_data)
+        df = auxiliary.force_data_variable_convention(df, definitions.format_core_data)
 
         ### convert units
         df["AtmPressure"] = unit_conversions.hPa_to_Pa(df["AtmPressure"])
@@ -211,7 +212,7 @@ def DWD_forecast_2_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.Data
 
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
-        core_format=auxiliary.format_core_data, other_format=format_DWD_forecast
+        core_format=definitions.format_core_data, other_format=format_DWD_forecast
     )
 
     ### format raw data for further operations
@@ -231,7 +232,7 @@ def DWD_forecast_2_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.Data
 
     def transform_DWD_forecast(df):
         # drop unnecessary variables
-        df = auxiliary.force_data_variable_convention(df, auxiliary.format_core_data)
+        df = auxiliary.force_data_variable_convention(df, definitions.format_core_data)
 
         ### convert units
         df["OpaqueSkyCover"] = unit_conversions.percent_to_tenth(df["OpaqueSkyCover"])

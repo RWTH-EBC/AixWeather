@@ -7,13 +7,13 @@ import unittest
 import pandas as pd
 
 from aixweather.project_class import ProjectClassTRY
-from config.definitions import ROOT_DIR
+from aixweather import definitions
 
 
 class TestDWDTRY(unittest.TestCase):
     def load_files(self):
         self.old_conv = pd.read_table(
-            filepath_or_buffer=rf"{ROOT_DIR}/tests/test_files/static_checks/"
+            filepath_or_buffer=rf"{definitions.ROOT_DIR}/tests/test_files/static_checks/"
                                "TRY/TRY2015_507931060546_Jahr_City_Aachen"
                                "_oldConverter.mos",
             header=40,
@@ -23,7 +23,7 @@ class TestDWDTRY(unittest.TestCase):
         )
 
         self.new_conv_no_shifting = pd.read_table(
-            filepath_or_buffer=rf"{ROOT_DIR}/tests/test_files/static_checks/"
+            filepath_or_buffer=rf"{definitions.ROOT_DIR}/tests/test_files/static_checks/"
                                "TRY/UnknownStationID_20150101_20160101_Aachen"
                                "_without_time_shifting.mos",
             header=43,
@@ -33,7 +33,7 @@ class TestDWDTRY(unittest.TestCase):
         )
 
         self.new_conv_with_shifting = pd.read_table(
-            filepath_or_buffer=rf"{ROOT_DIR}/tests/test_files/static_checks/"
+            filepath_or_buffer=rf"{definitions.ROOT_DIR}/tests/test_files/static_checks/"
                                "TRY/UnknownStationID_20150101_20151231_Aachen"
                                "_with_time_shifting.mos",
             header=43,
@@ -43,7 +43,7 @@ class TestDWDTRY(unittest.TestCase):
         )
 
         self.new_conv_without_shifting_new_NormDirRad = pd.read_table(
-            filepath_or_buffer=rf"{ROOT_DIR}/tests/test_files/static_checks/TRY"
+            filepath_or_buffer=rf"{definitions.ROOT_DIR}/tests/test_files/static_checks/TRY"
                                "/UnknownStationID_20150101_20151231_Aachen"
                                "_without_time_shifting_new_DirNormRad.mos",
             header=43,
@@ -53,7 +53,7 @@ class TestDWDTRY(unittest.TestCase):
         )
 
         self.new_conv_with_shifting_new_NormDirRad = pd.read_table(
-            filepath_or_buffer=rf"{ROOT_DIR}/tests/test_files/static_checks/TRY/"
+            filepath_or_buffer=rf"{definitions.ROOT_DIR}/tests/test_files/static_checks/TRY/"
                                "UnknownStationID_20150101_20151231_Aachen"
                                "_with_time_shifting_new_DirNormRad.mos",
             header=43,
@@ -63,7 +63,7 @@ class TestDWDTRY(unittest.TestCase):
         )
 
         self.new_conv_passthrough_new_NormDirRad = pd.read_table(
-            filepath_or_buffer=rf"{ROOT_DIR}/tests/test_files/static_checks/TRY/"
+            filepath_or_buffer=rf"{definitions.ROOT_DIR}/tests/test_files/static_checks/TRY/"
                                "UnknownStationID_20150101_20151231_Aachen"
                                "_passthrough_new_DirNormRad.mos",
             header=43,
@@ -114,7 +114,7 @@ class TestDWDTRY(unittest.TestCase):
 
         c = ProjectClassTRY(
             os.path.join(
-                ROOT_DIR,
+                definitions.ROOT_DIR,
                 "core",
                 "tests",
                 "test_files",

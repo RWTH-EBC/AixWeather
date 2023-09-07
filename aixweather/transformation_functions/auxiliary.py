@@ -5,43 +5,6 @@ includes auxiliary functions for data handling and transformation
 import pandas as pd
 import numpy as np
 
-# core data format always in UTC and values measured at indicated time
-format_core_data = {
-    # from TMY3 https://www.nrel.gov/docs/fy08osti/43156.pdf
-    "DryBulbTemp": {"unit": "degC"},
-    "DewPointTemp": {"unit": "degC"},
-    "RelHum": {"unit": "percent"},
-    "ExtHorRad": {"unit": "Wh/m2"},
-    "ExtDirNormRad": {"unit": "Wh/m2"},
-    "HorInfra": {"unit": "Wh/m2"},
-    "GlobHorRad": {"unit": "Wh/m2"},
-    "DirNormRad": {"unit": "Wh/m2"},
-    "DirHorRad": {"unit": "Wh/m2"},
-    "DiffHorRad": {"unit": "Wh/m2"},
-    "GlobHorIll": {"unit": "lux"},
-    "DirecNormIll": {"unit": "lux"},
-    "DiffuseHorIll": {"unit": "lux"},
-    "ZenithLum": {"unit": "Cd/m2"},
-    "WindDir": {"unit": "deg"},
-    "WindSpeed": {"unit": "m/s"},
-    "TotalSkyCover": {"unit": "1tenth"},
-    "OpaqueSkyCover": {"unit": "1tenth"},
-    "Visibility": {"unit": "km"},
-    "CeilingH": {"unit": "m"},
-    "PrecWater": {"unit": "mm"},
-    "Aerosol": {"unit": "1thousandth"},
-    "LiquidPrecD": {"unit": "mm/h"},
-    # exception to TMY3 format as all TMY3 data file actually use "Pa" instead of mbar
-    "AtmPressure": {"unit": "Pa"},
-    # additional variables
-    "Soil_Temperature_5cm": {"unit": "degC"},
-    "Soil_Temperature_10cm": {"unit": "degC"},
-    "Soil_Temperature_20cm": {"unit": "degC"},
-    "Soil_Temperature_50cm": {"unit": "degC"},
-    "Soil_Temperature_1m": {"unit": "degC"},
-}
-
-
 def force_data_variable_convention(
     df: pd.DataFrame, format_desired: dict
 ) -> pd.DataFrame:

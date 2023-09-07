@@ -9,14 +9,14 @@ import shutil
 import os.path
 import pandas as pd
 
-from aixweather.core_data_format_2_output_file import utils_2output
+from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
 
 
 def load_mos(folder_tests, result_folder, file_name):
     with open(os.path.join(folder_tests, file_name), "r") as file:
         mos_desired = file.read()
-    with open(utils_2output.results_file_path(file_name, result_folder), "r") as file:
+    with open(definitions.results_file_path(file_name, result_folder), "r") as file:
         mos_created = file.read()
     # delete time of data pull
     pattern = r"\(collected at \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6}\)"
@@ -28,7 +28,7 @@ def load_mos(folder_tests, result_folder, file_name):
 def load_epw(folder_tests, result_folder, file_name):
     with open(os.path.join(folder_tests, file_name), "r") as file:
         epw_desired = file.read()
-    with open(utils_2output.results_file_path(file_name, result_folder), "r") as file:
+    with open(definitions.results_file_path(file_name, result_folder), "r") as file:
         epw_created = file.read()
     return epw_desired, epw_created
 
@@ -36,14 +36,14 @@ def load_epw(folder_tests, result_folder, file_name):
 def load_json(folder_tests, result_folder, file_name):
     with open(os.path.join(folder_tests, file_name), "r") as file:
         json_desired = json.load(file)
-    with open(utils_2output.results_file_path(file_name, result_folder), "r") as file:
+    with open(definitions.results_file_path(file_name, result_folder), "r") as file:
         json_created = json.load(file)
     return json_desired, json_created
 
 
 def load_csv(folder_tests, result_folder, file_name):
     csv_desired = pd.read_csv(os.path.join(folder_tests, file_name))
-    csv_created = pd.read_csv(utils_2output.results_file_path(file_name, result_folder))
+    csv_created = pd.read_csv(definitions.results_file_path(file_name, result_folder))
     return csv_desired, csv_created
 
 

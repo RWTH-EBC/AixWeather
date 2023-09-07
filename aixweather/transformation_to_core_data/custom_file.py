@@ -5,15 +5,16 @@ directory for requirements of the returned df.
 
 import pandas as pd
 
+from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
 from aixweather.transformation_functions import auxiliary, time_observation_transformations, variable_transformations, \
     pass_through_handling, unit_conversions
 
 format_costum = {
     "variable_name_from_your_costum_data": {
-        "core_name": "core_name to which it translates (auxiliary.format_core_data)",
+        "core_name": "core_name to which it translates (definitions.format_core_data)",
         "time_of_meas_shift": "define if the variable needs to be shifted",
-        "unit": "see auxiliary.format_core_data for naming",
+        "unit": "see definitions.format_core_data for naming",
     },
 }
 
@@ -24,7 +25,7 @@ def custom_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame
     """
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
-        core_format=auxiliary.format_core_data, other_format=format_costum
+        core_format=definitions.format_core_data, other_format=format_costum
     )
 
     ### preprocessing raw data for further operations
@@ -43,7 +44,7 @@ def custom_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame
 
     def transform_custom(df):
         # drop unnecessary variables
-        df = auxiliary.force_data_variable_convention(df, auxiliary.format_core_data)
+        df = auxiliary.force_data_variable_convention(df, definitions.format_core_data)
 
         ### convert units
         # insert unit conversions like desired (examples follow)

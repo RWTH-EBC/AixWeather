@@ -1,5 +1,6 @@
 import pandas as pd
 
+from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
 from aixweather.transformation_functions import auxiliary, time_observation_transformations, variable_transformations, \
     pass_through_handling, unit_conversions
@@ -38,7 +39,7 @@ def TRY_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
 
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
-        core_format=auxiliary.format_core_data, other_format=format_TRY_15_45
+        core_format=definitions.format_core_data, other_format=format_TRY_15_45
     )
 
     ### preprocessing raw data for further operations
@@ -55,7 +56,7 @@ def TRY_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
 
     def transform_TRY(df):
         # drop unnecessary variables
-        df = auxiliary.force_data_variable_convention(df, auxiliary.format_core_data)
+        df = auxiliary.force_data_variable_convention(df, definitions.format_core_data)
         ### convert units
         df["TotalSkyCover"] = unit_conversions.eigth_to_tenth(df["TotalSkyCover"])
         df["AtmPressure"] = unit_conversions.hPa_to_Pa(df["AtmPressure"])

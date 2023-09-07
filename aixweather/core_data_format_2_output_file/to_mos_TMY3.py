@@ -6,8 +6,8 @@ import calendar
 import datetime as dt
 import pandas as pd
 
+from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
-from aixweather.core_data_format_2_output_file import utils_2output
 from aixweather.transformation_functions import auxiliary, time_observation_transformations, pass_through_handling
 
 """
@@ -77,7 +77,7 @@ def to_mos(
     """
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
-        core_format=auxiliary.format_core_data, other_format=format_modelica_TMY3
+        core_format=definitions.format_core_data, other_format=format_modelica_TMY3
     )
 
     df = core_df.copy()
@@ -226,7 +226,7 @@ def to_mos(
         f"{meta.station_id}_{start.strftime('%Y%m%d')}_{stop.strftime('%Y%m%d')}"
         f"_{meta.station_name}.mos"
     )
-    filepath = utils_2output.results_file_path(filename, result_folder)
+    filepath = definitions.results_file_path(filename, result_folder)
 
     df.to_csv(
         filepath,
