@@ -94,4 +94,5 @@ class TestDWDHistoricalNoAssert(BaseDWDHistorical):
         ]
     )
     def test_imports_and_transformation_without_assert(self, name, start, end):
+        name = "TestDWDHistoricalNoAssert" # enable teardown clean up through same result folder per parameter set
         self.init_and_run_DWD_historical(name, start, end)
