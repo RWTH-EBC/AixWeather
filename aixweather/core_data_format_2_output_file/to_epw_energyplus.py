@@ -7,9 +7,9 @@ import datetime as dt
 import pandas as pd
 import numpy as np
 
-from AixWeather.core_data_format_2_output_file import utils_2output
-from AixWeather.imports.utils_import import MetaData
-from AixWeather.transformation_functions import auxiliary, time_observation_transformations, pass_through_handling
+from aixweather.core_data_format_2_output_file import utils_2output
+from aixweather.imports.utils_import import MetaData
+from aixweather.transformation_functions import auxiliary, time_observation_transformations, pass_through_handling
 
 """
 format_epw information:
@@ -450,7 +450,7 @@ def to_epw(
         ### if possible avoid back and forth interpolating -> pass through
         ### variables without shifting
         df = pass_through_handling.pass_through_measurements_with_back_and_forth_interpolating(
-            df, format_epw
+           df, format_epw
         )
 
         ### select only desired period
@@ -592,7 +592,7 @@ def to_epw(
         return data_list, df
 
     ### merge all header lines and the data to be saved in a .epw file
-    with open(file_path, "w", newline="") as file:
+    with open(file_path, "w", newline="", encoding="latin1") as file:
         writer = csv.writer(file)
         writer.writerows(
             [

@@ -8,13 +8,14 @@ import datetime as dt
 
 from tests import utils_4_tests
 from config.definitions import ROOT_DIR
-from AixWeather.project_class import ProjectClassERC
+from aixweather.project_class import ProjectClassERC
+from aixweather.core_data_format_2_output_file import utils_2output
 
 # username="xxxxx@eonerc.rwth-aachen.de"
 # password="xxxxx"
 # cred = (username, password)
 
-
+@unittest.skip("Dont test ERC data as there are no credentials available for testing.")
 class BaseERC(unittest.TestCase):
     @classmethod
     def init_and_run_ERC(
@@ -36,7 +37,7 @@ class BaseERC(unittest.TestCase):
     def tearDownClass(cls) -> None:
         utils_4_tests.delete_created_result_files()
 
-
+@unittest.skip("Dont test ERC data as there are no credentials available for testing.")
 class TestERC10Days(BaseERC):
     """
     Attention at some day this pull will move from recent folder

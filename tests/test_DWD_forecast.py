@@ -8,9 +8,9 @@ import pandas as pd
 
 from parameterized import parameterized
 
-from AixWeather.project_class import ProjectClassDWDForecast
-from AixWeather.imports.utils_import import MetaData
-from AixWeather.core_data_format_2_output_file import utils_2output
+from aixweather.project_class import ProjectClassDWDForecast
+from aixweather.imports.utils_import import MetaData
+from aixweather.core_data_format_2_output_file import utils_2output
 from config.definitions import ROOT_DIR
 import utils_4_tests
 

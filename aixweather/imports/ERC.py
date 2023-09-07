@@ -9,7 +9,7 @@ from datetime import datetime
 
 import requests
 
-from AixWeather.imports.utils_import import MetaData
+from aixweather.imports.utils_import import MetaData
 
 key_list = [
     "4121.weatherstation.temperature",

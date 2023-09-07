@@ -11,8 +11,9 @@ import pandas as pd
 
 from tests import utils_4_tests
 from config.definitions import ROOT_DIR
-from AixWeather.imports.utils_import import MetaData
-from AixWeather.project_class import ProjectClassDWDHistorical
+from aixweather.imports.utils_import import MetaData
+from aixweather.project_class import ProjectClassDWDHistorical
+from aixweather.core_data_format_2_output_file import utils_2output
 
 
 class BaseOutputFunction(unittest.TestCase):

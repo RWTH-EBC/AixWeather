@@ -1,7 +1,7 @@
 import pandas as pd
 
-from AixWeather.imports.utils_import import MetaData
-from AixWeather.transformation_functions import auxiliary, time_observation_transformations, variable_transformations, \
+from aixweather.imports.utils_import import MetaData
+from aixweather.transformation_functions import auxiliary, time_observation_transformations, variable_transformations, \
     pass_through_handling, unit_conversions
 
 """

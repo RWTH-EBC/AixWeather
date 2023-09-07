@@ -2,8 +2,8 @@
     "_station_name": "Aachen",
     "station_id": "UnknownStationID",
     "_altitude": 186.0,
-    "_latitude": 50.793075965012825,
-    "_longitude": 6.054556452840753,
+    "_latitude": 50.79308,
+    "_longitude": 6.05456,
     "input_source": "TRY2045",
     "executed_transformations": {
         "OpaqueSkyCover": [

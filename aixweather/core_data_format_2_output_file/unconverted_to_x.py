@@ -6,8 +6,8 @@ import json
 import pickle
 import pandas as pd
 
-from AixWeather.core_data_format_2_output_file import utils_2output
-from AixWeather.imports.utils_import import MetaData
+from aixweather.core_data_format_2_output_file import utils_2output
+from aixweather.imports.utils_import import MetaData
 
 
 def to_pickle(

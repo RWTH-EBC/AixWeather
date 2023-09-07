@@ -3,31 +3,31 @@ import pandas as pd
 
 from abc import ABC, abstractmethod
 
-from AixWeather.imports.DWD import (
+from aixweather.imports.DWD import (
     import_DWD_historical,
     import_DWD_forecast,
     import_meta_DWD_historical,
     import_meta_DWD_forecast,
 )
-from AixWeather.imports.ERC import import_ERC, import_meta_from_ERC
-from AixWeather.imports.TRY import load_try_from_file, load_try_meta_from_file
-from AixWeather.imports.EPW import load_epw_from_file, load_epw_meta_from_file
-from AixWeather.imports.custom_file import load_custom_meta_data, load_custom_from_file
-from AixWeather.transformation_to_core_data.DWD import (
+from aixweather.imports.ERC import import_ERC, import_meta_from_ERC
+from aixweather.imports.TRY import load_try_from_file, load_try_meta_from_file
+from aixweather.imports.EPW import load_epw_from_file, load_epw_meta_from_file
+from aixweather.imports.custom_file import load_custom_meta_data, load_custom_from_file
+from aixweather.transformation_to_core_data.DWD import (
     DWD_historical_to_core_data,
     DWD_forecast_2_core_data,
 )
-from AixWeather.transformation_to_core_data.ERC import ERC_to_core_data
-from AixWeather.transformation_to_core_data.TRY import TRY_to_core_data
-from AixWeather.transformation_to_core_data.EPW import EPW_to_core_data
-from AixWeather.transformation_to_core_data.custom_file import custom_to_core_data
-from AixWeather.core_data_format_2_output_file.unconverted_to_x import (
+from aixweather.transformation_to_core_data.ERC import ERC_to_core_data
+from aixweather.transformation_to_core_data.TRY import TRY_to_core_data
+from aixweather.transformation_to_core_data.EPW import EPW_to_core_data
+from aixweather.transformation_to_core_data.custom_file import custom_to_core_data
+from aixweather.core_data_format_2_output_file.unconverted_to_x import (
     to_pickle,
     to_json,
     to_csv,
 )
-from AixWeather.core_data_format_2_output_file.to_mos_TMY3 import to_mos
-from AixWeather.core_data_format_2_output_file.to_epw_energyplus import to_epw
+from aixweather.core_data_format_2_output_file.to_mos_TMY3 import to_mos
+from aixweather.core_data_format_2_output_file.to_epw_energyplus import to_epw
 
 
 class ProjectClassGeneral(ABC):
@@ -45,7 +45,7 @@ class ProjectClassGeneral(ABC):
     Properties:
         imported_data (pd.DataFrame): The imported weather data.
         core_data (pd.DataFrame): The weather data in a standardized core format.
-        output_data_df (pd.DataFrame): The output data frame (depending on last triggered output method).
+        output_df_<outputformat> (pd.DataFrame): The output data frame (name depends on output format).
         meta_data: Metadata associated with weather data origin.
 
     Methods:
@@ -81,11 +81,17 @@ class ProjectClassGeneral(ABC):
     @core_data.setter
     def core_data(self, value: pd.DataFrame):
         if value is not None:
-            # only real pd.NA values
             for column in value.columns:
+                # only real pd.NA values
+                # force strings to be NaN
                 value[column] = pd.to_numeric(
                     value[column], errors="coerce"
-                )  # force strings to be NaN
+                )
+                # round floats for unit test compatibility across different machines
+                digits_2_round = 5
+                if value[column].dtype == "float":
+                    value[column] = value[column].round(digits_2_round)
+
             self._core_data = value
 
     @abstractmethod

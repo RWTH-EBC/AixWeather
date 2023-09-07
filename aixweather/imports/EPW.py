@@ -4,7 +4,7 @@ import epw files
 
 import pandas as pd
 
-from AixWeather.imports.utils_import import MetaData
+from aixweather.imports.utils_import import MetaData
 
 
 def load_epw_meta_from_file(path: str) -> MetaData:
@@ -20,7 +20,7 @@ def load_epw_meta_from_file(path: str) -> MetaData:
 
     meta = MetaData()
 
-    with open(path, "r") as file:
+    with open(path, "r", encoding="latin1") as file:
         lines = file.readlines()
 
     # The 1st line contains the location data
@@ -49,7 +49,7 @@ def load_epw_from_file(path: str) -> pd.DataFrame:
 
 
     # Find the row number for "DATA PERIODS" to determine where the data starts
-    with open(path, "r") as file:
+    with open(path, "r", encoding="latin1") as file:
         lines = file.readlines()
         data_start_row = (
                 next(i for i, line in enumerate(lines) if "DATA PERIODS" in line) + 1
@@ -60,7 +60,7 @@ def load_epw_from_file(path: str) -> pd.DataFrame:
         path,
         skiprows=data_start_row,
         header=None,
-        encoding="ISO-8859-1",
+        encoding="latin1",
         encoding_errors="replace",
     )
 

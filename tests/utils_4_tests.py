@@ -9,8 +9,8 @@ import shutil
 import os.path
 import pandas as pd
 
-from AixWeather.core_data_format_2_output_file import utils_2output
-from AixWeather.imports.utils_import import MetaData
+from aixweather.core_data_format_2_output_file import utils_2output
+from aixweather.imports.utils_import import MetaData
 
 
 def load_mos(folder_tests, file_name):
@@ -164,6 +164,7 @@ class RegressionTestsClass:
             self.folder_tests,
             f"{self.station_id}_{self.start_formatted}_{self.end_formatted}_{self.city}.epw",
         )
+        self.maxDiff = None
         self.assertEqual(
             epw_desired[:1000], epw_created[:1000], "First 1000 characters don't match!"
         )
