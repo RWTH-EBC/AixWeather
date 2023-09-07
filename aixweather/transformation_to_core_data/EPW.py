@@ -3,6 +3,7 @@ This module includes a function to transform EPW data to core data format.
 """
 
 import pandas as pd
+from copy import deepcopy
 
 from aixweather.imports.utils_import import MetaData
 from aixweather.transformation_functions import (
@@ -29,7 +30,7 @@ def EPW_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
     """
 
     # invert format_epw from core2export to import2core
-    format_epw = format_epw_export
+    format_epw = deepcopy(format_epw_export)
     for key, value in format_epw.items():
         time_shift = value["time_of_meas_shift"]
         if time_shift == "ind2prec":
