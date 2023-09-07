@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>aixweather.core_data_format_2_output_file.to_mos_TMY3 &mdash; aixweather 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/autodoc_pydantic.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> aixweather
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">aixweather</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html">Contribute as a user</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../version_his.html">Version History</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">aixweather</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>aixweather.core_data_format_2_output_file.to_mos_TMY3</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for aixweather.core_data_format_2_output_file.to_mos_TMY3</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Converts core data to modelica TMY3Reader data</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">calendar</span>
+<span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">aixweather.imports.utils_import</span> <span class="kn">import</span> <span class="n">MetaData</span>
+<span class="kn">from</span> <span class="nn">aixweather.core_data_format_2_output_file</span> <span class="kn">import</span> <span class="n">utils_2output</span>
+<span class="kn">from</span> <span class="nn">aixweather.transformation_functions</span> <span class="kn">import</span> <span class="n">auxiliary</span><span class="p">,</span> <span class="n">time_observation_transformations</span><span class="p">,</span> <span class="n">pass_through_handling</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">format_modelica_TMY3 information:</span>
+
+<span class="sd">Please indicate the unit (conversion has to be changed manually)</span>
+<span class="sd">Please indicate the desired time of measurement (conversion automatically)</span>
+<span class="sd">The stated nans are the default values stated from the AixLib TMY3 Reader, those values are filled if nan.</span>
+
+<span class="sd">time_of_meas_shift´s checked by Martin Rätz (07.08.2023)</span>
+<span class="sd">unit´s checked by Martin Rätz (07.08.2023)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">format_modelica_TMY3</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;timeOfYear&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+    <span class="s1">&#39;DryBulbTemp&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;DryBulbTemp&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;degC&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="mf">20.0</span><span class="p">},</span>
+    <span class="s1">&#39;DewPointTemp&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;DewPointTemp&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;degC&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">},</span>
+    <span class="s1">&#39;RelHum&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;RelHum&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;percent&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">},</span>
+    <span class="s1">&#39;AtmPressure&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;AtmPressure&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;Pa&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="mi">101325</span><span class="p">},</span>
+    <span class="s1">&#39;ExtHorRad&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;ExtHorRad&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;Wh/m2&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="s1">&#39;-0&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;ExtDirNormRad&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;ExtDirNormRad&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;Wh/m2&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="s1">&#39;-0&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;HorInfra&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;HorInfra&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;Wh/m2&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+    <span class="s1">&#39;GlobHorRad&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;GlobHorRad&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;Wh/m2&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+    <span class="s1">&#39;DirNormRad&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;DirNormRad&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;Wh/m2&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+    <span class="s1">&#39;DiffHorRad&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;DiffHorRad&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;Wh/m2&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+    <span class="s1">&#39;GlobHorIll&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;GlobHorIll&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;lux&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="s1">&#39;-0&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;DirecNormIll&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;DirecNormIll&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;lux&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="s1">&#39;-0&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;DiffuseHorIll&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;DiffuseHorIll&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;lux&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="s1">&#39;-0&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;ZenithLum&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;ZenithLum&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;Cd/m2&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="s1">&#39;-0&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;WindDir&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;WindDir&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;deg&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="s1">&#39;-0&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;WindSpeed&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;WindSpeed&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;m/s&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="s1">&#39;-0&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;TotalSkyCover&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;TotalSkyCover&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;1tenth&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
+    <span class="s1">&#39;OpaqueSkyCover&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;OpaqueSkyCover&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;1tenth&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
+    <span class="s1">&#39;Visibility&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Visibility&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;km&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="s1">&#39;-0&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;CeilingH&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;CeilingH&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="mf">20000.0</span><span class="p">},</span>
+    <span class="s1">&#39;WeatherObs&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="s1">&#39;-0&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;WeatherCode&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="s1">&#39;-0&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;PrecWater&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;PrecWater&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;mm&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="s1">&#39;-0&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;Aerosol&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Aerosol&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;1thousandth&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="s1">&#39;-0&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;Snow&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;cm&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="s1">&#39;-0&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;DaysSinceSnow&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;days&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="s1">&#39;-0&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;Albedo&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="s1">&#39;-0&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;LiquidPrecD&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;LiquidPrecD&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;mm/h&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="s1">&#39;-0&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;LiquidPrepQuant&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span> <span class="s1">&#39;-0&#39;</span><span class="p">}</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="to_mos"><a class="viewcode-back" href="../../../code/aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.to_mos_TMY3.to_mos">[docs]</a><span class="k">def</span> <span class="nf">to_mos</span><span class="p">(</span>
+    <span class="n">core_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span><span class="p">,</span>
+    <span class="n">start</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span>
+    <span class="n">stop</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span>
+    <span class="n">fillna</span><span class="p">:</span> <span class="nb">bool</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a MOS file from the core data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        core_df (pd.DataFrame): DataFrame containing core data.</span>
+<span class="sd">        meta (MetaData): Metadata associated with the weather data.</span>
+<span class="sd">        start (dt.datetime): Timestamp for the start of the MOS file.</span>
+<span class="sd">        stop (dt.datetime): Timestamp for the end of the MOS file.</span>
+<span class="sd">        fillna (bool): Boolean indicating whether NaN values should be filled.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame containing the weather data formatted for MOS export,</span>
+<span class="sd">                      excluding metadata.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">### evaluate correctness of format</span>
+    <span class="n">auxiliary</span><span class="o">.</span><span class="n">evaluate_transformations</span><span class="p">(</span>
+        <span class="n">core_format</span><span class="o">=</span><span class="n">auxiliary</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">,</span> <span class="n">other_format</span><span class="o">=</span><span class="n">format_modelica_TMY3</span>
+    <span class="p">)</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">core_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1">### measurement time conversion</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">time_observation_transformations</span><span class="o">.</span><span class="n">shift_time_by_dict</span><span class="p">(</span><span class="n">format_modelica_TMY3</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+
+    <span class="c1">### if possible avoid back and forth interpolating -&gt; pass through variables without shifting</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pass_through_handling</span><span class="o">.</span><span class="n">pass_through_measurements_with_back_and_forth_interpolating</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span> <span class="n">format_modelica_TMY3</span>
+    <span class="p">)</span>
+
+    <span class="c1">### select only desired period</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">time_observation_transformations</span><span class="o">.</span><span class="n">truncate_data_from_start_to_stop</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span>
+    <span class="p">)</span>
+
+    <span class="c1">### select the desired columns</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">force_data_variable_convention</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">format_modelica_TMY3</span><span class="p">)</span>
+
+    <span class="c1"># tmy3 data must start with 0 at the beginning of year (due to internal</span>
+    <span class="c1"># tmy3_reader sun inclination calculation)</span>
+    <span class="n">min_year</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+    <span class="n">time_of_year</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="n">min_year</span><span class="p">)</span> <span class="o">*</span> <span class="mi">365</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3600</span>
+            <span class="o">+</span> <span class="n">calendar</span><span class="o">.</span><span class="n">leapdays</span><span class="p">(</span><span class="n">min_year</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span><span class="p">)</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3600</span>
+            <span class="o">+</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">dayofyear</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3600</span>
+            <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">hour</span> <span class="o">*</span> <span class="mi">3600</span>
+    <span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;timeOfYear&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_of_year</span>
+
+    <span class="c1"># to avoid having the one-year duration between start and end of data as</span>
+    <span class="c1"># it will make the tmy3_reader loop the data</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;timeOfYear&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;timeOfYear&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">365</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3600</span><span class="p">:</span>
+        <span class="c1"># copy last row</span>
+        <span class="n">last_row</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Convert the Series to a new DataFrame with a single row</span>
+        <span class="n">new_row_df</span> <span class="o">=</span> <span class="n">last_row</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="c1"># continue time values</span>
+        <span class="n">new_row_df</span><span class="p">[</span><span class="s2">&quot;timeOfYear&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_row_df</span><span class="p">[</span><span class="s2">&quot;timeOfYear&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3600</span>
+        <span class="n">new_row_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">new_row_df</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># add new row to df, make sure its int</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">new_row_df</span><span class="p">])</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;timeOfYear&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;timeOfYear&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="c1">### fill nan</span>
+    <span class="k">if</span> <span class="n">fillna</span><span class="p">:</span>
+        <span class="c1"># fill first and last lines nans (possibly lost through shifting)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">bfill</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="c1"># fill dummy values</span>
+        <span class="n">auxiliary</span><span class="o">.</span><span class="n">fill_nan_from_format_dict</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">format_modelica_TMY3</span><span class="p">)</span>
+
+    <span class="c1">### Create header</span>
+    <span class="n">header_of</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;#1:for TMY3reader&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">double tab1(&quot;</span>
+        <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+        <span class="o">+</span> <span class="s2">&quot;,&quot;</span>
+        <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+        <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">header_of</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#LOCATION,</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">station_name</span><span class="si">}</span><span class="s2">,,,,,</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">latitude</span><span class="p">)</span><span class="si">}</span><span class="s2">,&quot;</span> \
+                 <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">longitude</span><span class="p">)</span><span class="si">}</span><span class="s2">,0,something&quot;</span>
+    <span class="n">header_of</span> <span class="o">+=</span> <span class="p">(</span>
+        <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#Explanation of Location line:&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#   Element 7: latitude&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#   Element 8: longitude&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#   Element 9: time zone in hours from UTC&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Data periods</span>
+    <span class="n">header_of</span> <span class="o">+=</span> <span class="p">(</span>
+        <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#DATA PERIODS, data available from &quot;</span>
+        <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">))</span>
+        <span class="o">+</span> <span class="s2">&quot; &quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;(second=&quot;</span>
+        <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;timeOfYear&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="o">+</span> <span class="s2">&quot;) to &quot;</span>
+        <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">))</span>
+        <span class="o">+</span> <span class="s2">&quot; &quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;(second=&quot;</span>
+        <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;timeOfYear&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"># info: TMY3Reader requirement: Time 0 = 01.01. 00:00:00 at local&quot;</span>
+          <span class="s2">&quot; time (see time zone above)&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#&quot;</span>
+    <span class="p">)</span>
+    <span class="c1"># data source</span>
+    <span class="n">header_of</span> <span class="o">+=</span> <span class="p">(</span>
+        <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#USED DATA-COLLECTOR: &quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;ebc-weather-tool with input source &quot;</span>
+        <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">input_source</span><span class="p">)</span>
+        <span class="o">+</span> <span class="s2">&quot; (collected at &quot;</span>
+        <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+        <span class="o">+</span> <span class="s1">&#39;) &quot;-0&quot; marks not available data&#39;</span>
+        <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#Info: The AixLib/IBPSA TMY3reader requires the below mentioned units and&quot;</span>
+          <span class="s2">&quot; measurement times. Last Check: 28.02.2022&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Information about the data</span>
+    <span class="n">header_of</span> <span class="o">+=</span> <span class="p">(</span>
+        <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C1 Time in seconds. Beginning of a year is 0s.&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C2 Dry bulb temperature in Celsius at indicated time&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C3 Dew point temperature in Celsius at indicated time&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C4 Relative humidity in percent at indicated time&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C5 Atmospheric station pressure in Pa at indicated time, TMY3Reader:&quot;</span>
+          <span class="s2">&quot; not used per default&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C6 Extraterrestrial horizontal radiation in Wh/m2, TMY3Reader: not used&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C7 Extraterrestrial direct normal radiation in Wh/m2, TMY3Reader: not used&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C8 Horizontal infrared radiation intensity in Wh/m2&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C9 Global horizontal radiation in Wh/m2&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C10 Direct normal radiation in Wh/m2&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C11 Diffuse horizontal radiation in Wh/m2&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C12 Averaged global horizontal illuminance in lux during minutes preceding&quot;</span>
+          <span class="s2">&quot; the indicated time, TMY3Reader: not used&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C13 Direct normal illuminance in lux during minutes preceding the&quot;</span>
+          <span class="s2">&quot; indicated time, TMY3Reader: not used&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C14 Diffuse horizontal illuminance in lux during minutes preceding the&quot;</span>
+          <span class="s2">&quot; indicated time, TMY3Reader: not used&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C15 Zenith luminance in Cd/m2 during minutes preceding the indicated&quot;</span>
+          <span class="s2">&quot; time, TMY3Reader: not used&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C16 Wind direction at indicated time. N=0, E=90, S=180, W=270&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C17 Wind speed in m/s at indicated time&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C18 Total sky cover in tenth at indicated time&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C19 Opaque sky cover tenth indicated time&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C20 Visibility in km at indicated time, TMY3Reader: not used&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C21 Ceiling height in m&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C22 Present weather observation, TMY3Reader: not used&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C23 Present weather codes, TMY3Reader: not used&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C24 Precipitable water in mm, TMY3Reader: not used&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C25 Aerosol optical depth, TMY3Reader: not used&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C26 Snow depth in cm, TMY3Reader: not used&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C27 Days since last snowfall, TMY3Reader: not used&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C28 Albedo, TMY3Reader: not used&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C29 Liquid precipitation depth in mm/h at indicated time, TMY3Reader: not used&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#C30 Liquid precipitation quantity, TMY3Reader: not used&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1">### write to csv</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">station_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">start</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">stop</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">station_name</span><span class="si">}</span><span class="s2">.mos&quot;</span>
+    <span class="p">)</span>
+    <span class="n">filepath</span> <span class="o">=</span> <span class="n">utils_2output</span><span class="o">.</span><span class="n">results_file_path</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+        <span class="n">filepath</span><span class="p">,</span>
+        <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">float_format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">index_label</span><span class="o">=</span><span class="s2">&quot;timeOfYear&quot;</span><span class="p">,</span>
+        <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Read the contents and prepend the header_of to the file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;r+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">header_of</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">content</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MOS file saved to </span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, EON EBC.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
