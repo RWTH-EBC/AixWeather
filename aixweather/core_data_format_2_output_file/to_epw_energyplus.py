@@ -450,7 +450,7 @@ def to_epw(
         ### if possible avoid back and forth interpolating -> pass through
         ### variables without shifting
         df = pass_through_handling.pass_through_measurements_with_back_and_forth_interpolating(
-            df, format_epw
+           df, format_epw
         )
 
         ### select only desired period

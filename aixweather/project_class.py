@@ -45,7 +45,7 @@ class ProjectClassGeneral(ABC):
     Properties:
         imported_data (pd.DataFrame): The imported weather data.
         core_data (pd.DataFrame): The weather data in a standardized core format.
-        output_data_df (pd.DataFrame): The output data frame (depending on last triggered output method).
+        output_df_<outputformat> (pd.DataFrame): The output data frame (name depends on output format).
         meta_data: Metadata associated with weather data origin.
 
     Methods:
