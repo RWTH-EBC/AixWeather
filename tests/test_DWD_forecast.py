@@ -1,6 +1,6 @@
-"""
+'''
 includes unittests for DWD forecast data
-"""
+'''
 import json
 import os.path
 import unittest
@@ -18,10 +18,7 @@ import utils_4_tests
 class BaseDWDForecast(unittest.TestCase):
     @classmethod
     def init_and_run_DWD_forecast(cls, name: str, station):
-        abs_result_folder_path = os.path.join(utils_2output.result_folder_path(), name)
-        cls.c = ProjectClassDWDForecast(
-            station=station, abs_result_folder_path=abs_result_folder_path
-        )
+        cls.c = ProjectClassDWDForecast(station=station)
         cls.folder_tests = os.path.join(
             ROOT_DIR, f"tests/test_files/regular_tests/DWD_forecast/test_{name}"
         )
@@ -35,7 +32,7 @@ class BaseDWDForecast(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls) -> None:
-        utils_4_tests.delete_created_result_files(cls.c.abs_result_folder_path)
+        utils_4_tests.delete_created_result_files()
 
 
 class TestDWDForecastFromImportedData(
@@ -45,10 +42,7 @@ class TestDWDForecastFromImportedData(
     def setUpClass(cls):
         station = "06710"
         name = "06710_august_2023"
-        abs_result_folder_path = os.path.join(utils_2output.result_folder_path(), name)
-        cls.c = ProjectClassDWDForecast(
-            station=station, abs_result_folder_path=abs_result_folder_path
-        )
+        cls.c = ProjectClassDWDForecast(station=station)
         cls.folder_tests = os.path.join(
             ROOT_DIR, f"tests/test_files/regular_tests/DWD_forecast/test_{name}"
         )
@@ -87,7 +81,9 @@ class TestDWDForecastNoAssert(BaseDWDForecast):
             ),
         ]
     )
-    def test_imports_and_transformation_without_assert(self, name, station):
+    def test_imports_and_transformation_without_assert(
+            self, name, station
+    ):
         self.init_and_run_DWD_forecast(name, station)
 
 

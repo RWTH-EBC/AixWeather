@@ -63,7 +63,6 @@ class ProjectClassGeneral(ABC):
         self.fillna = kwargs.get(
             "fillna", True
         )  # defines whether nan should be filled in the output formats
-        self.abs_result_folder_path = kwargs.get("abs_result_folder_path", None) # needed for parallelization of unit tests
 
         # User-settable or placeholder depending on data origin
         self.start = kwargs.get("start", None)
@@ -106,22 +105,22 @@ class ProjectClassGeneral(ABC):
     # core_data_format_2_output_file
     def core_2_mos(self):
         self.output_df_mos = to_mos(
-            self.core_data, self.meta_data, self.start, self.end, self.fillna, self.abs_result_folder_path
+            self.core_data, self.meta_data, self.start, self.end, self.fillna
         )
 
     def core_2_epw(self):
         self.output_df_epw = to_epw(
-            self.core_data, self.meta_data, self.start, self.end, self.fillna, self.abs_result_folder_path
+            self.core_data, self.meta_data, self.start, self.end, self.fillna
         )
 
     def core_2_csv(self):
-        self.output_df_csv = to_csv(self.core_data, self.meta_data, self.abs_result_folder_path)
+        self.output_df_csv = to_csv(self.core_data, self.meta_data)
 
     def core_2_json(self):
-        self.output_df_json = to_json(self.core_data, self.meta_data, self.abs_result_folder_path)
+        self.output_df_json = to_json(self.core_data, self.meta_data)
 
     def core_2_pickle(self):
-        self.output_df_pickle = to_pickle(self.core_data, self.meta_data, self.abs_result_folder_path)
+        self.output_df_pickle = to_pickle(self.core_data, self.meta_data)
 
 
 class ProjectClassDWDHistorical(ProjectClassGeneral):

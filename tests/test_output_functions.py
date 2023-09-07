@@ -18,13 +18,7 @@ from aixweather.core_data_format_2_output_file import utils_2output
 
 class BaseOutputFunction(unittest.TestCase):
     def init(cls, name: str, start: dt.datetime, end: dt.datetime, station=15000):
-        abs_result_folder_path = os.path.join(utils_2output.result_folder_path(), name)
-        cls.c = ProjectClassDWDHistorical(
-            start=start,
-            end=end,
-            station=station,
-            abs_result_folder_path=abs_result_folder_path,
-        )
+        cls.c = ProjectClassDWDHistorical(start=start, end=end, station=station)
         cls.folder_tests = os.path.join(
             ROOT_DIR,
             f"tests/test_files/regular_tests/output_functions/test_{name}",
@@ -37,7 +31,7 @@ class BaseOutputFunction(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls) -> None:
-        utils_4_tests.delete_created_result_files(cls.c.abs_result_folder_path)
+        utils_4_tests.delete_created_result_files()
 
 
 class TestOutputFunction(BaseOutputFunction, utils_4_tests.RegressionTestsClass):
@@ -66,6 +60,7 @@ class TestOutputFunction(BaseOutputFunction, utils_4_tests.RegressionTestsClass)
         with open(input_file_meta, "r") as meta_file:
             meta_json = json.load(meta_file)
         cls.c.meta_data = MetaData(**meta_json)
+
 
         cls.c.core_2_pickle()
         cls.c.core_2_json()

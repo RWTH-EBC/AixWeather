@@ -14,10 +14,7 @@ from tests import utils_4_tests
 class BaseEPW(unittest.TestCase):
     @classmethod
     def init_and_run_EPW(cls, name: str, path: str):
-        abs_result_folder_path = os.path.join(utils_2output.result_folder_path(), name)
-        cls.c = ProjectClassEPW(
-            path=path, abs_result_folder_path=abs_result_folder_path
-        )
+        cls.c = ProjectClassEPW(path=path)
         cls.folder_tests = os.path.join(
             ROOT_DIR, f"tests/test_files/regular_tests/EPW/test_{name}"
         )
@@ -31,7 +28,7 @@ class BaseEPW(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls) -> None:
-        utils_4_tests.delete_created_result_files(cls.c.abs_result_folder_path)
+        utils_4_tests.delete_created_result_files()
 
 
 class TestEPWEssenLadybug(BaseEPW, utils_4_tests.RegressionTestsClass):

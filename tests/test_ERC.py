@@ -15,20 +15,13 @@ from aixweather.core_data_format_2_output_file import utils_2output
 # password="xxxxx"
 # cred = (username, password)
 
-
 @unittest.skip("Dont test ERC data as there are no credentials available for testing.")
 class BaseERC(unittest.TestCase):
     @classmethod
     def init_and_run_ERC(
         cls, name: str, start: dt.datetime, end: dt.datetime, cred=None
     ):
-        abs_result_folder_path = os.path.join(utils_2output.result_folder_path(), name)
-        cls.c = ProjectClassERC(
-            start=start,
-            end=end,
-            cred=cred,
-            abs_result_folder_path=abs_result_folder_path,
-        )
+        cls.c = ProjectClassERC(start=start, end=end, cred=cred)
         cls.folder_tests = os.path.join(
             ROOT_DIR, f"tests/test_files/regular_tests/ERC_hist/test_{name}"
         )
@@ -42,8 +35,7 @@ class BaseERC(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls) -> None:
-        utils_4_tests.delete_created_result_files(cls.c.abs_result_folder_path)
-
+        utils_4_tests.delete_created_result_files()
 
 @unittest.skip("Dont test ERC data as there are no credentials available for testing.")
 class TestERC10Days(BaseERC):
