@@ -761,6 +761,28 @@
         },
         {
             "type": "convention",
+            "module": "aixweather.definitions",
+            "obj": "",
+            "line": 1,
+            "column": 0,
+            "path": "aixweather/definitions.py",
+            "symbol": "missing-module-docstring",
+            "message": "Missing module docstring",
+            "message-id": "C0114"
+        },
+        {
+            "type": "convention",
+            "module": "aixweather.definitions",
+            "obj": "result_folder_path",
+            "line": 46,
+            "column": 0,
+            "path": "aixweather/definitions.py",
+            "symbol": "missing-function-docstring",
+            "message": "Missing function or method docstring",
+            "message-id": "C0116"
+        },
+        {
+            "type": "convention",
             "module": "aixweather.project_class",
             "obj": "",
             "line": 42,
@@ -1036,17 +1058,6 @@
         },
         {
             "type": "convention",
-            "module": "definitions",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "config/definitions.py",
-            "symbol": "missing-module-docstring",
-            "message": "Missing module docstring",
-            "message-id": "C0114"
-        },
-        {
-            "type": "convention",
             "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
             "obj": "",
             "line": 39,
@@ -1148,7 +1159,7 @@
             "type": "convention",
             "module": "test_DWD_forecast",
             "obj": "BaseDWDForecast",
-            "line": 18,
+            "line": 17,
             "column": 0,
             "path": "tests/test_DWD_forecast.py",
             "symbol": "missing-class-docstring",
@@ -1159,7 +1170,7 @@
             "type": "convention",
             "module": "test_DWD_forecast",
             "obj": "BaseDWDForecast.init_and_run_DWD_forecast",
-            "line": 20,
+            "line": 19,
             "column": 4,
             "path": "tests/test_DWD_forecast.py",
             "symbol": "missing-function-docstring",
@@ -1170,7 +1181,7 @@
             "type": "convention",
             "module": "test_DWD_forecast",
             "obj": "BaseDWDForecast.init_and_run_DWD_forecast",
-            "line": 20,
+            "line": 19,
             "column": 4,
             "path": "tests/test_DWD_forecast.py",
             "symbol": "invalid-name",
@@ -1181,7 +1192,7 @@
             "type": "convention",
             "module": "test_DWD_forecast",
             "obj": "TestDWDForecastFromImportedData",
-            "line": 41,
+            "line": 40,
             "column": 0,
             "path": "tests/test_DWD_forecast.py",
             "symbol": "missing-class-docstring",
@@ -1192,7 +1203,7 @@
             "type": "warning",
             "module": "test_DWD_forecast",
             "obj": "TestDWDForecastFromImportedData.setUpClass",
-            "line": 64,
+            "line": 63,
             "column": 13,
             "path": "tests/test_DWD_forecast.py",
             "symbol": "unspecified-encoding",
@@ -1203,7 +1214,7 @@
             "type": "convention",
             "module": "test_DWD_forecast",
             "obj": "TestDWDForecastNoAssert",
-            "line": 81,
+            "line": 80,
             "column": 0,
             "path": "tests/test_DWD_forecast.py",
             "symbol": "missing-class-docstring",
@@ -1214,7 +1225,7 @@
             "type": "convention",
             "module": "test_DWD_forecast",
             "obj": "TestDWDForecastNoAssert.test_imports_and_transformation_without_assert",
-            "line": 90,
+            "line": 89,
             "column": 4,
             "path": "tests/test_DWD_forecast.py",
             "symbol": "missing-function-docstring",
@@ -1225,7 +1236,7 @@
             "type": "convention",
             "module": "test_DWD_forecast",
             "obj": "create_imported_data_for_unit_test",
-            "line": 100,
+            "line": 99,
             "column": 4,
             "path": "tests/test_DWD_forecast.py",
             "symbol": "invalid-name",
@@ -1236,18 +1247,18 @@
             "type": "convention",
             "module": "test_DWD_forecast",
             "obj": "",
-            "line": 15,
+            "line": 14,
             "column": 0,
             "path": "tests/test_DWD_forecast.py",
             "symbol": "wrong-import-order",
-            "message": "third party import \"import utils_4_tests\" should be placed before \"from aixweather.project_class import ProjectClassDWDForecast\"",
+            "message": "third party import \"import utils_4_tests\" should be placed before \"from aixweather import definitions\"",
             "message-id": "C0411"
         },
         {
             "type": "convention",
             "module": "test_DWD_historical",
             "obj": "",
-            "line": 88,
+            "line": 87,
             "column": 0,
             "path": "tests/test_DWD_historical.py",
             "symbol": "line-too-long",
@@ -1258,7 +1269,7 @@
             "type": "convention",
             "module": "test_DWD_historical",
             "obj": "",
-            "line": 97,
+            "line": 96,
             "column": 0,
             "path": "tests/test_DWD_historical.py",
             "symbol": "line-too-long",
@@ -1269,7 +1280,7 @@
             "type": "warning",
             "module": "test_DWD_historical",
             "obj": "",
-            "line": 88,
+            "line": 87,
             "column": 17,
             "path": "tests/test_DWD_historical.py",
             "symbol": "fixme",
@@ -1302,7 +1313,7 @@
             "type": "convention",
             "module": "test_DWD_historical",
             "obj": "BaseDWDHistorical",
-            "line": 17,
+            "line": 16,
             "column": 0,
             "path": "tests/test_DWD_historical.py",
             "symbol": "missing-class-docstring",
@@ -1313,7 +1324,7 @@
             "type": "convention",
             "module": "test_DWD_historical",
             "obj": "BaseDWDHistorical.init_and_run_DWD_historical",
-            "line": 19,
+            "line": 18,
             "column": 4,
             "path": "tests/test_DWD_historical.py",
             "symbol": "missing-function-docstring",
@@ -1324,7 +1335,7 @@
             "type": "convention",
             "module": "test_DWD_historical",
             "obj": "BaseDWDHistorical.init_and_run_DWD_historical",
-            "line": 19,
+            "line": 18,
             "column": 4,
             "path": "tests/test_DWD_historical.py",
             "symbol": "invalid-name",
@@ -1335,7 +1346,7 @@
             "type": "convention",
             "module": "test_DWD_historical",
             "obj": "TestDWDHistoricalNoAssert",
-            "line": 71,
+            "line": 70,
             "column": 0,
             "path": "tests/test_DWD_historical.py",
             "symbol": "missing-class-docstring",
@@ -1346,23 +1357,12 @@
             "type": "convention",
             "module": "test_DWD_historical",
             "obj": "TestDWDHistoricalNoAssert.test_imports_and_transformation_without_assert",
-            "line": 96,
+            "line": 95,
             "column": 4,
             "path": "tests/test_DWD_historical.py",
             "symbol": "missing-function-docstring",
             "message": "Missing function or method docstring",
             "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "test_DWD_historical",
-            "obj": "",
-            "line": 14,
-            "column": 0,
-            "path": "tests/test_DWD_historical.py",
-            "symbol": "ungrouped-imports",
-            "message": "Imports from package aixweather are not grouped",
-            "message-id": "C0412"
         },
         {
             "type": "convention",
@@ -1379,7 +1379,7 @@
             "type": "error",
             "module": "test_EPW",
             "obj": "",
-            "line": 11,
+            "line": 10,
             "column": 0,
             "path": "tests/test_EPW.py",
             "symbol": "no-name-in-module",
@@ -1390,7 +1390,7 @@
             "type": "convention",
             "module": "test_EPW",
             "obj": "BaseEPW",
-            "line": 14,
+            "line": 13,
             "column": 0,
             "path": "tests/test_EPW.py",
             "symbol": "missing-class-docstring",
@@ -1401,7 +1401,7 @@
             "type": "convention",
             "module": "test_EPW",
             "obj": "BaseEPW.init_and_run_EPW",
-            "line": 16,
+            "line": 15,
             "column": 4,
             "path": "tests/test_EPW.py",
             "symbol": "missing-function-docstring",
@@ -1412,7 +1412,7 @@
             "type": "convention",
             "module": "test_EPW",
             "obj": "BaseEPW.init_and_run_EPW",
-            "line": 16,
+            "line": 15,
             "column": 4,
             "path": "tests/test_EPW.py",
             "symbol": "invalid-name",
@@ -1423,7 +1423,7 @@
             "type": "convention",
             "module": "test_EPW",
             "obj": "TestEPWEssenLadybug",
-            "line": 37,
+            "line": 36,
             "column": 0,
             "path": "tests/test_EPW.py",
             "symbol": "missing-class-docstring",
@@ -1445,7 +1445,7 @@
             "type": "error",
             "module": "test_ERC",
             "obj": "",
-            "line": 9,
+            "line": 10,
             "column": 0,
             "path": "tests/test_ERC.py",
             "symbol": "no-name-in-module",
@@ -1456,7 +1456,7 @@
             "type": "convention",
             "module": "test_ERC",
             "obj": "BaseERC",
-            "line": 19,
+            "line": 18,
             "column": 0,
             "path": "tests/test_ERC.py",
             "symbol": "missing-class-docstring",
@@ -1467,7 +1467,7 @@
             "type": "convention",
             "module": "test_ERC",
             "obj": "BaseERC.init_and_run_ERC",
-            "line": 21,
+            "line": 20,
             "column": 4,
             "path": "tests/test_ERC.py",
             "symbol": "missing-function-docstring",
@@ -1478,7 +1478,7 @@
             "type": "convention",
             "module": "test_ERC",
             "obj": "BaseERC.init_and_run_ERC",
-            "line": 21,
+            "line": 20,
             "column": 4,
             "path": "tests/test_ERC.py",
             "symbol": "invalid-name",
@@ -1489,12 +1489,23 @@
             "type": "convention",
             "module": "test_ERC",
             "obj": "TestERC10Days.test_without_assert",
-            "line": 53,
+            "line": 52,
             "column": 4,
             "path": "tests/test_ERC.py",
             "symbol": "missing-function-docstring",
             "message": "Missing function or method docstring",
             "message-id": "C0116"
+        },
+        {
+            "type": "convention",
+            "module": "test_ERC",
+            "obj": "",
+            "line": 11,
+            "column": 0,
+            "path": "tests/test_ERC.py",
+            "symbol": "ungrouped-imports",
+            "message": "Imports from package aixweather are not grouped",
+            "message-id": "C0412"
         },
         {
             "type": "convention",
@@ -1511,7 +1522,7 @@
             "type": "error",
             "module": "test_TRY",
             "obj": "",
-            "line": 11,
+            "line": 10,
             "column": 0,
             "path": "tests/test_TRY.py",
             "symbol": "no-name-in-module",
@@ -1522,7 +1533,7 @@
             "type": "convention",
             "module": "test_TRY",
             "obj": "BaseTRY",
-            "line": 14,
+            "line": 13,
             "column": 0,
             "path": "tests/test_TRY.py",
             "symbol": "missing-class-docstring",
@@ -1533,7 +1544,7 @@
             "type": "convention",
             "module": "test_TRY",
             "obj": "BaseTRY.init_and_run_TRY",
-            "line": 16,
+            "line": 15,
             "column": 4,
             "path": "tests/test_TRY.py",
             "symbol": "missing-function-docstring",
@@ -1544,7 +1555,7 @@
             "type": "convention",
             "module": "test_TRY",
             "obj": "BaseTRY.init_and_run_TRY",
-            "line": 16,
+            "line": 15,
             "column": 4,
             "path": "tests/test_TRY.py",
             "symbol": "invalid-name",
@@ -1555,7 +1566,7 @@
             "type": "convention",
             "module": "test_TRY",
             "obj": "TestDWDTRY2015",
-            "line": 37,
+            "line": 36,
             "column": 0,
             "path": "tests/test_TRY.py",
             "symbol": "missing-class-docstring",
@@ -1566,7 +1577,7 @@
             "type": "convention",
             "module": "test_TRY",
             "obj": "TestDWDTRY2015Sommer",
-            "line": 50,
+            "line": 49,
             "column": 0,
             "path": "tests/test_TRY.py",
             "symbol": "missing-class-docstring",
@@ -1577,7 +1588,7 @@
             "type": "convention",
             "module": "test_TRY",
             "obj": "TestDWDTRY2045",
-            "line": 63,
+            "line": 62,
             "column": 0,
             "path": "tests/test_TRY.py",
             "symbol": "missing-class-docstring",
@@ -1588,7 +1599,7 @@
             "type": "error",
             "module": "test_output_functions",
             "obj": "",
-            "line": 12,
+            "line": 13,
             "column": 0,
             "path": "tests/test_output_functions.py",
             "symbol": "no-name-in-module",
@@ -1599,7 +1610,7 @@
             "type": "convention",
             "module": "test_output_functions",
             "obj": "BaseOutputFunction",
-            "line": 19,
+            "line": 17,
             "column": 0,
             "path": "tests/test_output_functions.py",
             "symbol": "missing-class-docstring",
@@ -1610,7 +1621,7 @@
             "type": "convention",
             "module": "test_output_functions",
             "obj": "BaseOutputFunction.init",
-            "line": 22,
+            "line": 20,
             "column": 8,
             "path": "tests/test_output_functions.py",
             "symbol": "invalid-name",
@@ -1621,7 +1632,7 @@
             "type": "convention",
             "module": "test_output_functions",
             "obj": "BaseOutputFunction.init",
-            "line": 20,
+            "line": 18,
             "column": 4,
             "path": "tests/test_output_functions.py",
             "symbol": "missing-function-docstring",
@@ -1632,7 +1643,7 @@
             "type": "error",
             "module": "test_output_functions",
             "obj": "BaseOutputFunction.init",
-            "line": 20,
+            "line": 18,
             "column": 4,
             "path": "tests/test_output_functions.py",
             "symbol": "no-self-argument",
@@ -1643,7 +1654,7 @@
             "type": "error",
             "module": "test_output_functions",
             "obj": "BaseOutputFunction.tearDownClass",
-            "line": 40,
+            "line": 38,
             "column": 50,
             "path": "tests/test_output_functions.py",
             "symbol": "no-member",
@@ -1654,7 +1665,7 @@
             "type": "warning",
             "module": "test_output_functions",
             "obj": "BaseOutputFunction.init",
-            "line": 22,
+            "line": 20,
             "column": 8,
             "path": "tests/test_output_functions.py",
             "symbol": "attribute-defined-outside-init",
@@ -1665,7 +1676,7 @@
             "type": "warning",
             "module": "test_output_functions",
             "obj": "BaseOutputFunction.init",
-            "line": 28,
+            "line": 26,
             "column": 8,
             "path": "tests/test_output_functions.py",
             "symbol": "attribute-defined-outside-init",
@@ -1676,7 +1687,7 @@
             "type": "warning",
             "module": "test_output_functions",
             "obj": "BaseOutputFunction.init",
-            "line": 32,
+            "line": 30,
             "column": 8,
             "path": "tests/test_output_functions.py",
             "symbol": "attribute-defined-outside-init",
@@ -1687,7 +1698,7 @@
             "type": "warning",
             "module": "test_output_functions",
             "obj": "BaseOutputFunction.init",
-            "line": 33,
+            "line": 31,
             "column": 8,
             "path": "tests/test_output_functions.py",
             "symbol": "attribute-defined-outside-init",
@@ -1698,7 +1709,7 @@
             "type": "warning",
             "module": "test_output_functions",
             "obj": "BaseOutputFunction.init",
-            "line": 35,
+            "line": 33,
             "column": 8,
             "path": "tests/test_output_functions.py",
             "symbol": "attribute-defined-outside-init",
@@ -1709,7 +1720,7 @@
             "type": "warning",
             "module": "test_output_functions",
             "obj": "BaseOutputFunction.init",
-            "line": 36,
+            "line": 34,
             "column": 8,
             "path": "tests/test_output_functions.py",
             "symbol": "attribute-defined-outside-init",
@@ -1720,7 +1731,7 @@
             "type": "warning",
             "module": "test_output_functions",
             "obj": "TestOutputFunction.setUpClass",
-            "line": 66,
+            "line": 64,
             "column": 13,
             "path": "tests/test_output_functions.py",
             "symbol": "unspecified-encoding",
@@ -1731,7 +1742,7 @@
             "type": "convention",
             "module": "test_output_functions",
             "obj": "TestOutputFunction.test_core_data",
-            "line": 77,
+            "line": 75,
             "column": 4,
             "path": "tests/test_output_functions.py",
             "symbol": "missing-function-docstring",
@@ -1742,12 +1753,23 @@
             "type": "convention",
             "module": "test_output_functions",
             "obj": "TestOutputFunction.test_meta_data",
-            "line": 80,
+            "line": 78,
             "column": 4,
             "path": "tests/test_output_functions.py",
             "symbol": "missing-function-docstring",
             "message": "Missing function or method docstring",
             "message-id": "C0116"
+        },
+        {
+            "type": "convention",
+            "module": "test_output_functions",
+            "obj": "",
+            "line": 14,
+            "column": 0,
+            "path": "tests/test_output_functions.py",
+            "symbol": "ungrouped-imports",
+            "message": "Imports from package aixweather are not grouped",
+            "message-id": "C0412"
         },
         {
             "type": "convention",
@@ -2450,7 +2472,7 @@
             "column": 0,
             "path": "tests/utils_4_tests.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_DWD_historical:[21:29]\n==test_output_functions:[20:28]\n        abs_result_folder_path = os.path.join(utils_2output.result_folder_path(), name)\n        cls.c = ProjectClassDWDHistorical(\n            start=start,\n            end=end,\n            station=station,\n            abs_result_folder_path=abs_result_folder_path,\n        )\n        cls.folder_tests = os.path.join(",
+            "message": "Similar lines in 2 files\n==test_DWD_historical:[20:28]\n==test_output_functions:[18:26]\n        abs_result_folder_path = os.path.join(definitions.result_folder_path(), name)\n        cls.c = ProjectClassDWDHistorical(\n            start=start,\n            end=end,\n            station=station,\n            abs_result_folder_path=abs_result_folder_path,\n        )\n        cls.folder_tests = os.path.join(",
             "message-id": "R0801"
         },
         {
@@ -2461,7 +2483,7 @@
             "column": 0,
             "path": "tests/utils_4_tests.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_DWD_forecast:[68:74]\n==test_output_functions:[69:77]\n        cls.c.core_2_pickle()\n        cls.c.core_2_json()\n        cls.c.core_2_mos()\n        cls.c.core_2_epw()\n        cls.c.core_2_csv()\n\n    # ignore core_data and meta_data tests\n    def test_core_data(self):",
+            "message": "Similar lines in 2 files\n==test_DWD_forecast:[67:73]\n==test_output_functions:[67:75]\n        cls.c.core_2_pickle()\n        cls.c.core_2_json()\n        cls.c.core_2_mos()\n        cls.c.core_2_epw()\n        cls.c.core_2_csv()\n",
             "message-id": "R0801"
         }
     ],
@@ -2500,6 +2522,15 @@
                 "statement": 14,
                 "warning": 0
             },
+            "aixweather.definitions": {
+                "convention": 2,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 13,
+                "warning": 0
+            },
             "aixweather.project_class": {
                 "convention": 17,
                 "error": 2,
@@ -2508,15 +2539,6 @@
                 "refactor": 1,
                 "statement": 114,
                 "warning": 5
-            },
-            "definitions": {
-                "convention": 1,
-                "error": 0,
-                "fatal": 0,
-                "info": 0,
-                "refactor": 0,
-                "statement": 3,
-                "warning": 0
             },
             "examples.e1_pull_DWD_historical_to_all_output_formats": {
                 "convention": 8,
@@ -2533,16 +2555,16 @@
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 52,
+                "statement": 51,
                 "warning": 1
             },
             "test_DWD_historical": {
-                "convention": 9,
+                "convention": 8,
                 "error": 1,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 30,
+                "statement": 29,
                 "warning": 1
             },
             "test_EPW": {
@@ -2551,16 +2573,16 @@
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 21,
+                "statement": 20,
                 "warning": 0
             },
             "test_ERC": {
-                "convention": 5,
+                "convention": 6,
                 "error": 1,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 22,
+                "statement": 21,
                 "warning": 0
             },
             "test_TRY": {
@@ -2569,16 +2591,16 @@
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 27,
+                "statement": 26,
                 "warning": 0
             },
             "test_output_functions": {
-                "convention": 5,
+                "convention": 6,
                 "error": 3,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 39,
+                "statement": 38,
                 "warning": 7
             },
             "utils_4_tests": {
@@ -2592,9 +2614,9 @@
             }
         },
         "by_msg": {
-            "missing-function-docstring": 34,
-            "line-too-long": 11,
+            "missing-function-docstring": 35,
             "missing-module-docstring": 3,
+            "line-too-long": 11,
             "too-many-instance-attributes": 1,
             "attribute-defined-outside-init": 12,
             "assignment-from-none": 1,
@@ -2607,7 +2629,7 @@
             "unspecified-encoding": 9,
             "fixme": 1,
             "no-name-in-module": 5,
-            "ungrouped-imports": 1,
+            "ungrouped-imports": 2,
             "no-self-argument": 1,
             "no-member": 39,
             "too-few-public-methods": 1,
@@ -2628,9 +2650,9 @@
                 "aixweather.data_quality_checks"
             ],
             "pandas": [
-                "utils_4_tests",
                 "test_output_functions",
                 "test_DWD_forecast",
+                "utils_4_tests",
                 "aixweather.project_class"
             ],
             "aixweather.imports.DWD": [
@@ -2673,12 +2695,12 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
+                "test_EPW",
                 "test_DWD_historical",
+                "test_ERC",
                 "test_TRY",
                 "test_output_functions",
                 "test_DWD_forecast",
-                "test_ERC",
-                "test_EPW",
                 "examples.e1_pull_DWD_historical_to_all_output_formats"
             ],
             "aixweather.data_quality_checks": [
@@ -2688,37 +2710,29 @@
                 "test_DWD_historical",
                 "test_DWD_forecast"
             ],
-            "aixweather.imports.utils_import": [
+            "aixweather.definitions": [
+                "test_EPW",
+                "test_DWD_historical",
                 "utils_4_tests",
+                "test_ERC",
+                "test_TRY",
                 "test_output_functions",
                 "test_DWD_forecast"
             ],
-            "aixweather.core_data_format_2_output_file.utils_2output": [
-                "test_DWD_historical",
-                "test_TRY",
+            "aixweather.imports.utils_import": [
                 "test_output_functions",
                 "test_DWD_forecast",
-                "utils_4_tests",
-                "test_ERC",
-                "test_EPW"
-            ],
-            "config.definitions": [
-                "test_DWD_historical",
-                "test_TRY",
-                "test_output_functions",
-                "test_DWD_forecast",
-                "test_ERC",
-                "test_EPW"
+                "utils_4_tests"
             ],
             "utils_4_tests": [
                 "test_DWD_forecast"
             ],
             "tests": [
+                "test_EPW",
                 "test_DWD_historical",
-                "test_TRY",
-                "test_output_functions",
                 "test_ERC",
-                "test_EPW"
+                "test_TRY",
+                "test_output_functions"
             ]
         },
         "duplicated_lines": {
@@ -2726,27 +2740,27 @@
             "percent_duplicated_lines": 0.0
         },
         "node_count": {
-            "function": 10,
+            "function": 12,
             "klass": 26,
             "method": 60,
             "module": 12
         },
         "undocumented": {
-            "function": 8,
+            "function": 9,
             "klass": 14,
             "method": 26,
             "module": 3
         },
-        "convention": 84,
+        "convention": 86,
         "error": 47,
         "fatal": 0,
         "info": 0,
         "refactor": 4,
-        "statement": 423,
+        "statement": 427,
         "warning": 22,
         "global_note": 0,
         "nb_duplicated_lines": 13,
-        "percent_duplicated_lines": 1.2770137524557956
+        "percent_duplicated_lines": 1.2104283054003724
     },
     "previous": {
         "bad_names": {
@@ -2783,6 +2797,15 @@
                 "statement": 14,
                 "warning": 0
             },
+            "aixweather.definitions": {
+                "convention": 2,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 13,
+                "warning": 0
+            },
             "aixweather.project_class": {
                 "convention": 17,
                 "error": 2,
@@ -2791,15 +2814,6 @@
                 "refactor": 1,
                 "statement": 114,
                 "warning": 5
-            },
-            "definitions": {
-                "convention": 1,
-                "error": 0,
-                "fatal": 0,
-                "info": 0,
-                "refactor": 0,
-                "statement": 3,
-                "warning": 0
             },
             "examples.e1_pull_DWD_historical_to_all_output_formats": {
                 "convention": 8,
@@ -2816,16 +2830,16 @@
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 52,
+                "statement": 51,
                 "warning": 1
             },
             "test_DWD_historical": {
-                "convention": 9,
+                "convention": 8,
                 "error": 1,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 30,
+                "statement": 29,
                 "warning": 1
             },
             "test_EPW": {
@@ -2834,16 +2848,16 @@
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 21,
+                "statement": 20,
                 "warning": 0
             },
             "test_ERC": {
-                "convention": 5,
+                "convention": 6,
                 "error": 1,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 22,
+                "statement": 21,
                 "warning": 0
             },
             "test_TRY": {
@@ -2852,16 +2866,16 @@
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 27,
+                "statement": 26,
                 "warning": 0
             },
             "test_output_functions": {
-                "convention": 5,
+                "convention": 6,
                 "error": 3,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 39,
+                "statement": 38,
                 "warning": 7
             },
             "utils_4_tests": {
@@ -2875,9 +2889,9 @@
             }
         },
         "by_msg": {
-            "missing-function-docstring": 34,
-            "line-too-long": 11,
+            "missing-function-docstring": 35,
             "missing-module-docstring": 3,
+            "line-too-long": 11,
             "too-many-instance-attributes": 1,
             "attribute-defined-outside-init": 12,
             "assignment-from-none": 1,
@@ -2890,7 +2904,7 @@
             "unspecified-encoding": 9,
             "fixme": 1,
             "no-name-in-module": 5,
-            "ungrouped-imports": 1,
+            "ungrouped-imports": 2,
             "no-self-argument": 1,
             "no-member": 39,
             "too-few-public-methods": 1,
@@ -2911,9 +2925,9 @@
                 "aixweather.data_quality_checks"
             ],
             "pandas": [
-                "utils_4_tests",
                 "test_output_functions",
                 "test_DWD_forecast",
+                "utils_4_tests",
                 "aixweather.project_class"
             ],
             "aixweather.imports.DWD": [
@@ -2956,12 +2970,12 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
+                "test_EPW",
                 "test_DWD_historical",
+                "test_ERC",
                 "test_TRY",
                 "test_output_functions",
                 "test_DWD_forecast",
-                "test_ERC",
-                "test_EPW",
                 "examples.e1_pull_DWD_historical_to_all_output_formats"
             ],
             "aixweather.data_quality_checks": [
@@ -2971,37 +2985,29 @@
                 "test_DWD_historical",
                 "test_DWD_forecast"
             ],
-            "aixweather.imports.utils_import": [
+            "aixweather.definitions": [
+                "test_EPW",
+                "test_DWD_historical",
                 "utils_4_tests",
+                "test_ERC",
+                "test_TRY",
                 "test_output_functions",
                 "test_DWD_forecast"
             ],
-            "aixweather.core_data_format_2_output_file.utils_2output": [
-                "test_DWD_historical",
-                "test_TRY",
+            "aixweather.imports.utils_import": [
                 "test_output_functions",
                 "test_DWD_forecast",
-                "utils_4_tests",
-                "test_ERC",
-                "test_EPW"
-            ],
-            "config.definitions": [
-                "test_DWD_historical",
-                "test_TRY",
-                "test_output_functions",
-                "test_DWD_forecast",
-                "test_ERC",
-                "test_EPW"
+                "utils_4_tests"
             ],
             "utils_4_tests": [
                 "test_DWD_forecast"
             ],
             "tests": [
+                "test_EPW",
                 "test_DWD_historical",
-                "test_TRY",
-                "test_output_functions",
                 "test_ERC",
-                "test_EPW"
+                "test_TRY",
+                "test_output_functions"
             ]
         },
         "duplicated_lines": {
@@ -3009,26 +3015,26 @@
             "percent_duplicated_lines": 0.0
         },
         "node_count": {
-            "function": 10,
+            "function": 12,
             "klass": 26,
             "method": 60,
             "module": 12
         },
         "undocumented": {
-            "function": 8,
+            "function": 9,
             "klass": 14,
             "method": 26,
             "module": 3
         },
-        "convention": 84,
+        "convention": 86,
         "error": 47,
         "fatal": 0,
         "info": 0,
         "refactor": 4,
-        "statement": 423,
+        "statement": 427,
         "warning": 22,
-        "global_note": 1.8439716312056742,
+        "global_note": 1.8735362997658083,
         "nb_duplicated_lines": 13,
-        "percent_duplicated_lines": 1.2770137524557956
+        "percent_duplicated_lines": 1.2104283054003724
     }
 }

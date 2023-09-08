@@ -109,6 +109,11 @@
 <li class="toctree-l4"><a class="reference internal" href="#aixweather.data_quality_checks.print_df_info"><code class="docutils literal notranslate"><span class="pre">print_df_info()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aixweather.definitions">aixweather.definitions module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#aixweather.definitions.result_folder_path"><code class="docutils literal notranslate"><span class="pre">result_folder_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aixweather.definitions.results_file_path"><code class="docutils literal notranslate"><span class="pre">results_file_path()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#module-aixweather.project_class">aixweather.project_class module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#aixweather.project_class.ProjectClassCustom"><code class="docutils literal notranslate"><span class="pre">ProjectClassCustom</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#aixweather.project_class.ProjectClassDWDForecast"><code class="docutils literal notranslate"><span class="pre">ProjectClassDWDForecast</span></code></a></li>
@@ -216,11 +221,6 @@
 <li class="toctree-l3"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.unconverted_to_x.to_csv"><code class="docutils literal notranslate"><span class="pre">to_csv()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.unconverted_to_x.to_json"><code class="docutils literal notranslate"><span class="pre">to_json()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.unconverted_to_x.to_pickle"><code class="docutils literal notranslate"><span class="pre">to_pickle()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#module-aixweather.core_data_format_2_output_file.utils_2output">aixweather.core_data_format_2_output_file.utils_2output module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.utils_2output.result_folder_path"><code class="docutils literal notranslate"><span class="pre">result_folder_path()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.utils_2output.results_file_path"><code class="docutils literal notranslate"><span class="pre">results_file_path()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -350,7 +350,7 @@
 </section>
 <section id="module-aixweather.data_quality_checks">
 <span id="aixweather-data-quality-checks-module"></span><h2>aixweather.data_quality_checks module<a class="headerlink" href="#module-aixweather.data_quality_checks" title="Permalink to this heading">¶</a></h2>
-<p>This module includes functions for analyzing and visualizing missing values</p>
+<p>This module includes functions for analyzing and visualizing missing values.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="aixweather.data_quality_checks.plot_heatmap_missing_values_daily">
 <span class="sig-prename descclassname"><span class="pre">aixweather.data_quality_checks.</span></span><span class="sig-name descname"><span class="pre">plot_heatmap_missing_values_daily</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/data_quality_checks.html#plot_heatmap_missing_values_daily"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.data_quality_checks.plot_heatmap_missing_values_daily" title="Permalink to this definition">¶</a></dt>
@@ -360,6 +360,27 @@
 <dt class="sig sig-object py" id="aixweather.data_quality_checks.print_df_info">
 <span class="sig-prename descclassname"><span class="pre">aixweather.data_quality_checks.</span></span><span class="sig-name descname"><span class="pre">print_df_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/data_quality_checks.html#print_df_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.data_quality_checks.print_df_info" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+</section>
+<section id="module-aixweather.definitions">
+<span id="aixweather-definitions-module"></span><h2>aixweather.definitions module<a class="headerlink" href="#module-aixweather.definitions" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.definitions.result_folder_path">
+<span class="sig-prename descclassname"><span class="pre">aixweather.definitions.</span></span><span class="sig-name descname"><span class="pre">result_folder_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/definitions.html#result_folder_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.definitions.result_folder_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.definitions.results_file_path">
+<span class="sig-prename descclassname"><span class="pre">aixweather.definitions.</span></span><span class="sig-name descname"><span class="pre">results_file_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/definitions.html#results_file_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.definitions.results_file_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>create a path to a results file</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>filename: name of file
+folder_path: path to result folder</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: path to result file</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="module-aixweather.project_class">
