@@ -39,8 +39,9 @@ class ProjectClassGeneral(ABC):
 
     Attributes:
         fillna (bool): A flag indicating whether NaN values should be filled in the output formats.
+        abs_result_folder_path (str): Optionally define the absolute path to the desired export location.
         start (pd.Timestamp or None): The start date of the project data (sometimes inferred by the inheriting class).
-        end (pd.Timestamp or None): The end date of the project data (can be None).
+        end (pd.Timestamp or None): The end date of the project data.
 
     Properties:
         imported_data (pd.DataFrame): The imported weather data.
@@ -63,7 +64,7 @@ class ProjectClassGeneral(ABC):
         self.fillna = kwargs.get(
             "fillna", True
         )  # defines whether nan should be filled in the output formats
-        self.abs_result_folder_path = kwargs.get("abs_result_folder_path", None) # needed for parallelization of unit tests
+        self.abs_result_folder_path = kwargs.get("abs_result_folder_path", None)
 
         # User-settable or placeholder depending on data origin
         self.start = kwargs.get("start", None)
