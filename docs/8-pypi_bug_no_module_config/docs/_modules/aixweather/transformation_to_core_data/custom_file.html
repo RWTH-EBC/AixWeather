@@ -168,15 +168,16 @@
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
+<span class="kn">from</span> <span class="nn">aixweather</span> <span class="kn">import</span> <span class="n">definitions</span>
 <span class="kn">from</span> <span class="nn">aixweather.imports.utils_import</span> <span class="kn">import</span> <span class="n">MetaData</span>
 <span class="kn">from</span> <span class="nn">aixweather.transformation_functions</span> <span class="kn">import</span> <span class="n">auxiliary</span><span class="p">,</span> <span class="n">time_observation_transformations</span><span class="p">,</span> <span class="n">variable_transformations</span><span class="p">,</span> \
     <span class="n">pass_through_handling</span><span class="p">,</span> <span class="n">unit_conversions</span>
 
 <span class="n">format_costum</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;variable_name_from_your_costum_data&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;core_name to which it translates (auxiliary.format_core_data)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;core_name to which it translates (definitions.format_core_data)&quot;</span><span class="p">,</span>
         <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s2">&quot;define if the variable needs to be shifted&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;see auxiliary.format_core_data for naming&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;see definitions.format_core_data for naming&quot;</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">}</span>
 
@@ -187,7 +188,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">### evaluate correctness of format</span>
     <span class="n">auxiliary</span><span class="o">.</span><span class="n">evaluate_transformations</span><span class="p">(</span>
-        <span class="n">core_format</span><span class="o">=</span><span class="n">auxiliary</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">,</span> <span class="n">other_format</span><span class="o">=</span><span class="n">format_costum</span>
+        <span class="n">core_format</span><span class="o">=</span><span class="n">definitions</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">,</span> <span class="n">other_format</span><span class="o">=</span><span class="n">format_costum</span>
     <span class="p">)</span>
 
     <span class="c1">### preprocessing raw data for further operations</span>
@@ -206,7 +207,7 @@
 
     <span class="k">def</span> <span class="nf">transform_custom</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
         <span class="c1"># drop unnecessary variables</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">force_data_variable_convention</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">force_data_variable_convention</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">definitions</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">)</span>
 
         <span class="c1">### convert units</span>
         <span class="c1"># insert unit conversions like desired (examples follow)</span>

@@ -32,11 +32,3 @@ aixweather.core\_data\_format\_2\_output\_file.unconverted\_to\_x module
    :members:
    :undoc-members:
    :show-inheritance:
-
-aixweather.core\_data\_format\_2\_output\_file.utils\_2output module
---------------------------------------------------------------------
-
-.. automodule:: aixweather.core_data_format_2_output_file.utils_2output
-   :members:
-   :undoc-members:
-   :show-inheritance:

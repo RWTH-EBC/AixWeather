@@ -168,43 +168,6 @@
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="c1"># core data format always in UTC and values measured at indicated time</span>
-<span class="n">format_core_data</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1"># from TMY3 https://www.nrel.gov/docs/fy08osti/43156.pdf</span>
-    <span class="s2">&quot;DryBulbTemp&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;DewPointTemp&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;RelHum&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;percent&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;ExtHorRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;ExtDirNormRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;HorInfra&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;GlobHorRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;DirNormRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;DirHorRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;DiffHorRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;GlobHorIll&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;lux&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;DirecNormIll&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;lux&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;DiffuseHorIll&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;lux&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;ZenithLum&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Cd/m2&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;WindDir&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;deg&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;WindSpeed&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;m/s&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;TotalSkyCover&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;1tenth&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;OpaqueSkyCover&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;1tenth&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;Visibility&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;km&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;CeilingH&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;m&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;PrecWater&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;mm&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;Aerosol&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;1thousandth&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;LiquidPrecD&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;mm/h&quot;</span><span class="p">},</span>
-    <span class="c1"># exception to TMY3 format as all TMY3 data file actually use &quot;Pa&quot; instead of mbar</span>
-    <span class="s2">&quot;AtmPressure&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Pa&quot;</span><span class="p">},</span>
-    <span class="c1"># additional variables</span>
-    <span class="s2">&quot;Soil_Temperature_5cm&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;Soil_Temperature_10cm&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;Soil_Temperature_20cm&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;Soil_Temperature_50cm&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;Soil_Temperature_1m&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
-<span class="p">}</span>
-
-
 <div class="viewcode-block" id="force_data_variable_convention"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.force_data_variable_convention">[docs]</a><span class="k">def</span> <span class="nf">force_data_variable_convention</span><span class="p">(</span>
     <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">format_desired</span><span class="p">:</span> <span class="nb">dict</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>

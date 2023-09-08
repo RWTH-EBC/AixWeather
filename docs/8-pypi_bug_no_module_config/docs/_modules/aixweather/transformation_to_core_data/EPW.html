@@ -168,6 +168,7 @@
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 
+<span class="kn">from</span> <span class="nn">aixweather</span> <span class="kn">import</span> <span class="n">definitions</span>
 <span class="kn">from</span> <span class="nn">aixweather.imports.utils_import</span> <span class="kn">import</span> <span class="n">MetaData</span>
 <span class="kn">from</span> <span class="nn">aixweather.transformation_functions</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">auxiliary</span><span class="p">,</span>
@@ -203,7 +204,7 @@
 
     <span class="c1"># evaluate correctness of format</span>
     <span class="n">auxiliary</span><span class="o">.</span><span class="n">evaluate_transformations</span><span class="p">(</span>
-        <span class="n">core_format</span><span class="o">=</span><span class="n">auxiliary</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">,</span> <span class="n">other_format</span><span class="o">=</span><span class="n">format_epw</span>
+        <span class="n">core_format</span><span class="o">=</span><span class="n">definitions</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">,</span> <span class="n">other_format</span><span class="o">=</span><span class="n">format_epw</span>
     <span class="p">)</span>
 
     <span class="c1">### preprocessing raw data for further operations</span>
@@ -224,7 +225,7 @@
 
     <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
         <span class="c1">### force variable naming format_core_data</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">force_data_variable_convention</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">force_data_variable_convention</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">definitions</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">)</span>
         <span class="c1">### unit conversion</span>
         <span class="c1"># all units correct</span>
         <span class="c1">### impute missing variables from other available ones</span>
