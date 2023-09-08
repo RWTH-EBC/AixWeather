@@ -1,5 +1,5 @@
 """
-This module includes functions for analyzing and visualizing missing values
+This module includes functions for analyzing and visualizing missing values.
 """
 
 import matplotlib.pyplot as plt
