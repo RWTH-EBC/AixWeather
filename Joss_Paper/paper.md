@@ -19,19 +19,25 @@ bibliography: paper.bib
 
 # Summary
 
-Building simulations are one of the main tools for building energy system research.
-These simulations require weather data, often in a very specific format.
-The creation of such weather data can be tedious and error prone.
-`AixWeather` will help to pull, transform and export weather data from one source or format origin to another, 
-while respecting commonly overseen issues like: 
-time zone, 
-time of measurement, 
-avoidance of smoothing through interpolation,
-unit transformation,
-missing data points,
-and calculates missing weather variables from other available variables.
+AixWeather is a versatile weather data generation tool designed to simplify the process of acquiring, 
+formatting, and exporting weather data for building energy system simulations. 
+It addresses the challenges researchers and industry players face in obtaining accurate and standardized weather 
+data by providing a user-friendly platform.
 
+Key Features:
+Data Transformation: AixWeather can seamlessly convert weather data from various sources into a 
+standardized core format and from there to the desired export format.
+AixWeather ensures data accuracy by considering critical and often overlooked factors such as time zones, time reference of measurement, 
+unit conversions, missing data points, and avoiding interpolation-induced smoothing. Additionally, 
+it leverages physical relationships to calculate missing weather variables from available data.
+Flexibility: The tool offers a generic framework that allows for the effortless addition of 
+new import and output formats, enhancing its adaptability for diverse weather data requirements.
+Modelica TMY3Reader Compatibility: A standout feature of AixWeather is its support for generating weather data 
+compatible with the Modelica TMY3Reader format, addressing a specific and underserved need in the field.
 
+AixWeather empowers researchers and professionals working in building energy systems by streamlining 
+the weather data generation process. It ensures the availability of high-quality weather data, enabling researchers 
+to focus on their essential work in the field of building energy systems.
 
 
 \autoref{fig:AixWeatherStructure}
@@ -42,11 +48,42 @@ and calculates missing weather variables from other available variables.
 
 # Statement of need
 
+Building energy simulations are crucial for research building energy systems, 
+often relying on specific weather data formats. Creating such weather data can be a 
+labor-intensive and error-prone task. AixWeather addresses these challenges by offering 
+a comprehensive solution for pulling, transforming, and exporting weather data from various sources and formats.
+
+
+
+
+AixWeather ensures data accuracy by considering critical factors such as time zones, measurement times, 
+unit conversions, missing data points, and avoiding interpolation-induced smoothing. Additionally, 
+it leverages physical relationships to calculate missing weather variables from available data.
+
+Beyond its core functionalities, AixWeather offers a flexible and extensible framework. 
+It simplifies the addition of new import and output formats, making it a versatile tool for researchers 
+in the field of building energy systems.
+
+
+
+Importing real weather data or Test Reference Years (TRY) data into the Modelica TMY3Reader format 
+can be challenging due to format differences. Currently, there are limited tools available for this purpose.
+
+AixWeather offers a practical solution by providing support for generating weather data compatible with the 
+Modelica TMY3Reader format. This feature addresses a critical need in the field, making AixWeather a 
+valuable tool for researchers working with this specific output format.
+
+Notably, AixWeather stands apart by offering support for the Modelica TMY3Reader format, addressing a specific 
+and underserved requirement in the field. This unique feature positions it as an indispensable tool 
+for those seeking compatibility with this format.
+
+
 Building simulations are one of the main tools for building energy system research.
 These simulations often require weather data, often in a very specific format.
 The creation of such weather data can be tedious and error prone.
 
 `AixWeather` was designed to be used by both researchers and researching industry.
+and sophisticated design and operation of energy building systems
 
 # Mathematics
 
