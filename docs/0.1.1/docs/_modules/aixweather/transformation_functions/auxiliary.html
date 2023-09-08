@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>aixweather.transformation_functions.auxiliary &mdash; aixweather 0.1.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/autodoc_pydantic.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> aixweather
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">aixweather</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html">Contribute as a user</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../version_his.html">Version History</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">aixweather</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>aixweather.transformation_functions.auxiliary</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for aixweather.transformation_functions.auxiliary</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">includes auxiliary functions for data handling and transformation</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<div class="viewcode-block" id="force_data_variable_convention"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.force_data_variable_convention">[docs]</a><span class="k">def</span> <span class="nf">force_data_variable_convention</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">format_desired</span><span class="p">:</span> <span class="nb">dict</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ensure that all and only desired variable names are present and in correct order.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame containing the data to be formatted.</span>
+<span class="sd">        format_desired (dict): A dictionary specifying the desired format with variable names as keys.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: A DataFrame with filtered data in the desired format and order.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># filter existing df</span>
+    <span class="n">desired_var_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">format_desired</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">df_core_var</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">desired_var_names</span><span class="p">)]</span>
+
+    <span class="c1"># Reindex the DataFrame to ensure all required columns exist and obey the order of columns</span>
+    <span class="n">df_core_var</span> <span class="o">=</span> <span class="n">df_core_var</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">format_desired</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+    <span class="k">return</span> <span class="n">df_core_var</span></div>
+
+
+<div class="viewcode-block" id="rename_columns"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.rename_columns">[docs]</a><span class="k">def</span> <span class="nf">rename_columns</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">format_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Rename DataFrame columns based on the provided format dictionary.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame whose columns need to be renamed.</span>
+<span class="sd">        format_dict (dict): A dictionary specifying the column renaming mapping,</span>
+<span class="sd">                            with current column names as keys and desired names as values.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: A DataFrame with renamed columns.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rename_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">val</span><span class="p">[</span><span class="s2">&quot;core_name&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">format_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">rename_map</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="fill_nan_from_format_dict"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.fill_nan_from_format_dict">[docs]</a><span class="k">def</span> <span class="nf">fill_nan_from_format_dict</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">format_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fill NaN values in a DataFrame based on the provided format data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame containing the data to be processed.</span>
+<span class="sd">        format_data (dict): A dictionary specifying NaN replacement values for columns,</span>
+<span class="sd">                            with column names as keys and NaN replacement values as values.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: A DataFrame with NaN values filled as per the format data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nan_key</span> <span class="o">=</span> <span class="s2">&quot;nan&quot;</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">format_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">nan</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="n">nan_key</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">nan</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+<div class="viewcode-block" id="replace_dummy_with_nan"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.replace_dummy_with_nan">[docs]</a><span class="k">def</span> <span class="nf">replace_dummy_with_nan</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">format_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Replace specific values in the DataFrame with NaN based on the given format dictionary.</span>
+<span class="sd">    Reason: sometimes, e.g. the DWD, specifies a missing value with a dummy value like e.g. 99,</span>
+<span class="sd">    which makes it hard to see where missing values are and might affect the simulation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame to be processed.</span>
+<span class="sd">        format_dict (dict): A dictionary specifying values to be replaced with NaN,</span>
+<span class="sd">                            with column names as keys and corresponding dummy values as values.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: A DataFrame with specified values replaced by NaN.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">format_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="s2">&quot;nan&quot;</span> <span class="ow">in</span> <span class="n">value</span> <span class="ow">and</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">nan_values</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;nan&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nan_values</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">nan_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">nan_values</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">nan_val</span> <span class="ow">in</span> <span class="n">nan_values</span><span class="p">:</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">nan_val</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+<div class="viewcode-block" id="evaluate_transformations"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.evaluate_transformations">[docs]</a><span class="k">def</span> <span class="nf">evaluate_transformations</span><span class="p">(</span><span class="n">core_format</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">other_format</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compare the units and core variables of two formats and print any required unit transformations.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        core_format (dict): A dictionary representing the core format with keys as variable names and values</span>
+<span class="sd">                            containing unit information.</span>
+<span class="sd">        other_format (dict): A dictionary representing another format to be compared with the core format.</span>
+<span class="sd">                            It contains keys and values with &#39;core_name&#39; and &#39;unit&#39; attributes.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If a core variable in other_format doesn&#39;t match the core variable format.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Evaluate format.&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">other_format</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;core_name&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">core_format</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="c1"># compare units</span>
+            <span class="k">if</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;unit&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">core_format</span><span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="s2">&quot;core_name&quot;</span><span class="p">]][</span><span class="s2">&quot;unit&quot;</span><span class="p">]:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Unit transformation required for </span><span class="si">{</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;core_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> from&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;unit&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">core_format</span><span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;core_name&#39;</span><span class="p">]][</span><span class="s1">&#39;unit&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;core_name&quot;</span><span class="p">]:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;The core variable &#39;</span><span class="si">{</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;core_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39; of import variable&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> does not fit the core variable format&quot;</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="select_entry_by_core_name"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.select_entry_by_core_name">[docs]</a><span class="k">def</span> <span class="nf">select_entry_by_core_name</span><span class="p">(</span><span class="n">format_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">core_name_to_match</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Select an entry from a format dictionary based on the specified core name.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        format_dict (dict): A dictionary to search for the entry.</span>
+<span class="sd">        core_name_to_match (str): The core name to match in the dictionary values.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: The dictionary entry matching the specified core name, or None if not found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">format_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;core_name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">core_name_to_match</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, EON EBC.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
