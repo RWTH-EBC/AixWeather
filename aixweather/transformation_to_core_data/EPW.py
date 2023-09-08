@@ -5,6 +5,7 @@ This module includes a function to transform EPW data to core data format.
 import pandas as pd
 from copy import deepcopy
 
+from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
 from aixweather.transformation_functions import (
     auxiliary,
@@ -40,7 +41,7 @@ def EPW_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
 
     # evaluate correctness of format
     auxiliary.evaluate_transformations(
-        core_format=auxiliary.format_core_data, other_format=format_epw
+        core_format=definitions.format_core_data, other_format=format_epw
     )
 
     ### preprocessing raw data for further operations
@@ -61,7 +62,7 @@ def EPW_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
 
     def transform(df):
         ### force variable naming format_core_data
-        df = auxiliary.force_data_variable_convention(df, auxiliary.format_core_data)
+        df = auxiliary.force_data_variable_convention(df, definitions.format_core_data)
         ### unit conversion
         # all units correct
         ### impute missing variables from other available ones

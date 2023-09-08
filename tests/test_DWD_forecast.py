@@ -8,22 +8,21 @@ import pandas as pd
 
 from parameterized import parameterized
 
+from aixweather import definitions
 from aixweather.project_class import ProjectClassDWDForecast
 from aixweather.imports.utils_import import MetaData
-from aixweather.core_data_format_2_output_file import utils_2output
-from config.definitions import ROOT_DIR
 import utils_4_tests
 
 
 class BaseDWDForecast(unittest.TestCase):
     @classmethod
     def init_and_run_DWD_forecast(cls, name: str, station):
-        abs_result_folder_path = os.path.join(utils_2output.result_folder_path(), name)
+        abs_result_folder_path = os.path.join(definitions.result_folder_path(), name)
         cls.c = ProjectClassDWDForecast(
             station=station, abs_result_folder_path=abs_result_folder_path
         )
         cls.folder_tests = os.path.join(
-            ROOT_DIR, f"tests/test_files/regular_tests/DWD_forecast/test_{name}"
+            definitions.ROOT_DIR, f"tests/test_files/regular_tests/DWD_forecast/test_{name}"
         )
 
         utils_4_tests.run_all_functions(cls.c)
@@ -45,12 +44,12 @@ class TestDWDForecastFromImportedData(
     def setUpClass(cls):
         station = "06710"
         name = "06710_august_2023"
-        abs_result_folder_path = os.path.join(utils_2output.result_folder_path(), name)
+        abs_result_folder_path = os.path.join(definitions.result_folder_path(), name)
         cls.c = ProjectClassDWDForecast(
             station=station, abs_result_folder_path=abs_result_folder_path
         )
         cls.folder_tests = os.path.join(
-            ROOT_DIR, f"tests/test_files/regular_tests/DWD_forecast/test_{name}"
+            definitions.ROOT_DIR, f"tests/test_files/regular_tests/DWD_forecast/test_{name}"
         )
 
         # import "imported data" and "meta_data"
@@ -100,5 +99,5 @@ def create_imported_data_for_unit_test():
     c = ProjectClassDWDForecast(station="06710")
     c.import_data()
     c.imported_data.to_csv(
-        utils_2output.results_file_path("forecast_imported_data_06710.csv"), index=True
+        definitions.results_file_path("forecast_imported_data_06710.csv"), index=True
     )

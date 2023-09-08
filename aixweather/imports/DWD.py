@@ -12,7 +12,7 @@ import pandas as pd
 from wetterdienst.provider.dwd.mosmix import DwdMosmixRequest, DwdMosmixType
 
 from aixweather.imports import utils_import
-import config.definitions as defin
+from aixweather import definitions
 
 
 def import_DWD_historical(start: dt.datetime, station: str) -> pd.DataFrame:
@@ -302,7 +302,7 @@ def _pull_DWD_historical_data(url: str, station: str) -> pd.DataFrame:
 
         data_total = pd.concat([data_total, data], verify_integrity=True)
 
-        shutil.rmtree(defin.local_folder)
+        shutil.rmtree(definitions.local_folder_temp)
 
     return data_total
 
@@ -322,10 +322,10 @@ def _download_DWD_file(url: str, zip_name: str):
     """
     folder_unzip = "unzipped_content"
 
-    total_zip_name = os.path.join(defin.local_folder, zip_name)
+    total_zip_name = os.path.join(definitions.local_folder_temp, zip_name)
 
-    if not os.path.exists(defin.local_folder):
-        os.makedirs(defin.local_folder)
+    if not os.path.exists(definitions.local_folder_temp):
+        os.makedirs(definitions.local_folder_temp)
 
     for i in range(4):  # try retrieval 3 times
         try:
@@ -333,7 +333,7 @@ def _download_DWD_file(url: str, zip_name: str):
             print(f"Loaded: {total_zip_name}")
 
             # save unzipped files to folder_unzip
-            extract_path = os.path.join(defin.local_folder, folder_unzip)
+            extract_path = os.path.join(definitions.local_folder_temp, folder_unzip)
             with zipfile.ZipFile(total_zip_name, "r") as zip_ref:
                 zip_ref.extractall(extract_path)
 

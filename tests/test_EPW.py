@@ -5,21 +5,20 @@ includes unittests for EPW data
 import os
 import unittest
 
+from aixweather import definitions
 from aixweather.project_class import ProjectClassEPW
-from aixweather.core_data_format_2_output_file import utils_2output
-from config.definitions import ROOT_DIR
 from tests import utils_4_tests
 
 
 class BaseEPW(unittest.TestCase):
     @classmethod
     def init_and_run_EPW(cls, name: str, path: str):
-        abs_result_folder_path = os.path.join(utils_2output.result_folder_path(), name)
+        abs_result_folder_path = os.path.join(definitions.result_folder_path(), name)
         cls.c = ProjectClassEPW(
             path=path, abs_result_folder_path=abs_result_folder_path
         )
         cls.folder_tests = os.path.join(
-            ROOT_DIR, f"tests/test_files/regular_tests/EPW/test_{name}"
+            definitions.ROOT_DIR, f"tests/test_files/regular_tests/EPW/test_{name}"
         )
 
         utils_4_tests.run_all_functions(cls.c)
@@ -40,7 +39,7 @@ class TestEPWEssenLadybug(BaseEPW, utils_4_tests.RegressionTestsClass):
         cls.init_and_run_EPW(
             "EPW_Essen_Ladybug",
             os.path.join(
-                ROOT_DIR,
+                definitions.ROOT_DIR,
                 r"tests/test_files/regular_tests/EPW/test_EPW_Essen_Ladybug/"
                 "input/DEU_NW_Essen_104100_TRY2035_05_Wint_BBSR.epw",
             ),

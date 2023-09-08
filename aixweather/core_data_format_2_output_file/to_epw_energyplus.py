@@ -7,7 +7,7 @@ import datetime as dt
 import pandas as pd
 import numpy as np
 
-from aixweather.core_data_format_2_output_file import utils_2output
+from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
 from aixweather.transformation_functions import auxiliary, time_observation_transformations, pass_through_handling
 
@@ -90,7 +90,7 @@ def to_epw(
 
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
-        core_format=auxiliary.format_core_data, other_format=format_epw
+        core_format=definitions.format_core_data, other_format=format_epw
     )
 
     df = core_df.copy()
@@ -100,7 +100,7 @@ def to_epw(
         f"_{meta.station_name}.epw"
     )
     # get file path to safe data to
-    file_path = utils_2output.results_file_path(filename, result_folder)
+    file_path = definitions.results_file_path(filename, result_folder)
 
     ### create header lines
     def line1_location(

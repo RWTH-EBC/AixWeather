@@ -6,10 +6,9 @@ import os.path
 import unittest
 import datetime as dt
 
+from aixweather import definitions
 from tests import utils_4_tests
-from config.definitions import ROOT_DIR
 from aixweather.project_class import ProjectClassERC
-from aixweather.core_data_format_2_output_file import utils_2output
 
 # username="xxxxx@eonerc.rwth-aachen.de"
 # password="xxxxx"
@@ -21,7 +20,7 @@ class BaseERC(unittest.TestCase):
     def init_and_run_ERC(
         cls, name: str, start: dt.datetime, end: dt.datetime, cred=None
     ):
-        abs_result_folder_path = os.path.join(utils_2output.result_folder_path(), name)
+        abs_result_folder_path = os.path.join(definitions.result_folder_path(), name)
         cls.c = ProjectClassERC(
             start=start,
             end=end,
@@ -29,7 +28,7 @@ class BaseERC(unittest.TestCase):
             abs_result_folder_path=abs_result_folder_path,
         )
         cls.folder_tests = os.path.join(
-            ROOT_DIR, f"tests/test_files/regular_tests/ERC_hist/test_{name}"
+            definitions.ROOT_DIR, f"tests/test_files/regular_tests/ERC_hist/test_{name}"
         )
         cls.start_formatted = start.strftime("%Y%m%d")
         cls.end_formatted = end.strftime("%Y%m%d")

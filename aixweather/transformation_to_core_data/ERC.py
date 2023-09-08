@@ -4,6 +4,7 @@ This module includes functions to transform ERC data to core data format.
 
 import pandas as pd
 
+from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
 from aixweather.transformation_functions import auxiliary, time_observation_transformations, variable_transformations, \
     pass_through_handling, unit_conversions
@@ -42,7 +43,7 @@ def ERC_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
 
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
-        core_format=auxiliary.format_core_data, other_format=format_ERC
+        core_format=definitions.format_core_data, other_format=format_ERC
     )
 
     ### format raw data for further operations
@@ -63,7 +64,7 @@ def ERC_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
 
     def transform_ERC(df):
         # drop unnecessary variables
-        df = auxiliary.force_data_variable_convention(df, auxiliary.format_core_data)
+        df = auxiliary.force_data_variable_convention(df, definitions.format_core_data)
 
         ### convert units
         df["AtmPressure"] = unit_conversions.hPa_to_Pa(df["AtmPressure"])
