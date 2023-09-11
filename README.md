@@ -3,11 +3,11 @@
 <!-- Add Paper here:
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.03861/status.svg )](Todo_DOI)
 -->
-[![pylint](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/main/pylint/pylint.svg )](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/main/pylint/pylint.html)
-[![documentation](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/main/docs/doc.svg)](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/main/docs/index.html)
-[![coverage](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/main/coverage/badge.svg)](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/main/coverage)
+[![pylint](https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.svg )](https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.html)
+[![documentation](https://rwth-ebc.github.io/AixWeather//main//docs/doc.svg)](https://rwth-ebc.github.io/AixWeather//main//docs/index.html)
+[![coverage](https://rwth-ebc.github.io/AixWeather//main//coverage/badge.svg)](https://rwth-ebc.github.io/AixWeather//main//coverage)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
-[![build](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/main/build/build.svg)](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/main/build/build.svg)
+[![build](https://rwth-ebc.github.io/AixWeather//main//build/build.svg)](https://rwth-ebc.github.io/AixWeather//main//build/build.svg)
 
 # AixWeather
 **A weather data generation tool for building energy system simulations. Pull, Transform, Export.**
@@ -15,7 +15,7 @@
 ## WebApp
 
 For fast access without setup, use the WebApp.
-The repository **[AixWeather-WebApp](https://github.com/RWTH-EBC/AixWeather-WebApp)** contains the corresponding WebApp for this repo.
+The repository [AixWeather-WebApp](https://github.com/RWTH-EBC/AixWeather-WebApp) contains the corresponding WebApp for this repo.
 This repository contains the functionalities useful for, e.g., automation of tasks. 
 
 ## How to use
