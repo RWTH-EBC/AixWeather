@@ -16,7 +16,10 @@ DWD_pull_project = ProjectClassDWDHistorical(
     start=dt.datetime(2022, 1, 1),
     end=dt.datetime(2023, 1, 1),
     station=15000,
+    # specify whether nan-values should be filled when exporting
     fillna=True,
+    # define results path if desired
+    abs_result_folder_path=None
 )
 ```
 

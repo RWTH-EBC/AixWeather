@@ -9,7 +9,10 @@ def e1_pull_DWD_historical_to_all_output_formats():
         start=dt.datetime(2022, 1, 1),
         end=dt.datetime(2023, 1, 1),
         station=15000,
+        # specify whether nan-values should be filled when exporting
         fillna=True,
+        # define results path if desired
+        abs_result_folder_path=None
     )
 
     # import historical weather from the DWD open access database
