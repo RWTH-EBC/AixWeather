@@ -167,131 +167,159 @@
   <section id="about-ebcpy">
 <h1>About ebcpy<a class="headerlink" href="#about-ebcpy" title="Permalink to this heading">¶</a></h1>
 <a class="reference external image-reference" href="./docs/source/_static/EBC_Logo.png"><img alt="E.ON EBC RWTH Aachen University" src="docs/source/_static/EBC_Logo.png" /></a>
-<a class="reference external image-reference" href="Todo_DOI"><img alt="DOI" src="https://joss.theoj.org/papers/10.21105/joss.03861/status.svg" /></a>
-<a class="reference external image-reference" href="https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/pylint/pylint.html"><img alt="pylint" src="https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/pylint/pylint.svg" /></a>
-<a class="reference external image-reference" href="https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/docs/index.html"><img alt="documentation" src="https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/docs/doc.svg" /></a>
-<a class="reference external image-reference" href="https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/coverage"><img alt="coverage" src="https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/coverage/badge.svg" /></a>
-<a class="reference external image-reference" href="https://opensource.org/licenses/BSD-3-Clause"><img alt="License" src="https://img.shields.io/badge/License-BSD%203--Clause-blue.svg" /></a>
-<a class="reference external image-reference" href="https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/build/build.svg"><img alt="build" src="https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/master/build/build.svg" /></a>
-<section id="aixweather">
-<h2>AixWeather<a class="headerlink" href="#aixweather" title="Permalink to this heading">¶</a></h2>
-<p><strong>A weather data generation tool for building energy system simulations. Pull, Transform, Export.</strong></p>
-</section>
-</section>
-<section id="webapp">
-<h1>WebApp<a class="headerlink" href="#webapp" title="Permalink to this heading">¶</a></h1>
-<p>For fast and easy accees use the WebApp.
-The repository <a href="#id1"><span class="problematic" id="id2">**</span></a><a class="reference external" href="https://github.com/RWTH-EBC/AixWeather-WebApp">AixWeather-WebApp</a>** contains the corresponding WebApp for this repo.
-This repository contains the functionalities, which can be used for automated weather data generation.</p>
-</section>
-<section id="how-to-use">
-<h1>How to use<a class="headerlink" href="#how-to-use" title="Permalink to this heading">¶</a></h1>
-<p>For each data origin a class is defined. See the examples to know how to use them.</p>
-</section>
-<section id="tool-structure-and-overview">
-<h1>Tool structure and overview<a class="headerlink" href="#tool-structure-and-overview" title="Permalink to this heading">¶</a></h1>
-<p><strong>This tool consists of three layers:</strong></p>
-<ol class="arabic">
-<li><p>import raw weather data from several sources</p></li>
-<li><p>transform the weather data to a defined core-format with consideration of:</p>
-<blockquote>
-<div><p>2.1. time zone</p>
-<p>2.2. time of measurement (whether a value at a certain time stamp is for the indicated time or e.g., the average of the preceding hour)</p>
-<p>2.3. avoidance of smoothing through interpolation (pass through variables without interpolation if possible)</p>
-<p>2.4 units</p>
-<p>2.5. calculate missing variables from available ones, e.g. horizontal direct radiation from diffuse and global radiation.</p>
-<p>2.5 missing data</p>
-</div></blockquote>
-</li>
-<li><p>transform the core-format data to your desired output format</p></li>
-</ol>
-<p><strong>Overview</strong></p>
-<a class="reference external image-reference" href="docs/Overview_WeatherTool.drawio.png"><img alt="Weather Data Tool Diagram" src="docs/Overview_WeatherTool.drawio.png" /></a>
-<p><strong>Known limitations:</strong></p>
-<ul class="simple">
-<li><p>only hourly data</p></li>
-</ul>
-<p><strong>Chances:</strong></p>
-<ul class="simple">
-<li><p>generic code base that allows for fast and easy extensions to both other import formats and output formats</p></li>
-</ul>
-<section id="station-ids-and-kml-grid-ids">
-<h2>Station IDs and KML grid IDs**<a class="headerlink" href="#station-ids-and-kml-grid-ids" title="Permalink to this heading">¶</a></h2>
-<p>The station IDs for the DWD weather stations to pull historical data from are listed <a class="reference external" href="https://www.dwd.de/DE/leistungen/klimadatendeutschland/statliste/statlex_rich.txt;jsessionid=68E14BA255FE50BDC4AD9FF4F835895F.live31092?view=nasPublication&amp;nn=16102">here</a>. Only german stations available. Aachen would be 15000.</p>
-<p>The KML grid IDs for the DWD forecast are listed <a class="reference external" href="https://www.dwd.de/DE/leistungen/met_verfahren_mosmix/mosmix_stationskatalog.cfg?view=nasPublication&amp;nn=16102">here</a>. Worldwide station available. Aachen would be 10505.</p>
-<p>You may use the imported package <a class="reference external" href="https://github.com/earthobservations/wetterdienst">Wetterdienst</a> to search for stations automatically, like described <a class="reference external" href="https://bookdown.org/brry/rdwd/station-selection.html">here</a>.</p>
-</section>
-<section id="sources-of-information-for-corresponding-data-formats">
-<h2>Sources of information for corresponding data formats<a class="headerlink" href="#sources-of-information-for-corresponding-data-formats" title="Permalink to this heading">¶</a></h2>
-</section>
-</section>
-<section id="input">
-<h1>Input<a class="headerlink" href="#input" title="Permalink to this heading">¶</a></h1>
-<p><strong>Test Reference Years (TRY)</strong>:</p>
-<p><a class="reference external" href="https://www.bbsr.bund.de/BBSR/DE/forschung/programme/zb/Auftragsforschung/5EnergieKlimaBauen/2013/testreferenzjahre/try-handbuch.pdf">Handbuch</a>.</p>
-<p>TRY data can be downloaded from the DWD (sign up required but for free) <a class="reference external" href="https://www.bbsr.bund.de/BBSR/DE/forschung/programme/zb/Auftragsforschung/5EnergieKlimaBauen/2013/testreferenzjahre/01-start.html;jsessionid=5D9912D230EB887C1F831671303A8A0F.live21304?nn=2544408&amp;pos=2">TRY data sets</a>.</p>
-<p>Additional information on suitability of TRY data (last update: 2019):
-There are typical TRY datasets grouped by the year of publication:</p>
-<ul class="simple">
-<li><p>2004 datasets: (DWD; some errors in solar radiation; dataset should be avoided).</p></li>
-<li><p>2010 datasets: suitable for EnEV and GEG, not for solar thermal simulations.</p></li>
-<li><p>2015 datasets: not suitable for EnEV and GEG, but for solar thermal simulations</p></li>
-<li><p>Overall: Reliable quantities in TRYs are only the air temperature
-and the global radiation!</p></li>
-</ul>
-<p><strong>DWD historical</strong>: <a class="reference external" href="https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/">open data website</a></p>
-<p><strong>DWD forecasts (MosMix or KML files)</strong>: <a class="reference external" href="https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/">open data website</a> go to content.log.bz2.</p>
-<p><strong>EnergyPlus (EPW)</strong>:</p>
-<p>for format information, see output formats.</p>
-<p>Online sources for EPW data: <a class="reference external" href="https://climate.onebuilding.org/default.html">https://climate.onebuilding.org/default.html</a> and <a class="reference external" href="https://www.ladybug.tools/epwmap/">https://www.ladybug.tools/epwmap/</a></p>
-<p><strong>ERC data:</strong></p>
-<p>This data is from the weather station of the Institute for Energy Efficient Buildings and Indoor Climate (RWTH). Access requires user credentials. Such credentials are pre-defined if you use the WebApp.</p>
-</section>
-<section id="output-formats">
-<h1>Output formats<a class="headerlink" href="#output-formats" title="Permalink to this heading">¶</a></h1>
-<p><strong>EnergyPlus (EPW):</strong></p>
-<p><a class="reference external" href="https://designbuilder.co.uk/cahelp/Content/EnergyPlusWeatherFileFormat.htm">3rd party format description</a></p>
-<p><strong>Modelica ReaderTMY3:</strong></p>
-<p>TMY3 reader from the <a class="reference external" href="https://github.com/ibpsa/modelica-ibpsa">IBPSA</a> library used in the <a class="reference external" href="https://github.com/RWTH-EBC/AixLib">AixLib</a> library. Model info at <a class="reference external" href="https://build.openmodelica.org/Documentation/Buildings.BoundaryConditions.WeatherData.ReaderTMY3.html">OpenModelica</a>.
-It claims to use mainly <a class="reference external" href="https://www.nrel.gov/docs/fy08osti/43156.pdf">TMY3 data</a>, though we found that the pressure is used in mbar instead of Pa. Further deviations possible.</p>
-<p>Additional information for AixLib users.</p>
-<p>Weatherdata usage in the low order model (LOM):</p>
-<p>Used in LOM:</p>
-<ul class="simple">
-<li><p>TDryBul</p></li>
-<li><p>RelHum</p></li>
-<li><p>TBlaSky (calculated via: HInfHor, TDryBul, TDewPoi and OpaSkyCov)</p></li>
-<li><p>HGloHor</p></li>
-<li><p>HDifHor</p></li>
-<li><p>HDirNor</p></li>
-</ul>
-<p>Not used in the LOM:</p>
-<ul class="simple">
-<li><p>total sky cover</p></li>
-<li><p>ceiling height</p></li>
-<li><p>wind direction</p></li>
-<li><p>wind speed</p></li>
-<li><p>atmospheric pressure</p></li>
-</ul>
-<p><strong>Unconverted to x</strong></p>
-<p>exports the core data without conversion to .csv, .json or .pickle files.</p>
-<section id="how-to-contribute-to-the-development">
-<h2>How to contribute to the development<a class="headerlink" href="#how-to-contribute-to-the-development" title="Permalink to this heading">¶</a></h2>
-<p>You are invited to contribute to the development of this weather tool.
-Issues can be reported using this site’s Issues section.
-Furthermore, you are welcome to contribute via Pull Requests.</p>
-</section>
-<section id="how-to-cite">
-<h2>How to cite<a class="headerlink" href="#how-to-cite" title="Permalink to this heading">¶</a></h2>
-<p><a href="#id7"><span class="problematic" id="id8">`ToDo &lt;&gt;`_</span></a>
-DOI:  ToDo</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@inproceedings</span><span class="p">{</span><span class="n">ToDo</span><span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="license">
+<!-- Add Paper here:
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.03861/status.svg )](Todo_DOI)
+-->
+[![pylint](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/main/pylint/pylint.svg )](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/main/pylint/pylint.html)
+[![documentation](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/main/docs/doc.svg)](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/main/docs/index.html)
+[![coverage](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/main/coverage/badge.svg)](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/main/coverage)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![build](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/main/build/build.svg)](https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixWeather/main/build/build.svg)
+
+# AixWeather
+**A weather data generation tool for building energy system simulations. Pull, Transform, Export.**
+
+## WebApp
+
+For fast access without setup, use the WebApp.
+The repository **[AixWeather-WebApp](https://github.com/RWTH-EBC/AixWeather-WebApp)** contains the corresponding WebApp for this repo.
+This repository contains the functionalities useful for, e.g., automation of tasks.
+
+## How to use
+For each data origin, a class is defined. Use generic functions to create the desired output file.
+See the examples to know how to use them.
+
+## Tool structure and overview
+
+**This tool consists of three layers:**
+
+1. Import raw weather data from several sources
+
+2. Transform the weather data to a defined core format with consideration of:
+
+    2.1. Time zone
+
+    2.2. Time of measurement (whether a value at a certain time stamp is for the indicated time or, e.g., the average of the preceding hour)
+
+    2.3. Avoidance of smoothing through interpolation (pass through variables without interpolation if possible)
+
+    2.4. Units
+
+    2.5. Calculate missing variables from available ones, e.g., horizontal direct radiation from diffuse and global radiation
+
+    2.6. Missing data.
+
+3. Transform the core-format data to your desired output format
+
+**Overview**
+
+![Weather Data Tool Diagram](docs/Overview_WeatherTool.drawio.png)
+
+**Known limitations:**
+
+- only hourly data
+
+**Chances:**
+
+- generic code base that allows for fast and easy extensions to both other import formats and output formats
+
+
+# DWD station IDs and DWD MOSMIX station IDs
+
+The station IDs for the DWD weather stations to pull historical data from are listed [here](https://www.dwd.de/DE/leistungen/klimadatendeutschland/statliste/statlex_rich.txt;jsessionid=68E14BA255FE50BDC4AD9FF4F835895F.live31092?view=nasPublication&nn=16102). Only german stations available. Aachen would be 15000.
+
+The DWD MOSMIX station IDs for the DWD forecast are listed [here](https://www.dwd.de/DE/leistungen/met_verfahren_mosmix/mosmix_stationskatalog.cfg?view=nasPublication&nn=16102) or located on a map [here](https://wettwarn.de/mosmix/mosmix.html). Worldwide station available. Aachen would be 10505.
+
+You may use the imported package [Wetterdienst](https://github.com/earthobservations/wetterdienst) to search for stations automatically, as described [here](https://bookdown.org/brry/rdwd/station-selection.html).
+
+
+# Sources of information for corresponding data formats
+
+## Input
+
+**Test Reference Years (TRY)**:
+
+[Handbuch](https://www.bbsr.bund.de/BBSR/DE/forschung/programme/zb/Auftragsforschung/5EnergieKlimaBauen/2013/testreferenzjahre/try-handbuch.pdf).
+
+TRY data can be downloaded from the DWD (sign up required but for free) [TRY data sets](https://www.bbsr.bund.de/BBSR/DE/forschung/programme/zb/Auftragsforschung/5EnergieKlimaBauen/2013/testreferenzjahre/01-start.html;jsessionid=5D9912D230EB887C1F831671303A8A0F.live21304?nn=2544408&pos=2).
+
+Additional information on the suitability of TRY data (last update: 2019):
+There are typical TRY datasets grouped by the year of publication:
+- 2004 datasets: (DWD; some errors in solar radiation; dataset should be avoided).
+- 2010 datasets: suitable for EnEV and GEG, not for solar thermal simulations.
+- 2015 datasets: not suitable for EnEV and GEG, but for solar thermal simulations
+- Overall: Reliable quantities in TRYs are only the air temperature
+and the global radiation!
+
+
+**DWD historical**: [open data website](https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/)
+
+**DWD forecasts (MOSMIX i.e. KML files)**: [open data website](https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/) go to content.log.bz2.
+
+**EnergyPlus (EPW)**:
+
+For format information, see the corresponding output format description.
+
+Online sources for EPW data: https://climate.onebuilding.org/default.html and https://www.ladybug.tools/epwmap/
+
+**ERC data:**
+
+This data is from the weather station of the Institute for Energy Efficient Buildings and Indoor Climate (RWTH). Access requires user credentials. Such credentials are pre-defined if you use the WebApp.
+
+## Output formats
+
+**EnergyPlus (EPW):**
+
+[3rd party format description](https://designbuilder.co.uk/cahelp/Content/EnergyPlusWeatherFileFormat.htm)
+
+**Modelica ReaderTMY3:**
+
+TMY3 reader from the [IBPSA](https://github.com/ibpsa/modelica-ibpsa) library used in the [AixLib](https://github.com/RWTH-EBC/AixLib) library. Model info at [OpenModelica](https://build.openmodelica.org/Documentation/Buildings.BoundaryConditions.WeatherData.ReaderTMY3.html).
+It claims to use mainly [TMY3 data](https://www.nrel.gov/docs/fy08osti/43156.pdf), though we found that the pressure is used in mbar instead of Pa. Further deviations possible.
+
+Additional information for AixLib users.
+
+Weather data usage in the low order model (LOM):
+
+Used in LOM:
+- TDryBul
+- RelHum
+- TBlaSky (calculated via HInfHor, TDryBul, TDewPoi, and OpaSkyCov)
+- HGloHor
+- HDifHor
+- HDirNor
+
+Not used in the LOM:
+- total sky cover
+- ceiling height
+- wind direction
+- wind speed
+- atmospheric pressure
+
+**Unconverted to x**
+
+exports the core data without conversion to .csv, .json, or .pickle files.
+
+# How to contribute to the development
+
+You are invited to contribute to the development of this weather tool.
+Issues can be reported using this site's Issues section.
+Furthermore, you are welcome to contribute via Pull Requests.
+More info on how to contribute can be found [here](docs/source/Contribution.md).
+
+<!-- This section is a work in progress and needs further editing
+
+# How to cite
+
+[ToDo]()
+DOI:  ToDo
+
+```
+@inproceedings{ToDo}
+```
+ --><section id="license">
 <h2>License<a class="headerlink" href="#license" title="Permalink to this heading">¶</a></h2>
-<p>The weather tool is released by RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficient Buildings and Indoor Climate and is available under a 3-clause BSD-license.
+<p>The weather tool is released by RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficient Buildings and Indoor Climate and is available under a 3-clause BSD license.
 See <a class="reference external" href="LICENSE">license</a>.</p>
 <div class="toctree-wrapper compound">
 <ul>
