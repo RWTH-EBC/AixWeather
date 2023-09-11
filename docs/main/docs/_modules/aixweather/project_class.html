@@ -202,8 +202,9 @@
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        fillna (bool): A flag indicating whether NaN values should be filled in the output formats.</span>
+<span class="sd">        abs_result_folder_path (str): Optionally define the absolute path to the desired export location.</span>
 <span class="sd">        start (pd.Timestamp or None): The start date of the project data (sometimes inferred by the inheriting class).</span>
-<span class="sd">        end (pd.Timestamp or None): The end date of the project data (can be None).</span>
+<span class="sd">        end (pd.Timestamp or None): The end date of the project data.</span>
 
 <span class="sd">    Properties:</span>
 <span class="sd">        imported_data (pd.DataFrame): The imported weather data.</span>
@@ -226,7 +227,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">fillna</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
             <span class="s2">&quot;fillna&quot;</span><span class="p">,</span> <span class="kc">True</span>
         <span class="p">)</span>  <span class="c1"># defines whether nan should be filled in the output formats</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">abs_result_folder_path</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;abs_result_folder_path&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="c1"># needed for parallelization of unit tests</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">abs_result_folder_path</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;abs_result_folder_path&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
         <span class="c1"># User-settable or placeholder depending on data origin</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;start&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>

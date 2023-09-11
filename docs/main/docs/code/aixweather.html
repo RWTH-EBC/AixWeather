@@ -510,8 +510,9 @@ from the ERC (Energy Research Center).</p>
 and implement specific methods for data import and transformation.</p>
 <dl class="simple">
 <dt>Attributes:</dt><dd><p>fillna (bool): A flag indicating whether NaN values should be filled in the output formats.
+abs_result_folder_path (str): Optionally define the absolute path to the desired export location.
 start (pd.Timestamp or None): The start date of the project data (sometimes inferred by the inheriting class).
-end (pd.Timestamp or None): The end date of the project data (can be None).</p>
+end (pd.Timestamp or None): The end date of the project data.</p>
 </dd>
 <dt>Properties:</dt><dd><p>imported_data (pd.DataFrame): The imported weather data.
 core_data (pd.DataFrame): The weather data in a standardized core format.
