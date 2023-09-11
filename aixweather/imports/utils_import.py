@@ -11,7 +11,7 @@ class MetaData:
 
     Attributes:
         station_name (str): The name of the weather station.
-        station_id (str): The ID (DWD or KML grid ID) of the weather station.
+        station_id (str): The ID (DWD or DWD MOSMIX ID) of the weather station.
         altitude (float): The altitude of the weather station in meters.
         latitude (float): The latitude of the weather station in degree.
         longitude (float): The longitude of the weather station in degree.
