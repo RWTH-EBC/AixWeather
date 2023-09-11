@@ -253,7 +253,9 @@ tests/utils_4_tests.py:1:0: R0801: Similar lines in 2 files
         cls.c.core_2_mos()
         cls.c.core_2_epw()
         cls.c.core_2_csv()
- (duplicate-code)
+
+    # ignore core_data and meta_data tests
+    def test_core_data(self): (duplicate-code)
 
 -----------------------------------
 Your code has been rated at 1.87/10
