@@ -43,7 +43,7 @@ to focus on their essential work in the field of building energy systems.
 
 \autoref{fig:AixWeatherStructure}
 
-![Structure of AixWeather.\label{fig:AixWeatherStructure}](docs/Overview_WeatherTool.drawio.png)
+![Structure of AixWeather.\label{fig:AixWeatherStructure}](Overview_WeatherTool.drawio.png)
 
 # Statement of need
 
