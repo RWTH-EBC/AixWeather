@@ -45,6 +45,7 @@ to focus on their essential work in the field of building energy systems.
 
 ![Structure of AixWeather.\label{fig:AixWeatherStructure}](Overview_WeatherTool.drawio.png)
 
+
 # Statement of need
 
 Building energy simulations are crucial for research building energy systems, 
