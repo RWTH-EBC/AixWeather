@@ -16,6 +16,15 @@
 # AixWeather
 **A weather data generation tool for building energy system simulations. Pull, Transform, Export.**
 
+It is being developed at RWTH Aachen University, E.ON Energy Research Center, 
+Institute for Energy Efficient Buildings and Indoor Climate (EBC) in Aachen, Germany.
+
+As the library is developed at RWTH Aachen University's EBC, the library's name AixWeather is derived from the 
+city's French name Aix-la-Chapelle, which the people of Aachen are very fond of and use a lot. 
+With the name AixWeather we follow this local tradition.
+
+If you have any questions regarding AixWeather, feel free to contact us at aixweather@eonerc.rwth-aachen.de.
+
 ## WebApp
 
 For fast access without setup, use the WebApp.
