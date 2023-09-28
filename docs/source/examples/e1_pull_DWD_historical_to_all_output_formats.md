@@ -46,7 +46,8 @@ from aixweather.data_quality_checks import plot_heatmap_missing_values_daily
 plot data quality
 
 ```python
-plot_heatmap_missing_values_daily(DWD_pull_project.core_data)
+plot = plot_heatmap_missing_values_daily(DWD_pull_project.core_data)
+plot.show()
 ```
 
 convert this core data to an output data format of your choice
