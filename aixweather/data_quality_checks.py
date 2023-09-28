@@ -24,7 +24,8 @@ def plot_heatmap_missing_values_daily(df):
 
     plt.title("Heatmap of Missing Values (white = missing)")
     plt.tight_layout()
-    plt.show()
+
+    return plt
 
 
 def print_df_info(df):
