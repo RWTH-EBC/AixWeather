@@ -68,7 +68,7 @@ pylintrc:1:0: W0012: Unknown option value for '--disable', expected a valid pyli
 pylintrc:1:0: W0012: Unknown option value for '--disable', expected a valid pylint message and got 'eq-without-hash' (unknown-option-value)
 ************* Module aixweather.data_quality_checks
 aixweather/data_quality_checks.py:10:0: C0116: Missing function or method docstring (missing-function-docstring)
-aixweather/data_quality_checks.py:30:0: C0116: Missing function or method docstring (missing-function-docstring)
+aixweather/data_quality_checks.py:31:0: C0116: Missing function or method docstring (missing-function-docstring)
 ************* Module aixweather.definitions
 aixweather/definitions.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 aixweather/definitions.py:46:0: C0116: Missing function or method docstring (missing-function-docstring)
@@ -99,7 +99,7 @@ aixweather/project_class.py:287:8: E1128: Assigning result of a function call, w
 aixweather/project_class.py:288:25: E1123: Unexpected keyword argument 'path' in function call (unexpected-keyword-arg)
 aixweather/project_class.py:4:0: C0411: standard import "from abc import ABC, abstractmethod" should be placed before "import pandas as pd" (wrong-import-order)
 ************* Module e1_pull_DWD_historical_to_all_output_formats
-examples/e1_pull_DWD_historical_to_all_output_formats.py:42:0: C0304: Final newline missing (missing-final-newline)
+examples/e1_pull_DWD_historical_to_all_output_formats.py:43:0: C0304: Final newline missing (missing-final-newline)
 examples/e1_pull_DWD_historical_to_all_output_formats.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 examples/e1_pull_DWD_historical_to_all_output_formats.py:1:0: C0103: Module name "e1_pull_DWD_historical_to_all_output_formats" doesn't conform to snake_case naming style (invalid-name)
 examples/e1_pull_DWD_historical_to_all_output_formats.py:3:0: C0116: Missing function or method docstring (missing-function-docstring)
@@ -253,8 +253,10 @@ tests/utils_4_tests.py:1:0: R0801: Similar lines in 2 files
         cls.c.core_2_mos()
         cls.c.core_2_epw()
         cls.c.core_2_csv()
- (duplicate-code)
+
+    # ignore core_data and meta_data tests
+    def test_core_data(self): (duplicate-code)
 
 -----------------------------------
-Your code has been rated at 1.87/10
+Your code has been rated at 1.89/10
 
