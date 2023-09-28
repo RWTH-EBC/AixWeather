@@ -1,0 +1,50 @@
+aixweather.transformation\_to\_core\_data package
+=================================================
+
+.. automodule:: aixweather.transformation_to_core_data
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+aixweather.transformation\_to\_core\_data.DWD module
+----------------------------------------------------
+
+.. automodule:: aixweather.transformation_to_core_data.DWD
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aixweather.transformation\_to\_core\_data.EPW module
+----------------------------------------------------
+
+.. automodule:: aixweather.transformation_to_core_data.EPW
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aixweather.transformation\_to\_core\_data.ERC module
+----------------------------------------------------
+
+.. automodule:: aixweather.transformation_to_core_data.ERC
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aixweather.transformation\_to\_core\_data.TRY module
+----------------------------------------------------
+
+.. automodule:: aixweather.transformation_to_core_data.TRY
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aixweather.transformation\_to\_core\_data.custom\_file module
+-------------------------------------------------------------
+
+.. automodule:: aixweather.transformation_to_core_data.custom_file
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>aixweather.transformation_to_core_data.DWD &mdash; aixweather 0.1.2 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/autodoc_pydantic.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> aixweather
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">aixweather</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html">Contribute as a user</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../version_his.html">Version History</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">aixweather</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>aixweather.transformation_to_core_data.DWD</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for aixweather.transformation_to_core_data.DWD</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">aixweather</span> <span class="kn">import</span> <span class="n">definitions</span>
+<span class="kn">from</span> <span class="nn">aixweather.imports.utils_import</span> <span class="kn">import</span> <span class="n">MetaData</span>
+<span class="kn">from</span> <span class="nn">aixweather.transformation_functions</span> <span class="kn">import</span> <span class="n">auxiliary</span><span class="p">,</span> <span class="n">time_observation_transformations</span><span class="p">,</span> <span class="n">variable_transformations</span><span class="p">,</span> \
+    <span class="n">pass_through_handling</span><span class="p">,</span> <span class="n">unit_conversions</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">format_DWD_historical information:</span>
+<span class="sd">see readme</span>
+
+<span class="sd">checked by Martin Rätz (08.08.2023)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">format_DWD_historical</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/</span>
+    <span class="c1"># 10_minutes/air_temperature/DESCRIPTION_obsgermany_climate_10min_air_temperature_en.pdf</span>
+    <span class="s2">&quot;RF_10&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;RelHum&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s2">&quot;foll2ind&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;percent&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;TT_10&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DryBulbTemp&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s2">&quot;foll2ind&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;TD_10&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DewPointTemp&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s2">&quot;foll2ind&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;PP_10&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AtmPressure&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s2">&quot;foll2ind&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;hPa&quot;</span><span class="p">},</span>
+    <span class="c1">#https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/solar/BESCHREIBUNG_obsgermany_climate_10min_solar_de.pdf</span>
+    <span class="s2">&quot;DS_10&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DiffHorRad&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s2">&quot;foll2ind&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;J/cm2&quot;</span><span class="p">,</span> <span class="s2">&quot;resample&quot;</span><span class="p">:</span> <span class="s2">&quot;sum&quot;</span><span class="p">},</span>
+    <span class="c1">#https://de.wikipedia.org/wiki/Globalstrahlung</span>
+    <span class="s2">&quot;GS_10&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;GlobHorRad&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s2">&quot;foll2ind&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;J/cm2&quot;</span><span class="p">,</span> <span class="s2">&quot;resample&quot;</span><span class="p">:</span> <span class="s2">&quot;sum&quot;</span><span class="p">},</span>
+    <span class="c1">#https://de.wikipedia.org/wiki/Atmosph%C3%A4rische_Gegenstrahlung</span>
+    <span class="s2">&quot;LS_10&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;HorInfra&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s2">&quot;foll2ind&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;J/cm2&quot;</span><span class="p">,</span> <span class="s2">&quot;resample&quot;</span><span class="p">:</span> <span class="s2">&quot;sum&quot;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:[</span><span class="mi">990</span><span class="p">,</span> <span class="o">-</span><span class="mi">999</span><span class="p">]},</span>
+    <span class="c1">#https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/wind/BESCHREIBUNG_obsgermany_climate_10min_wind_de.pdf</span>
+    <span class="s2">&quot;FF_10&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;WindSpeed&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s2">&quot;prec2ind&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;m/s&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;DD_10&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;WindDir&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s2">&quot;prec2ind&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;deg&quot;</span><span class="p">},</span>
+    <span class="c1"># https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/precipitation/BESCHREIBUNG_obsgermany_climate_10min_precipitation_de.pdf</span>
+    <span class="s2">&quot;RWS_10&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;LiquidPrecD&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s2">&quot;prec2ind&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;mm/h&quot;</span><span class="p">,</span> <span class="s2">&quot;resample&quot;</span><span class="p">:</span> <span class="s2">&quot;sum&quot;</span><span class="p">},</span>
+    <span class="c1"># https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/soil_temperature/BESCHREIBUNG_obsgermany_climate_hourly_soil_temperature_de.pdf</span>
+    <span class="s2">&quot;V_TE100&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Soil_Temperature_1m&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;V_TE050&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Soil_Temperature_50cm&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;V_TE020&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Soil_Temperature_20cm&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;V_TE010&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Soil_Temperature_10cm&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;V_TE005&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Soil_Temperature_5cm&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
+    <span class="c1"># https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/cloud_type/BESCHREIBUNG_obsgermany_climate_hourly_cloud_type_de.pdf</span>
+    <span class="s2">&quot; V_N&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;TotalSkyCover&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;1eighth&quot;</span><span class="p">},</span>
+    <span class="c1"># Hourly measurements currently unused due to doubling with 10</span>
+    <span class="c1"># minute data and conflicting time shifting and units</span>
+    <span class="c1"># &quot;RF_TU&quot;: &quot;RelHum&quot;,</span>
+    <span class="c1"># &quot;TT_TU&quot;: &quot;DryBulbTemp&quot;,</span>
+    <span class="c1"># &quot;  P0&quot;: &quot;AtmPressure&quot;,</span>
+    <span class="c1"># &quot;   P&quot;: &quot;Pressure_Sea_Level&quot;,</span>
+    <span class="c1"># &quot;   F&quot;: &quot;WindSpeed&quot;,</span>
+    <span class="c1"># &quot;   D&quot;: &quot;WindDir&quot;,</span>
+    <span class="c1"># &quot;  R1&quot;: &quot;LiquidPrecD&quot;,</span>
+<span class="p">}</span>
+<span class="c1"># get variables that should be resampled by sum instead of mean</span>
+<span class="n">variables_to_sum_DWD_historical</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">key</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">format_DWD_historical</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="s2">&quot;resample&quot;</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="p">]</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">format_DWD_forecast information:</span>
+
+<span class="sd">Variable definitions: https://opendata.dwd.de/weather/lib/MetElementDefinition.xml or </span>
+<span class="sd">https://wetterdienst.readthedocs.io/en/latest/data/coverage/dwd/mosmix/hourly.html (in origin unit)</span>
+
+<span class="sd">checked by Martin Rätz 18.08.2023</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">format_DWD_forecast</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># &quot;cloud_cover_above_7_km&quot;: None,</span>
+    <span class="c1"># &quot;cloud_cover_below_1000_ft&quot;: None,</span>
+    <span class="c1"># &quot;cloud_cover_below_500_ft&quot;: None,</span>
+    <span class="c1"># &quot;cloud_cover_between_2_to_7_km&quot;: None,</span>
+    <span class="s2">&quot;cloud_cover_effective&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;OpaqueSkyCover&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;%&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;cloud_cover_total&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;TotalSkyCover&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;%&quot;</span><span class="p">},</span>
+    <span class="c1"># &quot;precipitation_height_significant_weather_last_1h&quot;: None,</span>
+    <span class="c1"># &quot;precipitation_height_significant_weather_last_3h&quot;: None,</span>
+    <span class="s2">&quot;pressure_air_site_reduced&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AtmPressure&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Pa&quot;</span><span class="p">},</span>
+    <span class="c1"># &quot;probability_fog_last_12h&quot;: None,</span>
+    <span class="c1"># &quot;probability_fog_last_1h&quot;: None,</span>
+    <span class="c1"># &quot;probability_fog_last_6h&quot;: None,</span>
+    <span class="c1"># &quot;probability_precipitation_height_gt_0_0_mm_last_12h&quot;: None,</span>
+    <span class="c1"># &quot;probability_precipitation_height_gt_0_2_mm_last_12h&quot;: None,</span>
+    <span class="c1"># &quot;probability_precipitation_height_gt_0_2_mm_last_24h&quot;: None,</span>
+    <span class="c1"># &quot;probability_precipitation_height_gt_0_2_mm_last_6h&quot;: None,</span>
+    <span class="c1"># &quot;probability_precipitation_height_gt_1_0_mm_last_12h&quot;: None,</span>
+    <span class="c1"># &quot;probability_precipitation_height_gt_5_0_mm_last_12h&quot;: None,</span>
+    <span class="c1"># &quot;probability_precipitation_height_gt_5_0_mm_last_24h&quot;: None,</span>
+    <span class="c1"># &quot;probability_precipitation_height_gt_5_0_mm_last_6h&quot;: None,</span>
+    <span class="c1"># &quot;probability_wind_gust_ge_25_kn_last_12h&quot;: None,</span>
+    <span class="c1"># &quot;probability_wind_gust_ge_40_kn_last_12h&quot;: None,</span>
+    <span class="c1"># &quot;probability_wind_gust_ge_55_kn_last_12h&quot;: None,</span>
+    <span class="c1"># is actually balance during the last 3 hours:</span>
+    <span class="s2">&quot;radiation_global&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;GlobHorRad&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s2">&quot;prec2ind&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;kJ/m2&quot;</span><span class="p">},</span>
+    <span class="c1"># &quot;sunshine_duration&quot;: None,</span>
+    <span class="c1"># &quot;temperature_air_max_200&quot;: None,</span>
+    <span class="c1"># &quot;temperature_air_mean_005&quot;: None,</span>
+    <span class="c1"># no information if temperature is drybulb or something else:</span>
+    <span class="s2">&quot;temperature_air_mean_200&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DryBulbTemp&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;K&quot;</span><span class="p">},</span>
+    <span class="c1"># &quot;temperature_air_min_200&quot;: None,</span>
+    <span class="s2">&quot;temperature_dew_point_mean_200&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DewPointTemp&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;K&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;visibility_range&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Visibility&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;m&quot;</span><span class="p">},</span>
+    <span class="c1"># &quot;water_equivalent_snow_depth_new_last_1h&quot;: None,</span>
+    <span class="c1"># &quot;water_equivalent_snow_depth_new_last_3h&quot;: None,</span>
+    <span class="c1"># &quot;weather_last_6h&quot;: None,</span>
+    <span class="c1"># &quot;weather_significant&quot;: None,</span>
+    <span class="s2">&quot;wind_direction&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;WindDir&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;deg&quot;</span><span class="p">},</span>
+    <span class="c1"># &quot;wind_gust_max_last_12h&quot;: None,</span>
+    <span class="c1"># &quot;wind_gust_max_last_1h&quot;: None,</span>
+    <span class="c1"># &quot;wind_gust_max_last_3h&quot;: None,</span>
+    <span class="s2">&quot;wind_speed&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;WindSpeed&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;m/s&quot;</span><span class="p">}</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="DWD_historical_to_core_data"><a class="viewcode-back" href="../../../code/aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.DWD.DWD_historical_to_core_data">[docs]</a><span class="k">def</span> <span class="nf">DWD_historical_to_core_data</span><span class="p">(</span>
+    <span class="n">df_import</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">stop</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transform imported weather data from DWD historical format into core data format.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df_import (pd.DataFrame): The DataFrame containing imported weather data from DWD.</span>
+<span class="sd">        start (datetime): The timestamp for the start of the desired data range (will be extended for interpolation).</span>
+<span class="sd">        stop (datetime): The timestamp for the end of the desired data range (will be extended for interpolation).</span>
+<span class="sd">        meta (MetaData): Metadata associated with the data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: The transformed DataFrame in the core data format.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">### evaluate correctness of format</span>
+    <span class="n">auxiliary</span><span class="o">.</span><span class="n">evaluate_transformations</span><span class="p">(</span>
+        <span class="n">core_format</span><span class="o">=</span><span class="n">definitions</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">,</span> <span class="n">other_format</span><span class="o">=</span><span class="n">format_DWD_historical</span>
+    <span class="p">)</span>
+
+    <span class="c1">### format raw data for further operations</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_import</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="c1"># to datetime; account for different time-formats</span>
+    <span class="n">date_format</span> <span class="o">=</span> <span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">%H%M&quot;</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">date_format</span><span class="p">)</span>
+
+    <span class="c1"># reduce time period to extended period for working interpolation and for faster operation</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">time_observation_transformations</span><span class="o">.</span><span class="n">truncate_data_from_start_to_stop</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span> <span class="n">start</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">stop</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># select only numeric columns</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;number&quot;</span><span class="p">])</span>
+
+    <span class="c1"># delete dummy values from DWD</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">replace_dummy_with_nan</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">format_DWD_historical</span><span class="p">)</span>
+
+    <span class="c1"># resample some via sum some via mean -&gt; results in average of following hour</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c1"># fills nan only if all nan in interval</span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables_to_sum_DWD_historical</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">df_sum</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="p">)</span>  <span class="c1"># fills nan only if 1 value in interval</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_sum</span>
+
+    <span class="c1"># rename available variables to core data format</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">rename_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">format_DWD_historical</span><span class="p">)</span>
+
+    <span class="c1">### convert timezone to UTC</span>
+    <span class="c1"># the data is for most stations and datasets, as well as for more recent</span>
+    <span class="c1"># data (several years) in UTC. For more sophisticated handling pull meta</span>
+    <span class="c1"># and respect time zone or implement dwd_pulling repo from github</span>
+
+    <span class="c1">### shift and interpolate data forward 30mins or backward -30mins</span>
+    <span class="n">df_no_shift</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">time_observation_transformations</span><span class="o">.</span><span class="n">shift_time_by_dict</span><span class="p">(</span><span class="n">format_DWD_historical</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">transform_DWD_historical</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+        <span class="c1"># drop unnecessary variables</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">force_data_variable_convention</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">definitions</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">)</span>
+
+        <span class="c1">### convert units</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;AtmPressure&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">hPa_to_Pa</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;AtmPressure&quot;</span><span class="p">])</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;DiffHorRad&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">Jcm2_to_Whm2</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;DiffHorRad&quot;</span><span class="p">])</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;GlobHorRad&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">Jcm2_to_Whm2</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;GlobHorRad&quot;</span><span class="p">])</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;HorInfra&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">Jcm2_to_Whm2</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;HorInfra&quot;</span><span class="p">])</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;TotalSkyCover&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">eigth_to_tenth</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;TotalSkyCover&quot;</span><span class="p">])</span>
+
+        <span class="c1">### impute missing variables from other available ones</span>
+        <span class="n">df</span><span class="p">,</span> <span class="n">calc_overview</span> <span class="o">=</span> <span class="n">variable_transformations</span><span class="o">.</span><span class="n">variable_transform_all</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">meta</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">calc_overview</span>
+
+    <span class="n">df</span><span class="p">,</span> <span class="n">meta</span><span class="o">.</span><span class="n">executed_transformations</span> <span class="o">=</span> <span class="n">transform_DWD_historical</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+    <span class="c1">### add unshifted data for possible later direct use (pass-through),</span>
+    <span class="c1">### to avoid back and forth interpolating</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pass_through_handling</span><span class="o">.</span><span class="n">create_pass_through_variables</span><span class="p">(</span>
+        <span class="n">df_shifted</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+        <span class="n">df_no_shift</span><span class="o">=</span><span class="n">df_no_shift</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="n">format_DWD_historical</span><span class="p">,</span>
+        <span class="n">transform_func</span><span class="o">=</span><span class="n">transform_DWD_historical</span><span class="p">,</span>
+        <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+<div class="viewcode-block" id="DWD_forecast_2_core_data"><a class="viewcode-back" href="../../../code/aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.DWD.DWD_forecast_2_core_data">[docs]</a><span class="k">def</span> <span class="nf">DWD_forecast_2_core_data</span><span class="p">(</span><span class="n">df_import</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transform imported weather forecast data from DWD into core data format.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df_import (pd.DataFrame): The DataFrame containing imported weather forecast data from DWD.</span>
+<span class="sd">        meta (MetaData): Metadata associated with the data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: The transformed DataFrame in the core data format.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">### evaluate correctness of format</span>
+    <span class="n">auxiliary</span><span class="o">.</span><span class="n">evaluate_transformations</span><span class="p">(</span>
+        <span class="n">core_format</span><span class="o">=</span><span class="n">definitions</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">,</span> <span class="n">other_format</span><span class="o">=</span><span class="n">format_DWD_forecast</span>
+    <span class="p">)</span>
+
+    <span class="c1">### format raw data for further operations</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_import</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># delete timezone information</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+    <span class="c1"># rename available variables to core data format</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">rename_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">format_DWD_forecast</span><span class="p">)</span>
+
+    <span class="c1">### convert timezone to UTC</span>
+    <span class="c1"># the data pulled by Wetterdienst is already UTC</span>
+
+    <span class="c1">### shift and interpolate data forward 30mins or backward -30mins</span>
+    <span class="n">df_no_shift</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">time_observation_transformations</span><span class="o">.</span><span class="n">shift_time_by_dict</span><span class="p">(</span><span class="n">format_DWD_forecast</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">transform_DWD_forecast</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+        <span class="c1"># drop unnecessary variables</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">force_data_variable_convention</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">definitions</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">)</span>
+
+        <span class="c1">### convert units</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;OpaqueSkyCover&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">percent_to_tenth</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;OpaqueSkyCover&quot;</span><span class="p">])</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;TotalSkyCover&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">percent_to_tenth</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;TotalSkyCover&quot;</span><span class="p">])</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;GlobHorRad&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">kJm2_to_Whm2</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;GlobHorRad&quot;</span><span class="p">])</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;DryBulbTemp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">kelvin_to_celcius</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;DryBulbTemp&quot;</span><span class="p">])</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;DewPointTemp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">kelvin_to_celcius</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;DewPointTemp&quot;</span><span class="p">])</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Visibility&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">divide_by_1000</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Visibility&quot;</span><span class="p">])</span>
+
+        <span class="c1">### impute missing variables from other available ones</span>
+        <span class="n">df</span><span class="p">,</span> <span class="n">calc_overview</span> <span class="o">=</span> <span class="n">variable_transformations</span><span class="o">.</span><span class="n">variable_transform_all</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">meta</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">calc_overview</span>
+
+    <span class="n">df</span><span class="p">,</span> <span class="n">meta</span><span class="o">.</span><span class="n">executed_transformations</span> <span class="o">=</span> <span class="n">transform_DWD_forecast</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+    <span class="c1">### add unshifted data for possible later direct use (pass-through),</span>
+    <span class="c1">### to avoid back and forth interpolating</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pass_through_handling</span><span class="o">.</span><span class="n">create_pass_through_variables</span><span class="p">(</span>
+        <span class="n">df_shifted</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+        <span class="n">df_no_shift</span><span class="o">=</span><span class="n">df_no_shift</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="n">format_DWD_forecast</span><span class="p">,</span>
+        <span class="n">transform_func</span><span class="o">=</span><span class="n">transform_DWD_forecast</span><span class="p">,</span>
+        <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, EON EBC.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
