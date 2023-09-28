@@ -8,7 +8,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Contribute as a user &mdash; aixweather 0.1.1 documentation</title>
+  <title>Contribute as a user &mdash; aixweather 0.1.2 documentation</title>
   
 
   
@@ -174,23 +174,26 @@
   <section id="contribute-as-a-user">
 <h1>Contribute as a user<a class="headerlink" href="#contribute-as-a-user" title="Permalink to this heading">¶</a></h1>
 <p>The documentation, examples and tutorials should be understandable and the code bug-free.
-As all user’s have different backgrounds, you may not understand everything or encounter bugs.
+All users have different backgrounds, so you may not understand everything or encounter bugs.
 In that case, PLEASE raise an issue <a class="reference external" href="https://github.com/RWTH-EBC/ebcpy/issues/new">here</a>.</p>
 </section>
 <section id="contribute-as-a-developer">
 <h1>Contribute as a developer<a class="headerlink" href="#contribute-as-a-developer" title="Permalink to this heading">¶</a></h1>
 <p>If you instead want to contribute new features or fix bugs yourself, we are more than happy.</p>
 <p>Please also raise an issue and create a new branch labeled <code class="docutils literal notranslate"><span class="pre">issueNR_issueName</span></code>.</p>
-<p>Once you’re feature is ready, create a pull request and check if the pipeline succeeds.
-Assign a reviewer before merging. Once review is finished, you can merge.</p>
+<p>Once your feature is ready, create a pull request and check if the pipeline succeeds.
+Assign a reviewer before merging. Once the review is finished, you can merge.</p>
+<p>Please note that the main branch is used in the WebApp and should always be synced with PyPi.
+Pull requests should merge into the development first.
+Every merge of the development to the main branch must result in a PyPi release.</p>
 <p><strong>Before</strong> implementing or modifying modules, classes or functions, please read the following page.</p>
 <section id="styleguide">
 <h2>Styleguide<a class="headerlink" href="#styleguide" title="Permalink to this heading">¶</a></h2>
-<p>We use PEP8 as a styleguide. Some IDEs (like PyCharm) automatically show you code that is not in PEP8. If you don’t have such an IDE, please read <a class="reference external" href="https://pep8.org/">this page</a> to get a better understanding of it.</p>
+<p>We use PEP8 as a style guide. Some IDEs (like PyCharm) automatically show you code that is not in PEP8. If you don’t have such an IDE, please read <a class="reference external" href="https://pep8.org/">this page</a> to get a better understanding of it.</p>
 </section>
 <section id="documentation">
 <h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading">¶</a></h2>
-<p>All created or modified function should be documented properly. Try to follow the structure already present. If possible, write a little doctest example into the docstring to make clear to user’s what the desired output of your function is. All non self-explanatory lines of code should include a comment. We use the pycharm-style for docstrings, e.g.</p>
+<p>All created or modified functions should be documented properly. Try to follow the structure already present. If possible, write a little doctest example into the docstring to make clear to users what the desired output of your function is. All non-self-explanatory lines of code should include a comment. We use the pycharm-style for docstrings, e.g.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">dummy</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Describe what the function does in here.</span>
@@ -206,13 +209,13 @@ Assign a reviewer before merging. Once review is finished, you can merge.</p>
 </section>
 <section id="unit-tests">
 <h2>Unit-Tests<a class="headerlink" href="#unit-tests" title="Permalink to this heading">¶</a></h2>
-<p>Espacially when creating new functions or classes, you have to add a unit-test function.
+<p>Especially when creating new functions or classes, you have to add a unit-test function.
 Open the <code class="docutils literal notranslate"><span class="pre">test_module.py</span></code> file in the <code class="docutils literal notranslate"><span class="pre">\tests</span></code>-directory and add a function to the class <code class="docutils literal notranslate"><span class="pre">TestModule</span></code>with a name like <code class="docutils literal notranslate"><span class="pre">test_my_new_function</span></code>. If you create a new module, you have to create a new <code class="docutils literal notranslate"><span class="pre">test_my_new_module.py</span></code> file and follow the existing structure of the
 other test-files.</p>
 <p>If you are not familiar with unit-tests, here is a quick summary:</p>
 <ul class="simple">
 <li><p>Test as many things as possible. Even seemingly silly tests like correct input-format help prevent future problems for new users</p></li>
-<li><p>use the <code class="docutils literal notranslate"><span class="pre">self.assertSOMETHING</span></code> functions provided by <code class="docutils literal notranslate"><span class="pre">unittest</span></code>. This way a test failure is presented correctly An error inside your test function will not be handeled as a failure but an error.</p></li>
+<li><p>use the <code class="docutils literal notranslate"><span class="pre">self.assertSOMETHING</span></code> functions provided by <code class="docutils literal notranslate"><span class="pre">unittest</span></code>. This way, a test failure is presented correctly An error inside your test function will not be handeled as a failure but an error.</p></li>
 <li><p>If the success of your test depends on the used device, you can use decorators like <code class="docutils literal notranslate"><span class="pre">skip()</span></code>, <code class="docutils literal notranslate"><span class="pre">skipif(numpy.__version__&lt;(1,</span> <span class="pre">0),</span> <span class="pre">&quot;not</span> <span class="pre">supported</span> <span class="pre">with</span> <span class="pre">your</span> <span class="pre">numpy</span> <span class="pre">version&quot;)</span></code>, etc.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">setUp()</span></code> and <code class="docutils literal notranslate"><span class="pre">tearDown()</span></code> are called before and after each test. Use this functions to define parameters used in every test, or to close applications like Dymola once a test is completed.</p></li>
 <li><p>See the <a class="reference external" href="https://docs.python.org/3/library/unittest.html#organizing-tests">unittest-documentation</a> for further information</p></li>
