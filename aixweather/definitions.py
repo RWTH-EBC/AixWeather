@@ -1,3 +1,7 @@
+"""
+This module includes variables or functions which define central variables for the whole project.
+"""
+
 import os
 
 # format of the core_data
@@ -44,6 +48,9 @@ ROOT_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), ".."))
 local_folder_temp = os.path.join(ROOT_DIR, "temp_local")
 
 def result_folder_path() -> str:
+    """
+    Creates the path to the resultsfolder.
+    """
     folder_path = os.path.join(f"{ROOT_DIR}", "results")
     return folder_path
 

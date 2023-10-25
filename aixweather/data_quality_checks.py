@@ -8,6 +8,15 @@ import seaborn as sns
 
 
 def plot_heatmap_missing_values_daily(df):
+    """
+    Generate a heatmap to visualize daily missing values in a DataFrame.
+
+    Args:
+        df (pd.DataFrame): The DataFrame to be analyzed for missing values.
+
+    Returns:
+        plt: A Matplotlib figure representing the heatmap of missing values.
+    """
     # Group by day and check for any missing values for each day
     missing_data = df.resample("D").apply(lambda x: x.isnull().any())
 
@@ -29,5 +38,8 @@ def plot_heatmap_missing_values_daily(df):
 
 
 def print_df_info(df):
+    """
+    prints df info for intermediate checks or debugging
+    """
     info = df.info()
     print(info)

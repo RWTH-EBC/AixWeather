@@ -1,7 +1,8 @@
-import datetime as dt
-import pandas as pd
+"""This module contains the central project classes which are used by the user."""
 
 from abc import ABC, abstractmethod
+import datetime as dt
+import pandas as pd
 
 from aixweather.imports.DWD import (
     import_DWD_historical,
@@ -38,20 +39,27 @@ class ProjectClassGeneral(ABC):
     and implement specific methods for data import and transformation.
 
     Attributes:
-        fillna (bool): A flag indicating whether NaN values should be filled in the output formats.
-        abs_result_folder_path (str): Optionally define the absolute path to the desired export location.
-        start (pd.Timestamp or None): The start date of the project data (sometimes inferred by the inheriting class).
+        fillna (bool): A flag indicating whether NaN values should be filled
+            in the output formats.
+        abs_result_folder_path (str): Optionally define the absolute path to
+            the desired export location.
+        start (pd.Timestamp or None): The start date of the project data
+            (sometimes inferred by the inheriting class).
         end (pd.Timestamp or None): The end date of the project data.
 
     Properties:
         imported_data (pd.DataFrame): The imported weather data.
-        core_data (pd.DataFrame): The weather data in a standardized core format.
-        output_df_<outputformat> (pd.DataFrame): The output data frame (name depends on output format).
+        core_data (pd.DataFrame): The weather data in a standardized core
+            format.
+        output_df_<outputformat> (pd.DataFrame): The output data frame
+            (name depends on output format).
         meta_data: Metadata associated with weather data origin.
 
     Methods:
-        import_data(): An abstract method to import data from the specific source.
-        data_2_core_data(): An abstract method to transform imported data into core data format.
+        import_data(): An abstract method to import data from the specific
+            source.
+        data_2_core_data(): An abstract method to transform imported data into
+            core data format.
         core_2_mos(): Convert core data to MOS format.
         core_2_epw(): Convert core data to EPW format.
         core_2_csv(): Convert core data to CSV format.
@@ -86,9 +94,7 @@ class ProjectClassGeneral(ABC):
             for column in value.columns:
                 # only real pd.NA values
                 # force strings to be NaN
-                value[column] = pd.to_numeric(
-                    value[column], errors="coerce"
-                )
+                value[column] = pd.to_numeric(value[column], errors="coerce")
                 # round floats for unit test compatibility across different machines
                 digits_2_round = 5
                 if value[column].dtype == "float":
@@ -107,22 +113,38 @@ class ProjectClassGeneral(ABC):
     # core_data_format_2_output_file
     def core_2_mos(self):
         self.output_df_mos = to_mos(
-            self.core_data, self.meta_data, self.start, self.end, self.fillna, self.abs_result_folder_path
+            self.core_data,
+            self.meta_data,
+            self.start,
+            self.end,
+            self.fillna,
+            self.abs_result_folder_path,
         )
 
     def core_2_epw(self):
         self.output_df_epw = to_epw(
-            self.core_data, self.meta_data, self.start, self.end, self.fillna, self.abs_result_folder_path
+            self.core_data,
+            self.meta_data,
+            self.start,
+            self.end,
+            self.fillna,
+            self.abs_result_folder_path,
         )
 
     def core_2_csv(self):
-        self.output_df_csv = to_csv(self.core_data, self.meta_data, self.abs_result_folder_path)
+        self.output_df_csv = to_csv(
+            self.core_data, self.meta_data, self.abs_result_folder_path
+        )
 
     def core_2_json(self):
-        self.output_df_json = to_json(self.core_data, self.meta_data, self.abs_result_folder_path)
+        self.output_df_json = to_json(
+            self.core_data, self.meta_data, self.abs_result_folder_path
+        )
 
     def core_2_pickle(self):
-        self.output_df_pickle = to_pickle(self.core_data, self.meta_data, self.abs_result_folder_path)
+        self.output_df_pickle = to_pickle(
+            self.core_data, self.meta_data, self.abs_result_folder_path
+        )
 
 
 class ProjectClassDWDHistorical(ProjectClassGeneral):
