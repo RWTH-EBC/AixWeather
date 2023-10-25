@@ -67,17 +67,10 @@ pylintrc:1:0: W0012: Unknown option value for '--disable', expected a valid pyli
 pylintrc:1:0: W0012: Unknown option value for '--disable', expected a valid pylint message and got 'locally-enabled' (unknown-option-value)
 pylintrc:1:0: W0012: Unknown option value for '--disable', expected a valid pylint message and got 'eq-without-hash' (unknown-option-value)
 ************* Module aixweather.project_class
-aixweather/project_class.py:34:0: R0902: Too many instance attributes (14/7) (too-many-instance-attributes)
+aixweather/project_class.py:34:0: R0902: Too many instance attributes (9/7) (too-many-instance-attributes)
 aixweather/project_class.py:88:4: C0116: Missing function or method docstring (missing-function-docstring)
 aixweather/project_class.py:109:8: W0107: Unnecessary pass statement (unnecessary-pass)
 aixweather/project_class.py:114:8: W0107: Unnecessary pass statement (unnecessary-pass)
-aixweather/project_class.py:119:8: W0201: Attribute 'output_df_mos' defined outside __init__ (attribute-defined-outside-init)
-aixweather/project_class.py:130:8: W0201: Attribute 'output_df_epw' defined outside __init__ (attribute-defined-outside-init)
-aixweather/project_class.py:141:8: W0201: Attribute 'output_df_csv' defined outside __init__ (attribute-defined-outside-init)
-aixweather/project_class.py:147:8: W0201: Attribute 'output_df_json' defined outside __init__ (attribute-defined-outside-init)
-aixweather/project_class.py:153:8: W0201: Attribute 'output_df_pickle' defined outside __init__ (attribute-defined-outside-init)
-aixweather/project_class.py:329:8: E1128: Assigning result of a function call, where the function returns None (assignment-from-none)
-aixweather/project_class.py:330:25: E1123: Unexpected keyword argument 'path' in function call (unexpected-keyword-arg)
 ************* Module examples.e1_pull_DWD_historical_to_all_output_formats
 examples/e1_pull_DWD_historical_to_all_output_formats.py:1:0: C0103: Module name "e1_pull_DWD_historical_to_all_output_formats" doesn't conform to snake_case naming style (invalid-name)
 examples/e1_pull_DWD_historical_to_all_output_formats.py:6:0: C0103: Function name "e1_pull_DWD_historical_to_all_output_formats" doesn't conform to snake_case naming style (invalid-name)
@@ -232,5 +225,5 @@ tests/utils_4_tests.py:1:0: R0801: Similar lines in 2 files
     def test_core_data(self): (duplicate-code)
 
 -----------------------------------
-Your code has been rated at 2.45/10
+Your code has been rated at 2.80/10
 

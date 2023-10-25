@@ -745,7 +745,7 @@
             "column": 0,
             "path": "aixweather/project_class.py",
             "symbol": "too-many-instance-attributes",
-            "message": "Too many instance attributes (14/7)",
+            "message": "Too many instance attributes (9/7)",
             "message-id": "R0902"
         },
         {
@@ -780,83 +780,6 @@
             "symbol": "unnecessary-pass",
             "message": "Unnecessary pass statement",
             "message-id": "W0107"
-        },
-        {
-            "type": "warning",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_mos",
-            "line": 119,
-            "column": 8,
-            "path": "aixweather/project_class.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'output_df_mos' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_epw",
-            "line": 130,
-            "column": 8,
-            "path": "aixweather/project_class.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'output_df_epw' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_csv",
-            "line": 141,
-            "column": 8,
-            "path": "aixweather/project_class.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'output_df_csv' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_json",
-            "line": 147,
-            "column": 8,
-            "path": "aixweather/project_class.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'output_df_json' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_pickle",
-            "line": 153,
-            "column": 8,
-            "path": "aixweather/project_class.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'output_df_pickle' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "error",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassCustom.import_data",
-            "line": 329,
-            "column": 8,
-            "path": "aixweather/project_class.py",
-            "symbol": "assignment-from-none",
-            "message": "Assigning result of a function call, where the function returns None",
-            "message-id": "E1128"
-        },
-        {
-            "type": "error",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassCustom.import_data",
-            "line": 330,
-            "column": 25,
-            "path": "aixweather/project_class.py",
-            "symbol": "unexpected-keyword-arg",
-            "message": "Unexpected keyword argument 'path' in function call",
-            "message-id": "E1123"
         },
         {
             "type": "convention",
@@ -2269,12 +2192,12 @@
             },
             "aixweather.project_class": {
                 "convention": 1,
-                "error": 2,
+                "error": 0,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 1,
                 "statement": 114,
-                "warning": 7
+                "warning": 2
             },
             "examples.e1_pull_DWD_historical_to_all_output_formats": {
                 "convention": 5,
@@ -2353,9 +2276,6 @@
             "too-many-instance-attributes": 1,
             "missing-function-docstring": 24,
             "unnecessary-pass": 2,
-            "attribute-defined-outside-init": 12,
-            "assignment-from-none": 1,
-            "unexpected-keyword-arg": 1,
             "invalid-name": 16,
             "import-outside-toplevel": 2,
             "missing-class-docstring": 14,
@@ -2367,6 +2287,7 @@
             "ungrouped-imports": 2,
             "no-self-argument": 1,
             "no-member": 39,
+            "attribute-defined-outside-init": 7,
             "too-few-public-methods": 1,
             "duplicate-code": 2
         },
@@ -2386,8 +2307,8 @@
             ],
             "pandas": [
                 "aixweather.project_class",
-                "utils_4_tests",
                 "test_DWD_forecast",
+                "utils_4_tests",
                 "test_output_functions"
             ],
             "aixweather.imports.DWD": [
@@ -2430,44 +2351,44 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
-                "test_EPW",
                 "examples.e1_pull_DWD_historical_to_all_output_formats",
-                "test_ERC",
-                "test_DWD_historical",
-                "test_output_functions",
                 "test_DWD_forecast",
-                "test_TRY"
+                "test_TRY",
+                "test_ERC",
+                "test_output_functions",
+                "test_EPW",
+                "test_DWD_historical"
             ],
             "aixweather.data_quality_checks": [
                 "examples.e1_pull_DWD_historical_to_all_output_formats"
             ],
             "parameterized.parameterized": [
-                "test_DWD_forecast",
-                "test_DWD_historical"
+                "test_DWD_historical",
+                "test_DWD_forecast"
             ],
             "aixweather.definitions": [
-                "test_EPW",
-                "test_ERC",
-                "test_DWD_historical",
-                "test_output_functions",
                 "utils_4_tests",
                 "test_DWD_forecast",
-                "test_TRY"
+                "test_TRY",
+                "test_ERC",
+                "test_output_functions",
+                "test_EPW",
+                "test_DWD_historical"
             ],
             "aixweather.imports.utils_import": [
-                "test_output_functions",
+                "test_DWD_forecast",
                 "utils_4_tests",
-                "test_DWD_forecast"
+                "test_output_functions"
             ],
             "utils_4_tests": [
                 "test_DWD_forecast"
             ],
             "tests": [
-                "test_EPW",
-                "test_ERC",
-                "test_DWD_historical",
+                "test_TRY",
                 "test_output_functions",
-                "test_TRY"
+                "test_ERC",
+                "test_EPW",
+                "test_DWD_historical"
             ]
         },
         "duplicated_lines": {
@@ -2487,12 +2408,12 @@
             "module": 0
         },
         "convention": 60,
-        "error": 47,
+        "error": 45,
         "fatal": 0,
         "info": 0,
         "refactor": 4,
         "statement": 428,
-        "warning": 24,
+        "warning": 19,
         "global_note": 0,
         "nb_duplicated_lines": 13,
         "percent_duplicated_lines": 1.1274934952298352
@@ -2543,12 +2464,12 @@
             },
             "aixweather.project_class": {
                 "convention": 1,
-                "error": 2,
+                "error": 0,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 1,
                 "statement": 114,
-                "warning": 7
+                "warning": 2
             },
             "examples.e1_pull_DWD_historical_to_all_output_formats": {
                 "convention": 5,
@@ -2627,9 +2548,6 @@
             "too-many-instance-attributes": 1,
             "missing-function-docstring": 24,
             "unnecessary-pass": 2,
-            "attribute-defined-outside-init": 12,
-            "assignment-from-none": 1,
-            "unexpected-keyword-arg": 1,
             "invalid-name": 16,
             "import-outside-toplevel": 2,
             "missing-class-docstring": 14,
@@ -2641,6 +2559,7 @@
             "ungrouped-imports": 2,
             "no-self-argument": 1,
             "no-member": 39,
+            "attribute-defined-outside-init": 7,
             "too-few-public-methods": 1,
             "duplicate-code": 2
         },
@@ -2659,10 +2578,10 @@
                 "aixweather.data_quality_checks"
             ],
             "pandas": [
-                "test_output_functions",
-                "utils_4_tests",
+                "aixweather.project_class",
                 "test_DWD_forecast",
-                "aixweather.project_class"
+                "utils_4_tests",
+                "test_output_functions"
             ],
             "aixweather.imports.DWD": [
                 "aixweather.project_class"
@@ -2704,44 +2623,44 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
-                "test_EPW",
                 "examples.e1_pull_DWD_historical_to_all_output_formats",
-                "test_ERC",
-                "test_DWD_historical",
-                "test_output_functions",
                 "test_DWD_forecast",
-                "test_TRY"
+                "test_TRY",
+                "test_output_functions",
+                "test_ERC",
+                "test_EPW",
+                "test_DWD_historical"
             ],
             "aixweather.data_quality_checks": [
                 "examples.e1_pull_DWD_historical_to_all_output_formats"
             ],
             "parameterized.parameterized": [
-                "test_DWD_forecast",
-                "test_DWD_historical"
+                "test_DWD_historical",
+                "test_DWD_forecast"
             ],
             "aixweather.definitions": [
-                "test_EPW",
-                "test_ERC",
-                "test_DWD_historical",
-                "test_output_functions",
                 "utils_4_tests",
                 "test_DWD_forecast",
-                "test_TRY"
+                "test_TRY",
+                "test_output_functions",
+                "test_ERC",
+                "test_EPW",
+                "test_DWD_historical"
             ],
             "aixweather.imports.utils_import": [
-                "test_output_functions",
+                "test_DWD_forecast",
                 "utils_4_tests",
-                "test_DWD_forecast"
+                "test_output_functions"
             ],
             "utils_4_tests": [
                 "test_DWD_forecast"
             ],
             "tests": [
-                "test_EPW",
+                "test_TRY",
                 "test_ERC",
-                "test_DWD_historical",
                 "test_output_functions",
-                "test_TRY"
+                "test_EPW",
+                "test_DWD_historical"
             ]
         },
         "duplicated_lines": {
@@ -2761,13 +2680,13 @@
             "module": 0
         },
         "convention": 60,
-        "error": 47,
+        "error": 45,
         "fatal": 0,
         "info": 0,
         "refactor": 4,
         "statement": 428,
-        "warning": 24,
-        "global_note": 2.453271028037384,
+        "warning": 19,
+        "global_note": 2.803738317757009,
         "nb_duplicated_lines": 13,
         "percent_duplicated_lines": 1.1274934952298352
     }

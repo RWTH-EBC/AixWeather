@@ -193,7 +193,7 @@
 <span class="kn">from</span> <span class="nn">aixweather.core_data_format_2_output_file.to_mos_TMY3</span> <span class="kn">import</span> <span class="n">to_mos</span>
 <span class="kn">from</span> <span class="nn">aixweather.core_data_format_2_output_file.to_epw_energyplus</span> <span class="kn">import</span> <span class="n">to_epw</span>
 
-
+<span class="c1"># pylint-disable: R0902</span>
 <div class="viewcode-block" id="ProjectClassGeneral"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassGeneral">[docs]</a><span class="k">class</span> <span class="nc">ProjectClassGeneral</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    An abstract base class representing a general project.</span>
@@ -279,7 +279,7 @@
     <span class="c1"># core_data_format_2_output_file</span>
 <div class="viewcode-block" id="ProjectClassGeneral.core_2_mos"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassGeneral.core_2_mos">[docs]</a>    <span class="k">def</span> <span class="nf">core_2_mos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert core data to .mos file&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">output_df_mos</span> <span class="o">=</span> <span class="n">to_mos</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_data_df</span> <span class="o">=</span> <span class="n">to_mos</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">core_data</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">meta_data</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span>
@@ -290,7 +290,7 @@
 
 <div class="viewcode-block" id="ProjectClassGeneral.core_2_epw"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassGeneral.core_2_epw">[docs]</a>    <span class="k">def</span> <span class="nf">core_2_epw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert core data to .epw file&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">output_df_epw</span> <span class="o">=</span> <span class="n">to_epw</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_data_df</span> <span class="o">=</span> <span class="n">to_epw</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">core_data</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">meta_data</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span>
@@ -301,19 +301,19 @@
 
 <div class="viewcode-block" id="ProjectClassGeneral.core_2_csv"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassGeneral.core_2_csv">[docs]</a>    <span class="k">def</span> <span class="nf">core_2_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert core data to .csv file&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">output_df_csv</span> <span class="o">=</span> <span class="n">to_csv</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_data_df</span> <span class="o">=</span> <span class="n">to_csv</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">core_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">abs_result_folder_path</span>
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="ProjectClassGeneral.core_2_json"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassGeneral.core_2_json">[docs]</a>    <span class="k">def</span> <span class="nf">core_2_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert core data to .json file&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">output_df_json</span> <span class="o">=</span> <span class="n">to_json</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_data_df</span> <span class="o">=</span> <span class="n">to_json</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">core_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">abs_result_folder_path</span>
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="ProjectClassGeneral.core_2_pickle"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassGeneral.core_2_pickle">[docs]</a>    <span class="k">def</span> <span class="nf">core_2_pickle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert core data pickle file&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">output_df_pickle</span> <span class="o">=</span> <span class="n">to_pickle</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_data_df</span> <span class="o">=</span> <span class="n">to_pickle</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">core_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">abs_result_folder_path</span>
         <span class="p">)</span></div></div>
 
@@ -490,7 +490,7 @@
 <div class="viewcode-block" id="ProjectClassCustom.import_data"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassCustom.import_data">[docs]</a>    <span class="k">def</span> <span class="nf">import_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;override abstract function&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">imported_data</span> <span class="o">=</span> <span class="n">load_custom_from_file</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">meta_data</span> <span class="o">=</span> <span class="n">load_custom_meta_data</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta_data</span> <span class="o">=</span> <span class="n">load_custom_meta_data</span><span class="p">()</span></div>
 
     <span class="c1"># transformation_2_core_data_TRY</span>
 <div class="viewcode-block" id="ProjectClassCustom.data_2_core_data"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassCustom.data_2_core_data">[docs]</a>    <span class="k">def</span> <span class="nf">data_2_core_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
