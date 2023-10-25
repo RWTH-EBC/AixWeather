@@ -738,142 +738,10 @@
             "message-id": "W0012"
         },
         {
-            "type": "convention",
-            "module": "aixweather.data_quality_checks",
-            "obj": "plot_heatmap_missing_values_daily",
-            "line": 10,
-            "column": 0,
-            "path": "aixweather/data_quality_checks.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.data_quality_checks",
-            "obj": "print_df_info",
-            "line": 31,
-            "column": 0,
-            "path": "aixweather/data_quality_checks.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.definitions",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "aixweather/definitions.py",
-            "symbol": "missing-module-docstring",
-            "message": "Missing module docstring",
-            "message-id": "C0114"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.definitions",
-            "obj": "result_folder_path",
-            "line": 46,
-            "column": 0,
-            "path": "aixweather/definitions.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "",
-            "line": 42,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (105/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "",
-            "line": 43,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (118/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "",
-            "line": 49,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (103/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "",
-            "line": 110,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (106/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "",
-            "line": 115,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (106/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "",
-            "line": 125,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (102/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "",
-            "line": 194,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (113/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "missing-module-docstring",
-            "message": "Missing module docstring",
-            "message-id": "C0114"
-        },
-        {
             "type": "refactor",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral",
-            "line": 33,
+            "line": 34,
             "column": 0,
             "path": "aixweather/project_class.py",
             "symbol": "too-many-instance-attributes",
@@ -884,7 +752,7 @@
             "type": "convention",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.core_data",
-            "line": 80,
+            "line": 88,
             "column": 4,
             "path": "aixweather/project_class.py",
             "symbol": "missing-function-docstring",
@@ -895,7 +763,7 @@
             "type": "convention",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.import_data",
-            "line": 100,
+            "line": 106,
             "column": 4,
             "path": "aixweather/project_class.py",
             "symbol": "missing-function-docstring",
@@ -906,7 +774,7 @@
             "type": "convention",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.data_2_core_data",
-            "line": 104,
+            "line": 110,
             "column": 4,
             "path": "aixweather/project_class.py",
             "symbol": "missing-function-docstring",
@@ -917,7 +785,7 @@
             "type": "convention",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.core_2_mos",
-            "line": 108,
+            "line": 114,
             "column": 4,
             "path": "aixweather/project_class.py",
             "symbol": "missing-function-docstring",
@@ -928,7 +796,7 @@
             "type": "convention",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.core_2_epw",
-            "line": 113,
+            "line": 124,
             "column": 4,
             "path": "aixweather/project_class.py",
             "symbol": "missing-function-docstring",
@@ -939,7 +807,7 @@
             "type": "convention",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.core_2_csv",
-            "line": 118,
+            "line": 134,
             "column": 4,
             "path": "aixweather/project_class.py",
             "symbol": "missing-function-docstring",
@@ -950,7 +818,7 @@
             "type": "convention",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.core_2_json",
-            "line": 121,
+            "line": 139,
             "column": 4,
             "path": "aixweather/project_class.py",
             "symbol": "missing-function-docstring",
@@ -961,7 +829,7 @@
             "type": "convention",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.core_2_pickle",
-            "line": 124,
+            "line": 144,
             "column": 4,
             "path": "aixweather/project_class.py",
             "symbol": "missing-function-docstring",
@@ -972,7 +840,7 @@
             "type": "warning",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.core_2_mos",
-            "line": 109,
+            "line": 115,
             "column": 8,
             "path": "aixweather/project_class.py",
             "symbol": "attribute-defined-outside-init",
@@ -983,7 +851,7 @@
             "type": "warning",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.core_2_epw",
-            "line": 114,
+            "line": 125,
             "column": 8,
             "path": "aixweather/project_class.py",
             "symbol": "attribute-defined-outside-init",
@@ -994,7 +862,7 @@
             "type": "warning",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.core_2_csv",
-            "line": 119,
+            "line": 135,
             "column": 8,
             "path": "aixweather/project_class.py",
             "symbol": "attribute-defined-outside-init",
@@ -1005,7 +873,7 @@
             "type": "warning",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.core_2_json",
-            "line": 122,
+            "line": 140,
             "column": 8,
             "path": "aixweather/project_class.py",
             "symbol": "attribute-defined-outside-init",
@@ -1016,7 +884,7 @@
             "type": "warning",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.core_2_pickle",
-            "line": 125,
+            "line": 145,
             "column": 8,
             "path": "aixweather/project_class.py",
             "symbol": "attribute-defined-outside-init",
@@ -1027,7 +895,7 @@
             "type": "error",
             "module": "aixweather.project_class",
             "obj": "ProjectClassCustom.import_data",
-            "line": 287,
+            "line": 310,
             "column": 8,
             "path": "aixweather/project_class.py",
             "symbol": "assignment-from-none",
@@ -1038,7 +906,7 @@
             "type": "error",
             "module": "aixweather.project_class",
             "obj": "ProjectClassCustom.import_data",
-            "line": 288,
+            "line": 311,
             "column": 25,
             "path": "aixweather/project_class.py",
             "symbol": "unexpected-keyword-arg",
@@ -1047,40 +915,7 @@
         },
         {
             "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "",
-            "line": 4,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "wrong-import-order",
-            "message": "standard import \"from abc import ABC, abstractmethod\" should be placed before \"import pandas as pd\"",
-            "message-id": "C0411"
-        },
-        {
-            "type": "convention",
-            "module": "e1_pull_DWD_historical_to_all_output_formats",
-            "obj": "",
-            "line": 43,
-            "column": 0,
-            "path": "examples/e1_pull_DWD_historical_to_all_output_formats.py",
-            "symbol": "missing-final-newline",
-            "message": "Final newline missing",
-            "message-id": "C0304"
-        },
-        {
-            "type": "convention",
-            "module": "e1_pull_DWD_historical_to_all_output_formats",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "examples/e1_pull_DWD_historical_to_all_output_formats.py",
-            "symbol": "missing-module-docstring",
-            "message": "Missing module docstring",
-            "message-id": "C0114"
-        },
-        {
-            "type": "convention",
-            "module": "e1_pull_DWD_historical_to_all_output_formats",
+            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
             "obj": "",
             "line": 1,
             "column": 0,
@@ -1091,20 +926,9 @@
         },
         {
             "type": "convention",
-            "module": "e1_pull_DWD_historical_to_all_output_formats",
+            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
             "obj": "e1_pull_DWD_historical_to_all_output_formats",
-            "line": 3,
-            "column": 0,
-            "path": "examples/e1_pull_DWD_historical_to_all_output_formats.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "e1_pull_DWD_historical_to_all_output_formats",
-            "obj": "e1_pull_DWD_historical_to_all_output_formats",
-            "line": 3,
+            "line": 6,
             "column": 0,
             "path": "examples/e1_pull_DWD_historical_to_all_output_formats.py",
             "symbol": "invalid-name",
@@ -1113,9 +937,9 @@
         },
         {
             "type": "convention",
-            "module": "e1_pull_DWD_historical_to_all_output_formats",
+            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
             "obj": "e1_pull_DWD_historical_to_all_output_formats",
-            "line": 5,
+            "line": 13,
             "column": 4,
             "path": "examples/e1_pull_DWD_historical_to_all_output_formats.py",
             "symbol": "import-outside-toplevel",
@@ -1124,9 +948,9 @@
         },
         {
             "type": "convention",
-            "module": "e1_pull_DWD_historical_to_all_output_formats",
+            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
             "obj": "e1_pull_DWD_historical_to_all_output_formats",
-            "line": 8,
+            "line": 16,
             "column": 4,
             "path": "examples/e1_pull_DWD_historical_to_all_output_formats.py",
             "symbol": "invalid-name",
@@ -1135,9 +959,9 @@
         },
         {
             "type": "convention",
-            "module": "e1_pull_DWD_historical_to_all_output_formats",
+            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
             "obj": "e1_pull_DWD_historical_to_all_output_formats",
-            "line": 27,
+            "line": 37,
             "column": 4,
             "path": "examples/e1_pull_DWD_historical_to_all_output_formats.py",
             "symbol": "import-outside-toplevel",
@@ -1262,18 +1086,7 @@
             "column": 0,
             "path": "tests/test_DWD_historical.py",
             "symbol": "line-too-long",
-            "message": "Line too long (133/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "convention",
-            "module": "test_DWD_historical",
-            "obj": "",
-            "line": 96,
-            "column": 0,
-            "path": "tests/test_DWD_historical.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (114/100)",
+            "message": "Line too long (133/120)",
             "message-id": "C0301"
         },
         {
@@ -1770,28 +1583,6 @@
             "symbol": "ungrouped-imports",
             "message": "Imports from package aixweather are not grouped",
             "message-id": "C0412"
-        },
-        {
-            "type": "convention",
-            "module": "utils_4_tests",
-            "obj": "",
-            "line": 59,
-            "column": 0,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (112/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "convention",
-            "module": "utils_4_tests",
-            "obj": "",
-            "line": 79,
-            "column": 0,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (105/100)",
-            "message-id": "C0301"
         },
         {
             "type": "convention",
@@ -2514,7 +2305,7 @@
                 "warning": 0
             },
             "aixweather.data_quality_checks": {
-                "convention": 2,
+                "convention": 0,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -2523,7 +2314,7 @@
                 "warning": 0
             },
             "aixweather.definitions": {
-                "convention": 2,
+                "convention": 0,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -2532,7 +2323,7 @@
                 "warning": 0
             },
             "aixweather.project_class": {
-                "convention": 17,
+                "convention": 8,
                 "error": 2,
                 "fatal": 0,
                 "info": 0,
@@ -2540,8 +2331,8 @@
                 "statement": 114,
                 "warning": 5
             },
-            "e1_pull_DWD_historical_to_all_output_formats": {
-                "convention": 8,
+            "examples.e1_pull_DWD_historical_to_all_output_formats": {
+                "convention": 5,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -2559,7 +2350,7 @@
                 "warning": 1
             },
             "test_DWD_historical": {
-                "convention": 8,
+                "convention": 7,
                 "error": 1,
                 "fatal": 0,
                 "info": 0,
@@ -2604,7 +2395,7 @@
                 "warning": 7
             },
             "utils_4_tests": {
-                "convention": 16,
+                "convention": 14,
                 "error": 38,
                 "fatal": 0,
                 "info": 0,
@@ -2614,19 +2405,17 @@
             }
         },
         "by_msg": {
-            "missing-function-docstring": 35,
-            "missing-module-docstring": 3,
-            "line-too-long": 11,
             "too-many-instance-attributes": 1,
+            "missing-function-docstring": 31,
             "attribute-defined-outside-init": 12,
             "assignment-from-none": 1,
             "unexpected-keyword-arg": 1,
-            "wrong-import-order": 2,
-            "missing-final-newline": 1,
             "invalid-name": 16,
             "import-outside-toplevel": 2,
             "missing-class-docstring": 14,
             "unspecified-encoding": 9,
+            "wrong-import-order": 1,
+            "line-too-long": 1,
             "fixme": 1,
             "no-name-in-module": 5,
             "ungrouped-imports": 2,
@@ -2650,10 +2439,10 @@
                 "aixweather.data_quality_checks"
             ],
             "pandas": [
+                "test_output_functions",
                 "test_DWD_forecast",
                 "aixweather.project_class",
-                "utils_4_tests",
-                "test_output_functions"
+                "utils_4_tests"
             ],
             "aixweather.imports.DWD": [
                 "aixweather.project_class"
@@ -2695,44 +2484,44 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
-                "test_DWD_forecast",
-                "test_DWD_historical",
-                "test_TRY",
-                "test_ERC",
                 "test_output_functions",
-                "e1_pull_DWD_historical_to_all_output_formats",
-                "test_EPW"
+                "test_TRY",
+                "test_DWD_forecast",
+                "test_EPW",
+                "test_DWD_historical",
+                "examples.e1_pull_DWD_historical_to_all_output_formats",
+                "test_ERC"
             ],
             "aixweather.data_quality_checks": [
-                "e1_pull_DWD_historical_to_all_output_formats"
+                "examples.e1_pull_DWD_historical_to_all_output_formats"
             ],
             "parameterized.parameterized": [
                 "test_DWD_forecast",
                 "test_DWD_historical"
             ],
             "aixweather.definitions": [
+                "test_output_functions",
                 "test_DWD_historical",
+                "test_DWD_forecast",
+                "test_EPW",
                 "utils_4_tests",
                 "test_TRY",
-                "test_ERC",
-                "test_output_functions",
-                "test_DWD_forecast",
-                "test_EPW"
+                "test_ERC"
             ],
             "aixweather.imports.utils_import": [
+                "test_output_functions",
                 "test_DWD_forecast",
-                "utils_4_tests",
-                "test_output_functions"
+                "utils_4_tests"
             ],
             "utils_4_tests": [
                 "test_DWD_forecast"
             ],
             "tests": [
-                "test_DWD_historical",
-                "test_TRY",
-                "test_ERC",
                 "test_output_functions",
-                "test_EPW"
+                "test_TRY",
+                "test_EPW",
+                "test_DWD_historical",
+                "test_ERC"
             ]
         },
         "duplicated_lines": {
@@ -2746,12 +2535,12 @@
             "module": 12
         },
         "undocumented": {
-            "function": 9,
+            "function": 5,
             "klass": 14,
             "method": 26,
-            "module": 3
+            "module": 0
         },
-        "convention": 86,
+        "convention": 67,
         "error": 47,
         "fatal": 0,
         "info": 0,
@@ -2760,7 +2549,7 @@
         "warning": 22,
         "global_note": 0,
         "nb_duplicated_lines": 13,
-        "percent_duplicated_lines": 1.2037037037037037
+        "percent_duplicated_lines": 1.147396293027361
     },
     "previous": {
         "bad_names": {
@@ -2789,7 +2578,7 @@
                 "warning": 0
             },
             "aixweather.data_quality_checks": {
-                "convention": 2,
+                "convention": 0,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -2798,7 +2587,7 @@
                 "warning": 0
             },
             "aixweather.definitions": {
-                "convention": 2,
+                "convention": 0,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -2807,7 +2596,7 @@
                 "warning": 0
             },
             "aixweather.project_class": {
-                "convention": 17,
+                "convention": 8,
                 "error": 2,
                 "fatal": 0,
                 "info": 0,
@@ -2815,8 +2604,8 @@
                 "statement": 114,
                 "warning": 5
             },
-            "e1_pull_DWD_historical_to_all_output_formats": {
-                "convention": 8,
+            "examples.e1_pull_DWD_historical_to_all_output_formats": {
+                "convention": 5,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -2834,7 +2623,7 @@
                 "warning": 1
             },
             "test_DWD_historical": {
-                "convention": 8,
+                "convention": 7,
                 "error": 1,
                 "fatal": 0,
                 "info": 0,
@@ -2879,7 +2668,7 @@
                 "warning": 7
             },
             "utils_4_tests": {
-                "convention": 16,
+                "convention": 14,
                 "error": 38,
                 "fatal": 0,
                 "info": 0,
@@ -2889,19 +2678,17 @@
             }
         },
         "by_msg": {
-            "missing-function-docstring": 35,
-            "missing-module-docstring": 3,
-            "line-too-long": 11,
             "too-many-instance-attributes": 1,
+            "missing-function-docstring": 31,
             "attribute-defined-outside-init": 12,
             "assignment-from-none": 1,
             "unexpected-keyword-arg": 1,
-            "wrong-import-order": 2,
-            "missing-final-newline": 1,
             "invalid-name": 16,
             "import-outside-toplevel": 2,
             "missing-class-docstring": 14,
             "unspecified-encoding": 9,
+            "wrong-import-order": 1,
+            "line-too-long": 1,
             "fixme": 1,
             "no-name-in-module": 5,
             "ungrouped-imports": 2,
@@ -2925,10 +2712,10 @@
                 "aixweather.data_quality_checks"
             ],
             "pandas": [
+                "test_output_functions",
                 "test_DWD_forecast",
                 "aixweather.project_class",
-                "utils_4_tests",
-                "test_output_functions"
+                "utils_4_tests"
             ],
             "aixweather.imports.DWD": [
                 "aixweather.project_class"
@@ -2970,44 +2757,44 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
-                "test_DWD_forecast",
-                "test_DWD_historical",
-                "test_TRY",
-                "test_ERC",
                 "test_output_functions",
-                "e1_pull_DWD_historical_to_all_output_formats",
-                "test_EPW"
+                "test_DWD_historical",
+                "test_DWD_forecast",
+                "test_EPW",
+                "test_TRY",
+                "examples.e1_pull_DWD_historical_to_all_output_formats",
+                "test_ERC"
             ],
             "aixweather.data_quality_checks": [
-                "e1_pull_DWD_historical_to_all_output_formats"
+                "examples.e1_pull_DWD_historical_to_all_output_formats"
             ],
             "parameterized.parameterized": [
                 "test_DWD_forecast",
                 "test_DWD_historical"
             ],
             "aixweather.definitions": [
+                "test_output_functions",
                 "test_DWD_historical",
+                "test_DWD_forecast",
+                "test_EPW",
                 "utils_4_tests",
                 "test_TRY",
-                "test_ERC",
-                "test_output_functions",
-                "test_DWD_forecast",
-                "test_EPW"
+                "test_ERC"
             ],
             "aixweather.imports.utils_import": [
+                "test_output_functions",
                 "test_DWD_forecast",
-                "utils_4_tests",
-                "test_output_functions"
+                "utils_4_tests"
             ],
             "utils_4_tests": [
                 "test_DWD_forecast"
             ],
             "tests": [
-                "test_DWD_historical",
-                "test_TRY",
-                "test_ERC",
                 "test_output_functions",
-                "test_EPW"
+                "test_DWD_historical",
+                "test_EPW",
+                "test_TRY",
+                "test_ERC"
             ]
         },
         "duplicated_lines": {
@@ -3021,20 +2808,20 @@
             "module": 12
         },
         "undocumented": {
-            "function": 9,
+            "function": 5,
             "klass": 14,
             "method": 26,
-            "module": 3
+            "module": 0
         },
-        "convention": 86,
+        "convention": 67,
         "error": 47,
         "fatal": 0,
         "info": 0,
         "refactor": 4,
         "statement": 428,
         "warning": 22,
-        "global_note": 1.8925233644859816,
+        "global_note": 2.3364485981308416,
         "nb_duplicated_lines": 13,
-        "percent_duplicated_lines": 1.2037037037037037
+        "percent_duplicated_lines": 1.147396293027361
     }
 }
