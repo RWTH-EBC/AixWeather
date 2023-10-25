@@ -86,11 +86,12 @@ class ProjectClassGeneral(ABC):
 
     @property
     def core_data(self):
+        """Get core data"""
         return self._core_data
 
     @core_data.setter
     def core_data(self, value: pd.DataFrame):
-        """Makes sure the core data data types are correct."""
+        """Makes sure the core-data data types are correct."""
         if value is not None:
             for column in value.columns:
                 # only real pd.NA values
