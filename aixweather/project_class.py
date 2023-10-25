@@ -107,12 +107,10 @@ class ProjectClassGeneral(ABC):
     @abstractmethod
     def import_data(self):
         """Abstract function to import weather data."""
-        pass
 
     @abstractmethod
     def data_2_core_data(self):
         """Abstract function to convert the imported data to core data."""
-        pass
 
     # core_data_format_2_output_file
     def core_2_mos(self):
