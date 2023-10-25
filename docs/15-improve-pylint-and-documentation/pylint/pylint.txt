@@ -83,7 +83,7 @@ aixweather/project_class.py:140:8: W0201: Attribute 'output_df_json' defined out
 aixweather/project_class.py:145:8: W0201: Attribute 'output_df_pickle' defined outside __init__ (attribute-defined-outside-init)
 aixweather/project_class.py:310:8: E1128: Assigning result of a function call, where the function returns None (assignment-from-none)
 aixweather/project_class.py:311:25: E1123: Unexpected keyword argument 'path' in function call (unexpected-keyword-arg)
-************* Module examples.e1_pull_DWD_historical_to_all_output_formats
+************* Module e1_pull_DWD_historical_to_all_output_formats
 examples/e1_pull_DWD_historical_to_all_output_formats.py:1:0: C0103: Module name "e1_pull_DWD_historical_to_all_output_formats" doesn't conform to snake_case naming style (invalid-name)
 examples/e1_pull_DWD_historical_to_all_output_formats.py:6:0: C0103: Function name "e1_pull_DWD_historical_to_all_output_formats" doesn't conform to snake_case naming style (invalid-name)
 examples/e1_pull_DWD_historical_to_all_output_formats.py:13:4: C0415: Import outside toplevel (aixweather.project_class.ProjectClassDWDHistorical) (import-outside-toplevel)
