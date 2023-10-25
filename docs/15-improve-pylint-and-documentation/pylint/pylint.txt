@@ -1,6 +1,3 @@
-************* Module /builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc
-.pylintrc:1:0: W0012: Unknown option value for '--disable', expected a valid pylint message and got 'use-implicit-booleaness-not-comparison-to-string' (unknown-option-value)
-.pylintrc:1:0: W0012: Unknown option value for '--disable', expected a valid pylint message and got 'use-implicit-booleaness-not-comparison-to-zero' (unknown-option-value)
 ************* Module aixweather.data_quality_checks
 aixweather/data_quality_checks.py:10:38: C0103: Argument name "df" doesn't conform to snake_case naming style (invalid-name)
 aixweather/data_quality_checks.py:40:18: C0103: Argument name "df" doesn't conform to snake_case naming style (invalid-name)
