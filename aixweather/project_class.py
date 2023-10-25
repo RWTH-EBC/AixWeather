@@ -30,7 +30,7 @@ from aixweather.core_data_format_2_output_file.unconverted_to_x import (
 from aixweather.core_data_format_2_output_file.to_mos_TMY3 import to_mos
 from aixweather.core_data_format_2_output_file.to_epw_energyplus import to_epw
 
-
+# pylint-disable: R0902
 class ProjectClassGeneral(ABC):
     """
     An abstract base class representing a general project.
