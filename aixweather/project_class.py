@@ -116,7 +116,7 @@ class ProjectClassGeneral(ABC):
     # core_data_format_2_output_file
     def core_2_mos(self):
         """Convert core data to .mos file"""
-        self.output_df_mos = to_mos(
+        self.output_data_df = to_mos(
             self.core_data,
             self.meta_data,
             self.start,
@@ -127,7 +127,7 @@ class ProjectClassGeneral(ABC):
 
     def core_2_epw(self):
         """Convert core data to .epw file"""
-        self.output_df_epw = to_epw(
+        self.output_data_df = to_epw(
             self.core_data,
             self.meta_data,
             self.start,
@@ -138,19 +138,19 @@ class ProjectClassGeneral(ABC):
 
     def core_2_csv(self):
         """Convert core data to .csv file"""
-        self.output_df_csv = to_csv(
+        self.output_data_df = to_csv(
             self.core_data, self.meta_data, self.abs_result_folder_path
         )
 
     def core_2_json(self):
         """Convert core data to .json file"""
-        self.output_df_json = to_json(
+        self.output_data_df = to_json(
             self.core_data, self.meta_data, self.abs_result_folder_path
         )
 
     def core_2_pickle(self):
         """Convert core data pickle file"""
-        self.output_df_pickle = to_pickle(
+        self.output_data_df = to_pickle(
             self.core_data, self.meta_data, self.abs_result_folder_path
         )
 
@@ -327,7 +327,7 @@ class ProjectClassCustom(ProjectClassGeneral):
     def import_data(self):
         """override abstract function"""
         self.imported_data = load_custom_from_file(path=self.path)
-        self.meta_data = load_custom_meta_data(path=self.path)
+        self.meta_data = load_custom_meta_data()
 
     # transformation_2_core_data_TRY
     def data_2_core_data(self):

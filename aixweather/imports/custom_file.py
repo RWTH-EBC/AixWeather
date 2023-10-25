@@ -37,4 +37,4 @@ def load_custom_from_file(path):
     ### convert timestamp to datetime and set as index
 
     ### return data frame
-    return
+    return "DataFrame"
