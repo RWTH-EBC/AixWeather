@@ -2109,7 +2109,7 @@
             "column": 0,
             "path": "tests/utils_4_tests.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_DWD_forecast:[67:73]\n==test_output_functions:[67:75]\n        cls.c.core_2_pickle()\n        cls.c.core_2_json()\n        cls.c.core_2_mos()\n        cls.c.core_2_epw()\n        cls.c.core_2_csv()\n",
+            "message": "Similar lines in 2 files\n==test_DWD_forecast:[67:73]\n==test_output_functions:[67:75]\n        cls.c.core_2_pickle()\n        cls.c.core_2_json()\n        cls.c.core_2_mos()\n        cls.c.core_2_epw()\n        cls.c.core_2_csv()\n\n    # ignore core_data and meta_data tests\n    def test_core_data(self):",
             "message-id": "R0801"
         }
     ],
@@ -2273,8 +2273,8 @@
             ],
             "pandas": [
                 "test_DWD_forecast",
-                "aixweather.project_class",
                 "test_output_functions",
+                "aixweather.project_class",
                 "utils_4_tests"
             ],
             "aixweather.imports.DWD": [
@@ -2317,13 +2317,13 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
-                "test_ERC",
+                "e1_pull_DWD_historical_to_all_output_formats",
                 "test_output_functions",
                 "test_TRY",
-                "e1_pull_DWD_historical_to_all_output_formats",
+                "test_EPW",
                 "test_DWD_forecast",
-                "test_DWD_historical",
-                "test_EPW"
+                "test_ERC",
+                "test_DWD_historical"
             ],
             "aixweather.data_quality_checks": [
                 "e1_pull_DWD_historical_to_all_output_formats"
@@ -2333,28 +2333,28 @@
                 "test_DWD_historical"
             ],
             "aixweather.definitions": [
-                "test_ERC",
                 "test_output_functions",
-                "utils_4_tests",
                 "test_TRY",
+                "utils_4_tests",
                 "test_DWD_forecast",
-                "test_DWD_historical",
-                "test_EPW"
+                "test_EPW",
+                "test_ERC",
+                "test_DWD_historical"
             ],
             "aixweather.imports.utils_import": [
                 "test_DWD_forecast",
-                "utils_4_tests",
-                "test_output_functions"
+                "test_output_functions",
+                "utils_4_tests"
             ],
             "utils_4_tests": [
                 "test_DWD_forecast"
             ],
             "tests": [
-                "test_ERC",
                 "test_output_functions",
                 "test_TRY",
-                "test_DWD_historical",
-                "test_EPW"
+                "test_EPW",
+                "test_ERC",
+                "test_DWD_historical"
             ]
         },
         "duplicated_lines": {
@@ -2437,7 +2437,7 @@
                 "statement": 114,
                 "warning": 2
             },
-            "e1_pull_DWD_historical_to_all_output_formats": {
+            "examples.e1_pull_DWD_historical_to_all_output_formats": {
                 "convention": 5,
                 "error": 0,
                 "fatal": 0,
@@ -2544,9 +2544,9 @@
             ],
             "pandas": [
                 "test_DWD_forecast",
+                "test_output_functions",
                 "aixweather.project_class",
-                "utils_4_tests",
-                "test_output_functions"
+                "utils_4_tests"
             ],
             "aixweather.imports.DWD": [
                 "aixweather.project_class"
@@ -2588,44 +2588,44 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
-                "test_ERC",
                 "test_output_functions",
                 "test_TRY",
-                "e1_pull_DWD_historical_to_all_output_formats",
+                "test_EPW",
                 "test_DWD_forecast",
-                "test_DWD_historical",
-                "test_EPW"
+                "test_ERC",
+                "examples.e1_pull_DWD_historical_to_all_output_formats",
+                "test_DWD_historical"
             ],
             "aixweather.data_quality_checks": [
-                "e1_pull_DWD_historical_to_all_output_formats"
+                "examples.e1_pull_DWD_historical_to_all_output_formats"
             ],
             "parameterized.parameterized": [
                 "test_DWD_forecast",
                 "test_DWD_historical"
             ],
             "aixweather.definitions": [
-                "test_ERC",
-                "utils_4_tests",
                 "test_output_functions",
                 "test_TRY",
+                "utils_4_tests",
+                "test_EPW",
                 "test_DWD_forecast",
-                "test_DWD_historical",
-                "test_EPW"
+                "test_ERC",
+                "test_DWD_historical"
             ],
             "aixweather.imports.utils_import": [
                 "test_DWD_forecast",
-                "utils_4_tests",
-                "test_output_functions"
+                "test_output_functions",
+                "utils_4_tests"
             ],
             "utils_4_tests": [
                 "test_DWD_forecast"
             ],
             "tests": [
-                "test_ERC",
                 "test_output_functions",
                 "test_TRY",
-                "test_DWD_historical",
-                "test_EPW"
+                "test_EPW",
+                "test_ERC",
+                "test_DWD_historical"
             ]
         },
         "duplicated_lines": {

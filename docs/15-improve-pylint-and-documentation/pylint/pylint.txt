@@ -70,7 +70,7 @@
 aixweather/project_class.py:34:0: R0902: Too many instance attributes (9/7) (too-many-instance-attributes)
 aixweather/project_class.py:110:8: W0107: Unnecessary pass statement (unnecessary-pass)
 aixweather/project_class.py:115:8: W0107: Unnecessary pass statement (unnecessary-pass)
-************* Module e1_pull_DWD_historical_to_all_output_formats
+************* Module examples.e1_pull_DWD_historical_to_all_output_formats
 examples/e1_pull_DWD_historical_to_all_output_formats.py:1:0: C0103: Module name "e1_pull_DWD_historical_to_all_output_formats" doesn't conform to snake_case naming style (invalid-name)
 examples/e1_pull_DWD_historical_to_all_output_formats.py:6:0: C0103: Function name "e1_pull_DWD_historical_to_all_output_formats" doesn't conform to snake_case naming style (invalid-name)
 examples/e1_pull_DWD_historical_to_all_output_formats.py:13:4: C0415: Import outside toplevel (aixweather.project_class.ProjectClassDWDHistorical) (import-outside-toplevel)
