@@ -1,53 +1,8 @@
 {
-    "messages": [
-        {
-            "type": "convention",
-            "module": "aixweather.data_quality_checks",
-            "obj": "plot_heatmap_missing_values_daily",
-            "line": 10,
-            "column": 38,
-            "path": "aixweather/data_quality_checks.py",
-            "symbol": "invalid-name",
-            "message": "Argument name \"df\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.data_quality_checks",
-            "obj": "print_df_info",
-            "line": 40,
-            "column": 18,
-            "path": "aixweather/data_quality_checks.py",
-            "symbol": "invalid-name",
-            "message": "Argument name \"df\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "warning",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.import_data",
-            "line": 110,
-            "column": 8,
-            "path": "aixweather/project_class.py",
-            "symbol": "unnecessary-pass",
-            "message": "Unnecessary pass statement",
-            "message-id": "W0107"
-        },
-        {
-            "type": "warning",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.data_2_core_data",
-            "line": 115,
-            "column": 8,
-            "path": "aixweather/project_class.py",
-            "symbol": "unnecessary-pass",
-            "message": "Unnecessary pass statement",
-            "message-id": "W0107"
-        }
-    ],
+    "messages": [],
     "stats": {
         "bad_names": {
-            "argument": 2,
+            "argument": 0,
             "attr": 0,
             "klass": 0,
             "class_attribute": 0,
@@ -72,7 +27,7 @@
                 "warning": 0
             },
             "aixweather.data_quality_checks": {
-                "convention": 2,
+                "convention": 0,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -95,8 +50,8 @@
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 114,
-                "warning": 2
+                "statement": 112,
+                "warning": 0
             },
             "examples.e1_pull_DWD_historical_to_all_output_formats": {
                 "convention": 0,
@@ -171,10 +126,7 @@
                 "warning": 0
             }
         },
-        "by_msg": {
-            "invalid-name": 2,
-            "unnecessary-pass": 2
-        },
+        "by_msg": {},
         "code_type_count": {
             "code": 0,
             "comment": 0,
@@ -248,20 +200,20 @@
             "method": 0,
             "module": 0
         },
-        "convention": 2,
+        "convention": 0,
         "error": 0,
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 142,
-        "warning": 2,
+        "statement": 140,
+        "warning": 0,
         "global_note": 0,
         "nb_duplicated_lines": 0,
         "percent_duplicated_lines": 0.0
     },
     "previous": {
         "bad_names": {
-            "argument": 2,
+            "argument": 0,
             "attr": 0,
             "klass": 0,
             "class_attribute": 0,
@@ -286,7 +238,7 @@
                 "warning": 0
             },
             "aixweather.data_quality_checks": {
-                "convention": 2,
+                "convention": 0,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -309,10 +261,10 @@
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 114,
-                "warning": 2
+                "statement": 112,
+                "warning": 0
             },
-            "examples.e1_pull_DWD_historical_to_all_output_formats": {
+            "e1_pull_DWD_historical_to_all_output_formats": {
                 "convention": 0,
                 "error": 0,
                 "fatal": 0,
@@ -385,10 +337,7 @@
                 "warning": 0
             }
         },
-        "by_msg": {
-            "invalid-name": 2,
-            "unnecessary-pass": 2
-        },
+        "by_msg": {},
         "code_type_count": {
             "code": 0,
             "comment": 0,
@@ -462,14 +411,14 @@
             "method": 0,
             "module": 0
         },
-        "convention": 2,
+        "convention": 0,
         "error": 0,
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 142,
-        "warning": 2,
-        "global_note": 9.71830985915493,
+        "statement": 140,
+        "warning": 0,
+        "global_note": 10.0,
         "nb_duplicated_lines": 0,
         "percent_duplicated_lines": 0.0
     }

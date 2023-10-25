@@ -1,10 +1,4 @@
-************* Module aixweather.data_quality_checks
-aixweather/data_quality_checks.py:10:38: C0103: Argument name "df" doesn't conform to snake_case naming style (invalid-name)
-aixweather/data_quality_checks.py:40:18: C0103: Argument name "df" doesn't conform to snake_case naming style (invalid-name)
-************* Module aixweather.project_class
-aixweather/project_class.py:110:8: W0107: Unnecessary pass statement (unnecessary-pass)
-aixweather/project_class.py:115:8: W0107: Unnecessary pass statement (unnecessary-pass)
 
------------------------------------
-Your code has been rated at 9.72/10
+------------------------------------
+Your code has been rated at 10.00/10
 
