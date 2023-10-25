@@ -11,7 +11,7 @@ ignore=CVS,.pylintrc,tests
 
 # Add files or directories matching the regex patterns to the blacklist. The
 # regex matches against base names, not paths.
-ignore-patterns=
+ignore-patterns=^tests/
 
 # Python code to execute, usually for sys.path manipulation such as
 # pygtk.require().
@@ -417,7 +417,9 @@ ignored-classes=optparse.Values,thread._local,_thread._local
 # (useful for modules/projects where namespaces are manipulated during runtime
 # and thus existing member attributes cannot be deduced by static analysis. It
 # supports qualified module names, as well as Unix pattern matching.
-ignored-modules=examples,tests
+ignored-modules=/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc,
+                examples,
+                tests
 
 # Show a hint with possible names when a member name was not found. The aspect
 # of finding the hint is based on edit distance.
