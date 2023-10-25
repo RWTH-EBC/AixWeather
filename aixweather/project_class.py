@@ -90,6 +90,7 @@ class ProjectClassGeneral(ABC):
 
     @core_data.setter
     def core_data(self, value: pd.DataFrame):
+        """Makes sure the core data data types are correct."""
         if value is not None:
             for column in value.columns:
                 # only real pd.NA values
@@ -104,14 +105,17 @@ class ProjectClassGeneral(ABC):
 
     @abstractmethod
     def import_data(self):
+        """Abstract function to import weather data."""
         pass
 
     @abstractmethod
     def data_2_core_data(self):
+        """Abstract function to convert the imported data to core data."""
         pass
 
     # core_data_format_2_output_file
     def core_2_mos(self):
+        """Convert core data to .mos file"""
         self.output_df_mos = to_mos(
             self.core_data,
             self.meta_data,
@@ -122,6 +126,7 @@ class ProjectClassGeneral(ABC):
         )
 
     def core_2_epw(self):
+        """Convert core data to .epw file"""
         self.output_df_epw = to_epw(
             self.core_data,
             self.meta_data,
@@ -132,16 +137,19 @@ class ProjectClassGeneral(ABC):
         )
 
     def core_2_csv(self):
+        """Convert core data to .csv file"""
         self.output_df_csv = to_csv(
             self.core_data, self.meta_data, self.abs_result_folder_path
         )
 
     def core_2_json(self):
+        """Convert core data to .json file"""
         self.output_df_json = to_json(
             self.core_data, self.meta_data, self.abs_result_folder_path
         )
 
     def core_2_pickle(self):
+        """Convert core data pickle file"""
         self.output_df_pickle = to_pickle(
             self.core_data, self.meta_data, self.abs_result_folder_path
         )
@@ -164,6 +172,7 @@ class ProjectClassDWDHistorical(ProjectClassGeneral):
 
     # imports
     def import_data(self):
+        """override abstract function"""
         self.meta_data = import_meta_DWD_historical(station=self.station)
         self.imported_data = import_DWD_historical(
             self.start - dt.timedelta(days=1), self.station
@@ -171,6 +180,7 @@ class ProjectClassDWDHistorical(ProjectClassGeneral):
 
     # transformation_2_core_data_DWD_Historical
     def data_2_core_data(self):
+        """override abstract function"""
         self.core_data = DWD_historical_to_core_data(
             self.imported_data,
             self.start - dt.timedelta(days=1),
@@ -196,10 +206,12 @@ class ProjectClassDWDForecast(ProjectClassGeneral):
 
     # imports
     def import_data(self):
+        """override abstract function"""
         self.meta_data = import_meta_DWD_forecast(self.station)
         self.imported_data = import_DWD_forecast(self.station)
 
     def data_2_core_data(self):
+        """override abstract function"""
         self.core_data = DWD_forecast_2_core_data(self.imported_data, self.meta_data)
         self.start = self.core_data.index[0]
         self.end = self.core_data.index[-1]
@@ -226,12 +238,14 @@ class ProjectClassERC(ProjectClassGeneral):
         self.end_hour_later = end + dt.timedelta(hours=2)
 
     def import_data(self):
+        """override abstract function"""
         self.imported_data = import_ERC(
             self.start_hour_earlier, self.end_hour_later, self.cred
         )
         self.meta_data = import_meta_from_ERC()
 
     def data_2_core_data(self):
+        """override abstract function"""
         self.core_data = ERC_to_core_data(self.imported_data, self.meta_data)
 
 
@@ -252,11 +266,13 @@ class ProjectClassTRY(ProjectClassGeneral):
 
     # imports
     def import_data(self):
+        """override abstract function"""
         self.imported_data = load_try_from_file(path=self.path)
         self.meta_data = load_try_meta_from_file(path=self.path)
 
     # transformation_2_core_data_TRY
     def data_2_core_data(self):
+        """override abstract function"""
         self.core_data = TRY_to_core_data(self.imported_data, self.meta_data)
         self.start = self.core_data.index[0]
         self.end = self.core_data.index[-1]
@@ -279,11 +295,13 @@ class ProjectClassEPW(ProjectClassGeneral):
 
     # imports
     def import_data(self):
+        """override abstract function"""
         self.imported_data = load_epw_from_file(path=self.path)
         self.meta_data = load_epw_meta_from_file(path=self.path)
 
     # transformation_2_core_data_TRY
     def data_2_core_data(self):
+        """override abstract function"""
         self.core_data = EPW_to_core_data(self.imported_data, self.meta_data)
         self.start = self.core_data.index[0]
         self.end = self.core_data.index[-1]
@@ -307,11 +325,13 @@ class ProjectClassCustom(ProjectClassGeneral):
 
     # imports
     def import_data(self):
+        """override abstract function"""
         self.imported_data = load_custom_from_file(path=self.path)
         self.meta_data = load_custom_meta_data(path=self.path)
 
     # transformation_2_core_data_TRY
     def data_2_core_data(self):
+        """override abstract function"""
         self.core_data = custom_to_core_data(self.imported_data, self.meta_data)
         self.start = self.core_data.index[0]  # or define in init
         self.end = self.core_data.index[-1]  # or define in init
