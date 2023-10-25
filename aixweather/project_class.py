@@ -213,7 +213,8 @@ class ProjectClassERC(ProjectClassGeneral):
     For common attributes, properties, and methods, refer to the base class.
 
     Attributes:
-        cred (tuple): A tuple containing credentials or authentication information for accessing the data source.
+        cred (tuple): A tuple containing credentials or authentication information for accessing
+        the data source.
     """
 
     def __init__(
