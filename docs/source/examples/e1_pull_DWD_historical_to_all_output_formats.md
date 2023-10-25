@@ -1,5 +1,7 @@
 
 ```python
+"""Contains examples"""
+
 import datetime as dt
 ```
 
@@ -19,7 +21,7 @@ DWD_pull_project = ProjectClassDWDHistorical(
     # specify whether nan-values should be filled when exporting
     fillna=True,
     # define results path if desired
-    abs_result_folder_path=None
+    abs_result_folder_path=None,
 )
 ```
 
@@ -27,7 +29,9 @@ import historical weather from the DWD open access database
 
 ```python
 DWD_pull_project.import_data()
-print(f"\nHow the imported data looks like:\n{DWD_pull_project.imported_data.head()}\n")
+print(
+    f"\nHow the imported data looks like:\n{DWD_pull_project.imported_data.head()}\n"
+)
 ```
 
 convert this imported data to the core format
