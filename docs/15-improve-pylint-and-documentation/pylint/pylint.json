@@ -760,87 +760,32 @@
             "message-id": "C0116"
         },
         {
-            "type": "convention",
+            "type": "warning",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.import_data",
-            "line": 106,
-            "column": 4,
+            "line": 109,
+            "column": 8,
             "path": "aixweather/project_class.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
+            "symbol": "unnecessary-pass",
+            "message": "Unnecessary pass statement",
+            "message-id": "W0107"
         },
         {
-            "type": "convention",
+            "type": "warning",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.data_2_core_data",
-            "line": 110,
-            "column": 4,
-            "path": "aixweather/project_class.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_mos",
             "line": 114,
-            "column": 4,
+            "column": 8,
             "path": "aixweather/project_class.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_epw",
-            "line": 124,
-            "column": 4,
-            "path": "aixweather/project_class.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_csv",
-            "line": 134,
-            "column": 4,
-            "path": "aixweather/project_class.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_json",
-            "line": 139,
-            "column": 4,
-            "path": "aixweather/project_class.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_pickle",
-            "line": 144,
-            "column": 4,
-            "path": "aixweather/project_class.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
+            "symbol": "unnecessary-pass",
+            "message": "Unnecessary pass statement",
+            "message-id": "W0107"
         },
         {
             "type": "warning",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.core_2_mos",
-            "line": 115,
+            "line": 119,
             "column": 8,
             "path": "aixweather/project_class.py",
             "symbol": "attribute-defined-outside-init",
@@ -851,7 +796,7 @@
             "type": "warning",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.core_2_epw",
-            "line": 125,
+            "line": 130,
             "column": 8,
             "path": "aixweather/project_class.py",
             "symbol": "attribute-defined-outside-init",
@@ -862,7 +807,7 @@
             "type": "warning",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.core_2_csv",
-            "line": 135,
+            "line": 141,
             "column": 8,
             "path": "aixweather/project_class.py",
             "symbol": "attribute-defined-outside-init",
@@ -873,7 +818,7 @@
             "type": "warning",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.core_2_json",
-            "line": 140,
+            "line": 147,
             "column": 8,
             "path": "aixweather/project_class.py",
             "symbol": "attribute-defined-outside-init",
@@ -884,7 +829,7 @@
             "type": "warning",
             "module": "aixweather.project_class",
             "obj": "ProjectClassGeneral.core_2_pickle",
-            "line": 145,
+            "line": 153,
             "column": 8,
             "path": "aixweather/project_class.py",
             "symbol": "attribute-defined-outside-init",
@@ -895,7 +840,7 @@
             "type": "error",
             "module": "aixweather.project_class",
             "obj": "ProjectClassCustom.import_data",
-            "line": 310,
+            "line": 329,
             "column": 8,
             "path": "aixweather/project_class.py",
             "symbol": "assignment-from-none",
@@ -906,7 +851,7 @@
             "type": "error",
             "module": "aixweather.project_class",
             "obj": "ProjectClassCustom.import_data",
-            "line": 311,
+            "line": 330,
             "column": 25,
             "path": "aixweather/project_class.py",
             "symbol": "unexpected-keyword-arg",
@@ -915,7 +860,7 @@
         },
         {
             "type": "convention",
-            "module": "e1_pull_DWD_historical_to_all_output_formats",
+            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
             "obj": "",
             "line": 1,
             "column": 0,
@@ -926,7 +871,7 @@
         },
         {
             "type": "convention",
-            "module": "e1_pull_DWD_historical_to_all_output_formats",
+            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
             "obj": "e1_pull_DWD_historical_to_all_output_formats",
             "line": 6,
             "column": 0,
@@ -937,7 +882,7 @@
         },
         {
             "type": "convention",
-            "module": "e1_pull_DWD_historical_to_all_output_formats",
+            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
             "obj": "e1_pull_DWD_historical_to_all_output_formats",
             "line": 13,
             "column": 4,
@@ -948,7 +893,7 @@
         },
         {
             "type": "convention",
-            "module": "e1_pull_DWD_historical_to_all_output_formats",
+            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
             "obj": "e1_pull_DWD_historical_to_all_output_formats",
             "line": 16,
             "column": 4,
@@ -959,7 +904,7 @@
         },
         {
             "type": "convention",
-            "module": "e1_pull_DWD_historical_to_all_output_formats",
+            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
             "obj": "e1_pull_DWD_historical_to_all_output_formats",
             "line": 37,
             "column": 4,
@@ -2274,7 +2219,7 @@
             "column": 0,
             "path": "tests/utils_4_tests.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_DWD_forecast:[67:73]\n==test_output_functions:[67:75]\n        cls.c.core_2_pickle()\n        cls.c.core_2_json()\n        cls.c.core_2_mos()\n        cls.c.core_2_epw()\n        cls.c.core_2_csv()\n\n    # ignore core_data and meta_data tests\n    def test_core_data(self):",
+            "message": "Similar lines in 2 files\n==test_DWD_forecast:[67:73]\n==test_output_functions:[67:75]\n        cls.c.core_2_pickle()\n        cls.c.core_2_json()\n        cls.c.core_2_mos()\n        cls.c.core_2_epw()\n        cls.c.core_2_csv()\n",
             "message-id": "R0801"
         }
     ],
@@ -2323,15 +2268,15 @@
                 "warning": 0
             },
             "aixweather.project_class": {
-                "convention": 8,
+                "convention": 1,
                 "error": 2,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 1,
                 "statement": 114,
-                "warning": 5
+                "warning": 7
             },
-            "e1_pull_DWD_historical_to_all_output_formats": {
+            "examples.e1_pull_DWD_historical_to_all_output_formats": {
                 "convention": 5,
                 "error": 0,
                 "fatal": 0,
@@ -2406,7 +2351,8 @@
         },
         "by_msg": {
             "too-many-instance-attributes": 1,
-            "missing-function-docstring": 31,
+            "missing-function-docstring": 24,
+            "unnecessary-pass": 2,
             "attribute-defined-outside-init": 12,
             "assignment-from-none": 1,
             "unexpected-keyword-arg": 1,
@@ -2439,10 +2385,10 @@
                 "aixweather.data_quality_checks"
             ],
             "pandas": [
-                "test_DWD_forecast",
-                "test_output_functions",
+                "aixweather.project_class",
                 "utils_4_tests",
-                "aixweather.project_class"
+                "test_DWD_forecast",
+                "test_output_functions"
             ],
             "aixweather.imports.DWD": [
                 "aixweather.project_class"
@@ -2484,42 +2430,42 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
+                "test_EPW",
+                "examples.e1_pull_DWD_historical_to_all_output_formats",
                 "test_ERC",
                 "test_DWD_historical",
-                "test_EPW",
-                "test_DWD_forecast",
                 "test_output_functions",
-                "e1_pull_DWD_historical_to_all_output_formats",
+                "test_DWD_forecast",
                 "test_TRY"
             ],
             "aixweather.data_quality_checks": [
-                "e1_pull_DWD_historical_to_all_output_formats"
+                "examples.e1_pull_DWD_historical_to_all_output_formats"
             ],
             "parameterized.parameterized": [
                 "test_DWD_forecast",
                 "test_DWD_historical"
             ],
             "aixweather.definitions": [
+                "test_EPW",
                 "test_ERC",
                 "test_DWD_historical",
-                "test_EPW",
-                "test_DWD_forecast",
                 "test_output_functions",
                 "utils_4_tests",
+                "test_DWD_forecast",
                 "test_TRY"
             ],
             "aixweather.imports.utils_import": [
-                "test_DWD_forecast",
                 "test_output_functions",
-                "utils_4_tests"
+                "utils_4_tests",
+                "test_DWD_forecast"
             ],
             "utils_4_tests": [
                 "test_DWD_forecast"
             ],
             "tests": [
+                "test_EPW",
                 "test_ERC",
                 "test_DWD_historical",
-                "test_EPW",
                 "test_output_functions",
                 "test_TRY"
             ]
@@ -2537,19 +2483,19 @@
         "undocumented": {
             "function": 5,
             "klass": 14,
-            "method": 26,
+            "method": 19,
             "module": 0
         },
-        "convention": 67,
+        "convention": 60,
         "error": 47,
         "fatal": 0,
         "info": 0,
         "refactor": 4,
         "statement": 428,
-        "warning": 22,
+        "warning": 24,
         "global_note": 0,
         "nb_duplicated_lines": 13,
-        "percent_duplicated_lines": 1.147396293027361
+        "percent_duplicated_lines": 1.1274934952298352
     },
     "previous": {
         "bad_names": {
@@ -2596,15 +2542,15 @@
                 "warning": 0
             },
             "aixweather.project_class": {
-                "convention": 8,
+                "convention": 1,
                 "error": 2,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 1,
                 "statement": 114,
-                "warning": 5
+                "warning": 7
             },
-            "e1_pull_DWD_historical_to_all_output_formats": {
+            "examples.e1_pull_DWD_historical_to_all_output_formats": {
                 "convention": 5,
                 "error": 0,
                 "fatal": 0,
@@ -2679,7 +2625,8 @@
         },
         "by_msg": {
             "too-many-instance-attributes": 1,
-            "missing-function-docstring": 31,
+            "missing-function-docstring": 24,
+            "unnecessary-pass": 2,
             "attribute-defined-outside-init": 12,
             "assignment-from-none": 1,
             "unexpected-keyword-arg": 1,
@@ -2712,9 +2659,9 @@
                 "aixweather.data_quality_checks"
             ],
             "pandas": [
-                "test_DWD_forecast",
                 "test_output_functions",
                 "utils_4_tests",
+                "test_DWD_forecast",
                 "aixweather.project_class"
             ],
             "aixweather.imports.DWD": [
@@ -2757,42 +2704,42 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
+                "test_EPW",
+                "examples.e1_pull_DWD_historical_to_all_output_formats",
                 "test_ERC",
                 "test_DWD_historical",
-                "test_EPW",
-                "test_DWD_forecast",
                 "test_output_functions",
-                "e1_pull_DWD_historical_to_all_output_formats",
+                "test_DWD_forecast",
                 "test_TRY"
             ],
             "aixweather.data_quality_checks": [
-                "e1_pull_DWD_historical_to_all_output_formats"
+                "examples.e1_pull_DWD_historical_to_all_output_formats"
             ],
             "parameterized.parameterized": [
                 "test_DWD_forecast",
                 "test_DWD_historical"
             ],
             "aixweather.definitions": [
+                "test_EPW",
                 "test_ERC",
                 "test_DWD_historical",
-                "test_EPW",
-                "test_DWD_forecast",
                 "test_output_functions",
                 "utils_4_tests",
+                "test_DWD_forecast",
                 "test_TRY"
             ],
             "aixweather.imports.utils_import": [
-                "test_DWD_forecast",
                 "test_output_functions",
-                "utils_4_tests"
+                "utils_4_tests",
+                "test_DWD_forecast"
             ],
             "utils_4_tests": [
                 "test_DWD_forecast"
             ],
             "tests": [
+                "test_EPW",
                 "test_ERC",
                 "test_DWD_historical",
-                "test_EPW",
                 "test_output_functions",
                 "test_TRY"
             ]
@@ -2810,18 +2757,18 @@
         "undocumented": {
             "function": 5,
             "klass": 14,
-            "method": 26,
+            "method": 19,
             "module": 0
         },
-        "convention": 67,
+        "convention": 60,
         "error": 47,
         "fatal": 0,
         "info": 0,
         "refactor": 4,
         "statement": 428,
-        "warning": 22,
-        "global_note": 2.3364485981308416,
+        "warning": 24,
+        "global_note": 2.453271028037384,
         "nb_duplicated_lines": 13,
-        "percent_duplicated_lines": 1.147396293027361
+        "percent_duplicated_lines": 1.1274934952298352
     }
 }
