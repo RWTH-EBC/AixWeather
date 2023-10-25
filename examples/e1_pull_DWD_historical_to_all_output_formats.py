@@ -1,4 +1,4 @@
-"""This module contains examples"""
+"""Contains examples"""
 
 import datetime as dt
 
