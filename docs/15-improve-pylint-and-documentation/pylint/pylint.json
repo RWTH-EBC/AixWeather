@@ -1,677 +1,6 @@
 {
     "messages": [
         {
-            "type": "error",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "unrecognized-option",
-            "message": "Unrecognized option found: no-space-check",
-            "message-id": "E0015"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'print-statement' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'parameter-unpacking' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'unpacking-in-except' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'old-raise-syntax' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'backtick' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'import-star-module-level' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'apply-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'basestring-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'buffer-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'cmp-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'coerce-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'execfile-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'file-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'long-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'raw_input-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'reduce-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'standarderror-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'unicode-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'xrange-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'coerce-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'delslice-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'getslice-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'setslice-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'no-absolute-import' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'old-division' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'dict-iter-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'dict-view-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'next-method-called' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'metaclass-assignment' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'indexing-exception' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'raising-string' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'reload-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'oct-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'hex-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'nonzero-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'cmp-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'input-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'round-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'intern-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'unichr-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'map-builtin-not-iterating' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'zip-builtin-not-iterating' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'range-builtin-not-iterating' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'filter-builtin-not-iterating' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'using-cmp-argument' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'div-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'idiv-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'rdiv-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'exception-message-attribute' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'invalid-str-codec' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'sys-max-int' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'bad-python3-import' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'deprecated-string-function' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'deprecated-str-translate-call' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'deprecated-itertools-function' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'deprecated-types-field' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'next-method-defined' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'dict-items-not-iterating' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'dict-keys-not-iterating' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'dict-values-not-iterating' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
             "type": "warning",
             "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
             "obj": "",
@@ -679,7 +8,7 @@
             "column": 0,
             "path": ".pylintrc",
             "symbol": "unknown-option-value",
-            "message": "Unknown option value for '--disable', expected a valid pylint message and got 'long-suffix'",
+            "message": "Unknown option value for '--disable', expected a valid pylint message and got 'use-implicit-booleaness-not-comparison-to-string'",
             "message-id": "W0012"
         },
         {
@@ -690,63 +19,30 @@
             "column": 0,
             "path": ".pylintrc",
             "symbol": "unknown-option-value",
-            "message": "Unknown option value for '--disable', expected a valid pylint message and got 'old-ne-operator'",
+            "message": "Unknown option value for '--disable', expected a valid pylint message and got 'use-implicit-booleaness-not-comparison-to-zero'",
             "message-id": "W0012"
         },
         {
-            "type": "warning",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "unknown-option-value",
-            "message": "Unknown option value for '--disable', expected a valid pylint message and got 'old-octal-literal'",
-            "message-id": "W0012"
+            "type": "convention",
+            "module": "aixweather.data_quality_checks",
+            "obj": "plot_heatmap_missing_values_daily",
+            "line": 10,
+            "column": 38,
+            "path": "aixweather/data_quality_checks.py",
+            "symbol": "invalid-name",
+            "message": "Argument name \"df\" doesn't conform to snake_case naming style",
+            "message-id": "C0103"
         },
         {
-            "type": "warning",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "unknown-option-value",
-            "message": "Unknown option value for '--disable', expected a valid pylint message and got 'non-ascii-bytes-literal'",
-            "message-id": "W0012"
-        },
-        {
-            "type": "warning",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "unknown-option-value",
-            "message": "Unknown option value for '--disable', expected a valid pylint message and got 'locally-enabled'",
-            "message-id": "W0012"
-        },
-        {
-            "type": "warning",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/.pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": ".pylintrc",
-            "symbol": "unknown-option-value",
-            "message": "Unknown option value for '--disable', expected a valid pylint message and got 'eq-without-hash'",
-            "message-id": "W0012"
-        },
-        {
-            "type": "refactor",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral",
-            "line": 34,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "too-many-instance-attributes",
-            "message": "Too many instance attributes (9/7)",
-            "message-id": "R0902"
+            "type": "convention",
+            "module": "aixweather.data_quality_checks",
+            "obj": "print_df_info",
+            "line": 40,
+            "column": 18,
+            "path": "aixweather/data_quality_checks.py",
+            "symbol": "invalid-name",
+            "message": "Argument name \"df\" doesn't conform to snake_case naming style",
+            "message-id": "C0103"
         },
         {
             "type": "warning",
@@ -773,7 +69,7 @@
     ],
     "stats": {
         "bad_names": {
-            "argument": 0,
+            "argument": 2,
             "attr": 0,
             "klass": 0,
             "class_attribute": 0,
@@ -798,7 +94,7 @@
                 "warning": 0
             },
             "aixweather.data_quality_checks": {
-                "convention": 0,
+                "convention": 2,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -820,7 +116,7 @@
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
-                "refactor": 1,
+                "refactor": 0,
                 "statement": 114,
                 "warning": 2
             },
@@ -898,7 +194,7 @@
             }
         },
         "by_msg": {
-            "too-many-instance-attributes": 1,
+            "invalid-name": 2,
             "unnecessary-pass": 2
         },
         "code_type_count": {
@@ -974,11 +270,11 @@
             "method": 0,
             "module": 0
         },
-        "convention": 0,
+        "convention": 2,
         "error": 0,
         "fatal": 0,
         "info": 0,
-        "refactor": 1,
+        "refactor": 0,
         "statement": 142,
         "warning": 2,
         "global_note": 0,
@@ -987,7 +283,7 @@
     },
     "previous": {
         "bad_names": {
-            "argument": 0,
+            "argument": 2,
             "attr": 0,
             "klass": 0,
             "class_attribute": 0,
@@ -1012,7 +308,7 @@
                 "warning": 0
             },
             "aixweather.data_quality_checks": {
-                "convention": 0,
+                "convention": 2,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -1034,11 +330,11 @@
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
-                "refactor": 1,
+                "refactor": 0,
                 "statement": 114,
                 "warning": 2
             },
-            "examples.e1_pull_DWD_historical_to_all_output_formats": {
+            "e1_pull_DWD_historical_to_all_output_formats": {
                 "convention": 0,
                 "error": 0,
                 "fatal": 0,
@@ -1112,7 +408,7 @@
             }
         },
         "by_msg": {
-            "too-many-instance-attributes": 1,
+            "invalid-name": 2,
             "unnecessary-pass": 2
         },
         "code_type_count": {
@@ -1188,14 +484,14 @@
             "method": 0,
             "module": 0
         },
-        "convention": 0,
+        "convention": 2,
         "error": 0,
         "fatal": 0,
         "info": 0,
-        "refactor": 1,
+        "refactor": 0,
         "statement": 142,
         "warning": 2,
-        "global_note": 9.788732394366198,
+        "global_note": 9.71830985915493,
         "nb_duplicated_lines": 0,
         "percent_duplicated_lines": 0.0
     }
