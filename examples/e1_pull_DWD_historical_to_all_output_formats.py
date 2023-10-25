@@ -1,5 +1,7 @@
 """Contains examples"""
 
+# pylint: disable=all
+
 import datetime as dt
 
 
