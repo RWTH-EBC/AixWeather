@@ -2,6 +2,7 @@
 This module contains functions and classes for testing. It provides utilities
 to load data, compare results and execute tests
 """
+# pylint: disable=all
 
 import re
 import json

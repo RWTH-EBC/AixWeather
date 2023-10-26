@@ -13,9 +13,11 @@ Please also raise an issue and create a new branch labeled `issueNR_issueName`.
 Once your feature is ready, create a pull request and check if the pipeline succeeds.
 Assign a reviewer before merging. Once the review is finished, you can merge.
 
-Please note that the main branch is used in the WebApp and should always be synced with PyPi.
-Pull requests should merge into the development first.
-Every merge of the development to the main branch must result in a PyPi release.
+Please note that the main branch is used in the WebApp and therefore changes here must be in 
+line with the current version of the WebApp. Updates to the main branch that affect 
+functionalities require therefore a PYPI RELEASE. The VM that hosts the WebApp must be updated.
+Pull requests should merge into the development first. The development branch contains a working 
+version which can be functionally ahead of the WebApp.
 
 
 **Before** implementing or modifying modules, classes or functions, please read the following page.

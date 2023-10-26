@@ -1,13 +1,8 @@
 ![E.ON EBC RWTH Aachen University](./docs/source/_static/EBC_Logo.png)
 
-<!-- Add Paper here:
-[![DOI](https://joss.theoj.org/papers/10.21105/joss.03861/status.svg  )](Todo_DOI)
--->
 [![pylint](https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.svg )](https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.html)
 [![documentation](https://rwth-ebc.github.io/AixWeather//main//docs/doc.svg)](https://rwth-ebc.github.io/AixWeather//main//docs/index.html)
-[![coverage](https://rwth-ebc.github.io/AixWeather//main//coverage/badge.svg)](https://rwth-ebc.github.io/AixWeather//main//coverage)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
-[![build](https://rwth-ebc.github.io/AixWeather//main//build/build.svg)](https://rwth-ebc.github.io/AixWeather//main//build/build.svg)
 
 <div align="center">
   <img src="./docs/aixweather_logo/AixWeather_Logo.png" alt="AixWeather Logo" width="50%">
