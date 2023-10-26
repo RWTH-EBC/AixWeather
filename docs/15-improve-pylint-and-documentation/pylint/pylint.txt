@@ -1,8 +1,4 @@
-************* Module e_1_pull_DWD_historical_to_all_output_formats
-examples/e_1_pull_DWD_historical_to_all_output_formats.py:1:0: C0103: Module name "e_1_pull_DWD_historical_to_all_output_formats" doesn't conform to snake_case naming style (invalid-name)
-examples/e_1_pull_DWD_historical_to_all_output_formats.py:8:0: C0103: Function name "e_1_pull_DWD_historical_to_all_output_formats" doesn't conform to snake_case naming style (invalid-name)
-examples/e_1_pull_DWD_historical_to_all_output_formats.py:18:4: C0103: Variable name "DWD_pull_project" doesn't conform to snake_case naming style (invalid-name)
 
------------------------------------
-Your code has been rated at 9.81/10
+------------------------------------
+Your code has been rated at 10.00/10
 

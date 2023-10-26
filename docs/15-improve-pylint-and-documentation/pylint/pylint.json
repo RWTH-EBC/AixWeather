@@ -1,39 +1,5 @@
 {
-    "messages": [
-        {
-            "type": "convention",
-            "module": "e_1_pull_DWD_historical_to_all_output_formats",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "examples/e_1_pull_DWD_historical_to_all_output_formats.py",
-            "symbol": "invalid-name",
-            "message": "Module name \"e_1_pull_DWD_historical_to_all_output_formats\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "convention",
-            "module": "e_1_pull_DWD_historical_to_all_output_formats",
-            "obj": "e_1_pull_DWD_historical_to_all_output_formats",
-            "line": 8,
-            "column": 0,
-            "path": "examples/e_1_pull_DWD_historical_to_all_output_formats.py",
-            "symbol": "invalid-name",
-            "message": "Function name \"e_1_pull_DWD_historical_to_all_output_formats\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "convention",
-            "module": "e_1_pull_DWD_historical_to_all_output_formats",
-            "obj": "e_1_pull_DWD_historical_to_all_output_formats",
-            "line": 18,
-            "column": 4,
-            "path": "examples/e_1_pull_DWD_historical_to_all_output_formats.py",
-            "symbol": "invalid-name",
-            "message": "Variable name \"DWD_pull_project\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        }
-    ],
+    "messages": [],
     "stats": {
         "bad_names": {
             "argument": 0,
@@ -87,8 +53,8 @@
                 "statement": 112,
                 "warning": 0
             },
-            "e_1_pull_DWD_historical_to_all_output_formats": {
-                "convention": 3,
+            "e1_pull_DWD_historical_to_all_output_formats": {
+                "convention": 0,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -160,9 +126,7 @@
                 "warning": 0
             }
         },
-        "by_msg": {
-            "invalid-name": 3
-        },
+        "by_msg": {},
         "code_type_count": {
             "code": 0,
             "comment": 0,
@@ -220,10 +184,10 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
-                "e_1_pull_DWD_historical_to_all_output_formats"
+                "e1_pull_DWD_historical_to_all_output_formats"
             ],
             "aixweather.data_quality_checks": [
-                "e_1_pull_DWD_historical_to_all_output_formats"
+                "e1_pull_DWD_historical_to_all_output_formats"
             ]
         },
         "duplicated_lines": {
@@ -242,7 +206,7 @@
             "method": 0,
             "module": 0
         },
-        "convention": 3,
+        "convention": 0,
         "error": 0,
         "fatal": 0,
         "info": 0,
@@ -306,8 +270,8 @@
                 "statement": 112,
                 "warning": 0
             },
-            "e_1_pull_DWD_historical_to_all_output_formats": {
-                "convention": 3,
+            "examples.e1_pull_DWD_historical_to_all_output_formats": {
+                "convention": 0,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -379,9 +343,7 @@
                 "warning": 0
             }
         },
-        "by_msg": {
-            "invalid-name": 3
-        },
+        "by_msg": {},
         "code_type_count": {
             "code": 0,
             "comment": 0,
@@ -439,10 +401,10 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
-                "e_1_pull_DWD_historical_to_all_output_formats"
+                "examples.e1_pull_DWD_historical_to_all_output_formats"
             ],
             "aixweather.data_quality_checks": [
-                "e_1_pull_DWD_historical_to_all_output_formats"
+                "examples.e1_pull_DWD_historical_to_all_output_formats"
             ]
         },
         "duplicated_lines": {
@@ -461,14 +423,14 @@
             "method": 0,
             "module": 0
         },
-        "convention": 3,
+        "convention": 0,
         "error": 0,
         "fatal": 0,
         "info": 0,
         "refactor": 0,
         "statement": 159,
         "warning": 0,
-        "global_note": 9.81132075471698,
+        "global_note": 10.0,
         "nb_duplicated_lines": 0,
         "percent_duplicated_lines": 0.0
     }
