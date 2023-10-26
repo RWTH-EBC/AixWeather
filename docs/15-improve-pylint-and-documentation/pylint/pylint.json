@@ -2,25 +2,36 @@
     "messages": [
         {
             "type": "convention",
-            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
-            "obj": "e1_pull_DWD_historical_to_all_output_formats",
-            "line": 16,
-            "column": 4,
-            "path": "examples/e1_pull_DWD_historical_to_all_output_formats.py",
-            "symbol": "import-outside-toplevel",
-            "message": "Import outside toplevel (aixweather.project_class.ProjectClassDWDHistorical)",
-            "message-id": "C0415"
+            "module": "e_1_pull_DWD_historical_to_all_output_formats",
+            "obj": "",
+            "line": 1,
+            "column": 0,
+            "path": "examples/e_1_pull_DWD_historical_to_all_output_formats.py",
+            "symbol": "invalid-name",
+            "message": "Module name \"e_1_pull_DWD_historical_to_all_output_formats\" doesn't conform to snake_case naming style",
+            "message-id": "C0103"
         },
         {
             "type": "convention",
-            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
-            "obj": "e1_pull_DWD_historical_to_all_output_formats",
-            "line": 40,
+            "module": "e_1_pull_DWD_historical_to_all_output_formats",
+            "obj": "e_1_pull_DWD_historical_to_all_output_formats",
+            "line": 8,
+            "column": 0,
+            "path": "examples/e_1_pull_DWD_historical_to_all_output_formats.py",
+            "symbol": "invalid-name",
+            "message": "Function name \"e_1_pull_DWD_historical_to_all_output_formats\" doesn't conform to snake_case naming style",
+            "message-id": "C0103"
+        },
+        {
+            "type": "convention",
+            "module": "e_1_pull_DWD_historical_to_all_output_formats",
+            "obj": "e_1_pull_DWD_historical_to_all_output_formats",
+            "line": 18,
             "column": 4,
-            "path": "examples/e1_pull_DWD_historical_to_all_output_formats.py",
-            "symbol": "import-outside-toplevel",
-            "message": "Import outside toplevel (aixweather.data_quality_checks.plot_heatmap_missing_values_daily)",
-            "message-id": "C0415"
+            "path": "examples/e_1_pull_DWD_historical_to_all_output_formats.py",
+            "symbol": "invalid-name",
+            "message": "Variable name \"DWD_pull_project\" doesn't conform to snake_case naming style",
+            "message-id": "C0103"
         }
     ],
     "stats": {
@@ -76,8 +87,8 @@
                 "statement": 112,
                 "warning": 0
             },
-            "examples.e1_pull_DWD_historical_to_all_output_formats": {
-                "convention": 2,
+            "e_1_pull_DWD_historical_to_all_output_formats": {
+                "convention": 3,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -150,7 +161,7 @@
             }
         },
         "by_msg": {
-            "import-outside-toplevel": 2
+            "invalid-name": 3
         },
         "code_type_count": {
             "code": 0,
@@ -209,10 +220,10 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
-                "examples.e1_pull_DWD_historical_to_all_output_formats"
+                "e_1_pull_DWD_historical_to_all_output_formats"
             ],
             "aixweather.data_quality_checks": [
-                "examples.e1_pull_DWD_historical_to_all_output_formats"
+                "e_1_pull_DWD_historical_to_all_output_formats"
             ]
         },
         "duplicated_lines": {
@@ -231,7 +242,7 @@
             "method": 0,
             "module": 0
         },
-        "convention": 2,
+        "convention": 3,
         "error": 0,
         "fatal": 0,
         "info": 0,
@@ -295,8 +306,8 @@
                 "statement": 112,
                 "warning": 0
             },
-            "examples.e1_pull_DWD_historical_to_all_output_formats": {
-                "convention": 2,
+            "e_1_pull_DWD_historical_to_all_output_formats": {
+                "convention": 3,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -369,7 +380,7 @@
             }
         },
         "by_msg": {
-            "import-outside-toplevel": 2
+            "invalid-name": 3
         },
         "code_type_count": {
             "code": 0,
@@ -428,10 +439,10 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
-                "examples.e1_pull_DWD_historical_to_all_output_formats"
+                "e_1_pull_DWD_historical_to_all_output_formats"
             ],
             "aixweather.data_quality_checks": [
-                "examples.e1_pull_DWD_historical_to_all_output_formats"
+                "e_1_pull_DWD_historical_to_all_output_formats"
             ]
         },
         "duplicated_lines": {
@@ -450,14 +461,14 @@
             "method": 0,
             "module": 0
         },
-        "convention": 2,
+        "convention": 3,
         "error": 0,
         "fatal": 0,
         "info": 0,
         "refactor": 0,
         "statement": 159,
         "warning": 0,
-        "global_note": 9.874213836477987,
+        "global_note": 9.81132075471698,
         "nb_duplicated_lines": 0,
         "percent_duplicated_lines": 0.0
     }

@@ -1,7 +1,8 @@
-************* Module examples.e1_pull_DWD_historical_to_all_output_formats
-examples/e1_pull_DWD_historical_to_all_output_formats.py:16:4: C0415: Import outside toplevel (aixweather.project_class.ProjectClassDWDHistorical) (import-outside-toplevel)
-examples/e1_pull_DWD_historical_to_all_output_formats.py:40:4: C0415: Import outside toplevel (aixweather.data_quality_checks.plot_heatmap_missing_values_daily) (import-outside-toplevel)
+************* Module e_1_pull_DWD_historical_to_all_output_formats
+examples/e_1_pull_DWD_historical_to_all_output_formats.py:1:0: C0103: Module name "e_1_pull_DWD_historical_to_all_output_formats" doesn't conform to snake_case naming style (invalid-name)
+examples/e_1_pull_DWD_historical_to_all_output_formats.py:8:0: C0103: Function name "e_1_pull_DWD_historical_to_all_output_formats" doesn't conform to snake_case naming style (invalid-name)
+examples/e_1_pull_DWD_historical_to_all_output_formats.py:18:4: C0103: Variable name "DWD_pull_project" doesn't conform to snake_case naming style (invalid-name)
 
 -----------------------------------
-Your code has been rated at 9.87/10
+Your code has been rated at 9.81/10
 
