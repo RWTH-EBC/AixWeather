@@ -20,7 +20,6 @@ Pull requests should merge into the development first. The development branch co
 version which can be functionally ahead of the WebApp.
 
 
-
 **Before** implementing or modifying modules, classes or functions, please read the following page.
 
 ## Styleguide
