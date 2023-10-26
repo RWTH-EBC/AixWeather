@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>aixweather.data_quality_checks &mdash; aixweather 0.1.1 documentation</title>
+  <title>aixweather.data_quality_checks &mdash; aixweather 0.1.2 documentation</title>
   
 
   
@@ -171,6 +171,15 @@
 
 
 <div class="viewcode-block" id="plot_heatmap_missing_values_daily"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.data_quality_checks.plot_heatmap_missing_values_daily">[docs]</a><span class="k">def</span> <span class="nf">plot_heatmap_missing_values_daily</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a heatmap to visualize daily missing values in a DataFrame.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame to be analyzed for missing values.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        plt: A Matplotlib figure representing the heatmap of missing values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Group by day and check for any missing values for each day</span>
     <span class="n">missing_data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">())</span>
 
@@ -192,6 +201,9 @@
 
 
 <div class="viewcode-block" id="print_df_info"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.data_quality_checks.print_df_info">[docs]</a><span class="k">def</span> <span class="nf">print_df_info</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    prints df info for intermediate checks or debugging</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">info</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">info</span><span class="p">)</span></div>
 </pre></div>

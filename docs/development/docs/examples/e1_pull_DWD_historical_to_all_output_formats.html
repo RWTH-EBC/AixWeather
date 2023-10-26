@@ -8,7 +8,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>&lt;no title&gt; &mdash; aixweather 0.1.1 documentation</title>
+  <title>&lt;no title&gt; &mdash; aixweather 0.1.2 documentation</title>
   
 
   
@@ -163,7 +163,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
+  <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Contains examples&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
 </pre></div>
 </div>
 <p>choose the project class according to the desired weather data origin</p>
@@ -178,13 +180,15 @@
     <span class="c1"># specify whether nan-values should be filled when exporting</span>
     <span class="n">fillna</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="c1"># define results path if desired</span>
-    <span class="n">abs_result_folder_path</span><span class="o">=</span><span class="kc">None</span>
+    <span class="n">abs_result_folder_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>import historical weather from the DWD open access database</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">import_data</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">How the imported data looks like:</span><span class="se">\n</span><span class="si">{</span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">imported_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">How the imported data looks like:</span><span class="se">\n</span><span class="si">{</span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">imported_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <p>convert this imported data to the core format</p>
