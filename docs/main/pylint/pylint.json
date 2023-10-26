@@ -1,2505 +1,18 @@
 {
-    "messages": [
-        {
-            "type": "error",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "unrecognized-option",
-            "message": "Unrecognized option found: no-space-check",
-            "message-id": "E0015"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'print-statement' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'parameter-unpacking' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'unpacking-in-except' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'old-raise-syntax' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'backtick' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'import-star-module-level' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'apply-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'basestring-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'buffer-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'cmp-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'coerce-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'execfile-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'file-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'long-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'raw_input-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'reduce-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'standarderror-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'unicode-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'xrange-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'coerce-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'delslice-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'getslice-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'setslice-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'no-absolute-import' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'old-division' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'dict-iter-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'dict-view-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'next-method-called' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'metaclass-assignment' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'indexing-exception' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'raising-string' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'reload-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'oct-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'hex-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'nonzero-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'cmp-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'input-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'round-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'intern-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'unichr-builtin' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'map-builtin-not-iterating' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'zip-builtin-not-iterating' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'range-builtin-not-iterating' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'filter-builtin-not-iterating' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'using-cmp-argument' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'div-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'idiv-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'rdiv-method' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'exception-message-attribute' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'invalid-str-codec' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'sys-max-int' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'bad-python3-import' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'deprecated-string-function' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'deprecated-str-translate-call' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'deprecated-itertools-function' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'deprecated-types-field' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'next-method-defined' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'dict-items-not-iterating' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'dict-keys-not-iterating' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "refactor",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "useless-option-value",
-            "message": "Useless option value for '--disable', 'dict-values-not-iterating' was removed from pylint, see https://github.com/pylint-dev/pylint/pull/4942.",
-            "message-id": "R0022"
-        },
-        {
-            "type": "warning",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "unknown-option-value",
-            "message": "Unknown option value for '--disable', expected a valid pylint message and got 'long-suffix'",
-            "message-id": "W0012"
-        },
-        {
-            "type": "warning",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "unknown-option-value",
-            "message": "Unknown option value for '--disable', expected a valid pylint message and got 'old-ne-operator'",
-            "message-id": "W0012"
-        },
-        {
-            "type": "warning",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "unknown-option-value",
-            "message": "Unknown option value for '--disable', expected a valid pylint message and got 'old-octal-literal'",
-            "message-id": "W0012"
-        },
-        {
-            "type": "warning",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "unknown-option-value",
-            "message": "Unknown option value for '--disable', expected a valid pylint message and got 'non-ascii-bytes-literal'",
-            "message-id": "W0012"
-        },
-        {
-            "type": "warning",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "unknown-option-value",
-            "message": "Unknown option value for '--disable', expected a valid pylint message and got 'locally-enabled'",
-            "message-id": "W0012"
-        },
-        {
-            "type": "warning",
-            "module": "/builds/EBC/EBC_all/github_ci/AixWeather/pylintrc",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "pylintrc",
-            "symbol": "unknown-option-value",
-            "message": "Unknown option value for '--disable', expected a valid pylint message and got 'eq-without-hash'",
-            "message-id": "W0012"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.data_quality_checks",
-            "obj": "plot_heatmap_missing_values_daily",
-            "line": 10,
-            "column": 0,
-            "path": "aixweather/data_quality_checks.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.data_quality_checks",
-            "obj": "print_df_info",
-            "line": 31,
-            "column": 0,
-            "path": "aixweather/data_quality_checks.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.definitions",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "aixweather/definitions.py",
-            "symbol": "missing-module-docstring",
-            "message": "Missing module docstring",
-            "message-id": "C0114"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.definitions",
-            "obj": "result_folder_path",
-            "line": 46,
-            "column": 0,
-            "path": "aixweather/definitions.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "",
-            "line": 42,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (105/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "",
-            "line": 43,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (118/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "",
-            "line": 49,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (103/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "",
-            "line": 110,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (106/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "",
-            "line": 115,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (106/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "",
-            "line": 125,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (102/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "",
-            "line": 194,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (113/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "missing-module-docstring",
-            "message": "Missing module docstring",
-            "message-id": "C0114"
-        },
-        {
-            "type": "refactor",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral",
-            "line": 33,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "too-many-instance-attributes",
-            "message": "Too many instance attributes (14/7)",
-            "message-id": "R0902"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_data",
-            "line": 80,
-            "column": 4,
-            "path": "aixweather/project_class.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.import_data",
-            "line": 100,
-            "column": 4,
-            "path": "aixweather/project_class.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.data_2_core_data",
-            "line": 104,
-            "column": 4,
-            "path": "aixweather/project_class.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_mos",
-            "line": 108,
-            "column": 4,
-            "path": "aixweather/project_class.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_epw",
-            "line": 113,
-            "column": 4,
-            "path": "aixweather/project_class.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_csv",
-            "line": 118,
-            "column": 4,
-            "path": "aixweather/project_class.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_json",
-            "line": 121,
-            "column": 4,
-            "path": "aixweather/project_class.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_pickle",
-            "line": 124,
-            "column": 4,
-            "path": "aixweather/project_class.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "warning",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_mos",
-            "line": 109,
-            "column": 8,
-            "path": "aixweather/project_class.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'output_df_mos' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_epw",
-            "line": 114,
-            "column": 8,
-            "path": "aixweather/project_class.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'output_df_epw' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_csv",
-            "line": 119,
-            "column": 8,
-            "path": "aixweather/project_class.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'output_df_csv' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_json",
-            "line": 122,
-            "column": 8,
-            "path": "aixweather/project_class.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'output_df_json' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.core_2_pickle",
-            "line": 125,
-            "column": 8,
-            "path": "aixweather/project_class.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'output_df_pickle' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "error",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassCustom.import_data",
-            "line": 287,
-            "column": 8,
-            "path": "aixweather/project_class.py",
-            "symbol": "assignment-from-none",
-            "message": "Assigning result of a function call, where the function returns None",
-            "message-id": "E1128"
-        },
-        {
-            "type": "error",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassCustom.import_data",
-            "line": 288,
-            "column": 25,
-            "path": "aixweather/project_class.py",
-            "symbol": "unexpected-keyword-arg",
-            "message": "Unexpected keyword argument 'path' in function call",
-            "message-id": "E1123"
-        },
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "",
-            "line": 4,
-            "column": 0,
-            "path": "aixweather/project_class.py",
-            "symbol": "wrong-import-order",
-            "message": "standard import \"from abc import ABC, abstractmethod\" should be placed before \"import pandas as pd\"",
-            "message-id": "C0411"
-        },
-        {
-            "type": "convention",
-            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
-            "obj": "",
-            "line": 43,
-            "column": 0,
-            "path": "examples/e1_pull_DWD_historical_to_all_output_formats.py",
-            "symbol": "missing-final-newline",
-            "message": "Final newline missing",
-            "message-id": "C0304"
-        },
-        {
-            "type": "convention",
-            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "examples/e1_pull_DWD_historical_to_all_output_formats.py",
-            "symbol": "missing-module-docstring",
-            "message": "Missing module docstring",
-            "message-id": "C0114"
-        },
-        {
-            "type": "convention",
-            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "examples/e1_pull_DWD_historical_to_all_output_formats.py",
-            "symbol": "invalid-name",
-            "message": "Module name \"e1_pull_DWD_historical_to_all_output_formats\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "convention",
-            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
-            "obj": "e1_pull_DWD_historical_to_all_output_formats",
-            "line": 3,
-            "column": 0,
-            "path": "examples/e1_pull_DWD_historical_to_all_output_formats.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
-            "obj": "e1_pull_DWD_historical_to_all_output_formats",
-            "line": 3,
-            "column": 0,
-            "path": "examples/e1_pull_DWD_historical_to_all_output_formats.py",
-            "symbol": "invalid-name",
-            "message": "Function name \"e1_pull_DWD_historical_to_all_output_formats\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "convention",
-            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
-            "obj": "e1_pull_DWD_historical_to_all_output_formats",
-            "line": 5,
-            "column": 4,
-            "path": "examples/e1_pull_DWD_historical_to_all_output_formats.py",
-            "symbol": "import-outside-toplevel",
-            "message": "Import outside toplevel (aixweather.project_class.ProjectClassDWDHistorical)",
-            "message-id": "C0415"
-        },
-        {
-            "type": "convention",
-            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
-            "obj": "e1_pull_DWD_historical_to_all_output_formats",
-            "line": 8,
-            "column": 4,
-            "path": "examples/e1_pull_DWD_historical_to_all_output_formats.py",
-            "symbol": "invalid-name",
-            "message": "Variable name \"DWD_pull_project\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "convention",
-            "module": "examples.e1_pull_DWD_historical_to_all_output_formats",
-            "obj": "e1_pull_DWD_historical_to_all_output_formats",
-            "line": 27,
-            "column": 4,
-            "path": "examples/e1_pull_DWD_historical_to_all_output_formats.py",
-            "symbol": "import-outside-toplevel",
-            "message": "Import outside toplevel (aixweather.data_quality_checks.plot_heatmap_missing_values_daily)",
-            "message-id": "C0415"
-        },
-        {
-            "type": "convention",
-            "module": "test_DWD_forecast",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "tests/test_DWD_forecast.py",
-            "symbol": "invalid-name",
-            "message": "Module name \"test_DWD_forecast\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "convention",
-            "module": "test_DWD_forecast",
-            "obj": "BaseDWDForecast",
-            "line": 17,
-            "column": 0,
-            "path": "tests/test_DWD_forecast.py",
-            "symbol": "missing-class-docstring",
-            "message": "Missing class docstring",
-            "message-id": "C0115"
-        },
-        {
-            "type": "convention",
-            "module": "test_DWD_forecast",
-            "obj": "BaseDWDForecast.init_and_run_DWD_forecast",
-            "line": 19,
-            "column": 4,
-            "path": "tests/test_DWD_forecast.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "test_DWD_forecast",
-            "obj": "BaseDWDForecast.init_and_run_DWD_forecast",
-            "line": 19,
-            "column": 4,
-            "path": "tests/test_DWD_forecast.py",
-            "symbol": "invalid-name",
-            "message": "Method name \"init_and_run_DWD_forecast\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "convention",
-            "module": "test_DWD_forecast",
-            "obj": "TestDWDForecastFromImportedData",
-            "line": 40,
-            "column": 0,
-            "path": "tests/test_DWD_forecast.py",
-            "symbol": "missing-class-docstring",
-            "message": "Missing class docstring",
-            "message-id": "C0115"
-        },
-        {
-            "type": "warning",
-            "module": "test_DWD_forecast",
-            "obj": "TestDWDForecastFromImportedData.setUpClass",
-            "line": 63,
-            "column": 13,
-            "path": "tests/test_DWD_forecast.py",
-            "symbol": "unspecified-encoding",
-            "message": "Using open without explicitly specifying an encoding",
-            "message-id": "W1514"
-        },
-        {
-            "type": "convention",
-            "module": "test_DWD_forecast",
-            "obj": "TestDWDForecastNoAssert",
-            "line": 80,
-            "column": 0,
-            "path": "tests/test_DWD_forecast.py",
-            "symbol": "missing-class-docstring",
-            "message": "Missing class docstring",
-            "message-id": "C0115"
-        },
-        {
-            "type": "convention",
-            "module": "test_DWD_forecast",
-            "obj": "TestDWDForecastNoAssert.test_imports_and_transformation_without_assert",
-            "line": 89,
-            "column": 4,
-            "path": "tests/test_DWD_forecast.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "test_DWD_forecast",
-            "obj": "create_imported_data_for_unit_test",
-            "line": 99,
-            "column": 4,
-            "path": "tests/test_DWD_forecast.py",
-            "symbol": "invalid-name",
-            "message": "Variable name \"c\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "convention",
-            "module": "test_DWD_forecast",
-            "obj": "",
-            "line": 14,
-            "column": 0,
-            "path": "tests/test_DWD_forecast.py",
-            "symbol": "wrong-import-order",
-            "message": "third party import \"import utils_4_tests\" should be placed before \"from aixweather import definitions\"",
-            "message-id": "C0411"
-        },
-        {
-            "type": "convention",
-            "module": "test_DWD_historical",
-            "obj": "",
-            "line": 87,
-            "column": 0,
-            "path": "tests/test_DWD_historical.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (133/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "convention",
-            "module": "test_DWD_historical",
-            "obj": "",
-            "line": 96,
-            "column": 0,
-            "path": "tests/test_DWD_historical.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (114/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "warning",
-            "module": "test_DWD_historical",
-            "obj": "",
-            "line": 87,
-            "column": 17,
-            "path": "tests/test_DWD_historical.py",
-            "symbol": "fixme",
-            "message": "Todo: check how programs (e.g. TMY3Reader or EnergyPlus) handle leap year data and apply handling here respectively",
-            "message-id": "W0511"
-        },
-        {
-            "type": "convention",
-            "module": "test_DWD_historical",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "tests/test_DWD_historical.py",
-            "symbol": "invalid-name",
-            "message": "Module name \"test_DWD_historical\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "error",
-            "module": "test_DWD_historical",
-            "obj": "",
-            "line": 13,
-            "column": 0,
-            "path": "tests/test_DWD_historical.py",
-            "symbol": "no-name-in-module",
-            "message": "No name 'utils_4_tests' in module 'tests'",
-            "message-id": "E0611"
-        },
-        {
-            "type": "convention",
-            "module": "test_DWD_historical",
-            "obj": "BaseDWDHistorical",
-            "line": 16,
-            "column": 0,
-            "path": "tests/test_DWD_historical.py",
-            "symbol": "missing-class-docstring",
-            "message": "Missing class docstring",
-            "message-id": "C0115"
-        },
-        {
-            "type": "convention",
-            "module": "test_DWD_historical",
-            "obj": "BaseDWDHistorical.init_and_run_DWD_historical",
-            "line": 18,
-            "column": 4,
-            "path": "tests/test_DWD_historical.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "test_DWD_historical",
-            "obj": "BaseDWDHistorical.init_and_run_DWD_historical",
-            "line": 18,
-            "column": 4,
-            "path": "tests/test_DWD_historical.py",
-            "symbol": "invalid-name",
-            "message": "Method name \"init_and_run_DWD_historical\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "convention",
-            "module": "test_DWD_historical",
-            "obj": "TestDWDHistoricalNoAssert",
-            "line": 70,
-            "column": 0,
-            "path": "tests/test_DWD_historical.py",
-            "symbol": "missing-class-docstring",
-            "message": "Missing class docstring",
-            "message-id": "C0115"
-        },
-        {
-            "type": "convention",
-            "module": "test_DWD_historical",
-            "obj": "TestDWDHistoricalNoAssert.test_imports_and_transformation_without_assert",
-            "line": 95,
-            "column": 4,
-            "path": "tests/test_DWD_historical.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "test_EPW",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "tests/test_EPW.py",
-            "symbol": "invalid-name",
-            "message": "Module name \"test_EPW\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "error",
-            "module": "test_EPW",
-            "obj": "",
-            "line": 10,
-            "column": 0,
-            "path": "tests/test_EPW.py",
-            "symbol": "no-name-in-module",
-            "message": "No name 'utils_4_tests' in module 'tests'",
-            "message-id": "E0611"
-        },
-        {
-            "type": "convention",
-            "module": "test_EPW",
-            "obj": "BaseEPW",
-            "line": 13,
-            "column": 0,
-            "path": "tests/test_EPW.py",
-            "symbol": "missing-class-docstring",
-            "message": "Missing class docstring",
-            "message-id": "C0115"
-        },
-        {
-            "type": "convention",
-            "module": "test_EPW",
-            "obj": "BaseEPW.init_and_run_EPW",
-            "line": 15,
-            "column": 4,
-            "path": "tests/test_EPW.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "test_EPW",
-            "obj": "BaseEPW.init_and_run_EPW",
-            "line": 15,
-            "column": 4,
-            "path": "tests/test_EPW.py",
-            "symbol": "invalid-name",
-            "message": "Method name \"init_and_run_EPW\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "convention",
-            "module": "test_EPW",
-            "obj": "TestEPWEssenLadybug",
-            "line": 36,
-            "column": 0,
-            "path": "tests/test_EPW.py",
-            "symbol": "missing-class-docstring",
-            "message": "Missing class docstring",
-            "message-id": "C0115"
-        },
-        {
-            "type": "convention",
-            "module": "test_ERC",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "tests/test_ERC.py",
-            "symbol": "invalid-name",
-            "message": "Module name \"test_ERC\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "error",
-            "module": "test_ERC",
-            "obj": "",
-            "line": 10,
-            "column": 0,
-            "path": "tests/test_ERC.py",
-            "symbol": "no-name-in-module",
-            "message": "No name 'utils_4_tests' in module 'tests'",
-            "message-id": "E0611"
-        },
-        {
-            "type": "convention",
-            "module": "test_ERC",
-            "obj": "BaseERC",
-            "line": 18,
-            "column": 0,
-            "path": "tests/test_ERC.py",
-            "symbol": "missing-class-docstring",
-            "message": "Missing class docstring",
-            "message-id": "C0115"
-        },
-        {
-            "type": "convention",
-            "module": "test_ERC",
-            "obj": "BaseERC.init_and_run_ERC",
-            "line": 20,
-            "column": 4,
-            "path": "tests/test_ERC.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "test_ERC",
-            "obj": "BaseERC.init_and_run_ERC",
-            "line": 20,
-            "column": 4,
-            "path": "tests/test_ERC.py",
-            "symbol": "invalid-name",
-            "message": "Method name \"init_and_run_ERC\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "convention",
-            "module": "test_ERC",
-            "obj": "TestERC10Days.test_without_assert",
-            "line": 52,
-            "column": 4,
-            "path": "tests/test_ERC.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "test_ERC",
-            "obj": "",
-            "line": 11,
-            "column": 0,
-            "path": "tests/test_ERC.py",
-            "symbol": "ungrouped-imports",
-            "message": "Imports from package aixweather are not grouped",
-            "message-id": "C0412"
-        },
-        {
-            "type": "convention",
-            "module": "test_TRY",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "tests/test_TRY.py",
-            "symbol": "invalid-name",
-            "message": "Module name \"test_TRY\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "error",
-            "module": "test_TRY",
-            "obj": "",
-            "line": 10,
-            "column": 0,
-            "path": "tests/test_TRY.py",
-            "symbol": "no-name-in-module",
-            "message": "No name 'utils_4_tests' in module 'tests'",
-            "message-id": "E0611"
-        },
-        {
-            "type": "convention",
-            "module": "test_TRY",
-            "obj": "BaseTRY",
-            "line": 13,
-            "column": 0,
-            "path": "tests/test_TRY.py",
-            "symbol": "missing-class-docstring",
-            "message": "Missing class docstring",
-            "message-id": "C0115"
-        },
-        {
-            "type": "convention",
-            "module": "test_TRY",
-            "obj": "BaseTRY.init_and_run_TRY",
-            "line": 15,
-            "column": 4,
-            "path": "tests/test_TRY.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "test_TRY",
-            "obj": "BaseTRY.init_and_run_TRY",
-            "line": 15,
-            "column": 4,
-            "path": "tests/test_TRY.py",
-            "symbol": "invalid-name",
-            "message": "Method name \"init_and_run_TRY\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "convention",
-            "module": "test_TRY",
-            "obj": "TestDWDTRY2015",
-            "line": 36,
-            "column": 0,
-            "path": "tests/test_TRY.py",
-            "symbol": "missing-class-docstring",
-            "message": "Missing class docstring",
-            "message-id": "C0115"
-        },
-        {
-            "type": "convention",
-            "module": "test_TRY",
-            "obj": "TestDWDTRY2015Sommer",
-            "line": 49,
-            "column": 0,
-            "path": "tests/test_TRY.py",
-            "symbol": "missing-class-docstring",
-            "message": "Missing class docstring",
-            "message-id": "C0115"
-        },
-        {
-            "type": "convention",
-            "module": "test_TRY",
-            "obj": "TestDWDTRY2045",
-            "line": 62,
-            "column": 0,
-            "path": "tests/test_TRY.py",
-            "symbol": "missing-class-docstring",
-            "message": "Missing class docstring",
-            "message-id": "C0115"
-        },
-        {
-            "type": "error",
-            "module": "test_output_functions",
-            "obj": "",
-            "line": 13,
-            "column": 0,
-            "path": "tests/test_output_functions.py",
-            "symbol": "no-name-in-module",
-            "message": "No name 'utils_4_tests' in module 'tests'",
-            "message-id": "E0611"
-        },
-        {
-            "type": "convention",
-            "module": "test_output_functions",
-            "obj": "BaseOutputFunction",
-            "line": 17,
-            "column": 0,
-            "path": "tests/test_output_functions.py",
-            "symbol": "missing-class-docstring",
-            "message": "Missing class docstring",
-            "message-id": "C0115"
-        },
-        {
-            "type": "convention",
-            "module": "test_output_functions",
-            "obj": "BaseOutputFunction.init",
-            "line": 20,
-            "column": 8,
-            "path": "tests/test_output_functions.py",
-            "symbol": "invalid-name",
-            "message": "Attribute name \"c\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "convention",
-            "module": "test_output_functions",
-            "obj": "BaseOutputFunction.init",
-            "line": 18,
-            "column": 4,
-            "path": "tests/test_output_functions.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "error",
-            "module": "test_output_functions",
-            "obj": "BaseOutputFunction.init",
-            "line": 18,
-            "column": 4,
-            "path": "tests/test_output_functions.py",
-            "symbol": "no-self-argument",
-            "message": "Method 'init' should have \"self\" as first argument",
-            "message-id": "E0213"
-        },
-        {
-            "type": "error",
-            "module": "test_output_functions",
-            "obj": "BaseOutputFunction.tearDownClass",
-            "line": 38,
-            "column": 50,
-            "path": "tests/test_output_functions.py",
-            "symbol": "no-member",
-            "message": "Class 'BaseOutputFunction' has no 'c' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "warning",
-            "module": "test_output_functions",
-            "obj": "BaseOutputFunction.init",
-            "line": 20,
-            "column": 8,
-            "path": "tests/test_output_functions.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'c' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "test_output_functions",
-            "obj": "BaseOutputFunction.init",
-            "line": 26,
-            "column": 8,
-            "path": "tests/test_output_functions.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'folder_tests' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "test_output_functions",
-            "obj": "BaseOutputFunction.init",
-            "line": 30,
-            "column": 8,
-            "path": "tests/test_output_functions.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'start_formatted' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "test_output_functions",
-            "obj": "BaseOutputFunction.init",
-            "line": 31,
-            "column": 8,
-            "path": "tests/test_output_functions.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'end_formatted' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "test_output_functions",
-            "obj": "BaseOutputFunction.init",
-            "line": 33,
-            "column": 8,
-            "path": "tests/test_output_functions.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'station_id' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "test_output_functions",
-            "obj": "BaseOutputFunction.init",
-            "line": 34,
-            "column": 8,
-            "path": "tests/test_output_functions.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'city' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "test_output_functions",
-            "obj": "TestOutputFunction.setUpClass",
-            "line": 64,
-            "column": 13,
-            "path": "tests/test_output_functions.py",
-            "symbol": "unspecified-encoding",
-            "message": "Using open without explicitly specifying an encoding",
-            "message-id": "W1514"
-        },
-        {
-            "type": "convention",
-            "module": "test_output_functions",
-            "obj": "TestOutputFunction.test_core_data",
-            "line": 75,
-            "column": 4,
-            "path": "tests/test_output_functions.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "test_output_functions",
-            "obj": "TestOutputFunction.test_meta_data",
-            "line": 78,
-            "column": 4,
-            "path": "tests/test_output_functions.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "test_output_functions",
-            "obj": "",
-            "line": 14,
-            "column": 0,
-            "path": "tests/test_output_functions.py",
-            "symbol": "ungrouped-imports",
-            "message": "Imports from package aixweather are not grouped",
-            "message-id": "C0412"
-        },
-        {
-            "type": "convention",
-            "module": "utils_4_tests",
-            "obj": "",
-            "line": 59,
-            "column": 0,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (112/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "convention",
-            "module": "utils_4_tests",
-            "obj": "",
-            "line": 79,
-            "column": 0,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "line-too-long",
-            "message": "Line too long (105/100)",
-            "message-id": "C0301"
-        },
-        {
-            "type": "convention",
-            "module": "utils_4_tests",
-            "obj": "load_mos",
-            "line": 16,
-            "column": 0,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "warning",
-            "module": "utils_4_tests",
-            "obj": "load_mos",
-            "line": 17,
-            "column": 9,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "unspecified-encoding",
-            "message": "Using open without explicitly specifying an encoding",
-            "message-id": "W1514"
-        },
-        {
-            "type": "warning",
-            "module": "utils_4_tests",
-            "obj": "load_mos",
-            "line": 19,
-            "column": 9,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "unspecified-encoding",
-            "message": "Using open without explicitly specifying an encoding",
-            "message-id": "W1514"
-        },
-        {
-            "type": "convention",
-            "module": "utils_4_tests",
-            "obj": "load_epw",
-            "line": 28,
-            "column": 0,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "warning",
-            "module": "utils_4_tests",
-            "obj": "load_epw",
-            "line": 29,
-            "column": 9,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "unspecified-encoding",
-            "message": "Using open without explicitly specifying an encoding",
-            "message-id": "W1514"
-        },
-        {
-            "type": "warning",
-            "module": "utils_4_tests",
-            "obj": "load_epw",
-            "line": 31,
-            "column": 9,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "unspecified-encoding",
-            "message": "Using open without explicitly specifying an encoding",
-            "message-id": "W1514"
-        },
-        {
-            "type": "convention",
-            "module": "utils_4_tests",
-            "obj": "load_json",
-            "line": 36,
-            "column": 0,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "warning",
-            "module": "utils_4_tests",
-            "obj": "load_json",
-            "line": 37,
-            "column": 9,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "unspecified-encoding",
-            "message": "Using open without explicitly specifying an encoding",
-            "message-id": "W1514"
-        },
-        {
-            "type": "warning",
-            "module": "utils_4_tests",
-            "obj": "load_json",
-            "line": 39,
-            "column": 9,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "unspecified-encoding",
-            "message": "Using open without explicitly specifying an encoding",
-            "message-id": "W1514"
-        },
-        {
-            "type": "convention",
-            "module": "utils_4_tests",
-            "obj": "load_csv",
-            "line": 44,
-            "column": 0,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "utils_4_tests",
-            "obj": "delete_created_result_files",
-            "line": 50,
-            "column": 0,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_epw",
-            "line": 165,
-            "column": 8,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "invalid-name",
-            "message": "Attribute name \"maxDiff\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "convention",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_core_data",
-            "line": 90,
-            "column": 4,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_core_data",
-            "line": 92,
-            "column": 25,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'folder_tests' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_core_data",
-            "line": 92,
-            "column": 55,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'city' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_core_data",
-            "line": 94,
-            "column": 55,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'c' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "convention",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_meta_data",
-            "line": 96,
-            "column": 4,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "warning",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_meta_data",
-            "line": 97,
-            "column": 13,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "unspecified-encoding",
-            "message": "Using open without explicitly specifying an encoding",
-            "message-id": "W1514"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_meta_data",
-            "line": 98,
-            "column": 25,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'folder_tests' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_meta_data",
-            "line": 98,
-            "column": 55,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'city' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_meta_data",
-            "line": 110,
-            "column": 33,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'c' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_meta_data",
-            "line": 113,
-            "column": 8,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'assertSetEqual' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_meta_data",
-            "line": 116,
-            "column": 12,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'assertEqual' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_meta_data",
-            "line": 117,
-            "column": 45,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'c' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "convention",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_json",
-            "line": 120,
-            "column": 4,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_json",
-            "line": 122,
-            "column": 12,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'folder_tests' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_json",
-            "line": 122,
-            "column": 31,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'c' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_json",
-            "line": 122,
-            "column": 73,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'city' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_json",
-            "line": 127,
-            "column": 8,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'assertEqual' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_json",
-            "line": 132,
-            "column": 8,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'assertEqual' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_json",
-            "line": 137,
-            "column": 8,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'assertEqual' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "convention",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_csv",
-            "line": 139,
-            "column": 4,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_csv",
-            "line": 141,
-            "column": 12,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'folder_tests' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_csv",
-            "line": 141,
-            "column": 31,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'c' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_csv",
-            "line": 141,
-            "column": 73,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'city' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "convention",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_mos",
-            "line": 145,
-            "column": 4,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_mos",
-            "line": 147,
-            "column": 12,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'folder_tests' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_mos",
-            "line": 147,
-            "column": 31,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'c' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_mos",
-            "line": 148,
-            "column": 15,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'station_id' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_mos",
-            "line": 148,
-            "column": 33,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'start_formatted' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_mos",
-            "line": 148,
-            "column": 56,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'end_formatted' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_mos",
-            "line": 148,
-            "column": 77,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'city' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_mos",
-            "line": 150,
-            "column": 8,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'assertEqual' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_mos",
-            "line": 153,
-            "column": 8,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'assertEqual' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_mos",
-            "line": 158,
-            "column": 8,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'assertEqual' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "convention",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_epw",
-            "line": 160,
-            "column": 4,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_epw",
-            "line": 162,
-            "column": 12,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'folder_tests' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_epw",
-            "line": 162,
-            "column": 31,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'c' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_epw",
-            "line": 163,
-            "column": 15,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'station_id' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_epw",
-            "line": 163,
-            "column": 33,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'start_formatted' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_epw",
-            "line": 163,
-            "column": 56,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'end_formatted' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_epw",
-            "line": 163,
-            "column": 77,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'city' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_epw",
-            "line": 166,
-            "column": 8,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'assertEqual' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_epw",
-            "line": 169,
-            "column": 8,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'assertEqual' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_epw",
-            "line": 174,
-            "column": 8,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'RegressionTestsClass' has no 'assertEqual' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "warning",
-            "module": "utils_4_tests",
-            "obj": "RegressionTestsClass.test_output_epw",
-            "line": 165,
-            "column": 8,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'maxDiff' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "convention",
-            "module": "utils_4_tests",
-            "obj": "DatetimeIndexTestsClass",
-            "line": 177,
-            "column": 0,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "missing-class-docstring",
-            "message": "Missing class docstring",
-            "message-id": "C0115"
-        },
-        {
-            "type": "convention",
-            "module": "utils_4_tests",
-            "obj": "DatetimeIndexTestsClass.test_is_continuous_datetime_index",
-            "line": 178,
-            "column": 4,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "DatetimeIndexTestsClass.test_is_continuous_datetime_index",
-            "line": 180,
-            "column": 21,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'DatetimeIndexTestsClass' has no 'c' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "error",
-            "module": "utils_4_tests",
-            "obj": "DatetimeIndexTestsClass.test_is_continuous_datetime_index",
-            "line": 183,
-            "column": 8,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "no-member",
-            "message": "Instance of 'DatetimeIndexTestsClass' has no 'assertTrue' member",
-            "message-id": "E1101"
-        },
-        {
-            "type": "refactor",
-            "module": "utils_4_tests",
-            "obj": "DatetimeIndexTestsClass",
-            "line": 177,
-            "column": 0,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "too-few-public-methods",
-            "message": "Too few public methods (1/2)",
-            "message-id": "R0903"
-        },
-        {
-            "type": "refactor",
-            "module": "utils_4_tests",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_DWD_historical:[20:28]\n==test_output_functions:[18:26]\n        abs_result_folder_path = os.path.join(definitions.result_folder_path(), name)\n        cls.c = ProjectClassDWDHistorical(\n            start=start,\n            end=end,\n            station=station,\n            abs_result_folder_path=abs_result_folder_path,\n        )\n        cls.folder_tests = os.path.join(",
-            "message-id": "R0801"
-        },
-        {
-            "type": "refactor",
-            "module": "utils_4_tests",
-            "obj": "",
-            "line": 1,
-            "column": 0,
-            "path": "tests/utils_4_tests.py",
-            "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_DWD_forecast:[67:73]\n==test_output_functions:[67:75]\n        cls.c.core_2_pickle()\n        cls.c.core_2_json()\n        cls.c.core_2_mos()\n        cls.c.core_2_epw()\n        cls.c.core_2_csv()\n\n    # ignore core_data and meta_data tests\n    def test_core_data(self):",
-            "message-id": "R0801"
-        }
-    ],
+    "messages": [],
     "stats": {
         "bad_names": {
             "argument": 0,
-            "attr": 2,
+            "attr": 0,
             "klass": 0,
             "class_attribute": 0,
             "class_const": 0,
             "const": 0,
             "inlinevar": 0,
             "function": 1,
-            "method": 5,
-            "module": 6,
-            "variable": 2,
+            "method": 0,
+            "module": 1,
+            "variable": 1,
             "typevar": 0,
             "typealias": 0
         },
@@ -2514,7 +27,7 @@
                 "warning": 0
             },
             "aixweather.data_quality_checks": {
-                "convention": 2,
+                "convention": 0,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -2523,7 +36,7 @@
                 "warning": 0
             },
             "aixweather.definitions": {
-                "convention": 2,
+                "convention": 0,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -2532,16 +45,16 @@
                 "warning": 0
             },
             "aixweather.project_class": {
-                "convention": 17,
-                "error": 2,
+                "convention": 0,
+                "error": 0,
                 "fatal": 0,
                 "info": 0,
-                "refactor": 1,
-                "statement": 114,
-                "warning": 5
+                "refactor": 0,
+                "statement": 112,
+                "warning": 0
             },
-            "examples.e1_pull_DWD_historical_to_all_output_formats": {
-                "convention": 8,
+            "e1_pull_DWD_historical_to_all_output_formats": {
+                "convention": 0,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -2550,91 +63,70 @@
                 "warning": 0
             },
             "test_DWD_forecast": {
-                "convention": 9,
+                "convention": 0,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 51,
-                "warning": 1
+                "statement": 0,
+                "warning": 0
             },
             "test_DWD_historical": {
-                "convention": 8,
-                "error": 1,
+                "convention": 0,
+                "error": 0,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 29,
-                "warning": 1
+                "statement": 0,
+                "warning": 0
             },
             "test_EPW": {
-                "convention": 5,
-                "error": 1,
+                "convention": 0,
+                "error": 0,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 20,
+                "statement": 0,
                 "warning": 0
             },
             "test_ERC": {
-                "convention": 6,
-                "error": 1,
+                "convention": 0,
+                "error": 0,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 21,
+                "statement": 0,
                 "warning": 0
             },
             "test_TRY": {
-                "convention": 7,
-                "error": 1,
+                "convention": 0,
+                "error": 0,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 26,
+                "statement": 0,
                 "warning": 0
             },
             "test_output_functions": {
-                "convention": 6,
-                "error": 3,
+                "convention": 0,
+                "error": 0,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 38,
-                "warning": 7
+                "statement": 0,
+                "warning": 0
             },
             "utils_4_tests": {
-                "convention": 16,
-                "error": 38,
+                "convention": 0,
+                "error": 0,
                 "fatal": 0,
                 "info": 0,
-                "refactor": 3,
-                "statement": 82,
-                "warning": 8
+                "refactor": 0,
+                "statement": 0,
+                "warning": 0
             }
         },
-        "by_msg": {
-            "missing-function-docstring": 35,
-            "missing-module-docstring": 3,
-            "line-too-long": 11,
-            "too-many-instance-attributes": 1,
-            "attribute-defined-outside-init": 12,
-            "assignment-from-none": 1,
-            "unexpected-keyword-arg": 1,
-            "wrong-import-order": 2,
-            "missing-final-newline": 1,
-            "invalid-name": 16,
-            "import-outside-toplevel": 2,
-            "missing-class-docstring": 14,
-            "unspecified-encoding": 9,
-            "fixme": 1,
-            "no-name-in-module": 5,
-            "ungrouped-imports": 2,
-            "no-self-argument": 1,
-            "no-member": 39,
-            "too-few-public-methods": 1,
-            "duplicate-code": 2
-        },
+        "by_msg": {},
         "code_type_count": {
             "code": 0,
             "comment": 0,
@@ -2650,10 +142,7 @@
                 "aixweather.data_quality_checks"
             ],
             "pandas": [
-                "aixweather.project_class",
-                "test_output_functions",
-                "utils_4_tests",
-                "test_DWD_forecast"
+                "aixweather.project_class"
             ],
             "aixweather.imports.DWD": [
                 "aixweather.project_class"
@@ -2695,44 +184,10 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
-                "test_output_functions",
-                "test_ERC",
-                "examples.e1_pull_DWD_historical_to_all_output_formats",
-                "test_DWD_historical",
-                "test_EPW",
-                "test_TRY",
-                "test_DWD_forecast"
+                "e1_pull_DWD_historical_to_all_output_formats"
             ],
             "aixweather.data_quality_checks": [
-                "examples.e1_pull_DWD_historical_to_all_output_formats"
-            ],
-            "parameterized.parameterized": [
-                "test_DWD_historical",
-                "test_DWD_forecast"
-            ],
-            "aixweather.definitions": [
-                "test_output_functions",
-                "test_ERC",
-                "test_DWD_historical",
-                "test_EPW",
-                "utils_4_tests",
-                "test_TRY",
-                "test_DWD_forecast"
-            ],
-            "aixweather.imports.utils_import": [
-                "test_output_functions",
-                "utils_4_tests",
-                "test_DWD_forecast"
-            ],
-            "utils_4_tests": [
-                "test_DWD_forecast"
-            ],
-            "tests": [
-                "test_output_functions",
-                "test_ERC",
-                "test_DWD_historical",
-                "test_EPW",
-                "test_TRY"
+                "e1_pull_DWD_historical_to_all_output_formats"
             ]
         },
         "duplicated_lines": {
@@ -2740,41 +195,41 @@
             "percent_duplicated_lines": 0.0
         },
         "node_count": {
-            "function": 12,
-            "klass": 26,
-            "method": 60,
-            "module": 12
+            "function": 5,
+            "klass": 7,
+            "method": 28,
+            "module": 5
         },
         "undocumented": {
-            "function": 9,
-            "klass": 14,
-            "method": 26,
-            "module": 3
+            "function": 0,
+            "klass": 0,
+            "method": 0,
+            "module": 0
         },
-        "convention": 86,
-        "error": 47,
+        "convention": 0,
+        "error": 0,
         "fatal": 0,
         "info": 0,
-        "refactor": 4,
-        "statement": 428,
-        "warning": 22,
+        "refactor": 0,
+        "statement": 159,
+        "warning": 0,
         "global_note": 0,
-        "nb_duplicated_lines": 13,
-        "percent_duplicated_lines": 1.2037037037037037
+        "nb_duplicated_lines": 0,
+        "percent_duplicated_lines": 0.0
     },
     "previous": {
         "bad_names": {
             "argument": 0,
-            "attr": 2,
+            "attr": 0,
             "klass": 0,
             "class_attribute": 0,
             "class_const": 0,
             "const": 0,
             "inlinevar": 0,
             "function": 1,
-            "method": 5,
-            "module": 6,
-            "variable": 2,
+            "method": 0,
+            "module": 1,
+            "variable": 1,
             "typevar": 0,
             "typealias": 0
         },
@@ -2789,7 +244,7 @@
                 "warning": 0
             },
             "aixweather.data_quality_checks": {
-                "convention": 2,
+                "convention": 0,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -2798,7 +253,7 @@
                 "warning": 0
             },
             "aixweather.definitions": {
-                "convention": 2,
+                "convention": 0,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -2807,16 +262,16 @@
                 "warning": 0
             },
             "aixweather.project_class": {
-                "convention": 17,
-                "error": 2,
+                "convention": 0,
+                "error": 0,
                 "fatal": 0,
                 "info": 0,
-                "refactor": 1,
-                "statement": 114,
-                "warning": 5
+                "refactor": 0,
+                "statement": 112,
+                "warning": 0
             },
-            "e1_pull_DWD_historical_to_all_output_formats": {
-                "convention": 8,
+            "examples.e1_pull_DWD_historical_to_all_output_formats": {
+                "convention": 0,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -2825,91 +280,70 @@
                 "warning": 0
             },
             "test_DWD_forecast": {
-                "convention": 9,
+                "convention": 0,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 51,
-                "warning": 1
+                "statement": 0,
+                "warning": 0
             },
             "test_DWD_historical": {
-                "convention": 8,
-                "error": 1,
+                "convention": 0,
+                "error": 0,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 29,
-                "warning": 1
+                "statement": 0,
+                "warning": 0
             },
             "test_EPW": {
-                "convention": 5,
-                "error": 1,
+                "convention": 0,
+                "error": 0,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 20,
+                "statement": 0,
                 "warning": 0
             },
             "test_ERC": {
-                "convention": 6,
-                "error": 1,
+                "convention": 0,
+                "error": 0,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 21,
+                "statement": 0,
                 "warning": 0
             },
             "test_TRY": {
-                "convention": 7,
-                "error": 1,
+                "convention": 0,
+                "error": 0,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 26,
+                "statement": 0,
                 "warning": 0
             },
             "test_output_functions": {
-                "convention": 6,
-                "error": 3,
+                "convention": 0,
+                "error": 0,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 38,
-                "warning": 7
+                "statement": 0,
+                "warning": 0
             },
             "utils_4_tests": {
-                "convention": 16,
-                "error": 38,
+                "convention": 0,
+                "error": 0,
                 "fatal": 0,
                 "info": 0,
-                "refactor": 3,
-                "statement": 82,
-                "warning": 8
+                "refactor": 0,
+                "statement": 0,
+                "warning": 0
             }
         },
-        "by_msg": {
-            "missing-function-docstring": 35,
-            "missing-module-docstring": 3,
-            "line-too-long": 11,
-            "too-many-instance-attributes": 1,
-            "attribute-defined-outside-init": 12,
-            "assignment-from-none": 1,
-            "unexpected-keyword-arg": 1,
-            "wrong-import-order": 2,
-            "missing-final-newline": 1,
-            "invalid-name": 16,
-            "import-outside-toplevel": 2,
-            "missing-class-docstring": 14,
-            "unspecified-encoding": 9,
-            "fixme": 1,
-            "no-name-in-module": 5,
-            "ungrouped-imports": 2,
-            "no-self-argument": 1,
-            "no-member": 39,
-            "too-few-public-methods": 1,
-            "duplicate-code": 2
-        },
+        "by_msg": {},
         "code_type_count": {
             "code": 0,
             "comment": 0,
@@ -2925,10 +359,7 @@
                 "aixweather.data_quality_checks"
             ],
             "pandas": [
-                "aixweather.project_class",
-                "test_output_functions",
-                "utils_4_tests",
-                "test_DWD_forecast"
+                "aixweather.project_class"
             ],
             "aixweather.imports.DWD": [
                 "aixweather.project_class"
@@ -2970,44 +401,10 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
-                "test_output_functions",
-                "test_ERC",
-                "test_DWD_historical",
-                "test_EPW",
-                "e1_pull_DWD_historical_to_all_output_formats",
-                "test_TRY",
-                "test_DWD_forecast"
+                "examples.e1_pull_DWD_historical_to_all_output_formats"
             ],
             "aixweather.data_quality_checks": [
-                "e1_pull_DWD_historical_to_all_output_formats"
-            ],
-            "parameterized.parameterized": [
-                "test_DWD_historical",
-                "test_DWD_forecast"
-            ],
-            "aixweather.definitions": [
-                "test_output_functions",
-                "test_ERC",
-                "test_DWD_historical",
-                "test_EPW",
-                "utils_4_tests",
-                "test_TRY",
-                "test_DWD_forecast"
-            ],
-            "aixweather.imports.utils_import": [
-                "test_output_functions",
-                "utils_4_tests",
-                "test_DWD_forecast"
-            ],
-            "utils_4_tests": [
-                "test_DWD_forecast"
-            ],
-            "tests": [
-                "test_output_functions",
-                "test_ERC",
-                "test_DWD_historical",
-                "test_EPW",
-                "test_TRY"
+                "examples.e1_pull_DWD_historical_to_all_output_formats"
             ]
         },
         "duplicated_lines": {
@@ -3015,26 +412,26 @@
             "percent_duplicated_lines": 0.0
         },
         "node_count": {
-            "function": 12,
-            "klass": 26,
-            "method": 60,
-            "module": 12
+            "function": 5,
+            "klass": 7,
+            "method": 28,
+            "module": 5
         },
         "undocumented": {
-            "function": 9,
-            "klass": 14,
-            "method": 26,
-            "module": 3
+            "function": 0,
+            "klass": 0,
+            "method": 0,
+            "module": 0
         },
-        "convention": 86,
-        "error": 47,
+        "convention": 0,
+        "error": 0,
         "fatal": 0,
         "info": 0,
-        "refactor": 4,
-        "statement": 428,
-        "warning": 22,
-        "global_note": 1.8925233644859816,
-        "nb_duplicated_lines": 13,
-        "percent_duplicated_lines": 1.2037037037037037
+        "refactor": 0,
+        "statement": 159,
+        "warning": 0,
+        "global_note": 10.0,
+        "nb_duplicated_lines": 0,
+        "percent_duplicated_lines": 0.0
     }
 }

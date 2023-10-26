@@ -183,9 +183,11 @@ In that case, PLEASE raise an issue <a class="reference external" href="https://
 <p>Please also raise an issue and create a new branch labeled <code class="docutils literal notranslate"><span class="pre">issueNR_issueName</span></code>.</p>
 <p>Once your feature is ready, create a pull request and check if the pipeline succeeds.
 Assign a reviewer before merging. Once the review is finished, you can merge.</p>
-<p>Please note that the main branch is used in the WebApp and should always be synced with PyPi.
-Pull requests should merge into the development first.
-Every merge of the development to the main branch must result in a PyPi release.</p>
+<p>Please note that the main branch is used in the WebApp and therefore changes here must be in
+line with the current version of the WebApp. Updates to the main branch that affect
+functionalities require therefore a PYPI RELEASE. The VM that hosts the WebApp must be updated.
+Pull requests should merge into the development first. The development branch contains a working
+version which can be functionally ahead of the WebApp.</p>
 <p><strong>Before</strong> implementing or modifying modules, classes or functions, please read the following page.</p>
 <section id="styleguide">
 <h2>Styleguide<a class="headerlink" href="#styleguide" title="Permalink to this heading">¶</a></h2>
