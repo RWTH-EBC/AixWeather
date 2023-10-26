@@ -1,6 +1,7 @@
 """Contains examples"""
 
-# pylint: disable=all
+# pylint: disable=C0103
+# to ignore that pylint suggests e1_pull_DWD_historical_to_all_output_formats is not snake_case
 
 import datetime as dt
 
