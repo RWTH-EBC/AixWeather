@@ -1,11 +1,12 @@
 """Contains examples"""
 
-# pylint: disable=C0415
-# let pylint ignore to import from aixweather (Import outside toplevel)
+# pylint: disable=C0415, C0103
+# let pylint ignore to import from aixweather (Import outside toplevel), and ignore that pylint
+# suggests e1_pull_DWD_historical_to_all_output_formats would not be snake_case.
 
 import datetime as dt
 
-def e_1_pull_DWD_historical_to_all_output_formats():
+def e1_pull_DWD_historical_to_all_output_formats():
     """
     1. Learn how to use `AixWeather`
     2. See examplary use of additional features and settings
@@ -51,6 +52,6 @@ def e_1_pull_DWD_historical_to_all_output_formats():
 
 
 if __name__ == "__main__":
-    e_1_pull_DWD_historical_to_all_output_formats()
+    e1_pull_DWD_historical_to_all_output_formats()
 
     print("\nExample 1: That´s it! :)")
