@@ -1,6 +1,7 @@
 """
 includes unittests for different TRY datasets
 """
+# pylint: disable=all
 
 import os
 import unittest

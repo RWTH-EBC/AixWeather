@@ -1,6 +1,7 @@
 """
 includes unittests for DWD historical data
 """
+# pylint: disable=all
 
 import os.path
 import unittest

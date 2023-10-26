@@ -1,6 +1,7 @@
 """
 includes unittests for EPW data
 """
+# pylint: disable=all
 
 import os
 import unittest

@@ -1,6 +1,8 @@
 """
 includes unittests for DWD forecast data
 """
+# pylint: disable=all
+
 import json
 import os.path
 import unittest

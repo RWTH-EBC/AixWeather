@@ -1,6 +1,7 @@
 """
 includes untittests for output functions
 """
+# pylint: disable=all
 
 import os.path
 import datetime as dt

@@ -1,6 +1,17 @@
+"""Contains examples"""
+
+# pylint: disable=C0415, C0103
+# let pylint ignore to import from aixweather (Import outside toplevel), and ignore that pylint
+# suggests e1_pull_DWD_historical_to_all_output_formats would not be snake_case.
+
 import datetime as dt
 
 def e1_pull_DWD_historical_to_all_output_formats():
+    """
+    1. Learn how to use `AixWeather`
+    2. See examplary use of additional features and settings
+    3. Create weather data files
+    """
     # choose the project class according to the desired weather data origin
     from aixweather.project_class import ProjectClassDWDHistorical
 
@@ -12,12 +23,14 @@ def e1_pull_DWD_historical_to_all_output_formats():
         # specify whether nan-values should be filled when exporting
         fillna=True,
         # define results path if desired
-        abs_result_folder_path=None
+        abs_result_folder_path=None,
     )
 
     # import historical weather from the DWD open access database
     DWD_pull_project.import_data()
-    print(f"\nHow the imported data looks like:\n{DWD_pull_project.imported_data.head()}\n")
+    print(
+        f"\nHow the imported data looks like:\n{DWD_pull_project.imported_data.head()}\n"
+    )
 
     # convert this imported data to the core format
     DWD_pull_project.data_2_core_data()
@@ -37,7 +50,8 @@ def e1_pull_DWD_historical_to_all_output_formats():
     DWD_pull_project.core_2_mos()
     DWD_pull_project.core_2_epw()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     e1_pull_DWD_historical_to_all_output_formats()
 
     print("\nExample 1: That´s it! :)")

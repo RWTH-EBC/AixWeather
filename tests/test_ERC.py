@@ -1,6 +1,7 @@
 """
 includes unittests for ERC data
 """
+# pylint: disable=all
 
 import os.path
 import unittest

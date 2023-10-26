@@ -1,7 +1,8 @@
-import datetime as dt
-import pandas as pd
+"""This module contains the central project classes which are used by the user."""
 
 from abc import ABC, abstractmethod
+import datetime as dt
+import pandas as pd
 
 from aixweather.imports.DWD import (
     import_DWD_historical,
@@ -29,7 +30,7 @@ from aixweather.core_data_format_2_output_file.unconverted_to_x import (
 from aixweather.core_data_format_2_output_file.to_mos_TMY3 import to_mos
 from aixweather.core_data_format_2_output_file.to_epw_energyplus import to_epw
 
-
+# pylint-disable: R0902
 class ProjectClassGeneral(ABC):
     """
     An abstract base class representing a general project.
@@ -38,20 +39,27 @@ class ProjectClassGeneral(ABC):
     and implement specific methods for data import and transformation.
 
     Attributes:
-        fillna (bool): A flag indicating whether NaN values should be filled in the output formats.
-        abs_result_folder_path (str): Optionally define the absolute path to the desired export location.
-        start (pd.Timestamp or None): The start date of the project data (sometimes inferred by the inheriting class).
+        fillna (bool): A flag indicating whether NaN values should be filled
+            in the output formats.
+        abs_result_folder_path (str): Optionally define the absolute path to
+            the desired export location.
+        start (pd.Timestamp or None): The start date of the project data
+            (sometimes inferred by the inheriting class).
         end (pd.Timestamp or None): The end date of the project data.
 
     Properties:
         imported_data (pd.DataFrame): The imported weather data.
-        core_data (pd.DataFrame): The weather data in a standardized core format.
-        output_df_<outputformat> (pd.DataFrame): The output data frame (name depends on output format).
+        core_data (pd.DataFrame): The weather data in a standardized core
+            format.
+        output_df_<outputformat> (pd.DataFrame): The output data frame
+            (name depends on output format).
         meta_data: Metadata associated with weather data origin.
 
     Methods:
-        import_data(): An abstract method to import data from the specific source.
-        data_2_core_data(): An abstract method to transform imported data into core data format.
+        import_data(): An abstract method to import data from the specific
+            source.
+        data_2_core_data(): An abstract method to transform imported data into
+            core data format.
         core_2_mos(): Convert core data to MOS format.
         core_2_epw(): Convert core data to EPW format.
         core_2_csv(): Convert core data to CSV format.
@@ -78,17 +86,17 @@ class ProjectClassGeneral(ABC):
 
     @property
     def core_data(self):
+        """Get core data"""
         return self._core_data
 
     @core_data.setter
     def core_data(self, value: pd.DataFrame):
+        """Makes sure the core-data data types are correct."""
         if value is not None:
             for column in value.columns:
                 # only real pd.NA values
                 # force strings to be NaN
-                value[column] = pd.to_numeric(
-                    value[column], errors="coerce"
-                )
+                value[column] = pd.to_numeric(value[column], errors="coerce")
                 # round floats for unit test compatibility across different machines
                 digits_2_round = 5
                 if value[column].dtype == "float":
@@ -98,31 +106,52 @@ class ProjectClassGeneral(ABC):
 
     @abstractmethod
     def import_data(self):
-        pass
+        """Abstract function to import weather data."""
 
     @abstractmethod
     def data_2_core_data(self):
-        pass
+        """Abstract function to convert the imported data to core data."""
 
     # core_data_format_2_output_file
     def core_2_mos(self):
-        self.output_df_mos = to_mos(
-            self.core_data, self.meta_data, self.start, self.end, self.fillna, self.abs_result_folder_path
+        """Convert core data to .mos file"""
+        self.output_data_df = to_mos(
+            self.core_data,
+            self.meta_data,
+            self.start,
+            self.end,
+            self.fillna,
+            self.abs_result_folder_path,
         )
 
     def core_2_epw(self):
-        self.output_df_epw = to_epw(
-            self.core_data, self.meta_data, self.start, self.end, self.fillna, self.abs_result_folder_path
+        """Convert core data to .epw file"""
+        self.output_data_df = to_epw(
+            self.core_data,
+            self.meta_data,
+            self.start,
+            self.end,
+            self.fillna,
+            self.abs_result_folder_path,
         )
 
     def core_2_csv(self):
-        self.output_df_csv = to_csv(self.core_data, self.meta_data, self.abs_result_folder_path)
+        """Convert core data to .csv file"""
+        self.output_data_df = to_csv(
+            self.core_data, self.meta_data, self.abs_result_folder_path
+        )
 
     def core_2_json(self):
-        self.output_df_json = to_json(self.core_data, self.meta_data, self.abs_result_folder_path)
+        """Convert core data to .json file"""
+        self.output_data_df = to_json(
+            self.core_data, self.meta_data, self.abs_result_folder_path
+        )
 
     def core_2_pickle(self):
-        self.output_df_pickle = to_pickle(self.core_data, self.meta_data, self.abs_result_folder_path)
+        """Convert core data pickle file"""
+        self.output_data_df = to_pickle(
+            self.core_data, self.meta_data, self.abs_result_folder_path
+        )
 
 
 class ProjectClassDWDHistorical(ProjectClassGeneral):
@@ -142,6 +171,7 @@ class ProjectClassDWDHistorical(ProjectClassGeneral):
 
     # imports
     def import_data(self):
+        """override abstract function"""
         self.meta_data = import_meta_DWD_historical(station=self.station)
         self.imported_data = import_DWD_historical(
             self.start - dt.timedelta(days=1), self.station
@@ -149,6 +179,7 @@ class ProjectClassDWDHistorical(ProjectClassGeneral):
 
     # transformation_2_core_data_DWD_Historical
     def data_2_core_data(self):
+        """override abstract function"""
         self.core_data = DWD_historical_to_core_data(
             self.imported_data,
             self.start - dt.timedelta(days=1),
@@ -174,10 +205,12 @@ class ProjectClassDWDForecast(ProjectClassGeneral):
 
     # imports
     def import_data(self):
+        """override abstract function"""
         self.meta_data = import_meta_DWD_forecast(self.station)
         self.imported_data = import_DWD_forecast(self.station)
 
     def data_2_core_data(self):
+        """override abstract function"""
         self.core_data = DWD_forecast_2_core_data(self.imported_data, self.meta_data)
         self.start = self.core_data.index[0]
         self.end = self.core_data.index[-1]
@@ -191,7 +224,8 @@ class ProjectClassERC(ProjectClassGeneral):
     For common attributes, properties, and methods, refer to the base class.
 
     Attributes:
-        cred (tuple): A tuple containing credentials or authentication information for accessing the data source.
+        cred (tuple): A tuple containing credentials or authentication information for accessing
+        the data source.
     """
 
     def __init__(
@@ -203,12 +237,14 @@ class ProjectClassERC(ProjectClassGeneral):
         self.end_hour_later = end + dt.timedelta(hours=2)
 
     def import_data(self):
+        """override abstract function"""
         self.imported_data = import_ERC(
             self.start_hour_earlier, self.end_hour_later, self.cred
         )
         self.meta_data = import_meta_from_ERC()
 
     def data_2_core_data(self):
+        """override abstract function"""
         self.core_data = ERC_to_core_data(self.imported_data, self.meta_data)
 
 
@@ -229,11 +265,13 @@ class ProjectClassTRY(ProjectClassGeneral):
 
     # imports
     def import_data(self):
+        """override abstract function"""
         self.imported_data = load_try_from_file(path=self.path)
         self.meta_data = load_try_meta_from_file(path=self.path)
 
     # transformation_2_core_data_TRY
     def data_2_core_data(self):
+        """override abstract function"""
         self.core_data = TRY_to_core_data(self.imported_data, self.meta_data)
         self.start = self.core_data.index[0]
         self.end = self.core_data.index[-1]
@@ -256,11 +294,13 @@ class ProjectClassEPW(ProjectClassGeneral):
 
     # imports
     def import_data(self):
+        """override abstract function"""
         self.imported_data = load_epw_from_file(path=self.path)
         self.meta_data = load_epw_meta_from_file(path=self.path)
 
     # transformation_2_core_data_TRY
     def data_2_core_data(self):
+        """override abstract function"""
         self.core_data = EPW_to_core_data(self.imported_data, self.meta_data)
         self.start = self.core_data.index[0]
         self.end = self.core_data.index[-1]
@@ -284,11 +324,13 @@ class ProjectClassCustom(ProjectClassGeneral):
 
     # imports
     def import_data(self):
+        """override abstract function"""
         self.imported_data = load_custom_from_file(path=self.path)
-        self.meta_data = load_custom_meta_data(path=self.path)
+        self.meta_data = load_custom_meta_data()
 
     # transformation_2_core_data_TRY
     def data_2_core_data(self):
+        """override abstract function"""
         self.core_data = custom_to_core_data(self.imported_data, self.meta_data)
         self.start = self.core_data.index[0]  # or define in init
         self.end = self.core_data.index[-1]  # or define in init
