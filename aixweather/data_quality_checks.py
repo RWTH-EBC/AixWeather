@@ -21,10 +21,13 @@ def plot_heatmap_missing_values_daily(df):
     # define resolution depending on the length of the data set
     if len(df) <= (24 * 60):
         resolution = "D"
+        res_name = "daily"
     elif len(df) <= (24 * 7 * 60):
         resolution = "W"
+        res_name = "weekly"
     else:
         resolution = "M"
+        res_name = "monthly"
 
     # Group by resolution and check for missing values in each period
     missing_data = df.resample(resolution).apply(lambda x: x.isnull().mean())
@@ -33,20 +36,21 @@ def plot_heatmap_missing_values_daily(df):
     num_rows = missing_data.shape[0]
 
     # Set the height of the figure based on the number of rows, and a fixed width
-    plt.figure(figsize=(12, num_rows * 0.15 + 3))
+    plt.figure(figsize=(14, num_rows * 0.15 + 3))
 
     sns.heatmap(
         missing_data,
         cmap="Greens_r",
         cbar=True,
+        yticklabels=False  # Remove y-axis labels
     )
 
     # Set y-tick labels to represent each period
     plt.yticks(range(num_rows), missing_data.index.date, rotation=0)
 
     plt.title("Heatmap of data availability\n"
-              "From white (no data) to dark green (100% data)\n"
-              f"Bucket size = {resolution}")
+              "From white (100% data missing) to dark green (0% data missing)\n"
+              f"Bucket size = {res_name}")
     plt.tight_layout()
 
     return plt
