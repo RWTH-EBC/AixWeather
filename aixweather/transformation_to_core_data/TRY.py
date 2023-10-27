@@ -44,6 +44,8 @@ def TRY_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
 
     ### preprocessing raw data for further operations
     df = df_import.copy()
+    # sort by time
+    df = df.sort_index()
     # rename available variables to core data format
     df = auxiliary.rename_columns(df, format_TRY_15_45)
 

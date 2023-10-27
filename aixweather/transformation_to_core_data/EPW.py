@@ -46,12 +46,15 @@ def EPW_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
 
     ### preprocessing raw data for further operations
     df = df_import.copy()
+    # sort by time
+    df = df.sort_index()
     # give names to columns according to documentation of import data
     df.columns = [key for key in format_epw.keys()]
     # rename available variables to core data format
     df = auxiliary.rename_columns(df, format_epw)
     # delete dummy values from EPW
     df = auxiliary.replace_dummy_with_nan(df, format_epw)
+
 
     ### convert timezone to UTC+0
     df = df.shift(periods=meta.timezone, freq="H", axis=0)
