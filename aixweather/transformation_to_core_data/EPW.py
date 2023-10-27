@@ -46,8 +46,8 @@ def EPW_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
 
     ### preprocessing raw data for further operations
     df = df_import.copy()
-    # sort by time
-    df = df.sort_index()
+    # Resample the DataFrame to make the DatetimeIndex complete and monotonic
+    df = df.resample('H').asfreq()
     # give names to columns according to documentation of import data
     df.columns = [key for key in format_epw.keys()]
     # rename available variables to core data format

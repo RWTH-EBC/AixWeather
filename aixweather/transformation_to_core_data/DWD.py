@@ -218,8 +218,8 @@ def DWD_forecast_2_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.Data
 
     ### format raw data for further operations
     df = df_import.copy()
-    # sort by time
-    df = df.sort_index()
+    # Resample the DataFrame to make the DatetimeIndex complete and monotonic
+    df = df.resample('H').asfreq()
     # delete timezone information
     df = df.tz_localize(None)
     # rename available variables to core data format
