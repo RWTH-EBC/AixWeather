@@ -19,9 +19,9 @@ def plot_heatmap_missing_values_daily(df):
     """
 
     # define resolution depending on the length of the data set
-    if df.shape[0] <= 365:
+    if len(df) <= ((24 * 365) - 5):
         resolution = "D"
-    elif df.shape[0] <= 3 * 365:
+    elif len(df) <= (3 * 24 * 365):
         resolution = "W"
     else:
         resolution = "M"
@@ -41,10 +41,12 @@ def plot_heatmap_missing_values_daily(df):
         cbar=False,
     )
 
-    # Set y-tick labels to represent each day
+    # Set y-tick labels to represent each period
     plt.yticks(range(num_rows), missing_data.index.date, rotation=0)
 
-    plt.title("Heatmap of Missing Values\nFrom white (no data) to dark green (100% data)")
+    plt.title("Heatmap of data availability\n"
+              "From white (no data) to dark green (100% data)\n"
+              f"Bucket size = {resolution}")
     plt.tight_layout()
 
     return plt
