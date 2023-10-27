@@ -85,6 +85,22 @@ class ProjectClassGeneral(ABC):
         self.meta_data = None
 
     @property
+    def imported_data(self):
+        """Get imported data"""
+        return self._imported_data
+
+    @imported_data.setter
+    def imported_data(self, data):
+        if isinstance(data, pd.DataFrame) and data.empty:
+            raise ValueError("Imported data cannot be an empty DataFrame. No weather data "
+                             "has been found. Possible reasons are: "
+                             "The station id is wrong or the station does not exist/measure "
+                             "anymore, the data is currently not available or the weather "
+                             "provider can not be accessed.\n"
+                             f"The so far pulled meta data is: {self.meta_data.__dict__}")
+        self._imported_data = data
+
+    @property
     def core_data(self):
         """Get core data"""
         return self._core_data
@@ -238,10 +254,11 @@ class ProjectClassERC(ProjectClassGeneral):
 
     def import_data(self):
         """override abstract function"""
+        self.meta_data = import_meta_from_ERC()
         self.imported_data = import_ERC(
             self.start_hour_earlier, self.end_hour_later, self.cred
         )
-        self.meta_data = import_meta_from_ERC()
+
 
     def data_2_core_data(self):
         """override abstract function"""
@@ -266,8 +283,9 @@ class ProjectClassTRY(ProjectClassGeneral):
     # imports
     def import_data(self):
         """override abstract function"""
-        self.imported_data = load_try_from_file(path=self.path)
         self.meta_data = load_try_meta_from_file(path=self.path)
+        self.imported_data = load_try_from_file(path=self.path)
+
 
     # transformation_2_core_data_TRY
     def data_2_core_data(self):
@@ -295,8 +313,9 @@ class ProjectClassEPW(ProjectClassGeneral):
     # imports
     def import_data(self):
         """override abstract function"""
-        self.imported_data = load_epw_from_file(path=self.path)
         self.meta_data = load_epw_meta_from_file(path=self.path)
+        self.imported_data = load_epw_from_file(path=self.path)
+
 
     # transformation_2_core_data_TRY
     def data_2_core_data(self):
@@ -325,8 +344,9 @@ class ProjectClassCustom(ProjectClassGeneral):
     # imports
     def import_data(self):
         """override abstract function"""
-        self.imported_data = load_custom_from_file(path=self.path)
         self.meta_data = load_custom_meta_data()
+        self.imported_data = load_custom_from_file(path=self.path)
+
 
     # transformation_2_core_data_TRY
     def data_2_core_data(self):
