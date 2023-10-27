@@ -19,9 +19,9 @@ def plot_heatmap_missing_values_daily(df):
     """
 
     # define resolution depending on the length of the data set
-    if len(df) <= ((24 * 365) - 5):
+    if len(df) <= (24 * 60):
         resolution = "D"
-    elif len(df) <= (3 * 24 * 365):
+    elif len(df) <= (24 * 7 * 60):
         resolution = "W"
     else:
         resolution = "M"
@@ -33,12 +33,12 @@ def plot_heatmap_missing_values_daily(df):
     num_rows = missing_data.shape[0]
 
     # Set the height of the figure based on the number of rows, and a fixed width
-    plt.figure(figsize=(10, num_rows * 0.15 + 3))
+    plt.figure(figsize=(12, num_rows * 0.15 + 3))
 
     sns.heatmap(
         missing_data,
         cmap="Greens_r",
-        cbar=False,
+        cbar=True,
     )
 
     # Set y-tick labels to represent each period
