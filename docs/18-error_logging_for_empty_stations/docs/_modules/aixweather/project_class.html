@@ -193,6 +193,7 @@
 <span class="kn">from</span> <span class="nn">aixweather.core_data_format_2_output_file.to_mos_TMY3</span> <span class="kn">import</span> <span class="n">to_mos</span>
 <span class="kn">from</span> <span class="nn">aixweather.core_data_format_2_output_file.to_epw_energyplus</span> <span class="kn">import</span> <span class="n">to_epw</span>
 
+
 <span class="c1"># pylint-disable: R0902</span>
 <div class="viewcode-block" id="ProjectClassGeneral"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassGeneral">[docs]</a><span class="k">class</span> <span class="nc">ProjectClassGeneral</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -246,6 +247,26 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">core_data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">output_data_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">meta_data</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">imported_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get imported data&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_imported_data</span>
+
+    <span class="nd">@imported_data</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">imported_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;If the imported data is empty, the program should be stopped with clear error</span>
+<span class="sd">        description.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="ow">and</span> <span class="n">data</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Imported data cannot be an empty DataFrame. No weather data &quot;</span>
+                <span class="s2">&quot;has been found. Possible reasons are: &quot;</span>
+                <span class="s2">&quot;The station id is wrong or the station does not exist/measure &quot;</span>
+                <span class="s2">&quot;anymore, the data is currently not available or the weather &quot;</span>
+                <span class="s2">&quot;provider can not be accessed.</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;The so far pulled meta data is: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">meta_data</span><span class="o">.</span><span class="vm">__dict__</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_imported_data</span> <span class="o">=</span> <span class="n">data</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">core_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -401,10 +422,10 @@
 
 <div class="viewcode-block" id="ProjectClassERC.import_data"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassERC.import_data">[docs]</a>    <span class="k">def</span> <span class="nf">import_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;override abstract function&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta_data</span> <span class="o">=</span> <span class="n">import_meta_from_ERC</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">imported_data</span> <span class="o">=</span> <span class="n">import_ERC</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">start_hour_earlier</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">end_hour_later</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cred</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">meta_data</span> <span class="o">=</span> <span class="n">import_meta_from_ERC</span><span class="p">()</span></div>
+        <span class="p">)</span></div>
 
 <div class="viewcode-block" id="ProjectClassERC.data_2_core_data"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassERC.data_2_core_data">[docs]</a>    <span class="k">def</span> <span class="nf">data_2_core_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;override abstract function&quot;&quot;&quot;</span>
@@ -429,8 +450,8 @@
     <span class="c1"># imports</span>
 <div class="viewcode-block" id="ProjectClassTRY.import_data"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassTRY.import_data">[docs]</a>    <span class="k">def</span> <span class="nf">import_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;override abstract function&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">imported_data</span> <span class="o">=</span> <span class="n">load_try_from_file</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">meta_data</span> <span class="o">=</span> <span class="n">load_try_meta_from_file</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta_data</span> <span class="o">=</span> <span class="n">load_try_meta_from_file</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imported_data</span> <span class="o">=</span> <span class="n">load_try_from_file</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span></div>
 
     <span class="c1"># transformation_2_core_data_TRY</span>
 <div class="viewcode-block" id="ProjectClassTRY.data_2_core_data"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassTRY.data_2_core_data">[docs]</a>    <span class="k">def</span> <span class="nf">data_2_core_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -458,8 +479,8 @@
     <span class="c1"># imports</span>
 <div class="viewcode-block" id="ProjectClassEPW.import_data"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassEPW.import_data">[docs]</a>    <span class="k">def</span> <span class="nf">import_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;override abstract function&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">imported_data</span> <span class="o">=</span> <span class="n">load_epw_from_file</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">meta_data</span> <span class="o">=</span> <span class="n">load_epw_meta_from_file</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta_data</span> <span class="o">=</span> <span class="n">load_epw_meta_from_file</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imported_data</span> <span class="o">=</span> <span class="n">load_epw_from_file</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span></div>
 
     <span class="c1"># transformation_2_core_data_TRY</span>
 <div class="viewcode-block" id="ProjectClassEPW.data_2_core_data"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassEPW.data_2_core_data">[docs]</a>    <span class="k">def</span> <span class="nf">data_2_core_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -488,8 +509,8 @@
     <span class="c1"># imports</span>
 <div class="viewcode-block" id="ProjectClassCustom.import_data"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassCustom.import_data">[docs]</a>    <span class="k">def</span> <span class="nf">import_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;override abstract function&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">imported_data</span> <span class="o">=</span> <span class="n">load_custom_from_file</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">meta_data</span> <span class="o">=</span> <span class="n">load_custom_meta_data</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta_data</span> <span class="o">=</span> <span class="n">load_custom_meta_data</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imported_data</span> <span class="o">=</span> <span class="n">load_custom_from_file</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span></div>
 
     <span class="c1"># transformation_2_core_data_TRY</span>
 <div class="viewcode-block" id="ProjectClassCustom.data_2_core_data"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassCustom.data_2_core_data">[docs]</a>    <span class="k">def</span> <span class="nf">data_2_core_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
