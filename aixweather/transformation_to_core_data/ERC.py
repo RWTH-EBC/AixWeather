@@ -48,10 +48,10 @@ def ERC_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
 
     ### format raw data for further operations
     df = df_import.copy()
-
+    # Resample the DataFrame to make the DatetimeIndex complete and monotonic
+    df = df.resample('H').asfreq()
     # Remove timezone awareness
     df.index = df.index.tz_localize(None)
-
     # rename available variables to core data format
     df = auxiliary.rename_columns(df, format_ERC)
 
