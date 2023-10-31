@@ -109,7 +109,7 @@ def import_DWD_forecast(station: str) -> pd.DataFrame:
     try:
         values = next(stations.values.query())
     except Exception as excep:
-        raise ProcessLookupError(f"There is no loadable forecast for station {station}") from excep
+        raise ValueError(f"There is no loadable forecast for station {station}") from excep
 
     imported_df = values.df.to_pandas()
 
