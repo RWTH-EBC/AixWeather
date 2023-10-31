@@ -185,6 +185,9 @@ def import_meta_DWD_historical(station) -> utils_import.MetaData:
         if stat_id == station:
             station_data = {key: value for key, value in zip(header, values)}
             break
+        else:
+            raise ValueError(f"Station for historical weatherdata with ID {station} could not be"
+                             f"found in station list {url}.")
 
     ### convert to meta class
     meta = utils_import.MetaData()
@@ -244,7 +247,8 @@ def import_meta_DWD_forecast(station) -> utils_import.MetaData:
 
         # warn that the station does not exist
         raise ValueError(
-            f"Station {station_id} could not be found in the station list: {url}"
+            f"Station for forecast data with the ID {station_id} could not be found in the "
+            f"station list: {url}"
         )
 
     station_data = extract_info_for_station(data_str, station)
