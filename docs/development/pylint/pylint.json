@@ -32,7 +32,7 @@
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 14,
+                "statement": 22,
                 "warning": 0
             },
             "aixweather.definitions": {
@@ -211,7 +211,7 @@
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 159,
+        "statement": 167,
         "warning": 0,
         "global_note": 0,
         "nb_duplicated_lines": 0,
@@ -249,7 +249,7 @@
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 14,
+                "statement": 22,
                 "warning": 0
             },
             "aixweather.definitions": {
@@ -428,7 +428,7 @@
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 159,
+        "statement": 167,
         "warning": 0,
         "global_note": 10.0,
         "nb_duplicated_lines": 0,

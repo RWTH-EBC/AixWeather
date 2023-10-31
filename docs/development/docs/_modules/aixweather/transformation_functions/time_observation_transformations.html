@@ -196,7 +196,7 @@
 
     <span class="c1"># shift and interpolate</span>
     <span class="n">df_shifted</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">freq</span><span class="o">=</span><span class="n">interval</span><span class="p">)</span>
-    <span class="n">df_interpolated</span> <span class="o">=</span> <span class="n">df_shifted</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;30min&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">)</span>
+    <span class="n">df_interpolated</span> <span class="o">=</span> <span class="n">df_shifted</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;30min&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="c1"># keep only original timestamps</span>
     <span class="n">df_final</span> <span class="o">=</span> <span class="n">df_interpolated</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
