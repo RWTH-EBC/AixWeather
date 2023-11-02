@@ -1,0 +1,437 @@
+{
+    "messages": [],
+    "stats": {
+        "bad_names": {
+            "argument": 0,
+            "attr": 0,
+            "klass": 0,
+            "class_attribute": 0,
+            "class_const": 0,
+            "const": 0,
+            "inlinevar": 0,
+            "function": 1,
+            "method": 0,
+            "module": 1,
+            "variable": 1,
+            "typevar": 0,
+            "typealias": 0
+        },
+        "by_module": {
+            "aixweather.__init__": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 1,
+                "warning": 0
+            },
+            "aixweather.data_quality_checks": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 22,
+                "warning": 0
+            },
+            "aixweather.definitions": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 13,
+                "warning": 0
+            },
+            "aixweather.project_class": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 118,
+                "warning": 0
+            },
+            "e1_pull_DWD_historical_to_all_output_formats": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 19,
+                "warning": 0
+            },
+            "test_DWD_forecast": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 0,
+                "warning": 0
+            },
+            "test_DWD_historical": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 0,
+                "warning": 0
+            },
+            "test_EPW": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 0,
+                "warning": 0
+            },
+            "test_ERC": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 0,
+                "warning": 0
+            },
+            "test_TRY": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 0,
+                "warning": 0
+            },
+            "test_output_functions": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 0,
+                "warning": 0
+            },
+            "utils_4_tests": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 0,
+                "warning": 0
+            }
+        },
+        "by_msg": {},
+        "code_type_count": {
+            "code": 0,
+            "comment": 0,
+            "docstring": 0,
+            "empty": 0,
+            "total": 0
+        },
+        "dependencies": {
+            "matplotlib.pyplot": [
+                "aixweather.data_quality_checks"
+            ],
+            "seaborn": [
+                "aixweather.data_quality_checks"
+            ],
+            "pandas": [
+                "aixweather.project_class"
+            ],
+            "aixweather.imports.DWD": [
+                "aixweather.project_class"
+            ],
+            "aixweather.imports.ERC": [
+                "aixweather.project_class"
+            ],
+            "aixweather.imports.TRY": [
+                "aixweather.project_class"
+            ],
+            "aixweather.imports.EPW": [
+                "aixweather.project_class"
+            ],
+            "aixweather.imports.custom_file": [
+                "aixweather.project_class"
+            ],
+            "aixweather.transformation_to_core_data.DWD": [
+                "aixweather.project_class"
+            ],
+            "aixweather.transformation_to_core_data.ERC": [
+                "aixweather.project_class"
+            ],
+            "aixweather.transformation_to_core_data.TRY": [
+                "aixweather.project_class"
+            ],
+            "aixweather.transformation_to_core_data.EPW": [
+                "aixweather.project_class"
+            ],
+            "aixweather.transformation_to_core_data.custom_file": [
+                "aixweather.project_class"
+            ],
+            "aixweather.core_data_format_2_output_file.unconverted_to_x": [
+                "aixweather.project_class"
+            ],
+            "aixweather.core_data_format_2_output_file.to_mos_TMY3": [
+                "aixweather.project_class"
+            ],
+            "aixweather.core_data_format_2_output_file.to_epw_energyplus": [
+                "aixweather.project_class"
+            ],
+            "aixweather.project_class": [
+                "e1_pull_DWD_historical_to_all_output_formats"
+            ],
+            "aixweather.data_quality_checks": [
+                "e1_pull_DWD_historical_to_all_output_formats"
+            ]
+        },
+        "duplicated_lines": {
+            "nb_duplicated_lines": 0,
+            "percent_duplicated_lines": 0.0
+        },
+        "node_count": {
+            "function": 5,
+            "klass": 7,
+            "method": 30,
+            "module": 5
+        },
+        "undocumented": {
+            "function": 0,
+            "klass": 0,
+            "method": 0,
+            "module": 0
+        },
+        "convention": 0,
+        "error": 0,
+        "fatal": 0,
+        "info": 0,
+        "refactor": 0,
+        "statement": 173,
+        "warning": 0,
+        "global_note": 0,
+        "nb_duplicated_lines": 0,
+        "percent_duplicated_lines": 0.0
+    },
+    "previous": {
+        "bad_names": {
+            "argument": 0,
+            "attr": 0,
+            "klass": 0,
+            "class_attribute": 0,
+            "class_const": 0,
+            "const": 0,
+            "inlinevar": 0,
+            "function": 1,
+            "method": 0,
+            "module": 1,
+            "variable": 1,
+            "typevar": 0,
+            "typealias": 0
+        },
+        "by_module": {
+            "aixweather.__init__": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 1,
+                "warning": 0
+            },
+            "aixweather.data_quality_checks": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 22,
+                "warning": 0
+            },
+            "aixweather.definitions": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 13,
+                "warning": 0
+            },
+            "aixweather.project_class": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 118,
+                "warning": 0
+            },
+            "e1_pull_DWD_historical_to_all_output_formats": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 19,
+                "warning": 0
+            },
+            "test_DWD_forecast": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 0,
+                "warning": 0
+            },
+            "test_DWD_historical": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 0,
+                "warning": 0
+            },
+            "test_EPW": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 0,
+                "warning": 0
+            },
+            "test_ERC": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 0,
+                "warning": 0
+            },
+            "test_TRY": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 0,
+                "warning": 0
+            },
+            "test_output_functions": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 0,
+                "warning": 0
+            },
+            "utils_4_tests": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 0,
+                "warning": 0
+            }
+        },
+        "by_msg": {},
+        "code_type_count": {
+            "code": 0,
+            "comment": 0,
+            "docstring": 0,
+            "empty": 0,
+            "total": 0
+        },
+        "dependencies": {
+            "matplotlib.pyplot": [
+                "aixweather.data_quality_checks"
+            ],
+            "seaborn": [
+                "aixweather.data_quality_checks"
+            ],
+            "pandas": [
+                "aixweather.project_class"
+            ],
+            "aixweather.imports.DWD": [
+                "aixweather.project_class"
+            ],
+            "aixweather.imports.ERC": [
+                "aixweather.project_class"
+            ],
+            "aixweather.imports.TRY": [
+                "aixweather.project_class"
+            ],
+            "aixweather.imports.EPW": [
+                "aixweather.project_class"
+            ],
+            "aixweather.imports.custom_file": [
+                "aixweather.project_class"
+            ],
+            "aixweather.transformation_to_core_data.DWD": [
+                "aixweather.project_class"
+            ],
+            "aixweather.transformation_to_core_data.ERC": [
+                "aixweather.project_class"
+            ],
+            "aixweather.transformation_to_core_data.TRY": [
+                "aixweather.project_class"
+            ],
+            "aixweather.transformation_to_core_data.EPW": [
+                "aixweather.project_class"
+            ],
+            "aixweather.transformation_to_core_data.custom_file": [
+                "aixweather.project_class"
+            ],
+            "aixweather.core_data_format_2_output_file.unconverted_to_x": [
+                "aixweather.project_class"
+            ],
+            "aixweather.core_data_format_2_output_file.to_mos_TMY3": [
+                "aixweather.project_class"
+            ],
+            "aixweather.core_data_format_2_output_file.to_epw_energyplus": [
+                "aixweather.project_class"
+            ],
+            "aixweather.project_class": [
+                "e1_pull_DWD_historical_to_all_output_formats"
+            ],
+            "aixweather.data_quality_checks": [
+                "e1_pull_DWD_historical_to_all_output_formats"
+            ]
+        },
+        "duplicated_lines": {
+            "nb_duplicated_lines": 0,
+            "percent_duplicated_lines": 0.0
+        },
+        "node_count": {
+            "function": 5,
+            "klass": 7,
+            "method": 30,
+            "module": 5
+        },
+        "undocumented": {
+            "function": 0,
+            "klass": 0,
+            "method": 0,
+            "module": 0
+        },
+        "convention": 0,
+        "error": 0,
+        "fatal": 0,
+        "info": 0,
+        "refactor": 0,
+        "statement": 173,
+        "warning": 0,
+        "global_note": 10.0,
+        "nb_duplicated_lines": 0,
+        "percent_duplicated_lines": 0.0
+    }
+}

@@ -1,0 +1,290 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>aixweather.transformation_to_core_data.TRY &mdash; aixweather 0.1.3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/autodoc_pydantic.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> aixweather
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">aixweather</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html">Contribute as a user</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../version_his.html">Version History</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">aixweather</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>aixweather.transformation_to_core_data.TRY</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for aixweather.transformation_to_core_data.TRY</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">aixweather</span> <span class="kn">import</span> <span class="n">definitions</span>
+<span class="kn">from</span> <span class="nn">aixweather.imports.utils_import</span> <span class="kn">import</span> <span class="n">MetaData</span>
+<span class="kn">from</span> <span class="nn">aixweather.transformation_functions</span> <span class="kn">import</span> <span class="n">auxiliary</span><span class="p">,</span> <span class="n">time_observation_transformations</span><span class="p">,</span> <span class="n">variable_transformations</span><span class="p">,</span> \
+    <span class="n">pass_through_handling</span><span class="p">,</span> <span class="n">unit_conversions</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">format_TRY_15_45 information </span>
+
+<span class="sd">checked by Martin Rätz (08.08.2023)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">format_TRY_15_45</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DryBulbTemp&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s2">&quot;prec2ind&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;p&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AtmPressure&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;hPa&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;WR&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;WindDir&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;deg&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;WG&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;WindSpeed&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;m/s&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;N&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;TotalSkyCover&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;1eigth&quot;</span><span class="p">},</span>
+    <span class="c1"># &#39;x&#39;,</span>
+    <span class="s2">&quot;RF&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;RelHum&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s2">&quot;prec2ind&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;percent&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DirHorRad&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s2">&quot;prec2ind&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DiffHorRad&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s2">&quot;prec2ind&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;HorInfra&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
+    <span class="c1"># &#39;E&#39;,</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="TRY_to_core_data"><a class="viewcode-back" href="../../../code/aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.TRY.TRY_to_core_data">[docs]</a><span class="k">def</span> <span class="nf">TRY_to_core_data</span><span class="p">(</span><span class="n">df_import</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transform imported TRY data of the formats 2015 and 2045 into the core data format.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df_import (pd.DataFrame): The DataFrame containing imported TRY weather data.</span>
+<span class="sd">        meta (MetaData): Metadata associated with the data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: The transformed DataFrame in the core data format.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">### evaluate correctness of format</span>
+    <span class="n">auxiliary</span><span class="o">.</span><span class="n">evaluate_transformations</span><span class="p">(</span>
+        <span class="n">core_format</span><span class="o">=</span><span class="n">definitions</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">,</span> <span class="n">other_format</span><span class="o">=</span><span class="n">format_TRY_15_45</span>
+    <span class="p">)</span>
+
+    <span class="c1">### preprocessing raw data for further operations</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_import</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="c1"># Resample the DataFrame to make the DatetimeIndex complete and monotonic</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">asfreq</span><span class="p">()</span>
+    <span class="c1"># rename available variables to core data format</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">rename_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">format_TRY_15_45</span><span class="p">)</span>
+
+    <span class="c1">### convert timezone to UTC+0</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">periods</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1">### shift and interpolate data forward 30mins or backward -30mins</span>
+    <span class="n">df_no_shift</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">time_observation_transformations</span><span class="o">.</span><span class="n">shift_time_by_dict</span><span class="p">(</span><span class="n">format_TRY_15_45</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">transform_TRY</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+        <span class="c1"># drop unnecessary variables</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">force_data_variable_convention</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">definitions</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">)</span>
+        <span class="c1">### convert units</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;TotalSkyCover&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">eigth_to_tenth</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;TotalSkyCover&quot;</span><span class="p">])</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;AtmPressure&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">hPa_to_Pa</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;AtmPressure&quot;</span><span class="p">])</span>
+        <span class="c1">### impute missing variables from other available ones</span>
+        <span class="n">df</span><span class="p">,</span> <span class="n">calc_overview</span> <span class="o">=</span> <span class="n">variable_transformations</span><span class="o">.</span><span class="n">variable_transform_all</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">meta</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">calc_overview</span>
+
+    <span class="n">df</span><span class="p">,</span> <span class="n">meta</span><span class="o">.</span><span class="n">executed_transformations</span> <span class="o">=</span> <span class="n">transform_TRY</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+    <span class="c1">### add unshifted data for possible later direct use (pass-through),</span>
+    <span class="c1">### to avoid back and forth interpolating</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pass_through_handling</span><span class="o">.</span><span class="n">create_pass_through_variables</span><span class="p">(</span>
+        <span class="n">df_shifted</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+        <span class="n">df_no_shift</span><span class="o">=</span><span class="n">df_no_shift</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="n">format_TRY_15_45</span><span class="p">,</span>
+        <span class="n">transform_func</span><span class="o">=</span><span class="n">transform_TRY</span><span class="p">,</span>
+        <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, EON EBC.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
