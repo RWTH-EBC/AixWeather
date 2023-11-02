@@ -32,7 +32,7 @@
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 14,
+                "statement": 22,
                 "warning": 0
             },
             "aixweather.definitions": {
@@ -53,7 +53,7 @@
                 "statement": 118,
                 "warning": 0
             },
-            "e1_pull_DWD_historical_to_all_output_formats": {
+            "examples.e1_pull_DWD_historical_to_all_output_formats": {
                 "convention": 0,
                 "error": 0,
                 "fatal": 0,
@@ -184,10 +184,10 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
-                "e1_pull_DWD_historical_to_all_output_formats"
+                "examples.e1_pull_DWD_historical_to_all_output_formats"
             ],
             "aixweather.data_quality_checks": [
-                "e1_pull_DWD_historical_to_all_output_formats"
+                "examples.e1_pull_DWD_historical_to_all_output_formats"
             ]
         },
         "duplicated_lines": {
@@ -211,7 +211,7 @@
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 165,
+        "statement": 173,
         "warning": 0,
         "global_note": 0,
         "nb_duplicated_lines": 0,
@@ -249,7 +249,7 @@
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 14,
+                "statement": 22,
                 "warning": 0
             },
             "aixweather.definitions": {
@@ -270,7 +270,7 @@
                 "statement": 118,
                 "warning": 0
             },
-            "e1_pull_DWD_historical_to_all_output_formats": {
+            "examples.e1_pull_DWD_historical_to_all_output_formats": {
                 "convention": 0,
                 "error": 0,
                 "fatal": 0,
@@ -401,10 +401,10 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
-                "e1_pull_DWD_historical_to_all_output_formats"
+                "examples.e1_pull_DWD_historical_to_all_output_formats"
             ],
             "aixweather.data_quality_checks": [
-                "e1_pull_DWD_historical_to_all_output_formats"
+                "examples.e1_pull_DWD_historical_to_all_output_formats"
             ]
         },
         "duplicated_lines": {
@@ -428,7 +428,7 @@
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 165,
+        "statement": 173,
         "warning": 0,
         "global_note": 10.0,
         "nb_duplicated_lines": 0,
