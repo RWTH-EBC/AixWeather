@@ -183,8 +183,9 @@ def import_meta_DWD_historical(station:str) -> utils_import.MetaData:
         if stat_id == station:
             station_data = {key: value for key, value in zip(header, values)}
             break
-        else:
-            raise ValueError(f"Station for historical weatherdata with ID {station} could not be"
+
+    if station_data == {}:
+        raise ValueError(f"Station for historical weatherdata with ID {station} could not be"
                              f"found in station list {url}.")
 
     ### convert to meta class
