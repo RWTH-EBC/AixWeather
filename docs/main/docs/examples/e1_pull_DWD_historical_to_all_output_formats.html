@@ -8,7 +8,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>&lt;no title&gt; &mdash; aixweather 0.1.2 documentation</title>
+  <title>&lt;no title&gt; &mdash; aixweather 0.1.3 documentation</title>
   
 
   
@@ -197,11 +197,11 @@
 </pre></div>
 </div>
 <p>you may also use data quality check utils, like:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aixweather.data_quality_checks</span> <span class="kn">import</span> <span class="n">plot_heatmap_missing_values_daily</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aixweather.data_quality_checks</span> <span class="kn">import</span> <span class="n">plot_heatmap_missing_values</span>
 </pre></div>
 </div>
 <p>plot data quality</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">=</span> <span class="n">plot_heatmap_missing_values_daily</span><span class="p">(</span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_data</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">=</span> <span class="n">plot_heatmap_missing_values</span><span class="p">(</span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_data</span><span class="p">)</span>
 <span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
