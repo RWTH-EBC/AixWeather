@@ -188,7 +188,7 @@ class ProjectClassDWDHistorical(ProjectClassGeneral):
 
     def __init__(self, start: dt.datetime, end: dt.datetime, station: str, **kwargs):
         super().__init__(start=start, end=end, **kwargs)
-        self.station = station
+        self.station = str(station)
 
     # imports
     def import_data(self):
@@ -222,7 +222,7 @@ class ProjectClassDWDForecast(ProjectClassGeneral):
 
     def __init__(self, station: str, **kwargs):
         super().__init__(**kwargs)
-        self.station = station
+        self.station = str(station)
 
     # imports
     def import_data(self):
