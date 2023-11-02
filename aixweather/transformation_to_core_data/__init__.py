@@ -8,7 +8,7 @@ This core data format adheres to specific guidelines:
 
 - Timezone: UTC
 - Hourly data
-- Index is a datetime index
+- Index is a datetime index (DatetimeIndex complete and monotonic)
 - Measurement at the indicated time (not as average for the following or preceding hour)
 - Always the same set of variables names (see core_data)
 - Missing values are displayed as 'nan'

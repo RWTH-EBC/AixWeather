@@ -17,21 +17,40 @@ def plot_heatmap_missing_values_daily(df):
     Returns:
         plt: A Matplotlib figure representing the heatmap of missing values.
     """
-    # Group by day and check for any missing values for each day
-    missing_data = df.resample("D").apply(lambda x: x.isnull().any())
 
-    # Determine the number of days (rows) in your dataframe
-    num_days = missing_data.shape[0]
+    # define resolution depending on the length of the data set
+    if len(df) <= (24 * 60):
+        resolution = "D"
+        res_name = "daily"
+    elif len(df) <= (24 * 7 * 60):
+        resolution = "W"
+        res_name = "weekly"
+    else:
+        resolution = "M"
+        res_name = "monthly"
 
-    # Set the height of the figure based on the number of days, and a fixed width
-    plt.figure(figsize=(10, num_days * 0.15 + 3))
+    # Group by resolution and check for missing values in each period
+    missing_data = df.resample(resolution).apply(lambda x: x.isnull().mean())
 
-    sns.heatmap(missing_data, cmap="Greens_r", cbar=False)
+    # Determine the number rows to plot
+    num_rows = missing_data.shape[0]
 
-    # Set y-tick labels to represent each day
-    plt.yticks(range(num_days), missing_data.index.date, rotation=0)
+    # Set the height of the figure based on the number of rows, and a fixed width
+    plt.figure(figsize=(14, num_rows * 0.15 + 3))
 
-    plt.title("Heatmap of Missing Values (white = missing)")
+    sns.heatmap(
+        missing_data,
+        cmap="Greens_r",
+        cbar=True,
+        yticklabels=False  # Remove y-axis labels
+    )
+
+    # Set y-tick labels to represent each period
+    plt.yticks(range(num_rows), missing_data.index.date, rotation=0)
+
+    plt.title("Heatmap of data availability\n"
+              "From white (100% data missing) to dark green (0% data missing)\n"
+              f"Bucket size = {res_name}")
     plt.tight_layout()
 
     return plt
