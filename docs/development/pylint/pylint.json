@@ -50,7 +50,7 @@
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 112,
+                "statement": 118,
                 "warning": 0
             },
             "examples.e1_pull_DWD_historical_to_all_output_formats": {
@@ -197,7 +197,7 @@
         "node_count": {
             "function": 5,
             "klass": 7,
-            "method": 28,
+            "method": 30,
             "module": 5
         },
         "undocumented": {
@@ -211,7 +211,7 @@
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 167,
+        "statement": 173,
         "warning": 0,
         "global_note": 0,
         "nb_duplicated_lines": 0,
@@ -267,7 +267,7 @@
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 112,
+                "statement": 118,
                 "warning": 0
             },
             "examples.e1_pull_DWD_historical_to_all_output_formats": {
@@ -414,7 +414,7 @@
         "node_count": {
             "function": 5,
             "klass": 7,
-            "method": 28,
+            "method": 30,
             "module": 5
         },
         "undocumented": {
@@ -428,7 +428,7 @@
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 167,
+        "statement": 173,
         "warning": 0,
         "global_note": 10.0,
         "nb_duplicated_lines": 0,
