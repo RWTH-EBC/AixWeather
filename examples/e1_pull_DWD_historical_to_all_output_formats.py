@@ -37,10 +37,10 @@ def e1_pull_DWD_historical_to_all_output_formats():
     print(f"\nHow the core data looks like:\n{DWD_pull_project.core_data.head()}\n")
 
     # you may also use data quality check utils, like:
-    from aixweather.data_quality_checks import plot_heatmap_missing_values_daily
+    from aixweather.data_quality_checks import plot_heatmap_missing_values
 
     # plot data quality
-    plot = plot_heatmap_missing_values_daily(DWD_pull_project.core_data)
+    plot = plot_heatmap_missing_values(DWD_pull_project.core_data)
     plot.show()
 
     # convert this core data to an output data format of your choice

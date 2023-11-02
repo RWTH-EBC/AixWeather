@@ -109,7 +109,7 @@ def import_DWD_forecast(station: str) -> pd.DataFrame:
     try:
         values = next(stations.values.query())
     except Exception as excep:
-        raise ProcessLookupError(f"There is no loadable forecast for station {station}") from excep
+        raise ValueError(f"There is no loadable forecast for station {station}") from excep
 
     imported_df = values.df.to_pandas()
 
@@ -129,7 +129,7 @@ def import_DWD_forecast(station: str) -> pd.DataFrame:
     return imported_df
 
 
-def import_meta_DWD_historical(station) -> utils_import.MetaData:
+def import_meta_DWD_historical(station:str) -> utils_import.MetaData:
     """
     Downloads and extracts metadata related to the specified station from
     the DWD (Deutscher Wetterdienst) Open Data Interface.
@@ -145,8 +145,6 @@ def import_meta_DWD_historical(station) -> utils_import.MetaData:
     url = "https://www.dwd.de/DE/leistungen/klimadatendeutschland/" \
           "statliste/statlex_rich.txt;jsessionid" \
           "=68E14BA255FE50BDC4AD9FF4F835895F.live31092?view=nasPublication&nn=16102"
-
-    station = int(station)
 
     # load station overview
     data_str = urllib.request.urlopen(url).read().decode("latin-1")
@@ -181,10 +179,14 @@ def import_meta_DWD_historical(station) -> utils_import.MetaData:
             line[start:end].strip()
             for start, end in zip(column_breaks[:-1], column_breaks[1:])
         ]
-        stat_id = int(values[header.index("STAT_ID")])
+        stat_id = str(values[header.index("STAT_ID")])
         if stat_id == station:
             station_data = {key: value for key, value in zip(header, values)}
             break
+
+    if station_data == {}:
+        raise ValueError(f"Station for historical weatherdata with ID {station} could not be"
+                             f"found in station list {url}.")
 
     ### convert to meta class
     meta = utils_import.MetaData()
@@ -200,7 +202,7 @@ def import_meta_DWD_historical(station) -> utils_import.MetaData:
     return meta
 
 
-def import_meta_DWD_forecast(station) -> utils_import.MetaData:
+def import_meta_DWD_forecast(station: str) -> utils_import.MetaData:
     """
     Downloads and extracts metadata related to the specified station
     from the DWD (Deutscher Wetterdienst) Open Data Interface.
@@ -244,7 +246,8 @@ def import_meta_DWD_forecast(station) -> utils_import.MetaData:
 
         # warn that the station does not exist
         raise ValueError(
-            f"Station {station_id} could not be found in the station list: {url}"
+            f"Station for forecast data with the ID {station_id} could not be found in the "
+            f"station list: {url}"
         )
 
     station_data = extract_info_for_station(data_str, station)

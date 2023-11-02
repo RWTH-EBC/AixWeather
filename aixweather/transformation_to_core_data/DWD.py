@@ -133,12 +133,13 @@ def DWD_historical_to_core_data(
     # to datetime; account for different time-formats
     date_format = "%Y%m%d%H%M"
     df.index = pd.to_datetime(df.index, format=date_format)
+    # sort by time
+    df = df.sort_index()
 
     # reduce time period to extended period for working interpolation and for faster operation
     df = time_observation_transformations.truncate_data_from_start_to_stop(
         df, start - timedelta(days=1), stop + timedelta(days=1)
     )
-    df.sort_index(inplace=True)
 
     # select only numeric columns
     df = df.select_dtypes(include=["number"])
@@ -217,7 +218,8 @@ def DWD_forecast_2_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.Data
 
     ### format raw data for further operations
     df = df_import.copy()
-
+    # Resample the DataFrame to make the DatetimeIndex complete and monotonic
+    df = df.resample('H').asfreq()
     # delete timezone information
     df = df.tz_localize(None)
     # rename available variables to core data format
