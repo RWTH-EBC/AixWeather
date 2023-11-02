@@ -30,6 +30,7 @@ from aixweather.core_data_format_2_output_file.unconverted_to_x import (
 from aixweather.core_data_format_2_output_file.to_mos_TMY3 import to_mos
 from aixweather.core_data_format_2_output_file.to_epw_energyplus import to_epw
 
+
 # pylint-disable: R0902
 class ProjectClassGeneral(ABC):
     """
@@ -83,6 +84,26 @@ class ProjectClassGeneral(ABC):
         self.core_data: pd.DataFrame = None
         self.output_data_df: pd.DataFrame = None
         self.meta_data = None
+
+    @property
+    def imported_data(self):
+        """Get imported data"""
+        return self._imported_data
+
+    @imported_data.setter
+    def imported_data(self, data):
+        """If the imported data is empty, the program should be stopped with clear error
+        description."""
+        if isinstance(data, pd.DataFrame) and data.empty:
+            raise ValueError(
+                "Imported data cannot be an empty DataFrame. No weather data "
+                "has been found. Possible reasons are: "
+                "The station id is wrong or the station does not exist/measure "
+                "anymore, the data is currently not available or the weather "
+                "provider can not be accessed.\n"
+                f"The so far pulled meta data is: {self.meta_data.__dict__}"
+            )
+        self._imported_data = data
 
     @property
     def core_data(self):
@@ -167,7 +188,7 @@ class ProjectClassDWDHistorical(ProjectClassGeneral):
 
     def __init__(self, start: dt.datetime, end: dt.datetime, station: str, **kwargs):
         super().__init__(start=start, end=end, **kwargs)
-        self.station = station
+        self.station = str(station)
 
     # imports
     def import_data(self):
@@ -201,7 +222,7 @@ class ProjectClassDWDForecast(ProjectClassGeneral):
 
     def __init__(self, station: str, **kwargs):
         super().__init__(**kwargs)
-        self.station = station
+        self.station = str(station)
 
     # imports
     def import_data(self):
@@ -238,10 +259,10 @@ class ProjectClassERC(ProjectClassGeneral):
 
     def import_data(self):
         """override abstract function"""
+        self.meta_data = import_meta_from_ERC()
         self.imported_data = import_ERC(
             self.start_hour_earlier, self.end_hour_later, self.cred
         )
-        self.meta_data = import_meta_from_ERC()
 
     def data_2_core_data(self):
         """override abstract function"""
@@ -266,8 +287,8 @@ class ProjectClassTRY(ProjectClassGeneral):
     # imports
     def import_data(self):
         """override abstract function"""
-        self.imported_data = load_try_from_file(path=self.path)
         self.meta_data = load_try_meta_from_file(path=self.path)
+        self.imported_data = load_try_from_file(path=self.path)
 
     # transformation_2_core_data_TRY
     def data_2_core_data(self):
@@ -295,8 +316,8 @@ class ProjectClassEPW(ProjectClassGeneral):
     # imports
     def import_data(self):
         """override abstract function"""
-        self.imported_data = load_epw_from_file(path=self.path)
         self.meta_data = load_epw_meta_from_file(path=self.path)
+        self.imported_data = load_epw_from_file(path=self.path)
 
     # transformation_2_core_data_TRY
     def data_2_core_data(self):
@@ -325,8 +346,8 @@ class ProjectClassCustom(ProjectClassGeneral):
     # imports
     def import_data(self):
         """override abstract function"""
-        self.imported_data = load_custom_from_file(path=self.path)
         self.meta_data = load_custom_meta_data()
+        self.imported_data = load_custom_from_file(path=self.path)
 
     # transformation_2_core_data_TRY
     def data_2_core_data(self):
