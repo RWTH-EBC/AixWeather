@@ -1,5 +1,17 @@
 {
-    "messages": [],
+    "messages": [
+        {
+            "type": "convention",
+            "module": "aixweather.project_class",
+            "obj": "ProjectClassGeneral.start_end_checks",
+            "line": 91,
+            "column": 4,
+            "path": "aixweather/project_class.py",
+            "symbol": "missing-function-docstring",
+            "message": "Missing function or method docstring",
+            "message-id": "C0116"
+        }
+    ],
     "stats": {
         "bad_names": {
             "argument": 0,
@@ -45,12 +57,12 @@
                 "warning": 0
             },
             "aixweather.project_class": {
-                "convention": 0,
+                "convention": 1,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 118,
+                "statement": 125,
                 "warning": 0
             },
             "e1_pull_DWD_historical_to_all_output_formats": {
@@ -126,7 +138,9 @@
                 "warning": 0
             }
         },
-        "by_msg": {},
+        "by_msg": {
+            "missing-function-docstring": 1
+        },
         "code_type_count": {
             "code": 0,
             "comment": 0,
@@ -197,21 +211,21 @@
         "node_count": {
             "function": 5,
             "klass": 7,
-            "method": 30,
+            "method": 31,
             "module": 5
         },
         "undocumented": {
             "function": 0,
             "klass": 0,
-            "method": 0,
+            "method": 1,
             "module": 0
         },
-        "convention": 0,
+        "convention": 1,
         "error": 0,
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 173,
+        "statement": 180,
         "warning": 0,
         "global_note": 0,
         "nb_duplicated_lines": 0,
@@ -262,15 +276,15 @@
                 "warning": 0
             },
             "aixweather.project_class": {
-                "convention": 0,
+                "convention": 1,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 118,
+                "statement": 125,
                 "warning": 0
             },
-            "examples.e1_pull_DWD_historical_to_all_output_formats": {
+            "e1_pull_DWD_historical_to_all_output_formats": {
                 "convention": 0,
                 "error": 0,
                 "fatal": 0,
@@ -343,7 +357,9 @@
                 "warning": 0
             }
         },
-        "by_msg": {},
+        "by_msg": {
+            "missing-function-docstring": 1
+        },
         "code_type_count": {
             "code": 0,
             "comment": 0,
@@ -401,10 +417,10 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
-                "examples.e1_pull_DWD_historical_to_all_output_formats"
+                "e1_pull_DWD_historical_to_all_output_formats"
             ],
             "aixweather.data_quality_checks": [
-                "examples.e1_pull_DWD_historical_to_all_output_formats"
+                "e1_pull_DWD_historical_to_all_output_formats"
             ]
         },
         "duplicated_lines": {
@@ -414,23 +430,23 @@
         "node_count": {
             "function": 5,
             "klass": 7,
-            "method": 30,
+            "method": 31,
             "module": 5
         },
         "undocumented": {
             "function": 0,
             "klass": 0,
-            "method": 0,
+            "method": 1,
             "module": 0
         },
-        "convention": 0,
+        "convention": 1,
         "error": 0,
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 173,
+        "statement": 180,
         "warning": 0,
-        "global_note": 10.0,
+        "global_note": 9.944444444444445,
         "nb_duplicated_lines": 0,
         "percent_duplicated_lines": 0.0
     }
