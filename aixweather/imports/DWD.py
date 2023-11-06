@@ -277,9 +277,15 @@ def _pull_DWD_historical_data(url: str, station: str) -> pd.DataFrame:
     # First, load all available filenames
     http_obj = urllib.request.urlopen(url).read().decode()
 
+    # DWD data contains the stations with leading zeros, the meta-data and station lists without
+    # leading zeros. Apply leading zeros for pulling DWD data.
+    station_with_leading_zeros = station.zfill(5)
+
     # select only those file names that belong to the station
     zip_names = [
-        i for i in http_obj.split('"') if f"_{station}_" in i and not i.startswith(">")
+        i
+        for i in http_obj.split('"')
+        if f"_{station_with_leading_zeros}_" in i and not i.startswith(">")
     ]
 
     data_total = pd.DataFrame()
