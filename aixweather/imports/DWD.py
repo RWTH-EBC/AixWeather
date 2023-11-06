@@ -109,7 +109,9 @@ def import_DWD_forecast(station: str) -> pd.DataFrame:
     try:
         values = next(stations.values.query())
     except Exception as excep:
-        raise ValueError(f"There is no loadable forecast for station {station}") from excep
+        raise ValueError(
+            f"There is no loadable forecast for station {station}"
+        ) from excep
 
     imported_df = values.df.to_pandas()
 
@@ -129,7 +131,7 @@ def import_DWD_forecast(station: str) -> pd.DataFrame:
     return imported_df
 
 
-def import_meta_DWD_historical(station:str) -> utils_import.MetaData:
+def import_meta_DWD_historical(station: str) -> utils_import.MetaData:
     """
     Downloads and extracts metadata related to the specified station from
     the DWD (Deutscher Wetterdienst) Open Data Interface.
@@ -142,9 +144,11 @@ def import_meta_DWD_historical(station:str) -> utils_import.MetaData:
         populated attributes related to the station.
     """
 
-    url = "https://www.dwd.de/DE/leistungen/klimadatendeutschland/" \
-          "statliste/statlex_rich.txt;jsessionid" \
-          "=68E14BA255FE50BDC4AD9FF4F835895F.live31092?view=nasPublication&nn=16102"
+    url = (
+        "https://www.dwd.de/DE/leistungen/klimadatendeutschland/"
+        "statliste/statlex_rich.txt;jsessionid"
+        "=68E14BA255FE50BDC4AD9FF4F835895F.live31092?view=nasPublication&nn=16102"
+    )
 
     # load station overview
     data_str = urllib.request.urlopen(url).read().decode("latin-1")
@@ -185,8 +189,10 @@ def import_meta_DWD_historical(station:str) -> utils_import.MetaData:
             break
 
     if station_data == {}:
-        raise ValueError(f"Station for historical weatherdata with ID {station} could not be"
-                             f"found in station list {url}.")
+        raise ValueError(
+            f"Station for historical weatherdata with ID {station} could not be"
+            f"found in station list {url}."
+        )
 
     ### convert to meta class
     meta = utils_import.MetaData()
@@ -214,9 +220,11 @@ def import_meta_DWD_forecast(station: str) -> utils_import.MetaData:
         meta (meta_data object): An object of the meta_data class with
         populated attributes related to the station.
     """
-    url = "https://www.dwd.de/DE/leistungen/met_verfahren_mosmix/" \
-          "mosmix_stationskatalog.cfg?view=nasPublication&nn" \
-          "=16102"
+    url = (
+        "https://www.dwd.de/DE/leistungen/met_verfahren_mosmix/"
+        "mosmix_stationskatalog.cfg?view=nasPublication&nn"
+        "=16102"
+    )
 
     # load station overview
     data_str = urllib.request.urlopen(url).read().decode("latin-1")
