@@ -85,6 +85,19 @@ class ProjectClassGeneral(ABC):
         self.output_data_df: pd.DataFrame = None
         self.meta_data = None
 
+        # checks too wordy with getter and setters
+        self.start_end_checks()
+
+    def start_end_checks(self):
+        # make sure start and end are of type datetime
+        if self.start is not None and self.end is not None:
+            if not isinstance(self.start, dt.datetime) or not isinstance(self.end, dt.datetime):
+                raise ValueError("Time period for pulling data: start and end must be of "
+                                 "type datetime")
+            # make sure end is after start
+            if self.end < self.start:
+                raise ValueError("Time period for pulling data: end must be after start")
+
     @property
     def imported_data(self):
         """Get imported data"""
