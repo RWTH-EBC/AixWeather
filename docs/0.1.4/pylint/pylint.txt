@@ -1,0 +1,6 @@
+************* Module aixweather.project_class
+aixweather/project_class.py:91:4: C0116: Missing function or method docstring (missing-function-docstring)
+
+-----------------------------------
+Your code has been rated at 9.94/10
+

@@ -1,0 +1,617 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>aixweather.transformation_functions package &mdash; aixweather 0.1.4 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/autodoc_pydantic.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="aixweather.transformation_to_core_data package" href="aixweather.transformation_to_core_data.html" />
+    <link rel="prev" title="aixweather.imports package" href="aixweather.imports.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> aixweather
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">aixweather</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="aixweather.html">aixweather package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="aixweather.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html">aixweather.core_data_format_2_output_file package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aixweather.imports.html">aixweather.imports package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">aixweather.transformation_functions package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aixweather.transformation_to_core_data.html">aixweather.transformation_to_core_data package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.html#module-aixweather.data_quality_checks">aixweather.data_quality_checks module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.html#module-aixweather.definitions">aixweather.definitions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.html#module-aixweather.project_class">aixweather.project_class module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Contribution.html">Contribute as a user</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version_his.html">Version History</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">aixweather</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">aixweather</a> &raquo;</li>
+        
+          <li><a href="aixweather.html">aixweather package</a> &raquo;</li>
+        
+      <li>aixweather.transformation_functions package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/code/aixweather.transformation_functions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="module-aixweather.transformation_functions">
+<span id="aixweather-transformation-functions-package"></span><h1>aixweather.transformation_functions package<a class="headerlink" href="#module-aixweather.transformation_functions" title="Permalink to this heading">¶</a></h1>
+<p>AixWeather Transformation Functions</p>
+<p>The ‘transformation_functions’ module contains a collection of static functions used for transforming weather data.
+These functions are designed to be imported and utilized by other modules within the AixWeather package.</p>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-aixweather.transformation_functions.auxiliary">
+<span id="aixweather-transformation-functions-auxiliary-module"></span><h2>aixweather.transformation_functions.auxiliary module<a class="headerlink" href="#module-aixweather.transformation_functions.auxiliary" title="Permalink to this heading">¶</a></h2>
+<p>includes auxiliary functions for data handling and transformation</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.auxiliary.evaluate_transformations">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.auxiliary.</span></span><span class="sig-name descname"><span class="pre">evaluate_transformations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">core_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/auxiliary.html#evaluate_transformations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.auxiliary.evaluate_transformations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compare the units and core variables of two formats and print any required unit transformations.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>core_format (dict): A dictionary representing the core format with keys as variable names and values</dt><dd><p>containing unit information.</p>
+</dd>
+<dt>other_format (dict): A dictionary representing another format to be compared with the core format.</dt><dd><p>It contains keys and values with ‘core_name’ and ‘unit’ attributes.</p>
+</dd>
+</dl>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If a core variable in other_format doesn’t match the core variable format.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.auxiliary.fill_nan_from_format_dict">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.auxiliary.</span></span><span class="sig-name descname"><span class="pre">fill_nan_from_format_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/aixweather/transformation_functions/auxiliary.html#fill_nan_from_format_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.auxiliary.fill_nan_from_format_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fill NaN values in a DataFrame based on the provided format data.</p>
+<dl>
+<dt>Args:</dt><dd><p>df (pd.DataFrame): The DataFrame containing the data to be processed.
+format_data (dict): A dictionary specifying NaN replacement values for columns,</p>
+<blockquote>
+<div><p>with column names as keys and NaN replacement values as values.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: A DataFrame with NaN values filled as per the format data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.auxiliary.force_data_variable_convention">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.auxiliary.</span></span><span class="sig-name descname"><span class="pre">force_data_variable_convention</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format_desired</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/aixweather/transformation_functions/auxiliary.html#force_data_variable_convention"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.auxiliary.force_data_variable_convention" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure that all and only desired variable names are present and in correct order.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>df (pd.DataFrame): The DataFrame containing the data to be formatted.
+format_desired (dict): A dictionary specifying the desired format with variable names as keys.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: A DataFrame with filtered data in the desired format and order.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.auxiliary.rename_columns">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.auxiliary.</span></span><span class="sig-name descname"><span class="pre">rename_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/aixweather/transformation_functions/auxiliary.html#rename_columns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.auxiliary.rename_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rename DataFrame columns based on the provided format dictionary.</p>
+<dl>
+<dt>Args:</dt><dd><p>df (pd.DataFrame): The DataFrame whose columns need to be renamed.
+format_dict (dict): A dictionary specifying the column renaming mapping,</p>
+<blockquote>
+<div><p>with current column names as keys and desired names as values.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: A DataFrame with renamed columns.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.auxiliary.replace_dummy_with_nan">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.auxiliary.</span></span><span class="sig-name descname"><span class="pre">replace_dummy_with_nan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/aixweather/transformation_functions/auxiliary.html#replace_dummy_with_nan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.auxiliary.replace_dummy_with_nan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace specific values in the DataFrame with NaN based on the given format dictionary.
+Reason: sometimes, e.g. the DWD, specifies a missing value with a dummy value like e.g. 99,
+which makes it hard to see where missing values are and might affect the simulation.</p>
+<dl>
+<dt>Args:</dt><dd><p>df (pd.DataFrame): The DataFrame to be processed.
+format_dict (dict): A dictionary specifying values to be replaced with NaN,</p>
+<blockquote>
+<div><p>with column names as keys and corresponding dummy values as values.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: A DataFrame with specified values replaced by NaN.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.auxiliary.select_entry_by_core_name">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.auxiliary.</span></span><span class="sig-name descname"><span class="pre">select_entry_by_core_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">format_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">core_name_to_match</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/auxiliary.html#select_entry_by_core_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.auxiliary.select_entry_by_core_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select an entry from a format dictionary based on the specified core name.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>format_dict (dict): A dictionary to search for the entry.
+core_name_to_match (str): The core name to match in the dictionary values.</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: The dictionary entry matching the specified core name, or None if not found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-aixweather.transformation_functions.pass_through_handling">
+<span id="aixweather-transformation-functions-pass-through-handling-module"></span><h2>aixweather.transformation_functions.pass_through_handling module<a class="headerlink" href="#module-aixweather.transformation_functions.pass_through_handling" title="Permalink to this heading">¶</a></h2>
+<p>This module contains auxiliary functions for data transformation, e.g. time shifts</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.pass_through_handling.create_pass_through_variables">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.pass_through_handling.</span></span><span class="sig-name descname"><span class="pre">create_pass_through_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_shifted</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_no_shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.utils_import.MetaData" title="aixweather.imports.utils_import.MetaData"><span class="pre">MetaData</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/pass_through_handling.html#create_pass_through_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.pass_through_handling.create_pass_through_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function adds unshifted data from the <cite>df_no_shift</cite> DataFrame to the <cite>df_shifted</cite> DataFrame to
+prevent unnecessary interpolation of values. It takes into account the required shifting and performs
+transformations. The appropriate pass-through variables (unshifted variables) are added to the dataframe
+with a suffix specifying the shifting that would be required for them. Calculated (transformed) variables
+are only added if the variables they were calculated from all have the same shifting (time of measurement).</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>df_shifted (pd.DataFrame): The DataFrame with shifted data.
+df_no_shift (pd.DataFrame): The DataFrame with unshifted data.
+format (dict): A dictionary specifying the format (required shifting) of the data.
+transform_func: The transformation function from the import2core data process.
+meta (MetaData): Metadata associated with the data.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: The modified <cite>df_shifted</cite> DataFrame with added pass-through variables.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.pass_through_handling.pass_through_measurements_with_back_and_forth_interpolating">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.pass_through_handling.</span></span><span class="sig-name descname"><span class="pre">pass_through_measurements_with_back_and_forth_interpolating</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">core2output_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format_outputter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/aixweather/transformation_functions/pass_through_handling.html#pass_through_measurements_with_back_and_forth_interpolating"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.pass_through_handling.pass_through_measurements_with_back_and_forth_interpolating" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert pass-through measurements to the output dataframe to
+avoid back-and-forth or double shifting interpolation.</p>
+<p>It deletes the double interpolated variables and inserts the pass-through ones where applicable.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>core2output_df (pd.DataFrame): DataFrame containing core data in the process of core2outputfile.
+format_outputter (dict): Dictionary specifying the format of output data.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: The modified <cite>core2output_df</cite> DataFrame with pass-through variables.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-aixweather.transformation_functions.time_observation_transformations">
+<span id="aixweather-transformation-functions-time-observation-transformations-module"></span><h2>aixweather.transformation_functions.time_observation_transformations module<a class="headerlink" href="#module-aixweather.transformation_functions.time_observation_transformations" title="Permalink to this heading">¶</a></h2>
+<p>Includes functions to execute time shift operations. It also includes a
+function to truncate data in given interval.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.time_observation_transformations.avg_following_hour_2_indicated_time">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.time_observation_transformations.</span></span><span class="sig-name descname"><span class="pre">avg_following_hour_2_indicated_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/time_observation_transformations.html#avg_following_hour_2_indicated_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.time_observation_transformations.avg_following_hour_2_indicated_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.time_observation_transformations.avg_preceding_hour_2_indicated_time">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.time_observation_transformations.</span></span><span class="sig-name descname"><span class="pre">avg_preceding_hour_2_indicated_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/time_observation_transformations.html#avg_preceding_hour_2_indicated_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.time_observation_transformations.avg_preceding_hour_2_indicated_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_following_hour">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.time_observation_transformations.</span></span><span class="sig-name descname"><span class="pre">indicated_time_2_avg_following_hour</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/time_observation_transformations.html#indicated_time_2_avg_following_hour"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_following_hour" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_preceding_hour">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.time_observation_transformations.</span></span><span class="sig-name descname"><span class="pre">indicated_time_2_avg_preceding_hour</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/time_observation_transformations.html#indicated_time_2_avg_preceding_hour"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_preceding_hour" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.time_observation_transformations.shift_time_by_dict">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.time_observation_transformations.</span></span><span class="sig-name descname"><span class="pre">shift_time_by_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">format_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/aixweather/transformation_functions/time_observation_transformations.html#shift_time_by_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.time_observation_transformations.shift_time_by_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shift timestamps in a DataFrame based on a format dictionary.</p>
+<p>This function shifts and interpolates values in the DataFrame <cite>df</cite> based on the specified format dictionary. The format
+dictionary should contain information about the desired time shifting for core data variables.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>format_dict (dict): A dictionary specifying the time shifting for core data variables.
+df (pd.DataFrame): The DataFrame containing timestamped data with core data variable names.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: The modified DataFrame with values shifted and interpolated according to the format dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.time_observation_transformations.truncate_data_from_start_to_stop">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.time_observation_transformations.</span></span><span class="sig-name descname"><span class="pre">truncate_data_from_start_to_stop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df:</span> <span class="pre">~pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start:</span> <span class="pre">&lt;module</span> <span class="pre">'datetime'</span> <span class="pre">from</span> <span class="pre">'/usr/local/lib/python3.11/datetime.py'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop:</span> <span class="pre">&lt;module</span> <span class="pre">'datetime'</span> <span class="pre">from</span> <span class="pre">'/usr/local/lib/python3.11/datetime.py'&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/aixweather/transformation_functions/time_observation_transformations.html#truncate_data_from_start_to_stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.time_observation_transformations.truncate_data_from_start_to_stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Truncate a DataFrame to include data only between specified start and stop timestamps.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>df (pd.DataFrame): The DataFrame containing timestamped data.
+start (datetime): The start timestamp to include in the truncated DataFrame.
+stop (datetime): The stop timestamp to include in the truncated DataFrame.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: A new DataFrame containing data only within the specified time range.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-aixweather.transformation_functions.unit_conversions">
+<span id="aixweather-transformation-functions-unit-conversions-module"></span><h2>aixweather.transformation_functions.unit_conversions module<a class="headerlink" href="#module-aixweather.transformation_functions.unit_conversions" title="Permalink to this heading">¶</a></h2>
+<p>Includes functions to convert units in weather data.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.unit_conversions.Jcm2_to_Whm2">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.unit_conversions.</span></span><span class="sig-name descname"><span class="pre">Jcm2_to_Whm2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radiation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/unit_conversions.html#Jcm2_to_Whm2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.unit_conversions.Jcm2_to_Whm2" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert radiance unit from J/cm^2 to Wh/m^2</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.unit_conversions.Jm2_to_Whm2">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.unit_conversions.</span></span><span class="sig-name descname"><span class="pre">Jm2_to_Whm2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radiation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/unit_conversions.html#Jm2_to_Whm2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.unit_conversions.Jm2_to_Whm2" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert radiance unit from J/m^2 to Wh/m^2</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.unit_conversions.divide_by_1000">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.unit_conversions.</span></span><span class="sig-name descname"><span class="pre">divide_by_1000</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/unit_conversions.html#divide_by_1000"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.unit_conversions.divide_by_1000" title="Permalink to this definition">¶</a></dt>
+<dd><p>divide by 1000</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.unit_conversions.eigth_to_tenth">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.unit_conversions.</span></span><span class="sig-name descname"><span class="pre">eigth_to_tenth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cloudgrade</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/unit_conversions.html#eigth_to_tenth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.unit_conversions.eigth_to_tenth" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert cloudgrade from eighth to tenth</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.unit_conversions.hPa_to_Pa">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.unit_conversions.</span></span><span class="sig-name descname"><span class="pre">hPa_to_Pa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pressure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/unit_conversions.html#hPa_to_Pa"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.unit_conversions.hPa_to_Pa" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert pressure unit from hPa to Pa</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.unit_conversions.kJm2_to_Whm2">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.unit_conversions.</span></span><span class="sig-name descname"><span class="pre">kJm2_to_Whm2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radiation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/unit_conversions.html#kJm2_to_Whm2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.unit_conversions.kJm2_to_Whm2" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert radiance unit from kJ/m^2 to Wh/m^2</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.unit_conversions.kelvin_to_celcius">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.unit_conversions.</span></span><span class="sig-name descname"><span class="pre">kelvin_to_celcius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/unit_conversions.html#kelvin_to_celcius"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.unit_conversions.kelvin_to_celcius" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert temperature from kelvin to celcius</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.unit_conversions.percent_to_tenth">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.unit_conversions.</span></span><span class="sig-name descname"><span class="pre">percent_to_tenth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cloudgrade</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/unit_conversions.html#percent_to_tenth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.unit_conversions.percent_to_tenth" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert cloudgrade from percent to tenth</p>
+</dd></dl>
+
+</section>
+<section id="module-aixweather.transformation_functions.variable_transformations">
+<span id="aixweather-transformation-functions-variable-transformations-module"></span><h2>aixweather.transformation_functions.variable_transformations module<a class="headerlink" href="#module-aixweather.transformation_functions.variable_transformations" title="Permalink to this heading">¶</a></h2>
+<p>This module includes variable transformations and functions
+to calculate variables from given values</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.variable_transformations.approximate_opaque_from_total_skycover">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.variable_transformations.</span></span><span class="sig-name descname"><span class="pre">approximate_opaque_from_total_skycover</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">total_sky_cover</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/variable_transformations.html#approximate_opaque_from_total_skycover"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.variable_transformations.approximate_opaque_from_total_skycover" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.variable_transformations.calculate_dew_point_temp">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.variable_transformations.</span></span><span class="sig-name descname"><span class="pre">calculate_dew_point_temp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dry_bulb_temp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_hum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Series</span></span></span><a class="reference internal" href="../_modules/aixweather/transformation_functions/variable_transformations.html#calculate_dew_point_temp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.variable_transformations.calculate_dew_point_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the dew point temperature using a simplified formula.</p>
+<p>This function estimates the dew point temperature in degrees Celsius based on the given dry bulb temperature
+and relative humidity. Please note that this formula is fairly accurate for humidity above 50%. For more
+precise calculations, consider using a more advanced formula.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dry_bulb_temp (pd.Series): The dry bulb temperature in degrees Celsius.
+rel_hum (pd.Series): The relative humidity in percentage.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.Series: The estimated dew point temperature in degrees Celsius.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.variable_transformations.calculate_direct_horizontal_radiation">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.variable_transformations.</span></span><span class="sig-name descname"><span class="pre">calculate_direct_horizontal_radiation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">glob_hor_rad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diff_hor_rad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Series</span></span></span><a class="reference internal" href="../_modules/aixweather/transformation_functions/variable_transformations.html#calculate_direct_horizontal_radiation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.variable_transformations.calculate_direct_horizontal_radiation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate direct horizontal radiation by subtracting diffuse horizontal radiation from global horizontal radiation.</p>
+<p>Checked by Martin Rätz on 08.08.2023.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>glob_hor_rad (pd.Series): Global horizontal radiation in Wh/m^2.
+diff_hor_rad (pd.Series): Diffuse horizontal radiation in Wh/m^2.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.Series: The estimated direct horizontal radiation in Wh/m^2.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.variable_transformations.calculate_global_horizontal_radiation">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.variable_transformations.</span></span><span class="sig-name descname"><span class="pre">calculate_global_horizontal_radiation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_hor_rad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diff_hor_rad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Series</span></span></span><a class="reference internal" href="../_modules/aixweather/transformation_functions/variable_transformations.html#calculate_global_horizontal_radiation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.variable_transformations.calculate_global_horizontal_radiation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate global horizontal radiation on a horizontal plane by adding direct horizontal radiation
+with diffuse horizontal radiation.</p>
+<p>Checked by Martin Rätz on 08.08.2023 using:
+<a class="reference external" href="https://pvpmc.sandia.gov/modeling-steps/1-weather-design-inputs/irradiance-insolation/global-horizontal-irradiance/">https://pvpmc.sandia.gov/modeling-steps/1-weather-design-inputs/irradiance-insolation/global-horizontal-irradiance/</a></p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dir_hor_rad (pd.Series): Direct horizontal radiation in Wh/m^2.
+diff_hor_rad (pd.Series): Diffuse horizontal radiation in Wh/m^2.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.Series: The estimated global horizontal radiation in Wh/m^2.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.variable_transformations.calculate_horizontal_infrared_radiation">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.variable_transformations.</span></span><span class="sig-name descname"><span class="pre">calculate_horizontal_infrared_radiation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dry_bulb_temp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dew_point_temp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opaque_sky_cover</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Series</span></span></span><a class="reference internal" href="../_modules/aixweather/transformation_functions/variable_transformations.html#calculate_horizontal_infrared_radiation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.variable_transformations.calculate_horizontal_infrared_radiation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate horizontal infrared radiation using the provided inputs.</p>
+<p>Calculation details can be found at:
+<a class="reference external" href="https://www.energyplus.net/sites/default/files/docs/site_v8.3.0/EngineeringReference/05-Climate/index.html">https://www.energyplus.net/sites/default/files/docs/site_v8.3.0/EngineeringReference/05-Climate/index.html</a></p>
+<p>Sky emissivity is considered in the calculation as per the above reference.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dry_bulb_temp (pd.Series): Dry bulb temperature in degrees Celsius.
+dew_point_temp (pd.Series): Dew point temperature in degrees Celsius.
+opaque_sky_cover (pd.Series): Opaque sky cover in tenths.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.Series: The estimated horizontal infrared radiation in Wh/m^2.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.variable_transformations.calculate_normal_from_horizontal_direct_radiation">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.variable_transformations.</span></span><span class="sig-name descname"><span class="pre">calculate_normal_from_horizontal_direct_radiation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">utc_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DatetimeIndex</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direct_horizontal_radiation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/variable_transformations.html#calculate_normal_from_horizontal_direct_radiation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.variable_transformations.calculate_normal_from_horizontal_direct_radiation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the Direct Normal Irradiance (DNI) from Direct Horizontal Irradiance (DHI).
+Values will be set to zero when the sun is below 5° angle from the horizon.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>latitude (float): The latitude of the location in degrees.
+longitude (float): The longitude of the location in degrees.
+utc_time (pd.DatetimeIndex): The timestamps for which the DNI is to be calculated, in UTC.
+direct_horizontal_radiation (pd.Series): The Direct Horizontal Irradiance (DHI) in [W/m^2]</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.Series: The calculated Direct Normal Irradiance (DNI) in W/m^2 for each timestamp.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.variable_transformations.robust_transformation">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.variable_transformations.</span></span><span class="sig-name descname"><span class="pre">robust_transformation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desired_variable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformation_function</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/aixweather/transformation_functions/variable_transformations.html#robust_transformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.variable_transformations.robust_transformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a transformation function to calculate the desired variable in the DataFrame
+if the variable is missing or contains only NaN values. Skip the transformation if
+any required column (specified in args) is missing to perform the calculation.</p>
+<dl>
+<dt>Args:</dt><dd><p>df (pd.DataFrame): DataFrame containing the data.
+desired_variable (str): Name of the variable to which the transformation should be applied.
+transformation_function: Function to apply to the desired variable.
+<a href="#id1"><span class="problematic" id="id2">*</span></a>args: Additional arguments required for the transformation function.</p>
+<blockquote>
+<div><p>These can be column names (str) or other values (all other types).</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><p>tuple[pd.DataFrame, dict]: A tuple containing the updated DataFrame with the transformation applied
+to the desired variable and a dictionary indicating which variables were used for the calculation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.variable_transformations.variable_transform_all">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.variable_transformations.</span></span><span class="sig-name descname"><span class="pre">variable_transform_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.utils_import.MetaData" title="aixweather.imports.utils_import.MetaData"><span class="pre">MetaData</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/aixweather/transformation_functions/variable_transformations.html#variable_transform_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.variable_transformations.variable_transform_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform and compute missing variables for the given DataFrame based on specified calculations.
+This function performs multiple transformations on the DataFrame to calculate all completely
+missing variables. The applied calculations for each variable are tracked in the
+‘calc_overview’ dictionary.</p>
+<p>You can add all variable transformations here.
+Respect a meaningful order.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>df (pd.DataFrame): The DataFrame containing the data to be transformed.
+meta (MetaData): Metadata associated with the data.</p>
+</dd>
+<dt>Returns:</dt><dd><p>tuple[pd.DataFrame, dict]: A tuple containing the transformed DataFrame with computed variables
+and a dictionary (‘calc_overview’) tracking the calculations applied to the DataFrame.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="aixweather.transformation_to_core_data.html" class="btn btn-neutral float-right" title="aixweather.transformation_to_core_data package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="aixweather.imports.html" class="btn btn-neutral float-left" title="aixweather.imports package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, EON EBC.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

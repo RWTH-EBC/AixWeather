@@ -1,0 +1,466 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>aixweather.imports package &mdash; aixweather 0.1.4 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/autodoc_pydantic.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="aixweather.transformation_functions package" href="aixweather.transformation_functions.html" />
+    <link rel="prev" title="aixweather.core_data_format_2_output_file package" href="aixweather.core_data_format_2_output_file.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> aixweather
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">aixweather</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="aixweather.html">aixweather package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="aixweather.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html">aixweather.core_data_format_2_output_file package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">aixweather.imports package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aixweather.transformation_functions.html">aixweather.transformation_functions package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aixweather.transformation_to_core_data.html">aixweather.transformation_to_core_data package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.html#module-aixweather.data_quality_checks">aixweather.data_quality_checks module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.html#module-aixweather.definitions">aixweather.definitions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.html#module-aixweather.project_class">aixweather.project_class module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Contribution.html">Contribute as a user</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version_his.html">Version History</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">aixweather</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">aixweather</a> &raquo;</li>
+        
+          <li><a href="aixweather.html">aixweather package</a> &raquo;</li>
+        
+      <li>aixweather.imports package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/code/aixweather.imports.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="module-aixweather.imports">
+<span id="aixweather-imports-package"></span><h1>aixweather.imports package<a class="headerlink" href="#module-aixweather.imports" title="Permalink to this heading">¶</a></h1>
+<p>AixWeather Imports Package</p>
+<p>The ‘imports’ package within AixWeather contains modules for importing raw weather data from various sources,
+including pulling data from DWD (Deutscher Wetterdienst) or reading files from local drives.
+Each module is designed to handle data from a specific source or format.</p>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-aixweather.imports.DWD">
+<span id="aixweather-imports-dwd-module"></span><h2>aixweather.imports.DWD module<a class="headerlink" href="#module-aixweather.imports.DWD" title="Permalink to this heading">¶</a></h2>
+<p>imports weather data from the DWD</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.imports.DWD.import_DWD_forecast">
+<span class="sig-prename descclassname"><span class="pre">aixweather.imports.DWD.</span></span><span class="sig-name descname"><span class="pre">import_DWD_forecast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">station</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/aixweather/imports/DWD.html#import_DWD_forecast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.imports.DWD.import_DWD_forecast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import weather forecast data from the DWD (German Weather Service) for a specified station.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>station (str): Station ID of the DWD for which forecast data is to be imported.</dt><dd><p>For debugging purposes: station 01028.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: DataFrame containing weather forecast data from the DWD.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.imports.DWD.import_DWD_historical">
+<span class="sig-prename descclassname"><span class="pre">aixweather.imports.DWD.</span></span><span class="sig-name descname"><span class="pre">import_DWD_historical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">station</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/aixweather/imports/DWD.html#import_DWD_historical"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.imports.DWD.import_DWD_historical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pull historical data from DWD:
+(<a class="reference external" href="https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/">https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/</a>) and
+format them into a dataframe.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>start: defines how much data must be pulled
+station: station id of the DWD</p>
+</dd>
+<dt>Returns:</dt><dd><p>Dataframe weather data from DWD that is as raw as possible.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.imports.DWD.import_meta_DWD_forecast">
+<span class="sig-prename descclassname"><span class="pre">aixweather.imports.DWD.</span></span><span class="sig-name descname"><span class="pre">import_meta_DWD_forecast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">station</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#aixweather.imports.utils_import.MetaData" title="aixweather.imports.utils_import.MetaData"><span class="pre">MetaData</span></a></span></span><a class="reference internal" href="../_modules/aixweather/imports/DWD.html#import_meta_DWD_forecast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.imports.DWD.import_meta_DWD_forecast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Downloads and extracts metadata related to the specified station
+from the DWD (Deutscher Wetterdienst) Open Data Interface.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><p>station: Station ID for which metadata is to be retrieved.</p>
+</dd>
+<dt>Returns:</dt><dd><p>meta (meta_data object): An object of the meta_data class with
+populated attributes related to the station.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.imports.DWD.import_meta_DWD_historical">
+<span class="sig-prename descclassname"><span class="pre">aixweather.imports.DWD.</span></span><span class="sig-name descname"><span class="pre">import_meta_DWD_historical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">station</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#aixweather.imports.utils_import.MetaData" title="aixweather.imports.utils_import.MetaData"><span class="pre">MetaData</span></a></span></span><a class="reference internal" href="../_modules/aixweather/imports/DWD.html#import_meta_DWD_historical"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.imports.DWD.import_meta_DWD_historical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Downloads and extracts metadata related to the specified station from
+the DWD (Deutscher Wetterdienst) Open Data Interface.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><p>station: Station ID for which metadata is to be retrieved.</p>
+</dd>
+<dt>Returns:</dt><dd><p>meta (meta_data object): An object of the meta_data class with
+populated attributes related to the station.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-aixweather.imports.EPW">
+<span id="aixweather-imports-epw-module"></span><h2>aixweather.imports.EPW module<a class="headerlink" href="#module-aixweather.imports.EPW" title="Permalink to this heading">¶</a></h2>
+<p>import epw files</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.imports.EPW.load_epw_from_file">
+<span class="sig-prename descclassname"><span class="pre">aixweather.imports.EPW.</span></span><span class="sig-name descname"><span class="pre">load_epw_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/aixweather/imports/EPW.html#load_epw_from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.imports.EPW.load_epw_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import data from an EPW file and convert it into a DataFrame.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>path (str): The absolute path to the EPW file.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: A DataFrame containing the imported data from the EPW file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.imports.EPW.load_epw_meta_from_file">
+<span class="sig-prename descclassname"><span class="pre">aixweather.imports.EPW.</span></span><span class="sig-name descname"><span class="pre">load_epw_meta_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#aixweather.imports.utils_import.MetaData" title="aixweather.imports.utils_import.MetaData"><span class="pre">MetaData</span></a></span></span><a class="reference internal" href="../_modules/aixweather/imports/EPW.html#load_epw_meta_from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.imports.EPW.load_epw_meta_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load an EPW file from a specified path and parse the file header for metadata.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>path (str): The file path to the EPW file to be loaded.</p>
+</dd>
+<dt>Returns:</dt><dd><p>MetaData: An object containing the parsed metadata from the EPW file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-aixweather.imports.ERC">
+<span id="aixweather-imports-erc-module"></span><h2>aixweather.imports.ERC module<a class="headerlink" href="#module-aixweather.imports.ERC" title="Permalink to this heading">¶</a></h2>
+<p>contains functions to handle data within ERC</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.imports.ERC.import_ERC">
+<span class="sig-prename descclassname"><span class="pre">aixweather.imports.ERC.</span></span><span class="sig-name descname"><span class="pre">import_ERC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><span class="pre">tuple</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/aixweather/imports/ERC.html#import_ERC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.imports.ERC.import_ERC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import weather data from aedifion ERC weather station (credentials required).</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>start (datetime): Datetime object representing the data start.
+stop (datetime): Datetime object representing the data stop.
+cred (tuple): Aedifion credentials.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: DataFrame containing as raw as possible weather data from aedifion ERC.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.imports.ERC.import_meta_from_ERC">
+<span class="sig-prename descclassname"><span class="pre">aixweather.imports.ERC.</span></span><span class="sig-name descname"><span class="pre">import_meta_from_ERC</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#aixweather.imports.utils_import.MetaData" title="aixweather.imports.utils_import.MetaData"><span class="pre">MetaData</span></a></span></span><a class="reference internal" href="../_modules/aixweather/imports/ERC.html#import_meta_from_ERC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.imports.ERC.import_meta_from_ERC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import (specify) metadata from ERC.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>MetaData: A MetaData object containing station information for ERC.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.imports.ERC.load_credentials_ERC_weather_data">
+<span class="sig-prename descclassname"><span class="pre">aixweather.imports.ERC.</span></span><span class="sig-name descname"><span class="pre">load_credentials_ERC_weather_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><span class="pre">tuple</span></a></span></span><a class="reference internal" href="../_modules/aixweather/imports/ERC.html#load_credentials_ERC_weather_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.imports.ERC.load_credentials_ERC_weather_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>GUI to return the username and password needed to access ERC weather data.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>tuple: The username and password required for accessing ERC weather data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-aixweather.imports.TRY">
+<span id="aixweather-imports-try-module"></span><h2>aixweather.imports.TRY module<a class="headerlink" href="#module-aixweather.imports.TRY" title="Permalink to this heading">¶</a></h2>
+<p>import DWD TRY data</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.imports.TRY.load_try_from_file">
+<span class="sig-prename descclassname"><span class="pre">aixweather.imports.TRY.</span></span><span class="sig-name descname"><span class="pre">load_try_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/aixweather/imports/TRY.html#load_try_from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.imports.TRY.load_try_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import data from a TRY file and convert it into a DataFrame.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>path (str): The absolute path to the TRY file.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: A DataFrame containing the imported data from the TRY file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.imports.TRY.load_try_meta_from_file">
+<span class="sig-prename descclassname"><span class="pre">aixweather.imports.TRY.</span></span><span class="sig-name descname"><span class="pre">load_try_meta_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#aixweather.imports.utils_import.MetaData" title="aixweather.imports.utils_import.MetaData"><span class="pre">MetaData</span></a></span></span><a class="reference internal" href="../_modules/aixweather/imports/TRY.html#load_try_meta_from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.imports.TRY.load_try_meta_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a TRY file from a specified path and parse the header for metadata.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>path (str): The file path to the TRY file to be loaded.</p>
+</dd>
+<dt>Returns:</dt><dd><p>MetaData: An object containing the parsed metadata from the TRY file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-aixweather.imports.custom_file">
+<span id="aixweather-imports-custom-file-module"></span><h2>aixweather.imports.custom_file module<a class="headerlink" href="#module-aixweather.imports.custom_file" title="Permalink to this heading">¶</a></h2>
+<p>change this file to your custom requirements (only import and perform as
+little preprocessing as possible)</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.imports.custom_file.load_custom_from_file">
+<span class="sig-prename descclassname"><span class="pre">aixweather.imports.custom_file.</span></span><span class="sig-name descname"><span class="pre">load_custom_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/imports/custom_file.html#load_custom_from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.imports.custom_file.load_custom_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import data from file and convert them into df</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>path: absolute path to file</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.Dataframe: as raw as possible but with some datetimeindex</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.imports.custom_file.load_custom_meta_data">
+<span class="sig-prename descclassname"><span class="pre">aixweather.imports.custom_file.</span></span><span class="sig-name descname"><span class="pre">load_custom_meta_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/imports/custom_file.html#load_custom_meta_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.imports.custom_file.load_custom_meta_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>define or load your meta data here</p>
+</dd></dl>
+
+</section>
+<section id="module-aixweather.imports.utils_import">
+<span id="aixweather-imports-utils-import-module"></span><h2>aixweather.imports.utils_import module<a class="headerlink" href="#module-aixweather.imports.utils_import" title="Permalink to this heading">¶</a></h2>
+<p>includes a class that reads metadata from weather station</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="aixweather.imports.utils_import.MetaData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">aixweather.imports.utils_import.</span></span><span class="sig-name descname"><span class="pre">MetaData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/imports/utils_import.html#MetaData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.imports.utils_import.MetaData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A class for storing metadata information about a weather station.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>station_name (str): The name of the weather station.
+station_id (str): The ID (DWD or DWD MOSMIX ID) of the weather station.
+altitude (float): The altitude of the weather station in meters.
+latitude (float): The latitude of the weather station in degree.
+longitude (float): The longitude of the weather station in degree.
+input_source (str): The source of input data for the station.</p>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="aixweather.imports.utils_import.MetaData.altitude">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">altitude</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></em><a class="headerlink" href="#aixweather.imports.utils_import.MetaData.altitude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="aixweather.imports.utils_import.MetaData.latitude">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">latitude</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></em><a class="headerlink" href="#aixweather.imports.utils_import.MetaData.latitude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="aixweather.imports.utils_import.MetaData.longitude">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">longitude</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></em><a class="headerlink" href="#aixweather.imports.utils_import.MetaData.longitude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="aixweather.imports.utils_import.MetaData.station_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">station_name</span></span><a class="headerlink" href="#aixweather.imports.utils_import.MetaData.station_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="aixweather.transformation_functions.html" class="btn btn-neutral float-right" title="aixweather.transformation_functions package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="aixweather.core_data_format_2_output_file.html" class="btn btn-neutral float-left" title="aixweather.core_data_format_2_output_file package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, EON EBC.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>aixweather.transformation_functions.variable_transformations &mdash; aixweather 0.1.4 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/autodoc_pydantic.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> aixweather
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">aixweather</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html">Contribute as a user</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../version_his.html">Version History</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">aixweather</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>aixweather.transformation_functions.variable_transformations</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for aixweather.transformation_functions.variable_transformations</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module includes variable transformations and functions</span>
+<span class="sd">to calculate variables from given values</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">pvlib</span>
+
+<span class="kn">from</span> <span class="nn">aixweather.imports.utils_import</span> <span class="kn">import</span> <span class="n">MetaData</span>
+
+
+<div class="viewcode-block" id="approximate_opaque_from_total_skycover"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.approximate_opaque_from_total_skycover">[docs]</a><span class="k">def</span> <span class="nf">approximate_opaque_from_total_skycover</span><span class="p">(</span><span class="n">total_sky_cover</span><span class="p">):</span>
+    <span class="n">opaque_sky_cover</span> <span class="o">=</span> <span class="n">total_sky_cover</span>
+    <span class="k">return</span> <span class="n">opaque_sky_cover</span></div>
+
+
+<div class="viewcode-block" id="calculate_dew_point_temp"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_dew_point_temp">[docs]</a><span class="k">def</span> <span class="nf">calculate_dew_point_temp</span><span class="p">(</span><span class="n">dry_bulb_temp</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">rel_hum</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the dew point temperature using a simplified formula.</span>
+
+<span class="sd">    This function estimates the dew point temperature in degrees Celsius based on the given dry bulb temperature</span>
+<span class="sd">    and relative humidity. Please note that this formula is fairly accurate for humidity above 50%. For more</span>
+<span class="sd">    precise calculations, consider using a more advanced formula.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dry_bulb_temp (pd.Series): The dry bulb temperature in degrees Celsius.</span>
+<span class="sd">        rel_hum (pd.Series): The relative humidity in percentage.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.Series: The estimated dew point temperature in degrees Celsius.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dew_point_temp</span> <span class="o">=</span> <span class="n">dry_bulb_temp</span> <span class="o">-</span> <span class="p">(</span><span class="mi">100</span> <span class="o">-</span> <span class="n">rel_hum</span><span class="p">)</span> <span class="o">/</span> <span class="mi">5</span>
+    <span class="k">return</span> <span class="n">dew_point_temp</span></div>
+
+
+<div class="viewcode-block" id="calculate_direct_horizontal_radiation"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_direct_horizontal_radiation">[docs]</a><span class="k">def</span> <span class="nf">calculate_direct_horizontal_radiation</span><span class="p">(</span>
+    <span class="n">glob_hor_rad</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">diff_hor_rad</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate direct horizontal radiation by subtracting diffuse horizontal radiation from global horizontal radiation.</span>
+
+<span class="sd">    Checked by Martin Rätz on 08.08.2023.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        glob_hor_rad (pd.Series): Global horizontal radiation in Wh/m^2.</span>
+<span class="sd">        diff_hor_rad (pd.Series): Diffuse horizontal radiation in Wh/m^2.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.Series: The estimated direct horizontal radiation in Wh/m^2.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dir_hor_rad</span> <span class="o">=</span> <span class="n">glob_hor_rad</span> <span class="o">-</span> <span class="n">diff_hor_rad</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dir_hor_rad</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+        <span class="n">dir_hor_rad</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">dir_hor_rad</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">dir_hor_rad</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">dir_hor_rad</span></div>
+
+
+<div class="viewcode-block" id="calculate_global_horizontal_radiation"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_global_horizontal_radiation">[docs]</a><span class="k">def</span> <span class="nf">calculate_global_horizontal_radiation</span><span class="p">(</span>
+    <span class="n">dir_hor_rad</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">diff_hor_rad</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate global horizontal radiation on a horizontal plane by adding direct horizontal radiation</span>
+<span class="sd">    with diffuse horizontal radiation.</span>
+
+<span class="sd">    Checked by Martin Rätz on 08.08.2023 using:</span>
+<span class="sd">    https://pvpmc.sandia.gov/modeling-steps/1-weather-design-inputs/irradiance-insolation/global-horizontal-irradiance/</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dir_hor_rad (pd.Series): Direct horizontal radiation in Wh/m^2.</span>
+<span class="sd">        diff_hor_rad (pd.Series): Diffuse horizontal radiation in Wh/m^2.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.Series: The estimated global horizontal radiation in Wh/m^2.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">glob_hor_rad</span> <span class="o">=</span> <span class="n">dir_hor_rad</span> <span class="o">+</span> <span class="n">diff_hor_rad</span>
+
+    <span class="c1"># if value &lt; 0 set as 0</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">glob_hor_rad</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+        <span class="n">glob_hor_rad</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">glob_hor_rad</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">glob_hor_rad</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">return</span> <span class="n">glob_hor_rad</span></div>
+
+
+<div class="viewcode-block" id="calculate_horizontal_infrared_radiation"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_horizontal_infrared_radiation">[docs]</a><span class="k">def</span> <span class="nf">calculate_horizontal_infrared_radiation</span><span class="p">(</span>
+    <span class="n">dry_bulb_temp</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">dew_point_temp</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">opaque_sky_cover</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate horizontal infrared radiation using the provided inputs.</span>
+
+<span class="sd">    Calculation details can be found at:</span>
+<span class="sd">    https://www.energyplus.net/sites/default/files/docs/site_v8.3.0/EngineeringReference/05-Climate/index.html</span>
+
+<span class="sd">    Sky emissivity is considered in the calculation as per the above reference.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dry_bulb_temp (pd.Series): Dry bulb temperature in degrees Celsius.</span>
+<span class="sd">        dew_point_temp (pd.Series): Dew point temperature in degrees Celsius.</span>
+<span class="sd">        opaque_sky_cover (pd.Series): Opaque sky cover in tenths.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.Series: The estimated horizontal infrared radiation in Wh/m^2.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># change to Kelvin</span>
+    <span class="n">dry_bulb_temp</span> <span class="o">=</span> <span class="n">dry_bulb_temp</span> <span class="o">+</span> <span class="mf">273.15</span>
+    <span class="n">dew_point_tem</span> <span class="o">=</span> <span class="n">dew_point_temp</span> <span class="o">+</span> <span class="mf">273.15</span>
+
+    <span class="n">sky_emissivity</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.787</span> <span class="o">+</span> <span class="mf">0.764</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">dew_point_tem</span> <span class="o">/</span> <span class="mf">273.0</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span>
+        <span class="mf">1.0</span>
+        <span class="o">+</span> <span class="mf">0.0224</span> <span class="o">*</span> <span class="n">opaque_sky_cover</span>
+        <span class="o">-</span> <span class="mf">0.0035</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">opaque_sky_cover</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="o">+</span> <span class="mf">0.00028</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">opaque_sky_cover</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;equation 3 from Sky Radiation Modeling</span>
+<span class="sd">    https://www.energyplus.net/sites/default/files/docs/site_v8.3.0/</span>
+<span class="sd">    EngineeringReference/05-Climate/index.html&quot;&quot;&quot;</span>
+
+    <span class="n">hor_infra</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">sky_emissivity</span> <span class="o">*</span> <span class="mf">5.6697</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">dry_bulb_temp</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;equation 2 from Sky Radiation Modeling </span>
+<span class="sd">    https://www.energyplus.net/sites/default/files/docs/site_v8.3.0/EngineeringReference/05-Climate/index.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">hor_infra</span></div>
+
+
+<div class="viewcode-block" id="calculate_normal_from_horizontal_direct_radiation"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_normal_from_horizontal_direct_radiation">[docs]</a><span class="k">def</span> <span class="nf">calculate_normal_from_horizontal_direct_radiation</span><span class="p">(</span>
+    <span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">utc_time</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">,</span>
+    <span class="n">direct_horizontal_radiation</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the Direct Normal Irradiance (DNI) from Direct Horizontal Irradiance (DHI).</span>
+<span class="sd">    Values will be set to zero when the sun is below 5° angle from the horizon.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        latitude (float): The latitude of the location in degrees.</span>
+<span class="sd">        longitude (float): The longitude of the location in degrees.</span>
+<span class="sd">        utc_time (pd.DatetimeIndex): The timestamps for which the DNI is to be calculated, in UTC.</span>
+<span class="sd">        direct_horizontal_radiation (pd.Series): The Direct Horizontal Irradiance (DHI) in [W/m^2]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.Series: The calculated Direct Normal Irradiance (DNI) in W/m^2 for each timestamp.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Calculate the solar zenith angle for each time</span>
+    <span class="n">solar_position</span> <span class="o">=</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">solarposition</span><span class="o">.</span><span class="n">get_solarposition</span><span class="p">(</span>
+        <span class="n">utc_time</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="s2">&quot;UTC&quot;</span><span class="p">),</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span>
+    <span class="p">)</span>
+    <span class="n">solar_position</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">solar_position</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">zenith_angle_deg</span> <span class="o">=</span> <span class="n">solar_position</span><span class="p">[</span><span class="s2">&quot;zenith&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Calculate the Direct Normal Irradiance (DNI) for each time</span>
+    <span class="n">zenith_angle_rad</span> <span class="o">=</span> <span class="n">zenith_angle_deg</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span><span class="p">)</span>  <span class="c1"># Convert to radians</span>
+    <span class="n">dni</span> <span class="o">=</span> <span class="n">direct_horizontal_radiation</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">zenith_angle_rad</span><span class="p">)</span>
+
+    <span class="c1"># Set values to zero when the sun is below 5° angle from the horizon</span>
+    <span class="n">dni</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">zenith_angle_deg</span> <span class="o">&gt;</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dni</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">dni</span></div>
+
+
+<span class="c1"># wrapping functions ------------------------------------------</span>
+<div class="viewcode-block" id="robust_transformation"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.robust_transformation">[docs]</a><span class="k">def</span> <span class="nf">robust_transformation</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">desired_variable</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">transformation_function</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply a transformation function to calculate the desired variable in the DataFrame</span>
+<span class="sd">    if the variable is missing or contains only NaN values. Skip the transformation if</span>
+<span class="sd">    any required column (specified in args) is missing to perform the calculation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): DataFrame containing the data.</span>
+<span class="sd">        desired_variable (str): Name of the variable to which the transformation should be applied.</span>
+<span class="sd">        transformation_function: Function to apply to the desired variable.</span>
+<span class="sd">        *args: Additional arguments required for the transformation function.</span>
+<span class="sd">               These can be column names (str) or other values (all other types).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple[pd.DataFrame, dict]: A tuple containing the updated DataFrame with the transformation applied</span>
+<span class="sd">        to the desired variable and a dictionary indicating which variables were used for the calculation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Feed back whether calculation was done and with which variables</span>
+    <span class="n">calc_status</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Check if the desired variable is missing or contains only NaN values</span>
+    <span class="k">if</span> <span class="n">desired_variable</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="ow">or</span> <span class="n">df</span><span class="p">[</span><span class="n">desired_variable</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+        <span class="c1"># refactor args to account for strings to get the column of the df and pure objects</span>
+        <span class="n">new_args</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">args_of_columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>  <span class="c1"># get only strings of args that are column names</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="c1"># if arg is a column of the df, the new arg should be the column values</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                    <span class="c1"># if contains only NaN values</span>
+                    <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">arg</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                        <span class="nb">print</span><span class="p">(</span>
+                            <span class="sa">f</span><span class="s2">&quot;The required variable </span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s2"> has only nan, &quot;</span>
+                            <span class="sa">f</span><span class="s2">&quot;calculation of </span><span class="si">{</span><span class="n">desired_variable</span><span class="si">}</span><span class="s2"> aborted.&quot;</span>
+                        <span class="p">)</span>
+                        <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">calc_status</span>
+                    <span class="n">new_args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">arg</span><span class="p">])</span>
+                    <span class="n">args_of_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;The required variable </span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s2"> is not in the dataframes &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;columns, calculation of </span><span class="si">{</span><span class="n">desired_variable</span><span class="si">}</span><span class="s2"> aborted.&quot;</span>
+                    <span class="p">)</span>
+                    <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">calc_status</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># if arg is an object, e.g. from meta_data, add it directly</span>
+                <span class="n">new_args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+
+        <span class="c1"># Apply transformation if variables are available</span>
+        <span class="n">df</span><span class="p">[</span><span class="n">desired_variable</span><span class="p">]</span> <span class="o">=</span> <span class="n">transformation_function</span><span class="p">(</span><span class="o">*</span><span class="n">new_args</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calculated </span><span class="si">{</span><span class="n">desired_variable</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">args_of_columns</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Feed back whether calculation was done and with which variables</span>
+        <span class="n">calc_status</span> <span class="o">=</span> <span class="p">{</span><span class="n">desired_variable</span><span class="p">:</span> <span class="n">args_of_columns</span><span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">calc_status</span></div>
+
+
+<div class="viewcode-block" id="variable_transform_all"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.variable_transform_all">[docs]</a><span class="k">def</span> <span class="nf">variable_transform_all</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transform and compute missing variables for the given DataFrame based on specified calculations.</span>
+<span class="sd">    This function performs multiple transformations on the DataFrame to calculate all completely</span>
+<span class="sd">    missing variables. The applied calculations for each variable are tracked in the</span>
+<span class="sd">    &#39;calc_overview&#39; dictionary.</span>
+
+<span class="sd">    You can add all variable transformations here.</span>
+<span class="sd">    Respect a meaningful order.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame containing the data to be transformed.</span>
+<span class="sd">        meta (MetaData): Metadata associated with the data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple[pd.DataFrame, dict]: A tuple containing the transformed DataFrame with computed variables</span>
+<span class="sd">        and a dictionary (&#39;calc_overview&#39;) tracking the calculations applied to the DataFrame.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># track if calculations are applied</span>
+    <span class="n">calc_overview</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1">### calculate missing variables for core data format if required and if possible</span>
+    <span class="n">df</span><span class="p">,</span> <span class="n">calc_status</span> <span class="o">=</span> <span class="n">robust_transformation</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span> <span class="s2">&quot;OpaqueSkyCover&quot;</span><span class="p">,</span> <span class="n">approximate_opaque_from_total_skycover</span><span class="p">,</span> <span class="s2">&quot;TotalSkyCover&quot;</span>
+    <span class="p">)</span>
+    <span class="n">calc_overview</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">calc_status</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">,</span> <span class="n">calc_status</span> <span class="o">=</span> <span class="n">robust_transformation</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span> <span class="s2">&quot;DewPointTemp&quot;</span><span class="p">,</span> <span class="n">calculate_dew_point_temp</span><span class="p">,</span> <span class="s2">&quot;DryBulbTemp&quot;</span><span class="p">,</span> <span class="s2">&quot;RelHum&quot;</span>
+    <span class="p">)</span>
+    <span class="n">calc_overview</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">calc_status</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">,</span> <span class="n">calc_status</span> <span class="o">=</span> <span class="n">robust_transformation</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span>
+        <span class="s2">&quot;DirHorRad&quot;</span><span class="p">,</span>
+        <span class="n">calculate_direct_horizontal_radiation</span><span class="p">,</span>
+        <span class="s2">&quot;GlobHorRad&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;DiffHorRad&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">calc_overview</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">calc_status</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">,</span> <span class="n">calc_status</span> <span class="o">=</span> <span class="n">robust_transformation</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span>
+        <span class="s2">&quot;DirNormRad&quot;</span><span class="p">,</span>
+        <span class="n">calculate_normal_from_horizontal_direct_radiation</span><span class="p">,</span>
+        <span class="n">meta</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span>
+        <span class="n">meta</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+        <span class="s2">&quot;DirHorRad&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">calc_overview</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">calc_status</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">,</span> <span class="n">calc_status</span> <span class="o">=</span> <span class="n">robust_transformation</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span>
+        <span class="s2">&quot;HorInfra&quot;</span><span class="p">,</span>
+        <span class="n">calculate_horizontal_infrared_radiation</span><span class="p">,</span>
+        <span class="s2">&quot;DryBulbTemp&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;DewPointTemp&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;OpaqueSkyCover&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">calc_overview</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">calc_status</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">calc_overview</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, EON EBC.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
