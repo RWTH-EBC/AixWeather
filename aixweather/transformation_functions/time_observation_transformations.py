@@ -33,7 +33,7 @@ def _shift_timestamps_and_interpolate(df: pd.DataFrame, backward: bool) -> pd.Da
 
     # shift and interpolate
     df_shifted = df.shift(freq=interval)
-    df_interpolated = df_shifted.resample("30min").interpolate(method="linear")
+    df_interpolated = df_shifted.resample("30min").interpolate(method="linear", limit=1)
 
     # keep only original timestamps
     df_final = df_interpolated.reindex(df.index)

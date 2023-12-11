@@ -483,12 +483,12 @@ def to_epw(
             ["Year", "Month", "Day"]
         ] = np.nan
         df["Year"] = (
-            df["Year"].fillna(method="ffill").fillna(method="bfill").astype(int)
+            df["Year"].ffill().bfill().astype(int)
         )
         df["Month"] = (
-            df["Month"].fillna(method="ffill").fillna(method="bfill").astype(int)
+            df["Month"].ffill().bfill().astype(int)
         )
-        df["Day"] = df["Day"].fillna(method="ffill").fillna(method="bfill").astype(int)
+        df["Day"] = df["Day"].ffill().bfill().astype(int)
         df.reset_index(drop=True, inplace=True)
 
         # data should always contain full days
@@ -581,7 +581,7 @@ def to_epw(
             df = auxiliary.fill_nan_from_format_dict(df, format_epw)
 
         # cut off float digits (required for EnergyPlus)
-        df = df.applymap(lambda x: (f"{x:.1f}") if isinstance(x, float) else x)
+        df = df.map(lambda x: (f"{x:.1f}") if isinstance(x, float) else x)
 
         # again make sure correct order and variables are applied
         # (processing might have mixed it up)

@@ -67,7 +67,7 @@ See the examples to know how to use them.
 
 # DWD station IDs and DWD MOSMIX station IDs
 
-The station IDs for the DWD weather stations to pull historical data from are listed [here](https://www.dwd.de/DE/leistungen/klimadatendeutschland/statliste/statlex_rich.txt;jsessionid=68E14BA255FE50BDC4AD9FF4F835895F.live31092?view=nasPublication&nn=16102). Only german stations available. Aachen would be 15000.
+The station IDs for the DWD weather stations to pull historical data from are listed [here](https://www.dwd.de/DE/leistungen/klimadatendeutschland/stationsliste.html). Only german stations available. Aachen would be 15000.
 
 The DWD MOSMIX station IDs for the DWD forecast are listed [here](https://www.dwd.de/DE/leistungen/met_verfahren_mosmix/mosmix_stationskatalog.cfg?view=nasPublication&nn=16102) or located on a map [here](https://wettwarn.de/mosmix/mosmix.html). Worldwide station available. Aachen would be 10505.
 

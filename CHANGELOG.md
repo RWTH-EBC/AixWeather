@@ -3,5 +3,10 @@
 - v0.1.1:   
    - BugFix: Config module not found, rearranged utils/definitions.
 - v0.1.2:
-  - BugFix: Compatibility with WebApp.  
+  - BugFix: Compatibility with WebApp.
+- v0.1.3:
+  - BugFix: loose package versioning caused errors
+  - Feature: descriptive error messages
+  - Feature: now handles non-complete or monotonic datetimeindexes
+  - Feature: variable bucket size for plotting (days, weeks, month)
 
