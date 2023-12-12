@@ -1,94 +1,50 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>aixweather.transformation_to_core_data.ERC &mdash; aixweather 0.1.2 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/autodoc_pydantic.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
+  <title>aixweather.transformation_to_core_data.ERC &mdash; aixweather 0.1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
 
   
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
-    
-    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
-    
+    <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../../index.html" class="icon icon-home"> aixweather
           
-
-          
+          <a href="../../../index.html" class="icon icon-home">
+            aixweather
           </a>
-
-          
-            
-            
               <div class="version">
                 0.1
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">aixweather</a></li>
@@ -97,69 +53,30 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../version_his.html">Version History</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../index.html">aixweather</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../../index.html">Module code</a> &raquo;</li>
-        
-      <li>aixweather.transformation_to_core_data.ERC</li>
-    
-    
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">aixweather.transformation_to_core_data.ERC</li>
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for aixweather.transformation_to_core_data.ERC</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This module includes functions to transform ERC data to core data format.</span>
@@ -176,6 +93,7 @@
 <span class="sd">format_ERC information</span>
 
 <span class="sd">checked by Martin Rätz 01.09.2023</span>
+<span class="sd">Radiation checks 12.12.2023: https://github.com/RWTH-EBC/AixWeather/issues/27</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="n">format_ERC</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;4121.weatherstation.temperature&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;DryBulbTemp&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="s1">&#39;foll2ind&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
@@ -186,9 +104,7 @@
     <span class="s1">&#39;4121.weatherstation.wind-direction&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;WindDir&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="s1">&#39;foll2ind&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s2">&quot;deg&quot;</span><span class="p">},</span>
     <span class="s1">&#39;4121.weatherstation.wind-speed&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;core_name&#39;</span><span class="p">:</span> <span class="s1">&#39;WindSpeed&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_meas_shift&#39;</span><span class="p">:</span> <span class="s1">&#39;foll2ind&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s2">&quot;m/s&quot;</span><span class="p">},</span>
     <span class="c1"># too little information available, also possibly needs a sum up not a mean when interpolating</span>
-    <span class="c1"># &#39;rainfall&#39;: {&#39;core_name&#39;: &#39;PrecWater&#39;,</span>
-    <span class="c1"># &#39;time_of_meas_shift&#39;: &#39;foll2ind&#39;,</span>
-    <span class="c1"># &#39;unit&#39;: &quot;mm/h&quot;}</span>
+    <span class="c1"># &#39;rainfall&#39;: {&#39;core_name&#39;: &#39;PrecWater&#39;, &#39;time_of_meas_shift&#39;: &#39;foll2ind&#39;, &#39;unit&#39;: &quot;mm/h&quot;}</span>
 <span class="p">}</span>
 
 
@@ -211,10 +127,10 @@
 
     <span class="c1">### format raw data for further operations</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df_import</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-
+    <span class="c1"># Resample the DataFrame to make the DatetimeIndex complete and monotonic</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">asfreq</span><span class="p">()</span>
     <span class="c1"># Remove timezone awareness</span>
     <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-
     <span class="c1"># rename available variables to core data format</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">rename_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">format_ERC</span><span class="p">)</span>
 
@@ -253,46 +169,30 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2023, EON EBC.
-
-    </p>
+    <p>&#169; Copyright 2023, EON EBC.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
