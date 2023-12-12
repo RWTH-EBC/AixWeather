@@ -119,7 +119,7 @@ def load_try_meta_from_file(path: str) -> MetaData:
 
     ### try to get city of location
     # Initialize Nominatim geolocator
-    geolocator = Nominatim(user_agent="myGeocoder")
+    geolocator = Nominatim(user_agent="aixweather")
     try:
         # Perform reverse geocoding
         location = geolocator.reverse((latitude_wgs84, longitude_wgs84))
