@@ -119,33 +119,26 @@ def load_try_meta_from_file(path: str) -> MetaData:
 
     ### try to get city of location
     # Initialize Nominatim geolocator
-    geolocator = Nominatim(user_agent="myGeocoder")
-    try:
-        # Perform reverse geocoding
-        location = geolocator.reverse((latitude_wgs84, longitude_wgs84))
+    geolocator = Nominatim(user_agent="aixweather")
+    # Perform reverse geocoding
+    location = geolocator.reverse((latitude_wgs84, longitude_wgs84))
 
-        # If you want specific components like city, state, etc.
-        address = location.raw["address"]
-        if "city" in address:
-            city = address["city"]
-        elif "town" in address:
-            city = address["town"]
-        elif "village" in address:
-            city = address["village"]
-        elif "hamlet" in address:
-            city = address["hamlet"]
-        elif "suburb" in address:
-            city = address["suburb"]
-        elif "locality" in address:
-            city = address["locality"]
-        else:
-            city = "Unknown"
-    except:
+    # If you want specific components like city, state, etc.
+    address = location.raw["address"]
+    if "city" in address:
+        city = address["city"]
+    elif "town" in address:
+        city = address["town"]
+    elif "village" in address:
+        city = address["village"]
+    elif "hamlet" in address:
+        city = address["hamlet"]
+    elif "suburb" in address:
+        city = address["suburb"]
+    elif "locality" in address:
+        city = address["locality"]
+    else:
         city = meta.station_name
-        print(
-            "Error: could not infer closest city from longitude + latitude"
-            " -> station_name will be unknown."
-        )
 
     meta.station_name = city
     meta.input_source = f"TRY{TRY_year}"
