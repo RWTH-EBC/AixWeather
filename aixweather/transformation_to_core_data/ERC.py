@@ -13,6 +13,7 @@ from aixweather.transformation_functions import auxiliary, time_observation_tran
 format_ERC information
 
 checked by Martin Rätz 01.09.2023
+Radiation checks 12.12.2023: https://github.com/RWTH-EBC/AixWeather/issues/27
 """
 format_ERC = {
     '4121.weatherstation.temperature': {'core_name': 'DryBulbTemp', 'time_of_meas_shift': 'foll2ind', 'unit': "degC"},
@@ -23,9 +24,7 @@ format_ERC = {
     '4121.weatherstation.wind-direction': {'core_name': 'WindDir', 'time_of_meas_shift': 'foll2ind', 'unit': "deg"},
     '4121.weatherstation.wind-speed': {'core_name': 'WindSpeed', 'time_of_meas_shift': 'foll2ind', 'unit': "m/s"},
     # too little information available, also possibly needs a sum up not a mean when interpolating
-    # 'rainfall': {'core_name': 'PrecWater',
-    # 'time_of_meas_shift': 'foll2ind',
-    # 'unit': "mm/h"}
+    # 'rainfall': {'core_name': 'PrecWater', 'time_of_meas_shift': 'foll2ind', 'unit': "mm/h"}
 }
 
 
