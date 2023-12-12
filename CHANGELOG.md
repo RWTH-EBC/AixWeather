@@ -9,4 +9,8 @@
   - Feature: descriptive error messages
   - Feature: now handles non-complete or monotonic datetimeindexes
   - Feature: variable bucket size for plotting (days, weeks, month)
+- v0.1.4:
+  - BugFix: DWD historical pull with station id´s with less than 5 digits.
+  - Feature: updated station list link
+  - Feature: check for meaningful start and end dates
 
