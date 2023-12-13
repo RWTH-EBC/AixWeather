@@ -1,17 +1,5 @@
 {
-    "messages": [
-        {
-            "type": "convention",
-            "module": "aixweather.project_class",
-            "obj": "ProjectClassGeneral.start_end_checks",
-            "line": 91,
-            "column": 4,
-            "path": "aixweather/project_class.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        }
-    ],
+    "messages": [],
     "stats": {
         "bad_names": {
             "argument": 0,
@@ -57,7 +45,7 @@
                 "warning": 0
             },
             "aixweather.project_class": {
-                "convention": 1,
+                "convention": 0,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -138,9 +126,7 @@
                 "warning": 0
             }
         },
-        "by_msg": {
-            "missing-function-docstring": 1
-        },
+        "by_msg": {},
         "code_type_count": {
             "code": 0,
             "comment": 0,
@@ -217,10 +203,10 @@
         "undocumented": {
             "function": 0,
             "klass": 0,
-            "method": 1,
+            "method": 0,
             "module": 0
         },
-        "convention": 1,
+        "convention": 0,
         "error": 0,
         "fatal": 0,
         "info": 0,
@@ -276,7 +262,7 @@
                 "warning": 0
             },
             "aixweather.project_class": {
-                "convention": 1,
+                "convention": 0,
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
@@ -357,9 +343,7 @@
                 "warning": 0
             }
         },
-        "by_msg": {
-            "missing-function-docstring": 1
-        },
+        "by_msg": {},
         "code_type_count": {
             "code": 0,
             "comment": 0,
@@ -436,17 +420,17 @@
         "undocumented": {
             "function": 0,
             "klass": 0,
-            "method": 1,
+            "method": 0,
             "module": 0
         },
-        "convention": 1,
+        "convention": 0,
         "error": 0,
         "fatal": 0,
         "info": 0,
         "refactor": 0,
         "statement": 180,
         "warning": 0,
-        "global_note": 9.944444444444445,
+        "global_note": 10.0,
         "nb_duplicated_lines": 0,
         "percent_duplicated_lines": 0.0
     }
