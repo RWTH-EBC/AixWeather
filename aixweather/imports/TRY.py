@@ -5,6 +5,7 @@ import DWD TRY data
 import datetime as dt
 import re
 import pandas as pd
+import random
 
 import geopandas as gpd
 from geopy.geocoders import Nominatim
@@ -119,7 +120,8 @@ def load_try_meta_from_file(path: str) -> MetaData:
 
     ### try to get city of location
     # Initialize Nominatim geolocator
-    geolocator = Nominatim(user_agent="aixweather")
+    user_agent = f"aixweather_{str(random.randint(1, 1000))}"
+    geolocator = Nominatim(user_agent=user_agent)
     # Perform reverse geocoding
     location = geolocator.reverse((latitude_wgs84, longitude_wgs84))
 
