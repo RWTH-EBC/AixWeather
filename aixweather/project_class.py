@@ -89,7 +89,7 @@ class ProjectClassGeneral(ABC):
         self.start_end_checks()
 
     def start_end_checks(self):
-        # make sure start and end are of type datetime
+        """Make sure start and end are of type datetime and end is after start."""
         if self.start is not None and self.end is not None:
             if not isinstance(self.start, dt.datetime) or not isinstance(self.end, dt.datetime):
                 raise ValueError("Time period for pulling data: start and end must be of "
