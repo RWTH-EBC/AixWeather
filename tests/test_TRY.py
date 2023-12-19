@@ -5,8 +5,6 @@ includes unittests for different TRY datasets
 
 import os
 import unittest
-import time
-import random
 
 from aixweather import definitions
 from aixweather.project_class import ProjectClassTRY
@@ -23,11 +21,6 @@ class BaseTRY(unittest.TestCase):
         cls.folder_tests = os.path.join(
             definitions.ROOT_DIR, f"tests/test_files/regular_tests/TRY/test_{name}"
         )
-
-        # de-parallelize the tests to avoid timeouts during accessing the Nominatim API for reverse
-        # geolocating
-        pause_time = random.uniform(1, 5)
-        time.sleep(pause_time)
 
         utils_4_tests.run_all_functions(cls.c)
 
