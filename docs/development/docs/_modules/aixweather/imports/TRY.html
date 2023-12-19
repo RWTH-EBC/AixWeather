@@ -85,6 +85,7 @@
 <span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">random</span>
 
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">from</span> <span class="nn">geopy.geocoders</span> <span class="kn">import</span> <span class="n">Nominatim</span>
@@ -199,7 +200,8 @@
 
     <span class="c1">### try to get city of location</span>
     <span class="c1"># Initialize Nominatim geolocator</span>
-    <span class="n">geolocator</span> <span class="o">=</span> <span class="n">Nominatim</span><span class="p">(</span><span class="n">user_agent</span><span class="o">=</span><span class="s2">&quot;aixweather&quot;</span><span class="p">)</span>
+    <span class="n">user_agent</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;aixweather_</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">geolocator</span> <span class="o">=</span> <span class="n">Nominatim</span><span class="p">(</span><span class="n">user_agent</span><span class="o">=</span><span class="n">user_agent</span><span class="p">)</span>
     <span class="c1"># Perform reverse geocoding</span>
     <span class="n">location</span> <span class="o">=</span> <span class="n">geolocator</span><span class="o">.</span><span class="n">reverse</span><span class="p">((</span><span class="n">latitude_wgs84</span><span class="p">,</span> <span class="n">longitude_wgs84</span><span class="p">))</span>
 
