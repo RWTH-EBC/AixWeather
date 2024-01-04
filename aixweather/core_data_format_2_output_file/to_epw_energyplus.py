@@ -180,7 +180,7 @@ def to_epw(
         }  # Monaten in Saisons zuweisen
 
         def group_func(input):
-            """Gruppefunktion für df.groupby()"""
+            """Gruppefunktion für .groupby()"""
             return season_dict[input.month]
 
         df_temp_ambient = df["DryBulbTemp"]  # Temperature_Ambient von weatherdata holen
@@ -320,7 +320,7 @@ def to_epw(
 
         return typical_extreme_period
 
-    def line4_ground_temp(df):
+    def line4_ground_temp(core_df):
         """
         Parsen von weatherdata, um Bodentemperaturen zu holen
 
@@ -332,8 +332,10 @@ def to_epw(
             "GROUND TEMPERATURES",
         ]
 
+        df_4_ground_temp = core_df.copy()
+
         df_w_ground = (
-            df.resample("M").mean().copy().round(decimals=1)
+            df_4_ground_temp.resample("M").mean().round(decimals=1)
         )  # Resample in monatliche Interval
         try:
             ground_t = df_w_ground[
@@ -421,7 +423,7 @@ def to_epw(
             data_periods:    List    8.Zeile(DATA PERIODS) von epw Daten als List
         """
         start_dp = df.index[0]
-        end_dp = df.index[-2]
+        end_dp = df.index[-1]
         data_periods = [
             "DATA PERIODS",
             1,  # Anzahl von Datenperioden
@@ -603,20 +605,20 @@ def to_epw(
 
     ### merge all header lines and the data to be saved in a .epw file
     with open(file_path, "w", newline="", encoding="latin1") as file:
+        df_as_list, df = format_data(df, start, stop)
         writer = csv.writer(file)
         writer.writerows(
             [
                 line1_location(meta),
                 line2_design_cond(),
                 line3_typ_ext_period(df),
-                line4_ground_temp(df),
+                line4_ground_temp(core_df),
                 line5_holiday_dl_saving(df),
                 line6_comment_1(),
                 line7_comment_2(),
                 line8_data_periods(df),
             ]
         )
-        df_as_list, df = format_data(df, start, stop)
         writer.writerows(df_as_list)
 
     print(f"EPW file saved to {file_path}.")
