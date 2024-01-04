@@ -535,23 +535,28 @@ def to_epw(
 
             # If the last hour is not 24, add rows to reach hour 24
             if last_hour != 24:
-                # Calculate how many rows to add
-                rows_to_add = 24 - int(last_hour)
+                # If the last hour is 0, we dont want to add a full extra day, just delete the
+                # line so that the data frame ends with hour 24
+                if last_hour == 0:
+                    df = df.drop(df.index[-1])
+                else:
+                    # Calculate how many rows to add
+                    rows_to_add = 24 - int(last_hour)
 
-                # Generate new rows
-                new_rows = []
-                for i in range(1, rows_to_add + 1):
-                    new_row = {
-                        "Minute": last_minute,
-                        "Hour": last_hour + i,
-                        "Day": last_day,
-                        "Month": last_month,
-                        "Year": last_year,
-                    }
-                    new_rows.append(new_row)
+                    # Generate new rows
+                    new_rows = []
+                    for i in range(1, rows_to_add + 1):
+                        new_row = {
+                            "Minute": last_minute,
+                            "Hour": last_hour + i,
+                            "Day": last_day,
+                            "Month": last_month,
+                            "Year": last_year,
+                        }
+                        new_rows.append(new_row)
 
-                # Append new rows to DataFrame
-                df = pd.concat([df, pd.DataFrame(new_rows)], ignore_index=True)
+                    # Append new rows to DataFrame
+                    df = pd.concat([df, pd.DataFrame(new_rows)], ignore_index=True)
             return df, rows_to_add
 
         df, first_day_added_rows = fill_full_first_day(df)
