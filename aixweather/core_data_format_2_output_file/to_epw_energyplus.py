@@ -88,20 +88,6 @@ def to_epw(
                       excluding metadata.
     """
 
-    ### evaluate correctness of format
-    auxiliary.evaluate_transformations(
-        core_format=definitions.format_core_data, other_format=format_epw
-    )
-
-    df = core_df.copy()
-
-    filename = (
-        f"{meta.station_id}_{start.strftime('%Y%m%d')}_{stop.strftime('%Y%m%d')}"
-        f"_{meta.station_name}.epw"
-    )
-    # get file path to safe data to
-    file_path = definitions.results_file_path(filename, result_folder)
-
     ### create header lines
     def line1_location(
         meta: MetaData,
@@ -320,7 +306,7 @@ def to_epw(
 
         return typical_extreme_period
 
-    def line4_ground_temp(core_df):
+    def line4_ground_temp(df):
         """
         Parsen von weatherdata, um Bodentemperaturen zu holen
 
@@ -332,7 +318,7 @@ def to_epw(
             "GROUND TEMPERATURES",
         ]
 
-        df_4_ground_temp = core_df.copy()
+        df_4_ground_temp = df.copy()
 
         df_w_ground = (
             df_4_ground_temp.resample("M").mean().round(decimals=1)
@@ -603,23 +589,48 @@ def to_epw(
 
         return data_list, df
 
+    ### evaluate correctness of format
+    auxiliary.evaluate_transformations(
+        core_format=definitions.format_core_data, other_format=format_epw
+    )
+
+    df = core_df.copy()
+
+    # format data to epw
+    df_epw_as_list, df_epw = format_data(df, start, stop)
+
+    # get final start and stop time (differs from start, stop due to filling to full days)
+    start_epw = pd.to_datetime(df_epw.iloc[[0]][['Year', 'Month', 'Day', 'Hour']]).iloc[0]
+    stop_epw = pd.to_datetime(df_epw.iloc[[-1]][['Year', 'Month', 'Day', 'Hour']]).iloc[-1]
+    # truncate core data for other calculations
+    df_truncated = time_observation_transformations.truncate_data_from_start_to_stop(
+        df, start_epw, stop_epw
+    )
+
+    # keep regular start stop in the filename for the unit tests
+    filename = (
+        f"{meta.station_id}_{start.strftime('%Y%m%d')}_{stop.strftime('%Y%m%d')}"
+        f"_{meta.station_name}.epw"
+    )
+    # get file path to safe data to
+    file_path = definitions.results_file_path(filename, result_folder)
+
     ### merge all header lines and the data to be saved in a .epw file
     with open(file_path, "w", newline="", encoding="latin1") as file:
-        df_as_list, df = format_data(df, start, stop)
         writer = csv.writer(file)
         writer.writerows(
             [
                 line1_location(meta),
                 line2_design_cond(),
-                line3_typ_ext_period(df),
-                line4_ground_temp(core_df),
-                line5_holiday_dl_saving(df),
+                line3_typ_ext_period(df_truncated),
+                line4_ground_temp(df_truncated),
+                line5_holiday_dl_saving(df_truncated),
                 line6_comment_1(),
                 line7_comment_2(),
-                line8_data_periods(df),
+                line8_data_periods(df_truncated),
             ]
         )
-        writer.writerows(df_as_list)
+        writer.writerows(df_epw_as_list)
 
     print(f"EPW file saved to {file_path}.")
 
