@@ -442,9 +442,6 @@ def to_epw(
             data_list:    List    Datasätze von epw Daten als List
         """
 
-        # add 1 hour to start, because epw always starts at hour 1 instead of 0
-        start_epw = start + dt.timedelta(hours=1)
-
         ### measurement time conversion
         df = time_observation_transformations.shift_time_by_dict(format_epw, df)
 
@@ -456,7 +453,7 @@ def to_epw(
 
         ### select only desired period
         df = time_observation_transformations.truncate_data_from_start_to_stop(
-            df, start_epw, stop
+            df, start, stop
         )
 
         ### select the desired columns
@@ -501,23 +498,30 @@ def to_epw(
             first_year = df.iloc[0]["Year"]
             rows_to_add = 0
 
+
+
             # If the first hour is not 1, add rows to start with hour 1
             if first_hour != 1:
-                # Calculate how many rows to add
-                rows_to_add = int(first_hour) - 1
+                # If the first hour is 24, we dont want to add an full extra day, just delete the
+                # line so that the data frame starts with hour 1
+                if first_hour == 24:
+                    df = df.drop(df.index[0])
+                else:
+                    # Calculate how many rows to add
+                    rows_to_add = int(first_hour) - 1
 
-                # Generate new rows
-                for i in range(rows_to_add, 0, -1):
-                    new_row = pd.DataFrame(
-                        {
-                            "Minute": [first_minute],
-                            "Hour": [i],
-                            "Day": [first_day],
-                            "Month": [first_month],
-                            "Year": [first_year],
-                        }
-                    )
-                    df = pd.concat([new_row, df]).reset_index(drop=True)
+                    # Generate new rows
+                    for i in range(rows_to_add, 0, -1):
+                        new_row = pd.DataFrame(
+                            {
+                                "Minute": [first_minute],
+                                "Hour": [i],
+                                "Day": [first_day],
+                                "Month": [first_month],
+                                "Year": [first_year],
+                            }
+                        )
+                        df = pd.concat([new_row, df]).reset_index(drop=True)
             return df, rows_to_add
 
         def fill_full_last_day(df):
