@@ -87,8 +87,6 @@
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">random</span>
 
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
-<span class="kn">from</span> <span class="nn">geopy.geocoders</span> <span class="kn">import</span> <span class="n">Nominatim</span>
 <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span>
 
 <span class="kn">from</span> <span class="nn">aixweather.imports.utils_import</span> <span class="kn">import</span> <span class="n">MetaData</span>
@@ -181,6 +179,13 @@
     <span class="c1"># Extract Höhenlage (altitude)</span>
     <span class="n">hoehenlage_line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">header_lines</span> <span class="k">if</span> <span class="s2">&quot;Hoehenlage&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">)</span>
     <span class="n">hoehenlage</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;:\s*(\d+) Meter&quot;</span><span class="p">,</span> <span class="n">hoehenlage_line</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+        <span class="kn">from</span> <span class="nn">geopy.geocoders</span> <span class="kn">import</span> <span class="n">Nominatim</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Optional dependency &#39;TRY&#39; not installed, skipping metadata of TRY.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">meta</span>
 
     <span class="c1">### convert latitude and longitude</span>
     <span class="c1"># Create a GeoDataFrame with the provided coordinates</span>
