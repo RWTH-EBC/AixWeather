@@ -101,7 +101,7 @@ def import_DWD_forecast(station: str) -> pd.DataFrame:
     try:
         from wetterdienst.provider.dwd.mosmix import DwdMosmixRequest, DwdMosmixType
     except ImportError:
-        raise ImportError("Optional dependency 'DWD' not installed, can't import data")
+        raise ImportError("Optional dependency 'DWD_forecast' not installed, can't import data.")
     ### pull forecast data using the package wetterdienst
     stations = DwdMosmixRequest(
         parameter="small", mosmix_type=DwdMosmixType.SMALL
