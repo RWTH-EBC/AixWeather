@@ -158,13 +158,12 @@ def DWD_historical_to_core_data(
     df = auxiliary.replace_dummy_with_nan(df, format_DWD_historical)
 
     # resample some via sum some via mean -> results in average of following hour
-    df = df.resample("H").mean()  # fills nan only if all nan in interval
-    for var in variables_to_sum_DWD_historical:
-        if var in df.columns:
-            df_sum = (
-                df[var].resample("H").sum(min_count=1)
-            )  # fills nan only if 1 value in interval
-            df[var] = df_sum
+    for var in df.columns:
+        if var in variables_to_sum_DWD_historical:
+            df[var] = df[var].resample("H").sum(min_count=1)  # fills nan only if 1 value in interval
+        else:
+            df[var] = df[var].resample("H").mean()  # fills nan only if all nan in interval
+    df = df.resample("H").first()  # only keep the previously resampled value
 
     # rename available variables to core data format
     df = auxiliary.rename_columns(df, format_DWD_historical)
