@@ -6,7 +6,11 @@ You have implemented changes that make the tests fail due to correcting a bug?
 
 1. Check all failing tests:
 Check each failing test thoroughly to make sure that only the desired changes are present and
-not any undesired side effects.
+not any undesired side effects. Tip: Some IDE´s like PyCharm offer file comparisons (PyCharm: Click
+both files via "Strg" and then right click "compare files"). To generate the output file
+corresponding to your changes use the below approach.
+
+
 
 2. Update the corresponding test files:
 Set a debug point on the teardown function of the respective test and let it run. The debug
