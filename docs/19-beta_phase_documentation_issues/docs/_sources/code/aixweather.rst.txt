@@ -1,0 +1,45 @@
+aixweather package
+==================
+
+.. automodule:: aixweather
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   aixweather.core_data_format_2_output_file
+   aixweather.imports
+   aixweather.transformation_functions
+   aixweather.transformation_to_core_data
+
+Submodules
+----------
+
+aixweather.data\_quality\_checks module
+---------------------------------------
+
+.. automodule:: aixweather.data_quality_checks
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aixweather.definitions module
+-----------------------------
+
+.. automodule:: aixweather.definitions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aixweather.project\_class module
+--------------------------------
+
+.. automodule:: aixweather.project_class
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>aixweather.imports.DWD &mdash; aixweather 0.1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            aixweather
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">aixweather</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html">Contribute as a user</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../version_his.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">aixweather</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">aixweather.imports.DWD</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for aixweather.imports.DWD</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">imports weather data from the DWD</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">aixweather.imports</span> <span class="kn">import</span> <span class="n">utils_import</span>
+<span class="kn">from</span> <span class="nn">aixweather</span> <span class="kn">import</span> <span class="n">definitions</span>
+
+
+<div class="viewcode-block" id="import_DWD_historical"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.DWD.import_DWD_historical">[docs]</a><span class="k">def</span> <span class="nf">import_DWD_historical</span><span class="p">(</span><span class="n">start</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span> <span class="n">station</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Pull historical data from DWD:</span>
+<span class="sd">    (https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/) and</span>
+<span class="sd">    format them into a dataframe.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        start: defines how much data must be pulled</span>
+<span class="sd">        station: station id of the DWD</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dataframe weather data from DWD that is as raw as possible.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">measurements</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;air_temperature&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;solar&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;wind&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;precipitation&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;soil_temperature&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;cloudiness&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="n">base_url</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># if start of datapoint older than 530 days from now -&gt; import data from historical folder too</span>
+    <span class="n">days_from_now</span> <span class="o">=</span> <span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">days</span>
+    <span class="k">if</span> <span class="n">days_from_now</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">530</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">historical_folder</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">historical_folder</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># create dataframe in which all data to be stored</span>
+    <span class="n">df_w_ges</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+    <span class="c1"># get weather data from dwd per measurement</span>
+    <span class="k">for</span> <span class="n">single_measurement</span> <span class="ow">in</span> <span class="n">measurements</span><span class="p">:</span>
+        <span class="c1"># inconsistent pathing from DWD resolved by using the 10-min Values for these measurements</span>
+        <span class="k">if</span> <span class="n">single_measurement</span> <span class="o">==</span> <span class="s2">&quot;solar&quot;</span> <span class="ow">or</span> <span class="n">single_measurement</span> <span class="o">==</span> <span class="s2">&quot;air_temperature&quot;</span><span class="p">:</span>
+            <span class="n">df_w</span> <span class="o">=</span> <span class="n">_pull_DWD_historical_data</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/10_minutes/</span><span class="si">{</span><span class="n">single_measurement</span><span class="si">}</span><span class="s2">/recent/&quot;</span><span class="p">,</span>
+                <span class="n">station</span><span class="o">=</span><span class="n">station</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">historical_folder</span><span class="p">:</span>
+                <span class="n">df_hist</span> <span class="o">=</span> <span class="n">_pull_DWD_historical_data</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/10_minutes/</span><span class="si">{</span><span class="n">single_measurement</span><span class="si">}</span><span class="s2">/historical/&quot;</span><span class="p">,</span>
+                    <span class="n">station</span><span class="o">=</span><span class="n">station</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="c1"># add up rows (time periods)</span>
+                <span class="n">df_w</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_w</span><span class="p">,</span> <span class="n">df_hist</span><span class="p">])</span>
+                <span class="c1"># dataframes may overlap with same values, delete duplicates</span>
+                <span class="n">df_w</span> <span class="o">=</span> <span class="n">df_w</span><span class="p">[</span><span class="o">~</span><span class="n">df_w</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">keep</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">df_w</span> <span class="o">=</span> <span class="n">_pull_DWD_historical_data</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/hourly/</span><span class="si">{</span><span class="n">single_measurement</span><span class="si">}</span><span class="s2">/recent/&quot;</span><span class="p">,</span>
+                <span class="n">station</span><span class="o">=</span><span class="n">station</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">historical_folder</span><span class="p">:</span>
+                <span class="n">df_hist</span> <span class="o">=</span> <span class="n">_pull_DWD_historical_data</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/hourly/</span><span class="si">{</span><span class="n">single_measurement</span><span class="si">}</span><span class="s2">/historical/&quot;</span><span class="p">,</span>
+                    <span class="n">station</span><span class="o">=</span><span class="n">station</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="c1"># add up rows (time periods)</span>
+                <span class="n">df_w</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_w</span><span class="p">,</span> <span class="n">df_hist</span><span class="p">])</span>
+                <span class="c1"># dataframes may overlap with same values, delete duplicates</span>
+                <span class="n">df_w</span> <span class="o">=</span> <span class="n">df_w</span><span class="p">[</span><span class="o">~</span><span class="n">df_w</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">keep</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)]</span>
+
+        <span class="c1"># concat each measurement (column)</span>
+        <span class="n">df_w_ges</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_w_ges</span><span class="p">,</span> <span class="n">df_w</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df_w_ges</span></div>
+
+
+<div class="viewcode-block" id="import_DWD_forecast"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.DWD.import_DWD_forecast">[docs]</a><span class="k">def</span> <span class="nf">import_DWD_forecast</span><span class="p">(</span><span class="n">station</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Import weather forecast data from the DWD (German Weather Service) for a specified station.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        station (str): Station ID of the DWD for which forecast data is to be imported.</span>
+<span class="sd">                       For debugging purposes: station 01028.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame containing weather forecast data from the DWD.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">wetterdienst.provider.dwd.mosmix</span> <span class="kn">import</span> <span class="n">DwdMosmixRequest</span><span class="p">,</span> <span class="n">DwdMosmixType</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;Optional dependency &#39;DWD_forecast&#39; not installed, can&#39;t import data.&quot;</span><span class="p">)</span>
+    <span class="c1">### pull forecast data using the package wetterdienst</span>
+    <span class="n">stations</span> <span class="o">=</span> <span class="n">DwdMosmixRequest</span><span class="p">(</span>
+        <span class="n">parameter</span><span class="o">=</span><span class="s2">&quot;small&quot;</span><span class="p">,</span> <span class="n">mosmix_type</span><span class="o">=</span><span class="n">DwdMosmixType</span><span class="o">.</span><span class="n">SMALL</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">filter_by_station_id</span><span class="p">(</span><span class="n">station_id</span><span class="o">=</span><span class="p">[</span><span class="n">station</span><span class="p">])</span>
+    <span class="c1"># query object to get dataframe with forecast values</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">stations</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">query</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">excep</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;There is no loadable forecast for station </span><span class="si">{</span><span class="n">station</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span> <span class="kn">from</span> <span class="nn">excep</span>
+
+    <span class="n">imported_df</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+
+    <span class="c1">### transform to one column per measurement</span>
+    <span class="c1"># Convert the &#39;Timestamp&#39; column to a datetime object</span>
+    <span class="n">imported_df</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">imported_df</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">])</span>
+
+    <span class="c1"># Set the &#39;Timestamp&#39; column as the index</span>
+    <span class="n">imported_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Drop unnecessary columns</span>
+    <span class="n">imported_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;station_id&quot;</span><span class="p">,</span> <span class="s2">&quot;dataset&quot;</span><span class="p">,</span> <span class="s2">&quot;quality&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Pivot the dataframe to have each measurement as a separate column</span>
+    <span class="n">imported_df</span> <span class="o">=</span> <span class="n">imported_df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;parameter&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">imported_df</span></div>
+
+
+<div class="viewcode-block" id="import_meta_DWD_historical"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.DWD.import_meta_DWD_historical">[docs]</a><span class="k">def</span> <span class="nf">import_meta_DWD_historical</span><span class="p">(</span><span class="n">station</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">utils_import</span><span class="o">.</span><span class="n">MetaData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Downloads and extracts metadata related to the specified station from</span>
+<span class="sd">    the DWD (Deutscher Wetterdienst) Open Data Interface.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        station: Station ID for which metadata is to be retrieved.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        meta (meta_data object): An object of the meta_data class with</span>
+<span class="sd">        populated attributes related to the station.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;https://www.dwd.de/DE/leistungen/klimadatendeutschland/&quot;</span>
+        <span class="s2">&quot;statliste/statlex_rich.txt;jsessionid&quot;</span>
+        <span class="s2">&quot;=68E14BA255FE50BDC4AD9FF4F835895F.live31092?view=nasPublication&amp;nn=16102&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># load station overview</span>
+    <span class="n">data_str</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;latin-1&quot;</span><span class="p">)</span>
+
+    <span class="c1">### find station ID and its values</span>
+    <span class="c1"># Splitting the data into lines</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">data_str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Getting the header line and the line with dashes</span>
+    <span class="n">header_line</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">dash_line</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Finding the column breaks based on the dash line</span>
+    <span class="n">column_breaks</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dash_line</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">dash_line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;-&quot;</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">dash_line</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">):</span>
+            <span class="n">column_breaks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">column_breaks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dash_line</span><span class="p">))</span>
+
+    <span class="c1"># Splitting the header line based on column breaks</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">header_line</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">column_breaks</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">column_breaks</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Initializing a dictionary to store the result</span>
+    <span class="n">station_data</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Iterating through the rows and finding the one with the desired STAT_ID</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">line</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">column_breaks</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">column_breaks</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="p">]</span>
+        <span class="n">stat_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">header</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;STAT_ID&quot;</span><span class="p">)])</span>
+        <span class="k">if</span> <span class="n">stat_id</span> <span class="o">==</span> <span class="n">station</span><span class="p">:</span>
+            <span class="n">station_data</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">values</span><span class="p">)}</span>
+            <span class="k">break</span>
+
+    <span class="k">if</span> <span class="n">station_data</span> <span class="o">==</span> <span class="p">{}:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Station for historical weatherdata with ID </span><span class="si">{</span><span class="n">station</span><span class="si">}</span><span class="s2"> could not be&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;found in station list </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1">### convert to meta class</span>
+    <span class="n">meta</span> <span class="o">=</span> <span class="n">utils_import</span><span class="o">.</span><span class="n">MetaData</span><span class="p">()</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">station_id</span> <span class="o">=</span> <span class="n">station_data</span><span class="p">[</span><span class="s2">&quot;STAT_ID&quot;</span><span class="p">]</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">station_name</span> <span class="o">=</span> <span class="n">station_data</span><span class="p">[</span><span class="s2">&quot;STAT_NAME&quot;</span><span class="p">]</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">altitude</span> <span class="o">=</span> <span class="n">station_data</span><span class="p">[</span><span class="s2">&quot;HS&quot;</span><span class="p">]</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="n">station_data</span><span class="p">[</span><span class="s2">&quot;LA_HIGH&quot;</span><span class="p">]</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="n">station_data</span><span class="p">[</span><span class="s2">&quot;BR_HIGH&quot;</span><span class="p">]</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">station_exists_since</span> <span class="o">=</span> <span class="n">station_data</span><span class="p">[</span><span class="s2">&quot;BEGINN&quot;</span><span class="p">]</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">station_exists_until</span> <span class="o">=</span> <span class="n">station_data</span><span class="p">[</span><span class="s2">&quot;ENDE&quot;</span><span class="p">]</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">input_source</span> <span class="o">=</span> <span class="s2">&quot;DWD Historical&quot;</span>
+
+    <span class="k">return</span> <span class="n">meta</span></div>
+
+
+<div class="viewcode-block" id="import_meta_DWD_forecast"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.DWD.import_meta_DWD_forecast">[docs]</a><span class="k">def</span> <span class="nf">import_meta_DWD_forecast</span><span class="p">(</span><span class="n">station</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">utils_import</span><span class="o">.</span><span class="n">MetaData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Downloads and extracts metadata related to the specified station</span>
+<span class="sd">    from the DWD (Deutscher Wetterdienst) Open Data Interface.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        station: Station ID for which metadata is to be retrieved.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        meta (meta_data object): An object of the meta_data class with</span>
+<span class="sd">        populated attributes related to the station.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;https://www.dwd.de/DE/leistungen/met_verfahren_mosmix/&quot;</span>
+        <span class="s2">&quot;mosmix_stationskatalog.cfg?view=nasPublication&amp;nn&quot;</span>
+        <span class="s2">&quot;=16102&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># load station overview</span>
+    <span class="n">data_str</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;latin-1&quot;</span><span class="p">)</span>
+
+    <span class="c1">### find station ID and its values</span>
+    <span class="k">def</span> <span class="nf">extract_info_for_station</span><span class="p">(</span><span class="n">data_str</span><span class="p">,</span> <span class="n">station_id</span><span class="p">):</span>
+        <span class="c1"># Splitting the data by lines</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">data_str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Iterating through the lines to find the desired ID</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
+            <span class="c1"># Splitting the line into parts</span>
+            <span class="n">parts</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+            <span class="c1"># Extracting the ID and checking if it matches the search ID</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">id</span> <span class="o">==</span> <span class="n">station_id</span><span class="p">:</span>
+                <span class="c1"># Creating a dictionary to store the details</span>
+                <span class="n">result_dict</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">result_dict</span><span class="p">[</span><span class="s2">&quot;ID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">id</span>
+                <span class="n">result_dict</span><span class="p">[</span><span class="s2">&quot;ICAO&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">result_dict</span><span class="p">[</span><span class="s2">&quot;NAME&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">3</span><span class="p">])</span>
+                <span class="n">result_dict</span><span class="p">[</span><span class="s2">&quot;LAT&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+                <span class="n">result_dict</span><span class="p">[</span><span class="s2">&quot;LON&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">result_dict</span><span class="p">[</span><span class="s2">&quot;ELEV&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">return</span> <span class="n">result_dict</span>
+
+        <span class="c1"># warn that the station does not exist</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Station for forecast data with the ID </span><span class="si">{</span><span class="n">station_id</span><span class="si">}</span><span class="s2"> could not be found in the &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;station list: </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">station_data</span> <span class="o">=</span> <span class="n">extract_info_for_station</span><span class="p">(</span><span class="n">data_str</span><span class="p">,</span> <span class="n">station</span><span class="p">)</span>
+
+    <span class="c1"># convert to meta class</span>
+    <span class="n">meta</span> <span class="o">=</span> <span class="n">utils_import</span><span class="o">.</span><span class="n">MetaData</span><span class="p">()</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">station_id</span> <span class="o">=</span> <span class="n">station_data</span><span class="p">[</span><span class="s2">&quot;ID&quot;</span><span class="p">]</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">station_name</span> <span class="o">=</span> <span class="n">station_data</span><span class="p">[</span><span class="s2">&quot;NAME&quot;</span><span class="p">]</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">altitude</span> <span class="o">=</span> <span class="n">station_data</span><span class="p">[</span><span class="s2">&quot;ELEV&quot;</span><span class="p">]</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="n">station_data</span><span class="p">[</span><span class="s2">&quot;LON&quot;</span><span class="p">]</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="n">station_data</span><span class="p">[</span><span class="s2">&quot;LAT&quot;</span><span class="p">]</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">input_source</span> <span class="o">=</span> <span class="s2">&quot;DWD Forecast&quot;</span>
+
+    <span class="k">return</span> <span class="n">meta</span></div>
+
+
+<span class="k">def</span> <span class="nf">_pull_DWD_historical_data</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">station</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ruft die Messdaten von der angegebenen URL ab und konvertiert diese in</span>
+<span class="sd">    ein pandas DataFrame</span>
+
+<span class="sd">    :param url:             str                     URL des DWD-Ordners, in welchem die Messdaten gespeichert sind</span>
+<span class="sd">    :param station:         int/str                 Stationsname der DWD Wetterstation, Aachen-Orsbach ist 15000</span>
+<span class="sd">    :return: data           pandas DataFrame        Abgerufener Datensatz und eventuelle Fehlermeldungen</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># First, load all available filenames</span>
+    <span class="n">http_obj</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+
+    <span class="c1"># DWD data contains the stations with leading zeros, the meta-data and station lists without</span>
+    <span class="c1"># leading zeros. Apply leading zeros for pulling DWD data.</span>
+    <span class="n">station_with_leading_zeros</span> <span class="o">=</span> <span class="n">station</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="c1"># select only those file names that belong to the station</span>
+    <span class="n">zip_names</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">i</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">http_obj</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">station_with_leading_zeros</span><span class="si">}</span><span class="s2">_&quot;</span> <span class="ow">in</span> <span class="n">i</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">i</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;&gt;&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="n">data_total</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+    <span class="c1"># download and read all available data to df</span>
+    <span class="k">for</span> <span class="n">zip_name</span> <span class="ow">in</span> <span class="n">zip_names</span><span class="p">:</span>
+        <span class="n">unzipped_path</span> <span class="o">=</span> <span class="n">_download_DWD_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">zip_name</span><span class="p">)</span>
+
+        <span class="c1"># extract data file path</span>
+        <span class="n">file_name</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">unzipped_path</span><span class="p">)))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">unzipped_path</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+
+        <span class="c1"># read data file</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+
+        <span class="c1"># unify 10min data with 1h data for &quot;MESS_DATUM&quot; format</span>
+        <span class="c1"># -&gt; convert 2022012400 to 202201240000</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;MESS_DATUM&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>  <span class="c1"># if hourly</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;MESS_DATUM&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;MESS_DATUM&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>  <span class="c1"># add two zeros</span>
+
+        <span class="c1"># make MESS_DATUM the index for concenating</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;MESS_DATUM&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">data_total</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">data_total</span><span class="p">,</span> <span class="n">data</span><span class="p">],</span> <span class="n">verify_integrity</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">definitions</span><span class="o">.</span><span class="n">local_folder_temp</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data_total</span>
+
+
+<span class="k">def</span> <span class="nf">_download_DWD_file</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">zip_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Downloads the file with the given filename from the specified URL and unzip.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        url (str): URL of the DWD folder.</span>
+<span class="sd">        zip_name (str): Name of the file to be downloaded.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: A tuple containing a boolean indicating the success or failure of the download,</span>
+<span class="sd">               and the location of the downloaded file.</span>
+<span class="sd">               Returns (False, None) if an error occurs during download.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">folder_unzip</span> <span class="o">=</span> <span class="s2">&quot;unzipped_content&quot;</span>
+
+    <span class="n">total_zip_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">definitions</span><span class="o">.</span><span class="n">local_folder_temp</span><span class="p">,</span> <span class="n">zip_name</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">definitions</span><span class="o">.</span><span class="n">local_folder_temp</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">definitions</span><span class="o">.</span><span class="n">local_folder_temp</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>  <span class="c1"># try retrieval 3 times</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="n">zip_name</span><span class="p">,</span> <span class="n">total_zip_name</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded: </span><span class="si">{</span><span class="n">total_zip_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># save unzipped files to folder_unzip</span>
+            <span class="n">extract_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">definitions</span><span class="o">.</span><span class="n">local_folder_temp</span><span class="p">,</span> <span class="n">folder_unzip</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">total_zip_name</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+                <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">extract_path</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">extract_path</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">excep</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Not loaded: </span><span class="si">{</span><span class="n">total_zip_name</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="sa">f</span><span class="s2">&quot;with error: </span><span class="si">{</span><span class="n">excep</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span> <span class="kn">from</span> <span class="nn">excep</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, EON EBC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

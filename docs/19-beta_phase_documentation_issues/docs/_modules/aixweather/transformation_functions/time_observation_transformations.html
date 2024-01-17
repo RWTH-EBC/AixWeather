@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>aixweather.transformation_functions.time_observation_transformations &mdash; aixweather 0.1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            aixweather
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">aixweather</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html">Contribute as a user</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../version_his.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">aixweather</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">aixweather.transformation_functions.time_observation_transformations</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for aixweather.transformation_functions.time_observation_transformations</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Includes functions to execute time shift operations. It also includes a</span>
+<span class="sd">function to truncate data in given interval.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+
+<span class="k">def</span> <span class="nf">_shift_timestamps_and_interpolate</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">backward</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Shift and interpolate timestamps in a DataFrame by 30 minutes forward or backward.</span>
+
+<span class="sd">    This function shifts and interpolates the timestamps in the DataFrame `df` by either</span>
+<span class="sd">    30 minutes forward or backward based on the `backward` parameter. It uses linear interpolation</span>
+<span class="sd">    to fill in missing values during the shift.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame containing timestamped data.</span>
+<span class="sd">        backward (bool): If True, shift timestamps 30 minutes backward. If False, shift them 30 minutes forward.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: A DataFrame with timestamps shifted and interpolated as specified.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="n">backward</span>
+    <span class="p">):</span>  <span class="c1"># avg_preceding_hour_2_indicated_time or indicated_time_2_avg_following_hour</span>
+        <span class="n">interval</span> <span class="o">=</span> <span class="s2">&quot;-30min&quot;</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># avg_following_hour_2_indicated_time or indicated_time_2_avg_preceding_hour</span>
+        <span class="n">interval</span> <span class="o">=</span> <span class="s2">&quot;30min&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="c1"># shift and interpolate</span>
+    <span class="n">df_shifted</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">freq</span><span class="o">=</span><span class="n">interval</span><span class="p">)</span>
+    <span class="n">df_interpolated</span> <span class="o">=</span> <span class="n">df_shifted</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;30min&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># keep only original timestamps</span>
+    <span class="n">df_final</span> <span class="o">=</span> <span class="n">df_interpolated</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df_final</span>
+
+
+<div class="viewcode-block" id="avg_preceding_hour_2_indicated_time"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.avg_preceding_hour_2_indicated_time">[docs]</a><span class="k">def</span> <span class="nf">avg_preceding_hour_2_indicated_time</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;aka: prec2ind&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">_shift_timestamps_and_interpolate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="indicated_time_2_avg_following_hour"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_following_hour">[docs]</a><span class="k">def</span> <span class="nf">indicated_time_2_avg_following_hour</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;aka: ind2foll&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">_shift_timestamps_and_interpolate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="avg_following_hour_2_indicated_time"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.avg_following_hour_2_indicated_time">[docs]</a><span class="k">def</span> <span class="nf">avg_following_hour_2_indicated_time</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;aka: foll2ind&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">_shift_timestamps_and_interpolate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="indicated_time_2_avg_preceding_hour"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_preceding_hour">[docs]</a><span class="k">def</span> <span class="nf">indicated_time_2_avg_preceding_hour</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;aka: ind2prec&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">_shift_timestamps_and_interpolate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="shift_time_by_dict"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.shift_time_by_dict">[docs]</a><span class="k">def</span> <span class="nf">shift_time_by_dict</span><span class="p">(</span><span class="n">format_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Shift timestamps in a DataFrame based on a format dictionary.</span>
+
+<span class="sd">    This function shifts and interpolates values in the DataFrame `df` based on the specified format dictionary. The format</span>
+<span class="sd">    dictionary should contain information about the desired time shifting for core data variables.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        format_dict (dict): A dictionary specifying the time shifting for core data variables.</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame containing timestamped data with core data variable names.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: The modified DataFrame with values shifted and interpolated according to the format dictionary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">meas_key</span> <span class="o">=</span> <span class="s2">&quot;time_of_meas_shift&quot;</span>
+    <span class="n">core_name</span> <span class="o">=</span> <span class="s2">&quot;core_name&quot;</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">format_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1"># No measurement if not present, though avoid being triggered</span>
+        <span class="c1"># when using this function in 2output (empty string)</span>
+        <span class="k">if</span> <span class="n">value</span><span class="p">[</span><span class="n">core_name</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="n">value</span><span class="p">[</span><span class="n">core_name</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No measurements for </span><span class="si">{</span><span class="n">value</span><span class="p">[</span><span class="n">core_name</span><span class="p">]</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span><span class="p">[</span><span class="n">meas_key</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;prec2ind&quot;</span><span class="p">:</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">value</span><span class="p">[</span><span class="n">core_name</span><span class="p">]]</span> <span class="o">=</span> <span class="n">avg_preceding_hour_2_indicated_time</span><span class="p">(</span>
+                    <span class="n">df</span><span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="n">core_name</span><span class="p">]]</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">value</span><span class="p">[</span><span class="n">meas_key</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;ind2foll&quot;</span><span class="p">:</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">value</span><span class="p">[</span><span class="n">core_name</span><span class="p">]]</span> <span class="o">=</span> <span class="n">indicated_time_2_avg_following_hour</span><span class="p">(</span>
+                    <span class="n">df</span><span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="n">core_name</span><span class="p">]]</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">value</span><span class="p">[</span><span class="n">meas_key</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;foll2ind&quot;</span><span class="p">:</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">value</span><span class="p">[</span><span class="n">core_name</span><span class="p">]]</span> <span class="o">=</span> <span class="n">avg_following_hour_2_indicated_time</span><span class="p">(</span>
+                    <span class="n">df</span><span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="n">core_name</span><span class="p">]]</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">value</span><span class="p">[</span><span class="n">meas_key</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;ind2prec&quot;</span><span class="p">:</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">value</span><span class="p">[</span><span class="n">core_name</span><span class="p">]]</span> <span class="o">=</span> <span class="n">indicated_time_2_avg_preceding_hour</span><span class="p">(</span>
+                    <span class="n">df</span><span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="n">core_name</span><span class="p">]]</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">value</span><span class="p">[</span><span class="n">meas_key</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Invalid keyword for </span><span class="si">{</span><span class="n">meas_key</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: &#39;</span><span class="si">{</span><span class="n">value</span><span class="p">[</span><span class="n">meas_key</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39; is not valid.&quot;</span>
+                <span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+<div class="viewcode-block" id="truncate_data_from_start_to_stop"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.truncate_data_from_start_to_stop">[docs]</a><span class="k">def</span> <span class="nf">truncate_data_from_start_to_stop</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">stop</span><span class="p">:</span> <span class="n">datetime</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Truncate a DataFrame to include data only between specified start and stop timestamps.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame containing timestamped data.</span>
+<span class="sd">        start (datetime): The start timestamp to include in the truncated DataFrame.</span>
+<span class="sd">        stop (datetime): The stop timestamp to include in the truncated DataFrame.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: A new DataFrame containing data only within the specified time range.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="n">start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;=</span> <span class="n">stop</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, EON EBC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
