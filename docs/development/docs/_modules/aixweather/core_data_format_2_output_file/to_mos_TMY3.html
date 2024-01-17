@@ -93,9 +93,17 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">format_modelica_TMY3 information:</span>
 
-<span class="sd">Please indicate the unit (conversion has to be changed manually)</span>
-<span class="sd">Please indicate the desired time of measurement (conversion automatically)</span>
-<span class="sd">The stated nans are the default values stated from the AixLib TMY3 Reader, those values are filled if nan.</span>
+<span class="sd">Format info:</span>
+<span class="sd">key = output data point name</span>
+<span class="sd">core_name = corresponding name matching the format_core_data</span>
+<span class="sd">time_of_meas_shift = desired 30min shifting+interpolation to convert the value that is &quot;at </span>
+<span class="sd">indicated time&quot; to &quot;average of preceding hour&quot; (ind2prec). </span>
+<span class="sd">unit = unit of the output data following the naming convention of format_core_data</span>
+<span class="sd">nan = The default values stated from the AixLib TMY3 Reader, those values are </span>
+<span class="sd">filled if nan.</span>
+
+<span class="sd">All changes here automatically change the calculations. </span>
+<span class="sd">Exception: unit conversions have to be added manually.</span>
 
 <span class="sd">time_of_meas_shift´s checked by Martin Rätz (07.08.2023)</span>
 <span class="sd">unit´s checked by Martin Rätz (07.08.2023)</span>

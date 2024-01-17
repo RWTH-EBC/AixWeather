@@ -95,6 +95,18 @@
 <span class="sd">format_epw information:</span>
 <span class="sd">for links see readme</span>
 
+<span class="sd">Format info:</span>
+<span class="sd">key = output data point name</span>
+<span class="sd">core_name = corresponding name matching the format_core_data</span>
+<span class="sd">time_of_meas_shift = desired 30min shifting+interpolation to convert the value that is &quot;at </span>
+<span class="sd">indicated time&quot; to &quot;average of preceding hour&quot; (ind2prec). </span>
+<span class="sd">unit = unit of the output data following the naming convention of format_core_data</span>
+<span class="sd">nan = The default values stated from the format_epw information, those values are </span>
+<span class="sd">filled if nan.</span>
+
+<span class="sd">All changes here automatically change the calculations. </span>
+<span class="sd">Exception: unit conversions have to be added manually.</span>
+
 <span class="sd">Information for shifting:</span>
 <span class="sd">Hour: This is the hour of the data. (1 - 24). Hour 1 is 00:01 to 01:00. Cannot be missing.</span>
 <span class="sd">but e.g.:</span>
