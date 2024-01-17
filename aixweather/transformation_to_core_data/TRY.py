@@ -9,6 +9,10 @@ from aixweather.transformation_functions import auxiliary, time_observation_tran
 format_TRY_15_45 information 
 
 checked by Martin Rätz (08.08.2023)
+
+https://www.bbsr.bund.de/BBSR/DE/forschung/programme/zb/Auftragsforschung/5EnergieKlimaBauen/2013/testreferenzjahre/try-handbuch.pdf;jsessionid=9F928CDB6862224B04073332C2B1B620.live21301?__blob=publicationFile&v=1
+Der erste Eintrag im Datensatz bezieht sich auf den 1. Januar 01 Uhr MEZ und
+der letzte Eintrag auf den 31. Dezember 24 Uhr MEZ. Also UTC+1.
 """
 format_TRY_15_45 = {
     "t": {"core_name": "DryBulbTemp", "time_of_meas_shift": "prec2ind", "unit": "degC"},
