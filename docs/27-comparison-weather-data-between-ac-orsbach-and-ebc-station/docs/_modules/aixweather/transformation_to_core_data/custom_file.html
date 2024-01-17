@@ -90,6 +90,15 @@
 <span class="kn">from</span> <span class="nn">aixweather.transformation_functions</span> <span class="kn">import</span> <span class="n">auxiliary</span><span class="p">,</span> <span class="n">time_observation_transformations</span><span class="p">,</span> <span class="n">variable_transformations</span><span class="p">,</span> \
     <span class="n">pass_through_handling</span><span class="p">,</span> <span class="n">unit_conversions</span>
 
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Format info:</span>
+<span class="sd">key = raw data point name</span>
+<span class="sd">core_name = corresponding name matching the format_core_data</span>
+<span class="sd">time_of_meas_shift = desired 30min shifting+interpolation to convert a value that is e.g. the </span>
+<span class="sd">&quot;average of preceding hour&quot; to &quot;indicated time&quot; (prec2ind). </span>
+<span class="sd">unit = unit of the raw data following the naming convention of format_core_data</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
 <span class="n">format_costum</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;variable_name_from_your_costum_data&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;core_name to which it translates (definitions.format_core_data)&quot;</span><span class="p">,</span>

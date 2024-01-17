@@ -122,18 +122,22 @@
 
 
 <div class="viewcode-block" id="avg_preceding_hour_2_indicated_time"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.avg_preceding_hour_2_indicated_time">[docs]</a><span class="k">def</span> <span class="nf">avg_preceding_hour_2_indicated_time</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;aka: prec2ind&#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="n">_shift_timestamps_and_interpolate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="indicated_time_2_avg_following_hour"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_following_hour">[docs]</a><span class="k">def</span> <span class="nf">indicated_time_2_avg_following_hour</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;aka: ind2foll&#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="n">_shift_timestamps_and_interpolate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="avg_following_hour_2_indicated_time"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.avg_following_hour_2_indicated_time">[docs]</a><span class="k">def</span> <span class="nf">avg_following_hour_2_indicated_time</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;aka: foll2ind&#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="n">_shift_timestamps_and_interpolate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="indicated_time_2_avg_preceding_hour"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_preceding_hour">[docs]</a><span class="k">def</span> <span class="nf">indicated_time_2_avg_preceding_hour</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;aka: ind2prec&#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="n">_shift_timestamps_and_interpolate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></div>
 
 
