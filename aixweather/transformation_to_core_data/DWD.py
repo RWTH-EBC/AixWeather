@@ -10,6 +10,16 @@ from aixweather.transformation_functions import auxiliary, time_observation_tran
 format_DWD_historical information:
 see readme
 
+Format info:
+key = raw data point name
+core_name = corresponding name matching the format_core_data
+time_of_meas_shift = desired 30min shifting+interpolation to convert a value that is e.g. the 
+"average of preceding hour" to "indicated time" (prec2ind). 
+unit = unit of the raw data following the naming convention of format_core_data
+
+All changes here automatically change the calculations. 
+Exception: unit conversions have to be added manually.
+
 checked by Martin Rätz (08.08.2023)
 """
 format_DWD_historical = {

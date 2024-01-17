@@ -5,9 +5,8 @@ import DWD TRY data
 import datetime as dt
 import re
 import pandas as pd
+import random
 
-import geopandas as gpd
-from geopy.geocoders import Nominatim
 from shapely.geometry import Point
 
 from aixweather.imports.utils_import import MetaData
@@ -101,6 +100,13 @@ def load_try_meta_from_file(path: str) -> MetaData:
     hoehenlage_line = next(line for line in header_lines if "Hoehenlage" in line)
     hoehenlage = int(re.search(r":\s*(\d+) Meter", hoehenlage_line).group(1))
 
+    try:
+        import geopandas as gpd
+        from geopy.geocoders import Nominatim
+    except ImportError:
+        print("Optional dependency 'TRY' not installed, skipping metadata of TRY.")
+        return meta
+
     ### convert latitude and longitude
     # Create a GeoDataFrame with the provided coordinates
     # (using pyproj directly led to wrong calculation)
@@ -119,7 +125,8 @@ def load_try_meta_from_file(path: str) -> MetaData:
 
     ### try to get city of location
     # Initialize Nominatim geolocator
-    geolocator = Nominatim(user_agent="aixweather")
+    user_agent = f"aixweather_{str(random.randint(1, 1000))}"
+    geolocator = Nominatim(user_agent=user_agent)
     # Perform reverse geocoding
     location = geolocator.reverse((latitude_wgs84, longitude_wgs84))
 

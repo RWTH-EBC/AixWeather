@@ -15,6 +15,18 @@ from aixweather.transformation_functions import auxiliary, time_observation_tran
 format_epw information:
 for links see readme
 
+Format info:
+key = output data point name
+core_name = corresponding name matching the format_core_data
+time_of_meas_shift = desired 30min shifting+interpolation to convert the value that is "at 
+indicated time" to "average of preceding hour" (ind2prec). 
+unit = unit of the output data following the naming convention of format_core_data
+nan = The default values stated from the format_epw information, those values are 
+filled if nan.
+
+All changes here automatically change the calculations. 
+Exception: unit conversions have to be added manually.
+
 Information for shifting:
 Hour: This is the hour of the data. (1 - 24). Hour 1 is 00:01 to 01:00. Cannot be missing.
 but e.g.:
