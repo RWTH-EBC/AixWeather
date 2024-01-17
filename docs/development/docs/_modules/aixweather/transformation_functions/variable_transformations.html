@@ -341,10 +341,12 @@
         <span class="n">df</span><span class="p">,</span> <span class="s2">&quot;OpaqueSkyCover&quot;</span><span class="p">,</span> <span class="n">approximate_opaque_from_total_skycover</span><span class="p">,</span> <span class="s2">&quot;TotalSkyCover&quot;</span>
     <span class="p">)</span>
     <span class="n">calc_overview</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">calc_status</span><span class="p">)</span>
+
     <span class="n">df</span><span class="p">,</span> <span class="n">calc_status</span> <span class="o">=</span> <span class="n">robust_transformation</span><span class="p">(</span>
         <span class="n">df</span><span class="p">,</span> <span class="s2">&quot;DewPointTemp&quot;</span><span class="p">,</span> <span class="n">calculate_dew_point_temp</span><span class="p">,</span> <span class="s2">&quot;DryBulbTemp&quot;</span><span class="p">,</span> <span class="s2">&quot;RelHum&quot;</span>
     <span class="p">)</span>
     <span class="n">calc_overview</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">calc_status</span><span class="p">)</span>
+
     <span class="n">df</span><span class="p">,</span> <span class="n">calc_status</span> <span class="o">=</span> <span class="n">robust_transformation</span><span class="p">(</span>
         <span class="n">df</span><span class="p">,</span>
         <span class="s2">&quot;DirHorRad&quot;</span><span class="p">,</span>
@@ -353,6 +355,16 @@
         <span class="s2">&quot;DiffHorRad&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">calc_overview</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">calc_status</span><span class="p">)</span>
+
+    <span class="n">df</span><span class="p">,</span> <span class="n">calc_status</span> <span class="o">=</span> <span class="n">robust_transformation</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span>
+        <span class="s2">&quot;GlobHorRad&quot;</span><span class="p">,</span>
+        <span class="n">calculate_global_horizontal_radiation</span><span class="p">,</span>
+        <span class="s2">&quot;DirHorRad&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;DiffHorRad&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">calc_overview</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">calc_status</span><span class="p">)</span>
+
     <span class="n">df</span><span class="p">,</span> <span class="n">calc_status</span> <span class="o">=</span> <span class="n">robust_transformation</span><span class="p">(</span>
         <span class="n">df</span><span class="p">,</span>
         <span class="s2">&quot;DirNormRad&quot;</span><span class="p">,</span>
@@ -363,6 +375,7 @@
         <span class="s2">&quot;DirHorRad&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">calc_overview</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">calc_status</span><span class="p">)</span>
+
     <span class="n">df</span><span class="p">,</span> <span class="n">calc_status</span> <span class="o">=</span> <span class="n">robust_transformation</span><span class="p">(</span>
         <span class="n">df</span><span class="p">,</span>
         <span class="s2">&quot;HorInfra&quot;</span><span class="p">,</span>
@@ -372,6 +385,7 @@
         <span class="s2">&quot;OpaqueSkyCover&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">calc_overview</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">calc_status</span><span class="p">)</span>
+
 
     <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">calc_overview</span></div>
 </pre></div>
