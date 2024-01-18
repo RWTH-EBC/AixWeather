@@ -4,12 +4,17 @@ convert core data to epw (EnergyPlus) data
 
 import csv
 import datetime as dt
+import logging
+
 import pandas as pd
 import numpy as np
 
 from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
 from aixweather.transformation_functions import auxiliary, time_observation_transformations, pass_through_handling
+
+logger = logging.getLogger(__name__)
+
 
 """
 format_epw information:
@@ -374,9 +379,9 @@ def to_epw(
             )
             return ground_temp
         except KeyError as err:
-            print(
-                f"For adding the probably unnecessary ground temperature to the .epw file header, "
-                f"the following made it impossible: {err}"
+            logger.warn(
+                "Error while adding the probably unnecessary ground temperature to the .epw file "
+                "header. A placeholder will be used. Error: %s", err
             )
             ground_temp = ground_temp + [0]  # 0 ground layers
 
@@ -622,6 +627,6 @@ def to_epw(
         df_as_list, df = format_data(df, start, stop)
         writer.writerows(df_as_list)
 
-    print(f"EPW file saved to {file_path}.")
+    logger.info("EPW file saved to %s.", file_path)
 
     return df

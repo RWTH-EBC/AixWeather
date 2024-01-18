@@ -1,7 +1,7 @@
 """
 Converts core data to modelica TMY3Reader data
 """
-
+import logging
 import calendar
 import datetime as dt
 import pandas as pd
@@ -9,6 +9,9 @@ import pandas as pd
 from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
 from aixweather.transformation_functions import auxiliary, time_observation_transformations, pass_through_handling
+
+
+logger = logging.getLogger(__name__)
 
 """
 format_modelica_TMY3 information:
@@ -251,5 +254,5 @@ def to_mos(
         file.seek(0, 0)
         file.write(f"{header_of}\n{content}")
 
-    print(f"MOS file saved to {filepath}.")
+    logger.info("MOS file saved to %s.", filepath)
     return df

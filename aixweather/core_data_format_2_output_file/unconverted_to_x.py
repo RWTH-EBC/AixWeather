@@ -2,12 +2,16 @@
 converts core data to different simpler formats (currently without any transformation)
 """
 
+import logging
 import json
 import pickle
 import pandas as pd
 
 from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
+
+
+logger = logging.getLogger(__name__)
 
 
 def to_pickle(
@@ -35,7 +39,7 @@ def to_pickle(
     with open(meta_file_path, "wb") as file:
         pickle.dump(meta, file)
 
-    print(f"Pickle saved to {file_path}, meta information saved to {meta_file_path}.")
+    logger.info("Pickle saved to %s, meta information saved to %s.", file_path, meta_file_path)
 
     return core_df
 
@@ -70,7 +74,7 @@ def to_json(
     with open(meta_file_path, "w") as file:
         json.dump(meta_dict, file, indent=4)
 
-    print(f"JSON saved to {file_path}, meta information saved to {meta_file_path}.")
+    logger.info("JSON saved to %s, meta information saved to %s.", file_path, meta_file_path)
 
     return core_df
 
@@ -104,6 +108,6 @@ def to_csv(
     with open(meta_file_path, "w") as file:
         json.dump(meta_dict, file, indent=4)
 
-    print(f"CSV saved to {file_path}, meta information saved to {meta_file_path}.")
+    logger.info("CSV saved to %s, meta information saved to %s.", file_path, meta_file_path)
 
     return core_df
