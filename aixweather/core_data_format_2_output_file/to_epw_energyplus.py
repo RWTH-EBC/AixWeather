@@ -20,6 +20,18 @@ logger = logging.getLogger(__name__)
 format_epw information:
 for links see readme
 
+Format info:
+key = output data point name
+core_name = corresponding name matching the format_core_data
+time_of_meas_shift = desired 30min shifting+interpolation to convert the value that is "at 
+indicated time" to "average of preceding hour" (ind2prec). 
+unit = unit of the output data following the naming convention of format_core_data
+nan = The default values stated from the format_epw information, those values are 
+filled if nan.
+
+All changes here automatically change the calculations. 
+Exception: unit conversions have to be added manually.
+
 Information for shifting:
 Hour: This is the hour of the data. (1 - 24). Hour 1 is 00:01 to 01:00. Cannot be missing.
 but e.g.:
@@ -586,7 +598,7 @@ def to_epw(
             df = auxiliary.fill_nan_from_format_dict(df, format_epw)
 
         # cut off float digits (required for EnergyPlus)
-        df = df.map(lambda x: (f"{x:.1f}") if isinstance(x, float) else x)
+        df = df.applymap(lambda x: (f"{x:.1f}") if isinstance(x, float) else x)
 
         # again make sure correct order and variables are applied
         # (processing might have mixed it up)

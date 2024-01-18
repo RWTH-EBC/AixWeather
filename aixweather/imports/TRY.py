@@ -7,8 +7,6 @@ import re
 import pandas as pd
 import random
 
-import geopandas as gpd
-from geopy.geocoders import Nominatim
 from shapely.geometry import Point
 
 from aixweather.imports.utils_import import MetaData
@@ -101,6 +99,13 @@ def load_try_meta_from_file(path: str) -> MetaData:
     # Extract Höhenlage (altitude)
     hoehenlage_line = next(line for line in header_lines if "Hoehenlage" in line)
     hoehenlage = int(re.search(r":\s*(\d+) Meter", hoehenlage_line).group(1))
+
+    try:
+        import geopandas as gpd
+        from geopy.geocoders import Nominatim
+    except ImportError:
+        print("Optional dependency 'TRY' not installed, skipping metadata of TRY.")
+        return meta
 
     ### convert latitude and longitude
     # Create a GeoDataFrame with the provided coordinates

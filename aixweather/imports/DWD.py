@@ -9,8 +9,6 @@ import datetime as dt
 import urllib.request
 import pandas as pd
 
-from wetterdienst.provider.dwd.mosmix import DwdMosmixRequest, DwdMosmixType
-
 from aixweather.imports import utils_import
 from aixweather import definitions
 
@@ -103,7 +101,10 @@ def import_DWD_forecast(station: str) -> pd.DataFrame:
     Returns:
         pd.DataFrame: DataFrame containing weather forecast data from the DWD.
     """
-
+    try:
+        from wetterdienst.provider.dwd.mosmix import DwdMosmixRequest, DwdMosmixType
+    except ImportError:
+        raise ImportError("Optional dependency 'DWD_forecast' not installed, can't import data.")
     ### pull forecast data using the package wetterdienst
     stations = DwdMosmixRequest(
         parameter="small", mosmix_type=DwdMosmixType.SMALL

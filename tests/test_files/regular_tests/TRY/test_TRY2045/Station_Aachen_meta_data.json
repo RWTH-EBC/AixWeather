@@ -13,6 +13,10 @@
             "DryBulbTemp",
             "RelHum"
         ],
+        "GlobHorRad": [
+            "DirHorRad",
+            "DiffHorRad"
+        ],
         "DirNormRad": [
             "DirHorRad"
         ]
@@ -24,6 +28,10 @@
         "DewPointTemp": [
             "DryBulbTemp",
             "RelHum"
+        ],
+        "GlobHorRad": [
+            "DirHorRad",
+            "DiffHorRad"
         ],
         "DirNormRad": [
             "DirHorRad"

@@ -47,18 +47,22 @@ def _shift_timestamps_and_interpolate(df: pd.DataFrame, backward: bool) -> pd.Da
 
 
 def avg_preceding_hour_2_indicated_time(df):
+    '''aka: prec2ind'''
     return _shift_timestamps_and_interpolate(df, True)
 
 
 def indicated_time_2_avg_following_hour(df):
+    '''aka: ind2foll'''
     return _shift_timestamps_and_interpolate(df, True)
 
 
 def avg_following_hour_2_indicated_time(df):
+    '''aka: foll2ind'''
     return _shift_timestamps_and_interpolate(df, False)
 
 
 def indicated_time_2_avg_preceding_hour(df):
+    '''aka: ind2prec'''
     return _shift_timestamps_and_interpolate(df, False)
 
 

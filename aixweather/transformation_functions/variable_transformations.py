@@ -267,10 +267,12 @@ def variable_transform_all(
         df, "OpaqueSkyCover", approximate_opaque_from_total_skycover, "TotalSkyCover"
     )
     calc_overview.update(calc_status)
+
     df, calc_status = robust_transformation(
         df, "DewPointTemp", calculate_dew_point_temp, "DryBulbTemp", "RelHum"
     )
     calc_overview.update(calc_status)
+
     df, calc_status = robust_transformation(
         df,
         "DirHorRad",
@@ -279,6 +281,16 @@ def variable_transform_all(
         "DiffHorRad",
     )
     calc_overview.update(calc_status)
+
+    df, calc_status = robust_transformation(
+        df,
+        "GlobHorRad",
+        calculate_global_horizontal_radiation,
+        "DirHorRad",
+        "DiffHorRad",
+    )
+    calc_overview.update(calc_status)
+
     df, calc_status = robust_transformation(
         df,
         "DirNormRad",
@@ -289,6 +301,7 @@ def variable_transform_all(
         "DirHorRad",
     )
     calc_overview.update(calc_status)
+
     df, calc_status = robust_transformation(
         df,
         "HorInfra",
@@ -298,5 +311,6 @@ def variable_transform_all(
         "OpaqueSkyCover",
     )
     calc_overview.update(calc_status)
+
 
     return df, calc_overview

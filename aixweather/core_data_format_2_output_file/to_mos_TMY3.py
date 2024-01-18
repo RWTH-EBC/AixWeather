@@ -16,9 +16,17 @@ logger = logging.getLogger(__name__)
 """
 format_modelica_TMY3 information:
 
-Please indicate the unit (conversion has to be changed manually)
-Please indicate the desired time of measurement (conversion automatically)
-The stated nans are the default values stated from the AixLib TMY3 Reader, those values are filled if nan.
+Format info:
+key = output data point name
+core_name = corresponding name matching the format_core_data
+time_of_meas_shift = desired 30min shifting+interpolation to convert the value that is "at 
+indicated time" to "average of preceding hour" (ind2prec). 
+unit = unit of the output data following the naming convention of format_core_data
+nan = The default values stated from the AixLib TMY3 Reader, those values are 
+filled if nan.
+
+All changes here automatically change the calculations. 
+Exception: unit conversions have to be added manually.
 
 time_of_meas_shift´s checked by Martin Rätz (07.08.2023)
 unit´s checked by Martin Rätz (07.08.2023)
