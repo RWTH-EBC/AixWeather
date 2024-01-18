@@ -351,7 +351,7 @@ def _download_DWD_file(url: str, zip_name: str):
     for i in range(4):  # try retrieval 3 times
         try:
             urllib.request.urlretrieve(url + zip_name, total_zip_name)
-            logger.info("Loaded: %s", total_zip_name)
+            logger.debug("Loaded: %s", total_zip_name)
 
             # save unzipped files to folder_unzip
             extract_path = os.path.join(definitions.local_folder_temp, folder_unzip)

@@ -379,9 +379,9 @@ def to_epw(
             )
             return ground_temp
         except KeyError as err:
-            logger.error(
-                "For adding the probably unnecessary ground temperature to the .epw file header, "
-                "the following made it impossible: %s", err
+            logger.warn(
+                "Error while adding the probably unnecessary ground temperature to the .epw file "
+                "header. A placeholder will be used. Error: %s", err
             )
             ground_temp = ground_temp + [0]  # 0 ground layers
 

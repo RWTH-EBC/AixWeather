@@ -209,7 +209,7 @@ def robust_transformation(
                 if arg in df.columns:
                     # if contains only NaN values
                     if df[arg].isna().all():
-                        logger.info(
+                        logger.debug(
                             "The required variable %s has only nan, "
                             "calculation of %s aborted.",
                             arg, desired_variable
@@ -218,7 +218,7 @@ def robust_transformation(
                     new_args.append(df[arg])
                     args_of_columns.append(arg)
                 else:
-                    logger.info(
+                    logger.debug(
                         "The required variable %s is not in the dataframes "
                         "columns, calculation of %s aborted.",
                         arg, desired_variable
@@ -230,7 +230,7 @@ def robust_transformation(
 
         # Apply transformation if variables are available
         df[desired_variable] = transformation_function(*new_args)
-        logger.debug("Calculated %s from %s.", desired_variable, args_of_columns)
+        logger.info("Calculated %s from %s.", desired_variable, args_of_columns)
 
         # Feed back whether calculation was done and with which variables
         calc_status = {desired_variable: args_of_columns}

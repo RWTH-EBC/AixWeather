@@ -86,7 +86,7 @@ def shift_time_by_dict(format_dict: dict, df: pd.DataFrame) -> pd.DataFrame:
         # No measurement if not present, though avoid being triggered
         # when using this function in 2output (empty string)
         if value[core_name] not in df.columns and value[core_name]:
-            logger.info("No measurements for %s.", value[core_name])
+            logger.debug("No measurements for %s.", value[core_name])
         else:
             if value[meas_key] == "prec2ind":
                 df.loc[:, value[core_name]] = avg_preceding_hour_2_indicated_time(

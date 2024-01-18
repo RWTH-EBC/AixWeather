@@ -97,7 +97,7 @@ def create_pass_through_variables(
 
         if not is_identical:
             # dont add to df
-            logger.warning(
+            logger.debug(
                 f"Calculation of the non-shifted {desired_variable} is "
                 f"not valid due non consistent "
                 f"time of measurement (shifting) of the required "

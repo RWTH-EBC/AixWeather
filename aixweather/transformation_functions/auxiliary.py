@@ -112,7 +112,7 @@ def evaluate_transformations(core_format: dict, other_format: dict):
         if value["core_name"] in core_format.keys():
             # compare units
             if value["unit"] != core_format[value["core_name"]]["unit"]:
-                logger.info(
+                logger.debug(
                     "Unit transformation required for %s from %s to %s.",
                     value['core_name'], value['unit'],
                     core_format[value['core_name']]['unit']
