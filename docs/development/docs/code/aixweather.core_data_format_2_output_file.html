@@ -111,6 +111,33 @@ Each module is designed to produce a specific output format.</p>
 <section id="module-aixweather.core_data_format_2_output_file.to_epw_energyplus">
 <span id="aixweather-core-data-format-2-output-file-to-epw-energyplus-module"></span><h2>aixweather.core_data_format_2_output_file.to_epw_energyplus module<a class="headerlink" href="#module-aixweather.core_data_format_2_output_file.to_epw_energyplus" title="Permalink to this heading"></a></h2>
 <p>convert core data to epw (EnergyPlus) data</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="aixweather.core_data_format_2_output_file.to_epw_energyplus.logger">
+<span class="sig-prename descclassname"><span class="pre">aixweather.core_data_format_2_output_file.to_epw_energyplus.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">aixweather.core_data_format_2_output_file.to_epw_energyplus</span> <span class="pre">(WARNING)&gt;</span></em><a class="headerlink" href="#aixweather.core_data_format_2_output_file.to_epw_energyplus.logger" title="Permalink to this definition"></a></dt>
+<dd><p>format_epw information:
+for links see readme</p>
+<p>Format info:
+key = output data point name
+core_name = corresponding name matching the format_core_data
+time_of_meas_shift = desired 30min shifting+interpolation to convert the value that is “at 
+indicated time” to “average of preceding hour” (ind2prec). 
+unit = unit of the output data following the naming convention of format_core_data
+nan = The default values stated from the format_epw information, those values are 
+filled if nan.</p>
+<p>All changes here automatically change the calculations. 
+Exception: unit conversions have to be added manually.</p>
+<p>Information for shifting:
+Hour: This is the hour of the data. (1 - 24). Hour 1 is 00:01 to 01:00. Cannot be missing.
+but e.g.:
+DryBulbTemp: This is the dry bulb temperature in C at the time indicated.
+and:
+GlobHorRad: received on a horizontal surface during the hour preceding the time indicated.
+—-&gt; Hence, we assume that hour 1 should show the DryBulbTemp from
+0:30 to 1:30, i.e. the Temp at indicated time.</p>
+<p>time of measurement checked by Martin Rätz (07.08.2023)
+units checked by Martin Rätz (07.08.2023)</p>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="aixweather.core_data_format_2_output_file.to_epw_energyplus.to_epw">
 <span class="sig-prename descclassname"><span class="pre">aixweather.core_data_format_2_output_file.to_epw_energyplus.</span></span><span class="sig-name descname"><span class="pre">to_epw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">core_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.utils_import.MetaData" title="aixweather.imports.utils_import.MetaData"><span class="pre">MetaData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fillna</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/aixweather/core_data_format_2_output_file/to_epw_energyplus.html#to_epw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.core_data_format_2_output_file.to_epw_energyplus.to_epw" title="Permalink to this definition"></a></dt>
@@ -134,6 +161,24 @@ fillna (bool): Boolean indicating whether NaN values should be filled.</p>
 <section id="module-aixweather.core_data_format_2_output_file.to_mos_TMY3">
 <span id="aixweather-core-data-format-2-output-file-to-mos-tmy3-module"></span><h2>aixweather.core_data_format_2_output_file.to_mos_TMY3 module<a class="headerlink" href="#module-aixweather.core_data_format_2_output_file.to_mos_TMY3" title="Permalink to this heading"></a></h2>
 <p>Converts core data to modelica TMY3Reader data</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="aixweather.core_data_format_2_output_file.to_mos_TMY3.logger">
+<span class="sig-prename descclassname"><span class="pre">aixweather.core_data_format_2_output_file.to_mos_TMY3.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">aixweather.core_data_format_2_output_file.to_mos_TMY3</span> <span class="pre">(WARNING)&gt;</span></em><a class="headerlink" href="#aixweather.core_data_format_2_output_file.to_mos_TMY3.logger" title="Permalink to this definition"></a></dt>
+<dd><p>format_modelica_TMY3 information:</p>
+<p>Format info:
+key = output data point name
+core_name = corresponding name matching the format_core_data
+time_of_meas_shift = desired 30min shifting+interpolation to convert the value that is “at 
+indicated time” to “average of preceding hour” (ind2prec). 
+unit = unit of the output data following the naming convention of format_core_data
+nan = The default values stated from the AixLib TMY3 Reader, those values are 
+filled if nan.</p>
+<p>All changes here automatically change the calculations. 
+Exception: unit conversions have to be added manually.</p>
+<p>time_of_meas_shift´s checked by Martin Rätz (07.08.2023)
+unit´s checked by Martin Rätz (07.08.2023)</p>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="aixweather.core_data_format_2_output_file.to_mos_TMY3.to_mos">
 <span class="sig-prename descclassname"><span class="pre">aixweather.core_data_format_2_output_file.to_mos_TMY3.</span></span><span class="sig-name descname"><span class="pre">to_mos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">core_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.utils_import.MetaData" title="aixweather.imports.utils_import.MetaData"><span class="pre">MetaData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fillna</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/aixweather/core_data_format_2_output_file/to_mos_TMY3.html#to_mos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.core_data_format_2_output_file.to_mos_TMY3.to_mos" title="Permalink to this definition"></a></dt>

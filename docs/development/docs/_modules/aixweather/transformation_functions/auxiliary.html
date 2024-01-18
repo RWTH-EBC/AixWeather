@@ -81,9 +81,12 @@
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">includes auxiliary functions for data handling and transformation</span>
 <span class="sd">&quot;&quot;&quot;</span>
-
+<span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
 
 <div class="viewcode-block" id="force_data_variable_convention"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.force_data_variable_convention">[docs]</a><span class="k">def</span> <span class="nf">force_data_variable_convention</span><span class="p">(</span>
     <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">format_desired</span><span class="p">:</span> <span class="nb">dict</span>
@@ -184,14 +187,15 @@
 <span class="sd">        ValueError: If a core variable in other_format doesn&#39;t match the core variable format.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Evaluate format.&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Evaluate format.&quot;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">other_format</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;core_name&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">core_format</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="c1"># compare units</span>
             <span class="k">if</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;unit&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">core_format</span><span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="s2">&quot;core_name&quot;</span><span class="p">]][</span><span class="s2">&quot;unit&quot;</span><span class="p">]:</span>
-                <span class="nb">print</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;Unit transformation required for </span><span class="si">{</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;core_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> from&quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;unit&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">core_format</span><span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;core_name&#39;</span><span class="p">]][</span><span class="s1">&#39;unit&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                    <span class="s2">&quot;Unit transformation required for </span><span class="si">%s</span><span class="s2"> from </span><span class="si">%s</span><span class="s2"> to </span><span class="si">%s</span><span class="s2">.&quot;</span><span class="p">,</span>
+                    <span class="n">value</span><span class="p">[</span><span class="s1">&#39;core_name&#39;</span><span class="p">],</span> <span class="n">value</span><span class="p">[</span><span class="s1">&#39;unit&#39;</span><span class="p">],</span>
+                    <span class="n">core_format</span><span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;core_name&#39;</span><span class="p">]][</span><span class="s1">&#39;unit&#39;</span><span class="p">]</span>
                 <span class="p">)</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;core_name&quot;</span><span class="p">]:</span>
             <span class="k">pass</span>

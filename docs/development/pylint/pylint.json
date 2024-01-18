@@ -59,7 +59,7 @@
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 19,
+                "statement": 21,
                 "warning": 0
             },
             "test_DWD_forecast": {
@@ -211,7 +211,7 @@
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 180,
+        "statement": 182,
         "warning": 0,
         "global_note": 0,
         "nb_duplicated_lines": 0,
@@ -276,7 +276,7 @@
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 19,
+                "statement": 21,
                 "warning": 0
             },
             "test_DWD_forecast": {
@@ -428,7 +428,7 @@
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 180,
+        "statement": 182,
         "warning": 0,
         "global_note": 10.0,
         "nb_duplicated_lines": 0,

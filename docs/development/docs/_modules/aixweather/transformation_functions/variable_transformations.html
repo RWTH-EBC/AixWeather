@@ -82,6 +82,7 @@
 <span class="sd">This module includes variable transformations and functions</span>
 <span class="sd">to calculate variables from given values</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -89,6 +90,9 @@
 <span class="kn">import</span> <span class="nn">pvlib</span>
 
 <span class="kn">from</span> <span class="nn">aixweather.imports.utils_import</span> <span class="kn">import</span> <span class="n">MetaData</span>
+
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="approximate_opaque_from_total_skycover"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.approximate_opaque_from_total_skycover">[docs]</a><span class="k">def</span> <span class="nf">approximate_opaque_from_total_skycover</span><span class="p">(</span><span class="n">total_sky_cover</span><span class="p">):</span>
@@ -285,17 +289,19 @@
                 <span class="k">if</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
                     <span class="c1"># if contains only NaN values</span>
                     <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">arg</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
-                        <span class="nb">print</span><span class="p">(</span>
-                            <span class="sa">f</span><span class="s2">&quot;The required variable </span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s2"> has only nan, &quot;</span>
-                            <span class="sa">f</span><span class="s2">&quot;calculation of </span><span class="si">{</span><span class="n">desired_variable</span><span class="si">}</span><span class="s2"> aborted.&quot;</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                            <span class="s2">&quot;The required variable </span><span class="si">%s</span><span class="s2"> has only nan, &quot;</span>
+                            <span class="s2">&quot;calculation of </span><span class="si">%s</span><span class="s2"> aborted.&quot;</span><span class="p">,</span>
+                            <span class="n">arg</span><span class="p">,</span> <span class="n">desired_variable</span>
                         <span class="p">)</span>
                         <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">calc_status</span>
                     <span class="n">new_args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">arg</span><span class="p">])</span>
                     <span class="n">args_of_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span>
-                        <span class="sa">f</span><span class="s2">&quot;The required variable </span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s2"> is not in the dataframes &quot;</span>
-                        <span class="sa">f</span><span class="s2">&quot;columns, calculation of </span><span class="si">{</span><span class="n">desired_variable</span><span class="si">}</span><span class="s2"> aborted.&quot;</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                        <span class="s2">&quot;The required variable </span><span class="si">%s</span><span class="s2"> is not in the dataframes &quot;</span>
+                        <span class="s2">&quot;columns, calculation of </span><span class="si">%s</span><span class="s2"> aborted.&quot;</span><span class="p">,</span>
+                        <span class="n">arg</span><span class="p">,</span> <span class="n">desired_variable</span>
                     <span class="p">)</span>
                     <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">calc_status</span>
             <span class="k">else</span><span class="p">:</span>
@@ -304,7 +310,7 @@
 
         <span class="c1"># Apply transformation if variables are available</span>
         <span class="n">df</span><span class="p">[</span><span class="n">desired_variable</span><span class="p">]</span> <span class="o">=</span> <span class="n">transformation_function</span><span class="p">(</span><span class="o">*</span><span class="n">new_args</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calculated </span><span class="si">{</span><span class="n">desired_variable</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">args_of_columns</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Calculated </span><span class="si">%s</span><span class="s2"> from </span><span class="si">%s</span><span class="s2">.&quot;</span><span class="p">,</span> <span class="n">desired_variable</span><span class="p">,</span> <span class="n">args_of_columns</span><span class="p">)</span>
 
         <span class="c1"># Feed back whether calculation was done and with which variables</span>
         <span class="n">calc_status</span> <span class="o">=</span> <span class="p">{</span><span class="n">desired_variable</span><span class="p">:</span> <span class="n">args_of_columns</span><span class="p">}</span>

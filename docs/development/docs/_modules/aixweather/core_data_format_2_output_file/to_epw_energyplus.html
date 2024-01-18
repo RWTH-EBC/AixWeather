@@ -84,12 +84,17 @@
 
 <span class="kn">import</span> <span class="nn">csv</span>
 <span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">aixweather</span> <span class="kn">import</span> <span class="n">definitions</span>
 <span class="kn">from</span> <span class="nn">aixweather.imports.utils_import</span> <span class="kn">import</span> <span class="n">MetaData</span>
 <span class="kn">from</span> <span class="nn">aixweather.transformation_functions</span> <span class="kn">import</span> <span class="n">auxiliary</span><span class="p">,</span> <span class="n">time_observation_transformations</span><span class="p">,</span> <span class="n">pass_through_handling</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">format_epw information:</span>
@@ -454,9 +459,9 @@
             <span class="p">)</span>
             <span class="k">return</span> <span class="n">ground_temp</span>
         <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;For adding the probably unnecessary ground temperature to the .epw file header, &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;the following made it impossible: </span><span class="si">{</span><span class="n">err</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;Error while adding the probably unnecessary ground temperature to the .epw file &quot;</span>
+                <span class="s2">&quot;header. A placeholder will be used. Error: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">err</span>
             <span class="p">)</span>
             <span class="n">ground_temp</span> <span class="o">=</span> <span class="n">ground_temp</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># 0 ground layers</span>
 
@@ -702,7 +707,7 @@
         <span class="n">df_as_list</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">format_data</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">)</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">df_as_list</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EPW file saved to </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EPW file saved to </span><span class="si">%s</span><span class="s2">.&quot;</span><span class="p">,</span> <span class="n">file_path</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">df</span></div>
 </pre></div>
