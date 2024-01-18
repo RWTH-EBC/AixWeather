@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>aixweather.core_data_format_2_output_file.to_epw_energyplus &mdash; aixweather 0.1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            aixweather
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">aixweather</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html">Contribute as a user</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../version_his.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">aixweather</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">aixweather.core_data_format_2_output_file.to_epw_energyplus</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for aixweather.core_data_format_2_output_file.to_epw_energyplus</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">convert core data to epw (EnergyPlus) data</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">aixweather</span> <span class="kn">import</span> <span class="n">definitions</span>
+<span class="kn">from</span> <span class="nn">aixweather.imports.utils_import</span> <span class="kn">import</span> <span class="n">MetaData</span>
+<span class="kn">from</span> <span class="nn">aixweather.transformation_functions</span> <span class="kn">import</span> <span class="n">auxiliary</span><span class="p">,</span> <span class="n">time_observation_transformations</span><span class="p">,</span> <span class="n">pass_through_handling</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">format_epw information:</span>
+<span class="sd">for links see readme</span>
+
+<span class="sd">Format info:</span>
+<span class="sd">key = output data point name</span>
+<span class="sd">core_name = corresponding name matching the format_core_data</span>
+<span class="sd">time_of_meas_shift = desired 30min shifting+interpolation to convert the value that is &quot;at </span>
+<span class="sd">indicated time&quot; to &quot;average of preceding hour&quot; (ind2prec). </span>
+<span class="sd">unit = unit of the output data following the naming convention of format_core_data</span>
+<span class="sd">nan = The default values stated from the format_epw information, those values are </span>
+<span class="sd">filled if nan.</span>
+
+<span class="sd">All changes here automatically change the calculations. </span>
+<span class="sd">Exception: unit conversions have to be added manually.</span>
+
+<span class="sd">Information for shifting:</span>
+<span class="sd">Hour: This is the hour of the data. (1 - 24). Hour 1 is 00:01 to 01:00. Cannot be missing.</span>
+<span class="sd">but e.g.:</span>
+<span class="sd">DryBulbTemp: This is the dry bulb temperature in C at the time indicated.</span>
+<span class="sd">and:</span>
+<span class="sd">GlobHorRad: received on a horizontal surface during the hour preceding the time indicated.</span>
+<span class="sd">----&gt; Hence, we assume that hour 1 should show the DryBulbTemp from</span>
+<span class="sd">0:30 to 1:30, i.e. the Temp at indicated time.</span>
+
+<span class="sd">time of measurement checked by Martin Rätz (07.08.2023)</span>
+<span class="sd">units checked by Martin Rätz (07.08.2023)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">format_epw</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Year&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+    <span class="s2">&quot;Month&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+    <span class="s2">&quot;Day&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+    <span class="s2">&quot;Hour&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;hour&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+    <span class="s2">&quot;Minute&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;minute&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+    <span class="s2">&quot;Data Source and Uncertainty Flags&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="s2">&quot;?&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;DryBulbTemp&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DryBulbTemp&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">99.9</span><span class="p">},</span>
+    <span class="s2">&quot;DewPointTemp&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DewPointTemp&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">99.9</span><span class="p">},</span>
+    <span class="s2">&quot;RelHum&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;RelHum&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;percent&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">999.0</span><span class="p">},</span>
+    <span class="s2">&quot;AtmPressure&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AtmPressure&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Pa&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">999999.0</span><span class="p">},</span>
+    <span class="s2">&quot;ExtHorRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;ExtHorRad&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">9999.0</span><span class="p">},</span>
+    <span class="s2">&quot;ExtDirNormRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;ExtDirNormRad&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">9999.0</span><span class="p">},</span>
+    <span class="s2">&quot;HorInfra&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;HorInfra&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">9999.0</span><span class="p">},</span>
+    <span class="s2">&quot;GlobHorRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;GlobHorRad&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">9999.0</span><span class="p">},</span>
+    <span class="s2">&quot;DirNormRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DirNormRad&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">9999.0</span><span class="p">},</span>
+    <span class="s2">&quot;DiffHorRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DiffHorRad&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">9999.0</span><span class="p">},</span>
+    <span class="s2">&quot;GlobHorIll&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;GlobHorIll&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;lux&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">999999.0</span><span class="p">},</span>
+    <span class="s2">&quot;DirecNormIll&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DirecNormIll&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;lux&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">999999.0</span><span class="p">},</span>
+    <span class="s2">&quot;DiffuseHorIll&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DiffuseHorIll&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;lux&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">999999.0</span><span class="p">},</span>
+    <span class="s2">&quot;ZenithLum&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;ZenithLum&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Cd/m2&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">9999.0</span><span class="p">},</span>
+    <span class="s2">&quot;WindDir&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;WindDir&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;deg&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">999.0</span><span class="p">},</span>
+    <span class="s2">&quot;WindSpeed&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;WindSpeed&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;m/s&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">999.0</span><span class="p">},</span>
+    <span class="s2">&quot;TotalSkyCover&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;TotalSkyCover&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;1tenth&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">99</span><span class="p">},</span>
+    <span class="s2">&quot;OpaqueSkyCover&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;OpaqueSkyCover&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;1tenth&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">99</span><span class="p">},</span>
+    <span class="s2">&quot;Visibility&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Visibility&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;km&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">9999.0</span><span class="p">},</span>
+    <span class="s2">&quot;CeilingH&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;CeilingH&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">99999</span><span class="p">},</span>
+    <span class="s2">&quot;WeatherObs&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>
+    <span class="s2">&quot;WeatherCode&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">999999999</span><span class="p">},</span>
+    <span class="s2">&quot;PrecWater&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;PrecWater&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;mm&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">999.0</span><span class="p">},</span>
+    <span class="s2">&quot;Aerosol&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Aerosol&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;1thousandth&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">0.999</span><span class="p">},</span>
+    <span class="s2">&quot;Snow&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;cm&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">999.0</span><span class="p">},</span>
+    <span class="s2">&quot;DaysSinceSnow&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;days&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">99</span><span class="p">},</span>
+    <span class="s2">&quot;Albedo&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">999</span><span class="p">},</span>
+    <span class="s2">&quot;LiquidPrecD&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;LiquidPrecD&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;mm/h&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">999</span><span class="p">},</span>
+    <span class="s2">&quot;LiquidPrepQuant&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;hours&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">99</span><span class="p">},</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="to_epw"><a class="viewcode-back" href="../../../code/aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.to_epw_energyplus.to_epw">[docs]</a><span class="k">def</span> <span class="nf">to_epw</span><span class="p">(</span>
+    <span class="n">core_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span><span class="p">,</span>
+    <span class="n">start</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span>
+    <span class="n">stop</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span>
+    <span class="n">fillna</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">result_folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an EPW file from the core data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        core_df (pd.DataFrame): DataFrame containing core data.</span>
+<span class="sd">        meta (MetaData): Metadata associated with the weather data.</span>
+<span class="sd">        start (dt.datetime): Timestamp for the start of the EPW file.</span>
+<span class="sd">        stop (dt.datetime): Timestamp for the end of the EPW file.</span>
+<span class="sd">        fillna (bool): Boolean indicating whether NaN values should be filled.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame containing the weather data formatted for EPW export,</span>
+<span class="sd">                      excluding metadata.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">### evaluate correctness of format</span>
+    <span class="n">auxiliary</span><span class="o">.</span><span class="n">evaluate_transformations</span><span class="p">(</span>
+        <span class="n">core_format</span><span class="o">=</span><span class="n">definitions</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">,</span> <span class="n">other_format</span><span class="o">=</span><span class="n">format_epw</span>
+    <span class="p">)</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">core_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="n">filename</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">station_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">start</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">stop</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">station_name</span><span class="si">}</span><span class="s2">.epw&quot;</span>
+    <span class="p">)</span>
+    <span class="c1"># get file path to safe data to</span>
+    <span class="n">file_path</span> <span class="o">=</span> <span class="n">definitions</span><span class="o">.</span><span class="n">results_file_path</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">result_folder</span><span class="p">)</span>
+
+    <span class="c1">### create header lines</span>
+    <span class="k">def</span> <span class="nf">line1_location</span><span class="p">(</span>
+        <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get location metadata (station name, state, country, data_type,</span>
+<span class="sd">        stationID, lat, lon, TZ, alt)</span>
+
+<span class="sd">        return:</span>
+<span class="sd">            location:      List        Erstezeile(LOCATION) von epw Daten als List</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">data_type</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">timezone</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># relative to UTC</span>
+
+        <span class="n">location</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;LOCATION&quot;</span><span class="p">,</span>
+            <span class="n">meta</span><span class="o">.</span><span class="n">station_name</span><span class="p">,</span>
+            <span class="s2">&quot;State&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;country&quot;</span><span class="p">,</span>
+            <span class="n">data_type</span><span class="p">,</span>
+            <span class="n">meta</span><span class="o">.</span><span class="n">station_id</span><span class="p">,</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">latitude</span><span class="p">),</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">longitude</span><span class="p">),</span>
+            <span class="n">timezone</span><span class="p">,</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">altitude</span><span class="p">),</span>
+        <span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">location</span>
+
+    <span class="k">def</span> <span class="nf">line2_design_cond</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Erstellen zweite Zeile der epw.</span>
+
+<span class="sd">        return:</span>
+<span class="sd">            design_cond:    List    Zweite Zeile(Design Condition) von epw Daten als List</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">design_cond</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;DESIGN CONDITIONS&quot;</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>  <span class="c1"># number of design condition</span>
+        <span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">design_cond</span>
+
+    <span class="k">def</span> <span class="nf">line3_typ_ext_period</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parsen von weatherdata um typische und extreme Perioden zu holen.</span>
+
+<span class="sd">        Typische Perioden sind Wochen mit Temperatur, die der Durchschnittstemperatur der Saison</span>
+<span class="sd">        am nächsten kommt.</span>
+<span class="sd">        Extreme Perioden sind Wochen mit Temperatur, die der Maximum-/Minimumtemperatur der Saison</span>
+<span class="sd">        am nächsten kommt.</span>
+
+<span class="sd">        return:</span>
+<span class="sd">            typical_extreme_period:     List    Dritte Zeile(TYPICAL/EXTREME PERIODS)</span>
+<span class="sd">                                                    von epw Daten als List</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">typical_extreme_period</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;TYPICAL/EXTREME PERIODS&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="n">season_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">11</span><span class="p">:</span> <span class="s2">&quot;Autumn&quot;</span><span class="p">,</span>
+            <span class="mi">12</span><span class="p">:</span> <span class="s2">&quot;Winter&quot;</span><span class="p">,</span>
+            <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;Winter&quot;</span><span class="p">,</span>
+            <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;Winter&quot;</span><span class="p">,</span>
+            <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;Spring&quot;</span><span class="p">,</span>
+            <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;Spring&quot;</span><span class="p">,</span>
+            <span class="mi">5</span><span class="p">:</span> <span class="s2">&quot;Spring&quot;</span><span class="p">,</span>
+            <span class="mi">6</span><span class="p">:</span> <span class="s2">&quot;Summer&quot;</span><span class="p">,</span>
+            <span class="mi">7</span><span class="p">:</span> <span class="s2">&quot;Summer&quot;</span><span class="p">,</span>
+            <span class="mi">8</span><span class="p">:</span> <span class="s2">&quot;Summer&quot;</span><span class="p">,</span>
+            <span class="mi">9</span><span class="p">:</span> <span class="s2">&quot;Autumn&quot;</span><span class="p">,</span>
+            <span class="mi">10</span><span class="p">:</span> <span class="s2">&quot;Autumn&quot;</span><span class="p">,</span>
+        <span class="p">}</span>  <span class="c1"># Monaten in Saisons zuweisen</span>
+
+        <span class="k">def</span> <span class="nf">group_func</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Gruppefunktion für df.groupby()&quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="n">season_dict</span><span class="p">[</span><span class="nb">input</span><span class="o">.</span><span class="n">month</span><span class="p">]</span>
+
+        <span class="n">df_temp_ambient</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;DryBulbTemp&quot;</span><span class="p">]</span>  <span class="c1"># Temperature_Ambient von weatherdata holen</span>
+        <span class="n">number_of_periods</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">df_temp_ambient</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">group_func</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">)</span>  <span class="c1"># Zahl von der Saisons rechnen als Zahl von Perioden</span>
+        <span class="n">typical_extreme_period</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">number_of_periods</span><span class="p">)</span>
+
+        <span class="c1"># Gruppierung per Saison</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">summer_temp</span> <span class="o">=</span> <span class="n">df_temp_ambient</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">group_func</span><span class="p">)</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="s2">&quot;Summer&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">summer_temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">spring_temp</span> <span class="o">=</span> <span class="n">df_temp_ambient</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">group_func</span><span class="p">)</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="s2">&quot;Spring&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">spring_temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">autumn_temp</span> <span class="o">=</span> <span class="n">df_temp_ambient</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">group_func</span><span class="p">)</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="s2">&quot;Autumn&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">autumn_temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">winter_temp</span> <span class="o">=</span> <span class="n">df_temp_ambient</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">group_func</span><span class="p">)</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="s2">&quot;Winter&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">winter_temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">summer_temp</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">typical_extreme_period</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">typical_extreme_period</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="p">)</span>  <span class="c1"># Summer und Winter haben extreme Periode.</span>
+            <span class="n">max_temp_summer</span> <span class="o">=</span> <span class="n">summer_temp</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="n">typ_temp_summer</span> <span class="o">=</span> <span class="n">summer_temp</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="n">summer_temp_w</span> <span class="o">=</span> <span class="n">summer_temp</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span>
+                <span class="s2">&quot;W&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;left&quot;</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c1"># Resample in wochentliche Interval</span>
+
+            <span class="c1"># Datenpunkt(typisch und extreme) finden</span>
+            <span class="n">idx_mean_summer</span> <span class="o">=</span> <span class="n">summer_temp_w</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">typ_temp_summer</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()</span>
+            <span class="n">idx_max_summer</span> <span class="o">=</span> <span class="n">summer_temp_w</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">max_temp_summer</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()</span>
+            <span class="n">week_closest2mean_summer</span> <span class="o">=</span> <span class="n">summer_temp_w</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="n">idx_mean_summer</span><span class="p">]]</span>  <span class="c1"># Starttag</span>
+            <span class="n">week_closest2max_summer</span> <span class="o">=</span> <span class="n">summer_temp_w</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="n">idx_max_summer</span><span class="p">]]</span>  <span class="c1"># Starttag</span>
+
+            <span class="c1"># Endtag berechnen</span>
+            <span class="n">weekend_max_summer</span> <span class="o">=</span> <span class="n">week_closest2max_summer</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+            <span class="n">weekend_mean_summer</span> <span class="o">=</span> <span class="n">week_closest2mean_summer</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+            <span class="c1"># List für die Saison erstellen</span>
+            <span class="n">summer</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="s2">&quot;Summer - Week Nearest Max Temperature For Period&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Extreme&quot;</span><span class="p">,</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">week_closest2max_summer</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">week_closest2max_summer</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">day</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">weekend_max_summer</span><span class="o">.</span><span class="n">month</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">weekend_max_summer</span><span class="o">.</span><span class="n">day</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="s2">&quot;Summer - Week Nearest Average Temperature For Period&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Typical&quot;</span><span class="p">,</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">week_closest2mean_summer</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">week_closest2mean_summer</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">day</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">weekend_mean_summer</span><span class="o">.</span><span class="n">month</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">weekend_mean_summer</span><span class="o">.</span><span class="n">day</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+            <span class="p">]</span>
+
+            <span class="n">typical_extreme_period</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">typical_extreme_period</span> <span class="o">+</span> <span class="n">summer</span>
+            <span class="p">)</span>  <span class="c1"># Liste zusammensetzen</span>
+
+        <span class="c1"># für alle Saison wiederholen</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">winter_temp</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">typical_extreme_period</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">typical_extreme_period</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">min_temp_winter</span> <span class="o">=</span> <span class="n">winter_temp</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+            <span class="n">typ_temp_winter</span> <span class="o">=</span> <span class="n">winter_temp</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="n">winter_temp_w</span> <span class="o">=</span> <span class="n">winter_temp</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;W&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="n">idx_mean_winter</span> <span class="o">=</span> <span class="n">winter_temp_w</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">typ_temp_winter</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()</span>
+            <span class="n">idx_min_winter</span> <span class="o">=</span> <span class="n">winter_temp_w</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">min_temp_winter</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()</span>
+            <span class="n">week_closest2mean_winter</span> <span class="o">=</span> <span class="n">winter_temp_w</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="n">idx_mean_winter</span><span class="p">]]</span>
+            <span class="n">week_closest2min_winter</span> <span class="o">=</span> <span class="n">winter_temp_w</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="n">idx_min_winter</span><span class="p">]]</span>
+            <span class="n">weekend_min_winter</span> <span class="o">=</span> <span class="n">week_closest2min_winter</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+            <span class="n">weekend_mean_winter</span> <span class="o">=</span> <span class="n">week_closest2mean_winter</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+            <span class="n">winter</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="s2">&quot;Winter - Week Nearest Min Temperature For Period&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Extreme&quot;</span><span class="p">,</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">week_closest2min_winter</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">week_closest2min_winter</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">day</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">weekend_min_winter</span><span class="o">.</span><span class="n">month</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">weekend_min_winter</span><span class="o">.</span><span class="n">day</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="s2">&quot;Winter - Week Nearest Average Temperature For Period&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Typical&quot;</span><span class="p">,</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">week_closest2mean_winter</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">week_closest2mean_winter</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">day</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">weekend_mean_winter</span><span class="o">.</span><span class="n">month</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">weekend_mean_winter</span><span class="o">.</span><span class="n">day</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+            <span class="p">]</span>
+
+            <span class="n">typical_extreme_period</span> <span class="o">=</span> <span class="n">typical_extreme_period</span> <span class="o">+</span> <span class="n">winter</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">autumn_temp</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">typ_temp_autumn</span> <span class="o">=</span> <span class="n">autumn_temp</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="n">autumn_temp_w</span> <span class="o">=</span> <span class="n">autumn_temp</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;W&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="n">idx_mean_autumn</span> <span class="o">=</span> <span class="n">autumn_temp_w</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">typ_temp_autumn</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()</span>
+            <span class="n">week_closest2mean_autumn</span> <span class="o">=</span> <span class="n">autumn_temp_w</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="n">idx_mean_autumn</span><span class="p">]]</span>
+            <span class="n">weekend_mean_autumn</span> <span class="o">=</span> <span class="n">week_closest2mean_autumn</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+            <span class="n">autumn</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="s2">&quot;Autumn - Week Nearest Average Temperature For Period&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Typical&quot;</span><span class="p">,</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">week_closest2mean_autumn</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">week_closest2mean_autumn</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">day</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">weekend_mean_autumn</span><span class="o">.</span><span class="n">month</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">weekend_mean_autumn</span><span class="o">.</span><span class="n">day</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+            <span class="p">]</span>
+
+            <span class="n">typical_extreme_period</span> <span class="o">=</span> <span class="n">typical_extreme_period</span> <span class="o">+</span> <span class="n">autumn</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">spring_temp</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">typ_temp_spring</span> <span class="o">=</span> <span class="n">spring_temp</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="n">spring_temp_w</span> <span class="o">=</span> <span class="n">spring_temp</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;W&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="n">idx_mean_spring</span> <span class="o">=</span> <span class="n">spring_temp_w</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">typ_temp_spring</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()</span>
+            <span class="n">week_closest2mean_spring</span> <span class="o">=</span> <span class="n">spring_temp_w</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="n">idx_mean_spring</span><span class="p">]]</span>
+            <span class="n">weekend_mean_spring</span> <span class="o">=</span> <span class="n">week_closest2mean_spring</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+            <span class="n">spring</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="s2">&quot;Spring - Week Nearest Average Temperature For Period&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Typical&quot;</span><span class="p">,</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">week_closest2mean_spring</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">week_closest2mean_spring</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">day</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">weekend_mean_spring</span><span class="o">.</span><span class="n">month</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">weekend_mean_spring</span><span class="o">.</span><span class="n">day</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+            <span class="p">]</span>
+
+            <span class="n">typical_extreme_period</span> <span class="o">=</span> <span class="n">typical_extreme_period</span> <span class="o">+</span> <span class="n">spring</span>
+
+        <span class="k">return</span> <span class="n">typical_extreme_period</span>
+
+    <span class="k">def</span> <span class="nf">line4_ground_temp</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parsen von weatherdata, um Bodentemperaturen zu holen</span>
+
+<span class="sd">        return:</span>
+<span class="sd">            ground_temp:    List    Vierte Zeile(GROUND TEMPERATURES) von epw Daten als List</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">ground_temp</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;GROUND TEMPERATURES&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="n">df_w_ground</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;M&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">decimals</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span>  <span class="c1"># Resample in monatliche Interval</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ground_t</span> <span class="o">=</span> <span class="n">df_w_ground</span><span class="p">[</span>
+                <span class="p">[</span>
+                    <span class="s2">&quot;Soil_Temperature_5cm&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Soil_Temperature_10cm&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Soil_Temperature_20cm&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Soil_Temperature_50cm&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Soil_Temperature_1m&quot;</span><span class="p">,</span>
+                <span class="p">]</span>
+            <span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>  <span class="c1"># Dataframe2Array</span>
+            <span class="c1"># Array zu Liste umwandeln -&gt; Zusammensetzen</span>
+            <span class="n">ground_temp</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">ground_temp</span>
+                <span class="o">+</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span>  <span class="c1"># ground layers</span>
+                <span class="o">+</span> <span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+                <span class="o">+</span> <span class="n">ground_t</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                <span class="o">+</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+                <span class="o">+</span> <span class="n">ground_t</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                <span class="o">+</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+                <span class="o">+</span> <span class="n">ground_t</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                <span class="o">+</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+                <span class="o">+</span> <span class="n">ground_t</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+                <span class="o">+</span> <span class="n">ground_t</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">ground_temp</span>
+        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                <span class="s2">&quot;For adding the probably unnecessary ground temperature to the .epw file header, &quot;</span>
+                <span class="s2">&quot;the following made it impossible: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">err</span>
+            <span class="p">)</span>
+            <span class="n">ground_temp</span> <span class="o">=</span> <span class="n">ground_temp</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># 0 ground layers</span>
+
+            <span class="k">return</span> <span class="n">ground_temp</span>
+
+    <span class="k">def</span> <span class="nf">line5_holiday_dl_saving</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Erstellen der 5. Zeile der epw.</span>
+
+<span class="sd">        return:</span>
+<span class="sd">            holiday_dl_saving:    List    5.Zeile(HOLIDAYS/DAYLIGHT SAVINGS) von epw Daten als List</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="kc">True</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">is_leap_year</span><span class="p">:</span>
+            <span class="n">isLeap</span> <span class="o">=</span> <span class="s2">&quot;Yes&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">isLeap</span> <span class="o">=</span> <span class="s2">&quot;No&quot;</span>
+        <span class="n">holiday_dl_saving</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;HOLIDAYS/DAYLIGHT SAVINGS&quot;</span><span class="p">,</span>
+            <span class="n">isLeap</span><span class="p">,</span>  <span class="c1"># Leap Year Observed</span>
+            <span class="mi">0</span><span class="p">,</span>  <span class="c1"># Daylight Saving Start Date</span>
+            <span class="mi">0</span><span class="p">,</span>  <span class="c1"># Daylight Saving End Date</span>
+            <span class="mi">0</span><span class="p">,</span>  <span class="c1"># Number of Holidays</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">holiday_dl_saving</span>
+
+    <span class="k">def</span> <span class="nf">line6_comment_1</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Erstellen der 6. Zeile der epw.</span>
+
+<span class="sd">        return:</span>
+<span class="sd">            comment_1:    List    6.Zeile(COMMENTS 1) von epw Daten als List</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="s2">&quot;COMMENTS 1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;For data format information see the code or check: &quot;</span>
+            <span class="s2">&quot;https://designbuilder.co.uk/cahelp/Content/EnergyPlusWeatherFileFormat.htm&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">line7_comment_2</span><span class="p">(</span><span class="n">comment2</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Erstellen der 7. Zeile der epw.</span>
+
+<span class="sd">        return:</span>
+<span class="sd">            comment_2:    List    7.Zeile(COMMENTS 2) von epw Daten als List</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;COMMENTS 2&quot;</span><span class="p">,</span> <span class="n">comment2</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">line8_data_periods</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parsen von weatherdata, um Start- und Enddatenpunkt zu holen</span>
+
+<span class="sd">        return:</span>
+<span class="sd">            data_periods:    List    8.Zeile(DATA PERIODS) von epw Daten als List</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">start_dp</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">end_dp</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">data_periods</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;DATA PERIODS&quot;</span><span class="p">,</span>
+            <span class="mi">1</span><span class="p">,</span>  <span class="c1"># Anzahl von Datenperioden</span>
+            <span class="mi">1</span><span class="p">,</span>  <span class="c1"># Anzahl von Intervale in einer Stunde</span>
+            <span class="s2">&quot;Data&quot;</span><span class="p">,</span>  <span class="c1"># DP Name oder Beschreibung</span>
+            <span class="n">start_dp</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%A&quot;</span><span class="p">),</span>  <span class="c1"># DP Starttag</span>
+            <span class="n">start_dp</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%m/</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">),</span>  <span class="c1"># DP Startdatum</span>
+            <span class="n">end_dp</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%m/</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">),</span>  <span class="c1"># DP Enddatum</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">data_periods</span>
+
+    <span class="c1">### parse actual data</span>
+    <span class="k">def</span> <span class="nf">format_data</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parsen von weatherdata, für den export</span>
+
+<span class="sd">        return:</span>
+<span class="sd">            data_list:    List    Datasätze von epw Daten als List</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># add 1 hour to start, because epw always starts at hour 1 instead of 0</span>
+        <span class="n">start_epw</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1">### measurement time conversion</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">time_observation_transformations</span><span class="o">.</span><span class="n">shift_time_by_dict</span><span class="p">(</span><span class="n">format_epw</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+
+        <span class="c1">### if possible avoid back and forth interpolating -&gt; pass through</span>
+        <span class="c1">### variables without shifting</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pass_through_handling</span><span class="o">.</span><span class="n">pass_through_measurements_with_back_and_forth_interpolating</span><span class="p">(</span>
+           <span class="n">df</span><span class="p">,</span> <span class="n">format_epw</span>
+        <span class="p">)</span>
+
+        <span class="c1">### select only desired period</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">time_observation_transformations</span><span class="o">.</span><span class="n">truncate_data_from_start_to_stop</span><span class="p">(</span>
+            <span class="n">df</span><span class="p">,</span> <span class="n">start_epw</span><span class="p">,</span> <span class="n">stop</span>
+        <span class="p">)</span>
+
+        <span class="c1">### select the desired columns</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">force_data_variable_convention</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">format_epw</span><span class="p">)</span>
+
+        <span class="c1"># fill newly created variables of desired output format</span>
+        <span class="c1"># Index von Dataframe aufspalten</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">year</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Month&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">month</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Day&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">day</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Hour&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">hour</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Minute&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">minute</span>
+
+        <span class="c1">### meet special epw requirements</span>
+        <span class="c1"># Stunden 0 zu 24 der vorherigen Tag umwandeln</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Hour&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Hour&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="mi">24</span><span class="p">)</span>
+        <span class="c1"># Falls Tag ungleich 1 -&gt; Tag substrahieren mit 1</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Hour&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">24</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Day&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;Day&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+            <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Hour&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">24</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Day&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;Day&quot;</span>
+        <span class="p">]</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Falls Tag gleich 1 -&gt; Jahr, Monat, Tag loeschen -&gt; mit ffill nachfuellen</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+            <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Hour&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">24</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Day&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="p">[</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span> <span class="s2">&quot;Month&quot;</span><span class="p">,</span> <span class="s2">&quot;Day&quot;</span><span class="p">]</span>
+        <span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Year&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">bfill</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Month&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Month&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">bfill</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Day&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Day&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">bfill</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># data should always contain full days</span>
+        <span class="k">def</span> <span class="nf">fill_full_first_day</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+            <span class="c1"># Identify the first hour and date of the DataFrame</span>
+            <span class="n">first_minute</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;Minute&quot;</span><span class="p">]</span>
+            <span class="n">first_hour</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;Hour&quot;</span><span class="p">]</span>
+            <span class="n">first_day</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;Day&quot;</span><span class="p">]</span>
+            <span class="n">first_month</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;Month&quot;</span><span class="p">]</span>
+            <span class="n">first_year</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;Year&quot;</span><span class="p">]</span>
+            <span class="n">rows_to_add</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="c1"># If the first hour is not 1, add rows to start with hour 1</span>
+            <span class="k">if</span> <span class="n">first_hour</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="c1"># Calculate how many rows to add</span>
+                <span class="n">rows_to_add</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">first_hour</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+                <span class="c1"># Generate new rows</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows_to_add</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">new_row</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                        <span class="p">{</span>
+                            <span class="s2">&quot;Minute&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">first_minute</span><span class="p">],</span>
+                            <span class="s2">&quot;Hour&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                            <span class="s2">&quot;Day&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">first_day</span><span class="p">],</span>
+                            <span class="s2">&quot;Month&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">first_month</span><span class="p">],</span>
+                            <span class="s2">&quot;Year&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">first_year</span><span class="p">],</span>
+                        <span class="p">}</span>
+                    <span class="p">)</span>
+                    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">new_row</span><span class="p">,</span> <span class="n">df</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">rows_to_add</span>
+
+        <span class="k">def</span> <span class="nf">fill_full_last_day</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+            <span class="c1"># Identify the last hour and date of the DataFrame</span>
+            <span class="n">last_hour</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;Hour&quot;</span><span class="p">]</span>
+            <span class="n">last_day</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;Day&quot;</span><span class="p">]</span>
+            <span class="n">last_month</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;Month&quot;</span><span class="p">]</span>
+            <span class="n">last_year</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;Year&quot;</span><span class="p">]</span>
+            <span class="n">last_minute</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;Minute&quot;</span><span class="p">]</span>
+            <span class="n">rows_to_add</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="c1"># If the last hour is not 24, add rows to reach hour 24</span>
+            <span class="k">if</span> <span class="n">last_hour</span> <span class="o">!=</span> <span class="mi">24</span><span class="p">:</span>
+                <span class="c1"># Calculate how many rows to add</span>
+                <span class="n">rows_to_add</span> <span class="o">=</span> <span class="mi">24</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">last_hour</span><span class="p">)</span>
+
+                <span class="c1"># Generate new rows</span>
+                <span class="n">new_rows</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">rows_to_add</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="n">new_row</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s2">&quot;Minute&quot;</span><span class="p">:</span> <span class="n">last_minute</span><span class="p">,</span>
+                        <span class="s2">&quot;Hour&quot;</span><span class="p">:</span> <span class="n">last_hour</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span>
+                        <span class="s2">&quot;Day&quot;</span><span class="p">:</span> <span class="n">last_day</span><span class="p">,</span>
+                        <span class="s2">&quot;Month&quot;</span><span class="p">:</span> <span class="n">last_month</span><span class="p">,</span>
+                        <span class="s2">&quot;Year&quot;</span><span class="p">:</span> <span class="n">last_year</span><span class="p">,</span>
+                    <span class="p">}</span>
+                    <span class="n">new_rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_row</span><span class="p">)</span>
+
+                <span class="c1"># Append new rows to DataFrame</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">new_rows</span><span class="p">)],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">rows_to_add</span>
+
+        <span class="n">df</span><span class="p">,</span> <span class="n">first_day_added_rows</span> <span class="o">=</span> <span class="n">fill_full_first_day</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="n">df</span><span class="p">,</span> <span class="n">last_day_added_rows</span> <span class="o">=</span> <span class="n">fill_full_last_day</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+        <span class="c1"># ensure data type where required</span>
+        <span class="n">columns_to_convert</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span> <span class="s2">&quot;Month&quot;</span><span class="p">,</span> <span class="s2">&quot;Day&quot;</span><span class="p">,</span> <span class="s2">&quot;Hour&quot;</span><span class="p">,</span> <span class="s2">&quot;Minute&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns_to_convert</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+        <span class="c1">### fill NaNs</span>
+        <span class="k">if</span> <span class="n">fillna</span><span class="p">:</span>
+            <span class="c1"># Forward-fill added rows at end of df</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="n">last_day_added_rows</span><span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span>
+                <span class="o">-</span><span class="n">last_day_added_rows</span><span class="p">:,</span> <span class="p">:</span>
+                                                      <span class="p">]</span>
+            <span class="c1"># fill added rows at beginning of df</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">first_day_added_rows</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">bfill</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span>
+                <span class="p">:</span><span class="n">first_day_added_rows</span><span class="p">,</span> <span class="p">:</span>
+                                                      <span class="p">]</span>
+
+            <span class="c1"># fill first and last lines nans (possibly lost through shifting)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span> <span class="o">+</span> <span class="n">first_day_added_rows</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">bfill</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span>
+                <span class="mi">0</span> <span class="o">+</span> <span class="n">first_day_added_rows</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:</span>
+                                                             <span class="p">]</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span> <span class="o">-</span> <span class="n">last_day_added_rows</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span>
+                <span class="o">-</span><span class="mi">1</span> <span class="o">-</span> <span class="n">last_day_added_rows</span><span class="p">,</span> <span class="p">:</span>
+                                                         <span class="p">]</span>
+
+            <span class="c1"># fill default nans to the rest</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">fill_nan_from_format_dict</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">format_epw</span><span class="p">)</span>
+
+        <span class="c1"># cut off float digits (required for EnergyPlus)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="k">else</span> <span class="n">x</span><span class="p">)</span>
+
+        <span class="c1"># again make sure correct order and variables are applied</span>
+        <span class="c1"># (processing might have mixed it up)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">force_data_variable_convention</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">format_epw</span><span class="p">)</span>
+
+        <span class="c1">### format dataframe to list</span>
+        <span class="n">data_list</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">format_epw</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">data_list</span><span class="p">,</span> <span class="n">df</span>
+
+    <span class="c1">### merge all header lines and the data to be saved in a .epw file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;latin1&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">line1_location</span><span class="p">(</span><span class="n">meta</span><span class="p">),</span>
+                <span class="n">line2_design_cond</span><span class="p">(),</span>
+                <span class="n">line3_typ_ext_period</span><span class="p">(</span><span class="n">df</span><span class="p">),</span>
+                <span class="n">line4_ground_temp</span><span class="p">(</span><span class="n">df</span><span class="p">),</span>
+                <span class="n">line5_holiday_dl_saving</span><span class="p">(</span><span class="n">df</span><span class="p">),</span>
+                <span class="n">line6_comment_1</span><span class="p">(),</span>
+                <span class="n">line7_comment_2</span><span class="p">(),</span>
+                <span class="n">line8_data_periods</span><span class="p">(</span><span class="n">df</span><span class="p">),</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">df_as_list</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">format_data</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">df_as_list</span><span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EPW file saved to </span><span class="si">%s</span><span class="s2">.&quot;</span><span class="p">,</span> <span class="n">file_path</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, EON EBC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
