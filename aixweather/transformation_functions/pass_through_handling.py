@@ -1,11 +1,15 @@
 """
 This module contains auxiliary functions for data transformation, e.g. time shifts
 """
+import logging
 
 import pandas as pd
 
 from aixweather.transformation_functions import auxiliary
 from aixweather.imports.utils_import import MetaData
+
+
+logger = logging.getLogger(__name__)
 
 
 def create_pass_through_variables(
@@ -33,7 +37,7 @@ def create_pass_through_variables(
         pd.DataFrame: The modified `df_shifted` DataFrame with added pass-through variables.
     """
 
-    print("\nApply transformation for pass through variables.")
+    logger.debug("Apply transformation for pass through variables.")
     # perform same transformation
     df_no_shift, meta.executed_transformations_no_shift = transform_func(df_no_shift)
 
@@ -93,7 +97,7 @@ def create_pass_through_variables(
 
         if not is_identical:
             # dont add to df
-            print(
+            logger.warning(
                 f"Calculation of the non-shifted {desired_variable} is "
                 f"not valid due non consistent "
                 f"time of measurement (shifting) of the required "
