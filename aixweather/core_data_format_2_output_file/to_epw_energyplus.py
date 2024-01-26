@@ -89,8 +89,9 @@ def to_epw(
     start: dt.datetime,
     stop: dt.datetime,
     fillna: bool,
-    result_folder: str = None
-) -> pd.DataFrame:
+    result_folder: str = None,
+    filename: str = None
+) -> (pd.DataFrame, str):
     """Create an EPW file from the core data.
 
     Args:
@@ -99,10 +100,16 @@ def to_epw(
         start (dt.datetime): Timestamp for the start of the EPW file.
         stop (dt.datetime): Timestamp for the end of the EPW file.
         fillna (bool): Boolean indicating whether NaN values should be filled.
+        result_folder (str):
+            Path to the folder where to save the file. Default will use
+            the `results_file_path` method.
+        filename (str): Name of the file to be saved. The default is constructed
+            based on the meta-data as well as start and stop time
 
     Returns:
         pd.DataFrame: DataFrame containing the weather data formatted for EPW export,
                       excluding metadata.
+        str: Path to the exported file.
     """
 
     ### evaluate correctness of format
@@ -111,11 +118,11 @@ def to_epw(
     )
 
     df = core_df.copy()
-
-    filename = (
-        f"{meta.station_id}_{start.strftime('%Y%m%d')}_{stop.strftime('%Y%m%d')}"
-        f"_{meta.station_name}.epw"
-    )
+    if filename is None:
+        filename = (
+            f"{meta.station_id}_{start.strftime('%Y%m%d')}_{stop.strftime('%Y%m%d')}"
+            f"_{meta.station_name}.epw"
+        )
     # get file path to safe data to
     file_path = definitions.results_file_path(filename, result_folder)
 
@@ -629,4 +636,4 @@ def to_epw(
 
     logger.info("EPW file saved to %s.", file_path)
 
-    return df
+    return df, file_path
