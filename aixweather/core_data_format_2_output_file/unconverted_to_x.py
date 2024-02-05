@@ -52,7 +52,7 @@ def to_pickle(
 
     core_df = core_df.copy()
     filename, meta_filename = _get_file_name_and_meta_data_file_name(
-        meta=meta, filename=filename, suffix=".pkl"
+        meta=meta, filename=filename, suffix="pkl"
     )
     file_path = definitions.results_file_path(filename, result_folder)
     meta_file_path = definitions.results_file_path(meta_filename, result_folder)
@@ -91,7 +91,7 @@ def to_json(
     core_df = core_df.copy()
 
     filename, meta_filename = _get_file_name_and_meta_data_file_name(
-        meta=meta, filename=filename, suffix=".json"
+        meta=meta, filename=filename, suffix="json"
     )
     file_path = definitions.results_file_path(filename, result_folder)
     meta_file_path = definitions.results_file_path(meta_filename, result_folder)
@@ -134,7 +134,7 @@ def to_csv(
     core_df = core_df.copy()
 
     filename, meta_filename = _get_file_name_and_meta_data_file_name(
-        meta=meta, filename=filename, suffix=".csv"
+        meta=meta, filename=filename, suffix="csv"
     )
     file_path = definitions.results_file_path(filename, result_folder)
     meta_file_path = definitions.results_file_path(meta_filename, result_folder)
