@@ -44,8 +44,41 @@ def EPW_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
         core_format=definitions.format_core_data, other_format=format_epw
     )
 
+    def epw_to_datetimeindex(df):
+        '''
+        Attention: only works for continuous time series, no missing data
+        Convert the first 4 columns of the DataFrame to a DatetimeIndex and set it as the
+        index.'''
+        # The first 4 columns represent year, month, day, and hour respectively,
+        # but with hour 24 instead of hour 0.
+        hour = df.iloc[:, 3].copy()
+        mask_24hr = hour == 24
+        hour.loc[mask_24hr] = 0
+        df["datetime"] = pd.to_datetime(
+            df.iloc[:, 0].astype(str)
+            + "-"
+            + df.iloc[:, 1].astype(str)
+            + "-"
+            + df.iloc[:, 2].astype(str)
+            + " "
+            + hour.astype(str)
+            + ":00:00"
+        )
+
+        # Increment the day by one for those rows where hour
+        # was originally 24
+        df.loc[mask_24hr, "datetime"] = df.loc[mask_24hr, "datetime"] + pd.Timedelta(
+            days=1
+        )
+
+        # Setting datetime column as index
+        df.set_index("datetime", inplace=True)
+
+        return df
+        return df
     ### preprocessing raw data for further operations
     df = df_import.copy()
+    df = epw_to_datetimeindex(df)
     # Resample the DataFrame to make the DatetimeIndex complete and monotonic
     df = df.resample('H').asfreq()
     # give names to columns according to documentation of import data

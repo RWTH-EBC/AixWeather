@@ -1,4 +1,5 @@
 import pandas as pd
+import datetime as dt
 
 from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
@@ -56,8 +57,29 @@ def TRY_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
         core_format=definitions.format_core_data, other_format=format_TRY_15_45
     )
 
+    def TRY_to_datetimeindex(df, meta: MetaData):
+        # set index to datetime
+        # returns datetime objects
+        df["MM"] = df["MM"].astype(int)
+        df["DD"] = df["DD"].astype(int)
+        df["HH"] = df["HH"].astype(int)
+        time_index = df.apply(
+            lambda row: dt.datetime(int(meta.try_year), row.MM, row.DD, row.HH - int(1.0)),
+            axis=1,
+        )
+        # data is shifted by -1 H to satisfy pandas timestamp
+        # hours in pandas only between 0 and 23, in TRY between 1 and 24
+        # converts to pandas timestamps if desired
+        df.index = pd.to_datetime(time_index)
+        # data is shifted back to original to start: back to
+        # 2017-01-01 01:00:00 instead of the temporary 2017-01-01 00:00:00
+        df = df.shift(periods=1, freq="H", axis=0)
+
+        return df
+
     ### preprocessing raw data for further operations
     df = df_import.copy()
+    df = TRY_to_datetimeindex(df, meta)
     # Resample the DataFrame to make the DatetimeIndex complete and monotonic
     df = df.resample('H').asfreq()
     # rename available variables to core data format
