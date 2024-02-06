@@ -4,6 +4,7 @@ This module includes a function to transform EPW data to core data format.
 
 import pandas as pd
 from copy import deepcopy
+import logging
 
 from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
@@ -16,6 +17,8 @@ from aixweather.transformation_functions import (
 from aixweather.core_data_format_2_output_file.to_epw_energyplus import (
     format_epw as format_epw_export,
 )
+
+logger = logging.getLogger(__name__)
 
 
 def EPW_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
@@ -75,19 +78,47 @@ def EPW_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
         df.set_index("datetime", inplace=True)
 
         return df
+
+    def if_TMY_convert_to_one_year(df):
+        """TMY (typical meteorological year) data in .epw files often contains data for a period
+        of one year but each month is from a different year. This will lead to several years of
+        nan data in between. As the year is irrelevant in tmy data, we set all dates to the year
+        of februaries data. February is chosen to avoid leap year issues.
+
+        It is automatically detected whether it is a TMY through the following criteria:
+        - the available data covers exactly 8760 data points (one non-leap year)
+        - the period covered by the timestamps spans more than one year
+        - the first date is the first of January at hour 1
+
+        This will lead to an info log message if the data is transformed."""
+        if (
+            len(df) == 8760 # exactly one year of data
+            and df.iloc[:, 0].max() - df.iloc[:, 0].min() > 1 # spanning over more than one year
+            and df.iloc[0, 1] == 1 # first month is January
+            and df.iloc[0, 2] == 1 # first day is one
+            and df.iloc[0, 3] == 1 # first hour is one
+        ):
+            year_of_february = df.loc[df.iloc[:, 1] == 2, 0].iloc[0]
+            # Replace the year component with the year of February
+            df.iloc[:, 0] = year_of_february
+            logger.info(
+                "The data was transformed to one year of data as it seems to be TMY data."
+                "The year is irrelevant for TMY data."
+            )
         return df
+
     ### preprocessing raw data for further operations
     df = df_import.copy()
+    df = if_TMY_convert_to_one_year(df)
     df = epw_to_datetimeindex(df)
     # Resample the DataFrame to make the DatetimeIndex complete and monotonic
-    df = df.resample('H').asfreq()
+    df = df.resample("H").asfreq()
     # give names to columns according to documentation of import data
     df.columns = [key for key in format_epw.keys()]
     # rename available variables to core data format
     df = auxiliary.rename_columns(df, format_epw)
     # delete dummy values from EPW
     df = auxiliary.replace_dummy_with_nan(df, format_epw)
-
 
     ### convert timezone to UTC+0
     df = df.shift(periods=meta.timezone, freq="H", axis=0)
