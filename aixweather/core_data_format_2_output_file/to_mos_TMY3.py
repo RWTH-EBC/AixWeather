@@ -71,8 +71,9 @@ def to_mos(
     start: dt.datetime,
     stop: dt.datetime,
     fillna: bool,
-    result_folder: str = None
-) -> pd.DataFrame:
+    result_folder: str = None,
+    filename: str = None
+) -> (pd.DataFrame, str):
     """Create a MOS file from the core data.
 
     Args:
@@ -81,10 +82,16 @@ def to_mos(
         start (dt.datetime): Timestamp for the start of the MOS file.
         stop (dt.datetime): Timestamp for the end of the MOS file.
         fillna (bool): Boolean indicating whether NaN values should be filled.
+        result_folder (str):
+            Path to the folder where to save the file. Default will use
+            the `results_file_path` method.
+        filename (str): Name of the file to be saved. The default is constructed
+            based on the meta-data as well as start and stop time
 
     Returns:
         pd.DataFrame: DataFrame containing the weather data formatted for MOS export,
                       excluding metadata.
+        str: Path to the exported file.
     """
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
@@ -233,10 +240,11 @@ def to_mos(
     )
 
     ### write to csv
-    filename = (
-        f"{meta.station_id}_{start.strftime('%Y%m%d')}_{stop.strftime('%Y%m%d')}"
-        f"_{meta.station_name}.mos"
-    )
+    if filename is None:
+        filename = (
+            f"{meta.station_id}_{start.strftime('%Y%m%d')}_{stop.strftime('%Y%m%d')}"
+            f"_{meta.station_name}.mos"
+        )
     filepath = definitions.results_file_path(filename, result_folder)
 
     df.to_csv(
@@ -255,4 +263,4 @@ def to_mos(
         file.write(f"{header_of}\n{content}")
 
     logger.info("MOS file saved to %s.", filepath)
-    return df
+    return df, filepath
