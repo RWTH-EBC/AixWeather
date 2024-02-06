@@ -2,6 +2,7 @@
 This module includes variable transformations and functions
 to calculate variables from given values
 """
+import logging
 
 import pandas as pd
 import numpy as np
@@ -9,6 +10,9 @@ import numpy as np
 import pvlib
 
 from aixweather.imports.utils_import import MetaData
+
+
+logger = logging.getLogger(__name__)
 
 
 def approximate_opaque_from_total_skycover(total_sky_cover):
@@ -205,17 +209,19 @@ def robust_transformation(
                 if arg in df.columns:
                     # if contains only NaN values
                     if df[arg].isna().all():
-                        print(
-                            f"The required variable {arg} has only nan, "
-                            f"calculation of {desired_variable} aborted."
+                        logger.debug(
+                            "The required variable %s has only nan, "
+                            "calculation of %s aborted.",
+                            arg, desired_variable
                         )
                         return df, calc_status
                     new_args.append(df[arg])
                     args_of_columns.append(arg)
                 else:
-                    print(
-                        f"The required variable {arg} is not in the dataframes "
-                        f"columns, calculation of {desired_variable} aborted."
+                    logger.debug(
+                        "The required variable %s is not in the dataframes "
+                        "columns, calculation of %s aborted.",
+                        arg, desired_variable
                     )
                     return df, calc_status
             else:
@@ -224,7 +230,7 @@ def robust_transformation(
 
         # Apply transformation if variables are available
         df[desired_variable] = transformation_function(*new_args)
-        print(f"Calculated {desired_variable} from {args_of_columns}.")
+        logger.info("Calculated %s from %s.", desired_variable, args_of_columns)
 
         # Feed back whether calculation was done and with which variables
         calc_status = {desired_variable: args_of_columns}
@@ -261,10 +267,12 @@ def variable_transform_all(
         df, "OpaqueSkyCover", approximate_opaque_from_total_skycover, "TotalSkyCover"
     )
     calc_overview.update(calc_status)
+
     df, calc_status = robust_transformation(
         df, "DewPointTemp", calculate_dew_point_temp, "DryBulbTemp", "RelHum"
     )
     calc_overview.update(calc_status)
+
     df, calc_status = robust_transformation(
         df,
         "DirHorRad",
@@ -273,6 +281,16 @@ def variable_transform_all(
         "DiffHorRad",
     )
     calc_overview.update(calc_status)
+
+    df, calc_status = robust_transformation(
+        df,
+        "GlobHorRad",
+        calculate_global_horizontal_radiation,
+        "DirHorRad",
+        "DiffHorRad",
+    )
+    calc_overview.update(calc_status)
+
     df, calc_status = robust_transformation(
         df,
         "DirNormRad",
@@ -283,6 +301,7 @@ def variable_transform_all(
         "DirHorRad",
     )
     calc_overview.update(calc_status)
+
     df, calc_status = robust_transformation(
         df,
         "HorInfra",
@@ -292,5 +311,6 @@ def variable_transform_all(
         "OpaqueSkyCover",
     )
     calc_overview.update(calc_status)
+
 
     return df, calc_overview

@@ -64,28 +64,4 @@ def load_epw_from_file(path: str) -> pd.DataFrame:
         encoding_errors="replace",
     )
 
-    # The first 4 columns represent year, month, day, and hour respectively,
-    # but with hour 24 instead of hour 0.
-    hour = weather_df.iloc[:, 3].copy()
-    mask_24hr = hour == 24
-    hour.loc[mask_24hr] = 0
-    weather_df["datetime"] = pd.to_datetime(
-        weather_df.iloc[:, 0].astype(str)
-        + "-"
-        + weather_df.iloc[:, 1].astype(str)
-        + "-"
-        + weather_df.iloc[:, 2].astype(str)
-        + " "
-        + hour.astype(str)
-        + ":00:00"
-    )
-
-    # Increment the day by one for those rows where hour
-    # was originally 24
-    weather_df.loc[mask_24hr, "datetime"] = weather_df.loc[mask_24hr, "datetime"] \
-                                            + pd.Timedelta(days=1)
-
-    # Setting datetime column as index
-    weather_df.set_index("datetime", inplace=True)
-
     return weather_df

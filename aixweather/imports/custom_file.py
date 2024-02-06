@@ -29,7 +29,7 @@ def load_custom_from_file(path):
         path: absolute path to file
 
     Returns:
-        pd.Dataframe: as raw as possible but with some datetimeindex
+        pd.Dataframe: as raw as possible
     """
 
     ### load file to Dataframe

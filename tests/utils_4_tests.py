@@ -3,7 +3,7 @@ This module contains functions and classes for testing. It provides utilities
 to load data, compare results and execute tests
 """
 # pylint: disable=all
-
+import logging
 import re
 import json
 import shutil
@@ -12,6 +12,9 @@ import pandas as pd
 
 from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
+
+# Enable logging for all unit-tests to see what is happening
+logging.basicConfig(level="DEBUG")
 
 
 def load_mos(folder_tests, result_folder, file_name):

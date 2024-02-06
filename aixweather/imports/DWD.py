@@ -1,7 +1,7 @@
 """
 imports weather data from the DWD
 """
-
+import logging
 import zipfile
 import os
 import shutil
@@ -9,10 +9,11 @@ import datetime as dt
 import urllib.request
 import pandas as pd
 
-from wetterdienst.provider.dwd.mosmix import DwdMosmixRequest, DwdMosmixType
-
 from aixweather.imports import utils_import
 from aixweather import definitions
+
+
+logger = logging.getLogger(__name__)
 
 
 def import_DWD_historical(start: dt.datetime, station: str) -> pd.DataFrame:
@@ -100,7 +101,10 @@ def import_DWD_forecast(station: str) -> pd.DataFrame:
     Returns:
         pd.DataFrame: DataFrame containing weather forecast data from the DWD.
     """
-
+    try:
+        from wetterdienst.provider.dwd.mosmix import DwdMosmixRequest, DwdMosmixType
+    except ImportError:
+        raise ImportError("Optional dependency 'DWD_forecast' not installed, can't import data.")
     ### pull forecast data using the package wetterdienst
     stations = DwdMosmixRequest(
         parameter="small", mosmix_type=DwdMosmixType.SMALL
@@ -347,7 +351,7 @@ def _download_DWD_file(url: str, zip_name: str):
     for i in range(4):  # try retrieval 3 times
         try:
             urllib.request.urlretrieve(url + zip_name, total_zip_name)
-            print(f"Loaded: {total_zip_name}")
+            logger.debug("Loaded: %s", total_zip_name)
 
             # save unzipped files to folder_unzip
             extract_path = os.path.join(definitions.local_folder_temp, folder_unzip)
