@@ -49,7 +49,6 @@ def EPW_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
 
     def epw_to_datetimeindex(df):
         '''
-        Attention: only works for continuous time series, no missing data
         Convert the first 4 columns of the DataFrame to a DatetimeIndex and set it as the
         index.'''
         # The first 4 columns represent year, month, day, and hour respectively,
@@ -57,25 +56,23 @@ def EPW_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
         hour = df.iloc[:, 3].copy()
         mask_24hr = hour == 24
         hour.loc[mask_24hr] = 0
-        df["datetime"] = pd.to_datetime(
-            df.iloc[:, 0].astype(str)
-            + "-"
-            + df.iloc[:, 1].astype(str)
-            + "-"
-            + df.iloc[:, 2].astype(str)
-            + " "
-            + hour.astype(str)
-            + ":00:00"
-        )
 
-        # Increment the day by one for those rows where hour
-        # was originally 24
-        df.loc[mask_24hr, "datetime"] = df.loc[mask_24hr, "datetime"] + pd.Timedelta(
-            days=1
-        )
+        # loop one by one to avoid faults with non-continuous data
+        datetime_list = []
+        for index, row in df.iterrows():
+            year, month, day, hour = row[:4]
+            if hour == 24:
+                hour = 0
+                # Increment the day by one for those rows where hour
+                # was originally 24
+                row_datetime = pd.Timestamp(year, month, day, hour) + pd.Timedelta(days=1)
+            else:
+                row_datetime = pd.Timestamp(year, month, day, hour)
+            datetime_list.append(row_datetime)
 
-        # Setting datetime column as index
-        df.set_index("datetime", inplace=True)
+        # Setting datetime column as index with name 'datetime'
+        df.index = datetime_list
+        df.index = df.index.rename('datetime')
 
         return df
 
