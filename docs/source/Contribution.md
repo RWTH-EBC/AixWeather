@@ -41,7 +41,8 @@ def foo(dummy):
 ```
 ## Unit-Tests
 Especially when creating new functions or classes, you have to add a unit-test function.
-Open the `test_module.py` file in the `\tests`-directory and add a function to the class `TestModule`with a name like `test_my_new_function`. If you create a new module, you have to create a new `test_my_new_module.py` file and follow the existing structure of the 
+Open the `\tests`-directory. If you create a new module, you have to create a new 
+`test_my_new_module.py` file and follow the existing structure of the 
 other test-files.
 
 If you are not familiar with unit-tests, here is a quick summary:

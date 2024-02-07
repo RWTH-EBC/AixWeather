@@ -4,6 +4,8 @@ convert core data to epw (EnergyPlus) data
 
 import csv
 import datetime as dt
+import logging
+
 import pandas as pd
 import numpy as np
 
@@ -11,9 +13,24 @@ from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
 from aixweather.transformation_functions import auxiliary, time_observation_transformations, pass_through_handling
 
+logger = logging.getLogger(__name__)
+
+
 """
 format_epw information:
 for links see readme
+
+Format info:
+key = output data point name
+core_name = corresponding name matching the format_core_data
+time_of_meas_shift = desired 30min shifting+interpolation to convert the value that is "at 
+indicated time" to "average of preceding hour" (ind2prec). 
+unit = unit of the output data following the naming convention of format_core_data
+nan = The default values stated from the format_epw information, those values are 
+filled if nan.
+
+All changes here automatically change the calculations. 
+Exception: unit conversions have to be added manually.
 
 Information for shifting:
 Hour: This is the hour of the data. (1 - 24). Hour 1 is 00:01 to 01:00. Cannot be missing.
@@ -72,8 +89,9 @@ def to_epw(
     start: dt.datetime,
     stop: dt.datetime,
     fillna: bool,
-    result_folder: str = None
-) -> pd.DataFrame:
+    result_folder: str = None,
+    filename: str = None
+) -> (pd.DataFrame, str):
     """Create an EPW file from the core data.
 
     Args:
@@ -82,10 +100,16 @@ def to_epw(
         start (dt.datetime): Timestamp for the start of the EPW file.
         stop (dt.datetime): Timestamp for the end of the EPW file.
         fillna (bool): Boolean indicating whether NaN values should be filled.
+        result_folder (str):
+            Path to the folder where to save the file. Default will use
+            the `results_file_path` method.
+        filename (str): Name of the file to be saved. The default is constructed
+            based on the meta-data as well as start and stop time
 
     Returns:
         pd.DataFrame: DataFrame containing the weather data formatted for EPW export,
                       excluding metadata.
+        str: Path to the exported file.
     """
 
     ### evaluate correctness of format
@@ -94,11 +118,11 @@ def to_epw(
     )
 
     df = core_df.copy()
-
-    filename = (
-        f"{meta.station_id}_{start.strftime('%Y%m%d')}_{stop.strftime('%Y%m%d')}"
-        f"_{meta.station_name}.epw"
-    )
+    if filename is None:
+        filename = (
+            f"{meta.station_id}_{start.strftime('%Y%m%d')}_{stop.strftime('%Y%m%d')}"
+            f"_{meta.station_name}.epw"
+        )
     # get file path to safe data to
     file_path = definitions.results_file_path(filename, result_folder)
 
@@ -362,9 +386,9 @@ def to_epw(
             )
             return ground_temp
         except KeyError as err:
-            print(
-                f"For adding the probably unnecessary ground temperature to the .epw file header, "
-                f"the following made it impossible: {err}"
+            logger.warn(
+                "Error while adding the probably unnecessary ground temperature to the .epw file "
+                "header. A placeholder will be used. Error: %s", err
             )
             ground_temp = ground_temp + [0]  # 0 ground layers
 
@@ -581,7 +605,7 @@ def to_epw(
             df = auxiliary.fill_nan_from_format_dict(df, format_epw)
 
         # cut off float digits (required for EnergyPlus)
-        df = df.map(lambda x: (f"{x:.1f}") if isinstance(x, float) else x)
+        df = df.applymap(lambda x: (f"{x:.1f}") if isinstance(x, float) else x)
 
         # again make sure correct order and variables are applied
         # (processing might have mixed it up)
@@ -610,6 +634,6 @@ def to_epw(
         df_as_list, df = format_data(df, start, stop)
         writer.writerows(df_as_list)
 
-    print(f"EPW file saved to {file_path}.")
+    logger.info("EPW file saved to %s.", file_path)
 
-    return df
+    return df, file_path
