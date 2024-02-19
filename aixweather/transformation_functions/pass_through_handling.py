@@ -125,13 +125,16 @@ def _find_pass_through_core_names(columns: list, output_format: dict) -> list:
     This function analyzes a list of column names and identifies those that represent pass-through
     core variables based on the provided output format. It takes into account suffix mappings
     to match the required shifting.
+    suffix mapping key = desired shifting during import
+    suffix mapping value = desired shifting during export
 
     Args:
         columns (list): A list of column names to analyze.
         output_format (dict): A dictionary specifying the desired format and shifting of the data.
 
     Returns:
-        list: A list of column names representing pass-through variables that shall actually be passed through.
+        list: A list of column names representing pass-through variables that shall actually be
+        passed through.
     """
 
     selected_columns = []
@@ -155,9 +158,9 @@ def _find_and_apply_full_hour_shifts(df: pd.DataFrame, output_format: dict) -> t
     """
     Find variables that require a full-hour shift to avoid double interpolation.
 
-    This function identifies pass-through variables in the DataFrame `df` that are specified in the `output_format`
-    to be shifted by a full hour in total. It performs the necessary full hour shift on these variables to prevent
-    double interpolation.
+    This function identifies pass-through variables in the DataFrame `df` that are specified in
+    the  `output_format` to be shifted by a full hour in total. It performs the necessary full
+    hour shift on these variables to prevent double interpolation.
 
     Args:
         df (pd.DataFrame): The DataFrame containing data to be shifted.
