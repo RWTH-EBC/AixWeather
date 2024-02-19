@@ -1,0 +1,21 @@
+{
+    "_station_name": "Aachen",
+    "station_id": "UnknownStationID",
+    "_altitude": 232.0,
+    "_latitude": 50.7983,
+    "_longitude": 6.0244,
+    "input_source": "EPW",
+    "timezone": 1.0,
+    "executed_transformations": {
+        "DirHorRad": [
+            "GlobHorRad",
+            "DiffHorRad"
+        ]
+    },
+    "executed_transformations_no_shift": {
+        "DirHorRad": [
+            "GlobHorRad",
+            "DiffHorRad"
+        ]
+    }
+}
