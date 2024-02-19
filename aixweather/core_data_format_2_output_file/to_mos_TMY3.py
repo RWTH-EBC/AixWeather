@@ -129,7 +129,8 @@ def to_mos(
 
     # to avoid having the one-year duration between start and end of data as
     # it will make the tmy3_reader loop the data
-    if (df["timeOfYear"].iloc[-1] - df["timeOfYear"].iloc[0]) == 365 * 24 * 3600:
+    if (df.loc[df.index[-1], "timeOfYear"] - df.loc[df.index[0], "timeOfYear"]) == \
+            365 * 24 * 3600:
         # copy last row
         last_row = df.iloc[-1]
 
@@ -137,7 +138,7 @@ def to_mos(
         new_row_df = last_row.to_frame().T
 
         # continue time values
-        new_row_df["timeOfYear"].iloc[0] = new_row_df["timeOfYear"].iloc[0] + 3600
+        new_row_df.loc[new_row_df.index[0], "timeOfYear"] = new_row_df.loc[new_row_df.index[0], "timeOfYear"] + 3600
         new_row_df.index = new_row_df.index + dt.timedelta(hours=1)
 
         # add new row to df, make sure its int

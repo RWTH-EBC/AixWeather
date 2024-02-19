@@ -62,9 +62,10 @@ def fill_nan_from_format_dict(df: pd.DataFrame, format_data: dict) -> pd.DataFra
     """
     nan_key = "nan"
     for key, value in format_data.items():
-        nan = value[nan_key]
-        if nan is not None:
-            df[key].fillna(nan, inplace=True)
+        nan_value = value[nan_key]
+        if nan_value is not None:
+            df[key] = df[key].replace(np.nan, nan_value)  # not using .fillna() as
+            # this will not work for columns with mixed dtypes
     return df
 
 
@@ -114,8 +115,9 @@ def evaluate_transformations(core_format: dict, other_format: dict):
             if value["unit"] != core_format[value["core_name"]]["unit"]:
                 logger.debug(
                     "Unit transformation required for %s from %s to %s.",
-                    value['core_name'], value['unit'],
-                    core_format[value['core_name']]['unit']
+                    value["core_name"],
+                    value["unit"],
+                    core_format[value["core_name"]]["unit"],
                 )
         elif not value["core_name"]:
             pass

@@ -187,7 +187,7 @@ def _find_and_apply_full_hour_shifts(df: pd.DataFrame, output_format: dict) -> t
                 and output_format[core_name]["time_of_meas_shift"]
                 == suffix_mapping_backward[suffix]
             ):
-                df.loc[:, col] = df[col].shift(periods=-1, freq="H", axis=0)
+                df.loc[:, col] = df[col].shift(periods=-1, freq="h", axis=0)
                 selected_columns.append(col)
 
     return selected_columns, df

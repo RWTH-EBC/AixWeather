@@ -357,7 +357,7 @@ def to_epw(
         ]
 
         df_w_ground = (
-            df.resample("M").mean().copy().round(decimals=1)
+            df.resample("ME").mean().copy().round(decimals=1)
         )  # Resample in monatliche Interval
         try:
             ground_t = df_w_ground[
@@ -605,7 +605,7 @@ def to_epw(
             df = auxiliary.fill_nan_from_format_dict(df, format_epw)
 
         # cut off float digits (required for EnergyPlus)
-        df = df.applymap(lambda x: (f"{x:.1f}") if isinstance(x, float) else x)
+        df = df.map(lambda x: (f"{x:.1f}") if isinstance(x, float) else x)
 
         # again make sure correct order and variables are applied
         # (processing might have mixed it up)
