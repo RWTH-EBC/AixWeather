@@ -20,9 +20,9 @@ EXTRAS_REQUIRE = {
         "geopandas",
         "geopy",
     ],
-    "DWD_forecast": ["wetterdienst"],
+    "DWD_forecast": ["wetterdienst>=0.65.0,<=0.72.0"],
     "full": [
-        "wetterdienst",
+        "wetterdienst>=0.65.0,<=0.72.0",
         "geopandas",
         "geopy",
     ]
