@@ -10,21 +10,21 @@ readme_path = Path(__file__).parent.joinpath("README.md")
 long_description = readme_path.read_text()
 
 INSTALL_REQUIRES = [
-    "unidecode",
-    "pvlib",
-    "matplotlib",
-    "seaborn",
+    "unidecode~=1.3.7",
+    "pvlib~=0.10.2",
+    "matplotlib~=3.8.1",
+    "seaborn~=0.13.0",
 ]
 EXTRAS_REQUIRE = {
     'TRY': [
-        "geopandas",
-        "geopy",
+        "geopandas~=0.14.0",
+        "geopy~=2.4.0",
     ],
-    "DWD_forecast": ["wetterdienst"],
+    "DWD_forecast": ["wetterdienst>=0.65.0,<=0.72.0"],
     "full": [
-        "wetterdienst",
-        "geopandas",
-        "geopy",
+        "wetterdienst>=0.65.0,<=0.72.0",
+        "geopandas~=0.14.0",
+        "geopy~=2.4.0",
     ]
 }
 
