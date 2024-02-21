@@ -332,7 +332,9 @@ def to_epw(
 
     def line4_ground_temp(df):
         """
-        Parsen von weatherdata, um Bodentemperaturen zu holen
+        Parsen von weatherdata, um Bodentemperaturen zu holen.
+
+        #Todo: Not checked yet if this is calculation is correct
 
         return:
             ground_temp:    List    Vierte Zeile(GROUND TEMPERATURES) von epw Daten als List

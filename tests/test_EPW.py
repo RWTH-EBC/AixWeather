@@ -47,6 +47,11 @@ class TestEPWEssenLadybug(BaseEPW, utils_4_tests.RegressionTestsClass):
         )
 
 class TestEPWAachenTMY(BaseEPW, utils_4_tests.RegressionTestsClass):
+    """
+    A TMY file contains data from different years, but the data is selected to represent typical
+    conditions. Each month is from a different year, so the year is not continuous. This required
+    a special treatment, which correct behavior is tested here.
+    """
     @classmethod
     def setUpClass(cls):
         cls.city = "Aachen"
