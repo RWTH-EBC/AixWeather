@@ -27,7 +27,6 @@ class BaseEPW(unittest.TestCase):
         cls.start_formatted = cls.c.start.strftime("%Y%m%d")
         cls.end_formatted = cls.c.end.strftime("%Y%m%d")
         cls.station_id = "UnknownStationID"
-        cls.city = "Essen"
 
     @classmethod
     def tearDownClass(cls) -> None:
@@ -37,6 +36,7 @@ class BaseEPW(unittest.TestCase):
 class TestEPWEssenLadybug(BaseEPW, utils_4_tests.RegressionTestsClass):
     @classmethod
     def setUpClass(cls):
+        cls.city = "Essen"
         cls.init_and_run_EPW(
             "EPW_Essen_Ladybug",
             os.path.join(
@@ -45,3 +45,22 @@ class TestEPWEssenLadybug(BaseEPW, utils_4_tests.RegressionTestsClass):
                 "input/DEU_NW_Essen_104100_TRY2035_05_Wint_BBSR.epw",
             ),
         )
+
+class TestEPWAachenTMY(BaseEPW, utils_4_tests.RegressionTestsClass):
+    """
+    A TMY file contains data from different years, but the data is selected to represent typical
+    conditions. Each month is from a different year, so the year is not continuous. This required
+    a special treatment, which correct behavior is tested here.
+    """
+    @classmethod
+    def setUpClass(cls):
+        cls.city = "Aachen"
+        cls.init_and_run_EPW(
+            "EPW_Aachen_TMY",
+            os.path.join(
+                definitions.ROOT_DIR,
+                r"tests/test_files/regular_tests/EPW/test_EPW_Aachen_TMY/"
+                "input/DEU_NW_Aachen.105010_TMYx.epw",
+            ),
+        )
+

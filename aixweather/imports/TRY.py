@@ -2,7 +2,6 @@
 import DWD TRY data
 """
 
-import datetime as dt
 import re
 import pandas as pd
 import random
@@ -149,6 +148,7 @@ def load_try_meta_from_file(path: str) -> MetaData:
 
     meta.station_name = city
     meta.input_source = f"TRY{TRY_year}"
+    meta.try_year = TRY_year
     meta.altitude = hoehenlage
     meta.longitude = longitude_wgs84
     meta.latitude = latitude_wgs84
@@ -180,22 +180,5 @@ def load_try_from_file(path: str) -> pd.DataFrame:
     )
     # drop first row cause empty
     weather_df = weather_df.iloc[1:]
-
-    # set index to datetime
-    # returns datetime objects
-    weather_df["MM"] = weather_df["MM"].astype(int)
-    weather_df["DD"] = weather_df["DD"].astype(int)
-    weather_df["HH"] = weather_df["HH"].astype(int)
-    time_index = weather_df.apply(
-        lambda row: dt.datetime(int(TRY_year), row.MM, row.DD, row.HH - int(1.0)),
-        axis=1,
-    )
-    # data is shifted by -1 H to satisfy pandas timestamp
-    # hours in pandas only between 0 and 23, in TRY between 1 and 24
-    # converts to pandas timestamps if desired
-    weather_df.index = pd.to_datetime(time_index)
-    # data is shifted back to original to start: back to
-    # 2017-01-01 01:00:00 instead of the temporary 2017-01-01 00:00:00
-    weather_df = weather_df.shift(periods=1, freq="H", axis=0)
 
     return weather_df

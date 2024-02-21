@@ -5,6 +5,7 @@
     "_latitude": 50.79308,
     "_longitude": 6.05456,
     "input_source": "TRY2045",
+    "try_year": 2045,
     "executed_transformations": {
         "OpaqueSkyCover": [
             "TotalSkyCover"
