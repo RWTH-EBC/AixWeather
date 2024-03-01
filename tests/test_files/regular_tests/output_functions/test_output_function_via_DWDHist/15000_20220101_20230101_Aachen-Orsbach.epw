@@ -1,11 +1,11 @@
 LOCATION,Aachen-Orsbach,State,country,,15000,50.798,6.024,0,231.0
 DESIGN CONDITIONS,0
-TYPICAL/EXTREME PERIODS,6,Summer - Week Nearest Max Temperature For Period,Extreme,7/17,7/23,Summer - Week Nearest Average Temperature For Period,Typical,6/26,7/2,Winter - Week Nearest Min Temperature For Period,Extreme,12/11,12/17,Winter - Week Nearest Average Temperature For Period,Typical,2/20,2/26,Autumn - Week Nearest Average Temperature For Period,Typical,10/2,10/8,Spring - Week Nearest Average Temperature For Period,Typical,3/20,3/26
-GROUND TEMPERATURES,5,0.05,,,,10.2,3.4,4.5,6.8,10.2,17.9,14.8,22.4,23.0,15.8,13.0,8.2,3.0,8.9,0.1,,,,9.7,3.7,4.6,6.7,10.1,17.5,20.1,22.0,22.7,16.0,13.1,8.5,3.3,8.9,0.2,,,,8.6,4.2,4.8,6.6,9.8,16.7,19.3,21.4,22.2,16.4,13.2,9.2,3.9,8.6,0.5,,,,6.9,5.5,5.4,6.4,9.1,14.6,17.2,19.5,20.6,17.2,13.5,10.9,5.8,7.6,1,,,,7.4,7.1,6.4,6.7,8.5,12.1,14.7,17.0,18.4,17.3,14.1,12.4,8.3,7.9
+TYPICAL/EXTREME PERIODS,6,Summer - Week Nearest Max Temperature For Period,Extreme,7/17,7/23,Summer - Week Nearest Average Temperature For Period,Typical,6/26,7/2,Winter - Week Nearest Min Temperature For Period,Extreme,12/11,12/17,Winter - Week Nearest Average Temperature For Period,Typical,1/2,1/8,Autumn - Week Nearest Average Temperature For Period,Typical,10/2,10/8,Spring - Week Nearest Average Temperature For Period,Typical,3/20,3/26
+GROUND TEMPERATURES,5,0.05,,,,3.4,4.5,6.8,10.2,17.9,14.8,22.4,23.0,15.8,13.0,8.2,3.0,8.9,0.1,,,,3.7,4.6,6.7,10.1,17.5,20.1,22.0,22.7,16.0,13.1,8.5,3.3,9.0,0.2,,,,4.2,4.8,6.6,9.8,16.7,19.3,21.4,22.2,16.4,13.2,9.2,3.9,8.7,0.5,,,,5.5,5.4,6.4,9.1,14.6,17.2,19.5,20.6,17.2,13.5,10.9,5.8,7.2,1,,,,7.1,6.4,6.7,8.5,12.1,14.7,17.0,18.4,17.3,14.1,12.4,8.3,7.8
 HOLIDAYS/DAYLIGHT SAVINGS,No,0,0,0
 COMMENTS 1,For data format information see the code or check: https://designbuilder.co.uk/cahelp/Content/EnergyPlusWeatherFileFormat.htm
 COMMENTS 2,
-DATA PERIODS,1,1,Data,Thursday,12/30,01/02
+DATA PERIODS,1,1,Data,Saturday,01/01,01/01
 2022,1,1,1,0,?,11.9,10.1,88.4,99672.5,9999.0,9999.0,351.1,0.0,0.0,0.0,999999.0,999999.0,999999.0,9999.0,999.0,999.0,10.0,10.0,9999.0,99999.0,9.0,999999999.0,999.0,1.0,999.0,99.0,999.0,999.0,99.0
 2022,1,1,2,0,?,11.7,9.8,88.1,99679.2,9999.0,9999.0,350.6,0.0,0.0,0.0,999999.0,999999.0,999999.0,9999.0,999.0,999.0,10.0,10.0,9999.0,99999.0,9.0,999999999.0,999.0,1.0,999.0,99.0,999.0,999.0,99.0
 2022,1,1,3,0,?,11.7,9.5,86.6,99691.7,9999.0,9999.0,350.1,0.0,0.0,0.0,999999.0,999999.0,999999.0,9999.0,999.0,999.0,10.0,10.0,9999.0,99999.0,9.0,999999999.0,999.0,1.0,999.0,99.0,999.0,999.0,99.0

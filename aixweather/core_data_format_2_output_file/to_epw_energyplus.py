@@ -4,6 +4,8 @@ convert core data to epw (EnergyPlus) data
 
 import csv
 import datetime as dt
+import logging
+
 import pandas as pd
 import numpy as np
 
@@ -11,9 +13,24 @@ from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
 from aixweather.transformation_functions import auxiliary, time_observation_transformations, pass_through_handling
 
+logger = logging.getLogger(__name__)
+
+
 """
 format_epw information:
 for links see readme
+
+Format info:
+key = output data point name
+core_name = corresponding name matching the format_core_data
+time_of_meas_shift = desired 30min shifting+interpolation to convert the value that is "at 
+indicated time" to "average of preceding hour" (ind2prec). 
+unit = unit of the output data following the naming convention of format_core_data
+nan = The default values stated from the format_epw information, those values are 
+filled if nan.
+
+All changes here automatically change the calculations. 
+Exception: unit conversions have to be added manually.
 
 Information for shifting:
 Hour: This is the hour of the data. (1 - 24). Hour 1 is 00:01 to 01:00. Cannot be missing.
@@ -72,8 +89,9 @@ def to_epw(
     start: dt.datetime,
     stop: dt.datetime,
     fillna: bool,
-    result_folder: str = None
-) -> pd.DataFrame:
+    result_folder: str = None,
+    filename: str = None
+) -> (pd.DataFrame, str):
     """Create an EPW file from the core data.
 
     Args:
@@ -82,25 +100,17 @@ def to_epw(
         start (dt.datetime): Timestamp for the start of the EPW file.
         stop (dt.datetime): Timestamp for the end of the EPW file.
         fillna (bool): Boolean indicating whether NaN values should be filled.
+        result_folder (str):
+            Path to the folder where to save the file. Default will use
+            the `results_file_path` method.
+        filename (str): Name of the file to be saved. The default is constructed
+            based on the meta-data as well as start and stop time
 
     Returns:
         pd.DataFrame: DataFrame containing the weather data formatted for EPW export,
                       excluding metadata.
+        str: Path to the exported file.
     """
-
-    ### evaluate correctness of format
-    auxiliary.evaluate_transformations(
-        core_format=definitions.format_core_data, other_format=format_epw
-    )
-
-    df = core_df.copy()
-
-    filename = (
-        f"{meta.station_id}_{start.strftime('%Y%m%d')}_{stop.strftime('%Y%m%d')}"
-        f"_{meta.station_name}.epw"
-    )
-    # get file path to safe data to
-    file_path = definitions.results_file_path(filename, result_folder)
 
     ### create header lines
     def line1_location(
@@ -180,7 +190,7 @@ def to_epw(
         }  # Monaten in Saisons zuweisen
 
         def group_func(input):
-            """Gruppefunktion für df.groupby()"""
+            """Gruppefunktion für .groupby()"""
             return season_dict[input.month]
 
         df_temp_ambient = df["DryBulbTemp"]  # Temperature_Ambient von weatherdata holen
@@ -322,7 +332,9 @@ def to_epw(
 
     def line4_ground_temp(df):
         """
-        Parsen von weatherdata, um Bodentemperaturen zu holen
+        Parsen von weatherdata, um Bodentemperaturen zu holen.
+
+        #Todo: Not checked yet if this is calculation is correct
 
         return:
             ground_temp:    List    Vierte Zeile(GROUND TEMPERATURES) von epw Daten als List
@@ -332,8 +344,10 @@ def to_epw(
             "GROUND TEMPERATURES",
         ]
 
+        df_4_ground_temp = df.copy()
+
         df_w_ground = (
-            df.resample("M").mean().copy().round(decimals=1)
+            df_4_ground_temp.resample("M").mean().round(decimals=1)
         )  # Resample in monatliche Interval
         try:
             ground_t = df_w_ground[
@@ -362,9 +376,9 @@ def to_epw(
             )
             return ground_temp
         except KeyError as err:
-            print(
-                f"For adding the probably unnecessary ground temperature to the .epw file header, "
-                f"the following made it impossible: {err}"
+            logger.warn(
+                "Error while adding the probably unnecessary ground temperature to the .epw file "
+                "header. A placeholder will be used. Error: %s", err
             )
             ground_temp = ground_temp + [0]  # 0 ground layers
 
@@ -421,7 +435,7 @@ def to_epw(
             data_periods:    List    8.Zeile(DATA PERIODS) von epw Daten als List
         """
         start_dp = df.index[0]
-        end_dp = df.index[-2]
+        end_dp = df.index[-1]
         data_periods = [
             "DATA PERIODS",
             1,  # Anzahl von Datenperioden
@@ -442,9 +456,6 @@ def to_epw(
             data_list:    List    Datasätze von epw Daten als List
         """
 
-        # add 1 hour to start, because epw always starts at hour 1 instead of 0
-        start_epw = start + dt.timedelta(hours=1)
-
         ### measurement time conversion
         df = time_observation_transformations.shift_time_by_dict(format_epw, df)
 
@@ -456,7 +467,7 @@ def to_epw(
 
         ### select only desired period
         df = time_observation_transformations.truncate_data_from_start_to_stop(
-            df, start_epw, stop
+            df, start, stop
         )
 
         ### select the desired columns
@@ -501,23 +512,30 @@ def to_epw(
             first_year = df.iloc[0]["Year"]
             rows_to_add = 0
 
+
+
             # If the first hour is not 1, add rows to start with hour 1
             if first_hour != 1:
-                # Calculate how many rows to add
-                rows_to_add = int(first_hour) - 1
+                # If the first hour is 24, we dont want to add an full extra day, just delete the
+                # line so that the data frame starts with hour 1
+                if first_hour == 24:
+                    df = df.drop(df.index[0])
+                else:
+                    # Calculate how many rows to add
+                    rows_to_add = int(first_hour) - 1
 
-                # Generate new rows
-                for i in range(rows_to_add, 0, -1):
-                    new_row = pd.DataFrame(
-                        {
-                            "Minute": [first_minute],
-                            "Hour": [i],
-                            "Day": [first_day],
-                            "Month": [first_month],
-                            "Year": [first_year],
-                        }
-                    )
-                    df = pd.concat([new_row, df]).reset_index(drop=True)
+                    # Generate new rows
+                    for i in range(rows_to_add, 0, -1):
+                        new_row = pd.DataFrame(
+                            {
+                                "Minute": [first_minute],
+                                "Hour": [i],
+                                "Day": [first_day],
+                                "Month": [first_month],
+                                "Year": [first_year],
+                            }
+                        )
+                        df = pd.concat([new_row, df]).reset_index(drop=True)
             return df, rows_to_add
 
         def fill_full_last_day(df):
@@ -531,23 +549,28 @@ def to_epw(
 
             # If the last hour is not 24, add rows to reach hour 24
             if last_hour != 24:
-                # Calculate how many rows to add
-                rows_to_add = 24 - int(last_hour)
+                # If the last hour is 0, we dont want to add a full extra day, just delete the
+                # line so that the data frame ends with hour 24
+                if last_hour == 0:
+                    df = df.drop(df.index[-1])
+                else:
+                    # Calculate how many rows to add
+                    rows_to_add = 24 - int(last_hour)
 
-                # Generate new rows
-                new_rows = []
-                for i in range(1, rows_to_add + 1):
-                    new_row = {
-                        "Minute": last_minute,
-                        "Hour": last_hour + i,
-                        "Day": last_day,
-                        "Month": last_month,
-                        "Year": last_year,
-                    }
-                    new_rows.append(new_row)
+                    # Generate new rows
+                    new_rows = []
+                    for i in range(1, rows_to_add + 1):
+                        new_row = {
+                            "Minute": last_minute,
+                            "Hour": last_hour + i,
+                            "Day": last_day,
+                            "Month": last_month,
+                            "Year": last_year,
+                        }
+                        new_rows.append(new_row)
 
-                # Append new rows to DataFrame
-                df = pd.concat([df, pd.DataFrame(new_rows)], ignore_index=True)
+                    # Append new rows to DataFrame
+                    df = pd.concat([df, pd.DataFrame(new_rows)], ignore_index=True)
             return df, rows_to_add
 
         df, first_day_added_rows = fill_full_first_day(df)
@@ -581,7 +604,7 @@ def to_epw(
             df = auxiliary.fill_nan_from_format_dict(df, format_epw)
 
         # cut off float digits (required for EnergyPlus)
-        df = df.map(lambda x: (f"{x:.1f}") if isinstance(x, float) else x)
+        df = df.applymap(lambda x: (f"{x:.1f}") if isinstance(x, float) else x)
 
         # again make sure correct order and variables are applied
         # (processing might have mixed it up)
@@ -592,6 +615,33 @@ def to_epw(
 
         return data_list, df
 
+    ### evaluate correctness of format
+    auxiliary.evaluate_transformations(
+        core_format=definitions.format_core_data, other_format=format_epw
+    )
+
+    df = core_df.copy()
+
+    # format data to epw
+    df_epw_as_list, df_epw = format_data(df, start, stop)
+
+    # get final start and stop time (differs from start, stop due to filling to full days)
+    start_epw = pd.to_datetime(df_epw.iloc[[0]][['Year', 'Month', 'Day', 'Hour']]).iloc[0]
+    stop_epw = pd.to_datetime(df_epw.iloc[[-1]][['Year', 'Month', 'Day', 'Hour']]).iloc[-1]
+    # truncate core data for other calculations
+    df_truncated = time_observation_transformations.truncate_data_from_start_to_stop(
+        df, start_epw, stop_epw
+    )
+
+    # keep regular start stop in the filename for the unit tests
+    if filename is None:
+        filename = (
+            f"{meta.station_id}_{start.strftime('%Y%m%d')}_{stop.strftime('%Y%m%d')}"
+            f"_{meta.station_name}.epw"
+        )
+    # get file path to safe data to
+    file_path = definitions.results_file_path(filename, result_folder)
+
     ### merge all header lines and the data to be saved in a .epw file
     with open(file_path, "w", newline="", encoding="latin1") as file:
         writer = csv.writer(file)
@@ -599,17 +649,16 @@ def to_epw(
             [
                 line1_location(meta),
                 line2_design_cond(),
-                line3_typ_ext_period(df),
-                line4_ground_temp(df),
-                line5_holiday_dl_saving(df),
+                line3_typ_ext_period(df_truncated),
+                line4_ground_temp(df_truncated),
+                line5_holiday_dl_saving(df_truncated),
                 line6_comment_1(),
                 line7_comment_2(),
-                line8_data_periods(df),
+                line8_data_periods(df_truncated),
             ]
         )
-        df_as_list, df = format_data(df, start, stop)
-        writer.writerows(df_as_list)
+        writer.writerows(df_epw_as_list)
 
-    print(f"EPW file saved to {file_path}.")
+    logger.info("EPW file saved to %s.", file_path)
 
-    return df
+    return df, file_path

@@ -2,12 +2,10 @@
 import DWD TRY data
 """
 
-import datetime as dt
 import re
 import pandas as pd
+import random
 
-import geopandas as gpd
-from geopy.geocoders import Nominatim
 from shapely.geometry import Point
 
 from aixweather.imports.utils_import import MetaData
@@ -101,6 +99,13 @@ def load_try_meta_from_file(path: str) -> MetaData:
     hoehenlage_line = next(line for line in header_lines if "Hoehenlage" in line)
     hoehenlage = int(re.search(r":\s*(\d+) Meter", hoehenlage_line).group(1))
 
+    try:
+        import geopandas as gpd
+        from geopy.geocoders import Nominatim
+    except ImportError:
+        print("Optional dependency 'TRY' not installed, skipping metadata of TRY.")
+        return meta
+
     ### convert latitude and longitude
     # Create a GeoDataFrame with the provided coordinates
     # (using pyproj directly led to wrong calculation)
@@ -119,36 +124,31 @@ def load_try_meta_from_file(path: str) -> MetaData:
 
     ### try to get city of location
     # Initialize Nominatim geolocator
-    geolocator = Nominatim(user_agent="myGeocoder")
-    try:
-        # Perform reverse geocoding
-        location = geolocator.reverse((latitude_wgs84, longitude_wgs84))
+    user_agent = f"aixweather_{str(random.randint(1, 1000))}"
+    geolocator = Nominatim(user_agent=user_agent)
+    # Perform reverse geocoding
+    location = geolocator.reverse((latitude_wgs84, longitude_wgs84))
 
-        # If you want specific components like city, state, etc.
-        address = location.raw["address"]
-        if "city" in address:
-            city = address["city"]
-        elif "town" in address:
-            city = address["town"]
-        elif "village" in address:
-            city = address["village"]
-        elif "hamlet" in address:
-            city = address["hamlet"]
-        elif "suburb" in address:
-            city = address["suburb"]
-        elif "locality" in address:
-            city = address["locality"]
-        else:
-            city = "Unknown"
-    except:
+    # If you want specific components like city, state, etc.
+    address = location.raw["address"]
+    if "city" in address:
+        city = address["city"]
+    elif "town" in address:
+        city = address["town"]
+    elif "village" in address:
+        city = address["village"]
+    elif "hamlet" in address:
+        city = address["hamlet"]
+    elif "suburb" in address:
+        city = address["suburb"]
+    elif "locality" in address:
+        city = address["locality"]
+    else:
         city = meta.station_name
-        print(
-            "Error: could not infer closest city from longitude + latitude"
-            " -> station_name will be unknown."
-        )
 
     meta.station_name = city
     meta.input_source = f"TRY{TRY_year}"
+    meta.try_year = TRY_year
     meta.altitude = hoehenlage
     meta.longitude = longitude_wgs84
     meta.latitude = latitude_wgs84
@@ -180,22 +180,5 @@ def load_try_from_file(path: str) -> pd.DataFrame:
     )
     # drop first row cause empty
     weather_df = weather_df.iloc[1:]
-
-    # set index to datetime
-    # returns datetime objects
-    weather_df["MM"] = weather_df["MM"].astype(int)
-    weather_df["DD"] = weather_df["DD"].astype(int)
-    weather_df["HH"] = weather_df["HH"].astype(int)
-    time_index = weather_df.apply(
-        lambda row: dt.datetime(int(TRY_year), row.MM, row.DD, row.HH - int(1.0)),
-        axis=1,
-    )
-    # data is shifted by -1 H to satisfy pandas timestamp
-    # hours in pandas only between 0 and 23, in TRY between 1 and 24
-    # converts to pandas timestamps if desired
-    weather_df.index = pd.to_datetime(time_index)
-    # data is shifted back to original to start: back to
-    # 2017-01-01 01:00:00 instead of the temporary 2017-01-01 00:00:00
-    weather_df = weather_df.shift(periods=1, freq="H", axis=0)
 
     return weather_df

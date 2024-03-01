@@ -1,7 +1,7 @@
 """
 Converts core data to modelica TMY3Reader data
 """
-
+import logging
 import calendar
 import datetime as dt
 import pandas as pd
@@ -10,12 +10,23 @@ from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
 from aixweather.transformation_functions import auxiliary, time_observation_transformations, pass_through_handling
 
+
+logger = logging.getLogger(__name__)
+
 """
 format_modelica_TMY3 information:
 
-Please indicate the unit (conversion has to be changed manually)
-Please indicate the desired time of measurement (conversion automatically)
-The stated nans are the default values stated from the AixLib TMY3 Reader, those values are filled if nan.
+Format info:
+key = output data point name
+core_name = corresponding name matching the format_core_data
+time_of_meas_shift = desired 30min shifting+interpolation to convert the value that is "at 
+indicated time" to "average of preceding hour" (ind2prec). 
+unit = unit of the output data following the naming convention of format_core_data
+nan = The default values stated from the AixLib TMY3 Reader, those values are 
+filled if nan.
+
+All changes here automatically change the calculations. 
+Exception: unit conversions have to be added manually.
 
 time_of_meas_shift´s checked by Martin Rätz (07.08.2023)
 unit´s checked by Martin Rätz (07.08.2023)
@@ -60,8 +71,9 @@ def to_mos(
     start: dt.datetime,
     stop: dt.datetime,
     fillna: bool,
-    result_folder: str = None
-) -> pd.DataFrame:
+    result_folder: str = None,
+    filename: str = None
+) -> (pd.DataFrame, str):
     """Create a MOS file from the core data.
 
     Args:
@@ -70,10 +82,16 @@ def to_mos(
         start (dt.datetime): Timestamp for the start of the MOS file.
         stop (dt.datetime): Timestamp for the end of the MOS file.
         fillna (bool): Boolean indicating whether NaN values should be filled.
+        result_folder (str):
+            Path to the folder where to save the file. Default will use
+            the `results_file_path` method.
+        filename (str): Name of the file to be saved. The default is constructed
+            based on the meta-data as well as start and stop time
 
     Returns:
         pd.DataFrame: DataFrame containing the weather data formatted for MOS export,
                       excluding metadata.
+        str: Path to the exported file.
     """
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
@@ -222,10 +240,11 @@ def to_mos(
     )
 
     ### write to csv
-    filename = (
-        f"{meta.station_id}_{start.strftime('%Y%m%d')}_{stop.strftime('%Y%m%d')}"
-        f"_{meta.station_name}.mos"
-    )
+    if filename is None:
+        filename = (
+            f"{meta.station_id}_{start.strftime('%Y%m%d')}_{stop.strftime('%Y%m%d')}"
+            f"_{meta.station_name}.mos"
+        )
     filepath = definitions.results_file_path(filename, result_folder)
 
     df.to_csv(
@@ -243,5 +262,5 @@ def to_mos(
         file.seek(0, 0)
         file.write(f"{header_of}\n{content}")
 
-    print(f"MOS file saved to {filepath}.")
-    return df
+    logger.info("MOS file saved to %s.", filepath)
+    return df, filepath

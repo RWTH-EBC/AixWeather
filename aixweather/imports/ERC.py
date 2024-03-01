@@ -80,7 +80,7 @@ def import_ERC(start: datetime, stop: datetime, cred: tuple) -> pd.DataFrame:
 
     for key in key_list:
         request = {
-            "project_id": 11,
+            "project_id": 37, # 11 refers to data older than February 2024
             "dataPointID": key,
             "start": start,
             "end": stop,

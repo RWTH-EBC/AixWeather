@@ -12,6 +12,10 @@ def e1_pull_DWD_historical_to_all_output_formats():
     2. See examplary use of additional features and settings
     3. Create weather data files
     """
+    # Enable logging to see what is happening
+    import logging
+    logging.basicConfig(level="DEBUG")
+
     # choose the project class according to the desired weather data origin
     from aixweather.project_class import ProjectClassDWDHistorical
 

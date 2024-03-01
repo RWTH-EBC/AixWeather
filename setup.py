@@ -10,15 +10,24 @@ readme_path = Path(__file__).parent.joinpath("README.md")
 long_description = readme_path.read_text()
 
 INSTALL_REQUIRES = [
-    "wetterdienst==0.65.0",
-    "unidecode==1.3.7",
-    "parameterized==0.9.0",
-    "geopandas==0.14.0",
-    "geopy==2.4.0",
-    "pvlib==0.10.2",
-    "matplotlib==3.8.1",
-    "seaborn==0.13.0",
+    "unidecode~=1.3.7",
+    "pvlib~=0.10.2",
+    "matplotlib~=3.8.1",
+    "seaborn~=0.13.0",
 ]
+EXTRAS_REQUIRE = {
+    'TRY': [
+        "geopandas~=0.14.0",
+        "geopy~=2.4.0",
+    ],
+    "DWD_forecast": ["wetterdienst>=0.65.0,<=0.72.0"],
+    "full": [
+        "wetterdienst>=0.65.0,<=0.72.0",
+        "geopandas~=0.14.0",
+        "geopy~=2.4.0",
+    ]
+}
+
 
 # Add all open-source packages to setup-requires
 SETUP_REQUIRES = INSTALL_REQUIRES.copy()
@@ -63,5 +72,6 @@ setuptools.setup(
     keywords=["weather", "BES", "converter", "simulation", "building", "energy"],
     packages=setuptools.find_packages(exclude=["tests", "tests.*", "img"]),
     setup_requires=SETUP_REQUIRES,
+    extras_require=EXTRAS_REQUIRE,
     install_requires=INSTALL_REQUIRES,
 )

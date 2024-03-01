@@ -4,7 +4,12 @@ function to truncate data in given interval.
 """
 
 import datetime
+import logging
+
 import pandas as pd
+
+
+logger = logging.getLogger(__name__)
 
 
 def _shift_timestamps_and_interpolate(df: pd.DataFrame, backward: bool) -> pd.DataFrame:
@@ -42,18 +47,22 @@ def _shift_timestamps_and_interpolate(df: pd.DataFrame, backward: bool) -> pd.Da
 
 
 def avg_preceding_hour_2_indicated_time(df):
+    '''aka: prec2ind'''
     return _shift_timestamps_and_interpolate(df, True)
 
 
 def indicated_time_2_avg_following_hour(df):
+    '''aka: ind2foll'''
     return _shift_timestamps_and_interpolate(df, True)
 
 
 def avg_following_hour_2_indicated_time(df):
+    '''aka: foll2ind'''
     return _shift_timestamps_and_interpolate(df, False)
 
 
 def indicated_time_2_avg_preceding_hour(df):
+    '''aka: ind2prec'''
     return _shift_timestamps_and_interpolate(df, False)
 
 
@@ -77,7 +86,7 @@ def shift_time_by_dict(format_dict: dict, df: pd.DataFrame) -> pd.DataFrame:
         # No measurement if not present, though avoid being triggered
         # when using this function in 2output (empty string)
         if value[core_name] not in df.columns and value[core_name]:
-            print(f"No measurements for {value[core_name]}.")
+            logger.debug("No measurements for %s.", value[core_name])
         else:
             if value[meas_key] == "prec2ind":
                 df.loc[:, value[core_name]] = avg_preceding_hour_2_indicated_time(

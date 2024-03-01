@@ -89,7 +89,7 @@ class ProjectClassGeneral(ABC):
         self.start_end_checks()
 
     def start_end_checks(self):
-        # make sure start and end are of type datetime
+        """Make sure start and end are of type datetime and end is after start."""
         if self.start is not None and self.end is not None:
             if not isinstance(self.start, dt.datetime) or not isinstance(self.end, dt.datetime):
                 raise ValueError("Time period for pulling data: start and end must be of "
@@ -147,45 +147,95 @@ class ProjectClassGeneral(ABC):
         """Abstract function to convert the imported data to core data."""
 
     # core_data_format_2_output_file
-    def core_2_mos(self):
-        """Convert core data to .mos file"""
-        self.output_data_df = to_mos(
+    def core_2_mos(self, filename: str = None) -> str:
+        """
+        Convert core data to .mos file
+
+        filename (str): Name of the file to be saved. The default is constructed
+            based on the meta-data as well as start and stop time
+
+        Returns:
+            str: Path to the exported file.
+        """
+        self.output_data_df, filepath = to_mos(
             self.core_data,
             self.meta_data,
             self.start,
             self.end,
             self.fillna,
             self.abs_result_folder_path,
+            filename=filename
         )
+        return filepath
 
-    def core_2_epw(self):
-        """Convert core data to .epw file"""
-        self.output_data_df = to_epw(
+    def core_2_epw(self, filename: str = None) -> str:
+        """
+        Convert core data to .epw file
+
+        filename (str): Name of the file to be saved. The default is constructed
+            based on the meta-data as well as start and stop time
+
+        Returns:
+            str: Path to the exported file.
+        """
+        self.output_data_df, filepath = to_epw(
             self.core_data,
             self.meta_data,
             self.start,
             self.end,
             self.fillna,
             self.abs_result_folder_path,
+            filename=filename
         )
+        return filepath
 
-    def core_2_csv(self):
-        """Convert core data to .csv file"""
-        self.output_data_df = to_csv(
-            self.core_data, self.meta_data, self.abs_result_folder_path
-        )
+    def core_2_csv(self, filename: str = None) -> str:
+        """
+        Convert core data to .csv file
 
-    def core_2_json(self):
-        """Convert core data to .json file"""
-        self.output_data_df = to_json(
-            self.core_data, self.meta_data, self.abs_result_folder_path
-        )
+        filename (str): Name of the file to be saved. The default is constructed
+            based on the station name.
 
-    def core_2_pickle(self):
-        """Convert core data pickle file"""
-        self.output_data_df = to_pickle(
-            self.core_data, self.meta_data, self.abs_result_folder_path
+        Returns:
+            str: Path to the exported file.
+        """
+        self.output_data_df, filepath = to_csv(
+            self.core_data, self.meta_data, self.abs_result_folder_path,
+            filename=filename
         )
+        return filepath
+
+    def core_2_json(self, filename: str = None) -> str:
+        """
+        Convert core data to .json file
+
+        filename (str): Name of the file to be saved. The default is constructed
+            based on the station name.
+
+        Returns:
+            str: Path to the exported file.
+        """
+        self.output_data_df, filepath = to_json(
+            self.core_data, self.meta_data, self.abs_result_folder_path,
+            filename=filename
+        )
+        return filepath
+
+    def core_2_pickle(self, filename: str = None) -> str:
+        """
+        Convert core data pickle file
+
+        filename (str): Name of the file to be saved. The default is constructed
+            based on the station name.
+
+        Returns:
+            str: Path to the exported file.
+        """
+        self.output_data_df, filepath = to_pickle(
+            self.core_data, self.meta_data, self.abs_result_folder_path,
+            filename=filename
+        )
+        return filepath
 
 
 class ProjectClassDWDHistorical(ProjectClassGeneral):

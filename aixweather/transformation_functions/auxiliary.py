@@ -1,9 +1,12 @@
 """
 includes auxiliary functions for data handling and transformation
 """
-
+import logging
 import pandas as pd
 import numpy as np
+
+logger = logging.getLogger(__name__)
+
 
 def force_data_variable_convention(
     df: pd.DataFrame, format_desired: dict
@@ -104,14 +107,15 @@ def evaluate_transformations(core_format: dict, other_format: dict):
         ValueError: If a core variable in other_format doesn't match the core variable format.
     """
 
-    print("\nEvaluate format.")
+    logger.debug("Evaluate format.")
     for key, value in other_format.items():
         if value["core_name"] in core_format.keys():
             # compare units
             if value["unit"] != core_format[value["core_name"]]["unit"]:
-                print(
-                    f"Unit transformation required for {value['core_name']} from"
-                    f" {value['unit']} to {core_format[value['core_name']]['unit']}."
+                logger.debug(
+                    "Unit transformation required for %s from %s to %s.",
+                    value['core_name'], value['unit'],
+                    core_format[value['core_name']]['unit']
                 )
         elif not value["core_name"]:
             pass

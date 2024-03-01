@@ -1,11 +1,15 @@
 """
 This module contains auxiliary functions for data transformation, e.g. time shifts
 """
+import logging
 
 import pandas as pd
 
 from aixweather.transformation_functions import auxiliary
 from aixweather.imports.utils_import import MetaData
+
+
+logger = logging.getLogger(__name__)
 
 
 def create_pass_through_variables(
@@ -33,7 +37,7 @@ def create_pass_through_variables(
         pd.DataFrame: The modified `df_shifted` DataFrame with added pass-through variables.
     """
 
-    print("\nApply transformation for pass through variables.")
+    logger.debug("Apply transformation for pass through variables.")
     # perform same transformation
     df_no_shift, meta.executed_transformations_no_shift = transform_func(df_no_shift)
 
@@ -93,7 +97,7 @@ def create_pass_through_variables(
 
         if not is_identical:
             # dont add to df
-            print(
+            logger.debug(
                 f"Calculation of the non-shifted {desired_variable} is "
                 f"not valid due non consistent "
                 f"time of measurement (shifting) of the required "
@@ -121,13 +125,16 @@ def _find_pass_through_core_names(columns: list, output_format: dict) -> list:
     This function analyzes a list of column names and identifies those that represent pass-through
     core variables based on the provided output format. It takes into account suffix mappings
     to match the required shifting.
+    suffix mapping key = desired shifting during import
+    suffix mapping value = desired shifting during export
 
     Args:
         columns (list): A list of column names to analyze.
         output_format (dict): A dictionary specifying the desired format and shifting of the data.
 
     Returns:
-        list: A list of column names representing pass-through variables that shall actually be passed through.
+        list: A list of column names representing pass-through variables that shall actually be
+        passed through.
     """
 
     selected_columns = []
@@ -151,9 +158,9 @@ def _find_and_apply_full_hour_shifts(df: pd.DataFrame, output_format: dict) -> t
     """
     Find variables that require a full-hour shift to avoid double interpolation.
 
-    This function identifies pass-through variables in the DataFrame `df` that are specified in the `output_format`
-    to be shifted by a full hour in total. It performs the necessary full hour shift on these variables to prevent
-    double interpolation.
+    This function identifies pass-through variables in the DataFrame `df` that are specified in
+    the  `output_format` to be shifted by a full hour in total. It performs the necessary full
+    hour shift on these variables to prevent double interpolation.
 
     Args:
         df (pd.DataFrame): The DataFrame containing data to be shifted.

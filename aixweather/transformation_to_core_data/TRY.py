@@ -1,4 +1,5 @@
 import pandas as pd
+import datetime as dt
 
 from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
@@ -8,7 +9,21 @@ from aixweather.transformation_functions import auxiliary, time_observation_tran
 """
 format_TRY_15_45 information 
 
+Format info:
+key = raw data point name
+core_name = corresponding name matching the format_core_data
+time_of_meas_shift = desired 30min shifting+interpolation to convert a value that is e.g. the 
+"average of preceding hour" to "indicated time" (prec2ind). 
+unit = unit of the raw data following the naming convention of format_core_data
+
+All changes here automatically change the calculations. 
+Exception: unit conversions have to be added manually.
+
 checked by Martin Rätz (08.08.2023)
+
+https://www.bbsr.bund.de/BBSR/DE/forschung/programme/zb/Auftragsforschung/5EnergieKlimaBauen/2013/testreferenzjahre/try-handbuch.pdf;jsessionid=9F928CDB6862224B04073332C2B1B620.live21301?__blob=publicationFile&v=1
+Der erste Eintrag im Datensatz bezieht sich auf den 1. Januar 01 Uhr MEZ und
+der letzte Eintrag auf den 31. Dezember 24 Uhr MEZ. Also UTC+1.
 """
 format_TRY_15_45 = {
     "t": {"core_name": "DryBulbTemp", "time_of_meas_shift": "prec2ind", "unit": "degC"},
@@ -42,8 +57,29 @@ def TRY_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
         core_format=definitions.format_core_data, other_format=format_TRY_15_45
     )
 
+    def TRY_to_datetimeindex(df, meta: MetaData):
+        # set index to datetime
+        # returns datetime objects
+        df["MM"] = df["MM"].astype(int)
+        df["DD"] = df["DD"].astype(int)
+        df["HH"] = df["HH"].astype(int)
+        time_index = df.apply(
+            lambda row: dt.datetime(int(meta.try_year), row.MM, row.DD, row.HH - int(1.0)),
+            axis=1,
+        )
+        # data is shifted by -1 H to satisfy pandas timestamp
+        # hours in pandas only between 0 and 23, in TRY between 1 and 24
+        # converts to pandas timestamps if desired
+        df.index = pd.to_datetime(time_index)
+        # data is shifted back to original to start: back to
+        # 2017-01-01 01:00:00 instead of the temporary 2017-01-01 00:00:00
+        df = df.shift(periods=1, freq="H", axis=0)
+
+        return df
+
     ### preprocessing raw data for further operations
     df = df_import.copy()
+    df = TRY_to_datetimeindex(df, meta)
     # Resample the DataFrame to make the DatetimeIndex complete and monotonic
     df = df.resample('H').asfreq()
     # rename available variables to core data format

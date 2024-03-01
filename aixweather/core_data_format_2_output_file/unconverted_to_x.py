@@ -2,6 +2,7 @@
 converts core data to different simpler formats (currently without any transformation)
 """
 
+import logging
 import json
 import pickle
 import pandas as pd
@@ -10,24 +11,49 @@ from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
 
 
+logger = logging.getLogger(__name__)
+
+
+def _get_file_name_and_meta_data_file_name(
+        meta: MetaData, suffix: str, filename: str = None
+) -> (str, str):
+    """
+    Return the filename and meta-data filename for the given suffix
+    """
+    if filename is None:
+        filename = f"Station_{meta.station_name}.{suffix}"
+        meta_filename = f"Station_{meta.station_name}_meta_data.{suffix}"
+    else:
+        meta_filename = filename.replace(f".{suffix}", f"_meta_data.{suffix}")
+    return filename, meta_filename
+
+
 def to_pickle(
     core_df: pd.DataFrame,
     meta: MetaData,
-    result_folder: str = None
-):
+    result_folder: str = None,
+    filename: str = None
+) -> (pd.DataFrame, str):
     """Create and save a pickle file from the core data.
 
     Args:
         core_df (pd.DataFrame): DataFrame containing core data.
         meta (MetaData): Metadata associated with the data.
+        result_folder (str):
+            Path to the folder where to save the file. Default will use
+            the `results_file_path` method.
+        filename (str): Name of the file to be saved. The default is constructed
+            based on the station name.
 
     Returns:
         pd.DataFrame: DataFrame containing the weather data formatted as core data.
+        str: Path to the exported file.
     """
 
     core_df = core_df.copy()
-    filename = f"Station_{meta.station_name}.pkl"
-    meta_filename = f"Station_{meta.station_name}_meta_data.pkl"
+    filename, meta_filename = _get_file_name_and_meta_data_file_name(
+        meta=meta, filename=filename, suffix="pkl"
+    )
     file_path = definitions.results_file_path(filename, result_folder)
     meta_file_path = definitions.results_file_path(meta_filename, result_folder)
 
@@ -35,30 +61,38 @@ def to_pickle(
     with open(meta_file_path, "wb") as file:
         pickle.dump(meta, file)
 
-    print(f"Pickle saved to {file_path}, meta information saved to {meta_file_path}.")
+    logger.info("Pickle saved to %s, meta information saved to %s.", file_path, meta_file_path)
 
-    return core_df
+    return core_df, file_path
 
 
 def to_json(
     core_df: pd.DataFrame,
     meta: MetaData,
-    result_folder: str = None
-):
+    result_folder: str = None,
+    filename: str = None
+) -> (pd.DataFrame, str):
     """Create and save a json file from the core data.
 
     Args:
         core_df (pd.DataFrame): DataFrame containing core data.
         meta (MetaData): Metadata associated with the data.
+        result_folder (str):
+            Path to the folder where to save the file. Default will use
+            the `results_file_path` method.
+        filename (str): Name of the file to be saved. The default is constructed
+            based on the station name.
 
     Returns:
         pd.DataFrame: DataFrame containing the weather data formatted as core data.
+        str: Path to the exported file.
     """
 
     core_df = core_df.copy()
 
-    filename = f"Station_{meta.station_name}.json"
-    meta_filename = f"Station_{meta.station_name}_meta_data.json"
+    filename, meta_filename = _get_file_name_and_meta_data_file_name(
+        meta=meta, filename=filename, suffix="json"
+    )
     file_path = definitions.results_file_path(filename, result_folder)
     meta_file_path = definitions.results_file_path(meta_filename, result_folder)
 
@@ -70,30 +104,38 @@ def to_json(
     with open(meta_file_path, "w") as file:
         json.dump(meta_dict, file, indent=4)
 
-    print(f"JSON saved to {file_path}, meta information saved to {meta_file_path}.")
+    logger.info("JSON saved to %s, meta information saved to %s.", file_path, meta_file_path)
 
-    return core_df
+    return core_df, file_path
 
 
 def to_csv(
     core_df: pd.DataFrame,
     meta: MetaData,
-    result_folder: str = None
-):
+    result_folder: str = None,
+    filename: str = None
+) -> (pd.DataFrame, str):
     """Create and save a csv file from the core data.
 
     Args:
         core_df (pd.DataFrame): DataFrame containing core data.
         meta (MetaData): Metadata associated with the data.
+        result_folder (str):
+            Path to the folder where to save the file. Default will use
+            the `results_file_path` method.
+        filename (str): Name of the file to be saved. The default is constructed
+            based on the station name.
 
     Returns:
         pd.DataFrame: DataFrame containing the weather data formatted as core data.
+        str: Path to the exported file.
     """
 
     core_df = core_df.copy()
 
-    filename = f"Station_{meta.station_name}.csv"
-    meta_filename = f"Station_{meta.station_name}_meta_data.json"
+    filename, meta_filename = _get_file_name_and_meta_data_file_name(
+        meta=meta, filename=filename, suffix="csv"
+    )
     file_path = definitions.results_file_path(filename, result_folder)
     meta_file_path = definitions.results_file_path(meta_filename, result_folder)
 
@@ -104,6 +146,6 @@ def to_csv(
     with open(meta_file_path, "w") as file:
         json.dump(meta_dict, file, indent=4)
 
-    print(f"CSV saved to {file_path}, meta information saved to {meta_file_path}.")
+    logger.info("CSV saved to %s, meta information saved to %s.", file_path, meta_file_path)
 
-    return core_df
+    return core_df, file_path

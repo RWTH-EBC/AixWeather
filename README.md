@@ -95,7 +95,7 @@ and the global radiation!
 
 **DWD historical**: [open data website](https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/)
 
-**DWD forecasts (MOSMIX i.e. KML files)**: [open data website](https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/) go to content.log.bz2.
+**DWD forecasts (MOSMIX i.e. KML files)**: [open data website](https://opendata.dwd.de/weather/local_forecasts/) go to content.log.bz2.
 
 **EnergyPlus (EPW)**: 
 
