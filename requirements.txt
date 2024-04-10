@@ -6,3 +6,4 @@ geopy~=2.4.0
 pvlib~=0.10.2
 matplotlib~=3.8.1
 seaborn~=0.13.0
+shapely~=2.0.3
