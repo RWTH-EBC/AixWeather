@@ -109,7 +109,7 @@ def EPW_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
     df = if_TMY_convert_to_one_year(df)
     df = epw_to_datetimeindex(df)
     # Resample the DataFrame to make the DatetimeIndex complete and monotonic
-    df = df.resample("H").asfreq()
+    df = df.resample("h").asfreq()
     # give names to columns according to documentation of import data
     df.columns = [key for key in format_epw.keys()]
     # rename available variables to core data format

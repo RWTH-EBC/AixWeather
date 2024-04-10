@@ -17,7 +17,7 @@ class TestDWDTRY(unittest.TestCase):
                                "TRY/TRY2015_507931060546_Jahr_City_Aachen"
                                "_oldConverter.mos",
             header=40,
-            delim_whitespace=True,
+            sep='\s+',
             skip_blank_lines=False,
             encoding="latin",
         )
@@ -27,7 +27,7 @@ class TestDWDTRY(unittest.TestCase):
                                "TRY/UnknownStationID_20150101_20160101_Aachen"
                                "_without_time_shifting.mos",
             header=43,
-            delim_whitespace=True,
+            sep='\s+',
             skip_blank_lines=False,
             encoding="latin",
         )
@@ -37,7 +37,7 @@ class TestDWDTRY(unittest.TestCase):
                                "TRY/UnknownStationID_20150101_20151231_Aachen"
                                "_with_time_shifting.mos",
             header=43,
-            delim_whitespace=True,
+            sep='\s+',
             skip_blank_lines=False,
             encoding="latin",
         )
@@ -47,7 +47,7 @@ class TestDWDTRY(unittest.TestCase):
                                "/UnknownStationID_20150101_20151231_Aachen"
                                "_without_time_shifting_new_DirNormRad.mos",
             header=43,
-            delim_whitespace=True,
+            sep='\s+',
             skip_blank_lines=False,
             encoding="latin",
         )
@@ -57,7 +57,7 @@ class TestDWDTRY(unittest.TestCase):
                                "UnknownStationID_20150101_20151231_Aachen"
                                "_with_time_shifting_new_DirNormRad.mos",
             header=43,
-            delim_whitespace=True,
+            sep='\s+',
             skip_blank_lines=False,
             encoding="latin",
         )
@@ -67,7 +67,7 @@ class TestDWDTRY(unittest.TestCase):
                                "UnknownStationID_20150101_20151231_Aachen"
                                "_passthrough_new_DirNormRad.mos",
             header=43,
-            delim_whitespace=True,
+            sep='\s+',
             skip_blank_lines=False,
             encoding="latin",
         )

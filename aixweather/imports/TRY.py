@@ -174,7 +174,7 @@ def load_try_from_file(path: str) -> pd.DataFrame:
     weather_df = pd.read_table(
         filepath_or_buffer=path,
         header=header_row,
-        delim_whitespace=True,
+        sep='\s+',
         skip_blank_lines=False,
         encoding="latin",
     )

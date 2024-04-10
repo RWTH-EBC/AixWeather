@@ -81,7 +81,7 @@ def TRY_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
     df = df_import.copy()
     df = TRY_to_datetimeindex(df, meta)
     # Resample the DataFrame to make the DatetimeIndex complete and monotonic
-    df = df.resample('H').asfreq()
+    df = df.resample('h').asfreq()
     # rename available variables to core data format
     df = auxiliary.rename_columns(df, format_TRY_15_45)
 
