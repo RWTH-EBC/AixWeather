@@ -118,7 +118,7 @@ def EPW_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
     df = auxiliary.replace_dummy_with_nan(df, format_epw)
 
     ### convert timezone to UTC+0
-    df = df.shift(periods=-meta.timezone, freq="H", axis=0)
+    df = df.shift(periods=-meta.timezone, freq="h", axis=0)
 
     ### shift and interpolate data forward 30mins or backward -30mins
     df_no_shift = df.copy()
