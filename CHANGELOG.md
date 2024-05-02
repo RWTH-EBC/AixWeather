@@ -21,4 +21,6 @@
   - Feature: tmy epw files with different years per month can now be handled
   - Feature: enable custom filenames for exports
   - Feature: use logging instaed of print
-
+- v0.1.6:
+  - Change sampling interval string from H to h #54
+  - Fix shapely import issue #52

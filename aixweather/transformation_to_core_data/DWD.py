@@ -160,10 +160,10 @@ def DWD_historical_to_core_data(
     # resample some via sum some via mean -> results in average of following hour
     for var in df.columns:
         if var in variables_to_sum_DWD_historical:
-            df[var] = df[var].resample("H").sum(min_count=1)  # fills nan only if 1 value in interval
+            df[var] = df[var].resample("h").sum(min_count=1)  # fills nan only if 1 value in interval
         else:
-            df[var] = df[var].resample("H").mean()  # fills nan only if all nan in interval
-    df = df.resample("H").first()  # only keep the previously resampled value
+            df[var] = df[var].resample("h").mean()  # fills nan only if all nan in interval
+    df = df.resample("h").first()  # only keep the previously resampled value
 
     # rename available variables to core data format
     df = auxiliary.rename_columns(df, format_DWD_historical)
@@ -228,7 +228,7 @@ def DWD_forecast_2_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.Data
     ### format raw data for further operations
     df = df_import.copy()
     # Resample the DataFrame to make the DatetimeIndex complete and monotonic
-    df = df.resample('H').asfreq()
+    df = df.resample('h').asfreq()
     # delete timezone information
     df = df.tz_localize(None)
     # rename available variables to core data format
