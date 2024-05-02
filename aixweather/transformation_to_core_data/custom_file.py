@@ -40,12 +40,12 @@ def custom_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame
     ### preprocessing raw data for further operations
     df = df_import.copy()
     # Resample the DataFrame to make the DatetimeIndex complete and monotonic
-    df = df.resample('H').asfreq()
+    df = df.resample('h').asfreq()
     # rename available variables to core data format
     df = auxiliary.rename_columns(df, format_costum)
 
     ### convert timezone to UTC+0 -> change periods accordingly
-    df = df.shift(periods=0, freq="H", axis=0)
+    df = df.shift(periods=0, freq="h", axis=0)
 
     ### shift and interpolate data forward 30mins or backward -30mins
     df_no_shift = df.copy()

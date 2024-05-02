@@ -73,7 +73,7 @@ def TRY_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
         df.index = pd.to_datetime(time_index)
         # data is shifted back to original to start: back to
         # 2017-01-01 01:00:00 instead of the temporary 2017-01-01 00:00:00
-        df = df.shift(periods=1, freq="H", axis=0)
+        df = df.shift(periods=1, freq="h", axis=0)
 
         return df
 
@@ -81,12 +81,12 @@ def TRY_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
     df = df_import.copy()
     df = TRY_to_datetimeindex(df, meta)
     # Resample the DataFrame to make the DatetimeIndex complete and monotonic
-    df = df.resample('H').asfreq()
+    df = df.resample('h').asfreq()
     # rename available variables to core data format
     df = auxiliary.rename_columns(df, format_TRY_15_45)
 
     ### convert timezone to UTC+0
-    df = df.shift(periods=-1, freq="H", axis=0)
+    df = df.shift(periods=-1, freq="h", axis=0)
 
     ### shift and interpolate data forward 30mins or backward -30mins
     df_no_shift = df.copy()

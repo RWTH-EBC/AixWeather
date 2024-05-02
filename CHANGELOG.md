@@ -13,4 +13,6 @@
   - BugFix: DWD historical pull with station id´s with less than 5 digits.
   - Feature: updated station list link
   - Feature: check for meaningful start and end dates
-
+- v0.1.5:
+  - Change sampling interval string from H to h #54
+  - Fix shapely import issue #52

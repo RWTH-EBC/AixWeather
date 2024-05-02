@@ -6,8 +6,6 @@ import re
 import pandas as pd
 import random
 
-from shapely.geometry import Point
-
 from aixweather.imports.utils_import import MetaData
 
 
@@ -102,8 +100,10 @@ def load_try_meta_from_file(path: str) -> MetaData:
     try:
         import geopandas as gpd
         from geopy.geocoders import Nominatim
-    except ImportError:
-        print("Optional dependency 'TRY' not installed, skipping metadata of TRY.")
+        from shapely.geometry import Point
+    except ImportError as err:
+        print("Optional dependency 'TRY' not installed, "
+              "skipping metadata of TRY. ImportError:", err)
         return meta
 
     ### convert latitude and longitude
@@ -174,7 +174,7 @@ def load_try_from_file(path: str) -> pd.DataFrame:
     weather_df = pd.read_table(
         filepath_or_buffer=path,
         header=header_row,
-        delim_whitespace=True,
+        sep='\s+',
         skip_blank_lines=False,
         encoding="latin",
     )
