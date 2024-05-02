@@ -14,5 +14,13 @@
   - Feature: updated station list link
   - Feature: check for meaningful start and end dates
 - v0.1.5:
+  - BugFix: timezone shift in opposite direction for epw imports
+  - BugFix: start time for epw imports one hour to late fixed
+  - BugFix: package versioning
+  - BugFix: global radiation NaN problem for DWD try imports fixed
+  - Feature: tmy epw files with different years per month can now be handled
+  - Feature: enable custom filenames for exports
+  - Feature: use logging instaed of print
+- v0.1.6:
   - Change sampling interval string from H to h #54
   - Fix shapely import issue #52
