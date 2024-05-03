@@ -26,6 +26,7 @@ EXTRAS_REQUIRE = {
         "wetterdienst>=0.65.0,<=0.72.0",
         "geopandas~=0.14.0",
         "geopy~=2.4.0",
+        "shapely~=2.0.3",
     ]
 }
 
