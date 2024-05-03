@@ -22,5 +22,7 @@
   - Feature: enable custom filenames for exports
   - Feature: use logging instaed of print
 - v0.1.6:
-  - Change sampling interval string from H to h #54
-  - Fix shapely import issue #52
+  - Feature: Change sampling interval string from H to h #54
+  - BugFix: Add shapely import issue #52
+- v0.1.7:
+  - HotFix: Corrected shapely import issue #52 and optional dependencies TRY warning
