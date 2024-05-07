@@ -2,13 +2,13 @@
 
 The documentation, examples and tutorials should be understandable and the code bug-free.
 All users have different backgrounds, so you may not understand everything or encounter bugs.
-In that case, PLEASE raise an issue [here](https://github.com/RWTH-EBC/ebcpy/issues/new).
+In that case, PLEASE raise an issue [here](https://github.com/RWTH-EBC/AixWeather/issues/new/choose).
 
 # Contribute as a developer
 
 If you instead want to contribute new features or fix bugs yourself, we are more than happy.
 
-Please also raise an issue and create a new branch labeled `issueNR_issueName`.
+Please also raise an issue and create a new branch labeled `issueNR-issueName`.
 
 Once your feature is ready, create a pull request and check if the pipeline succeeds.
 Assign a reviewer before merging. Once the review is finished, you can merge.
