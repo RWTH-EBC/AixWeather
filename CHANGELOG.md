@@ -1,0 +1,28 @@
+- v0.1.0:
+   - Initiate AixWeather repository
+- v0.1.1:   
+   - BugFix: Config module not found, rearranged utils/definitions.
+- v0.1.2:
+  - BugFix: Compatibility with WebApp.
+- v0.1.3:
+  - BugFix: loose package versioning caused errors
+  - Feature: descriptive error messages
+  - Feature: now handles non-complete or monotonic datetimeindexes
+  - Feature: variable bucket size for plotting (days, weeks, month)
+- v0.1.4:
+  - BugFix: DWD historical pull with station id´s with less than 5 digits.
+  - Feature: updated station list link
+  - Feature: check for meaningful start and end dates
+- v0.1.5:
+  - BugFix: timezone shift in opposite direction for epw imports
+  - BugFix: start time for epw imports one hour to late fixed
+  - BugFix: package versioning
+  - BugFix: global radiation NaN problem for DWD try imports fixed
+  - Feature: tmy epw files with different years per month can now be handled
+  - Feature: enable custom filenames for exports
+  - Feature: use logging instaed of print
+- v0.1.6:
+  - Feature: Change sampling interval string from H to h #54
+  - BugFix: Add shapely import issue #52
+- v0.1.7:
+  - HotFix: Corrected shapely import issue #52 and optional dependencies TRY warning

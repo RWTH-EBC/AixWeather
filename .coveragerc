@@ -4,4 +4,4 @@ omit =
     */test*
 	# omit examples
 	*/examples*
-source = AixWeather
+source = aixweather

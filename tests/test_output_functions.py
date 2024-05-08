@@ -1,6 +1,7 @@
 """
 includes untittests for output functions
 """
+# pylint: disable=all
 
 import os.path
 import datetime as dt
@@ -9,17 +10,22 @@ import json
 
 import pandas as pd
 
+from aixweather import definitions
 from tests import utils_4_tests
-from config.definitions import ROOT_DIR
-from AixWeather.imports.utils_import import MetaData
-from AixWeather.project_class import ProjectClassDWDHistorical
-
+from aixweather.imports.utils_import import MetaData
+from aixweather.project_class import ProjectClassDWDHistorical
 
 class BaseOutputFunction(unittest.TestCase):
     def init(cls, name: str, start: dt.datetime, end: dt.datetime, station=15000):
-        cls.c = ProjectClassDWDHistorical(start=start, end=end, station=station)
+        abs_result_folder_path = os.path.join(definitions.result_folder_path(), name)
+        cls.c = ProjectClassDWDHistorical(
+            start=start,
+            end=end,
+            station=station,
+            abs_result_folder_path=abs_result_folder_path,
+        )
         cls.folder_tests = os.path.join(
-            ROOT_DIR,
+            definitions.ROOT_DIR,
             f"tests/test_files/regular_tests/output_functions/test_{name}",
         )
         cls.start_formatted = start.strftime("%Y%m%d")
@@ -30,7 +36,7 @@ class BaseOutputFunction(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls) -> None:
-        utils_4_tests.delete_created_result_files()
+        utils_4_tests.delete_created_result_files(cls.c.abs_result_folder_path)
 
 
 class TestOutputFunction(BaseOutputFunction, utils_4_tests.RegressionTestsClass):
@@ -59,7 +65,6 @@ class TestOutputFunction(BaseOutputFunction, utils_4_tests.RegressionTestsClass)
         with open(input_file_meta, "r") as meta_file:
             meta_json = json.load(meta_file)
         cls.c.meta_data = MetaData(**meta_json)
-
 
         cls.c.core_2_pickle()
         cls.c.core_2_json()
