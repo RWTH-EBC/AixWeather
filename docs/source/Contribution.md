@@ -39,7 +39,6 @@ def foo(dummy):
         pd.Dataframe: Return description
     """
 ```
-
 ## Unit-Tests
 Especially when creating new functions or classes, you have to add a unit-test function.
 Open the `\tests`-directory. If you create a new module, you have to create a new 
