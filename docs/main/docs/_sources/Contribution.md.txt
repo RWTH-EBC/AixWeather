@@ -2,13 +2,13 @@
 
 The documentation, examples and tutorials should be understandable and the code bug-free.
 All users have different backgrounds, so you may not understand everything or encounter bugs.
-In that case, PLEASE raise an issue [here](https://github.com/RWTH-EBC/ebcpy/issues/new).
+In that case, PLEASE raise an issue [here](https://github.com/RWTH-EBC/AixWeather/issues/new/choose).
 
 # Contribute as a developer
 
 If you instead want to contribute new features or fix bugs yourself, we are more than happy.
 
-Please also raise an issue and create a new branch labeled `issueNR_issueName`.
+Please also raise an issue and create a new branch labeled `issueNR-issueName`.
 
 Once your feature is ready, create a pull request and check if the pipeline succeeds.
 Assign a reviewer before merging. Once the review is finished, you can merge.
@@ -41,7 +41,8 @@ def foo(dummy):
 ```
 ## Unit-Tests
 Especially when creating new functions or classes, you have to add a unit-test function.
-Open the `test_module.py` file in the `\tests`-directory and add a function to the class `TestModule`with a name like `test_my_new_function`. If you create a new module, you have to create a new `test_my_new_module.py` file and follow the existing structure of the 
+Open the `\tests`-directory. If you create a new module, you have to create a new 
+`test_my_new_module.py` file and follow the existing structure of the 
 other test-files.
 
 If you are not familiar with unit-tests, here is a quick summary:
