@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# ebcpy documentation build configuration file, created by
+# aixweather documentation build configuration file, created by
 # sphinx-quickstart on Thu Jul 11 11:40:00 2019.
 #
 # This file is execfile()d with the current directory set to its
