@@ -2,12 +2,14 @@
 import DWD TRY data
 """
 
+import logging
 import re
-import pandas as pd
 import random
+import pandas as pd
 
 from aixweather.imports.utils_import import MetaData
 
+logger = logging.getLogger(__name__)
 
 def _handle_TRY_type(path: str) -> tuple:
     """
@@ -101,10 +103,9 @@ def load_try_meta_from_file(path: str) -> MetaData:
         import geopandas as gpd
         from geopy.geocoders import Nominatim
         from shapely.geometry import Point
-    except ImportError as err:
-        print("Optional dependency 'TRY' not installed, "
-              "skipping metadata of TRY. ImportError:", err)
-        return meta
+    except ImportError:
+        raise ImportError("Optional dependency 'TRY' not installed. Conversion of longitude and "
+                          "latitude not possible and hence no radiation transformation.")
 
     ### convert latitude and longitude
     # Create a GeoDataFrame with the provided coordinates
