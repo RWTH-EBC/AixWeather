@@ -9,7 +9,7 @@ stages:
 
 variables:
   COVERAGE_TYPE: "NotDymola"
-  PAGES_BRANCH: main
+  PAGES_BRANCH: master
   PYTHON_VERSION: "registry.git.rwth-aachen.de/ebc/ebc_all/gitlab_ci/templates:python_3.11"
   PYTHON_PACKAGE_NAME: "aixweather"
   TEST_ENGINE: "PYTEST"
