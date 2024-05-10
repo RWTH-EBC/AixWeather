@@ -97,7 +97,8 @@ it a valuable tool not only for researchers that work with the ReaderTMY3 format
 
 # Accessibility
 
-AixWeather can be accessed through the repository itself, e.g. to incorporated in simulation 
+AixWeather can be accessed through the repository itself (https://github.com/RWTH-EBC/AixWeather)
+, e.g. to incorporated in simulation 
 automation workflows.
 For manual weather data generation we recommend our locally hosted web application at 
 https://aixweather.eonerc.rwth-aachen.de, omitting the need to set up an environment.
@@ -106,8 +107,9 @@ https://github.com/RWTH-EBC/AixWeather-WebApp.
 
 # Structure of AixWeather
 
-Figure \autoref{fig:AixWeatherStructure} shows the current structure of AixWeather. 
-Starting from the import layer, the data is transformed into a core format, and from there into the
+\autoref{fig:AixWeatherStructure} shows the current data flow and structure of AixWeather. 
+Starting from the import layer, the imported data is transformed into a core format, and from there 
+into the
 desired export format. The core format is a defined format that allows for easy conversion to
 different export formats. The pass-through handling avoids avoidable interpolation-related 
 smoothing, through storing the original unsmoothed time series and, if the shift sequence 
