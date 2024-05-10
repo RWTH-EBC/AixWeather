@@ -23,13 +23,10 @@ bibliography: paper.bib
 AixWeather is a tool for generating weather data for building energy system simulations. 
 It can be used to retrieve, format, enrich and ultimately export weather data in various file formats, 
 including .epw (EnergyPlus) and .mos (AixLib).
-
-[//]: # (AixWeather is a weather data generation tool designed to simplify the process of retrieving, )
-[//]: # (formatting, enriching and ultimately exporting weather data for building energy system simulations. )
 It addresses the challenges researchers and industry players face in obtaining accurate and standardized weather 
-data by providing a user-friendly platform.
+data by providing a streamlined process.
 
-Key features of AixWeather:
+**Key features of AixWeather**:
 
 *Data retrieval*: AixWeather can directly retrieve data from the german weather provider DWD, and 
 supports historical, recent and forecasted weather data retrieval. It also supports the upload 
@@ -66,7 +63,12 @@ AixWeather empowers researchers and professionals working in building energy sys
 the weather data generation process. It ensures the availability of high-quality weather data, 
 enabling researchers to focus on their essential work in the field of building energy systems.
 
-Figure \autoref{fig:AixWeatherStructure} shows the current structure of AixWeather.
+Figure \autoref{fig:AixWeatherStructure} shows the current structure of AixWeather. 
+Starting from the import layer, the data is transformed into a core format, and from there into the
+desired export format. The core format is a standardized format that allows for easy conversion to
+different export formats. The pass-through handling avoids avoidable interpolation-related 
+smoothing, through storing the original unsmoothed time series and, if the shifting sequence 
+allows, overwriting the smoothed time series in the output file.
 
 ![Structure of AixWeather.\label{fig:AixWeatherStructure}](Overview_WeatherTool.png)
 
@@ -76,16 +78,26 @@ Figure \autoref{fig:AixWeatherStructure} shows the current structure of AixWeath
 Building energy simulations, crucial for research in building energy systems, 
 often rely on specific weather data formats. Creating such weather data can be a 
 labor-intensive and error-prone task. AixWeather addresses these challenges by offering 
-a comprehensive solution for pulling, transforming, and exporting weather data from various sources and formats.
+a comprehensive solution for pulling, transforming, enriching and exporting weather data from 
+various sources and formats.
 
-There are limited tools available for importing and converting real weather data or Test Reference Years (TRY). 
-Also, there is a lack of tools supporting the ReaderTMY3 format.
-AixWeather offers a practical solution to a critical need in the field, making it a 
-valuable tool for researchers working with this specific output format.
+There are tools that focus on generating typical meteorological year (TMY) data, like the PVGIS [@PVGIS.2023]
+from the European Commission, providing TMY exports as .csv, .json and in the .epw format.
+EnergyPlus [@EnergyPlus.2017], a widely used building energy simulation tool, also provides a 
+weather data converter to cover the needs of its users, again only supporting the .epw format.
+There exist only limited tools for importing and converting real, historic or forecast, weather 
+data to building energy simulation formats.
+The same holds true for Test Reference Years (TRY) from the german weather service (DWD). 
+Also, there is a lack of tools supporting conversions to the ReaderTMY3 format.
 The ReaderTMY3 is a modelica model of the well established open source library Buildings
 [@WetterZuoNouiduiPang.2014].
 Other libraries such as the open source library AixLib [@Maier.2023] import this model
 to handle weather data.
+Often user of these libraries, which do not have an TMY3 file at hand, get stuck or invest a lot of 
+time to convert their weather data to the required format.
+Solving this problem, was the initial motivation to develop AixWeather.
+Now AixWeather also covers the aforementioned needs, making 
+it a valuable tool not only for researchers that work with the ReaderTMY3 format.
 
 # Acknowledgements
 
