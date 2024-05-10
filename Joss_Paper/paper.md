@@ -83,13 +83,17 @@ The ReaderTMY3 is a modelica model of the well established open source library B
 [@WetterZuoNouiduiPang.2014].
 Other libraries such as the open source library AixLib [@Maier.2023] import this model
 to handle weather data.
-Often user of these libraries, which do not have an TMY3 file at hand, get stuck or invest a lot of 
+Often user of these libraries, which do not have a TMY3 file at hand, get stuck or invest a lot of 
 time to convert their weather data to the required format.
 Solving this problem, was the initial motivation to develop AixWeather.
+Now, AixWeather is used by users of the open source library AixLib on a regular basis. Due to the 
+recent open source release and the lack of a citable reference, there is no citation yet.
+Though, it does not only cover the needs of the AixLib users, but also those who need real 
+weather data, be it historical or forecasted, in a format that can be used in building energy 
+simulations. 
 Now AixWeather also covers the aforementioned needs, making 
 it a valuable tool not only for researchers that work with the ReaderTMY3 format.
-AixWeather is used by users of the open source library AixLib on a regular basis. Due to the 
-recent open source release and the lack of a citable reference, there is no citation yet.
+
 
 # Accessibility
 
