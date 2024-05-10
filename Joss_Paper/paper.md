@@ -1,5 +1,6 @@
 ---
-title: 'AixWeather: A weather data generation tool for building energy system simulations. Pull, Transform, Export.'
+title: 'AixWeather: A Weather Data Generation Tool for Building Energy System Simulations. 
+Pull, Transform, Export.'
 tags:
   - Python
   - Weather
