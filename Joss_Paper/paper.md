@@ -67,12 +67,11 @@ The ReaderTMY3 is a Modelica model of the well-established open-source library B
 [@WetterZuoNouiduiPang.2014].
 Other libraries, such as the open-source library AixLib [@Maier.2023], import this model
 to handle weather data.
-Often, users of these libraries, which do not have a TMY3 file at hand, get stuck or invest a lot of 
-time to convert their weather data to the required format.
-Solving this problem was the initial motivation behind developing AixWeather.
-Furthermore, only limited tools exist for importing and converting real, historical, or forecast 
-weather data to building energy simulation formats.
-The same holds for Test Reference Years (TRY) from the German Weather Service (DWD).
+Often users of these libraries, who do not have a TMY3 file at hand, get stuck or spend a lot of time to convert their weather data into the required format.
+Solving this problem was the initial motivation to develop AixWeather.
+Moreover, there are only limited tools for importing real, historical or 
+forecast, weather data and converting it to building energy simulation formats.
+The same is true for the Test Reference Years (TRY) of the German Weather Service (DWD). 
 AixWeather also addresses these needs, making it a valuable tool, not only for researchers who work with the ReaderTMY3 format.
 
 [//]: # (AixWeather is regularly used by users of the open-source library AixLib. Due to the )
@@ -89,9 +88,10 @@ https://github.com/RWTH-EBC/AixWeather-WebApp.
 # Structure of AixWeather
 
 \autoref{fig:AixWeatherStructure} shows the current data flow and structure of AixWeather. 
-First, the data is imported as raw as possible. 
-The imported data is transformed into a core format and, from there, into the desired export format. 
-The core format is a defined format that allows for generalized conversion to different export 
+First, the data is imported as raw as possible, to enable inspection of the raw data. 
+The imported data is then converted into a core format, including all transformations like data 
+enrichment, unit conversions, time zone and measurement time handling.
+The core format is a defined format that allows for generalized conversion to the different export 
 formats. 
 The pass-through handling avoids avoidable interpolation-related smoothing by storing the original 
 unsmoothed time series and, if the shift sequence allows, overwriting the smoothed time series 
