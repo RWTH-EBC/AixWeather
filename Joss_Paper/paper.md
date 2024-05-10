@@ -113,7 +113,7 @@ different export formats. The pass-through handling avoids avoidable interpolati
 smoothing, through storing the original unsmoothed time series and, if the shift sequence 
 allows, overwriting the smoothed time series in the output file.
 
-![Structure of AixWeather.\label{fig:AixWeatherStructure}](Overview_WeatherTool.png)****
+![Structure of AixWeather.\label{fig:AixWeatherStructure}](Overview_WeatherTool.png)
 
 # Acknowledgements
 
