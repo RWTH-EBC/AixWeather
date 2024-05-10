@@ -30,31 +30,36 @@ It addresses the challenges researchers and industry players face in obtaining a
 data by providing a user-friendly platform.
 
 Key features of AixWeather:
-Data retrieval: AixWeather can directly retrieve data from the german weather provider DWD, and 
+
+*Data retrieval*: AixWeather can directly retrieve data from the german weather provider DWD, and 
 supports historical, recent and forecasted weather data retrieval. It also supports the upload 
 of test reference years (TRY) from the DWD and .epw files from EnergyPlus. A custom weather data 
 upload is also supported, which depending on the data structure, needs to be adjusted by the user.
 
-Data conversion: AixWeather converts this raw weather data from various sources into a standardized 
+*Data conversion*: AixWeather converts this raw weather data from various sources into a 
+standardized 
 core format and from there into the desired export format.
 
-Data accuracy: AixWeather ensures data accuracy by taking into account critical factors that are 
+*Data accuracy*: AixWeather ensures data accuracy by taking into account critical factors that are 
 often overlooked in custom solutions, including consideration of time zones, 
 the time reference of the measurement, unit conversions, correct handling of incomplete data series 
 and, where possible, the avoidance of interpolation-related smoothing.
 
-Data enrichment: AixWeather uses physical relationships to calculate missing weather variables
+*Data enrichment*: AixWeather uses physical relationships to calculate missing weather variables
 from the available weather data and metadata.
 
-Flexibility: AixWeather offers a modular structure that simplifies the addition of new import and
+*Flexibility*: AixWeather offers a modular structure that simplifies the addition of new import and
 output formats. The maintenance of existing formats is also simplified, 
 enabling a faster response to changing weather data formats.
 
-Modelica ReaderTMY3 compatibility: A special feature of AixWeather is its support for generating 
+*Modelica ReaderTMY3 compatibility*: A special feature of AixWeather is its support for generating 
 weather data compatible with the Modelica ReaderTMY3 format. This covers a so far unsatisfied need.
 
 AixWeather can be accessed through the repository itself, or through the web application at 
-https://aixweather.eonerc.rwth-aachen.de. The web application provides a user-friendly interface
+https://aixweather.eonerc.rwth-aachen.de.
+The web application is also open source and hosted in a separate repository at 
+https://github.com/RWTH-EBC/AixWeather-WebApp.
+The web application provides a user-friendly interface
 for even more convenient generation of weather data without the need of setting up an environment.
 
 AixWeather empowers researchers and professionals working in building energy systems by streamlining 
@@ -63,7 +68,7 @@ enabling researchers to focus on their essential work in the field of building e
 
 Figure \autoref{fig:AixWeatherStructure} shows the current structure of AixWeather.
 
-![Structure of AixWeather.\label{fig:AixWeatherStructure}](Overview_WeatherTool.drawio.png)
+![Structure of AixWeather.\label{fig:AixWeatherStructure}](Overview_WeatherTool.png)
 
 
 # Statement of need
