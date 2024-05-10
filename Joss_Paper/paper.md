@@ -97,13 +97,14 @@ The pass-through handling avoids avoidable interpolation-related smoothing by st
 unsmoothed time series and, if the shift sequence allows, overwriting the smoothed time series 
 in the output file.
 
-![Structure of AixWeather.\label{fig:AixWeatherStructure}](Overview_WeatherTool_Joss.png)
+![Data flow and structure of AixWeather.\label{fig:AixWeatherStructure}](Overview_WeatherTool_Joss.png)
 
 # Acknowledgements
 
 We acknowledge contributions from Michael Mans, Felix Nienaber, and Ana Constantin for providing 
 some functional base code.
 We also want to thank Firas Drass and Felix Rehmann from TU Berlin for their support on the WebApp.
-Lastly, we want to thank Fabian Wüllhorst and David Jansen for their support with quality management through continuous integration.
+Lastly, we want to thank Fabian Wüllhorst and David Jansen for their support for setting up the 
+quality management through continuous integration.
 
 # References
