@@ -60,7 +60,7 @@ a comprehensive solution for pulling, transforming, enriching, and exporting wea
 various sources and formats.
 
 Some tools focus on generating typical meteorological year (TMY) data, like the PVGIS [@PVGIS.2023] from the European Commission, which provides TMY exports in .csv, .json, and .epw formats.
-EnergyPlus [@EnergyPlus.2017], a widely used building energy simulation tool, also provides a 
+EnergyPlus [@EnergyPlus.2001], a widely used building energy simulation tool, also provides a 
 weather data converter to cover the needs of its users, again only supporting the .epw format.
 There is a lack of tools supporting conversions to the ReaderTMY3 format.
 The ReaderTMY3 is a Modelica model of the well-established open-source library Buildings
