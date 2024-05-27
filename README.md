@@ -54,7 +54,7 @@ See the examples to know how to use them.
 
 **Overview**
 
-![Weather Data Tool Diagram](docs/Overview_WeatherTool.drawio.png)
+![Weather Data Tool Diagram](docs/Overview_WeatherTool.png)
 
 **Known limitations:**
 
