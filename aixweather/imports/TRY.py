@@ -87,17 +87,17 @@ def load_try_meta_from_file(path: str) -> MetaData:
     rechtswert_line = next(
         line for line in header_lines if "Rechtswert" in line and ":" in line
     )
-    rechtswert = int(re.search(r":\s*(\d+) Meter", rechtswert_line).group(1))
+    rechtswert = int(re.search(r":\s*(-?\d+) Meter", rechtswert_line).group(1))
 
     # Extract Hochwert (Northing)
     hochwert_line = next(
         line for line in header_lines if "Hochwert" in line and ":" in line
     )
-    hochwert = int(re.search(r":\s*(\d+) Meter", hochwert_line).group(1))
+    hochwert = int(re.search(r":\s*(-?\d+) Meter", hochwert_line).group(1))
 
     # Extract Höhenlage (altitude)
     hoehenlage_line = next(line for line in header_lines if "Hoehenlage" in line)
-    hoehenlage = int(re.search(r":\s*(\d+) Meter", hoehenlage_line).group(1))
+    hoehenlage = int(re.search(r":\s*(-?\d+) Meter", hoehenlage_line).group(1))
 
     try:
         import geopandas as gpd
