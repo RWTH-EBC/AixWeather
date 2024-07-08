@@ -55,7 +55,7 @@ def import_DWD_historical(start: dt.datetime, station: str) -> pd.DataFrame:
     # get weather data from dwd per measurement
     for single_measurement in measurements:
         # inconsistent pathing from DWD resolved by using the 10-min Values for these measurements
-        if single_measurement == "solar" or single_measurement == "air_temperature":
+        if single_measurement in ["solar", "air_temperature", "wind"]:
             df_w = _pull_DWD_historical_data(
                 f"{base_url}/10_minutes/{single_measurement}/recent/",
                 station=station,

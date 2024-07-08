@@ -29,15 +29,15 @@ format_DWD_historical = {
     "TT_10": {"core_name": "DryBulbTemp", "time_of_meas_shift": "foll2ind", "unit": "degC"},
     "TD_10": {"core_name": "DewPointTemp", "time_of_meas_shift": "foll2ind", "unit": "degC"},
     "PP_10": {"core_name": "AtmPressure", "time_of_meas_shift": "foll2ind", "unit": "hPa"},
-    #https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/solar/BESCHREIBUNG_obsgermany_climate_10min_solar_de.pdf
+    # https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/solar/BESCHREIBUNG_obsgermany_climate_10min_solar_de.pdf
     "DS_10": {"core_name": "DiffHorRad", "time_of_meas_shift": "foll2ind", "unit": "J/cm2", "resample": "sum"},
-    #https://de.wikipedia.org/wiki/Globalstrahlung
+    # https://de.wikipedia.org/wiki/Globalstrahlung
     "GS_10": {"core_name": "GlobHorRad", "time_of_meas_shift": "foll2ind", "unit": "J/cm2", "resample": "sum"},
-    #https://de.wikipedia.org/wiki/Atmosph%C3%A4rische_Gegenstrahlung
+    # https://de.wikipedia.org/wiki/Atmosph%C3%A4rische_Gegenstrahlung
     "LS_10": {"core_name": "HorInfra", "time_of_meas_shift": "foll2ind", "unit": "J/cm2", "resample": "sum", "nan":[990, -999]},
-    #https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/wind/BESCHREIBUNG_obsgermany_climate_10min_wind_de.pdf
-    "FF_10": {"core_name": "WindSpeed", "time_of_meas_shift": "prec2ind", "unit": "m/s"},
-    "DD_10": {"core_name": "WindDir", "time_of_meas_shift": "prec2ind", "unit": "deg"},
+    # https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/wind/BESCHREIBUNG_obsgermany_climate_10min_wind_de.pdf
+    "FF_10": {"core_name": "WindSpeed", "time_of_meas_shift": "foll2ind", "unit": "m/s"},
+    "DD_10": {"core_name": "WindDir", "time_of_meas_shift": "foll2ind", "unit": "deg"},
     # https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/precipitation/BESCHREIBUNG_obsgermany_climate_10min_precipitation_de.pdf
     "RWS_10": {"core_name": "LiquidPrecD", "time_of_meas_shift": "prec2ind", "unit": "mm/h", "resample": "sum"},
     # https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/soil_temperature/BESCHREIBUNG_obsgermany_climate_hourly_soil_temperature_de.pdf
