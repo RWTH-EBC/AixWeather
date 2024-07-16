@@ -53,7 +53,7 @@
                 "statement": 130,
                 "warning": 0
             },
-            "examples.e1_pull_DWD_historical_to_all_output_formats": {
+            "e1_pull_DWD_historical_to_all_output_formats": {
                 "convention": 0,
                 "error": 0,
                 "fatal": 0,
@@ -139,8 +139,8 @@
                 "aixweather"
             ],
             "pandas": [
-                "aixweather.project_class",
-                "aixweather"
+                "aixweather",
+                "aixweather.project_class"
             ],
             "matplotlib.pyplot": [
                 "aixweather.data_quality_checks"
@@ -188,10 +188,10 @@
                 "aixweather.project_class"
             ],
             "aixweather.project_class": [
-                "examples.e1_pull_DWD_historical_to_all_output_formats"
+                "e1_pull_DWD_historical_to_all_output_formats"
             ],
             "aixweather.data_quality_checks": [
-                "examples.e1_pull_DWD_historical_to_all_output_formats"
+                "e1_pull_DWD_historical_to_all_output_formats"
             ]
         },
         "duplicated_lines": {
@@ -360,8 +360,8 @@
                 "aixweather"
             ],
             "pandas": [
-                "aixweather.project_class",
-                "aixweather"
+                "aixweather",
+                "aixweather.project_class"
             ],
             "matplotlib.pyplot": [
                 "aixweather.data_quality_checks"
