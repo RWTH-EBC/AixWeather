@@ -321,7 +321,7 @@ def _pull_DWD_historical_data(url: str, station: str) -> pd.DataFrame:
         # make MESS_DATUM the index for concenating
         data.set_index("MESS_DATUM", inplace=True, drop=True)
 
-        data_total = pd.concat([data_total, data], verify_integrity=True)
+        data_total = pd.concat([data_total, data], verify_integrity=False)
 
         shutil.rmtree(definitions.local_folder_temp)
 
