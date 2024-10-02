@@ -26,8 +26,8 @@ format_DWD_historical = {
     # https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/
     # 10_minutes/air_temperature/DESCRIPTION_obsgermany_climate_10min_air_temperature_en.pdf
     "RF_10": {"core_name": "RelHum", "time_of_meas_shift": "foll2ind", "unit": "percent"},
-    "TT_10": {"core_name": "DryBulbTemp", "time_of_meas_shift": "foll2ind", "unit": "degC"},
-    "TD_10": {"core_name": "DewPointTemp", "time_of_meas_shift": "foll2ind", "unit": "degC"},
+    "TT_10": {"core_name": "DryBulbTemp", "time_of_meas_shift": "foll2ind", "unit": "degC", "nan": [-999]},
+    "TD_10": {"core_name": "DewPointTemp", "time_of_meas_shift": "foll2ind", "unit": "degC", "nan": [-999]},
     "PP_10": {"core_name": "AtmPressure", "time_of_meas_shift": "foll2ind", "unit": "hPa"},
     # https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/solar/BESCHREIBUNG_obsgermany_climate_10min_solar_de.pdf
     "DS_10": {"core_name": "DiffHorRad", "time_of_meas_shift": "foll2ind", "unit": "J/cm2", "resample": "sum"},
