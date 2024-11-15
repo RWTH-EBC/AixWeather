@@ -24,11 +24,24 @@ If you have any questions regarding AixWeather, feel free to contact us at aixwe
 
 For fast access without setup, use the WebApp.
 The repository [AixWeather-WebApp](https://github.com/RWTH-EBC/AixWeather-WebApp) contains the corresponding WebApp for this repo.
-This repository contains the functionalities useful for, e.g., automation of tasks. 
+This repository contains the functionalities useful for, e.g., automation of tasks and is 
+available at PyPI as [AixWeather](https://pypi.org/project/AixWeather/).
 
 ## How to use
-For each data origin, a class is defined. Use generic functions to create the desired output file.
-See the examples to know how to use them.  
+Clone the repo and simply install via:
+```bash
+pip install AixWeather
+```
+or
+```bash
+cd AixWeather
+pip install -e .
+```
+
+Then go to examples and follow the descriptions.
+For each data origin, a class is defined. 
+Use generic functions to create the desired output file.
+For background knowledge, check the below tool structure and overview.
 
 ## Tool structure and overview
 
