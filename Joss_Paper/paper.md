@@ -39,7 +39,7 @@ formatted weather data by providing a streamlined process.
 *Data conversion*: AixWeather converts this raw weather data from various sources into a defined core format and, from there, into the desired export format.
 
 *Data accuracy*: AixWeather ensures data accuracy by taking into account critical factors that are 
-often overlooked in custom solutions, including consideration of time zones, 
+often overlooked in custom solutions, which are specifically the consideration of time zones, 
 the time reference of the measurement, unit conversions, correct handling of incomplete data series 
 and, where possible, the avoidance of interpolation-related smoothing.
 

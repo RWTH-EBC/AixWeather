@@ -46,7 +46,10 @@ For background knowledge, check the below tool structure and overview.
 
 ## Tool structure and overview
 
-**This tool consists of three layers:**
+AixWeather is a tool for generating weather data for building energy system simulations. 
+It retrieves, formats, enriches, and ultimately exports weather data in various file formats.
+
+**This tool consists of three layers that are executed as a pipeline for each run:**
 
 1. Import raw weather data from several sources
 
@@ -66,7 +69,16 @@ For background knowledge, check the below tool structure and overview.
 
 3. Transform the core-format data to your desired output format
 
+Which transformations are executed, i.e. required, will always depend on the input data and the 
+desired output format.
+The current set of implemented transformation functions can be found in 
+[aixweather/transformation_functions](aixweather/transformation_functions).
+The tool selects the required transformation functions based on the input data and 
+the desired output format.
+
 **Overview**
+
+The below diagram shows the tool's structure and the data flow from the import to the output format.
 
 ![Weather Data Tool Diagram](docs/Overview_WeatherTool.png)
 
