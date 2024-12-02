@@ -19,7 +19,9 @@
       <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="aixweather" href="../code/modules.html" />
+    <link rel="prev" title="Examples" href="../examples.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -63,6 +65,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../examples.html">Examples</a></li>
       <li class="breadcrumb-item active">&lt;no title&gt;</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/examples/e1_pull_DWD_historical_to_all_output_formats.md.txt" rel="nofollow"> View page source</a>
@@ -74,15 +77,25 @@
            <div itemprop="articleBody">
              
   <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Contains examples&quot;&quot;&quot;</span>
-
-<span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
 </pre></div>
 </div>
-<p>choose the project class according to the desired weather data origin</p>
+<p>pylint: disable=C0415, C0103
+let pylint ignore to import from aixweather (Import outside toplevel), and ignore that pylint
+suggests e1_pull_DWD_historical_to_all_output_formats would not be snake_case.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
+</pre></div>
+</div>
+<p>Enable logging, this is just get more feedback through the terminal</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Choose the project class according to the desired weather data origin.
+Check the project classes file or the API documentation to see which classes are available.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aixweather.project_class</span> <span class="kn">import</span> <span class="n">ProjectClassDWDHistorical</span>
 </pre></div>
 </div>
-<p>initiate the project class which contains or creates all variables and functions</p>
+<p>Step 0: Initiate the project class which contains or creates all variables and functions.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DWD_pull_project</span> <span class="o">=</span> <span class="n">ProjectClassDWDHistorical</span><span class="p">(</span>
     <span class="n">start</span><span class="o">=</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
     <span class="n">end</span><span class="o">=</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
@@ -94,14 +107,14 @@
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>import historical weather from the DWD open access database</p>
+<p>Step 1: Import historical weather from the DWD open access database</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">import_data</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span>
     <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">How the imported data looks like:</span><span class="se">\n</span><span class="si">{</span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">imported_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>convert this imported data to the core format</p>
+<p>Step 2: Convert this imported data to the core format</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">data_2_core_data</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">How the core data looks like:</span><span class="se">\n</span><span class="si">{</span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
@@ -115,7 +128,7 @@
 <span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>convert this core data to an output data format of your choice</p>
+<p>Step 3: Convert this core data to an output data format of your choice</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_2_csv</span><span class="p">()</span>
 <span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_2_json</span><span class="p">()</span>
 <span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_2_pickle</span><span class="p">()</span>
@@ -127,7 +140,10 @@
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../examples.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../code/modules.html" class="btn btn-neutral float-right" title="aixweather" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
