@@ -1,4 +1,4 @@
-![E.ON EBC RWTH Aachen University](https://github.com/RWTH-EBC/AixWeather/blob/main/docs/source/_static/EBC_Logo.png)
+![E.ON EBC RWTH Aachen University](https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/source/_static/EBC_Logo.png)
 
 [![pylint](https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.svg )](https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.html)
 [![documentation](https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/doc.svg)](https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/index.html)
@@ -6,7 +6,7 @@
 [![coverage](https://rwth-ebc.github.io/AixWeather/4-joss_paper/coverage/badge.svg)](https://rwth-ebc.github.io/AixWeather/4-joss_paper/coverage)
 
 <div align="center">
-  <img src="https://github.com/RWTH-EBC/AixWeather/blob/main/docs/aixweather_logo/AixWeather_Logo.png" alt="AixWeather Logo" width="50%">
+  <img src="https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/aixweather_logo/AixWeather_Logo.png" alt="AixWeather Logo" width="50%">
 </div>
 
 # AixWeather
