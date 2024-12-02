@@ -3,6 +3,7 @@
 [![pylint](https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.svg )](https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.html)
 [![documentation](https://rwth-ebc.github.io/AixWeather//main//docs/doc.svg)](https://rwth-ebc.github.io/AixWeather//main//docs/index.html)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![coverage](https://rwth-ebc.github.io/AixWeather/main/coverage/badge.svg)](https://rwth-ebc.github.io/AixWeather/main/coverage)
 
 <div align="center">
   <img src="./docs/aixweather_logo/AixWeather_Logo.png" alt="AixWeather Logo" width="50%">
