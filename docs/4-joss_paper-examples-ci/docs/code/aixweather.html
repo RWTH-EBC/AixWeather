@@ -1,0 +1,630 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>aixweather package &mdash; aixweather 0.1.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../_static/jquery.js"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+      <script src="../_static/doctools.js"></script>
+      <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="aixweather.core_data_format_2_output_file package" href="aixweather.core_data_format_2_output_file.html" />
+    <link rel="prev" title="aixweather" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            aixweather
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">aixweather</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">aixweather package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html">aixweather.core_data_format_2_output_file package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aixweather.imports.html">aixweather.imports package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aixweather.transformation_functions.html">aixweather.transformation_functions package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aixweather.transformation_to_core_data.html">aixweather.transformation_to_core_data package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aixweather.data_quality_checks">aixweather.data_quality_checks module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#aixweather.data_quality_checks.plot_heatmap_missing_values"><code class="docutils literal notranslate"><span class="pre">plot_heatmap_missing_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aixweather.data_quality_checks.print_df_info"><code class="docutils literal notranslate"><span class="pre">print_df_info()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aixweather.definitions">aixweather.definitions module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#aixweather.definitions.result_folder_path"><code class="docutils literal notranslate"><span class="pre">result_folder_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aixweather.definitions.results_file_path"><code class="docutils literal notranslate"><span class="pre">results_file_path()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aixweather.project_class">aixweather.project_class module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#aixweather.project_class.ProjectClassCustom"><code class="docutils literal notranslate"><span class="pre">ProjectClassCustom</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aixweather.project_class.ProjectClassDWDForecast"><code class="docutils literal notranslate"><span class="pre">ProjectClassDWDForecast</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aixweather.project_class.ProjectClassDWDHistorical"><code class="docutils literal notranslate"><span class="pre">ProjectClassDWDHistorical</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aixweather.project_class.ProjectClassEPW"><code class="docutils literal notranslate"><span class="pre">ProjectClassEPW</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aixweather.project_class.ProjectClassERC"><code class="docutils literal notranslate"><span class="pre">ProjectClassERC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aixweather.project_class.ProjectClassGeneral"><code class="docutils literal notranslate"><span class="pre">ProjectClassGeneral</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aixweather.project_class.ProjectClassTRY"><code class="docutils literal notranslate"><span class="pre">ProjectClassTRY</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Contribution.html">Contribute as a user</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version_his.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">aixweather</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">aixweather</a></li>
+      <li class="breadcrumb-item active">aixweather package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/code/aixweather.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-aixweather">
+<span id="aixweather-package"></span><h1>aixweather package<a class="headerlink" href="#module-aixweather" title="Permalink to this heading"></a></h1>
+<p>AixWeather-Module. See readme or documentation for more information.</p>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html">aixweather.core_data_format_2_output_file package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#module-aixweather.core_data_format_2_output_file.to_epw_energyplus">aixweather.core_data_format_2_output_file.to_epw_energyplus module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.to_epw_energyplus.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.to_epw_energyplus.to_epw"><code class="docutils literal notranslate"><span class="pre">to_epw()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#module-aixweather.core_data_format_2_output_file.to_mos_TMY3">aixweather.core_data_format_2_output_file.to_mos_TMY3 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.to_mos_TMY3.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.to_mos_TMY3.to_mos"><code class="docutils literal notranslate"><span class="pre">to_mos()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#module-aixweather.core_data_format_2_output_file.unconverted_to_x">aixweather.core_data_format_2_output_file.unconverted_to_x module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.unconverted_to_x.to_csv"><code class="docutils literal notranslate"><span class="pre">to_csv()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.unconverted_to_x.to_json"><code class="docutils literal notranslate"><span class="pre">to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.unconverted_to_x.to_pickle"><code class="docutils literal notranslate"><span class="pre">to_pickle()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="aixweather.imports.html">aixweather.imports package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.imports.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.imports.html#module-aixweather.imports.DWD">aixweather.imports.DWD module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.DWD.import_DWD_forecast"><code class="docutils literal notranslate"><span class="pre">import_DWD_forecast()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.DWD.import_DWD_historical"><code class="docutils literal notranslate"><span class="pre">import_DWD_historical()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.DWD.import_meta_DWD_forecast"><code class="docutils literal notranslate"><span class="pre">import_meta_DWD_forecast()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.DWD.import_meta_DWD_historical"><code class="docutils literal notranslate"><span class="pre">import_meta_DWD_historical()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.imports.html#module-aixweather.imports.EPW">aixweather.imports.EPW module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.EPW.load_epw_from_file"><code class="docutils literal notranslate"><span class="pre">load_epw_from_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.EPW.load_epw_meta_from_file"><code class="docutils literal notranslate"><span class="pre">load_epw_meta_from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.imports.html#module-aixweather.imports.ERC">aixweather.imports.ERC module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.ERC.import_ERC"><code class="docutils literal notranslate"><span class="pre">import_ERC()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.ERC.import_meta_from_ERC"><code class="docutils literal notranslate"><span class="pre">import_meta_from_ERC()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.ERC.load_credentials_ERC_weather_data"><code class="docutils literal notranslate"><span class="pre">load_credentials_ERC_weather_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.imports.html#module-aixweather.imports.TRY">aixweather.imports.TRY module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.TRY.load_try_from_file"><code class="docutils literal notranslate"><span class="pre">load_try_from_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.TRY.load_try_meta_from_file"><code class="docutils literal notranslate"><span class="pre">load_try_meta_from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.imports.html#module-aixweather.imports.custom_file">aixweather.imports.custom_file module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.custom_file.load_custom_from_file"><code class="docutils literal notranslate"><span class="pre">load_custom_from_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.custom_file.load_custom_meta_data"><code class="docutils literal notranslate"><span class="pre">load_custom_meta_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.imports.html#module-aixweather.imports.utils_import">aixweather.imports.utils_import module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.utils_import.MetaData"><code class="docutils literal notranslate"><span class="pre">MetaData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.utils_import.MetaData.altitude"><code class="docutils literal notranslate"><span class="pre">MetaData.altitude</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.utils_import.MetaData.latitude"><code class="docutils literal notranslate"><span class="pre">MetaData.latitude</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.utils_import.MetaData.longitude"><code class="docutils literal notranslate"><span class="pre">MetaData.longitude</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.utils_import.MetaData.station_name"><code class="docutils literal notranslate"><span class="pre">MetaData.station_name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="aixweather.transformation_functions.html">aixweather.transformation_functions package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.transformation_functions.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.transformation_functions.html#module-aixweather.transformation_functions.auxiliary">aixweather.transformation_functions.auxiliary module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.evaluate_transformations"><code class="docutils literal notranslate"><span class="pre">evaluate_transformations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.fill_nan_from_format_dict"><code class="docutils literal notranslate"><span class="pre">fill_nan_from_format_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.force_data_variable_convention"><code class="docutils literal notranslate"><span class="pre">force_data_variable_convention()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.rename_columns"><code class="docutils literal notranslate"><span class="pre">rename_columns()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.replace_dummy_with_nan"><code class="docutils literal notranslate"><span class="pre">replace_dummy_with_nan()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.select_entry_by_core_name"><code class="docutils literal notranslate"><span class="pre">select_entry_by_core_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.transformation_functions.html#module-aixweather.transformation_functions.pass_through_handling">aixweather.transformation_functions.pass_through_handling module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.pass_through_handling.create_pass_through_variables"><code class="docutils literal notranslate"><span class="pre">create_pass_through_variables()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.pass_through_handling.pass_through_measurements_with_back_and_forth_interpolating"><code class="docutils literal notranslate"><span class="pre">pass_through_measurements_with_back_and_forth_interpolating()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.transformation_functions.html#module-aixweather.transformation_functions.time_observation_transformations">aixweather.transformation_functions.time_observation_transformations module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.avg_following_hour_2_indicated_time"><code class="docutils literal notranslate"><span class="pre">avg_following_hour_2_indicated_time()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.avg_preceding_hour_2_indicated_time"><code class="docutils literal notranslate"><span class="pre">avg_preceding_hour_2_indicated_time()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_following_hour"><code class="docutils literal notranslate"><span class="pre">indicated_time_2_avg_following_hour()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_preceding_hour"><code class="docutils literal notranslate"><span class="pre">indicated_time_2_avg_preceding_hour()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.shift_time_by_dict"><code class="docutils literal notranslate"><span class="pre">shift_time_by_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.truncate_data_from_start_to_stop"><code class="docutils literal notranslate"><span class="pre">truncate_data_from_start_to_stop()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.transformation_functions.html#module-aixweather.transformation_functions.unit_conversions">aixweather.transformation_functions.unit_conversions module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.Jcm2_to_Whm2"><code class="docutils literal notranslate"><span class="pre">Jcm2_to_Whm2()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.Jm2_to_Whm2"><code class="docutils literal notranslate"><span class="pre">Jm2_to_Whm2()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.divide_by_1000"><code class="docutils literal notranslate"><span class="pre">divide_by_1000()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.eigth_to_tenth"><code class="docutils literal notranslate"><span class="pre">eigth_to_tenth()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.hPa_to_Pa"><code class="docutils literal notranslate"><span class="pre">hPa_to_Pa()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.kJm2_to_Whm2"><code class="docutils literal notranslate"><span class="pre">kJm2_to_Whm2()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.kelvin_to_celcius"><code class="docutils literal notranslate"><span class="pre">kelvin_to_celcius()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.percent_to_tenth"><code class="docutils literal notranslate"><span class="pre">percent_to_tenth()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.transformation_functions.html#module-aixweather.transformation_functions.variable_transformations">aixweather.transformation_functions.variable_transformations module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.approximate_opaque_from_total_skycover"><code class="docutils literal notranslate"><span class="pre">approximate_opaque_from_total_skycover()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_dew_point_temp"><code class="docutils literal notranslate"><span class="pre">calculate_dew_point_temp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_direct_horizontal_radiation"><code class="docutils literal notranslate"><span class="pre">calculate_direct_horizontal_radiation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_global_horizontal_radiation"><code class="docutils literal notranslate"><span class="pre">calculate_global_horizontal_radiation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_horizontal_infrared_radiation"><code class="docutils literal notranslate"><span class="pre">calculate_horizontal_infrared_radiation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_normal_from_horizontal_direct_radiation"><code class="docutils literal notranslate"><span class="pre">calculate_normal_from_horizontal_direct_radiation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.robust_transformation"><code class="docutils literal notranslate"><span class="pre">robust_transformation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.variable_transform_all"><code class="docutils literal notranslate"><span class="pre">variable_transform_all()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="aixweather.transformation_to_core_data.html">aixweather.transformation_to_core_data package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.transformation_to_core_data.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.transformation_to_core_data.html#module-aixweather.transformation_to_core_data.DWD">aixweather.transformation_to_core_data.DWD module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.DWD.DWD_forecast_2_core_data"><code class="docutils literal notranslate"><span class="pre">DWD_forecast_2_core_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.DWD.DWD_historical_to_core_data"><code class="docutils literal notranslate"><span class="pre">DWD_historical_to_core_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.DWD.variables_to_sum_DWD_historical"><code class="docutils literal notranslate"><span class="pre">variables_to_sum_DWD_historical</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.transformation_to_core_data.html#module-aixweather.transformation_to_core_data.EPW">aixweather.transformation_to_core_data.EPW module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.EPW.EPW_to_core_data"><code class="docutils literal notranslate"><span class="pre">EPW_to_core_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.transformation_to_core_data.html#module-aixweather.transformation_to_core_data.ERC">aixweather.transformation_to_core_data.ERC module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.ERC.ERC_to_core_data"><code class="docutils literal notranslate"><span class="pre">ERC_to_core_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.transformation_to_core_data.html#module-aixweather.transformation_to_core_data.TRY">aixweather.transformation_to_core_data.TRY module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.TRY.TRY_to_core_data"><code class="docutils literal notranslate"><span class="pre">TRY_to_core_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aixweather.transformation_to_core_data.html#module-aixweather.transformation_to_core_data.custom_file">aixweather.transformation_to_core_data.custom_file module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.custom_file.custom_to_core_data"><code class="docutils literal notranslate"><span class="pre">custom_to_core_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-aixweather.data_quality_checks">
+<span id="aixweather-data-quality-checks-module"></span><h2>aixweather.data_quality_checks module<a class="headerlink" href="#module-aixweather.data_quality_checks" title="Permalink to this heading"></a></h2>
+<p>This module includes functions for analyzing and visualizing missing values.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.data_quality_checks.plot_heatmap_missing_values">
+<span class="sig-prename descclassname"><span class="pre">aixweather.data_quality_checks.</span></span><span class="sig-name descname"><span class="pre">plot_heatmap_missing_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/data_quality_checks.html#plot_heatmap_missing_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.data_quality_checks.plot_heatmap_missing_values" title="Permalink to this definition"></a></dt>
+<dd><p>Generate a heatmap to visualize missing values in a DataFrame.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>df (pd.DataFrame): The DataFrame to be analyzed for missing values.</p>
+</dd>
+<dt>Returns:</dt><dd><p>plt: A Matplotlib figure representing the heatmap of missing values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.data_quality_checks.print_df_info">
+<span class="sig-prename descclassname"><span class="pre">aixweather.data_quality_checks.</span></span><span class="sig-name descname"><span class="pre">print_df_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/data_quality_checks.html#print_df_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.data_quality_checks.print_df_info" title="Permalink to this definition"></a></dt>
+<dd><p>prints df info for intermediate checks or debugging</p>
+</dd></dl>
+
+</section>
+<section id="module-aixweather.definitions">
+<span id="aixweather-definitions-module"></span><h2>aixweather.definitions module<a class="headerlink" href="#module-aixweather.definitions" title="Permalink to this heading"></a></h2>
+<p>This module includes variables or functions which define central variables for the whole project.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.definitions.result_folder_path">
+<span class="sig-prename descclassname"><span class="pre">aixweather.definitions.</span></span><span class="sig-name descname"><span class="pre">result_folder_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/definitions.html#result_folder_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.definitions.result_folder_path" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the path to the resultsfolder.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.definitions.results_file_path">
+<span class="sig-prename descclassname"><span class="pre">aixweather.definitions.</span></span><span class="sig-name descname"><span class="pre">results_file_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/definitions.html#results_file_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.definitions.results_file_path" title="Permalink to this definition"></a></dt>
+<dd><p>create a path to a results file</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>filename: name of file
+folder_path: path to result folder</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: path to result file</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-aixweather.project_class">
+<span id="aixweather-project-class-module"></span><h2>aixweather.project_class module<a class="headerlink" href="#module-aixweather.project_class" title="Permalink to this heading"></a></h2>
+<p>This module contains the central project classes which are used by the user.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassCustom">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">aixweather.project_class.</span></span><span class="sig-name descname"><span class="pre">ProjectClassCustom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassCustom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassCustom" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#aixweather.project_class.ProjectClassGeneral" title="aixweather.project_class.ProjectClassGeneral"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProjectClassGeneral</span></code></a></p>
+<p>A class representing a project for importing and processing custom weather data.
+Modify this class and its functions to create your own weather data pipeline
+and consider to create a pull request to add the pipeline to the repository.</p>
+<p>For common attributes, properties, and methods, refer to the base class.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>path (str): The file path to the custom weather data.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassCustom.data_2_core_data">
+<span class="sig-name descname"><span class="pre">data_2_core_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassCustom.data_2_core_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassCustom.data_2_core_data" title="Permalink to this definition"></a></dt>
+<dd><p>override abstract function</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassCustom.import_data">
+<span class="sig-name descname"><span class="pre">import_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassCustom.import_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassCustom.import_data" title="Permalink to this definition"></a></dt>
+<dd><p>override abstract function</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassDWDForecast">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">aixweather.project_class.</span></span><span class="sig-name descname"><span class="pre">ProjectClassDWDForecast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">station</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassDWDForecast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassDWDForecast" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#aixweather.project_class.ProjectClassGeneral" title="aixweather.project_class.ProjectClassGeneral"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProjectClassGeneral</span></code></a></p>
+<p>A class representing a project for importing and processing weather forecast data
+from DWD (Deutscher Wetterdienst).</p>
+<p>For common attributes, properties, and methods, refer to the base class.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>station (str): The identifier of the KML grid associated with the forecast data.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassDWDForecast.data_2_core_data">
+<span class="sig-name descname"><span class="pre">data_2_core_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassDWDForecast.data_2_core_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassDWDForecast.data_2_core_data" title="Permalink to this definition"></a></dt>
+<dd><p>override abstract function</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassDWDForecast.import_data">
+<span class="sig-name descname"><span class="pre">import_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassDWDForecast.import_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassDWDForecast.import_data" title="Permalink to this definition"></a></dt>
+<dd><p>override abstract function</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassDWDHistorical">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">aixweather.project_class.</span></span><span class="sig-name descname"><span class="pre">ProjectClassDWDHistorical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">station</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassDWDHistorical"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassDWDHistorical" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#aixweather.project_class.ProjectClassGeneral" title="aixweather.project_class.ProjectClassGeneral"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProjectClassGeneral</span></code></a></p>
+<p>A class representing a project for importing and processing historical weather data
+from DWD (Deutscher Wetterdienst).</p>
+<p>For common attributes, properties, and methods, refer to the base class.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>station (str): The identifier of the DWD weather station associated with the data.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassDWDHistorical.data_2_core_data">
+<span class="sig-name descname"><span class="pre">data_2_core_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassDWDHistorical.data_2_core_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassDWDHistorical.data_2_core_data" title="Permalink to this definition"></a></dt>
+<dd><p>override abstract function</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassDWDHistorical.import_data">
+<span class="sig-name descname"><span class="pre">import_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassDWDHistorical.import_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassDWDHistorical.import_data" title="Permalink to this definition"></a></dt>
+<dd><p>override abstract function</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassEPW">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">aixweather.project_class.</span></span><span class="sig-name descname"><span class="pre">ProjectClassEPW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassEPW"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassEPW" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#aixweather.project_class.ProjectClassGeneral" title="aixweather.project_class.ProjectClassGeneral"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProjectClassGeneral</span></code></a></p>
+<p>A class representing a project for importing and processing weather data
+from EPW (EnergyPlus Weather) format.</p>
+<p>For common attributes, properties, and methods, refer to the base class.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>path (str): The absolute file path to the EPW weather data.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassEPW.data_2_core_data">
+<span class="sig-name descname"><span class="pre">data_2_core_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassEPW.data_2_core_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassEPW.data_2_core_data" title="Permalink to this definition"></a></dt>
+<dd><p>override abstract function</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassEPW.import_data">
+<span class="sig-name descname"><span class="pre">import_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassEPW.import_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassEPW.import_data" title="Permalink to this definition"></a></dt>
+<dd><p>override abstract function</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassERC">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">aixweather.project_class.</span></span><span class="sig-name descname"><span class="pre">ProjectClassERC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassERC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassERC" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#aixweather.project_class.ProjectClassGeneral" title="aixweather.project_class.ProjectClassGeneral"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProjectClassGeneral</span></code></a></p>
+<p>A class representing a project for importing and processing weather data
+from the ERC (Energy Research Center).</p>
+<p>For common attributes, properties, and methods, refer to the base class.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>cred (tuple): A tuple containing credentials or authentication information for accessing
+the data source.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassERC.data_2_core_data">
+<span class="sig-name descname"><span class="pre">data_2_core_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassERC.data_2_core_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassERC.data_2_core_data" title="Permalink to this definition"></a></dt>
+<dd><p>override abstract function</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassERC.import_data">
+<span class="sig-name descname"><span class="pre">import_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassERC.import_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassERC.import_data" title="Permalink to this definition"></a></dt>
+<dd><p>override abstract function</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassGeneral">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">aixweather.project_class.</span></span><span class="sig-name descname"><span class="pre">ProjectClassGeneral</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<p>An abstract base class representing a general project.</p>
+<p>For each source of weather data, a project class should inherit from this class
+and implement specific methods for data import and transformation.</p>
+<dl>
+<dt>Attributes:</dt><dd><dl class="simple">
+<dt>fillna (bool): A flag indicating whether NaN values should be filled</dt><dd><p>in the output formats.</p>
+</dd>
+<dt>abs_result_folder_path (str): Optionally define the absolute path to</dt><dd><p>the desired export location.</p>
+</dd>
+<dt>start (pd.Timestamp or None): The start date of the project data</dt><dd><p>(sometimes inferred by the inheriting class).</p>
+</dd>
+</dl>
+<p>end (pd.Timestamp or None): The end date of the project data.</p>
+</dd>
+<dt>Properties:</dt><dd><p>imported_data (pd.DataFrame): The imported weather data.
+core_data (pd.DataFrame): The weather data in a standardized core</p>
+<blockquote>
+<div><p>format.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>output_df_&lt;outputformat&gt; (pd.DataFrame): The output data frame</dt><dd><p>(name depends on output format).</p>
+</dd>
+</dl>
+<p>meta_data: Metadata associated with weather data origin.</p>
+</dd>
+<dt>Methods:</dt><dd><dl class="simple">
+<dt>import_data(): An abstract method to import data from the specific</dt><dd><p>source.</p>
+</dd>
+<dt>data_2_core_data(): An abstract method to transform imported data into</dt><dd><p>core data format.</p>
+</dd>
+</dl>
+<p>core_2_mos(): Convert core data to MOS format.
+core_2_epw(): Convert core data to EPW format.
+core_2_csv(): Convert core data to CSV format.
+core_2_json(): Convert core data to JSON format.
+core_2_pickle(): Convert core data to Pickle format.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassGeneral.core_2_csv">
+<span class="sig-name descname"><span class="pre">core_2_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.core_2_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_2_csv" title="Permalink to this definition"></a></dt>
+<dd><p>Convert core data to .csv file</p>
+<dl class="simple">
+<dt>filename (str): Name of the file to be saved. The default is constructed</dt><dd><p>based on the station name.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Path to the exported file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassGeneral.core_2_epw">
+<span class="sig-name descname"><span class="pre">core_2_epw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.core_2_epw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_2_epw" title="Permalink to this definition"></a></dt>
+<dd><p>Convert core data to .epw file</p>
+<dl class="simple">
+<dt>filename (str): Name of the file to be saved. The default is constructed</dt><dd><p>based on the meta-data as well as start and stop time</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Path to the exported file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassGeneral.core_2_json">
+<span class="sig-name descname"><span class="pre">core_2_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.core_2_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_2_json" title="Permalink to this definition"></a></dt>
+<dd><p>Convert core data to .json file</p>
+<dl class="simple">
+<dt>filename (str): Name of the file to be saved. The default is constructed</dt><dd><p>based on the station name.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Path to the exported file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassGeneral.core_2_mos">
+<span class="sig-name descname"><span class="pre">core_2_mos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.core_2_mos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_2_mos" title="Permalink to this definition"></a></dt>
+<dd><p>Convert core data to .mos file</p>
+<dl class="simple">
+<dt>filename (str): Name of the file to be saved. The default is constructed</dt><dd><p>based on the meta-data as well as start and stop time</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Path to the exported file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassGeneral.core_2_pickle">
+<span class="sig-name descname"><span class="pre">core_2_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.core_2_pickle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_2_pickle" title="Permalink to this definition"></a></dt>
+<dd><p>Convert core data pickle file</p>
+<dl class="simple">
+<dt>filename (str): Name of the file to be saved. The default is constructed</dt><dd><p>based on the station name.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Path to the exported file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassGeneral.core_data">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">core_data</span></span><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_data" title="Permalink to this definition"></a></dt>
+<dd><p>Get core data</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassGeneral.data_2_core_data">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data_2_core_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.data_2_core_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.data_2_core_data" title="Permalink to this definition"></a></dt>
+<dd><p>Abstract function to convert the imported data to core data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassGeneral.import_data">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">import_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.import_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.import_data" title="Permalink to this definition"></a></dt>
+<dd><p>Abstract function to import weather data.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassGeneral.imported_data">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">imported_data</span></span><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.imported_data" title="Permalink to this definition"></a></dt>
+<dd><p>Get imported data</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassGeneral.start_end_checks">
+<span class="sig-name descname"><span class="pre">start_end_checks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.start_end_checks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.start_end_checks" title="Permalink to this definition"></a></dt>
+<dd><p>Make sure start and end are of type datetime and end is after start.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassTRY">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">aixweather.project_class.</span></span><span class="sig-name descname"><span class="pre">ProjectClassTRY</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassTRY"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassTRY" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#aixweather.project_class.ProjectClassGeneral" title="aixweather.project_class.ProjectClassGeneral"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProjectClassGeneral</span></code></a></p>
+<p>A class representing a project for importing and processing weather data
+from TRY (Test Reference Year) format.</p>
+<p>For common attributes, properties, and methods, refer to the base class.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>path (str): The absolute file path to the TRY weather data.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassTRY.data_2_core_data">
+<span class="sig-name descname"><span class="pre">data_2_core_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassTRY.data_2_core_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassTRY.data_2_core_data" title="Permalink to this definition"></a></dt>
+<dd><p>override abstract function</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="aixweather.project_class.ProjectClassTRY.import_data">
+<span class="sig-name descname"><span class="pre">import_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassTRY.import_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassTRY.import_data" title="Permalink to this definition"></a></dt>
+<dd><p>override abstract function</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="aixweather" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="aixweather.core_data_format_2_output_file.html" class="btn btn-neutral float-right" title="aixweather.core_data_format_2_output_file package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, EON EBC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
