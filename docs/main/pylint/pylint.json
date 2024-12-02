@@ -139,8 +139,8 @@
                 "aixweather"
             ],
             "pandas": [
-                "aixweather.project_class",
-                "aixweather"
+                "aixweather",
+                "aixweather.project_class"
             ],
             "matplotlib.pyplot": [
                 "aixweather.data_quality_checks"
@@ -360,8 +360,8 @@
                 "aixweather"
             ],
             "pandas": [
-                "aixweather.project_class",
-                "aixweather"
+                "aixweather",
+                "aixweather.project_class"
             ],
             "matplotlib.pyplot": [
                 "aixweather.data_quality_checks"
