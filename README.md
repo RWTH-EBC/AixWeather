@@ -1,7 +1,7 @@
 ![E.ON EBC RWTH Aachen University](https://github.com/RWTH-EBC/AixWeather/blob/main/docs/source/_static/EBC_Logo.png)
 
 [![pylint](https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.svg )](https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.html)
-[![documentation](https://rwth-ebc.github.io/AixWeather//main//docs/doc.svg)](https://rwth-ebc.github.io/AixWeather//main//docs/index.html)
+[![documentation](https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/doc.svg)](https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/index.html)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![coverage](https://rwth-ebc.github.io/AixWeather/4-joss_paper/coverage/badge.svg)](https://rwth-ebc.github.io/AixWeather/4-joss_paper/coverage)
 
