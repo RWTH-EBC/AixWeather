@@ -76,15 +76,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Contains examples&quot;&quot;&quot;</span>
-</pre></div>
-</div>
-<p>pylint: disable=C0415, C0103
-let pylint ignore to import from aixweather (Import outside toplevel), and ignore that pylint
-suggests e1_pull_DWD_historical_to_all_output_formats would not be snake_case.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
-</pre></div>
-</div>
+  <p>Historical DWD pull example</p>
 <p>Enable logging, this is just get more feedback through the terminal</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">)</span>
@@ -95,8 +87,10 @@ Check the project classes file or the API documentation to see which classes are
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aixweather.project_class</span> <span class="kn">import</span> <span class="n">ProjectClassDWDHistorical</span>
 </pre></div>
 </div>
-<p>Step 0: Initiate the project class which contains or creates all variables and functions.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DWD_pull_project</span> <span class="o">=</span> <span class="n">ProjectClassDWDHistorical</span><span class="p">(</span>
+<p>Step 0: Initiate the project class which contains or creates all variables and functions.
+For this, we use the datetime module to specify dates.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
+<span class="n">DWD_pull_project</span> <span class="o">=</span> <span class="n">ProjectClassDWDHistorical</span><span class="p">(</span>
     <span class="n">start</span><span class="o">=</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
     <span class="n">end</span><span class="o">=</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
     <span class="n">station</span><span class="o">=</span><span class="mi">15000</span><span class="p">,</span>
