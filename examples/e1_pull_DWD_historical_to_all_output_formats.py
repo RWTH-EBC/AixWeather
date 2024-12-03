@@ -1,10 +1,5 @@
-"""Contains examples"""
+# Historical DWD pull example
 
-# pylint: disable=C0415, C0103
-# let pylint ignore to import from aixweather (Import outside toplevel), and ignore that pylint
-# suggests e1_pull_DWD_historical_to_all_output_formats would not be snake_case.
-
-import datetime as dt
 
 def e1_pull_DWD_historical_to_all_output_formats():
     """
@@ -21,6 +16,8 @@ def e1_pull_DWD_historical_to_all_output_formats():
     from aixweather.project_class import ProjectClassDWDHistorical
 
     # Step 0: Initiate the project class which contains or creates all variables and functions.
+    # For this, we use the datetime module to specify dates.
+    import datetime as dt
     DWD_pull_project = ProjectClassDWDHistorical(
         start=dt.datetime(2022, 1, 1),
         end=dt.datetime(2023, 1, 1),
