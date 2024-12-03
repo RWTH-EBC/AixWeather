@@ -9,10 +9,10 @@
             "class_const": 0,
             "const": 0,
             "inlinevar": 0,
-            "function": 1,
+            "function": 0,
             "method": 0,
-            "module": 1,
-            "variable": 1,
+            "module": 0,
+            "variable": 0,
             "typevar": 0,
             "typealias": 0
         },
@@ -51,15 +51,6 @@
                 "info": 0,
                 "refactor": 0,
                 "statement": 130,
-                "warning": 0
-            },
-            "examples.e1_pull_DWD_historical_to_all_output_formats": {
-                "convention": 0,
-                "error": 0,
-                "fatal": 0,
-                "info": 0,
-                "refactor": 0,
-                "statement": 21,
                 "warning": 0
             },
             "test_DWD_forecast": {
@@ -139,8 +130,8 @@
                 "aixweather"
             ],
             "pandas": [
-                "aixweather",
-                "aixweather.project_class"
+                "aixweather.project_class",
+                "aixweather"
             ],
             "matplotlib.pyplot": [
                 "aixweather.data_quality_checks"
@@ -186,12 +177,6 @@
             ],
             "aixweather.core_data_format_2_output_file.to_epw_energyplus": [
                 "aixweather.project_class"
-            ],
-            "aixweather.project_class": [
-                "examples.e1_pull_DWD_historical_to_all_output_formats"
-            ],
-            "aixweather.data_quality_checks": [
-                "examples.e1_pull_DWD_historical_to_all_output_formats"
             ]
         },
         "duplicated_lines": {
@@ -199,10 +184,10 @@
             "percent_duplicated_lines": 0.0
         },
         "node_count": {
-            "function": 5,
+            "function": 4,
             "klass": 7,
             "method": 31,
-            "module": 5
+            "module": 4
         },
         "undocumented": {
             "function": 0,
@@ -215,7 +200,7 @@
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 192,
+        "statement": 171,
         "warning": 0,
         "global_note": 0,
         "nb_duplicated_lines": 0,
@@ -230,10 +215,10 @@
             "class_const": 0,
             "const": 0,
             "inlinevar": 0,
-            "function": 1,
+            "function": 0,
             "method": 0,
-            "module": 1,
-            "variable": 1,
+            "module": 0,
+            "variable": 0,
             "typevar": 0,
             "typealias": 0
         },
@@ -272,15 +257,6 @@
                 "info": 0,
                 "refactor": 0,
                 "statement": 130,
-                "warning": 0
-            },
-            "e1_pull_DWD_historical_to_all_output_formats": {
-                "convention": 0,
-                "error": 0,
-                "fatal": 0,
-                "info": 0,
-                "refactor": 0,
-                "statement": 21,
                 "warning": 0
             },
             "test_DWD_forecast": {
@@ -360,8 +336,8 @@
                 "aixweather"
             ],
             "pandas": [
-                "aixweather",
-                "aixweather.project_class"
+                "aixweather.project_class",
+                "aixweather"
             ],
             "matplotlib.pyplot": [
                 "aixweather.data_quality_checks"
@@ -407,12 +383,6 @@
             ],
             "aixweather.core_data_format_2_output_file.to_epw_energyplus": [
                 "aixweather.project_class"
-            ],
-            "aixweather.project_class": [
-                "e1_pull_DWD_historical_to_all_output_formats"
-            ],
-            "aixweather.data_quality_checks": [
-                "e1_pull_DWD_historical_to_all_output_formats"
             ]
         },
         "duplicated_lines": {
@@ -420,10 +390,10 @@
             "percent_duplicated_lines": 0.0
         },
         "node_count": {
-            "function": 5,
+            "function": 4,
             "klass": 7,
             "method": 31,
-            "module": 5
+            "module": 4
         },
         "undocumented": {
             "function": 0,
@@ -436,7 +406,7 @@
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 192,
+        "statement": 171,
         "warning": 0,
         "global_note": 10.0,
         "nb_duplicated_lines": 0,
