@@ -1,12 +1,16 @@
-![E.ON EBC RWTH Aachen University](./docs/source/_static/EBC_Logo.png)
+![E.ON EBC RWTH Aachen University](https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/source/_static/EBC_Logo.png)
 
 [![pylint](https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.svg )](https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.html)
-[![documentation](https://rwth-ebc.github.io/AixWeather//main//docs/doc.svg)](https://rwth-ebc.github.io/AixWeather//main//docs/index.html)
+[![documentation](https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/doc.svg)](https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/index.html)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![coverage](https://rwth-ebc.github.io/AixWeather/4-joss_paper/coverage/badge.svg)](https://rwth-ebc.github.io/AixWeather/4-joss_paper/coverage)
 
 <div align="center">
-  <img src="./docs/aixweather_logo/AixWeather_Logo.png" alt="AixWeather Logo" width="50%">
+  <img src="https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/aixweather_logo/AixWeather_Logo.png" alt="AixWeather Logo" width="50%">
 </div>
+
+THIS IS A REMINDER TO SET ALL IMAGES, BADGES, ETC. BACK FROM 4-joss_paper TO main BRANCH AFTER 
+JOSS-PAPER REVIEW IS FINISHED.
 
 # AixWeather
 **A weather data generation tool for building energy system simulations. Pull, Transform, Export.**
@@ -80,7 +84,7 @@ the desired output format.
 
 The below diagram shows the tool's structure and the data flow from the import to the output format.
 
-![Weather Data Tool Diagram](docs/Overview_WeatherTool.png)
+![Weather Data Tool Diagram](https://rwth-ebc.github.io/AixWeather/4-joss_paper/docs/Overview_WeatherTool.png)
 
 **Known limitations:**
 
