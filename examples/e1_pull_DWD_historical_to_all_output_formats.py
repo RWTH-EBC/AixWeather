@@ -1,4 +1,4 @@
-# # Historical DWD pull example
+# # AixWeather Tutorial
 
 
 def e1_pull_DWD_historical_to_all_output_formats():
