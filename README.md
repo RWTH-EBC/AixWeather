@@ -9,6 +9,9 @@
   <img src="https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/aixweather_logo/AixWeather_Logo.png" alt="AixWeather Logo" width="50%">
 </div>
 
+THIS IS A REMINDER TO SET ALL IMAGES, BADGES, ETC. BACK FROM 4-joss_paper TO main BRANCH AFTER 
+JOSS-PAPER REVIEW IS FINISHED.
+
 # AixWeather
 **A weather data generation tool for building energy system simulations. Pull, Transform, Export.**
 
@@ -81,7 +84,7 @@ the desired output format.
 
 The below diagram shows the tool's structure and the data flow from the import to the output format.
 
-![Weather Data Tool Diagram](docs/Overview_WeatherTool.png)
+![Weather Data Tool Diagram](https://rwth-ebc.github.io/AixWeather/4-joss_paper/docs/Overview_WeatherTool.png)
 
 **Known limitations:**
 
