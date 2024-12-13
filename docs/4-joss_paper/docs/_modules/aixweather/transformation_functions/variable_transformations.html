@@ -91,6 +91,18 @@
 
 
 <div class="viewcode-block" id="approximate_opaque_from_total_skycover"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.approximate_opaque_from_total_skycover">[docs]</a><span class="k">def</span> <span class="nf">approximate_opaque_from_total_skycover</span><span class="p">(</span><span class="n">total_sky_cover</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Approximate opaque sky cover from total sky cover by assuming they are equal.</span>
+
+<span class="sd">    This is a simple approximation that assumes all clouds in the total sky cover are opaque.</span>
+<span class="sd">    In reality, some clouds may be translucent, making this an upper bound estimate.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        total_sky_cover (float): Total sky cover in oktas or percentage of sky covered by clouds.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Approximated opaque sky cover in the same units as the input.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">opaque_sky_cover</span> <span class="o">=</span> <span class="n">total_sky_cover</span>
     <span class="k">return</span> <span class="n">opaque_sky_cover</span></div>
 
