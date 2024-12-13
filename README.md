@@ -83,8 +83,7 @@ the desired output format.
 **Overview**
 
 The below diagram shows the tool's structure and the data flow from the import to the output format.
-
-![Weather Data Tool Diagram](https://rwth-ebc.github.io/AixWeather/4-joss_paper/docs/Overview_WeatherTool.png)
+![Weather Data Tool Diagram](https://raw.githubusercontent.com/RWTH-EBC/AixWeather/4-joss_paper/docs/Overview_WeatherTool.png)
 
 **Known limitations:**
 
