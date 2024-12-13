@@ -99,6 +99,26 @@ in the output file.
 
 ![Data flow and structure of AixWeather.\label{fig:AixWeatherStructure}](Overview_WeatherTool_Joss.pdf)
 
+# Comparison with Similar Tools
+
+While several weather data tools exist, AixWeather offers distinct capabilities compared to similar software. 
+
+For instance, Elements [@Elements.2016], developed by Big Ladder Software, is a free open-source tool focused on editing and creating custom weather files. 
+While Elements excels at weather file manipulation through its spreadsheet-like interface and 
+visualization capabilities, AixWeather differentiates itself through automated data retrieval 
+and processing pipelines that reduce both the expertise and time required to generate weather data.
+Elements' strengths lie in manual data editing.
+In contrast, AixWeather focuses on automated workflows, direct integration with data sources like DWD, and specialized support for the Modelica ReaderTMY3 format. 
+
+The EnergyPlus Weather Converter [@EnergyPlus.2001] is a widely used tool that focuses specifically on creating and converting weather files for EnergyPlus simulations. 
+While it excels at EPW file handling, AixWeather offers multi-source data retrieval and multi-format export capabilities.
+
+Meteonorm [@Meteonorm.2023], a commercial tool, provides sophisticated weather data generation and processing capabilities. 
+While it offers extensive global coverage and detailed data analysis, AixWeather provides a free, open-source alternative with specific strengths in German weather data integration and the Modelica ReaderTMY3 compatibility.
+
+AixWeather's unique contribution lies in its automated workflows, direct integration with German weather services, specialized support for the Modelica ReaderTMY3 format, and web-based accessibility.
+
+
 # Acknowledgements
 
 We acknowledge contributions from Michael Mans, Felix Nienaber, and Ana Constantin for providing 
