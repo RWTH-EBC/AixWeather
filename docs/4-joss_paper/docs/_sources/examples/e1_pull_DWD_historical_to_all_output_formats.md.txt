@@ -1,4 +1,3 @@
-
 # AixWeather Tutorial
 
 Enable logging, this is just get more feedback through the terminal
