@@ -1,6 +1,13 @@
+
 # AixWeather Tutorial
 
-Enable logging, this is just get more feedback through the terminal
+This example is a step-by-step guide to pull historical weather data from the DWD open access database
+and convert it to different output formats.
+Thus showing all possible steps on how to use AixWeather.
+To run the tool for other weather data sources, just change the project class.
+The rest of the code is streamlined and will remain the same.
+
+Enable logging, this is just to get more feedback through the terminal
 
 ```python
 import logging
@@ -46,13 +53,13 @@ DWD_pull_project.data_2_core_data()
 print(f"\nHow the core data looks like:\n{DWD_pull_project.core_data.head()}\n")
 ```
 
-you may also use data quality check utils, like:
+You may optionally also use data quality check utils, like:
 
 ```python
 from aixweather.data_quality_checks import plot_heatmap_missing_values
 ```
 
-plot data quality
+Plot data quality
 
 ```python
 plot = plot_heatmap_missing_values(DWD_pull_project.core_data)
