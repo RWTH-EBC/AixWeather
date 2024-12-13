@@ -7,7 +7,14 @@ def e1_pull_DWD_historical_to_all_output_formats():
     2. See examplary use of additional features and settings
     3. Create weather data files
     """
-    # Enable logging, this is just get more feedback through the terminal
+    # This example is a step-by-step guide to pull historical weather data from the DWD open access database
+    # and convert it to different output formats.
+    # Thus showing all possible steps on how to use AixWeather.
+    # To run the tool for other weather data sources, just change the project class.
+    # The rest of the code is streamlined and will remain the same.
+
+
+    # Enable logging, this is just to get more feedback through the terminal
     import logging
     logging.basicConfig(level="DEBUG")
 
@@ -38,10 +45,10 @@ def e1_pull_DWD_historical_to_all_output_formats():
     DWD_pull_project.data_2_core_data()
     print(f"\nHow the core data looks like:\n{DWD_pull_project.core_data.head()}\n")
 
-    # you may also use data quality check utils, like:
+    # You may optionally also use data quality check utils, like:
     from aixweather.data_quality_checks import plot_heatmap_missing_values
 
-    # plot data quality
+    # Plot data quality
     plot = plot_heatmap_missing_values(DWD_pull_project.core_data)
     plot.show()
 
