@@ -16,6 +16,18 @@ logger = logging.getLogger(__name__)
 
 
 def approximate_opaque_from_total_skycover(total_sky_cover):
+    """
+    Approximate opaque sky cover from total sky cover by assuming they are equal.
+
+    This is a simple approximation that assumes all clouds in the total sky cover are opaque.
+    In reality, some clouds may be translucent, making this an upper bound estimate.
+
+    Args:
+        total_sky_cover (float): Total sky cover in oktas or percentage of sky covered by clouds.
+
+    Returns:
+        float: Approximated opaque sky cover in the same units as the input.
+    """
     opaque_sky_cover = total_sky_cover
     return opaque_sky_cover
 
