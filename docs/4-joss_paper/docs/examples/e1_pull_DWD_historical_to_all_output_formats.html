@@ -84,7 +84,12 @@
              
   <section id="aixweather-tutorial">
 <h1>AixWeather Tutorial<a class="headerlink" href="#aixweather-tutorial" title="Permalink to this heading"></a></h1>
-<p>Enable logging, this is just get more feedback through the terminal</p>
+<p>This example is a step-by-step guide to pull historical weather data from the DWD open access database
+and convert it to different output formats.
+Thus showing all possible steps on how to use AixWeather.
+To run the tool for other weather data sources, just change the project class.
+The rest of the code is streamlined and will remain the same.</p>
+<p>Enable logging, this is just to get more feedback through the terminal</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">)</span>
 </pre></div>
@@ -120,11 +125,11 @@ For this, we use the datetime module to specify dates.</p>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">How the core data looks like:</span><span class="se">\n</span><span class="si">{</span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>you may also use data quality check utils, like:</p>
+<p>You may optionally also use data quality check utils, like:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aixweather.data_quality_checks</span> <span class="kn">import</span> <span class="n">plot_heatmap_missing_values</span>
 </pre></div>
 </div>
-<p>plot data quality</p>
+<p>Plot data quality</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">=</span> <span class="n">plot_heatmap_missing_values</span><span class="p">(</span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_data</span><span class="p">)</span>
 <span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
