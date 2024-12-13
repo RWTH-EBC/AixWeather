@@ -89,7 +89,7 @@ desired output format.
 The current set of implemented transformation functions can be found in [aixweather/transformation_functions](https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/code/aixweather.transformation_functions.html), e.g. the [unit conversions](https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/code/aixweather.transformation_functions.html#module-aixweather.transformation_functions.unit_conversions) or the functions to calculate missing values: [variable transformation](https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/code/aixweather.transformation_functions.html#module-aixweather.transformation_functions.variable_transformations).
 Though, these function do not need be called explicitly, as they are called by the tool 
 automatically based on the input data and the desired output format.
-Only if you want to add a new input or output format, you will need to specify which 
+Only if you plan to extend AixWeather by adding a new input or output format, you will need to specify which 
 transformations are required specifically for your new format. 
 The community will be happy to have such developments contributed back to the main repository.
 
