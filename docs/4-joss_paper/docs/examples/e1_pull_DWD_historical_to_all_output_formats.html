@@ -91,18 +91,21 @@ To run the tool for other weather data sources, just change the project class.
 The rest of the code is streamlined and will remain the same.</p>
 <p>Enable logging, this is just to get more feedback through the terminal</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Choose the project class according to the desired weather data origin.
-Check the project classes file or the API documentation to see which classes are available.</p>
+Check the project_class.py file or the API documentation to see which classes are available.
+<a class="reference external" href="https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/code/aixweather.html#module-aixweather.project_class">project classes</a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aixweather.project_class</span> <span class="kn">import</span> <span class="n">ProjectClassDWDHistorical</span>
 </pre></div>
 </div>
 <p>Step 0: Initiate the project class which contains or creates all variables and functions.
 For this, we use the datetime module to specify dates.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
-<span class="n">DWD_pull_project</span> <span class="o">=</span> <span class="n">ProjectClassDWDHistorical</span><span class="p">(</span>
+
+<span class="n">project</span> <span class="o">=</span> <span class="n">ProjectClassDWDHistorical</span><span class="p">(</span>
     <span class="n">start</span><span class="o">=</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
     <span class="n">end</span><span class="o">=</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
     <span class="n">station</span><span class="o">=</span><span class="mi">15000</span><span class="p">,</span>
@@ -114,15 +117,13 @@ For this, we use the datetime module to specify dates.</p>
 </pre></div>
 </div>
 <p>Step 1: Import historical weather from the DWD open access database</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">import_data</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span>
-    <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">How the imported data looks like:</span><span class="se">\n</span><span class="si">{</span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">imported_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-<span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">project</span><span class="o">.</span><span class="n">import_data</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">How the imported data looks like:</span><span class="se">\n</span><span class="si">{</span><span class="n">project</span><span class="o">.</span><span class="n">imported_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Step 2: Convert this imported data to the core format</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">data_2_core_data</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">How the core data looks like:</span><span class="se">\n</span><span class="si">{</span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">project</span><span class="o">.</span><span class="n">data_2_core_data</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">How the core data looks like:</span><span class="se">\n</span><span class="si">{</span><span class="n">project</span><span class="o">.</span><span class="n">core_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>You may optionally also use data quality check utils, like:</p>
@@ -130,16 +131,55 @@ For this, we use the datetime module to specify dates.</p>
 </pre></div>
 </div>
 <p>Plot data quality</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">=</span> <span class="n">plot_heatmap_missing_values</span><span class="p">(</span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_data</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">=</span> <span class="n">plot_heatmap_missing_values</span><span class="p">(</span><span class="n">project</span><span class="o">.</span><span class="n">core_data</span><span class="p">)</span>
 <span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Step 3: Convert this core data to an output data format of your choice</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_2_csv</span><span class="p">()</span>
-<span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_2_json</span><span class="p">()</span>
-<span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_2_pickle</span><span class="p">()</span>
-<span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_2_mos</span><span class="p">()</span>
-<span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_2_epw</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">project</span><span class="o">.</span><span class="n">core_2_csv</span><span class="p">()</span>
+<span class="n">project</span><span class="o">.</span><span class="n">core_2_json</span><span class="p">()</span>
+<span class="n">project</span><span class="o">.</span><span class="n">core_2_pickle</span><span class="p">()</span>
+<span class="n">project</span><span class="o">.</span><span class="n">core_2_mos</span><span class="p">()</span>
+<span class="n">project</span><span class="o">.</span><span class="n">core_2_epw</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>By the way, if you want to run this with some other weather data source, here are some copy-paste snippets to get you started:</p>
+<p>For DWD Forecast data</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aixweather.project_class</span> <span class="kn">import</span> <span class="n">ProjectClassDWDForecast</span>
+
+<span class="n">project</span> <span class="o">=</span> <span class="n">ProjectClassDWDForecast</span><span class="p">(</span>
+    <span class="n">station</span><span class="o">=</span><span class="s2">&quot;06710&quot;</span><span class="p">,</span>  <span class="c1"># Example station: Lausanne</span>
+    <span class="n">abs_result_folder_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># Optional: specify result path</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>For EPW and TRY we need to import the .epw or .dat file
+These imports are just to create the path to the file stored in the tests folder</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">aixweather</span> <span class="kn">import</span> <span class="n">definitions</span>
+</pre></div>
+</div>
+<p>For EPW files</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aixweather.project_class</span> <span class="kn">import</span> <span class="n">ProjectClassEPW</span>
+
+<span class="n">project</span> <span class="o">=</span> <span class="n">ProjectClassEPW</span><span class="p">(</span>
+    <span class="n">path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">definitions</span><span class="o">.</span><span class="n">ROOT_DIR</span><span class="p">,</span>
+        <span class="s2">&quot;tests/test_files/regular_tests/EPW/test_EPW_Essen_Ladybug/input/DEU_NW_Essen_104100_TRY2035_05_Wint_BBSR.epw&quot;</span><span class="p">,</span>
+    <span class="p">),</span>  <span class="c1"># Example: EPW weather file for Essen</span>
+    <span class="n">abs_result_folder_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>For TRY (Test Reference Year) data</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aixweather.project_class</span> <span class="kn">import</span> <span class="n">ProjectClassTRY</span>
+
+<span class="n">project</span> <span class="o">=</span> <span class="n">ProjectClassTRY</span><span class="p">(</span>
+    <span class="n">path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">definitions</span><span class="o">.</span><span class="n">ROOT_DIR</span><span class="p">,</span>
+        <span class="s2">&quot;tests/test_files/regular_tests/TRY/test_TRY2015/input/TRY2015_507931060546_Jahr.dat&quot;</span>
+    <span class="p">),</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </section>
