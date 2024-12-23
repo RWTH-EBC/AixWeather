@@ -34,20 +34,20 @@ Available at PyPI as [AixWeather](https://pypi.org/project/AixWeather/).
 
 ## WebApp
 
-For fast access without setup, use the WebApp.
-The repository [AixWeather-WebApp](https://github.com/RWTH-EBC/AixWeather-WebApp) contains the corresponding WebApp for this repo.
-This repository contains the functionalities useful for, e.g., automation of tasks.
+For fast access without setup, use the [AixWeather-WebApp](https://aixweather.eonerc.rwth-aachen.de/).
+The [AixWeather-WebApp-Repository](https://github.com/RWTH-EBC/AixWeather-WebApp) contains the corresponding WebApp for AixWeather.
+This repository here contains the functionalities useful for, e.g., automation of tasks.
 
 ## How to use AixWeather locally
-Clone the repo and simply install via:
-```bash
-pip install AixWeather
-```
-or
-```bash
-cd AixWeather
-pip install -e .
-```
+Simply install via:
+
+`pip install AixWeather`
+
+Or, by cloning the repository:
+
+`git clone https://github.com/RWTH-EBC/AixWeather.git AixWeather`
+`cd AixWeather`
+`pip install -e .`
 
 Then go to the [example](https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/examples/e1_pull_DWD_historical_to_all_output_formats.html) and follow the descriptions.
 This example contains the streamlined process exemplary shown for pulling DWD historical data and exporting it to all available output formats.
