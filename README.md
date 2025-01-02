@@ -28,7 +28,7 @@ As the library is developed at RWTH Aachen University's EBC, the library's name 
 city's French name Aix-la-Chapelle, which the people of Aachen are very fond of and use a lot. 
 With the name AixWeather we follow this local tradition.
 
-If you have any questions regarding AixWeather, feel free to contact us at aixweather@eonerc.rwth-aachen.de.
+If you have any questions regarding AixWeather, feel free to contact us at ebc-tools@eonerc.rwth-aachen.de.
 
 Available at PyPI as [AixWeather](https://pypi.org/project/AixWeather/).
 
