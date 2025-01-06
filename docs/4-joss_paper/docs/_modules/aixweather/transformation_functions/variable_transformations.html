@@ -77,20 +77,20 @@
 <span class="sd">This module includes variable transformations and functions</span>
 <span class="sd">to calculate variables from given values</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">import</span> <span class="nn">pvlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pvlib</span>
 
-<span class="kn">from</span> <span class="nn">aixweather.imports.utils_import</span> <span class="kn">import</span> <span class="n">MetaData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.imports.utils_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetaData</span>
 
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="approximate_opaque_from_total_skycover"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.approximate_opaque_from_total_skycover">[docs]</a><span class="k">def</span> <span class="nf">approximate_opaque_from_total_skycover</span><span class="p">(</span><span class="n">total_sky_cover</span><span class="p">):</span>
+<div class="viewcode-block" id="approximate_opaque_from_total_skycover"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.approximate_opaque_from_total_skycover">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">approximate_opaque_from_total_skycover</span><span class="p">(</span><span class="n">total_sky_cover</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Approximate opaque sky cover from total sky cover by assuming they are equal.</span>
 
@@ -107,7 +107,7 @@
     <span class="k">return</span> <span class="n">opaque_sky_cover</span></div>
 
 
-<div class="viewcode-block" id="calculate_dew_point_temp"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_dew_point_temp">[docs]</a><span class="k">def</span> <span class="nf">calculate_dew_point_temp</span><span class="p">(</span><span class="n">dry_bulb_temp</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">rel_hum</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<div class="viewcode-block" id="calculate_dew_point_temp"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_dew_point_temp">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">calculate_dew_point_temp</span><span class="p">(</span><span class="n">dry_bulb_temp</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">rel_hum</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the dew point temperature using a simplified formula.</span>
 
@@ -126,7 +126,7 @@
     <span class="k">return</span> <span class="n">dew_point_temp</span></div>
 
 
-<div class="viewcode-block" id="calculate_direct_horizontal_radiation"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_direct_horizontal_radiation">[docs]</a><span class="k">def</span> <span class="nf">calculate_direct_horizontal_radiation</span><span class="p">(</span>
+<div class="viewcode-block" id="calculate_direct_horizontal_radiation"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_direct_horizontal_radiation">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">calculate_direct_horizontal_radiation</span><span class="p">(</span>
     <span class="n">glob_hor_rad</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">diff_hor_rad</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -151,7 +151,7 @@
     <span class="k">return</span> <span class="n">dir_hor_rad</span></div>
 
 
-<div class="viewcode-block" id="calculate_global_horizontal_radiation"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_global_horizontal_radiation">[docs]</a><span class="k">def</span> <span class="nf">calculate_global_horizontal_radiation</span><span class="p">(</span>
+<div class="viewcode-block" id="calculate_global_horizontal_radiation"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_global_horizontal_radiation">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">calculate_global_horizontal_radiation</span><span class="p">(</span>
     <span class="n">dir_hor_rad</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">diff_hor_rad</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -181,7 +181,7 @@
     <span class="k">return</span> <span class="n">glob_hor_rad</span></div>
 
 
-<div class="viewcode-block" id="calculate_horizontal_infrared_radiation"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_horizontal_infrared_radiation">[docs]</a><span class="k">def</span> <span class="nf">calculate_horizontal_infrared_radiation</span><span class="p">(</span>
+<div class="viewcode-block" id="calculate_horizontal_infrared_radiation"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_horizontal_infrared_radiation">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">calculate_horizontal_infrared_radiation</span><span class="p">(</span>
     <span class="n">dry_bulb_temp</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">dew_point_temp</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">opaque_sky_cover</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -224,7 +224,7 @@
     <span class="k">return</span> <span class="n">hor_infra</span></div>
 
 
-<div class="viewcode-block" id="calculate_normal_from_horizontal_direct_radiation"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_normal_from_horizontal_direct_radiation">[docs]</a><span class="k">def</span> <span class="nf">calculate_normal_from_horizontal_direct_radiation</span><span class="p">(</span>
+<div class="viewcode-block" id="calculate_normal_from_horizontal_direct_radiation"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.calculate_normal_from_horizontal_direct_radiation">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">calculate_normal_from_horizontal_direct_radiation</span><span class="p">(</span>
     <span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">utc_time</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">,</span>
@@ -262,7 +262,7 @@
 
 
 <span class="c1"># wrapping functions ------------------------------------------</span>
-<div class="viewcode-block" id="robust_transformation"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.robust_transformation">[docs]</a><span class="k">def</span> <span class="nf">robust_transformation</span><span class="p">(</span>
+<div class="viewcode-block" id="robust_transformation"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.robust_transformation">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">robust_transformation</span><span class="p">(</span>
     <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">desired_variable</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">transformation_function</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">str</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -325,7 +325,7 @@
     <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">calc_status</span></div>
 
 
-<div class="viewcode-block" id="variable_transform_all"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.variable_transform_all">[docs]</a><span class="k">def</span> <span class="nf">variable_transform_all</span><span class="p">(</span>
+<div class="viewcode-block" id="variable_transform_all"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.variable_transformations.variable_transform_all">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">variable_transform_all</span><span class="p">(</span>
     <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>

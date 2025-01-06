@@ -76,63 +76,63 @@
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Includes functions to convert units in weather data.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="Jcm2_to_Whm2"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.Jcm2_to_Whm2">[docs]</a><span class="k">def</span> <span class="nf">Jcm2_to_Whm2</span><span class="p">(</span><span class="n">radiation</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+<div class="viewcode-block" id="Jcm2_to_Whm2"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.Jcm2_to_Whm2">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">Jcm2_to_Whm2</span><span class="p">(</span><span class="n">radiation</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;convert radiance unit from J/cm^2 to Wh/m^2&quot;&quot;&quot;</span>
     <span class="n">radiation</span> <span class="o">=</span> <span class="n">radiation</span> <span class="o">/</span> <span class="mf">0.36</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> transformed from from J/cm2 to Wh/m2&quot;</span><span class="p">,</span> <span class="n">radiation</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">radiation</span></div>
 
 
-<div class="viewcode-block" id="Jm2_to_Whm2"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.Jm2_to_Whm2">[docs]</a><span class="k">def</span> <span class="nf">Jm2_to_Whm2</span><span class="p">(</span><span class="n">radiation</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+<div class="viewcode-block" id="Jm2_to_Whm2"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.Jm2_to_Whm2">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">Jm2_to_Whm2</span><span class="p">(</span><span class="n">radiation</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;convert radiance unit from J/m^2 to Wh/m^2&quot;&quot;&quot;</span>
     <span class="n">radiation</span> <span class="o">=</span> <span class="n">radiation</span> <span class="o">/</span> <span class="mi">3600</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> transformed from from J/m2 to Wh/m2&quot;</span><span class="p">,</span> <span class="n">radiation</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">radiation</span></div>
 
 
-<div class="viewcode-block" id="kJm2_to_Whm2"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.kJm2_to_Whm2">[docs]</a><span class="k">def</span> <span class="nf">kJm2_to_Whm2</span><span class="p">(</span><span class="n">radiation</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+<div class="viewcode-block" id="kJm2_to_Whm2"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.kJm2_to_Whm2">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">kJm2_to_Whm2</span><span class="p">(</span><span class="n">radiation</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;convert radiance unit from kJ/m^2 to Wh/m^2&quot;&quot;&quot;</span>
     <span class="n">radiation</span> <span class="o">=</span> <span class="n">radiation</span> <span class="o">/</span> <span class="mf">3.6</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> transformed from from kJ/m^2 to Wh/m^2&quot;</span><span class="p">,</span> <span class="n">radiation</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">radiation</span></div>
 
 
-<div class="viewcode-block" id="hPa_to_Pa"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.hPa_to_Pa">[docs]</a><span class="k">def</span> <span class="nf">hPa_to_Pa</span><span class="p">(</span><span class="n">pressure</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+<div class="viewcode-block" id="hPa_to_Pa"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.hPa_to_Pa">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">hPa_to_Pa</span><span class="p">(</span><span class="n">pressure</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;convert pressure unit from hPa to Pa&quot;&quot;&quot;</span>
     <span class="n">pressure</span> <span class="o">=</span> <span class="n">pressure</span> <span class="o">*</span> <span class="mi">100</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> transformed from from hPa to Pa&quot;</span><span class="p">,</span> <span class="n">pressure</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">pressure</span></div>
 
 
-<div class="viewcode-block" id="eigth_to_tenth"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.eigth_to_tenth">[docs]</a><span class="k">def</span> <span class="nf">eigth_to_tenth</span><span class="p">(</span><span class="n">cloudgrade</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+<div class="viewcode-block" id="eigth_to_tenth"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.eigth_to_tenth">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">eigth_to_tenth</span><span class="p">(</span><span class="n">cloudgrade</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;convert cloudgrade from eighth to tenth&quot;&quot;&quot;</span>
     <span class="n">cloudgrade</span> <span class="o">=</span> <span class="n">cloudgrade</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">/</span> <span class="mi">8</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> transformed from from eighth to tenth&quot;</span><span class="p">,</span> <span class="n">cloudgrade</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">cloudgrade</span></div>
 
 
-<div class="viewcode-block" id="percent_to_tenth"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.percent_to_tenth">[docs]</a><span class="k">def</span> <span class="nf">percent_to_tenth</span><span class="p">(</span><span class="n">cloudgrade</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+<div class="viewcode-block" id="percent_to_tenth"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.percent_to_tenth">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">percent_to_tenth</span><span class="p">(</span><span class="n">cloudgrade</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;convert cloudgrade from percent to tenth&quot;&quot;&quot;</span>
     <span class="n">cloudgrade</span> <span class="o">=</span> <span class="n">cloudgrade</span> <span class="o">/</span> <span class="mi">10</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> transformed from from percent to tenth&quot;</span><span class="p">,</span> <span class="n">cloudgrade</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">cloudgrade</span></div>
 
 
-<div class="viewcode-block" id="kelvin_to_celcius"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.kelvin_to_celcius">[docs]</a><span class="k">def</span> <span class="nf">kelvin_to_celcius</span><span class="p">(</span><span class="n">temperature</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+<div class="viewcode-block" id="kelvin_to_celcius"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.kelvin_to_celcius">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">kelvin_to_celcius</span><span class="p">(</span><span class="n">temperature</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;convert temperature from kelvin to celcius&quot;&quot;&quot;</span>
     <span class="n">temperature</span> <span class="o">=</span> <span class="n">temperature</span> <span class="o">-</span> <span class="mf">273.15</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> transformed from from kelvin to celcius&quot;</span><span class="p">,</span> <span class="n">temperature</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">temperature</span></div>
 
 
-<div class="viewcode-block" id="divide_by_1000"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.divide_by_1000">[docs]</a><span class="k">def</span> <span class="nf">divide_by_1000</span><span class="p">(</span><span class="n">series</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+<div class="viewcode-block" id="divide_by_1000"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.unit_conversions.divide_by_1000">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">divide_by_1000</span><span class="p">(</span><span class="n">series</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;divide by 1000&quot;&quot;&quot;</span>
     <span class="n">series</span> <span class="o">=</span> <span class="n">series</span> <span class="o">/</span> <span class="mi">1000</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> transformed from x to x/1000&quot;</span><span class="p">,</span> <span class="n">series</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>

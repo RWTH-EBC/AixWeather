@@ -78,16 +78,16 @@
 <span class="sd">function to truncate data in given interval.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">datetime</span>
-<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="shift_timestamps_and_interpolate"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.shift_timestamps_and_interpolate">[docs]</a><span class="k">def</span> <span class="nf">shift_timestamps_and_interpolate</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">backward</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<div class="viewcode-block" id="shift_timestamps_and_interpolate"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.shift_timestamps_and_interpolate">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">shift_timestamps_and_interpolate</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">backward</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Shift and interpolate timestamps in a DataFrame by 30 minutes forward or backward.</span>
 
@@ -121,7 +121,7 @@
     <span class="k">return</span> <span class="n">df_final</span></div>
 
 
-<div class="viewcode-block" id="avg_preceding_hour_2_indicated_time"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.avg_preceding_hour_2_indicated_time">[docs]</a><span class="k">def</span> <span class="nf">avg_preceding_hour_2_indicated_time</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<div class="viewcode-block" id="avg_preceding_hour_2_indicated_time"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.avg_preceding_hour_2_indicated_time">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">avg_preceding_hour_2_indicated_time</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Wrapper function for shift_timestamps_and_interpolate.</span>
 <span class="sd">    aka: prec2ind</span>
@@ -129,7 +129,7 @@
     <span class="k">return</span> <span class="n">shift_timestamps_and_interpolate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="indicated_time_2_avg_following_hour"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_following_hour">[docs]</a><span class="k">def</span> <span class="nf">indicated_time_2_avg_following_hour</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<div class="viewcode-block" id="indicated_time_2_avg_following_hour"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_following_hour">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">indicated_time_2_avg_following_hour</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Wrapper function for shift_timestamps_and_interpolate.</span>
 <span class="sd">    aka: ind2foll</span>
@@ -137,21 +137,21 @@
     <span class="k">return</span> <span class="n">shift_timestamps_and_interpolate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="avg_following_hour_2_indicated_time"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.avg_following_hour_2_indicated_time">[docs]</a><span class="k">def</span> <span class="nf">avg_following_hour_2_indicated_time</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<div class="viewcode-block" id="avg_following_hour_2_indicated_time"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.avg_following_hour_2_indicated_time">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">avg_following_hour_2_indicated_time</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Wrapper function for shift_timestamps_and_interpolate.</span>
 <span class="sd">    aka: foll2ind&#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="n">shift_timestamps_and_interpolate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="indicated_time_2_avg_preceding_hour"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_preceding_hour">[docs]</a><span class="k">def</span> <span class="nf">indicated_time_2_avg_preceding_hour</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<div class="viewcode-block" id="indicated_time_2_avg_preceding_hour"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_preceding_hour">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">indicated_time_2_avg_preceding_hour</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Wrapper function for shift_timestamps_and_interpolate.</span>
 <span class="sd">    aka: ind2prec&#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="n">shift_timestamps_and_interpolate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="shift_time_by_dict"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.shift_time_by_dict">[docs]</a><span class="k">def</span> <span class="nf">shift_time_by_dict</span><span class="p">(</span><span class="n">format_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<div class="viewcode-block" id="shift_time_by_dict"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.shift_time_by_dict">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">shift_time_by_dict</span><span class="p">(</span><span class="n">format_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Shift timestamps in a DataFrame based on a format dictionary.</span>
 
@@ -198,7 +198,7 @@
     <span class="k">return</span> <span class="n">df</span></div>
 
 
-<div class="viewcode-block" id="truncate_data_from_start_to_stop"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.truncate_data_from_start_to_stop">[docs]</a><span class="k">def</span> <span class="nf">truncate_data_from_start_to_stop</span><span class="p">(</span>
+<div class="viewcode-block" id="truncate_data_from_start_to_stop"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.truncate_data_from_start_to_stop">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">truncate_data_from_start_to_stop</span><span class="p">(</span>
     <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">stop</span><span class="p">:</span> <span class="n">datetime</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>

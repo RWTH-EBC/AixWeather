@@ -76,14 +76,14 @@
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">includes auxiliary functions for data handling and transformation</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="force_data_variable_convention"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.force_data_variable_convention">[docs]</a><span class="k">def</span> <span class="nf">force_data_variable_convention</span><span class="p">(</span>
+<div class="viewcode-block" id="force_data_variable_convention"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.force_data_variable_convention">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">force_data_variable_convention</span><span class="p">(</span>
     <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">format_desired</span><span class="p">:</span> <span class="nb">dict</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -107,7 +107,7 @@
     <span class="k">return</span> <span class="n">df_core_var</span></div>
 
 
-<div class="viewcode-block" id="rename_columns"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.rename_columns">[docs]</a><span class="k">def</span> <span class="nf">rename_columns</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">format_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<div class="viewcode-block" id="rename_columns"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.rename_columns">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">rename_columns</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">format_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Rename DataFrame columns based on the provided format dictionary.</span>
 
@@ -123,7 +123,7 @@
     <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">rename_map</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="fill_nan_from_format_dict"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.fill_nan_from_format_dict">[docs]</a><span class="k">def</span> <span class="nf">fill_nan_from_format_dict</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">format_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<div class="viewcode-block" id="fill_nan_from_format_dict"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.fill_nan_from_format_dict">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">fill_nan_from_format_dict</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">format_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Fill NaN values in a DataFrame based on the provided format data.</span>
 
@@ -143,7 +143,7 @@
     <span class="k">return</span> <span class="n">df</span></div>
 
 
-<div class="viewcode-block" id="replace_dummy_with_nan"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.replace_dummy_with_nan">[docs]</a><span class="k">def</span> <span class="nf">replace_dummy_with_nan</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">format_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<div class="viewcode-block" id="replace_dummy_with_nan"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.replace_dummy_with_nan">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">replace_dummy_with_nan</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">format_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Replace specific values in the DataFrame with NaN based on the given format dictionary.</span>
 <span class="sd">    Reason: sometimes, e.g. the DWD, specifies a missing value with a dummy value like e.g. 99,</span>
@@ -168,7 +168,7 @@
     <span class="k">return</span> <span class="n">df</span></div>
 
 
-<div class="viewcode-block" id="evaluate_transformations"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.evaluate_transformations">[docs]</a><span class="k">def</span> <span class="nf">evaluate_transformations</span><span class="p">(</span><span class="n">core_format</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">other_format</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<div class="viewcode-block" id="evaluate_transformations"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.evaluate_transformations">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">evaluate_transformations</span><span class="p">(</span><span class="n">core_format</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">other_format</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compare the units and core variables of two formats and print any required unit transformations.</span>
 
@@ -201,7 +201,7 @@
             <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="select_entry_by_core_name"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.select_entry_by_core_name">[docs]</a><span class="k">def</span> <span class="nf">select_entry_by_core_name</span><span class="p">(</span><span class="n">format_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">core_name_to_match</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<div class="viewcode-block" id="select_entry_by_core_name"><a class="viewcode-back" href="../../../code/aixweather.transformation_functions.html#aixweather.transformation_functions.auxiliary.select_entry_by_core_name">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">select_entry_by_core_name</span><span class="p">(</span><span class="n">format_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">core_name_to_match</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Select an entry from a format dictionary based on the specified core name.</span>
 
