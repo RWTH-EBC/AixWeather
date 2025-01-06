@@ -153,8 +153,12 @@ For this, we use the datetime module to specify dates.</p>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>For EPW and TRY we need to import the .epw or .dat file
-These imports are just to create the path to the file stored in the tests folder</p>
+<p>For EPW and TRY we need to import the .epw or .dat file, e.g. from your local drive. The
+Readme provides information on where you can download your own EPW and TRY files. For this
+example, we use the test files provided in the tests folder (be sure to have the full
+repository downloaded to have access to these files).
+If you use your own files, you can specify the path to the file in the <code class="docutils literal notranslate"><span class="pre">path</span></code> argument.</p>
+<p>These imports are just to create the path to the file stored in the tests folder</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">aixweather</span><span class="w"> </span><span class="kn">import</span> <span class="n">definitions</span>
 </pre></div>
