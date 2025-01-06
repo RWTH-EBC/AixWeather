@@ -73,6 +73,7 @@ def e1_pull_DWD_historical_to_all_output_formats():
     # Readme provides information on where you can download your own EPW and TRY files. For this
     # example, we use the test files provided in the tests folder (be sure to have the full
     # repository downloaded to have access to these files).
+    # If you use your own files, you can specify the path to the file in the `path` argument.
     
     # These imports are just to create the path to the file stored in the tests folder
     import os
