@@ -90,7 +90,12 @@ project = ProjectClassDWDForecast(
 )
 ```
 
-For EPW and TRY we need to import the .epw or .dat file
+For EPW and TRY we need to import the .epw or .dat file, e.g. from your local drive. The
+Readme provides information on where you can download your own EPW and TRY files. For this
+example, we use the test files provided in the tests folder (be sure to have the full
+repository downloaded to have access to these files).
+If you use your own files, you can specify the path to the file in the `path` argument.
+
 These imports are just to create the path to the file stored in the tests folder
 
 ```python
