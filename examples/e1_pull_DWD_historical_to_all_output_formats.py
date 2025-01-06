@@ -69,10 +69,11 @@ def e1_pull_DWD_historical_to_all_output_formats():
         abs_result_folder_path=None,  # Optional: specify result path
     )
 
-    # For EPW and TRY we need to import the .epw or .dat file, e.g. from your local drive.
-    # The Readme provides information on where you can download your own EPW and TRY files.
-    # For this example, we use the test files provided in the tests folder.
-
+    # For EPW and TRY we need to import the .epw or .dat file, e.g. from your local drive. The
+    # Readme provides information on where you can download your own EPW and TRY files. For this
+    # example, we use the test files provided in the tests folder (be sure to have the full
+    # repository downloaded to have access to these files).
+    
     # These imports are just to create the path to the file stored in the tests folder
     import os
     from aixweather import definitions
