@@ -11,6 +11,9 @@ tags:
 authors:
   - name: Martin Rätz
     orcid: 0000-0002-3573-2872
+    affiliation: 1 
+  - name: Fabian Wüllhorst
+    orcid: 0000-0003-3325-5707
     affiliation: 1
   - name: Rita Streblow
     orcid: 0000-0001-7640-0930
