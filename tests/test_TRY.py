@@ -4,7 +4,9 @@ includes unittests for different TRY datasets
 # pylint: disable=all
 
 import os
+import time
 import unittest
+import random
 
 from aixweather import definitions
 from aixweather.project_class import ProjectClassTRY
@@ -14,6 +16,11 @@ from tests import utils_4_tests
 class BaseTRY(unittest.TestCase):
     @classmethod
     def init_and_run_TRY(cls, name: str, path: str):
+        # running the tests on the CI server with different python versions simultaneously causes,
+        # connection timeouts to nominatim, which is used to get the coordinates of the station.
+        # Therefore, we use a random timer to avoid this issue.
+        time.sleep(random.uniform(0, 20))
+
         abs_result_folder_path = os.path.join(definitions.result_folder_path(), name)
         cls.c = ProjectClassTRY(
             path=path, abs_result_folder_path=abs_result_folder_path

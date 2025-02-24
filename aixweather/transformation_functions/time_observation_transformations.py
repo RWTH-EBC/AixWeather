@@ -12,7 +12,7 @@ import pandas as pd
 logger = logging.getLogger(__name__)
 
 
-def _shift_timestamps_and_interpolate(df: pd.DataFrame, backward: bool) -> pd.DataFrame:
+def shift_timestamps_and_interpolate(df: pd.DataFrame, backward: bool) -> pd.DataFrame:
     """
     Shift and interpolate timestamps in a DataFrame by 30 minutes forward or backward.
 
@@ -47,23 +47,33 @@ def _shift_timestamps_and_interpolate(df: pd.DataFrame, backward: bool) -> pd.Da
 
 
 def avg_preceding_hour_2_indicated_time(df):
-    '''aka: prec2ind'''
-    return _shift_timestamps_and_interpolate(df, True)
+    '''
+    Wrapper function for shift_timestamps_and_interpolate.
+    aka: prec2ind
+    '''
+    return shift_timestamps_and_interpolate(df, True)
 
 
 def indicated_time_2_avg_following_hour(df):
-    '''aka: ind2foll'''
-    return _shift_timestamps_and_interpolate(df, True)
+    '''
+    Wrapper function for shift_timestamps_and_interpolate.
+    aka: ind2foll
+    '''
+    return shift_timestamps_and_interpolate(df, True)
 
 
 def avg_following_hour_2_indicated_time(df):
-    '''aka: foll2ind'''
-    return _shift_timestamps_and_interpolate(df, False)
+    '''
+    Wrapper function for shift_timestamps_and_interpolate.
+    aka: foll2ind'''
+    return shift_timestamps_and_interpolate(df, False)
 
 
 def indicated_time_2_avg_preceding_hour(df):
-    '''aka: ind2prec'''
-    return _shift_timestamps_and_interpolate(df, False)
+    '''
+    Wrapper function for shift_timestamps_and_interpolate.
+    aka: ind2prec'''
+    return shift_timestamps_and_interpolate(df, False)
 
 
 def shift_time_by_dict(format_dict: dict, df: pd.DataFrame) -> pd.DataFrame:
