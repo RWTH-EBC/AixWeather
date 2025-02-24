@@ -1,24 +1,22 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>aixweather package &mdash; aixweather 0.1.4 documentation</title>
+  <title>aixweather package &mdash; aixweather 0.1.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+      <script src="../_static/jquery.js"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+      <script src="../_static/doctools.js"></script>
+      <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -37,9 +35,6 @@
           <a href="../index.html" class="icon icon-home">
             aixweather
           </a>
-              <div class="version">
-                0.1
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -49,7 +44,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Tutorial and Example</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">aixweather</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">aixweather package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
@@ -205,6 +200,7 @@
 <li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_following_hour"><code class="docutils literal notranslate"><span class="pre">indicated_time_2_avg_following_hour()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_preceding_hour"><code class="docutils literal notranslate"><span class="pre">indicated_time_2_avg_preceding_hour()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.shift_time_by_dict"><code class="docutils literal notranslate"><span class="pre">shift_time_by_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.shift_timestamps_and_interpolate"><code class="docutils literal notranslate"><span class="pre">shift_timestamps_and_interpolate()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_functions.html#aixweather.transformation_functions.time_observation_transformations.truncate_data_from_start_to_stop"><code class="docutils literal notranslate"><span class="pre">truncate_data_from_start_to_stop()</span></code></a></li>
 </ul>
 </li>
@@ -291,13 +287,13 @@
 <p>This module includes variables or functions which define central variables for the whole project.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="aixweather.definitions.result_folder_path">
-<span class="sig-prename descclassname"><span class="pre">aixweather.definitions.</span></span><span class="sig-name descname"><span class="pre">result_folder_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/definitions.html#result_folder_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.definitions.result_folder_path" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">aixweather.definitions.</span></span><span class="sig-name descname"><span class="pre">result_folder_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/definitions.html#result_folder_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.definitions.result_folder_path" title="Permalink to this definition"></a></dt>
 <dd><p>Creates the path to the resultsfolder.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="aixweather.definitions.results_file_path">
-<span class="sig-prename descclassname"><span class="pre">aixweather.definitions.</span></span><span class="sig-name descname"><span class="pre">results_file_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/definitions.html#results_file_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.definitions.results_file_path" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">aixweather.definitions.</span></span><span class="sig-name descname"><span class="pre">results_file_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/definitions.html#results_file_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.definitions.results_file_path" title="Permalink to this definition"></a></dt>
 <dd><p>create a path to a results file</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>filename: name of file
@@ -340,7 +336,7 @@ and consider to create a pull request to add the pipeline to the repository.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="aixweather.project_class.ProjectClassDWDForecast">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">aixweather.project_class.</span></span><span class="sig-name descname"><span class="pre">ProjectClassDWDForecast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">station</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassDWDForecast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassDWDForecast" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">aixweather.project_class.</span></span><span class="sig-name descname"><span class="pre">ProjectClassDWDForecast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">station</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassDWDForecast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassDWDForecast" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#aixweather.project_class.ProjectClassGeneral" title="aixweather.project_class.ProjectClassGeneral"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProjectClassGeneral</span></code></a></p>
 <p>A class representing a project for importing and processing weather forecast data
 from DWD (Deutscher Wetterdienst).</p>
@@ -365,7 +361,7 @@ from DWD (Deutscher Wetterdienst).</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="aixweather.project_class.ProjectClassDWDHistorical">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">aixweather.project_class.</span></span><span class="sig-name descname"><span class="pre">ProjectClassDWDHistorical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">station</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassDWDHistorical"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassDWDHistorical" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">aixweather.project_class.</span></span><span class="sig-name descname"><span class="pre">ProjectClassDWDHistorical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">station</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassDWDHistorical"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassDWDHistorical" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#aixweather.project_class.ProjectClassGeneral" title="aixweather.project_class.ProjectClassGeneral"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProjectClassGeneral</span></code></a></p>
 <p>A class representing a project for importing and processing historical weather data
 from DWD (Deutscher Wetterdienst).</p>
@@ -415,7 +411,7 @@ from EPW (EnergyPlus Weather) format.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="aixweather.project_class.ProjectClassERC">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">aixweather.project_class.</span></span><span class="sig-name descname"><span class="pre">ProjectClassERC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><span class="pre">tuple</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassERC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassERC" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">aixweather.project_class.</span></span><span class="sig-name descname"><span class="pre">ProjectClassERC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassERC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassERC" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#aixweather.project_class.ProjectClassGeneral" title="aixweather.project_class.ProjectClassGeneral"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProjectClassGeneral</span></code></a></p>
 <p>A class representing a project for importing and processing weather data
 from the ERC (Energy Research Center).</p>
@@ -442,7 +438,7 @@ the data source.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="aixweather.project_class.ProjectClassGeneral">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">aixweather.project_class.</span></span><span class="sig-name descname"><span class="pre">ProjectClassGeneral</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
 <p>An abstract base class representing a general project.</p>
 <p>For each source of weather data, a project class should inherit from this class
 and implement specific methods for data import and transformation.</p>
@@ -483,32 +479,62 @@ core_2_pickle(): Convert core data to Pickle format.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="aixweather.project_class.ProjectClassGeneral.core_2_csv">
-<span class="sig-name descname"><span class="pre">core_2_csv</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.core_2_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_2_csv" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">core_2_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.core_2_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_2_csv" title="Permalink to this definition"></a></dt>
 <dd><p>Convert core data to .csv file</p>
+<dl class="simple">
+<dt>filename (str): Name of the file to be saved. The default is constructed</dt><dd><p>based on the station name.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Path to the exported file.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="aixweather.project_class.ProjectClassGeneral.core_2_epw">
-<span class="sig-name descname"><span class="pre">core_2_epw</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.core_2_epw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_2_epw" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">core_2_epw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.core_2_epw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_2_epw" title="Permalink to this definition"></a></dt>
 <dd><p>Convert core data to .epw file</p>
+<dl class="simple">
+<dt>filename (str): Name of the file to be saved. The default is constructed</dt><dd><p>based on the meta-data as well as start and stop time</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Path to the exported file.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="aixweather.project_class.ProjectClassGeneral.core_2_json">
-<span class="sig-name descname"><span class="pre">core_2_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.core_2_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_2_json" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">core_2_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.core_2_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_2_json" title="Permalink to this definition"></a></dt>
 <dd><p>Convert core data to .json file</p>
+<dl class="simple">
+<dt>filename (str): Name of the file to be saved. The default is constructed</dt><dd><p>based on the station name.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Path to the exported file.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="aixweather.project_class.ProjectClassGeneral.core_2_mos">
-<span class="sig-name descname"><span class="pre">core_2_mos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.core_2_mos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_2_mos" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">core_2_mos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.core_2_mos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_2_mos" title="Permalink to this definition"></a></dt>
 <dd><p>Convert core data to .mos file</p>
+<dl class="simple">
+<dt>filename (str): Name of the file to be saved. The default is constructed</dt><dd><p>based on the meta-data as well as start and stop time</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Path to the exported file.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="aixweather.project_class.ProjectClassGeneral.core_2_pickle">
-<span class="sig-name descname"><span class="pre">core_2_pickle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.core_2_pickle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_2_pickle" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">core_2_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.core_2_pickle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_2_pickle" title="Permalink to this definition"></a></dt>
 <dd><p>Convert core data pickle file</p>
+<dl class="simple">
+<dt>filename (str): Name of the file to be saved. The default is constructed</dt><dd><p>based on the station name.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Path to the exported file.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">

@@ -1,24 +1,22 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Version History &mdash; aixweather 0.1.4 documentation</title>
+  <title>Version History &mdash; aixweather 0.1.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+      <script src="_static/jquery.js"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+      <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+      <script src="_static/doctools.js"></script>
+      <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -36,9 +34,6 @@
           <a href="index.html" class="icon icon-home">
             aixweather
           </a>
-              <div class="version">
-                0.1
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -48,7 +43,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Tutorial and Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code/modules.html">aixweather</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contribution.html">Contribute as a user</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
@@ -110,6 +105,28 @@
 <li><p>BugFix: DWD historical pull with station id´s with less than 5 digits.</p></li>
 <li><p>Feature: updated station list link</p></li>
 <li><p>Feature: check for meaningful start and end dates</p></li>
+</ul>
+</li>
+<li><p>v0.1.5:</p>
+<ul>
+<li><p>BugFix: timezone shift in opposite direction for epw imports</p></li>
+<li><p>BugFix: start time for epw imports one hour to late fixed</p></li>
+<li><p>BugFix: package versioning</p></li>
+<li><p>BugFix: global radiation NaN problem for DWD try imports fixed</p></li>
+<li><p>Feature: tmy epw files with different years per month can now be handled</p></li>
+<li><p>Feature: enable custom filenames for exports</p></li>
+<li><p>Feature: use logging instaed of print</p></li>
+</ul>
+</li>
+<li><p>v0.1.6:</p>
+<ul>
+<li><p>Feature: Change sampling interval string from H to h #54</p></li>
+<li><p>BugFix: Add shapely import issue #52</p></li>
+</ul>
+</li>
+<li><p>v0.1.7:</p>
+<ul>
+<li><p>HotFix: Corrected shapely import issue #52 and optional dependencies TRY warning</p></li>
 </ul>
 </li>
 </ul>

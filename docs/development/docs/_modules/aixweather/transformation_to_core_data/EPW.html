@@ -1,23 +1,21 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>aixweather.transformation_to_core_data.EPW &mdash; aixweather 0.1.4 documentation</title>
+  <title>aixweather.transformation_to_core_data.EPW &mdash; aixweather 0.1.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/sphinx_highlight.js"></script>
+      <script src="../../../_static/jquery.js"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+      <script src="../../../_static/doctools.js"></script>
+      <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -34,9 +32,6 @@
           <a href="../../../index.html" class="icon icon-home">
             aixweather
           </a>
-              <div class="version">
-                0.1
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -46,7 +41,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Tutorial and Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">aixweather</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html">Contribute as a user</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
@@ -82,23 +77,26 @@
 <span class="sd">This module includes a function to transform EPW data to core data format.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 
-<span class="kn">from</span> <span class="nn">aixweather</span> <span class="kn">import</span> <span class="n">definitions</span>
-<span class="kn">from</span> <span class="nn">aixweather.imports.utils_import</span> <span class="kn">import</span> <span class="n">MetaData</span>
-<span class="kn">from</span> <span class="nn">aixweather.transformation_functions</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aixweather</span><span class="w"> </span><span class="kn">import</span> <span class="n">definitions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.imports.utils_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetaData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.transformation_functions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">auxiliary</span><span class="p">,</span>
     <span class="n">time_observation_transformations</span><span class="p">,</span>
     <span class="n">variable_transformations</span><span class="p">,</span>
     <span class="n">pass_through_handling</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">aixweather.core_data_format_2_output_file.to_epw_energyplus</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.core_data_format_2_output_file.to_epw_energyplus</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">format_epw</span> <span class="k">as</span> <span class="n">format_epw_export</span><span class="p">,</span>
 <span class="p">)</span>
 
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-<div class="viewcode-block" id="EPW_to_core_data"><a class="viewcode-back" href="../../../code/aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.EPW.EPW_to_core_data">[docs]</a><span class="k">def</span> <span class="nf">EPW_to_core_data</span><span class="p">(</span><span class="n">df_import</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+
+<div class="viewcode-block" id="EPW_to_core_data"><a class="viewcode-back" href="../../../code/aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.EPW.EPW_to_core_data">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">EPW_to_core_data</span><span class="p">(</span><span class="n">df_import</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Transform imported EPW (EnergyPlus Weather) data into core data format.</span>
 
@@ -124,10 +122,69 @@
         <span class="n">core_format</span><span class="o">=</span><span class="n">definitions</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">,</span> <span class="n">other_format</span><span class="o">=</span><span class="n">format_epw</span>
     <span class="p">)</span>
 
+    <span class="k">def</span><span class="w"> </span><span class="nf">epw_to_datetimeindex</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Convert the first 4 columns of the DataFrame to a DatetimeIndex and set it as the</span>
+<span class="sd">        index.&#39;&#39;&#39;</span>
+        <span class="c1"># The first 4 columns represent year, month, day, and hour respectively,</span>
+        <span class="c1"># but with hour 24 instead of hour 0.</span>
+        <span class="n">hour</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">mask_24hr</span> <span class="o">=</span> <span class="n">hour</span> <span class="o">==</span> <span class="mi">24</span>
+        <span class="n">hour</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask_24hr</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># loop one by one to avoid faults with non-continuous data</span>
+        <span class="n">datetime_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">hour</span> <span class="o">=</span> <span class="n">row</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">hour</span> <span class="o">==</span> <span class="mi">24</span><span class="p">:</span>
+                <span class="n">hour</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="c1"># Increment the day by one for those rows where hour</span>
+                <span class="c1"># was originally 24</span>
+                <span class="n">row_datetime</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">hour</span><span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">row_datetime</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">hour</span><span class="p">)</span>
+            <span class="n">datetime_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row_datetime</span><span class="p">)</span>
+
+        <span class="c1"># Setting datetime column as index with name &#39;datetime&#39;</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">datetime_list</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;datetime&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">df</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">if_TMY_convert_to_one_year</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;TMY (typical meteorological year) data in .epw files often contains data for a period</span>
+<span class="sd">        of one year but each month is from a different year. This will lead to several years of</span>
+<span class="sd">        nan data in between. As the year is irrelevant in tmy data, we set all dates to the year</span>
+<span class="sd">        of februaries data. February is chosen to avoid leap year issues.</span>
+
+<span class="sd">        It is automatically detected whether it is a TMY through the following criteria:</span>
+<span class="sd">        - the available data covers exactly 8760 data points (one non-leap year)</span>
+<span class="sd">        - the period covered by the timestamps spans more than one year</span>
+<span class="sd">        - the first date is the first of January at hour 1</span>
+
+<span class="sd">        This will lead to an info log message if the data is transformed.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">==</span> <span class="mi">8760</span> <span class="c1"># exactly one year of data</span>
+            <span class="ow">and</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="c1"># spanning over more than one year</span>
+            <span class="ow">and</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="c1"># first month is January</span>
+            <span class="ow">and</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="c1"># first day is one</span>
+            <span class="ow">and</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="c1"># first hour is one</span>
+        <span class="p">):</span>
+            <span class="n">year_of_february</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c1"># Replace the year component with the year of February</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">year_of_february</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;The data was transformed to one year of data as it seems to be TMY data.&quot;</span>
+                <span class="s2">&quot;The year is irrelevant for TMY data.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">df</span>
+
     <span class="c1">### preprocessing raw data for further operations</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df_import</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">if_TMY_convert_to_one_year</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">epw_to_datetimeindex</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
     <span class="c1"># Resample the DataFrame to make the DatetimeIndex complete and monotonic</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">asfreq</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">asfreq</span><span class="p">()</span>
     <span class="c1"># give names to columns according to documentation of import data</span>
     <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">format_epw</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
     <span class="c1"># rename available variables to core data format</span>
@@ -135,15 +192,14 @@
     <span class="c1"># delete dummy values from EPW</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">replace_dummy_with_nan</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">format_epw</span><span class="p">)</span>
 
-
     <span class="c1">### convert timezone to UTC+0</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">periods</span><span class="o">=</span><span class="n">meta</span><span class="o">.</span><span class="n">timezone</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">periods</span><span class="o">=-</span><span class="n">meta</span><span class="o">.</span><span class="n">timezone</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="c1">### shift and interpolate data forward 30mins or backward -30mins</span>
     <span class="n">df_no_shift</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">time_observation_transformations</span><span class="o">.</span><span class="n">shift_time_by_dict</span><span class="p">(</span><span class="n">format_epw</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
         <span class="c1">### force variable naming format_core_data</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">force_data_variable_convention</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">definitions</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">)</span>
         <span class="c1">### unit conversion</span>

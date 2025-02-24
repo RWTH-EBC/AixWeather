@@ -1,24 +1,22 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contribute as a user &mdash; aixweather 0.1.4 documentation</title>
+  <title>Contribute as a user &mdash; aixweather 0.1.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+      <script src="_static/jquery.js"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+      <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+      <script src="_static/doctools.js"></script>
+      <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -37,9 +35,6 @@
           <a href="index.html" class="icon icon-home">
             aixweather
           </a>
-              <div class="version">
-                0.1
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -49,7 +44,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Tutorial and Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code/modules.html">aixweather</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Contribute as a user</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#contribute-as-a-developer">Contribute as a developer</a><ul>
@@ -90,12 +85,12 @@
 <h1>Contribute as a user<a class="headerlink" href="#contribute-as-a-user" title="Permalink to this heading"></a></h1>
 <p>The documentation, examples and tutorials should be understandable and the code bug-free.
 All users have different backgrounds, so you may not understand everything or encounter bugs.
-In that case, PLEASE raise an issue <a class="reference external" href="https://github.com/RWTH-EBC/ebcpy/issues/new">here</a>.</p>
+In that case, PLEASE raise an issue <a class="reference external" href="https://github.com/RWTH-EBC/AixWeather/issues/new/choose">here</a>.</p>
 </section>
 <section id="contribute-as-a-developer">
 <h1>Contribute as a developer<a class="headerlink" href="#contribute-as-a-developer" title="Permalink to this heading"></a></h1>
 <p>If you instead want to contribute new features or fix bugs yourself, we are more than happy.</p>
-<p>Please also raise an issue and create a new branch labeled <code class="docutils literal notranslate"><span class="pre">issueNR_issueName</span></code>.</p>
+<p>Please also raise an issue and create a new branch labeled <code class="docutils literal notranslate"><span class="pre">issueNR-issueName</span></code>.</p>
 <p>Once your feature is ready, create a pull request and check if the pipeline succeeds.
 Assign a reviewer before merging. Once the review is finished, you can merge.</p>
 <p>Please note that the main branch is used in the WebApp and therefore changes here must be in
@@ -111,7 +106,7 @@ version which can be functionally ahead of the WebApp.</p>
 <section id="documentation">
 <h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading"></a></h2>
 <p>All created or modified functions should be documented properly. Try to follow the structure already present. If possible, write a little doctest example into the docstring to make clear to users what the desired output of your function is. All non-self-explanatory lines of code should include a comment. We use the pycharm-style for docstrings, e.g.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">dummy</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">dummy</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Describe what the function does in here.</span>
 <span class="sd">    The blank line below is necessary for the doc to render nicely.</span>

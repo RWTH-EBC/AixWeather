@@ -1,24 +1,22 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>aixweather.core_data_format_2_output_file package &mdash; aixweather 0.1.4 documentation</title>
+  <title>aixweather.core_data_format_2_output_file package &mdash; aixweather 0.1.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+      <script src="../_static/jquery.js"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+      <script src="../_static/doctools.js"></script>
+      <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -37,9 +35,6 @@
           <a href="../index.html" class="icon icon-home">
             aixweather
           </a>
-              <div class="version">
-                0.1
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -49,7 +44,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Tutorial and Example</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">aixweather</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="aixweather.html">aixweather package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="aixweather.html#subpackages">Subpackages</a><ul class="current">
@@ -140,19 +135,29 @@ units checked by Martin Rätz (07.08.2023)</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="aixweather.core_data_format_2_output_file.to_epw_energyplus.to_epw">
-<span class="sig-prename descclassname"><span class="pre">aixweather.core_data_format_2_output_file.to_epw_energyplus.</span></span><span class="sig-name descname"><span class="pre">to_epw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">core_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.utils_import.MetaData" title="aixweather.imports.utils_import.MetaData"><span class="pre">MetaData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fillna</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/aixweather/core_data_format_2_output_file/to_epw_energyplus.html#to_epw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.core_data_format_2_output_file.to_epw_energyplus.to_epw" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">aixweather.core_data_format_2_output_file.to_epw_energyplus.</span></span><span class="sig-name descname"><span class="pre">to_epw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">core_df:</span> <span class="pre">~pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta:</span> <span class="pre">~aixweather.imports.utils_import.MetaData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start:</span> <span class="pre">~datetime.datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop:</span> <span class="pre">~datetime.datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fillna:</span> <span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_folder:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'pandas.core.frame.DataFrame'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'str'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/core_data_format_2_output_file/to_epw_energyplus.html#to_epw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.core_data_format_2_output_file.to_epw_energyplus.to_epw" title="Permalink to this definition"></a></dt>
 <dd><p>Create an EPW file from the core data.</p>
-<dl class="simple">
+<dl>
 <dt>Args:</dt><dd><p>core_df (pd.DataFrame): DataFrame containing core data.
 meta (MetaData): Metadata associated with the weather data.
 start (dt.datetime): Timestamp for the start of the EPW file.
 stop (dt.datetime): Timestamp for the end of the EPW file.
-fillna (bool): Boolean indicating whether NaN values should be filled.</p>
+fillna (bool): Boolean indicating whether NaN values should be filled.
+result_folder (str):</p>
+<blockquote>
+<div><p>Path to the folder where to save the file. Default will use
+the <cite>results_file_path</cite> method.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>filename (str): Name of the file to be saved. The default is constructed</dt><dd><p>based on the meta-data as well as start and stop time</p>
+</dd>
+</dl>
 </dd>
 <dt>Returns:</dt><dd><dl class="simple">
 <dt>pd.DataFrame: DataFrame containing the weather data formatted for EPW export,</dt><dd><p>excluding metadata.</p>
 </dd>
 </dl>
+<p>str: Path to the exported file.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -181,19 +186,29 @@ unit´s checked by Martin Rätz (07.08.2023)</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="aixweather.core_data_format_2_output_file.to_mos_TMY3.to_mos">
-<span class="sig-prename descclassname"><span class="pre">aixweather.core_data_format_2_output_file.to_mos_TMY3.</span></span><span class="sig-name descname"><span class="pre">to_mos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">core_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.utils_import.MetaData" title="aixweather.imports.utils_import.MetaData"><span class="pre">MetaData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fillna</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/aixweather/core_data_format_2_output_file/to_mos_TMY3.html#to_mos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.core_data_format_2_output_file.to_mos_TMY3.to_mos" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">aixweather.core_data_format_2_output_file.to_mos_TMY3.</span></span><span class="sig-name descname"><span class="pre">to_mos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">core_df:</span> <span class="pre">~pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta:</span> <span class="pre">~aixweather.imports.utils_import.MetaData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start:</span> <span class="pre">~datetime.datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop:</span> <span class="pre">~datetime.datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fillna:</span> <span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_folder:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'pandas.core.frame.DataFrame'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'str'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/core_data_format_2_output_file/to_mos_TMY3.html#to_mos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.core_data_format_2_output_file.to_mos_TMY3.to_mos" title="Permalink to this definition"></a></dt>
 <dd><p>Create a MOS file from the core data.</p>
-<dl class="simple">
+<dl>
 <dt>Args:</dt><dd><p>core_df (pd.DataFrame): DataFrame containing core data.
 meta (MetaData): Metadata associated with the weather data.
 start (dt.datetime): Timestamp for the start of the MOS file.
 stop (dt.datetime): Timestamp for the end of the MOS file.
-fillna (bool): Boolean indicating whether NaN values should be filled.</p>
+fillna (bool): Boolean indicating whether NaN values should be filled.
+result_folder (str):</p>
+<blockquote>
+<div><p>Path to the folder where to save the file. Default will use
+the <cite>results_file_path</cite> method.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>filename (str): Name of the file to be saved. The default is constructed</dt><dd><p>based on the meta-data as well as start and stop time</p>
+</dd>
+</dl>
 </dd>
 <dt>Returns:</dt><dd><dl class="simple">
 <dt>pd.DataFrame: DataFrame containing the weather data formatted for MOS export,</dt><dd><p>excluding metadata.</p>
 </dd>
 </dl>
+<p>str: Path to the exported file.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -204,39 +219,69 @@ fillna (bool): Boolean indicating whether NaN values should be filled.</p>
 <p>converts core data to different simpler formats (currently without any transformation)</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="aixweather.core_data_format_2_output_file.unconverted_to_x.to_csv">
-<span class="sig-prename descclassname"><span class="pre">aixweather.core_data_format_2_output_file.unconverted_to_x.</span></span><span class="sig-name descname"><span class="pre">to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">core_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.utils_import.MetaData" title="aixweather.imports.utils_import.MetaData"><span class="pre">MetaData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/core_data_format_2_output_file/unconverted_to_x.html#to_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.core_data_format_2_output_file.unconverted_to_x.to_csv" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">aixweather.core_data_format_2_output_file.unconverted_to_x.</span></span><span class="sig-name descname"><span class="pre">to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">core_df:</span> <span class="pre">~pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta:</span> <span class="pre">~aixweather.imports.utils_import.MetaData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_folder:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'pandas.core.frame.DataFrame'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'str'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/core_data_format_2_output_file/unconverted_to_x.html#to_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.core_data_format_2_output_file.unconverted_to_x.to_csv" title="Permalink to this definition"></a></dt>
 <dd><p>Create and save a csv file from the core data.</p>
-<dl class="simple">
+<dl>
 <dt>Args:</dt><dd><p>core_df (pd.DataFrame): DataFrame containing core data.
-meta (MetaData): Metadata associated with the data.</p>
+meta (MetaData): Metadata associated with the data.
+result_folder (str):</p>
+<blockquote>
+<div><p>Path to the folder where to save the file. Default will use
+the <cite>results_file_path</cite> method.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>filename (str): Name of the file to be saved. The default is constructed</dt><dd><p>based on the station name.</p>
 </dd>
-<dt>Returns:</dt><dd><p>pd.DataFrame: DataFrame containing the weather data formatted as core data.</p>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: DataFrame containing the weather data formatted as core data.
+str: Path to the exported file.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="aixweather.core_data_format_2_output_file.unconverted_to_x.to_json">
-<span class="sig-prename descclassname"><span class="pre">aixweather.core_data_format_2_output_file.unconverted_to_x.</span></span><span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">core_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.utils_import.MetaData" title="aixweather.imports.utils_import.MetaData"><span class="pre">MetaData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/core_data_format_2_output_file/unconverted_to_x.html#to_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.core_data_format_2_output_file.unconverted_to_x.to_json" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">aixweather.core_data_format_2_output_file.unconverted_to_x.</span></span><span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">core_df:</span> <span class="pre">~pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta:</span> <span class="pre">~aixweather.imports.utils_import.MetaData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_folder:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'pandas.core.frame.DataFrame'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'str'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/core_data_format_2_output_file/unconverted_to_x.html#to_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.core_data_format_2_output_file.unconverted_to_x.to_json" title="Permalink to this definition"></a></dt>
 <dd><p>Create and save a json file from the core data.</p>
-<dl class="simple">
+<dl>
 <dt>Args:</dt><dd><p>core_df (pd.DataFrame): DataFrame containing core data.
-meta (MetaData): Metadata associated with the data.</p>
+meta (MetaData): Metadata associated with the data.
+result_folder (str):</p>
+<blockquote>
+<div><p>Path to the folder where to save the file. Default will use
+the <cite>results_file_path</cite> method.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>filename (str): Name of the file to be saved. The default is constructed</dt><dd><p>based on the station name.</p>
 </dd>
-<dt>Returns:</dt><dd><p>pd.DataFrame: DataFrame containing the weather data formatted as core data.</p>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: DataFrame containing the weather data formatted as core data.
+str: Path to the exported file.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="aixweather.core_data_format_2_output_file.unconverted_to_x.to_pickle">
-<span class="sig-prename descclassname"><span class="pre">aixweather.core_data_format_2_output_file.unconverted_to_x.</span></span><span class="sig-name descname"><span class="pre">to_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">core_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="aixweather.imports.html#aixweather.imports.utils_import.MetaData" title="aixweather.imports.utils_import.MetaData"><span class="pre">MetaData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/core_data_format_2_output_file/unconverted_to_x.html#to_pickle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.core_data_format_2_output_file.unconverted_to_x.to_pickle" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">aixweather.core_data_format_2_output_file.unconverted_to_x.</span></span><span class="sig-name descname"><span class="pre">to_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">core_df:</span> <span class="pre">~pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta:</span> <span class="pre">~aixweather.imports.utils_import.MetaData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_folder:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'pandas.core.frame.DataFrame'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'str'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/core_data_format_2_output_file/unconverted_to_x.html#to_pickle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.core_data_format_2_output_file.unconverted_to_x.to_pickle" title="Permalink to this definition"></a></dt>
 <dd><p>Create and save a pickle file from the core data.</p>
-<dl class="simple">
+<dl>
 <dt>Args:</dt><dd><p>core_df (pd.DataFrame): DataFrame containing core data.
-meta (MetaData): Metadata associated with the data.</p>
+meta (MetaData): Metadata associated with the data.
+result_folder (str):</p>
+<blockquote>
+<div><p>Path to the folder where to save the file. Default will use
+the <cite>results_file_path</cite> method.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>filename (str): Name of the file to be saved. The default is constructed</dt><dd><p>based on the station name.</p>
 </dd>
-<dt>Returns:</dt><dd><p>pd.DataFrame: DataFrame containing the weather data formatted as core data.</p>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: DataFrame containing the weather data formatted as core data.
+str: Path to the exported file.</p>
 </dd>
 </dl>
 </dd></dl>
