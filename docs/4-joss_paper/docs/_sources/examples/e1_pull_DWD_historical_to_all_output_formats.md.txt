@@ -17,7 +17,7 @@ logging.basicConfig(level="DEBUG")
 
 Choose the project class according to the desired weather data origin.
 Check the project_class.py file or the API documentation to see which classes are available.
-[project classes](https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/code/aixweather.html#module-aixweather.project_class)
+[project classes](https://rwth-ebc.github.io/AixWeather//main//docs/code/aixweather.html#module-aixweather.project_class)
 
 ```python
 from aixweather.project_class import ProjectClassDWDHistorical

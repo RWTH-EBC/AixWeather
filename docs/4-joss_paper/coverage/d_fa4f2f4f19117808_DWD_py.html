@@ -65,7 +65,7 @@
             <a id="nextFileLink" class="nav" href="d_fa4f2f4f19117808_EPW_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.4.4">coverage.py v7.4.4</a>,
-            created at 2025-01-06 16:01 +0000
+            created at 2025-02-24 13:31 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"/>
@@ -137,7 +137,7 @@
     <p class="pln"><span class="n"><a id="t55" href="#t55">55</a></span><span class="t">    <span class="com"># get weather data from dwd per measurement</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t56" href="#t56">56</a></span><span class="t">    <span class="key">for</span> <span class="nam">single_measurement</span> <span class="key">in</span> <span class="nam">measurements</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t57" href="#t57">57</a></span><span class="t">        <span class="com"># inconsistent pathing from DWD resolved by using the 10-min Values for these measurements</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t58" href="#t58">58</a></span><span class="t">        <span class="key">if</span> <span class="nam">single_measurement</span> <span class="op">==</span> <span class="str">"solar"</span> <span class="key">or</span> <span class="nam">single_measurement</span> <span class="op">==</span> <span class="str">"air_temperature"</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t58" href="#t58">58</a></span><span class="t">        <span class="key">if</span> <span class="nam">single_measurement</span> <span class="key">in</span> <span class="op">[</span><span class="str">"solar"</span><span class="op">,</span> <span class="str">"air_temperature"</span><span class="op">,</span> <span class="str">"wind"</span><span class="op">]</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t59" href="#t59">59</a></span><span class="t">            <span class="nam">df_w</span> <span class="op">=</span> <span class="nam">_pull_DWD_historical_data</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t60" href="#t60">60</a></span><span class="t">                <span class="str">f"{base_url}/10_minutes/{single_measurement}/recent/"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t61" href="#t61">61</a></span><span class="t">                <span class="nam">station</span><span class="op">=</span><span class="nam">station</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
@@ -403,7 +403,7 @@
     <p class="pln"><span class="n"><a id="t321" href="#t321">321</a></span><span class="t">        <span class="com"># make MESS_DATUM the index for concenating</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t322" href="#t322">322</a></span><span class="t">        <span class="nam">data</span><span class="op">.</span><span class="nam">set_index</span><span class="op">(</span><span class="str">"MESS_DATUM"</span><span class="op">,</span> <span class="nam">inplace</span><span class="op">=</span><span class="key">True</span><span class="op">,</span> <span class="nam">drop</span><span class="op">=</span><span class="key">True</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t323" href="#t323">323</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t324" href="#t324">324</a></span><span class="t">        <span class="nam">data_total</span> <span class="op">=</span> <span class="nam">pd</span><span class="op">.</span><span class="nam">concat</span><span class="op">(</span><span class="op">[</span><span class="nam">data_total</span><span class="op">,</span> <span class="nam">data</span><span class="op">]</span><span class="op">,</span> <span class="nam">verify_integrity</span><span class="op">=</span><span class="key">True</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t324" href="#t324">324</a></span><span class="t">        <span class="nam">data_total</span> <span class="op">=</span> <span class="nam">pd</span><span class="op">.</span><span class="nam">concat</span><span class="op">(</span><span class="op">[</span><span class="nam">data_total</span><span class="op">,</span> <span class="nam">data</span><span class="op">]</span><span class="op">,</span> <span class="nam">verify_integrity</span><span class="op">=</span><span class="key">False</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t325" href="#t325">325</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t326" href="#t326">326</a></span><span class="t">        <span class="nam">shutil</span><span class="op">.</span><span class="nam">rmtree</span><span class="op">(</span><span class="nam">definitions</span><span class="op">.</span><span class="nam">local_folder_temp</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t327" href="#t327">327</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -455,7 +455,7 @@
             <a id="nextFileLink" class="nav" href="d_fa4f2f4f19117808_EPW_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.4.4">coverage.py v7.4.4</a>,
-            created at 2025-01-06 16:01 +0000
+            created at 2025-02-24 13:31 +0000
         </p>
     </div>
 </footer>

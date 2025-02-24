@@ -169,14 +169,18 @@ format_dict (dict): A dictionary specifying the column renaming mapping,</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="aixweather.transformation_functions.auxiliary.replace_dummy_with_nan">
 <span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.auxiliary.</span></span><span class="sig-name descname"><span class="pre">replace_dummy_with_nan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/aixweather/transformation_functions/auxiliary.html#replace_dummy_with_nan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.auxiliary.replace_dummy_with_nan" title="Permalink to this definition"></a></dt>
-<dd><p>Replace specific values in the DataFrame with NaN based on the given format dictionary.
-Reason: sometimes, e.g. the DWD, specifies a missing value with a dummy value like e.g. 99,
-which makes it hard to see where missing values are and might affect the simulation.</p>
+<dd><p>Replace specific values, or value ranges, in the DataFrame with NaN based on the given format
+dictionary. Reason: sometimes, e.g. the DWD, specifies a missing value with a dummy value
+like e.g. 99, which makes it hard to see where missing values are and might affect the
+simulation.</p>
 <dl>
 <dt>Args:</dt><dd><p>df (pd.DataFrame): The DataFrame to be processed.
 format_dict (dict): A dictionary specifying values to be replaced with NaN,</p>
 <blockquote>
-<div><p>with column names as keys and corresponding dummy values as values.</p>
+<div><p>with column names as keys and corresponding dummy values as values.
+Exact nans given through a float or int.
+Value ranges given through a dictionary with the operator as key
+and the threshold as value, e. g. {‘&lt;’: 0}.</p>
 </div></blockquote>
 </dd>
 <dt>Returns:</dt><dd><p>pd.DataFrame: A DataFrame with specified values replaced by NaN.</p>

@@ -78,14 +78,12 @@
 <h1>About AixWeather<a class="headerlink" href="#about-aixweather" title="Permalink to this heading"></a></h1>
 <a class="reference external image-reference" href="https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/source/_static/EBC_Logo.png"><img alt="E.ON EBC RWTH Aachen University" src="https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/source/_static/EBC_Logo.png" /></a>
 <a class="reference external image-reference" href="https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.html"><img alt="pylint" src="https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.svg" /></a>
-<a class="reference external image-reference" href="https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/index.html"><img alt="documentation" src="https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/doc.svg" /></a>
+<a class="reference external image-reference" href="https://rwth-ebc.github.io/AixWeather//main//docs/index.html"><img alt="documentation" src="https://rwth-ebc.github.io/AixWeather//main//docs/doc.svg" /></a>
 <a class="reference external image-reference" href="https://opensource.org/licenses/BSD-3-Clause"><img alt="License" src="https://img.shields.io/badge/License-BSD%203--Clause-blue.svg" /></a>
-<a class="reference external image-reference" href="https://rwth-ebc.github.io/AixWeather/4-joss_paper/coverage"><img alt="coverage" src="https://rwth-ebc.github.io/AixWeather/4-joss_paper/coverage/badge.svg" /></a>
+<a class="reference external image-reference" href="https://rwth-ebc.github.io/AixWeather/main/coverage"><img alt="coverage" src="https://rwth-ebc.github.io/AixWeather/main/coverage/badge.svg" /></a>
 <div align="center">
   <img src="https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/aixweather_logo/AixWeather_Logo.png" alt="AixWeather Logo" width="50%">
-</div><p>THIS IS A REMINDER TO SET ALL IMAGES, BADGES, ETC. BACK FROM 4-joss_paper TO main BRANCH AFTER
-JOSS-PAPER REVIEW IS FINISHED.</p>
-<section id="aixweather">
+</div><section id="aixweather">
 <h2>AixWeather<a class="headerlink" href="#aixweather" title="Permalink to this heading"></a></h2>
 <p><strong>A weather data generation tool for building energy system simulations. Pull, Transform, Export.</strong></p>
 <p>AixWeather is a streamlined tool which will help you to generate weather data for building energy system simulations.
@@ -116,7 +114,7 @@ This repository here contains the functionalities useful for, e.g., automation o
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/RWTH-EBC/AixWeather.git</span> <span class="pre">AixWeather</span></code>
 <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">AixWeather</span></code>
 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code></p>
-<p>Then go to the <a class="reference external" href="https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/examples/e1_pull_DWD_historical_to_all_output_formats.html">example</a> and follow the descriptions.
+<p>Then go to the <a class="reference external" href="https://rwth-ebc.github.io/AixWeather//main//docs/examples/e1_pull_DWD_historical_to_all_output_formats.html">example</a> and follow the descriptions.
 This example contains the streamlined process exemplary shown for pulling DWD historical data and exporting it to all available output formats.
 Use generic functions to execute the streamlined process to create the desired output file.
 You may then either run this example file as a standalone and just transfer the output
@@ -147,7 +145,7 @@ It retrieves, formats, enriches, and ultimately exports weather data in various 
 </ol>
 <p>Which transformations are executed, i.e. required, will always depend on the input data and the
 desired output format.
-The current set of implemented transformation functions can be found in <a class="reference external" href="https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/code/aixweather.transformation_functions.html">aixweather/transformation_functions</a>, e.g. the <a class="reference external" href="https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/code/aixweather.transformation_functions.html#module-aixweather.transformation_functions.unit_conversions">unit conversions</a> or the functions to calculate missing values: <a class="reference external" href="https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/code/aixweather.transformation_functions.html#module-aixweather.transformation_functions.variable_transformations">variable transformation</a>.
+The current set of implemented transformation functions can be found in <a class="reference external" href="https://rwth-ebc.github.io/AixWeather//main//docs/code/aixweather.transformation_functions.html">aixweather/transformation_functions</a>, e.g. the <a class="reference external" href="https://rwth-ebc.github.io/AixWeather//main//docs/code/aixweather.transformation_functions.html#module-aixweather.transformation_functions.unit_conversions">unit conversions</a> or the functions to calculate missing values: <a class="reference external" href="https://rwth-ebc.github.io/AixWeather//main//docs/code/aixweather.transformation_functions.html#module-aixweather.transformation_functions.variable_transformations">variable transformation</a>.
 Though, these function do not need be called explicitly, as they are called by the tool
 automatically based on the input data and the desired output format.
 Only if you plan to extend AixWeather by adding a new input or output format, you will need to specify which
@@ -158,7 +156,7 @@ The community will be happy to have such developments contributed back to the ma
 It also shows what kind of input and output formats are currently supported.
 Every input is first transformed to the core format, which is then transformed to the desired output format.
 This allows for a clear separation of concerns and a modular structure that is easy to extend.</p>
-<a class="reference external image-reference" href="https://raw.githubusercontent.com/RWTH-EBC/AixWeather/4-joss_paper/docs/Overview_WeatherTool.png"><img alt="Weather Data Tool Diagram" src="https://raw.githubusercontent.com/RWTH-EBC/AixWeather/4-joss_paper/docs/Overview_WeatherTool.png" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/Overview_WeatherTool.png"><img alt="Weather Data Tool Diagram" src="https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/Overview_WeatherTool.png" /></a>
 <p><strong>Known limitations:</strong></p>
 <ul class="simple">
 <li><p>only hourly data</p></li>
