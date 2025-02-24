@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>aixweather.transformation_functions package &mdash; aixweather 0.1.7 documentation</title>
+  <title>aixweather.transformation_functions package &mdash; aixweather 0.1.8 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
@@ -44,7 +44,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Tutorial and Example</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">aixweather</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="aixweather.html">aixweather package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="aixweather.html#subpackages">Subpackages</a><ul class="current">
@@ -169,14 +169,18 @@ format_dict (dict): A dictionary specifying the column renaming mapping,</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="aixweather.transformation_functions.auxiliary.replace_dummy_with_nan">
 <span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.auxiliary.</span></span><span class="sig-name descname"><span class="pre">replace_dummy_with_nan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/aixweather/transformation_functions/auxiliary.html#replace_dummy_with_nan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.auxiliary.replace_dummy_with_nan" title="Permalink to this definition"></a></dt>
-<dd><p>Replace specific values in the DataFrame with NaN based on the given format dictionary.
-Reason: sometimes, e.g. the DWD, specifies a missing value with a dummy value like e.g. 99,
-which makes it hard to see where missing values are and might affect the simulation.</p>
+<dd><p>Replace specific values, or value ranges, in the DataFrame with NaN based on the given format
+dictionary. Reason: sometimes, e.g. the DWD, specifies a missing value with a dummy value
+like e.g. 99, which makes it hard to see where missing values are and might affect the
+simulation.</p>
 <dl>
 <dt>Args:</dt><dd><p>df (pd.DataFrame): The DataFrame to be processed.
 format_dict (dict): A dictionary specifying values to be replaced with NaN,</p>
 <blockquote>
-<div><p>with column names as keys and corresponding dummy values as values.</p>
+<div><p>with column names as keys and corresponding dummy values as values.
+Exact nans given through a float or int.
+Value ranges given through a dictionary with the operator as key
+and the threshold as value, e. g. {‘&lt;’: 0}.</p>
 </div></blockquote>
 </dd>
 <dt>Returns:</dt><dd><p>pd.DataFrame: A DataFrame with specified values replaced by NaN.</p>
@@ -244,25 +248,29 @@ function to truncate data in given interval.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="aixweather.transformation_functions.time_observation_transformations.avg_following_hour_2_indicated_time">
 <span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.time_observation_transformations.</span></span><span class="sig-name descname"><span class="pre">avg_following_hour_2_indicated_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/time_observation_transformations.html#avg_following_hour_2_indicated_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.time_observation_transformations.avg_following_hour_2_indicated_time" title="Permalink to this definition"></a></dt>
-<dd><p>aka: foll2ind</p>
+<dd><p>Wrapper function for shift_timestamps_and_interpolate.
+aka: foll2ind</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="aixweather.transformation_functions.time_observation_transformations.avg_preceding_hour_2_indicated_time">
 <span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.time_observation_transformations.</span></span><span class="sig-name descname"><span class="pre">avg_preceding_hour_2_indicated_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/time_observation_transformations.html#avg_preceding_hour_2_indicated_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.time_observation_transformations.avg_preceding_hour_2_indicated_time" title="Permalink to this definition"></a></dt>
-<dd><p>aka: prec2ind</p>
+<dd><p>Wrapper function for shift_timestamps_and_interpolate.
+aka: prec2ind</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_following_hour">
 <span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.time_observation_transformations.</span></span><span class="sig-name descname"><span class="pre">indicated_time_2_avg_following_hour</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/time_observation_transformations.html#indicated_time_2_avg_following_hour"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_following_hour" title="Permalink to this definition"></a></dt>
-<dd><p>aka: ind2foll</p>
+<dd><p>Wrapper function for shift_timestamps_and_interpolate.
+aka: ind2foll</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_preceding_hour">
 <span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.time_observation_transformations.</span></span><span class="sig-name descname"><span class="pre">indicated_time_2_avg_preceding_hour</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/time_observation_transformations.html#indicated_time_2_avg_preceding_hour"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.time_observation_transformations.indicated_time_2_avg_preceding_hour" title="Permalink to this definition"></a></dt>
-<dd><p>aka: ind2prec</p>
+<dd><p>Wrapper function for shift_timestamps_and_interpolate.
+aka: ind2prec</p>
 </dd></dl>
 
 <dl class="py function">
@@ -276,6 +284,22 @@ dictionary should contain information about the desired time shifting for core d
 df (pd.DataFrame): The DataFrame containing timestamped data with core data variable names.</p>
 </dd>
 <dt>Returns:</dt><dd><p>pd.DataFrame: The modified DataFrame with values shifted and interpolated according to the format dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aixweather.transformation_functions.time_observation_transformations.shift_timestamps_and_interpolate">
+<span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.time_observation_transformations.</span></span><span class="sig-name descname"><span class="pre">shift_timestamps_and_interpolate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backward</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/aixweather/transformation_functions/time_observation_transformations.html#shift_timestamps_and_interpolate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.time_observation_transformations.shift_timestamps_and_interpolate" title="Permalink to this definition"></a></dt>
+<dd><p>Shift and interpolate timestamps in a DataFrame by 30 minutes forward or backward.</p>
+<p>This function shifts and interpolates the timestamps in the DataFrame <cite>df</cite> by either
+30 minutes forward or backward based on the <cite>backward</cite> parameter. It uses linear interpolation
+to fill in missing values during the shift.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>df (pd.DataFrame): The DataFrame containing timestamped data.
+backward (bool): If True, shift timestamps 30 minutes backward. If False, shift them 30 minutes forward.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: A DataFrame with timestamps shifted and interpolated as specified.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -354,7 +378,16 @@ to calculate variables from given values</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="aixweather.transformation_functions.variable_transformations.approximate_opaque_from_total_skycover">
 <span class="sig-prename descclassname"><span class="pre">aixweather.transformation_functions.variable_transformations.</span></span><span class="sig-name descname"><span class="pre">approximate_opaque_from_total_skycover</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">total_sky_cover</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aixweather/transformation_functions/variable_transformations.html#approximate_opaque_from_total_skycover"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.transformation_functions.variable_transformations.approximate_opaque_from_total_skycover" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Approximate opaque sky cover from total sky cover by assuming they are equal.</p>
+<p>This is a simple approximation that assumes all clouds in the total sky cover are opaque.
+In reality, some clouds may be translucent, making this an upper bound estimate.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>total_sky_cover (float): Total sky cover in oktas or percentage of sky covered by clouds.</p>
+</dd>
+<dt>Returns:</dt><dd><p>float: Approximated opaque sky cover in the same units as the input.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="aixweather.transformation_functions.variable_transformations.calculate_dew_point_temp">

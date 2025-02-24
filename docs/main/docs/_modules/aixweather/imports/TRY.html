@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>aixweather.imports.TRY &mdash; aixweather 0.1.7 documentation</title>
+  <title>aixweather.imports.TRY &mdash; aixweather 0.1.8 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
@@ -41,7 +41,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Tutorial and Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">aixweather</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html">Contribute as a user</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
@@ -77,16 +77,16 @@
 <span class="sd">import DWD TRY data</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="kn">from</span> <span class="nn">aixweather.imports.utils_import</span> <span class="kn">import</span> <span class="n">MetaData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.imports.utils_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetaData</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">_handle_TRY_type</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_handle_TRY_type</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Determine the TRY format type based on the provided file path.</span>
 
@@ -135,7 +135,7 @@
     <span class="k">return</span> <span class="n">TRY_year</span><span class="p">,</span> <span class="n">header_row</span>
 
 
-<div class="viewcode-block" id="load_try_meta_from_file"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.TRY.load_try_meta_from_file">[docs]</a><span class="k">def</span> <span class="nf">load_try_meta_from_file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MetaData</span><span class="p">:</span>
+<div class="viewcode-block" id="load_try_meta_from_file"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.TRY.load_try_meta_from_file">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">load_try_meta_from_file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MetaData</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Load a TRY file from a specified path and parse the header for metadata.</span>
 
@@ -162,22 +162,22 @@
     <span class="n">rechtswert_line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
         <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">header_lines</span> <span class="k">if</span> <span class="s2">&quot;Rechtswert&quot;</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">and</span> <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">line</span>
     <span class="p">)</span>
-    <span class="n">rechtswert</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;:\s*(\d+) Meter&quot;</span><span class="p">,</span> <span class="n">rechtswert_line</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">rechtswert</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;:\s*(-?\d+) Meter&quot;</span><span class="p">,</span> <span class="n">rechtswert_line</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
 
     <span class="c1"># Extract Hochwert (Northing)</span>
     <span class="n">hochwert_line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
         <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">header_lines</span> <span class="k">if</span> <span class="s2">&quot;Hochwert&quot;</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">and</span> <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">line</span>
     <span class="p">)</span>
-    <span class="n">hochwert</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;:\s*(\d+) Meter&quot;</span><span class="p">,</span> <span class="n">hochwert_line</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">hochwert</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;:\s*(-?\d+) Meter&quot;</span><span class="p">,</span> <span class="n">hochwert_line</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
 
     <span class="c1"># Extract Höhenlage (altitude)</span>
     <span class="n">hoehenlage_line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">header_lines</span> <span class="k">if</span> <span class="s2">&quot;Hoehenlage&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">)</span>
-    <span class="n">hoehenlage</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;:\s*(\d+) Meter&quot;</span><span class="p">,</span> <span class="n">hoehenlage_line</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">hoehenlage</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;:\s*(-?\d+) Meter&quot;</span><span class="p">,</span> <span class="n">hoehenlage_line</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
 
     <span class="k">try</span><span class="p">:</span>
-        <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
-        <span class="kn">from</span> <span class="nn">geopy.geocoders</span> <span class="kn">import</span> <span class="n">Nominatim</span>
-        <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">geopy.geocoders</span><span class="w"> </span><span class="kn">import</span> <span class="n">Nominatim</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Point</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;Optional dependency &#39;TRY&#39; not installed. Conversion of longitude and &quot;</span>
                           <span class="s2">&quot;latitude not possible and hence no radiation transformation.&quot;</span><span class="p">)</span>
@@ -232,7 +232,7 @@
     <span class="k">return</span> <span class="n">meta</span></div>
 
 
-<div class="viewcode-block" id="load_try_from_file"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.TRY.load_try_from_file">[docs]</a><span class="k">def</span> <span class="nf">load_try_from_file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<div class="viewcode-block" id="load_try_from_file"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.TRY.load_try_from_file">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">load_try_from_file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Import data from a TRY file and convert it into a DataFrame.</span>
 

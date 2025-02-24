@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>aixweather.core_data_format_2_output_file.to_mos_TMY3 &mdash; aixweather 0.1.7 documentation</title>
+  <title>aixweather.core_data_format_2_output_file.to_mos_TMY3 &mdash; aixweather 0.1.8 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
@@ -41,7 +41,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Tutorial and Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">aixweather</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html">Contribute as a user</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
@@ -76,14 +76,14 @@
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Converts core data to modelica TMY3Reader data</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">calendar</span>
-<span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">calendar</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="kn">from</span> <span class="nn">aixweather</span> <span class="kn">import</span> <span class="n">definitions</span>
-<span class="kn">from</span> <span class="nn">aixweather.imports.utils_import</span> <span class="kn">import</span> <span class="n">MetaData</span>
-<span class="kn">from</span> <span class="nn">aixweather.transformation_functions</span> <span class="kn">import</span> <span class="n">auxiliary</span><span class="p">,</span> <span class="n">time_observation_transformations</span><span class="p">,</span> <span class="n">pass_through_handling</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aixweather</span><span class="w"> </span><span class="kn">import</span> <span class="n">definitions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.imports.utils_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetaData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.transformation_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">auxiliary</span><span class="p">,</span> <span class="n">time_observation_transformations</span><span class="p">,</span> <span class="n">pass_through_handling</span>
 
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -140,7 +140,7 @@
 <span class="p">}</span>
 
 
-<div class="viewcode-block" id="to_mos"><a class="viewcode-back" href="../../../code/aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.to_mos_TMY3.to_mos">[docs]</a><span class="k">def</span> <span class="nf">to_mos</span><span class="p">(</span>
+<div class="viewcode-block" id="to_mos"><a class="viewcode-back" href="../../../code/aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.to_mos_TMY3.to_mos">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">to_mos</span><span class="p">(</span>
     <span class="n">core_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
     <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span><span class="p">,</span>
     <span class="n">start</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span>

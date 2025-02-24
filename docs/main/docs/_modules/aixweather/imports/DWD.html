@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>aixweather.imports.DWD &mdash; aixweather 0.1.7 documentation</title>
+  <title>aixweather.imports.DWD &mdash; aixweather 0.1.8 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
@@ -41,7 +41,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Tutorial and Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">aixweather</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html">Contribute as a user</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
@@ -76,22 +76,22 @@
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">imports weather data from the DWD</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">zipfile</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">shutil</span>
-<span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
-<span class="kn">import</span> <span class="nn">urllib.request</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="kn">from</span> <span class="nn">aixweather.imports</span> <span class="kn">import</span> <span class="n">utils_import</span>
-<span class="kn">from</span> <span class="nn">aixweather</span> <span class="kn">import</span> <span class="n">definitions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.imports</span><span class="w"> </span><span class="kn">import</span> <span class="n">utils_import</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aixweather</span><span class="w"> </span><span class="kn">import</span> <span class="n">definitions</span>
 
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="import_DWD_historical"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.DWD.import_DWD_historical">[docs]</a><span class="k">def</span> <span class="nf">import_DWD_historical</span><span class="p">(</span><span class="n">start</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span> <span class="n">station</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<div class="viewcode-block" id="import_DWD_historical"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.DWD.import_DWD_historical">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">import_DWD_historical</span><span class="p">(</span><span class="n">start</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span> <span class="n">station</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Pull historical data from DWD:</span>
 <span class="sd">    (https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/) and</span>
@@ -130,7 +130,7 @@
     <span class="c1"># get weather data from dwd per measurement</span>
     <span class="k">for</span> <span class="n">single_measurement</span> <span class="ow">in</span> <span class="n">measurements</span><span class="p">:</span>
         <span class="c1"># inconsistent pathing from DWD resolved by using the 10-min Values for these measurements</span>
-        <span class="k">if</span> <span class="n">single_measurement</span> <span class="o">==</span> <span class="s2">&quot;solar&quot;</span> <span class="ow">or</span> <span class="n">single_measurement</span> <span class="o">==</span> <span class="s2">&quot;air_temperature&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">single_measurement</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;solar&quot;</span><span class="p">,</span> <span class="s2">&quot;air_temperature&quot;</span><span class="p">,</span> <span class="s2">&quot;wind&quot;</span><span class="p">]:</span>
             <span class="n">df_w</span> <span class="o">=</span> <span class="n">_pull_DWD_historical_data</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/10_minutes/</span><span class="si">{</span><span class="n">single_measurement</span><span class="si">}</span><span class="s2">/recent/&quot;</span><span class="p">,</span>
                 <span class="n">station</span><span class="o">=</span><span class="n">station</span><span class="p">,</span>
@@ -165,7 +165,7 @@
     <span class="k">return</span> <span class="n">df_w_ges</span></div>
 
 
-<div class="viewcode-block" id="import_DWD_forecast"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.DWD.import_DWD_forecast">[docs]</a><span class="k">def</span> <span class="nf">import_DWD_forecast</span><span class="p">(</span><span class="n">station</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<div class="viewcode-block" id="import_DWD_forecast"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.DWD.import_DWD_forecast">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">import_DWD_forecast</span><span class="p">(</span><span class="n">station</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Import weather forecast data from the DWD (German Weather Service) for a specified station.</span>
 
@@ -177,7 +177,7 @@
 <span class="sd">        pd.DataFrame: DataFrame containing weather forecast data from the DWD.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">wetterdienst.provider.dwd.mosmix</span> <span class="kn">import</span> <span class="n">DwdMosmixRequest</span><span class="p">,</span> <span class="n">DwdMosmixType</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">wetterdienst.provider.dwd.mosmix</span><span class="w"> </span><span class="kn">import</span> <span class="n">DwdMosmixRequest</span><span class="p">,</span> <span class="n">DwdMosmixType</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;Optional dependency &#39;DWD_forecast&#39; not installed, can&#39;t import data.&quot;</span><span class="p">)</span>
     <span class="c1">### pull forecast data using the package wetterdienst</span>
@@ -190,7 +190,7 @@
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">excep</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;There is no loadable forecast for station </span><span class="si">{</span><span class="n">station</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="p">)</span> <span class="kn">from</span> <span class="nn">excep</span>
+        <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">excep</span>
 
     <span class="n">imported_df</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
 
@@ -210,7 +210,7 @@
     <span class="k">return</span> <span class="n">imported_df</span></div>
 
 
-<div class="viewcode-block" id="import_meta_DWD_historical"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.DWD.import_meta_DWD_historical">[docs]</a><span class="k">def</span> <span class="nf">import_meta_DWD_historical</span><span class="p">(</span><span class="n">station</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">utils_import</span><span class="o">.</span><span class="n">MetaData</span><span class="p">:</span>
+<div class="viewcode-block" id="import_meta_DWD_historical"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.DWD.import_meta_DWD_historical">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">import_meta_DWD_historical</span><span class="p">(</span><span class="n">station</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">utils_import</span><span class="o">.</span><span class="n">MetaData</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Downloads and extracts metadata related to the specified station from</span>
 <span class="sd">    the DWD (Deutscher Wetterdienst) Open Data Interface.</span>
@@ -287,7 +287,7 @@
     <span class="k">return</span> <span class="n">meta</span></div>
 
 
-<div class="viewcode-block" id="import_meta_DWD_forecast"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.DWD.import_meta_DWD_forecast">[docs]</a><span class="k">def</span> <span class="nf">import_meta_DWD_forecast</span><span class="p">(</span><span class="n">station</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">utils_import</span><span class="o">.</span><span class="n">MetaData</span><span class="p">:</span>
+<div class="viewcode-block" id="import_meta_DWD_forecast"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.DWD.import_meta_DWD_forecast">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">import_meta_DWD_forecast</span><span class="p">(</span><span class="n">station</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">utils_import</span><span class="o">.</span><span class="n">MetaData</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Downloads and extracts metadata related to the specified station</span>
 <span class="sd">    from the DWD (Deutscher Wetterdienst) Open Data Interface.</span>
@@ -309,7 +309,7 @@
     <span class="n">data_str</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;latin-1&quot;</span><span class="p">)</span>
 
     <span class="c1">### find station ID and its values</span>
-    <span class="k">def</span> <span class="nf">extract_info_for_station</span><span class="p">(</span><span class="n">data_str</span><span class="p">,</span> <span class="n">station_id</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract_info_for_station</span><span class="p">(</span><span class="n">data_str</span><span class="p">,</span> <span class="n">station_id</span><span class="p">):</span>
         <span class="c1"># Splitting the data by lines</span>
         <span class="n">lines</span> <span class="o">=</span> <span class="n">data_str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -351,7 +351,7 @@
     <span class="k">return</span> <span class="n">meta</span></div>
 
 
-<span class="k">def</span> <span class="nf">_pull_DWD_historical_data</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">station</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_pull_DWD_historical_data</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">station</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Ruft die Messdaten von der angegebenen URL ab und konvertiert diese in</span>
 <span class="sd">    ein pandas DataFrame</span>
@@ -396,14 +396,14 @@
         <span class="c1"># make MESS_DATUM the index for concenating</span>
         <span class="n">data</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;MESS_DATUM&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-        <span class="n">data_total</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">data_total</span><span class="p">,</span> <span class="n">data</span><span class="p">],</span> <span class="n">verify_integrity</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">data_total</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">data_total</span><span class="p">,</span> <span class="n">data</span><span class="p">],</span> <span class="n">verify_integrity</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
         <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">definitions</span><span class="o">.</span><span class="n">local_folder_temp</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">data_total</span>
 
 
-<span class="k">def</span> <span class="nf">_download_DWD_file</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">zip_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_download_DWD_file</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">zip_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Downloads the file with the given filename from the specified URL and unzip.</span>
 
@@ -438,7 +438,7 @@
             <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span>
                     <span class="sa">f</span><span class="s2">&quot;Not loaded: </span><span class="si">{</span><span class="n">total_zip_name</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="sa">f</span><span class="s2">&quot;with error: </span><span class="si">{</span><span class="n">excep</span><span class="si">}</span><span class="s2">&quot;</span>
-                <span class="p">)</span> <span class="kn">from</span> <span class="nn">excep</span>
+                <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">excep</span>
 </pre></div>
 
            </div>

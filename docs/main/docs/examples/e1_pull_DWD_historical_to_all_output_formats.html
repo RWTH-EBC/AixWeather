@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>&lt;no title&gt; &mdash; aixweather 0.1.7 documentation</title>
+  <title>AixWeather Tutorial &mdash; aixweather 0.1.8 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
@@ -19,7 +19,9 @@
       <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="aixweather" href="../code/modules.html" />
+    <link rel="prev" title="Tutorial and Example" href="../examples.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,8 +43,14 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Tutorial and Example</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../examples.html#e1-pull-dwd-historical-to-all-output-formats-py"><code class="docutils literal notranslate"><span class="pre">e1_pull_DWD_historical_to_all_output_formats.py</span></code></a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">AixWeather Tutorial</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../code/modules.html">aixweather</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Contribution.html">Contribute as a user</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
@@ -63,7 +71,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">&lt;no title&gt;</li>
+          <li class="breadcrumb-item"><a href="../examples.html">Tutorial and Example</a></li>
+      <li class="breadcrumb-item active">AixWeather Tutorial</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/examples/e1_pull_DWD_historical_to_all_output_formats.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -73,17 +82,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Contains examples&quot;&quot;&quot;</span>
+  <section id="aixweather-tutorial">
+<h1>AixWeather Tutorial<a class="headerlink" href="#aixweather-tutorial" title="Permalink to this heading"></a></h1>
+<p>This example is a step-by-step guide to pull historical weather data from the DWD open access database
+and convert it to different output formats.
+Thus showing all possible steps on how to use AixWeather.
+To run the tool for other weather data sources, just change the project class.
+The rest of the code is streamlined and will remain the same.</p>
+<p>Enable logging, this is just to get more feedback through the terminal</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 
-<span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>choose the project class according to the desired weather data origin</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aixweather.project_class</span> <span class="kn">import</span> <span class="n">ProjectClassDWDHistorical</span>
+<p>Choose the project class according to the desired weather data origin.
+Check the project_class.py file or the API documentation to see which classes are available.
+<a class="reference external" href="https://rwth-ebc.github.io/AixWeather//main//docs/code/aixweather.html#module-aixweather.project_class">project classes</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.project_class</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProjectClassDWDHistorical</span>
 </pre></div>
 </div>
-<p>initiate the project class which contains or creates all variables and functions</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DWD_pull_project</span> <span class="o">=</span> <span class="n">ProjectClassDWDHistorical</span><span class="p">(</span>
+<p>Step 0: Initiate the project class which contains or creates all variables and functions.
+For this, we use the datetime module to specify dates.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dt</span>
+
+<span class="n">project</span> <span class="o">=</span> <span class="n">ProjectClassDWDHistorical</span><span class="p">(</span>
     <span class="n">start</span><span class="o">=</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
     <span class="n">end</span><span class="o">=</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
     <span class="n">station</span><span class="o">=</span><span class="mi">15000</span><span class="p">,</span>
@@ -94,40 +116,85 @@
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>import historical weather from the DWD open access database</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">import_data</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span>
-    <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">How the imported data looks like:</span><span class="se">\n</span><span class="si">{</span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">imported_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-<span class="p">)</span>
+<p>Step 1: Import historical weather from the DWD open access database</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">project</span><span class="o">.</span><span class="n">import_data</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">How the imported data looks like:</span><span class="se">\n</span><span class="si">{</span><span class="n">project</span><span class="o">.</span><span class="n">imported_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>convert this imported data to the core format</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">data_2_core_data</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">How the core data looks like:</span><span class="se">\n</span><span class="si">{</span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<p>Step 2: Convert this imported data to the core format</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">project</span><span class="o">.</span><span class="n">data_2_core_data</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">How the core data looks like:</span><span class="se">\n</span><span class="si">{</span><span class="n">project</span><span class="o">.</span><span class="n">core_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>you may also use data quality check utils, like:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aixweather.data_quality_checks</span> <span class="kn">import</span> <span class="n">plot_heatmap_missing_values</span>
+<p>You may optionally also use data quality check utils, like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.data_quality_checks</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_heatmap_missing_values</span>
 </pre></div>
 </div>
-<p>plot data quality</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">=</span> <span class="n">plot_heatmap_missing_values</span><span class="p">(</span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_data</span><span class="p">)</span>
+<p>Plot data quality</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">=</span> <span class="n">plot_heatmap_missing_values</span><span class="p">(</span><span class="n">project</span><span class="o">.</span><span class="n">core_data</span><span class="p">)</span>
 <span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>convert this core data to an output data format of your choice</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_2_csv</span><span class="p">()</span>
-<span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_2_json</span><span class="p">()</span>
-<span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_2_pickle</span><span class="p">()</span>
-<span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_2_mos</span><span class="p">()</span>
-<span class="n">DWD_pull_project</span><span class="o">.</span><span class="n">core_2_epw</span><span class="p">()</span>
+<p>Step 3: Convert this core data to an output data format of your choice</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">project</span><span class="o">.</span><span class="n">core_2_csv</span><span class="p">()</span>
+<span class="n">project</span><span class="o">.</span><span class="n">core_2_json</span><span class="p">()</span>
+<span class="n">project</span><span class="o">.</span><span class="n">core_2_pickle</span><span class="p">()</span>
+<span class="n">project</span><span class="o">.</span><span class="n">core_2_mos</span><span class="p">()</span>
+<span class="n">project</span><span class="o">.</span><span class="n">core_2_epw</span><span class="p">()</span>
 </pre></div>
 </div>
+<p>By the way, if you want to run this with some other weather data source, here are some copy-paste snippets to get you started:</p>
+<p>For DWD Forecast data</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.project_class</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProjectClassDWDForecast</span>
+
+<span class="n">project</span> <span class="o">=</span> <span class="n">ProjectClassDWDForecast</span><span class="p">(</span>
+    <span class="n">station</span><span class="o">=</span><span class="s2">&quot;06710&quot;</span><span class="p">,</span>  <span class="c1"># Example station: Lausanne</span>
+    <span class="n">abs_result_folder_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># Optional: specify result path</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>For EPW and TRY we need to import the .epw or .dat file, e.g. from your local drive. The
+Readme provides information on where you can download your own EPW and TRY files. For this
+example, we use the test files provided in the tests folder (be sure to have the full
+repository downloaded to have access to these files).
+If you use your own files, you can specify the path to the file in the <code class="docutils literal notranslate"><span class="pre">path</span></code> argument.</p>
+<p>These imports are just to create the path to the file stored in the tests folder</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aixweather</span><span class="w"> </span><span class="kn">import</span> <span class="n">definitions</span>
+</pre></div>
+</div>
+<p>For EPW files</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.project_class</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProjectClassEPW</span>
+
+<span class="n">project</span> <span class="o">=</span> <span class="n">ProjectClassEPW</span><span class="p">(</span>
+    <span class="n">path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">definitions</span><span class="o">.</span><span class="n">ROOT_DIR</span><span class="p">,</span>
+        <span class="s2">&quot;tests/test_files/regular_tests/EPW/test_EPW_Essen_Ladybug/input/DEU_NW_Essen_104100_TRY2035_05_Wint_BBSR.epw&quot;</span><span class="p">,</span>
+    <span class="p">),</span>  <span class="c1"># Example: EPW weather file for Essen</span>
+    <span class="n">abs_result_folder_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>For TRY (Test Reference Year) data</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.project_class</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProjectClassTRY</span>
+
+<span class="n">project</span> <span class="o">=</span> <span class="n">ProjectClassTRY</span><span class="p">(</span>
+    <span class="n">path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">definitions</span><span class="o">.</span><span class="n">ROOT_DIR</span><span class="p">,</span>
+        <span class="s2">&quot;tests/test_files/regular_tests/TRY/test_TRY2015/input/TRY2015_507931060546_Jahr.dat&quot;</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../examples.html" class="btn btn-neutral float-left" title="Tutorial and Example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../code/modules.html" class="btn btn-neutral float-right" title="aixweather" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
