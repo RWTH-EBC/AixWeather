@@ -9,9 +9,6 @@
   <img src="https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/aixweather_logo/AixWeather_Logo.png" alt="AixWeather Logo" width="50%">
 </div>
 
-THIS IS A REMINDER TO SET ALL IMAGES, BADGES, ETC. BACK FROM main TO main BRANCH AFTER 
-JOSS-PAPER REVIEW IS FINISHED.
-
 # AixWeather
 **A weather data generation tool for building energy system simulations. Pull, Transform, Export.**
 
