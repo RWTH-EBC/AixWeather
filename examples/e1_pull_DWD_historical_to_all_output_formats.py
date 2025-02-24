@@ -20,7 +20,7 @@ def e1_pull_DWD_historical_to_all_output_formats():
 
     # Choose the project class according to the desired weather data origin.
     # Check the project_class.py file or the API documentation to see which classes are available.
-    # [project classes](https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/code/aixweather.html#module-aixweather.project_class)
+    # [project classes](https://rwth-ebc.github.io/AixWeather//main//docs/code/aixweather.html#module-aixweather.project_class)
     from aixweather.project_class import ProjectClassDWDHistorical
 
     # Step 0: Initiate the project class which contains or creates all variables and functions.

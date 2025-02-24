@@ -1,15 +1,15 @@
 ![E.ON EBC RWTH Aachen University](https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/source/_static/EBC_Logo.png)
 
 [![pylint](https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.svg )](https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.html)
-[![documentation](https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/doc.svg)](https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/index.html)
+[![documentation](https://rwth-ebc.github.io/AixWeather//main//docs/doc.svg)](https://rwth-ebc.github.io/AixWeather//main//docs/index.html)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
-[![coverage](https://rwth-ebc.github.io/AixWeather/4-joss_paper/coverage/badge.svg)](https://rwth-ebc.github.io/AixWeather/4-joss_paper/coverage)
+[![coverage](https://rwth-ebc.github.io/AixWeather/main/coverage/badge.svg)](https://rwth-ebc.github.io/AixWeather/main/coverage)
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/aixweather_logo/AixWeather_Logo.png" alt="AixWeather Logo" width="50%">
 </div>
 
-THIS IS A REMINDER TO SET ALL IMAGES, BADGES, ETC. BACK FROM 4-joss_paper TO main BRANCH AFTER 
+THIS IS A REMINDER TO SET ALL IMAGES, BADGES, ETC. BACK FROM main TO main BRANCH AFTER 
 JOSS-PAPER REVIEW IS FINISHED.
 
 # AixWeather
@@ -49,7 +49,7 @@ Or, by cloning the repository:
 `cd AixWeather`
 `pip install -e .`
 
-Then go to the [example](https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/examples/e1_pull_DWD_historical_to_all_output_formats.html) and follow the descriptions.
+Then go to the [example](https://rwth-ebc.github.io/AixWeather//main//docs/examples/e1_pull_DWD_historical_to_all_output_formats.html) and follow the descriptions.
 This example contains the streamlined process exemplary shown for pulling DWD historical data and exporting it to all available output formats.
 Use generic functions to execute the streamlined process to create the desired output file.
 You may then either run this example file as a standalone and just transfer the output 
@@ -86,7 +86,7 @@ It retrieves, formats, enriches, and ultimately exports weather data in various 
 
 Which transformations are executed, i.e. required, will always depend on the input data and the 
 desired output format.
-The current set of implemented transformation functions can be found in [aixweather/transformation_functions](https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/code/aixweather.transformation_functions.html), e.g. the [unit conversions](https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/code/aixweather.transformation_functions.html#module-aixweather.transformation_functions.unit_conversions) or the functions to calculate missing values: [variable transformation](https://rwth-ebc.github.io/AixWeather//4-joss_paper//docs/code/aixweather.transformation_functions.html#module-aixweather.transformation_functions.variable_transformations).
+The current set of implemented transformation functions can be found in [aixweather/transformation_functions](https://rwth-ebc.github.io/AixWeather//main//docs/code/aixweather.transformation_functions.html), e.g. the [unit conversions](https://rwth-ebc.github.io/AixWeather//main//docs/code/aixweather.transformation_functions.html#module-aixweather.transformation_functions.unit_conversions) or the functions to calculate missing values: [variable transformation](https://rwth-ebc.github.io/AixWeather//main//docs/code/aixweather.transformation_functions.html#module-aixweather.transformation_functions.variable_transformations).
 Though, these function do not need be called explicitly, as they are called by the tool 
 automatically based on the input data and the desired output format.
 Only if you plan to extend AixWeather by adding a new input or output format, you will need to specify which 
@@ -100,7 +100,7 @@ The below diagram shows the tool's structure and the data flow from the import t
 It also shows what kind of input and output formats are currently supported.
 Every input is first transformed to the core format, which is then transformed to the desired output format.
 This allows for a clear separation of concerns and a modular structure that is easy to extend.
-![Weather Data Tool Diagram](https://raw.githubusercontent.com/RWTH-EBC/AixWeather/4-joss_paper/docs/Overview_WeatherTool.png)
+![Weather Data Tool Diagram](https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/Overview_WeatherTool.png)
 
 **Known limitations:**
 
