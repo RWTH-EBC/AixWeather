@@ -70,14 +70,18 @@ def fill_nan_from_format_dict(df: pd.DataFrame, format_data: dict) -> pd.DataFra
 
 def replace_dummy_with_nan(df: pd.DataFrame, format_dict: dict) -> pd.DataFrame:
     """
-    Replace specific values in the DataFrame with NaN based on the given format dictionary.
-    Reason: sometimes, e.g. the DWD, specifies a missing value with a dummy value like e.g. 99,
-    which makes it hard to see where missing values are and might affect the simulation.
+    Replace specific values, or value ranges, in the DataFrame with NaN based on the given format
+    dictionary. Reason: sometimes, e.g. the DWD, specifies a missing value with a dummy value
+    like e.g. 99, which makes it hard to see where missing values are and might affect the
+    simulation.
 
     Args:
         df (pd.DataFrame): The DataFrame to be processed.
         format_dict (dict): A dictionary specifying values to be replaced with NaN,
                             with column names as keys and corresponding dummy values as values.
+                            Exact nans given through a float or int.
+                            Value ranges given through a dictionary with the operator as key
+                            and the threshold as value, e. g. {'<': 0}.
 
     Returns:
         pd.DataFrame: A DataFrame with specified values replaced by NaN.
@@ -89,7 +93,26 @@ def replace_dummy_with_nan(df: pd.DataFrame, format_dict: dict) -> pd.DataFrame:
             if not isinstance(nan_values, list):
                 nan_values = [nan_values]
             for nan_val in nan_values:
-                df[key] = df[key].replace(nan_val, np.nan)
+                # replace specified dummy values with NaN
+                if not isinstance(nan_val, dict):
+                    df[key] = df[key].replace(nan_val, np.nan)
+                # replace specified value range with NaN
+                else:
+                    operator, threshold = list(nan_val.items())[0]
+
+                    if operator == '<':
+                        df.loc[df[key] < threshold, key] = np.nan
+                    elif operator == '<=':
+                        df.loc[df[key] <= threshold, key] = np.nan
+                    elif operator == '>':
+                        df.loc[df[key] > threshold, key] = np.nan
+                    elif operator == '>=':
+                        df.loc[df[key] >= threshold, key] = np.nan
+                    elif operator == '==':
+                        df.loc[df[key] == threshold, key] = np.nan
+                    else:
+                        raise ValueError(f"Unsupported operator: {operator}")
+
     return df
 
 
