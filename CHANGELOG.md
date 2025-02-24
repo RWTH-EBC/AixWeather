@@ -26,3 +26,8 @@
   - BugFix: Add shapely import issue #52
 - v0.1.7:
   - HotFix: Corrected shapely import issue #52 and optional dependencies TRY warning
+- v0.1.8:
+  - BugFix: Fixed DWD data handling for missing values (#66)
+  - BugFix: TRY now works with negative coordinates (#61)
+  - Feature: Now pulling wind speed and wind direction from 10 minutes DWD data as this is more often available (#63)
+  - Feature: Added JOSS paper including enhanced documentation (#71)
