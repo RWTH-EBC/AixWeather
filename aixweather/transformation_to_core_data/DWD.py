@@ -25,29 +25,29 @@ checked by Martin Rätz (08.08.2023)
 format_DWD_historical = {
     # https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/
     # 10_minutes/air_temperature/DESCRIPTION_obsgermany_climate_10min_air_temperature_en.pdf
-    "RF_10": {"core_name": "RelHum", "time_of_meas_shift": "foll2ind", "unit": "percent"},
-    "TT_10": {"core_name": "DryBulbTemp", "time_of_meas_shift": "foll2ind", "unit": "degC"},
-    "TD_10": {"core_name": "DewPointTemp", "time_of_meas_shift": "foll2ind", "unit": "degC"},
-    "PP_10": {"core_name": "AtmPressure", "time_of_meas_shift": "foll2ind", "unit": "hPa"},
-    #https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/solar/BESCHREIBUNG_obsgermany_climate_10min_solar_de.pdf
-    "DS_10": {"core_name": "DiffHorRad", "time_of_meas_shift": "foll2ind", "unit": "J/cm2", "resample": "sum"},
-    #https://de.wikipedia.org/wiki/Globalstrahlung
-    "GS_10": {"core_name": "GlobHorRad", "time_of_meas_shift": "foll2ind", "unit": "J/cm2", "resample": "sum"},
-    #https://de.wikipedia.org/wiki/Atmosph%C3%A4rische_Gegenstrahlung
-    "LS_10": {"core_name": "HorInfra", "time_of_meas_shift": "foll2ind", "unit": "J/cm2", "resample": "sum", "nan":[990, -999]},
-    #https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/wind/BESCHREIBUNG_obsgermany_climate_10min_wind_de.pdf
-    "FF_10": {"core_name": "WindSpeed", "time_of_meas_shift": "prec2ind", "unit": "m/s"},
-    "DD_10": {"core_name": "WindDir", "time_of_meas_shift": "prec2ind", "unit": "deg"},
-    # https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/precipitation/BESCHREIBUNG_obsgermany_climate_10min_precipitation_de.pdf
-    "RWS_10": {"core_name": "LiquidPrecD", "time_of_meas_shift": "prec2ind", "unit": "mm/h", "resample": "sum"},
+    "RF_10": {"core_name": "RelHum", "time_of_meas_shift": "foll2ind", "unit": "percent", "nan": [-999, {"<": 0}, {">": 100}]},
+    "TT_10": {"core_name": "DryBulbTemp", "time_of_meas_shift": "foll2ind", "unit": "degC", "nan": [-999, {"<": -98}]},
+    "TD_10": {"core_name": "DewPointTemp", "time_of_meas_shift": "foll2ind", "unit": "degC", "nan": [-999, {"<": -98}]},
+    "PP_10": {"core_name": "AtmPressure", "time_of_meas_shift": "foll2ind", "unit": "hPa", "nan": [-999]},
+    # https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/solar/BESCHREIBUNG_obsgermany_climate_10min_solar_de.pdf
+    "DS_10": {"core_name": "DiffHorRad", "time_of_meas_shift": "foll2ind", "unit": "J/cm2", "resample": "sum", "nan": [-999, {"<": -10}]},
+    # https://de.wikipedia.org/wiki/Globalstrahlung
+    "GS_10": {"core_name": "GlobHorRad", "time_of_meas_shift": "foll2ind", "unit": "J/cm2", "resample": "sum", "nan": [-999, {"<": -10}]},
+    # https://de.wikipedia.org/wiki/Atmosph%C3%A4rische_Gegenstrahlung
+    "LS_10": {"core_name": "HorInfra", "time_of_meas_shift": "foll2ind", "unit": "J/cm2", "resample": "sum", "nan":[990, -999, {"<": -10}]},
+    # https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/wind/BESCHREIBUNG_obsgermany_climate_10min_wind_de.pdf
+    "FF_10": {"core_name": "WindSpeed", "time_of_meas_shift": "foll2ind", "unit": "m/s", "nan": [-999, {"<": -10}]},
+    "DD_10": {"core_name": "WindDir", "time_of_meas_shift": "foll2ind", "unit": "deg", "nan": [-999, {"<": 0}, {">": 360}]},
+    # https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/precipitation/DESCRIPTION_obsgermany-climate-10min-precipitation_en.pdf
+    "RWS_10": {"core_name": "LiquidPrecD", "time_of_meas_shift": "prec2ind", "unit": "mm/h", "resample": "sum", "nan": [-999, {"<": -10}]},
     # https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/soil_temperature/BESCHREIBUNG_obsgermany_climate_hourly_soil_temperature_de.pdf
-    "V_TE100": {"core_name": "Soil_Temperature_1m", "time_of_meas_shift": None, "unit": "degC"},
-    "V_TE050": {"core_name": "Soil_Temperature_50cm", "time_of_meas_shift": None, "unit": "degC"},
-    "V_TE020": {"core_name": "Soil_Temperature_20cm", "time_of_meas_shift": None, "unit": "degC"},
-    "V_TE010": {"core_name": "Soil_Temperature_10cm", "time_of_meas_shift": None, "unit": "degC"},
-    "V_TE005": {"core_name": "Soil_Temperature_5cm", "time_of_meas_shift": None, "unit": "degC"},
+    "V_TE100": {"core_name": "Soil_Temperature_1m", "time_of_meas_shift": None, "unit": "degC", "nan": [-999, {"<": -98}]},
+    "V_TE050": {"core_name": "Soil_Temperature_50cm", "time_of_meas_shift": None, "unit": "degC", "nan": [-999, {"<": -98}]},
+    "V_TE020": {"core_name": "Soil_Temperature_20cm", "time_of_meas_shift": None, "unit": "degC", "nan": [-999, {"<": -98}]},
+    "V_TE010": {"core_name": "Soil_Temperature_10cm", "time_of_meas_shift": None, "unit": "degC", "nan": [-999, {"<": -98}]},
+    "V_TE005": {"core_name": "Soil_Temperature_5cm", "time_of_meas_shift": None, "unit": "degC", "nan": [-999, {"<": -98}]},
     # https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/cloud_type/BESCHREIBUNG_obsgermany_climate_hourly_cloud_type_de.pdf
-    " V_N": {"core_name": "TotalSkyCover", "time_of_meas_shift": None, "unit": "1eighth"},
+    " V_N": {"core_name": "TotalSkyCover", "time_of_meas_shift": None, "unit": "1eighth", "nan": [-999, {"<": 0}]},
     # Hourly measurements currently unused due to doubling with 10
     # minute data and conflicting time shifting and units
     # "RF_TU": "RelHum",

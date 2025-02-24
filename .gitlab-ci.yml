@@ -2,14 +2,13 @@ stages:
  - test
  - doc
  - code_quality
-# - examples
+ - examples
  - build
  - release
  - deploy
 
 variables:
   COVERAGE_TYPE: "NotDymola"
-  PAGES_BRANCH: main
   PYTHON_VERSION: "registry.git.rwth-aachen.de/ebc/ebc_all/gitlab_ci/templates:python_3.11"
   PYTHON_PACKAGE_NAME: "aixweather"
   TEST_ENGINE: "PYTEST"
@@ -30,11 +29,11 @@ include:
     file: 'pages/gh-pages.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file: 'python/tests/tests.gitlab-ci.yml'
-#  - project: 'EBC/EBC_all/gitlab_ci/templates'
-#    file: 'python/tests/coverage.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file: 'python/tests/coverage.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file: 'python/pypi-release/release.gitlab-ci.yml'
-#  - project: 'EBC/EBC_all/gitlab_ci/templates'
-#    file: 'python/examples/examples.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file: 'python/examples/examples.gitlab-ci.yml'
   - template: Dependency-Scanning.gitlab-ci.yml
   - template: SAST.gitlab-ci.yml
