@@ -1,9 +1,10 @@
 ![E.ON EBC RWTH Aachen University](https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/source/_static/EBC_Logo.png)
 
-[![pylint](https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.svg )](https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.html)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.07344/status.svg)](https://doi.org/10.21105/joss.07344)
 [![documentation](https://rwth-ebc.github.io/AixWeather//main//docs/doc.svg)](https://rwth-ebc.github.io/AixWeather//main//docs/index.html)
-[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![pylint](https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.svg )](https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.html)
 [![coverage](https://rwth-ebc.github.io/AixWeather/main/coverage/badge.svg)](https://rwth-ebc.github.io/AixWeather/main/coverage)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/aixweather_logo/AixWeather_Logo.png" alt="AixWeather Logo" width="50%">
@@ -191,17 +192,26 @@ Issues can be reported using this site's Issues section.
 Furthermore, you are welcome to contribute via Pull Requests.
 More info on how to contribute can be found [here](docs/source/Contribution.md).
 
-<!-- This section is a work in progress and needs further editing
+
 
 # How to cite
 
-[ToDo]()
-DOI:  ToDo  
+If you are using weather files created by AixWeather in your research, please cite the corresponding JOSS paper:
 
 ```
-@inproceedings{ToDo}
+@article{Rätz2025,
+   doi = {10.21105/joss.07344}, 
+   url = {https://doi.org/10.21105/joss.07344}, 
+   year = {2025},
+   publisher = {The Open Journal}, 
+   volume = {10}, 
+   number = {107}, 
+   pages = {7344}, 
+   author = {Martin Rätz and Fabian Wüllhorst and Rita Streblow and Dirk Müller}, 
+   title = {AixWeather: A Weather Data Generation Tool for Building Energy System Simulations. Pull, Transform, Export.}, 
+   journal = {Journal of Open Source Software} } 
+}
 ```
- -->
 
 # License
 
