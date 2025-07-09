@@ -15,6 +15,7 @@ class MetaData:
         altitude (float): The altitude of the weather station in meters.
         latitude (float): The latitude of the weather station in degree.
         longitude (float): The longitude of the weather station in degree.
+        timezone (int): The timezone relative to UTC. E.g. -1 is UTC-1, 0 is UTC, etc.
         input_source (str): The source of input data for the station.
     """
     def __init__(self, **kwargs: str):
@@ -23,6 +24,7 @@ class MetaData:
         self._altitude: float = None
         self._latitude: float = None
         self._longitude: float = None
+        self._timezone: int = 0
         self.input_source: str = "UnknownInputSource"
 
         self.__dict__.update(kwargs)
@@ -59,6 +61,18 @@ class MetaData:
     @longitude.setter
     def longitude(self, value: float) -> None:
         self._longitude = round(self._ensure_float(value), 5)
+
+    @property
+    def timezone(self) -> float:
+        return self._timezone
+
+    @timezone.setter
+    def timezone(self, value: int) -> None:
+        if not isinstance(value, int):
+            raise TypeError("Given timezone is not a valid int")
+        if value < -12 or value > 14:
+            raise ValueError("Given timezone is outside -12 and +14")
+        self._timezone = value
 
     def _ensure_float(self, value):
         if value is not None:

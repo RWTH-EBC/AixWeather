@@ -72,27 +72,36 @@ def to_mos(
     stop: dt.datetime,
     fillna: bool,
     result_folder: str = None,
-    filename: str = None
+    filename: str = None,
+    use_metadata_timezone: bool = True
 ) -> (pd.DataFrame, str):
     """Create a MOS file from the core data.
 
     Args:
         core_df (pd.DataFrame): DataFrame containing core data.
         meta (MetaData): Metadata associated with the weather data.
-        start (dt.datetime): Timestamp for the start of the MOS file.
-        stop (dt.datetime): Timestamp for the end of the MOS file.
+        start (dt.datetime): Timestamp for the start of the MOS file in UTC.
+        stop (dt.datetime): Timestamp for the end of the MOS file in UTC.
         fillna (bool): Boolean indicating whether NaN values should be filled.
         result_folder (str):
             Path to the folder where to save the file. Default will use
             the `results_file_path` method.
         filename (str): Name of the file to be saved. The default is constructed
             based on the meta-data as well as start and stop time
+        use_metadata_timezone (bool): Timezone to be used for the export.
+            True (default) to use timezone from metadata,
+            False to use the core_df timezone, UTC+0
 
     Returns:
         pd.DataFrame: DataFrame containing the weather data formatted for MOS export,
                       excluding metadata.
         str: Path to the exported file.
     """
+    if use_metadata_timezone:
+        timezone = meta.timezone
+    else:
+        timezone = 0
+
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
         core_format=definitions.format_core_data, other_format=format_modelica_TMY3
@@ -115,6 +124,8 @@ def to_mos(
 
     ### select the desired columns
     df = auxiliary.force_data_variable_convention(df, format_modelica_TMY3)
+
+    df = df.shift(periods=timezone, freq="h", axis=0)
 
     # tmy3 data must start with 0 at the beginning of year (due to internal
     # tmy3_reader sun inclination calculation)
@@ -161,8 +172,8 @@ def to_mos(
         + str(int(df.columns.size))
         + ")"
     )
-    header_of += f"\n#LOCATION,{meta.station_name},,,,,{str(meta.latitude)}," \
-                 f"{str(meta.longitude)},0,something"
+    header_of += f"\n#LOCATION,{meta.station_name},,,,,{meta.latitude}," \
+                 f"{meta.longitude},{timezone},something"
     header_of += (
         "\n#Explanation of Location line:"
         + "\n#   Element 7: latitude"
