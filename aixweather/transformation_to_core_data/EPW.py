@@ -15,7 +15,7 @@ from aixweather.transformation_functions import (
     pass_through_handling,
 )
 from aixweather.core_data_format_2_output_file.to_epw_energyplus import (
-    format_epw as format_epw_export,
+    EPWFormat as EPWFormatExport,
 )
 
 logger = logging.getLogger(__name__)
@@ -34,7 +34,7 @@ def EPW_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
     """
 
     # invert format_epw from core2export to import2core
-    format_epw = deepcopy(format_epw_export)
+    format_epw = deepcopy(EPWFormatExport.format)
     for key, value in format_epw.items():
         time_shift = value["time_of_meas_shift"]
         if time_shift == "ind2prec":

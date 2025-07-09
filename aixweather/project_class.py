@@ -172,12 +172,16 @@ class ProjectClassGeneral(ABC):
         )
         return filepath
 
-    def core_2_epw(self, filename: str = None) -> str:
+    def core_2_epw(self, filename: str = None, use_metadata_timezone: bool = True) -> str:
         """
         Convert core data to .epw file
 
         filename (str): Name of the file to be saved. The default is constructed
             based on the meta-data as well as start and stop time
+        use_metadata_timezone (bool): Timezone to be used for the export.
+            True (default) to use timezone from metadata,
+            False to use the core_df timezone, UTC+0
+
 
         Returns:
             str: Path to the exported file.
@@ -189,7 +193,8 @@ class ProjectClassGeneral(ABC):
             self.end,
             self.fillna,
             self.abs_result_folder_path,
-            filename=filename
+            filename=filename,
+            use_metadata_timezone=use_metadata_timezone
         )
         return filepath
 

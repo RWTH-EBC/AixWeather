@@ -97,10 +97,7 @@ def to_mos(
                       excluding metadata.
         str: Path to the exported file.
     """
-    if use_metadata_timezone:
-        timezone = meta.timezone
-    else:
-        timezone = 0
+    timezone = meta.timezone if use_metadata_timezone else 0
 
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
