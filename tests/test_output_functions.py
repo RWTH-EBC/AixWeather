@@ -68,8 +68,8 @@ class TestOutputFunction(BaseOutputFunction, utils_4_tests.RegressionTestsClass)
 
         cls.c.core_2_pickle()
         cls.c.core_2_json()
-        cls.c.core_2_mos()
-        cls.c.core_2_epw()
+        cls.c.core_2_mos(use_metadata_timezone=True)
+        cls.c.core_2_epw(use_metadata_timezone=True)
         cls.c.core_2_csv()
 
     # ignore core_data and meta_data tests
