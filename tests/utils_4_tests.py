@@ -72,8 +72,8 @@ def run_all_functions(project_class_instance):
     project_class_instance.core_2_pickle()
     project_class_instance.core_2_json()
     project_class_instance.core_2_csv()
-    project_class_instance.core_2_mos()
-    project_class_instance.core_2_epw()
+    project_class_instance.core_2_mos(use_metadata_timezone=False)
+    project_class_instance.core_2_epw(use_metadata_timezone=False)
 
 
 class RegressionTestsClass:

@@ -67,9 +67,9 @@ class MetaData:
         return self._timezone
 
     @timezone.setter
-    def timezone(self, value: int) -> None:
-        if not isinstance(value, int):
-            raise TypeError("Given timezone is not a valid int")
+    def timezone(self, value: float) -> None:
+        if not isinstance(value, (float, int)):
+            raise TypeError("Given timezone is not a valid int or float")
         if value < -12 or value > 14:
             raise ValueError("Given timezone is outside -12 and +14")
         self._timezone = value
