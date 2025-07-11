@@ -153,6 +153,7 @@ def load_try_meta_from_file(path: str) -> MetaData:
     meta.altitude = hoehenlage
     meta.longitude = longitude_wgs84
     meta.latitude = latitude_wgs84
+    meta.timezone = 1  # Always in TRY
 
     return meta
 
