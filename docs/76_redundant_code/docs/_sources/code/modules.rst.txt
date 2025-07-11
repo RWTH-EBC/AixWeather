@@ -1,0 +1,7 @@
+aixweather
+==========
+
+.. toctree::
+   :maxdepth: 4
+
+   aixweather
