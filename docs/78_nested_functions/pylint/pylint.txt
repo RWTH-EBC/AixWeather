@@ -1,0 +1,6 @@
+************* Module aixweather.definitions
+aixweather/definitions.py:8:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+
+-----------------------------------
+Your code has been rated at 9.94/10
+
