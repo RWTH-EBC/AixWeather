@@ -201,12 +201,6 @@
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Convert the first 4 columns of the DataFrame to a DatetimeIndex and set it as the</span>
 <span class="sd">        index.&#39;&#39;&#39;</span>
-        <span class="c1"># The first 4 columns represent year, month, day, and hour respectively,</span>
-        <span class="c1"># but with hour 24 instead of hour 0.</span>
-        <span class="n">hour</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="n">mask_24hr</span> <span class="o">=</span> <span class="n">hour</span> <span class="o">==</span> <span class="mi">24</span>
-        <span class="n">hour</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask_24hr</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-
         <span class="c1"># loop one by one to avoid faults with non-continuous data</span>
         <span class="n">datetime_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
