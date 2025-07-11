@@ -126,12 +126,6 @@ def EPW_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
         '''
         Convert the first 4 columns of the DataFrame to a DatetimeIndex and set it as the
         index.'''
-        # The first 4 columns represent year, month, day, and hour respectively,
-        # but with hour 24 instead of hour 0.
-        hour = df.iloc[:, 3].copy()
-        mask_24hr = hour == 24
-        hour.loc[mask_24hr] = 0
-
         # loop one by one to avoid faults with non-continuous data
         datetime_list = []
         for index, row in df.iterrows():
