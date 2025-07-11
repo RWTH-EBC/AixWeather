@@ -33,7 +33,7 @@ class ModelicaTMY3Format:
     unit´s checked by Martin Rätz (07.08.2023)
     """
 
-    @staticmethod
+    @classmethod
     def export_format(cls) -> dict:
         return {
             'timeOfYear': {'core_name': '', 'unit': 's', 'time_of_meas_shift': None, 'nan': None},
