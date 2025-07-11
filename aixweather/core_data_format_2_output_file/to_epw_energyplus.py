@@ -390,12 +390,12 @@ def to_epw(
         """
 
         ### measurement time conversion
-        df = time_observation_transformations.shift_time_by_dict(EPWFormat.export_format().export, df)
+        df = time_observation_transformations.shift_time_by_dict(EPWFormat.export_format(), df)
 
         ### if possible avoid back and forth interpolating -> pass through
         ### variables without shifting
         df = pass_through_handling.pass_through_measurements_with_back_and_forth_interpolating(
-           df, EPWFormat.export_format().export
+           df, EPWFormat.export_format()
         )
 
         ### select only desired period
@@ -404,7 +404,7 @@ def to_epw(
         )
 
         ### select the desired columns
-        df = auxiliary.force_data_variable_convention(df, EPWFormat.export_format().export)
+        df = auxiliary.force_data_variable_convention(df, EPWFormat.export_format())
 
         # fill newly created variables of desired output format
         # Index von Dataframe aufspalten
@@ -534,23 +534,23 @@ def to_epw(
                                                          ]
 
             # fill default nans to the rest
-            df = auxiliary.fill_nan_from_format_dict(df, EPWFormat.export_format().export)
+            df = auxiliary.fill_nan_from_format_dict(df, EPWFormat.export_format())
 
         # cut off float digits (required for EnergyPlus)
         df = df.applymap(lambda x: (f"{x:.1f}") if isinstance(x, float) else x)
 
         # again make sure correct order and variables are applied
         # (processing might have mixed it up)
-        df = auxiliary.force_data_variable_convention(df, EPWFormat.export_format().export)
+        df = auxiliary.force_data_variable_convention(df, EPWFormat.export_format())
 
         ### format dataframe to list
-        data_list = df[EPWFormat.export_format().export.keys()].to_numpy().tolist()
+        data_list = df[EPWFormat.export_format().keys()].to_numpy().tolist()
 
         return data_list, df
 
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
-        core_format=definitions.format_core_data, other_format=EPWFormat.export_format().export
+        core_format=definitions.format_core_data, other_format=EPWFormat.export_format()
     )
 
     df = core_df.copy()
