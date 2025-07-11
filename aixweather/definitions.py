@@ -4,42 +4,51 @@ This module includes variables or functions which define central variables for t
 
 import os
 
-# format of the core_data
-# time of measurement is always at indicated time
-format_core_data = {
-    # from TMY3 https://www.nrel.gov/docs/fy08osti/43156.pdf
-    "DryBulbTemp": {"unit": "degC"},
-    "DewPointTemp": {"unit": "degC"},
-    "RelHum": {"unit": "percent"},
-    "ExtHorRad": {"unit": "Wh/m2"},
-    "ExtDirNormRad": {"unit": "Wh/m2"},
-    "HorInfra": {"unit": "Wh/m2"},
-    "GlobHorRad": {"unit": "Wh/m2"},
-    "DirNormRad": {"unit": "Wh/m2"},
-    "DirHorRad": {"unit": "Wh/m2"},
-    "DiffHorRad": {"unit": "Wh/m2"},
-    "GlobHorIll": {"unit": "lux"},
-    "DirecNormIll": {"unit": "lux"},
-    "DiffuseHorIll": {"unit": "lux"},
-    "ZenithLum": {"unit": "Cd/m2"},
-    "WindDir": {"unit": "deg"},
-    "WindSpeed": {"unit": "m/s"},
-    "TotalSkyCover": {"unit": "1tenth"},
-    "OpaqueSkyCover": {"unit": "1tenth"},
-    "Visibility": {"unit": "km"},
-    "CeilingH": {"unit": "m"},
-    "PrecWater": {"unit": "mm"},
-    "Aerosol": {"unit": "1thousandth"},
-    "LiquidPrecD": {"unit": "mm/h"},
-    # exception to TMY3 format as all TMY3 data file actually use "Pa" instead of mbar
-    "AtmPressure": {"unit": "Pa"},
-    # additional variables
-    "Soil_Temperature_5cm": {"unit": "degC"},
-    "Soil_Temperature_10cm": {"unit": "degC"},
-    "Soil_Temperature_20cm": {"unit": "degC"},
-    "Soil_Temperature_50cm": {"unit": "degC"},
-    "Soil_Temperature_1m": {"unit": "degC"},
-}
+
+class CoreDataFormat:
+    """
+    Information on core data:
+    Time of measurement is always at the indicated time.
+    Units as in TMY3 https://www.nrel.gov/docs/fy08osti/43156.pdf
+    Only exception to TMY3 format is pressure, as all TMY3 data file
+    actually use "Pa" instead of mbar
+    """
+    format: dict = {
+        "DryBulbTemp": {"unit": "degC"},
+        "DewPointTemp": {"unit": "degC"},
+        "RelHum": {"unit": "percent"},
+        "ExtHorRad": {"unit": "Wh/m2"},
+        "ExtDirNormRad": {"unit": "Wh/m2"},
+        "HorInfra": {"unit": "Wh/m2"},
+        "GlobHorRad": {"unit": "Wh/m2"},
+        "DirNormRad": {"unit": "Wh/m2"},
+        "DirHorRad": {"unit": "Wh/m2"},
+        "DiffHorRad": {"unit": "Wh/m2"},
+        "GlobHorIll": {"unit": "lux"},
+        "DirecNormIll": {"unit": "lux"},
+        "DiffuseHorIll": {"unit": "lux"},
+        "ZenithLum": {"unit": "Cd/m2"},
+        "WindDir": {"unit": "deg"},
+        "WindSpeed": {"unit": "m/s"},
+        "TotalSkyCover": {"unit": "1tenth"},
+        "OpaqueSkyCover": {"unit": "1tenth"},
+        "Visibility": {"unit": "km"},
+        "CeilingH": {"unit": "m"},
+        "PrecWater": {"unit": "mm"},
+        "Aerosol": {"unit": "1thousandth"},
+        "LiquidPrecD": {"unit": "mm/h"},
+        # exception to TMY3 format as all TMY3 data file actually use "Pa" instead of mbar
+        "AtmPressure": {"unit": "Pa"},
+        # additional variables
+        "Soil_Temperature_5cm": {"unit": "degC"},
+        "Soil_Temperature_10cm": {"unit": "degC"},
+        "Soil_Temperature_20cm": {"unit": "degC"},
+        "Soil_Temperature_50cm": {"unit": "degC"},
+        "Soil_Temperature_1m": {"unit": "degC"},
+    }
+
+
+format_core_data = CoreDataFormat.format
 
 # creates the path to the root directory to be used in other modules
 ROOT_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), ".."))
@@ -47,12 +56,14 @@ ROOT_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), ".."))
 # local temporary folder
 local_folder_temp = os.path.join(ROOT_DIR, "temp_local")
 
+
 def result_folder_path() -> str:
     """
     Creates the path to the resultsfolder.
     """
     folder_path = os.path.join(f"{ROOT_DIR}", "results")
     return folder_path
+
 
 def results_file_path(filename: str, folder_path: str = None) -> str:
     """
