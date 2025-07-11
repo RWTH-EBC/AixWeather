@@ -1,0 +1,50 @@
+aixweather.transformation\_functions package
+============================================
+
+.. automodule:: aixweather.transformation_functions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+aixweather.transformation\_functions.auxiliary module
+-----------------------------------------------------
+
+.. automodule:: aixweather.transformation_functions.auxiliary
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aixweather.transformation\_functions.pass\_through\_handling module
+-------------------------------------------------------------------
+
+.. automodule:: aixweather.transformation_functions.pass_through_handling
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aixweather.transformation\_functions.time\_observation\_transformations module
+------------------------------------------------------------------------------
+
+.. automodule:: aixweather.transformation_functions.time_observation_transformations
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aixweather.transformation\_functions.unit\_conversions module
+-------------------------------------------------------------
+
+.. automodule:: aixweather.transformation_functions.unit_conversions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aixweather.transformation\_functions.variable\_transformations module
+---------------------------------------------------------------------
+
+.. automodule:: aixweather.transformation_functions.variable_transformations
+   :members:
+   :undoc-members:
+   :show-inheritance:
