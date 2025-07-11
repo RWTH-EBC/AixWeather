@@ -14,11 +14,94 @@ from aixweather.transformation_functions import (
     variable_transformations,
     pass_through_handling,
 )
-from aixweather.core_data_format_2_output_file.to_epw_energyplus import (
-    format_epw as format_epw_export,
-)
 
 logger = logging.getLogger(__name__)
+
+
+class EPWFormat:
+    """
+    Information on EPW format:
+    Online sources for EPW data: https://climate.onebuilding.org/default.html and
+    https://www.ladybug.tools/epwmap/
+
+    Format info:
+        - key = output data point name
+        - core_name = corresponding name matching the format_core_data
+        - time_of_meas_shift = desired 30min shifting+interpolation to convert the value that is "at
+          indicated time" to "average of preceding hour" (ind2prec).
+        - unit = unit of the output data following the naming convention of format_core_data
+        - nan = The default values stated from the format information, those values are
+          filled if nan.
+
+    All changes here automatically change the calculations.
+    Exception: unit conversions have to be added manually.
+
+    Information for shifting:
+        Hour: This is the hour of the data. (1 - 24). Hour 1 is 00:01 to 01:00.
+        Cannot be missing. but e.g.:
+        DryBulbTemp: This is the dry bulb temperature in C at the time indicated. and:
+        GlobHorRad: received on a horizontal surface during the hour preceding the time indicated.
+        ----> Hence, we assume that hour 1 should show the DryBulbTemp from
+        0:30 to 1:30, i.e. the Temp at indicated time.
+
+    time of measurement checked by Martin Rätz (07.08.2023)
+    units checked by Martin Rätz (07.08.2023)
+    """
+
+    @classmethod
+    def import_format(cls) -> dict:
+        """
+        Inverts the export format from core2export to import2core
+        """
+        export_format = cls.export_format()
+        import_format = deepcopy(export_format)
+        for key, value in import_format.items():
+            time_shift = value["time_of_meas_shift"]
+            if time_shift == "ind2prec":
+                value["time_of_meas_shift"] = "prec2ind"
+            elif time_shift == "ind2foll":
+                value["time_of_meas_shift"] = "foll2ind"
+        return import_format
+
+    @classmethod
+    def export_format(cls) -> dict:
+        return {
+            "Year": {"core_name": "", "unit": "year", "time_of_meas_shift": None, "nan": None},
+            "Month": {"core_name": "", "unit": "month", "time_of_meas_shift": None, "nan": None},
+            "Day": {"core_name": "", "unit": "day", "time_of_meas_shift": None, "nan": None},
+            "Hour": {"core_name": "", "unit": "hour", "time_of_meas_shift": None, "nan": None},
+            "Minute": {"core_name": "", "unit": "minute", "time_of_meas_shift": None, "nan": None},
+            "Data Source and Uncertainty Flags": {"core_name": "", "unit": None, "time_of_meas_shift": None, "nan": "?"},
+            "DryBulbTemp": {"core_name": "DryBulbTemp", "unit": "degC", "time_of_meas_shift": None, "nan": 99.9},
+            "DewPointTemp": {"core_name": "DewPointTemp", "unit": "degC", "time_of_meas_shift": None, "nan": 99.9},
+            "RelHum": {"core_name": "RelHum", "unit": "percent", "time_of_meas_shift": None, "nan": 999.0},
+            "AtmPressure": {"core_name": "AtmPressure", "unit": "Pa", "time_of_meas_shift": None, "nan": 999999.0},
+            "ExtHorRad": {"core_name": "ExtHorRad", "unit": "Wh/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
+            "ExtDirNormRad": {"core_name": "ExtDirNormRad", "unit": "Wh/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
+            "HorInfra": {"core_name": "HorInfra", "unit": "Wh/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
+            "GlobHorRad": {"core_name": "GlobHorRad", "unit": "Wh/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
+            "DirNormRad": {"core_name": "DirNormRad", "unit": "Wh/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
+            "DiffHorRad": {"core_name": "DiffHorRad", "unit": "Wh/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
+            "GlobHorIll": {"core_name": "GlobHorIll", "unit": "lux", "time_of_meas_shift": 'ind2prec', "nan": 999999.0},
+            "DirecNormIll": {"core_name": "DirecNormIll", "unit": "lux", "time_of_meas_shift": 'ind2prec', "nan": 999999.0},
+            "DiffuseHorIll": {"core_name": "DiffuseHorIll", "unit": "lux", "time_of_meas_shift": 'ind2prec', "nan": 999999.0},
+            "ZenithLum": {"core_name": "ZenithLum", "unit": "Cd/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
+            "WindDir": {"core_name": "WindDir", "unit": "deg", "time_of_meas_shift": None, "nan": 999.0},
+            "WindSpeed": {"core_name": "WindSpeed", "unit": "m/s", "time_of_meas_shift": None, "nan": 999.0},
+            "TotalSkyCover": {"core_name": "TotalSkyCover", "unit": "1tenth", "time_of_meas_shift": None, "nan": 99},
+            "OpaqueSkyCover": {"core_name": "OpaqueSkyCover", "unit": "1tenth", "time_of_meas_shift": None, "nan": 99},
+            "Visibility": {"core_name": "Visibility", "unit": "km", "time_of_meas_shift": None, "nan": 9999.0},
+            "CeilingH": {"core_name": "CeilingH", "unit": "m", "time_of_meas_shift": None, "nan": 99999},
+            "WeatherObs": {"core_name": "", "unit": "None", "time_of_meas_shift": None, "nan": 9},
+            "WeatherCode": {"core_name": "", "unit": "None", "time_of_meas_shift": None, "nan": 999999999},
+            "PrecWater": {"core_name": "PrecWater", "unit": "mm", "time_of_meas_shift": None, "nan": 999.0},
+            "Aerosol": {"core_name": "Aerosol", "unit": "1thousandth", "time_of_meas_shift": None, "nan": 0.999},
+            "Snow": {"core_name": "", "unit": "cm", "time_of_meas_shift": None, "nan": 999.0},
+            "DaysSinceSnow": {"core_name": "", "unit": "days", "time_of_meas_shift": None, "nan": 99},
+            "Albedo": {"core_name": "", "unit": "None", "time_of_meas_shift": None, "nan": 999},
+            "LiquidPrecD": {"core_name": "LiquidPrecD", "unit": "mm/h", "time_of_meas_shift": None, "nan": 999},
+            "LiquidPrepQuant": {"core_name": "", "unit": "hours", "time_of_meas_shift": None, "nan": 99},
+        }
 
 
 def EPW_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
@@ -32,15 +115,7 @@ def EPW_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
     Returns:
         pd.DataFrame: The transformed DataFrame in the core data format.
     """
-
-    # invert format_epw from core2export to import2core
-    format_epw = deepcopy(format_epw_export)
-    for key, value in format_epw.items():
-        time_shift = value["time_of_meas_shift"]
-        if time_shift == "ind2prec":
-            value["time_of_meas_shift"] = "prec2ind"
-        elif time_shift == "ind2foll":
-            value["time_of_meas_shift"] = "foll2ind"
+    format_epw = EPWFormat.import_format()
 
     # evaluate correctness of format
     auxiliary.evaluate_transformations(

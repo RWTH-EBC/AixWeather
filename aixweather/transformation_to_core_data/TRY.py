@@ -6,38 +6,43 @@ from aixweather.imports.utils_import import MetaData
 from aixweather.transformation_functions import auxiliary, time_observation_transformations, variable_transformations, \
     pass_through_handling, unit_conversions
 
-"""
-format_TRY_15_45 information 
 
-Format info:
-key = raw data point name
-core_name = corresponding name matching the format_core_data
-time_of_meas_shift = desired 30min shifting+interpolation to convert a value that is e.g. the 
-"average of preceding hour" to "indicated time" (prec2ind). 
-unit = unit of the raw data following the naming convention of format_core_data
+class TRYFormat:
+    """
+    Information on TRY 2015 and 2045 format
 
-All changes here automatically change the calculations. 
-Exception: unit conversions have to be added manually.
+    Format info:
+    key = raw data point name
+    core_name = corresponding name matching the format_core_data
+    time_of_meas_shift = desired 30min shifting+interpolation to convert a value that is e.g. the
+    "average of preceding hour" to "indicated time" (prec2ind).
+    unit = unit of the raw data following the naming convention of format_core_data
 
-checked by Martin Rätz (08.08.2023)
+    All changes here automatically change the calculations.
+    Exception: unit conversions have to be added manually.
 
-https://www.bbsr.bund.de/BBSR/DE/forschung/programme/zb/Auftragsforschung/5EnergieKlimaBauen/2013/testreferenzjahre/try-handbuch.pdf;jsessionid=9F928CDB6862224B04073332C2B1B620.live21301?__blob=publicationFile&v=1
-Der erste Eintrag im Datensatz bezieht sich auf den 1. Januar 01 Uhr MEZ und
-der letzte Eintrag auf den 31. Dezember 24 Uhr MEZ. Also UTC+1.
-"""
-format_TRY_15_45 = {
-    "t": {"core_name": "DryBulbTemp", "time_of_meas_shift": "prec2ind", "unit": "degC"},
-    "p": {"core_name": "AtmPressure", "time_of_meas_shift": None, "unit": "hPa"},
-    "WR": {"core_name": "WindDir", "time_of_meas_shift": None, "unit": "deg"},
-    "WG": {"core_name": "WindSpeed", "time_of_meas_shift": None, "unit": "m/s"},
-    "N": {"core_name": "TotalSkyCover", "time_of_meas_shift": None, "unit": "1eigth"},
-    # 'x',
-    "RF": {"core_name": "RelHum", "time_of_meas_shift": "prec2ind", "unit": "percent"},
-    "B": {"core_name": "DirHorRad", "time_of_meas_shift": "prec2ind", "unit": "Wh/m2"},
-    "D": {"core_name": "DiffHorRad", "time_of_meas_shift": "prec2ind", "unit": "Wh/m2"},
-    "A": {"core_name": "HorInfra", "time_of_meas_shift": None, "unit": "Wh/m2"},
-    # 'E',
-}
+    checked by Martin Rätz (08.08.2023)
+
+    https://www.bbsr.bund.de/BBSR/DE/forschung/programme/zb/Auftragsforschung/5EnergieKlimaBauen/2013/testreferenzjahre/try-handbuch.pdf;jsessionid=9F928CDB6862224B04073332C2B1B620.live21301?__blob=publicationFile&v=1
+    Der erste Eintrag im Datensatz bezieht sich auf den 1. Januar 01 Uhr MEZ und
+    der letzte Eintrag auf den 31. Dezember 24 Uhr MEZ. Also UTC+1.
+    """
+
+    @classmethod
+    def import_format(cls):
+        return {
+            "t": {"core_name": "DryBulbTemp", "time_of_meas_shift": "prec2ind", "unit": "degC"},
+            "p": {"core_name": "AtmPressure", "time_of_meas_shift": None, "unit": "hPa"},
+            "WR": {"core_name": "WindDir", "time_of_meas_shift": None, "unit": "deg"},
+            "WG": {"core_name": "WindSpeed", "time_of_meas_shift": None, "unit": "m/s"},
+            "N": {"core_name": "TotalSkyCover", "time_of_meas_shift": None, "unit": "1eigth"},
+            # 'x',
+            "RF": {"core_name": "RelHum", "time_of_meas_shift": "prec2ind", "unit": "percent"},
+            "B": {"core_name": "DirHorRad", "time_of_meas_shift": "prec2ind", "unit": "Wh/m2"},
+            "D": {"core_name": "DiffHorRad", "time_of_meas_shift": "prec2ind", "unit": "Wh/m2"},
+            "A": {"core_name": "HorInfra", "time_of_meas_shift": None, "unit": "Wh/m2"},
+            # 'E',
+        }
 
 
 def TRY_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
@@ -51,6 +56,7 @@ def TRY_to_core_data(df_import: pd.DataFrame, meta: MetaData) -> pd.DataFrame:
     Returns:
         pd.DataFrame: The transformed DataFrame in the core data format.
     """
+    format_TRY_15_45 = TRYFormat.import_format()
 
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
