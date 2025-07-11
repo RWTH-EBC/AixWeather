@@ -12,75 +12,8 @@ import numpy as np
 from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
 from aixweather.transformation_functions import auxiliary, time_observation_transformations, pass_through_handling
-
+from aixweather.transformation_to_core_data.EPW import EPWFormat
 logger = logging.getLogger(__name__)
-
-
-"""
-format_epw information:
-for links see readme
-
-Format info:
-key = output data point name
-core_name = corresponding name matching the format_core_data
-time_of_meas_shift = desired 30min shifting+interpolation to convert the value that is "at 
-indicated time" to "average of preceding hour" (ind2prec). 
-unit = unit of the output data following the naming convention of format_core_data
-nan = The default values stated from the format_epw information, those values are 
-filled if nan.
-
-All changes here automatically change the calculations. 
-Exception: unit conversions have to be added manually.
-
-Information for shifting:
-Hour: This is the hour of the data. (1 - 24). Hour 1 is 00:01 to 01:00. Cannot be missing.
-but e.g.:
-DryBulbTemp: This is the dry bulb temperature in C at the time indicated.
-and:
-GlobHorRad: received on a horizontal surface during the hour preceding the time indicated.
-----> Hence, we assume that hour 1 should show the DryBulbTemp from
-0:30 to 1:30, i.e. the Temp at indicated time.
-
-time of measurement checked by Martin Rätz (07.08.2023)
-units checked by Martin Rätz (07.08.2023)
-"""
-format_epw = {
-    "Year": {"core_name": "", "unit": "year", "time_of_meas_shift": None, "nan": None},
-    "Month": {"core_name": "", "unit": "month", "time_of_meas_shift": None, "nan": None},
-    "Day": {"core_name": "", "unit": "day", "time_of_meas_shift": None, "nan": None},
-    "Hour": {"core_name": "", "unit": "hour", "time_of_meas_shift": None, "nan": None},
-    "Minute": {"core_name": "", "unit": "minute", "time_of_meas_shift": None, "nan": None},
-    "Data Source and Uncertainty Flags": {"core_name": "", "unit": None, "time_of_meas_shift": None, "nan": "?"},
-    "DryBulbTemp": {"core_name": "DryBulbTemp", "unit": "degC", "time_of_meas_shift": None, "nan": 99.9},
-    "DewPointTemp": {"core_name": "DewPointTemp", "unit": "degC", "time_of_meas_shift": None, "nan": 99.9},
-    "RelHum": {"core_name": "RelHum", "unit": "percent", "time_of_meas_shift": None, "nan": 999.0},
-    "AtmPressure": {"core_name": "AtmPressure", "unit": "Pa", "time_of_meas_shift": None, "nan": 999999.0},
-    "ExtHorRad": {"core_name": "ExtHorRad", "unit": "Wh/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
-    "ExtDirNormRad": {"core_name": "ExtDirNormRad", "unit": "Wh/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
-    "HorInfra": {"core_name": "HorInfra", "unit": "Wh/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
-    "GlobHorRad": {"core_name": "GlobHorRad", "unit": "Wh/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
-    "DirNormRad": {"core_name": "DirNormRad", "unit": "Wh/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
-    "DiffHorRad": {"core_name": "DiffHorRad", "unit": "Wh/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
-    "GlobHorIll": {"core_name": "GlobHorIll", "unit": "lux", "time_of_meas_shift": 'ind2prec', "nan": 999999.0},
-    "DirecNormIll": {"core_name": "DirecNormIll", "unit": "lux", "time_of_meas_shift": 'ind2prec', "nan": 999999.0},
-    "DiffuseHorIll": {"core_name": "DiffuseHorIll", "unit": "lux", "time_of_meas_shift": 'ind2prec', "nan": 999999.0},
-    "ZenithLum": {"core_name": "ZenithLum", "unit": "Cd/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
-    "WindDir": {"core_name": "WindDir", "unit": "deg", "time_of_meas_shift": None, "nan": 999.0},
-    "WindSpeed": {"core_name": "WindSpeed", "unit": "m/s", "time_of_meas_shift": None, "nan": 999.0},
-    "TotalSkyCover": {"core_name": "TotalSkyCover", "unit": "1tenth", "time_of_meas_shift": None, "nan": 99},
-    "OpaqueSkyCover": {"core_name": "OpaqueSkyCover", "unit": "1tenth", "time_of_meas_shift": None, "nan": 99},
-    "Visibility": {"core_name": "Visibility", "unit": "km", "time_of_meas_shift": None, "nan": 9999.0},
-    "CeilingH": {"core_name": "CeilingH", "unit": "m", "time_of_meas_shift": None, "nan": 99999},
-    "WeatherObs": {"core_name": "", "unit": "None", "time_of_meas_shift": None, "nan": 9},
-    "WeatherCode": {"core_name": "", "unit": "None", "time_of_meas_shift": None, "nan": 999999999},
-    "PrecWater": {"core_name": "PrecWater", "unit": "mm", "time_of_meas_shift": None, "nan": 999.0},
-    "Aerosol": {"core_name": "Aerosol", "unit": "1thousandth", "time_of_meas_shift": None, "nan": 0.999},
-    "Snow": {"core_name": "", "unit": "cm", "time_of_meas_shift": None, "nan": 999.0},
-    "DaysSinceSnow": {"core_name": "", "unit": "days", "time_of_meas_shift": None, "nan": 99},
-    "Albedo": {"core_name": "", "unit": "None", "time_of_meas_shift": None, "nan": 999},
-    "LiquidPrecD": {"core_name": "LiquidPrecD", "unit": "mm/h", "time_of_meas_shift": None, "nan": 999},
-    "LiquidPrepQuant": {"core_name": "", "unit": "hours", "time_of_meas_shift": None, "nan": 99},
-}
 
 
 def to_epw(
@@ -457,12 +390,12 @@ def to_epw(
         """
 
         ### measurement time conversion
-        df = time_observation_transformations.shift_time_by_dict(format_epw, df)
+        df = time_observation_transformations.shift_time_by_dict(EPWFormat.export_format(), df)
 
         ### if possible avoid back and forth interpolating -> pass through
         ### variables without shifting
         df = pass_through_handling.pass_through_measurements_with_back_and_forth_interpolating(
-           df, format_epw
+           df, EPWFormat.export_format()
         )
 
         ### select only desired period
@@ -471,7 +404,7 @@ def to_epw(
         )
 
         ### select the desired columns
-        df = auxiliary.force_data_variable_convention(df, format_epw)
+        df = auxiliary.force_data_variable_convention(df, EPWFormat.export_format())
 
         # fill newly created variables of desired output format
         # Index von Dataframe aufspalten
@@ -601,23 +534,23 @@ def to_epw(
                                                          ]
 
             # fill default nans to the rest
-            df = auxiliary.fill_nan_from_format_dict(df, format_epw)
+            df = auxiliary.fill_nan_from_format_dict(df, EPWFormat.export_format())
 
         # cut off float digits (required for EnergyPlus)
         df = df.applymap(lambda x: (f"{x:.1f}") if isinstance(x, float) else x)
 
         # again make sure correct order and variables are applied
         # (processing might have mixed it up)
-        df = auxiliary.force_data_variable_convention(df, format_epw)
+        df = auxiliary.force_data_variable_convention(df, EPWFormat.export_format())
 
         ### format dataframe to list
-        data_list = df[format_epw.keys()].to_numpy().tolist()
+        data_list = df[EPWFormat.export_format().keys()].to_numpy().tolist()
 
         return data_list, df
 
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
-        core_format=definitions.format_core_data, other_format=format_epw
+        core_format=definitions.format_core_data, other_format=EPWFormat.export_format()
     )
 
     df = core_df.copy()
