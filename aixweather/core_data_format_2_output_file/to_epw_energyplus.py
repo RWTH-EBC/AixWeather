@@ -12,78 +12,9 @@ import numpy as np
 from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
 from aixweather.transformation_functions import auxiliary, time_observation_transformations, pass_through_handling
+from aixweather.transformation_to_core_data.EPW import EPWFormat
 
 logger = logging.getLogger(__name__)
-
-
-class EPWFormat:
-    """
-    Information on EPW format:
-    Online sources for EPW data: https://climate.onebuilding.org/default.html and https://www.ladybug.tools/epwmap/
-
-    Format info:
-    - key = output data point name
-    - core_name = corresponding name matching the format_core_data
-    - time_of_meas_shift = desired 30min shifting+interpolation to convert the value that is "at
-        indicated time" to "average of preceding hour" (ind2prec).
-    - unit = unit of the output data following the naming convention of format_core_data
-    - nan = The default values stated from the format information, those values are
-        filled if nan.
-
-    All changes here automatically change the calculations.
-    Exception: unit conversions have to be added manually.
-
-    Information for shifting:
-    Hour: This is the hour of the data. (1 - 24). Hour 1 is 00:01 to 01:00.
-    Cannot be missing. but e.g.:
-    DryBulbTemp: This is the dry bulb temperature in C at the time indicated. and:
-    GlobHorRad: received on a horizontal surface during the hour preceding the time indicated.
-    ----> Hence, we assume that hour 1 should show the DryBulbTemp from
-    0:30 to 1:30, i.e. the Temp at indicated time.
-
-    time of measurement checked by Martin Rätz (07.08.2023)
-    units checked by Martin Rätz (07.08.2023)
-    """
-
-    format: dict = {
-        "Year": {"core_name": "", "unit": "year", "time_of_meas_shift": None, "nan": None},
-        "Month": {"core_name": "", "unit": "month", "time_of_meas_shift": None, "nan": None},
-        "Day": {"core_name": "", "unit": "day", "time_of_meas_shift": None, "nan": None},
-        "Hour": {"core_name": "", "unit": "hour", "time_of_meas_shift": None, "nan": None},
-        "Minute": {"core_name": "", "unit": "minute", "time_of_meas_shift": None, "nan": None},
-        "Data Source and Uncertainty Flags": {"core_name": "", "unit": None, "time_of_meas_shift": None, "nan": "?"},
-        "DryBulbTemp": {"core_name": "DryBulbTemp", "unit": "degC", "time_of_meas_shift": None, "nan": 99.9},
-        "DewPointTemp": {"core_name": "DewPointTemp", "unit": "degC", "time_of_meas_shift": None, "nan": 99.9},
-        "RelHum": {"core_name": "RelHum", "unit": "percent", "time_of_meas_shift": None, "nan": 999.0},
-        "AtmPressure": {"core_name": "AtmPressure", "unit": "Pa", "time_of_meas_shift": None, "nan": 999999.0},
-        "ExtHorRad": {"core_name": "ExtHorRad", "unit": "Wh/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
-        "ExtDirNormRad": {"core_name": "ExtDirNormRad", "unit": "Wh/m2", "time_of_meas_shift": 'ind2prec',
-                          "nan": 9999.0},
-        "HorInfra": {"core_name": "HorInfra", "unit": "Wh/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
-        "GlobHorRad": {"core_name": "GlobHorRad", "unit": "Wh/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
-        "DirNormRad": {"core_name": "DirNormRad", "unit": "Wh/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
-        "DiffHorRad": {"core_name": "DiffHorRad", "unit": "Wh/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
-        "GlobHorIll": {"core_name": "GlobHorIll", "unit": "lux", "time_of_meas_shift": 'ind2prec', "nan": 999999.0},
-        "DirecNormIll": {"core_name": "DirecNormIll", "unit": "lux", "time_of_meas_shift": 'ind2prec', "nan": 999999.0},
-        "DiffuseHorIll": {"core_name": "DiffuseHorIll", "unit": "lux", "time_of_meas_shift": 'ind2prec',
-                          "nan": 999999.0},
-        "ZenithLum": {"core_name": "ZenithLum", "unit": "Cd/m2", "time_of_meas_shift": 'ind2prec', "nan": 9999.0},
-        "WindDir": {"core_name": "WindDir", "unit": "deg", "time_of_meas_shift": None, "nan": 999.0},
-        "WindSpeed": {"core_name": "WindSpeed", "unit": "m/s", "time_of_meas_shift": None, "nan": 999.0},
-        "TotalSkyCover": {"core_name": "TotalSkyCover", "unit": "1tenth", "time_of_meas_shift": None, "nan": 99},
-        "OpaqueSkyCover": {"core_name": "OpaqueSkyCover", "unit": "1tenth", "time_of_meas_shift": None, "nan": 99},
-        "Visibility": {"core_name": "Visibility", "unit": "km", "time_of_meas_shift": None, "nan": 9999.0},
-        "CeilingH": {"core_name": "CeilingH", "unit": "m", "time_of_meas_shift": None, "nan": 99999},
-        "WeatherObs": {"core_name": "", "unit": "None", "time_of_meas_shift": None, "nan": 9},
-        "WeatherCode": {"core_name": "", "unit": "None", "time_of_meas_shift": None, "nan": 999999999},
-        "PrecWater": {"core_name": "PrecWater", "unit": "mm", "time_of_meas_shift": None, "nan": 999.0},
-        "Aerosol": {"core_name": "Aerosol", "unit": "1thousandth", "time_of_meas_shift": None, "nan": 0.999},
-        "Snow": {"core_name": "", "unit": "cm", "time_of_meas_shift": None, "nan": 999.0},
-        "DaysSinceSnow": {"core_name": "", "unit": "days", "time_of_meas_shift": None, "nan": 99},
-        "Albedo": {"core_name": "", "unit": "None", "time_of_meas_shift": None, "nan": 999},
-        "LiquidPrecD": {"core_name": "LiquidPrecD", "unit": "mm/h", "time_of_meas_shift": None, "nan": 999},
-        "LiquidPrepQuant": {"core_name": "", "unit": "hours", "time_of_meas_shift": None, "nan": 99},
-    }
 
 
 def to_epw(
@@ -122,7 +53,7 @@ def to_epw(
 
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
-        core_format=definitions.format_core_data, other_format=EPWFormat.format
+        core_format=definitions.format_core_data, other_format=EPWFormat.export_format()
     )
 
     df = core_df.copy()
@@ -152,10 +83,9 @@ def to_epw(
     ### merge all header lines and the data to be saved in a .epw file
     with open(file_path, "w", newline="", encoding="latin1") as file:
         writer = csv.writer(file)
-        ### create header lines
         writer.writerows(
             [
-                _line1_location(meta=meta, timezone=timezone),
+                _line1_location(meta),
                 _line2_design_cond(),
                 _line3_typ_ext_period(df_truncated),
                 _line4_ground_temp(df_truncated),
@@ -172,178 +102,7 @@ def to_epw(
     return df, file_path
 
 
-def _format_data(df, start, stop, timezone, fillna):
-    """
-    Parse actual weatherdata, for export
-
-    return:
-        data_list:    List    Datasätze von epw Daten als List
-    """
-    ### measurement time conversion
-    df = time_observation_transformations.shift_time_by_dict(EPWFormat.format, df)
-
-    ### if possible avoid back and forth interpolating -> pass through
-    ### variables without shifting
-    df = pass_through_handling.pass_through_measurements_with_back_and_forth_interpolating(
-        df, EPWFormat.format
-    )
-
-    ### select only desired period
-    df = time_observation_transformations.truncate_data_from_start_to_stop(
-        df, start, stop
-    )
-
-    ### Shift to desired timezone
-    df = df.shift(periods=timezone, freq="h", axis=0)
-
-    ### select the desired columns
-    df = auxiliary.force_data_variable_convention(df, EPWFormat.format)
-
-    # fill newly created variables of desired output format
-    # Index von Dataframe aufspalten
-    df["Year"] = pd.DatetimeIndex(df.index).year
-    df["Month"] = pd.DatetimeIndex(df.index).month
-    df["Day"] = pd.DatetimeIndex(df.index).day
-    df["Hour"] = pd.DatetimeIndex(df.index).hour
-    df["Minute"] = pd.DatetimeIndex(df.index).minute
-
-    ### meet special epw requirements
-    # Stunden 0 zu 24 der vorherigen Tag umwandeln
-    df["Hour"] = df["Hour"].replace([0], 24)
-    # Falls Tag ungleich 1 -> Tag substrahieren mit 1
-    df.loc[(df["Hour"] == 24) & (df["Day"] != 1), "Day"] = df.loc[
-        (df["Hour"] == 24) & (df["Day"] != 1), "Day"
-    ].sub(1)
-    # Falls Tag gleich 1 -> Jahr, Monat, Tag loeschen -> mit ffill nachfuellen
-    df.loc[
-        (df["Hour"] == 24) & (df["Day"] == 1),
-        ["Year", "Month", "Day"]
-    ] = np.nan
-    df["Year"] = (
-        df["Year"].ffill().bfill().astype(int)
-    )
-    df["Month"] = (
-        df["Month"].ffill().bfill().astype(int)
-    )
-    df["Day"] = df["Day"].ffill().bfill().astype(int)
-    df.reset_index(drop=True, inplace=True)
-
-    df, first_day_added_rows = fill_full_first_day(df)
-    df, last_day_added_rows = fill_full_last_day(df)
-
-    # ensure data type where required
-    columns_to_convert = ["Year", "Month", "Day", "Hour", "Minute"]
-    for col in columns_to_convert:
-        df[col] = df[col].astype(float).astype(int)
-
-    ### fill NaNs
-    if fillna:
-        # Forward-fill added rows at end of df
-        df.iloc[-last_day_added_rows:, :] = df.ffill().iloc[
-                                            -last_day_added_rows:, :
-                                            ]
-        # fill added rows at beginning of df
-        df.iloc[:first_day_added_rows, :] = df.bfill().iloc[
-                                            :first_day_added_rows, :
-                                            ]
-
-        # fill first and last lines nans (possibly lost through shifting)
-        df.iloc[0 + first_day_added_rows + 1, :] = df.bfill().iloc[
-                                                   0 + first_day_added_rows + 1, :
-                                                   ]
-        df.iloc[-1 - last_day_added_rows, :] = df.ffill().iloc[
-                                               -1 - last_day_added_rows, :
-                                               ]
-
-        # fill default nans to the rest
-        df = auxiliary.fill_nan_from_format_dict(df, EPWFormat.format)
-
-    # cut off float digits (required for EnergyPlus)
-    df = df.applymap(lambda x: (f"{x:.1f}") if isinstance(x, float) else x)
-
-    # again make sure correct order and variables are applied
-    # (processing might have mixed it up)
-    df = auxiliary.force_data_variable_convention(df, EPWFormat.format)
-
-    ### format dataframe to list
-    data_list = df[EPWFormat.format.keys()].to_numpy().tolist()
-
-    return data_list, df
-
-
-def fill_full_first_day(df):
-    """
-    data should always contain full days
-    """
-    # Identify the first hour and date of the DataFrame
-    first_minute = df.iloc[0]["Minute"]
-    first_hour = df.iloc[0]["Hour"]
-    first_day = df.iloc[0]["Day"]
-    first_month = df.iloc[0]["Month"]
-    first_year = df.iloc[0]["Year"]
-    rows_to_add = 0
-
-    # If the first hour is not 1, add rows to start with hour 1
-    if first_hour != 1:
-        # If the first hour is 24, we dont want to add an full extra day, just delete the
-        # line so that the data frame starts with hour 1
-        if first_hour == 24:
-            df = df.drop(df.index[0])
-        else:
-            # Calculate how many rows to add
-            rows_to_add = int(first_hour) - 1
-
-            # Generate new rows
-            for i in range(rows_to_add, 0, -1):
-                new_row = pd.DataFrame(
-                    {
-                        "Minute": [first_minute],
-                        "Hour": [i],
-                        "Day": [first_day],
-                        "Month": [first_month],
-                        "Year": [first_year],
-                    }
-                )
-                df = pd.concat([new_row, df]).reset_index(drop=True)
-    return df, rows_to_add
-
-
-def fill_full_last_day(df):
-    # Identify the last hour and date of the DataFrame
-    last_hour = df.iloc[-1]["Hour"]
-    last_day = df.iloc[-1]["Day"]
-    last_month = df.iloc[-1]["Month"]
-    last_year = df.iloc[-1]["Year"]
-    last_minute = df.iloc[-1]["Minute"]
-    rows_to_add = 0
-
-    # If the last hour is not 24, add rows to reach hour 24
-    if last_hour != 24:
-        # If the last hour is 0, we dont want to add a full extra day, just delete the
-        # line so that the data frame ends with hour 24
-        if last_hour == 0:
-            df = df.drop(df.index[-1])
-        else:
-            # Calculate how many rows to add
-            rows_to_add = 24 - int(last_hour)
-
-            # Generate new rows
-            new_rows = []
-            for i in range(1, rows_to_add + 1):
-                new_row = {
-                    "Minute": last_minute,
-                    "Hour": last_hour + i,
-                    "Day": last_day,
-                    "Month": last_month,
-                    "Year": last_year,
-                }
-                new_rows.append(new_row)
-
-            # Append new rows to DataFrame
-            df = pd.concat([df, pd.DataFrame(new_rows)], ignore_index=True)
-    return df, rows_to_add
-
-
+### create header lines
 def _line1_location(
         meta: MetaData,
         timezone: int
@@ -684,3 +443,172 @@ def _line8_data_periods(df):
         end_dp.strftime("%m/%d"),  # DP Enddatum
     ]
     return data_periods
+
+def _format_data(df, start, stop, timezone, fillna):
+    """
+    Parse actual weatherdata, for export
+
+    return:
+        data_list:    List    Datasätze von epw Daten als List
+    """
+    ### measurement time conversion
+    df = time_observation_transformations.shift_time_by_dict(EPWFormat.format, df)
+
+    ### if possible avoid back and forth interpolating -> pass through
+    ### variables without shifting
+    df = pass_through_handling.pass_through_measurements_with_back_and_forth_interpolating(
+        df, EPWFormat.format
+    )
+
+    ### select only desired period
+    df = time_observation_transformations.truncate_data_from_start_to_stop(
+        df, start, stop
+    )
+
+    ### Shift to desired timezone
+    df = df.shift(periods=timezone, freq="h", axis=0)
+
+    ### select the desired columns
+    df = auxiliary.force_data_variable_convention(df, EPWFormat.export_format())
+
+    # fill newly created variables of desired output format
+    # Index von Dataframe aufspalten
+    df["Year"] = pd.DatetimeIndex(df.index).year
+    df["Month"] = pd.DatetimeIndex(df.index).month
+    df["Day"] = pd.DatetimeIndex(df.index).day
+    df["Hour"] = pd.DatetimeIndex(df.index).hour
+    df["Minute"] = pd.DatetimeIndex(df.index).minute
+
+    ### meet special epw requirements
+    # Stunden 0 zu 24 der vorherigen Tag umwandeln
+    df["Hour"] = df["Hour"].replace([0], 24)
+    # Falls Tag ungleich 1 -> Tag substrahieren mit 1
+    df.loc[(df["Hour"] == 24) & (df["Day"] != 1), "Day"] = df.loc[
+        (df["Hour"] == 24) & (df["Day"] != 1), "Day"
+    ].sub(1)
+    # Falls Tag gleich 1 -> Jahr, Monat, Tag loeschen -> mit ffill nachfuellen
+    df.loc[
+        (df["Hour"] == 24) & (df["Day"] == 1),
+        ["Year", "Month", "Day"]
+    ] = np.nan
+    df["Year"] = (
+        df["Year"].ffill().bfill().astype(int)
+    )
+    df["Month"] = (
+        df["Month"].ffill().bfill().astype(int)
+    )
+    df["Day"] = df["Day"].ffill().bfill().astype(int)
+    df.reset_index(drop=True, inplace=True)
+
+    # data should always contain full days
+    df, first_day_added_rows = fill_full_first_day(df)
+    df, last_day_added_rows = fill_full_last_day(df)
+
+    # ensure data type where required
+    columns_to_convert = ["Year", "Month", "Day", "Hour", "Minute"]
+    for col in columns_to_convert:
+        df[col] = df[col].astype(float).astype(int)
+
+    ### fill NaNs
+    if fillna:
+        # Forward-fill added rows at end of df
+        df.iloc[-last_day_added_rows:, :] = df.ffill().iloc[
+                                            -last_day_added_rows:, :
+                                            ]
+        # fill added rows at beginning of df
+        df.iloc[:first_day_added_rows, :] = df.bfill().iloc[
+                                            :first_day_added_rows, :
+                                            ]
+
+        # fill first and last lines nans (possibly lost through shifting)
+        df.iloc[0 + first_day_added_rows + 1, :] = df.bfill().iloc[
+                                                   0 + first_day_added_rows + 1, :
+                                                   ]
+        df.iloc[-1 - last_day_added_rows, :] = df.ffill().iloc[
+                                               -1 - last_day_added_rows, :
+                                               ]
+
+        # fill default nans to the rest
+        df = auxiliary.fill_nan_from_format_dict(df, EPWFormat.export_format())
+
+    # cut off float digits (required for EnergyPlus)
+    df = df.applymap(lambda x: (f"{x:.1f}") if isinstance(x, float) else x)
+
+    # again make sure correct order and variables are applied
+    # (processing might have mixed it up)
+    df = auxiliary.force_data_variable_convention(df, EPWFormat.export_format())
+
+    ### format dataframe to list
+    data_list = df[EPWFormat.export_format().keys()].to_numpy().tolist()
+
+    return data_list, df
+
+
+def fill_full_first_day(df):
+    # Identify the first hour and date of the DataFrame
+    first_minute = df.iloc[0]["Minute"]
+    first_hour = df.iloc[0]["Hour"]
+    first_day = df.iloc[0]["Day"]
+    first_month = df.iloc[0]["Month"]
+    first_year = df.iloc[0]["Year"]
+    rows_to_add = 0
+
+    # If the first hour is not 1, add rows to start with hour 1
+    if first_hour != 1:
+        # If the first hour is 24, we dont want to add an full extra day, just delete the
+        # line so that the data frame starts with hour 1
+        if first_hour == 24:
+            df = df.drop(df.index[0])
+        else:
+            # Calculate how many rows to add
+            rows_to_add = int(first_hour) - 1
+
+            # Generate new rows
+            for i in range(rows_to_add, 0, -1):
+                new_row = pd.DataFrame(
+                    {
+                        "Minute": [first_minute],
+                        "Hour": [i],
+                        "Day": [first_day],
+                        "Month": [first_month],
+                        "Year": [first_year],
+                    }
+                )
+                df = pd.concat([new_row, df]).reset_index(drop=True)
+    return df, rows_to_add
+
+
+def fill_full_last_day(df):
+    # Identify the last hour and date of the DataFrame
+    last_hour = df.iloc[-1]["Hour"]
+    last_day = df.iloc[-1]["Day"]
+    last_month = df.iloc[-1]["Month"]
+    last_year = df.iloc[-1]["Year"]
+    last_minute = df.iloc[-1]["Minute"]
+    rows_to_add = 0
+
+    # If the last hour is not 24, add rows to reach hour 24
+    if last_hour != 24:
+        # If the last hour is 0, we dont want to add a full extra day, just delete the
+        # line so that the data frame ends with hour 24
+        if last_hour == 0:
+            df = df.drop(df.index[-1])
+        else:
+            # Calculate how many rows to add
+            rows_to_add = 24 - int(last_hour)
+
+            # Generate new rows
+            new_rows = []
+            for i in range(1, rows_to_add + 1):
+                new_row = {
+                    "Minute": last_minute,
+                    "Hour": last_hour + i,
+                    "Day": last_day,
+                    "Month": last_month,
+                    "Year": last_year,
+                }
+                new_rows.append(new_row)
+
+            # Append new rows to DataFrame
+            df = pd.concat([df, pd.DataFrame(new_rows)], ignore_index=True)
+    return df, rows_to_add
