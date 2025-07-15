@@ -32,7 +32,7 @@ class BaseDWDHistorical(unittest.TestCase):
         cls.start_formatted = start.strftime("%Y%m%d")
         cls.end_formatted = end.strftime("%Y%m%d")
 
-        utils_4_tests.run_all_functions(cls.c)
+        utils_4_tests.run_all_functions(project_class_instance=cls.c, export_in_utc=True)
 
         cls.station_id = station
         cls.city = "Aachen-Orsbach"

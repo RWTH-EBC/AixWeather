@@ -27,7 +27,7 @@ class BaseDWDForecast(unittest.TestCase):
             definitions.ROOT_DIR, f"tests/test_files/regular_tests/DWD_forecast/test_{name}"
         )
 
-        utils_4_tests.run_all_functions(cls.c)
+        utils_4_tests.run_all_functions(project_class_instance=cls.c, export_in_utc=True)
 
         cls.start_formatted = cls.c.start.strftime("%Y%m%d")
         cls.end_formatted = cls.c.end.strftime("%Y%m%d")
