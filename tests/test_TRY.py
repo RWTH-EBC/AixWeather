@@ -39,7 +39,6 @@ class BaseTRY(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls) -> None:
-        return
         utils_4_tests.delete_created_result_files(cls.c.abs_result_folder_path)
 
 
