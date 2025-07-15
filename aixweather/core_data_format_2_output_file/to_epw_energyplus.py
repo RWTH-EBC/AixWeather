@@ -25,7 +25,7 @@ def to_epw(
         fillna: bool,
         result_folder: str = None,
         filename: str = None,
-        use_metadata_timezone: bool = True
+        export_in_utc: bool = False
 ) -> (pd.DataFrame, str):
     """Create an EPW file from the core data.
 
@@ -40,16 +40,16 @@ def to_epw(
             the `results_file_path` method.
         filename (str): Name of the file to be saved. The default is constructed
             based on the meta-data as well as start and stop time
-        use_metadata_timezone (bool): Timezone to be used for the export.
-            True (default) to use timezone from metadata,
-            False to use the core_df timezone, UTC+0
+        export_in_utc (bool): Timezone to be used for the export.
+            True (default) to use the core_df timezone, UTC+0,
+            False (default) to use timezone from metadata
 
     Returns:
         pd.DataFrame: DataFrame containing the weather data formatted for EPW export,
                       excluding metadata.
         str: Path to the exported file.
     """
-    timezone = meta.timezone if use_metadata_timezone else 0
+    timezone = 0 if export_in_utc else meta.timezone
 
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
@@ -73,9 +73,10 @@ def to_epw(
 
     # keep regular start stop in the filename for the unit tests
     if filename is None:
+        _utc_flag = "_utc" if export_in_utc else ""
         filename = (
             f"{meta.station_id}_{start.strftime('%Y%m%d')}_{stop.strftime('%Y%m%d')}"
-            f"_{meta.station_name}.epw"
+            f"_{meta.station_name}{_utc_flag}.epw"
         )
     # get file path to safe data to
     file_path = definitions.results_file_path(filename, result_folder)
@@ -85,7 +86,7 @@ def to_epw(
         writer = csv.writer(file)
         writer.writerows(
             [
-                _line1_location(meta),
+                _line1_location(meta=meta, timezone=timezone),
                 _line2_design_cond(),
                 _line3_typ_ext_period(df_truncated),
                 _line4_ground_temp(df_truncated),
@@ -452,12 +453,12 @@ def _format_data(df, start, stop, timezone, fillna):
         data_list:    List    Datasätze von epw Daten als List
     """
     ### measurement time conversion
-    df = time_observation_transformations.shift_time_by_dict(EPWFormat.format, df)
+    df = time_observation_transformations.shift_time_by_dict(EPWFormat.export_format(), df)
 
     ### if possible avoid back and forth interpolating -> pass through
     ### variables without shifting
     df = pass_through_handling.pass_through_measurements_with_back_and_forth_interpolating(
-        df, EPWFormat.format
+        df, EPWFormat.export_format()
     )
 
     ### select only desired period

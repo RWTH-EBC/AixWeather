@@ -147,15 +147,15 @@ class ProjectClassGeneral(ABC):
         """Abstract function to convert the imported data to core data."""
 
     # core_data_format_2_output_file
-    def core_2_mos(self, filename: str = None, use_metadata_timezone: bool = True) -> str:
+    def core_2_mos(self, filename: str = None, export_in_utc: bool = False) -> str:
         """
         Convert core data to .mos file
 
         filename (str): Name of the file to be saved. The default is constructed
             based on the meta-data as well as start and stop time
-        use_metadata_timezone (bool): Timezone to be used for the export.
-            True (default) to use timezone from metadata,
-            False to use the core_df timezone, UTC+0
+        export_in_utc (bool): Timezone to be used for the export.
+            True (default) to use the core_df timezone, UTC+0,
+            False (default) to use timezone from metadata
 
         Returns:
             str: Path to the exported file.
@@ -168,20 +168,19 @@ class ProjectClassGeneral(ABC):
             fillna=self.fillna,
             result_folder=self.abs_result_folder_path,
             filename=filename,
-            use_metadata_timezone=use_metadata_timezone
+            export_in_utc=export_in_utc
         )
         return filepath
 
-    def core_2_epw(self, filename: str = None, use_metadata_timezone: bool = True) -> str:
+    def core_2_epw(self, filename: str = None, export_in_utc: bool = False) -> str:
         """
         Convert core data to .epw file
 
         filename (str): Name of the file to be saved. The default is constructed
             based on the meta-data as well as start and stop time
-        use_metadata_timezone (bool): Timezone to be used for the export.
-            True (default) to use timezone from metadata,
-            False to use the core_df timezone, UTC+0
-
+        export_in_utc (bool): Timezone to be used for the export.
+            True (default) to use the core_df timezone, UTC+0,
+            False (default) to use timezone from metadata
 
         Returns:
             str: Path to the exported file.
@@ -194,7 +193,7 @@ class ProjectClassGeneral(ABC):
             self.fillna,
             self.abs_result_folder_path,
             filename=filename,
-            use_metadata_timezone=use_metadata_timezone
+            export_in_utc=export_in_utc
         )
         return filepath
 

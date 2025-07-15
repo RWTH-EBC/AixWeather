@@ -57,8 +57,7 @@ def delete_created_result_files(result_folder):
         shutil.rmtree(result_folder)
 
 
-
-def run_all_functions(project_class_instance, use_metadata_timezone: bool):
+def run_all_functions(project_class_instance, export_in_utc: bool):
     """
     This function runs a series of methods on a project class instance to import and process weather data. It is
     intended for testing and validation purposes.
@@ -72,8 +71,8 @@ def run_all_functions(project_class_instance, use_metadata_timezone: bool):
     project_class_instance.core_2_pickle()
     project_class_instance.core_2_json()
     project_class_instance.core_2_csv()
-    project_class_instance.core_2_mos(use_metadata_timezone=use_metadata_timezone)
-    project_class_instance.core_2_epw(use_metadata_timezone=use_metadata_timezone)
+    project_class_instance.core_2_mos(export_in_utc=export_in_utc)
+    project_class_instance.core_2_epw(export_in_utc=export_in_utc)
 
 
 class RegressionTestsClass:
@@ -146,18 +145,18 @@ class RegressionTestsClass:
         )
         pd.testing.assert_frame_equal(csv_desired, csv_created)
 
-    def _get_name(self, with_timezone_boolean: bool = False):
+    def _get_name(self, export_in_utc: bool):
         _base = f"{self.station_id}_{self.start_formatted}_{self.end_formatted}_{self.city}"
-        if with_timezone_boolean:
-            return f"{_base}_True"
+        if export_in_utc:
+            return f"{_base}_utc"
         return _base
 
     def test_output_mos(self):
         mos_desired, mos_created = load_mos(
             folder_tests=self.folder_tests,
             result_folder=self.c.abs_result_folder_path,
-            file_name_created=f"{self._get_name()}.mos",
-            file_name_desired=f"{self._get_name(with_timezone_boolean=self.use_metadata_timezone)}.mos"
+            file_name_created=f"{self._get_name(self.export_in_utc)}.mos",
+            file_name_desired=f"{self._get_name(self.export_in_utc)}.mos"
         )
         self.assertEqual(
             mos_desired[:1000], mos_created[:1000], "First 1000 characters don't match!"
@@ -173,8 +172,8 @@ class RegressionTestsClass:
         epw_desired, epw_created = load_epw(
             folder_tests=self.folder_tests,
             result_folder=self.c.abs_result_folder_path,
-            file_name_created=f"{self._get_name()}.epw",
-            file_name_desired=f"{self._get_name(with_timezone_boolean=self.use_metadata_timezone)}.epw"
+            file_name_created=f"{self._get_name(self.export_in_utc)}.epw",
+            file_name_desired=f"{self._get_name(self.export_in_utc)}.epw"
         )
         self.maxDiff = None
         self.assertEqual(

@@ -77,7 +77,7 @@ def to_mos(
     fillna: bool,
     result_folder: str = None,
     filename: str = None,
-    use_metadata_timezone: bool = True
+    export_in_utc: bool = False
 ) -> (pd.DataFrame, str):
     """Create a MOS file from the core data.
 
@@ -92,9 +92,9 @@ def to_mos(
             the `results_file_path` method.
         filename (str): Name of the file to be saved. The default is constructed
             based on the meta-data as well as start and stop time
-        use_metadata_timezone (bool): Timezone to be used for the export.
-            True (default) to use timezone from metadata,
-            False to use the core_df timezone, UTC+0
+        export_in_utc (bool): Timezone to be used for the export.
+            True (default) to use the core_df timezone, UTC+0,
+            False (default) to use timezone from metadata
 
     Returns:
         pd.DataFrame: DataFrame containing the weather data formatted for MOS export,
@@ -103,7 +103,7 @@ def to_mos(
     """
     format_modelica_TMY3 = ModelicaTMY3Format.export_format()
 
-    timezone = meta.timezone if use_metadata_timezone else 0
+    timezone = 0 if export_in_utc else meta.timezone
 
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
@@ -255,9 +255,10 @@ def to_mos(
 
     ### write to csv
     if filename is None:
+        _utc_flag = "_utc" if export_in_utc else ""
         filename = (
             f"{meta.station_id}_{start.strftime('%Y%m%d')}_{stop.strftime('%Y%m%d')}"
-            f"_{meta.station_name}.mos"
+            f"_{meta.station_name}{_utc_flag}.mos"
         )
     filepath = definitions.results_file_path(filename, result_folder)
 
