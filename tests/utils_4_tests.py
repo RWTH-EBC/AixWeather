@@ -145,7 +145,11 @@ class RegressionTestsClass:
         )
         pd.testing.assert_frame_equal(csv_desired, csv_created)
 
-    def _get_name(self, export_in_utc: bool):
+    def _get_name(self):
+        if hasattr(self, "export_in_utc"):
+            export_in_utc = self.export_in_utc
+        else:
+            export_in_utc = True
         _base = f"{self.station_id}_{self.start_formatted}_{self.end_formatted}_{self.city}"
         if export_in_utc:
             return f"{_base}_utc"
@@ -155,8 +159,8 @@ class RegressionTestsClass:
         mos_desired, mos_created = load_mos(
             folder_tests=self.folder_tests,
             result_folder=self.c.abs_result_folder_path,
-            file_name_created=f"{self._get_name(self.export_in_utc)}.mos",
-            file_name_desired=f"{self._get_name(self.export_in_utc)}.mos"
+            file_name_created=f"{self._get_name()}.mos",
+            file_name_desired=f"{self._get_name()}.mos"
         )
         self.assertEqual(
             mos_desired[:1000], mos_created[:1000], "First 1000 characters don't match!"
@@ -172,8 +176,8 @@ class RegressionTestsClass:
         epw_desired, epw_created = load_epw(
             folder_tests=self.folder_tests,
             result_folder=self.c.abs_result_folder_path,
-            file_name_created=f"{self._get_name(self.export_in_utc)}.epw",
-            file_name_desired=f"{self._get_name(self.export_in_utc)}.epw"
+            file_name_created=f"{self._get_name()}.epw",
+            file_name_desired=f"{self._get_name()}.epw"
         )
         self.maxDiff = None
         self.assertEqual(
