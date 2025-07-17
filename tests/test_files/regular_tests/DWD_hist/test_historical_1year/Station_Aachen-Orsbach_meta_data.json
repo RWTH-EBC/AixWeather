@@ -4,6 +4,7 @@
     "_altitude": 231.0,
     "_latitude": 50.798,
     "_longitude": 6.024,
+    "_timezone": 1,
     "input_source": "DWD Historical",
     "station_exists_since": "01.04.2011",
     "station_exists_until": "02.10.2024",
