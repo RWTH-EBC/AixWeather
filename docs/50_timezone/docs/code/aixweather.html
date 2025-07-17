@@ -61,6 +61,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-aixweather.definitions">aixweather.definitions module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#aixweather.definitions.CoreDataFormat"><code class="docutils literal notranslate"><span class="pre">CoreDataFormat</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#aixweather.definitions.result_folder_path"><code class="docutils literal notranslate"><span class="pre">result_folder_path()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#aixweather.definitions.results_file_path"><code class="docutils literal notranslate"><span class="pre">results_file_path()</span></code></a></li>
 </ul>
@@ -119,17 +120,16 @@
 <li class="toctree-l1"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html">aixweather.core_data_format_2_output_file package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#module-aixweather.core_data_format_2_output_file.to_epw_energyplus">aixweather.core_data_format_2_output_file.to_epw_energyplus module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.to_epw_energyplus.EPWFormat"><code class="docutils literal notranslate"><span class="pre">EPWFormat</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.to_epw_energyplus.EPWFormat.format"><code class="docutils literal notranslate"><span class="pre">EPWFormat.format</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.to_epw_energyplus.fill_full_first_day"><code class="docutils literal notranslate"><span class="pre">fill_full_first_day()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.to_epw_energyplus.fill_full_last_day"><code class="docutils literal notranslate"><span class="pre">fill_full_last_day()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.to_epw_energyplus.to_epw"><code class="docutils literal notranslate"><span class="pre">to_epw()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#module-aixweather.core_data_format_2_output_file.to_mos_TMY3">aixweather.core_data_format_2_output_file.to_mos_TMY3 module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.to_mos_TMY3.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.to_mos_TMY3.ModelicaTMY3Format"><code class="docutils literal notranslate"><span class="pre">ModelicaTMY3Format</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.to_mos_TMY3.ModelicaTMY3Format.export_format"><code class="docutils literal notranslate"><span class="pre">ModelicaTMY3Format.export_format()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="aixweather.core_data_format_2_output_file.html#aixweather.core_data_format_2_output_file.to_mos_TMY3.to_mos"><code class="docutils literal notranslate"><span class="pre">to_mos()</span></code></a></li>
 </ul>
 </li>
@@ -237,20 +237,40 @@
 <li class="toctree-l1"><a class="reference internal" href="aixweather.transformation_to_core_data.html">aixweather.transformation_to_core_data package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="aixweather.transformation_to_core_data.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aixweather.transformation_to_core_data.html#module-aixweather.transformation_to_core_data.DWD">aixweather.transformation_to_core_data.DWD module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.DWD.DWDForecast"><code class="docutils literal notranslate"><span class="pre">DWDForecast</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.DWD.DWDForecast.import_format"><code class="docutils literal notranslate"><span class="pre">DWDForecast.import_format()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.DWD.DWDHistoricalFormat"><code class="docutils literal notranslate"><span class="pre">DWDHistoricalFormat</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.DWD.DWDHistoricalFormat.import_format"><code class="docutils literal notranslate"><span class="pre">DWDHistoricalFormat.import_format()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.DWD.DWD_forecast_2_core_data"><code class="docutils literal notranslate"><span class="pre">DWD_forecast_2_core_data()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.DWD.DWD_historical_to_core_data"><code class="docutils literal notranslate"><span class="pre">DWD_historical_to_core_data()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.DWD.variables_to_sum_DWD_historical"><code class="docutils literal notranslate"><span class="pre">variables_to_sum_DWD_historical</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="aixweather.transformation_to_core_data.html#module-aixweather.transformation_to_core_data.EPW">aixweather.transformation_to_core_data.EPW module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.EPW.EPWFormat"><code class="docutils literal notranslate"><span class="pre">EPWFormat</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.EPW.EPWFormat.export_format"><code class="docutils literal notranslate"><span class="pre">EPWFormat.export_format()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.EPW.EPWFormat.import_format"><code class="docutils literal notranslate"><span class="pre">EPWFormat.import_format()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.EPW.EPW_to_core_data"><code class="docutils literal notranslate"><span class="pre">EPW_to_core_data()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="aixweather.transformation_to_core_data.html#module-aixweather.transformation_to_core_data.ERC">aixweather.transformation_to_core_data.ERC module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.ERC.ERCFormat"><code class="docutils literal notranslate"><span class="pre">ERCFormat</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.ERC.ERCFormat.import_format"><code class="docutils literal notranslate"><span class="pre">ERCFormat.import_format()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.ERC.ERC_to_core_data"><code class="docutils literal notranslate"><span class="pre">ERC_to_core_data()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="aixweather.transformation_to_core_data.html#module-aixweather.transformation_to_core_data.TRY">aixweather.transformation_to_core_data.TRY module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.TRY.TRYFormat"><code class="docutils literal notranslate"><span class="pre">TRYFormat</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.TRY.TRYFormat.import_format"><code class="docutils literal notranslate"><span class="pre">TRYFormat.import_format()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.TRY.TRY_to_core_data"><code class="docutils literal notranslate"><span class="pre">TRY_to_core_data()</span></code></a></li>
 </ul>
 </li>
@@ -291,6 +311,22 @@
 <section id="module-aixweather.definitions">
 <span id="aixweather-definitions-module"></span><h2>aixweather.definitions module<a class="headerlink" href="#module-aixweather.definitions" title="Permalink to this heading"></a></h2>
 <p>This module includes variables or functions which define central variables for the whole project.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="aixweather.definitions.CoreDataFormat">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">aixweather.definitions.</span></span><span class="sig-name descname"><span class="pre">CoreDataFormat</span></span><a class="reference internal" href="../_modules/aixweather/definitions.html#CoreDataFormat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.definitions.CoreDataFormat" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Information on core data:
+Time of measurement is always at the indicated time.
+Units as in TMY3 <a class="reference external" href="https://www.nrel.gov/docs/fy08osti/43156.pdf">https://www.nrel.gov/docs/fy08osti/43156.pdf</a>
+Only exception to TMY3 format is pressure, as all TMY3 data file
+actually use “Pa” instead of mbar</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="aixweather.definitions.CoreDataFormat.format">
+<span class="sig-name descname"><span class="pre">format</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'Aerosol':</span> <span class="pre">{'unit':</span> <span class="pre">'1thousandth'},</span> <span class="pre">'AtmPressure':</span> <span class="pre">{'unit':</span> <span class="pre">'Pa'},</span> <span class="pre">'CeilingH':</span> <span class="pre">{'unit':</span> <span class="pre">'m'},</span> <span class="pre">'DewPointTemp':</span> <span class="pre">{'unit':</span> <span class="pre">'degC'},</span> <span class="pre">'DiffHorRad':</span> <span class="pre">{'unit':</span> <span class="pre">'Wh/m2'},</span> <span class="pre">'DiffuseHorIll':</span> <span class="pre">{'unit':</span> <span class="pre">'lux'},</span> <span class="pre">'DirHorRad':</span> <span class="pre">{'unit':</span> <span class="pre">'Wh/m2'},</span> <span class="pre">'DirNormRad':</span> <span class="pre">{'unit':</span> <span class="pre">'Wh/m2'},</span> <span class="pre">'DirecNormIll':</span> <span class="pre">{'unit':</span> <span class="pre">'lux'},</span> <span class="pre">'DryBulbTemp':</span> <span class="pre">{'unit':</span> <span class="pre">'degC'},</span> <span class="pre">'ExtDirNormRad':</span> <span class="pre">{'unit':</span> <span class="pre">'Wh/m2'},</span> <span class="pre">'ExtHorRad':</span> <span class="pre">{'unit':</span> <span class="pre">'Wh/m2'},</span> <span class="pre">'GlobHorIll':</span> <span class="pre">{'unit':</span> <span class="pre">'lux'},</span> <span class="pre">'GlobHorRad':</span> <span class="pre">{'unit':</span> <span class="pre">'Wh/m2'},</span> <span class="pre">'HorInfra':</span> <span class="pre">{'unit':</span> <span class="pre">'Wh/m2'},</span> <span class="pre">'LiquidPrecD':</span> <span class="pre">{'unit':</span> <span class="pre">'mm/h'},</span> <span class="pre">'OpaqueSkyCover':</span> <span class="pre">{'unit':</span> <span class="pre">'1tenth'},</span> <span class="pre">'PrecWater':</span> <span class="pre">{'unit':</span> <span class="pre">'mm'},</span> <span class="pre">'RelHum':</span> <span class="pre">{'unit':</span> <span class="pre">'percent'},</span> <span class="pre">'Soil_Temperature_10cm':</span> <span class="pre">{'unit':</span> <span class="pre">'degC'},</span> <span class="pre">'Soil_Temperature_1m':</span> <span class="pre">{'unit':</span> <span class="pre">'degC'},</span> <span class="pre">'Soil_Temperature_20cm':</span> <span class="pre">{'unit':</span> <span class="pre">'degC'},</span> <span class="pre">'Soil_Temperature_50cm':</span> <span class="pre">{'unit':</span> <span class="pre">'degC'},</span> <span class="pre">'Soil_Temperature_5cm':</span> <span class="pre">{'unit':</span> <span class="pre">'degC'},</span> <span class="pre">'TotalSkyCover':</span> <span class="pre">{'unit':</span> <span class="pre">'1tenth'},</span> <span class="pre">'Visibility':</span> <span class="pre">{'unit':</span> <span class="pre">'km'},</span> <span class="pre">'WindDir':</span> <span class="pre">{'unit':</span> <span class="pre">'deg'},</span> <span class="pre">'WindSpeed':</span> <span class="pre">{'unit':</span> <span class="pre">'m/s'},</span> <span class="pre">'ZenithLum':</span> <span class="pre">{'unit':</span> <span class="pre">'Cd/m2'}}</span></em><a class="headerlink" href="#aixweather.definitions.CoreDataFormat.format" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="aixweather.definitions.result_folder_path">
 <span class="sig-prename descclassname"><span class="pre">aixweather.definitions.</span></span><span class="sig-name descname"><span class="pre">result_folder_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/definitions.html#result_folder_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.definitions.result_folder_path" title="Permalink to this definition"></a></dt>
@@ -497,13 +533,13 @@ core_2_pickle(): Convert core data to Pickle format.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="aixweather.project_class.ProjectClassGeneral.core_2_epw">
-<span class="sig-name descname"><span class="pre">core_2_epw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_metadata_timezone</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.core_2_epw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_2_epw" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">core_2_epw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_in_utc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.core_2_epw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_2_epw" title="Permalink to this definition"></a></dt>
 <dd><p>Convert core data to .epw file</p>
 <dl class="simple">
 <dt>filename (str): Name of the file to be saved. The default is constructed</dt><dd><p>based on the meta-data as well as start and stop time</p>
 </dd>
-<dt>use_metadata_timezone (bool): Timezone to be used for the export.</dt><dd><p>True (default) to use timezone from metadata,
-False to use the core_df timezone, UTC+0</p>
+<dt>export_in_utc (bool): Timezone to be used for the export.</dt><dd><p>True (default) to use the core_df timezone, UTC+0,
+False (default) to use timezone from metadata</p>
 </dd>
 <dt>Returns:</dt><dd><p>str: Path to the exported file.</p>
 </dd>
@@ -524,13 +560,13 @@ False to use the core_df timezone, UTC+0</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="aixweather.project_class.ProjectClassGeneral.core_2_mos">
-<span class="sig-name descname"><span class="pre">core_2_mos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_metadata_timezone</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.core_2_mos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_2_mos" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">core_2_mos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_in_utc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/aixweather/project_class.html#ProjectClassGeneral.core_2_mos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aixweather.project_class.ProjectClassGeneral.core_2_mos" title="Permalink to this definition"></a></dt>
 <dd><p>Convert core data to .mos file</p>
 <dl class="simple">
 <dt>filename (str): Name of the file to be saved. The default is constructed</dt><dd><p>based on the meta-data as well as start and stop time</p>
 </dd>
-<dt>use_metadata_timezone (bool): Timezone to be used for the export.</dt><dd><p>True (default) to use timezone from metadata,
-False to use the core_df timezone, UTC+0</p>
+<dt>export_in_utc (bool): Timezone to be used for the export.</dt><dd><p>True (default) to use the core_df timezone, UTC+0,
+False (default) to use timezone from metadata</p>
 </dd>
 <dt>Returns:</dt><dd><p>str: Path to the exported file.</p>
 </dd>

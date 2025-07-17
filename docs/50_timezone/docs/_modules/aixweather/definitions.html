@@ -79,42 +79,51 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-<span class="c1"># format of the core_data</span>
-<span class="c1"># time of measurement is always at indicated time</span>
-<span class="n">format_core_data</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1"># from TMY3 https://www.nrel.gov/docs/fy08osti/43156.pdf</span>
-    <span class="s2">&quot;DryBulbTemp&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;DewPointTemp&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;RelHum&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;percent&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;ExtHorRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;ExtDirNormRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;HorInfra&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;GlobHorRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;DirNormRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;DirHorRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;DiffHorRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;GlobHorIll&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;lux&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;DirecNormIll&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;lux&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;DiffuseHorIll&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;lux&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;ZenithLum&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Cd/m2&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;WindDir&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;deg&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;WindSpeed&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;m/s&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;TotalSkyCover&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;1tenth&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;OpaqueSkyCover&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;1tenth&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;Visibility&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;km&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;CeilingH&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;m&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;PrecWater&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;mm&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;Aerosol&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;1thousandth&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;LiquidPrecD&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;mm/h&quot;</span><span class="p">},</span>
-    <span class="c1"># exception to TMY3 format as all TMY3 data file actually use &quot;Pa&quot; instead of mbar</span>
-    <span class="s2">&quot;AtmPressure&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Pa&quot;</span><span class="p">},</span>
-    <span class="c1"># additional variables</span>
-    <span class="s2">&quot;Soil_Temperature_5cm&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;Soil_Temperature_10cm&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;Soil_Temperature_20cm&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;Soil_Temperature_50cm&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;Soil_Temperature_1m&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
-<span class="p">}</span>
+
+<div class="viewcode-block" id="CoreDataFormat"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.definitions.CoreDataFormat">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">CoreDataFormat</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Information on core data:</span>
+<span class="sd">    Time of measurement is always at the indicated time.</span>
+<span class="sd">    Units as in TMY3 https://www.nrel.gov/docs/fy08osti/43156.pdf</span>
+<span class="sd">    Only exception to TMY3 format is pressure, as all TMY3 data file</span>
+<span class="sd">    actually use &quot;Pa&quot; instead of mbar</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;DryBulbTemp&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;DewPointTemp&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;RelHum&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;percent&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;ExtHorRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;ExtDirNormRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;HorInfra&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;GlobHorRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;DirNormRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;DirHorRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;DiffHorRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;GlobHorIll&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;lux&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;DirecNormIll&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;lux&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;DiffuseHorIll&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;lux&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;ZenithLum&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Cd/m2&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;WindDir&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;deg&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;WindSpeed&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;m/s&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;TotalSkyCover&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;1tenth&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;OpaqueSkyCover&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;1tenth&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;Visibility&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;km&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;CeilingH&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;m&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;PrecWater&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;mm&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;Aerosol&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;1thousandth&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;LiquidPrecD&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;mm/h&quot;</span><span class="p">},</span>
+        <span class="c1"># exception to TMY3 format as all TMY3 data file actually use &quot;Pa&quot; instead of mbar</span>
+        <span class="s2">&quot;AtmPressure&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Pa&quot;</span><span class="p">},</span>
+        <span class="c1"># additional variables</span>
+        <span class="s2">&quot;Soil_Temperature_5cm&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;Soil_Temperature_10cm&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;Soil_Temperature_20cm&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;Soil_Temperature_50cm&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;Soil_Temperature_1m&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">},</span>
+    <span class="p">}</span></div>
+
+
+<span class="n">format_core_data</span> <span class="o">=</span> <span class="n">CoreDataFormat</span><span class="o">.</span><span class="n">format</span>
 
 <span class="c1"># creates the path to the root directory to be used in other modules</span>
 <span class="n">ROOT_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;..&quot;</span><span class="p">))</span>
@@ -122,12 +131,14 @@
 <span class="c1"># local temporary folder</span>
 <span class="n">local_folder_temp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ROOT_DIR</span><span class="p">,</span> <span class="s2">&quot;temp_local&quot;</span><span class="p">)</span>
 
+
 <div class="viewcode-block" id="result_folder_path"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.definitions.result_folder_path">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">result_folder_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Creates the path to the resultsfolder.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">folder_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ROOT_DIR</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;results&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">folder_path</span></div>
+
 
 <div class="viewcode-block" id="results_file_path"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.definitions.results_file_path">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">results_file_path</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">folder_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>

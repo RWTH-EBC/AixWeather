@@ -222,15 +222,15 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Abstract function to convert the imported data to core data.&quot;&quot;&quot;</span></div>
 
     <span class="c1"># core_data_format_2_output_file</span>
-<div class="viewcode-block" id="ProjectClassGeneral.core_2_mos"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassGeneral.core_2_mos">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">core_2_mos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">use_metadata_timezone</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="ProjectClassGeneral.core_2_mos"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassGeneral.core_2_mos">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">core_2_mos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">export_in_utc</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert core data to .mos file</span>
 
 <span class="sd">        filename (str): Name of the file to be saved. The default is constructed</span>
 <span class="sd">            based on the meta-data as well as start and stop time</span>
-<span class="sd">        use_metadata_timezone (bool): Timezone to be used for the export.</span>
-<span class="sd">            True (default) to use timezone from metadata,</span>
-<span class="sd">            False to use the core_df timezone, UTC+0</span>
+<span class="sd">        export_in_utc (bool): Timezone to be used for the export.</span>
+<span class="sd">            True (default) to use the core_df timezone, UTC+0,</span>
+<span class="sd">            False (default) to use timezone from metadata</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            str: Path to the exported file.</span>
@@ -243,20 +243,19 @@
             <span class="n">fillna</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fillna</span><span class="p">,</span>
             <span class="n">result_folder</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">abs_result_folder_path</span><span class="p">,</span>
             <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
-            <span class="n">use_metadata_timezone</span><span class="o">=</span><span class="n">use_metadata_timezone</span>
+            <span class="n">export_in_utc</span><span class="o">=</span><span class="n">export_in_utc</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">filepath</span></div>
 
-<div class="viewcode-block" id="ProjectClassGeneral.core_2_epw"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassGeneral.core_2_epw">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">core_2_epw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">use_metadata_timezone</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="ProjectClassGeneral.core_2_epw"><a class="viewcode-back" href="../../code/aixweather.html#aixweather.project_class.ProjectClassGeneral.core_2_epw">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">core_2_epw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">export_in_utc</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert core data to .epw file</span>
 
 <span class="sd">        filename (str): Name of the file to be saved. The default is constructed</span>
 <span class="sd">            based on the meta-data as well as start and stop time</span>
-<span class="sd">        use_metadata_timezone (bool): Timezone to be used for the export.</span>
-<span class="sd">            True (default) to use timezone from metadata,</span>
-<span class="sd">            False to use the core_df timezone, UTC+0</span>
-
+<span class="sd">        export_in_utc (bool): Timezone to be used for the export.</span>
+<span class="sd">            True (default) to use the core_df timezone, UTC+0,</span>
+<span class="sd">            False (default) to use timezone from metadata</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            str: Path to the exported file.</span>
@@ -269,7 +268,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">fillna</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">abs_result_folder_path</span><span class="p">,</span>
             <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
-            <span class="n">use_metadata_timezone</span><span class="o">=</span><span class="n">use_metadata_timezone</span>
+            <span class="n">export_in_utc</span><span class="o">=</span><span class="n">export_in_utc</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">filepath</span></div>
 
