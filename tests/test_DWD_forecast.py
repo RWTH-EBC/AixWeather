@@ -69,8 +69,8 @@ class TestDWDForecastFromImportedData(
         cls.c.data_2_core_data()
         cls.c.core_2_pickle()
         cls.c.core_2_json()
-        cls.c.core_2_mos()
-        cls.c.core_2_epw()
+        cls.c.core_2_mos(export_in_utc=True)
+        cls.c.core_2_epw(export_in_utc=True)
         cls.c.core_2_csv()
 
         cls.start_formatted = cls.c.start.strftime("%Y%m%d")
