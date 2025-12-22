@@ -101,7 +101,6 @@ def load_try_meta_from_file(path: str) -> MetaData:
 
     try:
         import geopandas as gpd
-        from geopy.geocoders import Nominatim
         from shapely.geometry import Point
     except ImportError:
         raise ImportError("Optional dependency 'TRY' not installed. Conversion of longitude and "
@@ -123,7 +122,38 @@ def load_try_meta_from_file(path: str) -> MetaData:
     longitude_wgs84 = point_wgs84.x
     latitude_wgs84 = point_wgs84.y
 
-    ### try to get city of location
+    ### try to get city of the location
+    city = get_city_from_location(
+        longitude_wgs84=longitude_wgs84,
+        latitude_wgs84=latitude_wgs84,
+        meta=meta
+    )
+
+    meta.station_name = city
+    meta.input_source = f"TRY{TRY_year}"
+    meta.try_year = TRY_year
+    meta.altitude = hoehenlage
+    meta.longitude = longitude_wgs84
+    meta.latitude = latitude_wgs84
+
+    return meta
+
+
+def get_city_from_location(latitude_wgs84, longitude_wgs84, meta: MetaData):
+    """
+    Function to get the city of the given latitue and longitude.
+    If the address is malformatted (i.e. not a city, town, village, o.s.),
+    the meta.station_name is used as a city.
+    """
+    try:
+        from geopy.geocoders import Nominatim
+    except ImportError:
+        logger.warning(
+            "Optional dependency 'TRY' not installed. "
+            "Not possible to extract city name, using station_name %s.",
+            meta.station_name
+        )
+        return meta.station_name
     # Initialize Nominatim geolocator
     user_agent = f"aixweather_{str(random.randint(1, 1000))}"
     geolocator = Nominatim(user_agent=user_agent)
@@ -146,15 +176,7 @@ def load_try_meta_from_file(path: str) -> MetaData:
         city = address["locality"]
     else:
         city = meta.station_name
-
-    meta.station_name = city
-    meta.input_source = f"TRY{TRY_year}"
-    meta.try_year = TRY_year
-    meta.altitude = hoehenlage
-    meta.longitude = longitude_wgs84
-    meta.latitude = latitude_wgs84
-
-    return meta
+    return city
 
 
 def load_try_from_file(path: str) -> pd.DataFrame:
