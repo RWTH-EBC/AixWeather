@@ -91,7 +91,7 @@ aixweather/imports/utils_import.py:56:4: C0116: Missing function or method docst
 aixweather/imports/utils_import.py:68:16: W0707: Consider explicitly re-raising using 'except Exception as exc' and 'raise ValueError(f'Value must be of type float, not {type(value)}') from exc' (raise-missing-from)
 aixweather/imports/utils_import.py:63:4: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
 ************* Module aixweather.imports.TRY
-aixweather/imports/TRY.py:178:13: W1401: Anomalous backslash in string: '\s'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+aixweather/imports/TRY.py:200:13: W1401: Anomalous backslash in string: '\s'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
 aixweather/imports/TRY.py:1:0: C0103: Module name "TRY" doesn't conform to snake_case naming style (invalid-name)
 aixweather/imports/TRY.py:8:0: E0401: Unable to import 'pandas' (import-error)
 aixweather/imports/TRY.py:14:0: C0103: Function name "_handle_TRY_type" doesn't conform to snake_case naming style (invalid-name)
@@ -105,15 +105,15 @@ aixweather/imports/TRY.py:46:41: C0201: Consider iterating the dictionary direct
 aixweather/imports/TRY.py:48:7: R1714: Consider merging these comparisons with 'in' by using 'TRY_year in (2004, 2010)'. Use a set instead if elements are hashable. (consider-using-in)
 aixweather/imports/TRY.py:51:7: R1714: Consider merging these comparisons with 'in' by using 'TRY_year in (2015, 2045)'. Use a set instead if elements are hashable. (consider-using-in)
 aixweather/imports/TRY.py:52:13: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
-aixweather/imports/TRY.py:63:0: R0914: Too many local variables (27/15) (too-many-locals)
+aixweather/imports/TRY.py:63:0: R0914: Too many local variables (22/15) (too-many-locals)
 aixweather/imports/TRY.py:75:4: C0103: Variable name "TRY_year" doesn't conform to snake_case naming style (invalid-name)
 aixweather/imports/TRY.py:79:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
 aixweather/imports/TRY.py:103:8: C0415: Import outside toplevel (geopandas) (import-outside-toplevel)
-aixweather/imports/TRY.py:104:8: C0415: Import outside toplevel (geopy.geocoders.Nominatim) (import-outside-toplevel)
-aixweather/imports/TRY.py:105:8: C0415: Import outside toplevel (shapely.geometry.Point) (import-outside-toplevel)
-aixweather/imports/TRY.py:107:8: W0707: Consider explicitly re-raising using 'except ImportError as exc' and 'raise ImportError("Optional dependency 'TRY' not installed. Conversion of longitude and latitude not possible and hence no radiation transformation.") from exc' (raise-missing-from)
-aixweather/imports/TRY.py:172:4: C0103: Variable name "TRY_year" doesn't conform to snake_case naming style (invalid-name)
-aixweather/imports/TRY.py:172:4: W0612: Unused variable 'TRY_year' (unused-variable)
+aixweather/imports/TRY.py:104:8: C0415: Import outside toplevel (shapely.geometry.Point) (import-outside-toplevel)
+aixweather/imports/TRY.py:106:8: W0707: Consider explicitly re-raising using 'except ImportError as exc' and 'raise ImportError("Optional dependency 'TRY' not installed. Conversion of longitude and latitude not possible and hence no radiation transformation.") from exc' (raise-missing-from)
+aixweather/imports/TRY.py:149:8: C0415: Import outside toplevel (geopy.geocoders.Nominatim) (import-outside-toplevel)
+aixweather/imports/TRY.py:194:4: C0103: Variable name "TRY_year" doesn't conform to snake_case naming style (invalid-name)
+aixweather/imports/TRY.py:194:4: W0612: Unused variable 'TRY_year' (unused-variable)
 ************* Module aixweather.imports.custom_file
 aixweather/imports/custom_file.py:16:24: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
 aixweather/imports/custom_file.py:24:26: W0613: Unused argument 'path' (unused-argument)
@@ -332,5 +332,5 @@ tests/test_files/static_checks/TRY/compare_shifting.py:1:0: R0801: Similar lines
  (duplicate-code)
 
 -----------------------------------
-Your code has been rated at 6.76/10
+Your code has been rated at 6.78/10
 

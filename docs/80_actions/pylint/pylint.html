@@ -28,9 +28,9 @@
 
         
         <h2>Score</h2>
-        6.76 / 10
+        6.78 / 10
             
-            (previous score: 6.76 / 10)
+            (previous score: 6.78 / 10)
             
         
 
@@ -1401,7 +1401,7 @@
                 <td><code>too-many-locals</code></td>
                 <td>R0914</td>
                 <td>load_try_meta_from_file</td>
-                <td><pre>Too many local variables (27/15)</pre></td>
+                <td><pre>Too many local variables (22/15)</pre></td>
             </tr>
             
             <tr>
@@ -1441,21 +1441,11 @@
                 <td><code>import-outside-toplevel</code></td>
                 <td>C0415</td>
                 <td>load_try_meta_from_file</td>
-                <td><pre>Import outside toplevel (geopy.geocoders.Nominatim)</pre></td>
-            </tr>
-            
-            <tr>
-                <td>105</td>
-                <td>8</td>
-                <td>convention</td>
-                <td><code>import-outside-toplevel</code></td>
-                <td>C0415</td>
-                <td>load_try_meta_from_file</td>
                 <td><pre>Import outside toplevel (shapely.geometry.Point)</pre></td>
             </tr>
             
             <tr>
-                <td>107</td>
+                <td>106</td>
                 <td>8</td>
                 <td>warning</td>
                 <td><code>raise-missing-from</code></td>
@@ -1465,7 +1455,17 @@
             </tr>
             
             <tr>
-                <td>172</td>
+                <td>149</td>
+                <td>8</td>
+                <td>convention</td>
+                <td><code>import-outside-toplevel</code></td>
+                <td>C0415</td>
+                <td>get_city_from_location</td>
+                <td><pre>Import outside toplevel (geopy.geocoders.Nominatim)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>194</td>
                 <td>4</td>
                 <td>convention</td>
                 <td><code>invalid-name</code></td>
@@ -1475,7 +1475,7 @@
             </tr>
             
             <tr>
-                <td>172</td>
+                <td>194</td>
                 <td>4</td>
                 <td>warning</td>
                 <td><code>unused-variable</code></td>
@@ -1485,7 +1485,7 @@
             </tr>
             
             <tr>
-                <td>178</td>
+                <td>200</td>
                 <td>13</td>
                 <td>warning</td>
                 <td><code>anomalous-backslash-in-string</code></td>
@@ -3057,10 +3057,15 @@
 ==aixweather.transformation_to_core_data.TRY:[96:104]
 ==aixweather.transformation_to_core_data.custom_file:[57:70]
         df = auxiliary.force_data_variable_convention(df, definitions.format_core_data)
+
         ### convert units
+        # insert unit conversions like desired (examples follow)
         df[&#34;TotalSkyCover&#34;] = unit_conversions.eigth_to_tenth(df[&#34;TotalSkyCover&#34;])
         df[&#34;AtmPressure&#34;] = unit_conversions.hPa_to_Pa(df[&#34;AtmPressure&#34;])
+
         ### impute missing variables from other available ones
+        # add additionaly required transformations to
+        # variable_transformations.variable_transform_all or apply them directly here
         df, calc_overview = variable_transformations.variable_transform_all(df, meta)
         return df, calc_overview
 </pre></td>
