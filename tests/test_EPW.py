@@ -46,6 +46,7 @@ class TestEPWEssenLadybug(BaseEPW, utils_4_tests.RegressionTestsClass):
             ),
         )
 
+
 class TestEPWAachenTMY(BaseEPW, utils_4_tests.RegressionTestsClass):
     """
     A TMY file contains data from different years, but the data is selected to represent typical
@@ -63,4 +64,3 @@ class TestEPWAachenTMY(BaseEPW, utils_4_tests.RegressionTestsClass):
                 "input/DEU_NW_Aachen.105010_TMYx.epw",
             ),
         )
-
