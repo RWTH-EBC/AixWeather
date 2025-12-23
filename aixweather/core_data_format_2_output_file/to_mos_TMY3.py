@@ -142,7 +142,7 @@ def to_mos(
             + df.index.hour * 3600
     )
     if not np.any((0 <= time_of_year) & (time_of_year <= 86400)):
-        raise ValueError("Logic error in timezone-shifted export, data does not pass the first day")
+        logger.critical("Data does not pass the first day of simulation, carefully check simulation results.")
     df["timeOfYear"] = time_of_year
 
     # to avoid having the one-year duration between start and end of data as

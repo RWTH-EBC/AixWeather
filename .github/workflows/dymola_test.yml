@@ -73,7 +73,7 @@ jobs:
         shell: bash
         run: |
           source activate $CONDA_ENV
-          pip install pytest
+          pip install pytest ebcpy
 
       - name: Run tests
         shell: bash

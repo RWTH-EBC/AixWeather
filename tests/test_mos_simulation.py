@@ -136,7 +136,7 @@ def create_results(simulation_dir, result_dir, create_plot: bool = False, summer
 
 
 @pytest.mark.dymola
-class TestAnotherDymolaFeature(unittest.TestCase):
+class TestTMY3MOSReaderImpactOfTimeZone(unittest.TestCase):
 
     def setUp(self):
         self.simulation_dir = Path(__file__).parent.joinpath("tmp_simulation")
