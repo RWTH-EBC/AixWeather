@@ -2884,7 +2884,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "",
             "line": 20,
             "column": 17,
@@ -2895,7 +2895,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "",
             "line": 30,
             "column": 17,
@@ -2906,7 +2906,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "",
             "line": 40,
             "column": 17,
@@ -2917,7 +2917,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "",
             "line": 50,
             "column": 17,
@@ -2928,7 +2928,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "",
             "line": 60,
             "column": 17,
@@ -2939,7 +2939,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "",
             "line": 70,
             "column": 17,
@@ -2950,7 +2950,7 @@
         },
         {
             "type": "error",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "",
             "line": 7,
             "column": 0,
@@ -2961,7 +2961,7 @@
         },
         {
             "type": "convention",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY",
             "line": 13,
             "column": 0,
@@ -2972,7 +2972,7 @@
         },
         {
             "type": "convention",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.load_files",
             "line": 45,
             "column": 8,
@@ -2983,7 +2983,7 @@
         },
         {
             "type": "convention",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.load_files",
             "line": 55,
             "column": 8,
@@ -2994,7 +2994,7 @@
         },
         {
             "type": "convention",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.load_files",
             "line": 65,
             "column": 8,
@@ -3005,7 +3005,7 @@
         },
         {
             "type": "convention",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.load_files",
             "line": 14,
             "column": 4,
@@ -3016,7 +3016,7 @@
         },
         {
             "type": "convention",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.load_files",
             "line": 115,
             "column": 8,
@@ -3027,7 +3027,7 @@
         },
         {
             "type": "convention",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.test_TRY_shifting",
             "line": 130,
             "column": 4,
@@ -3038,7 +3038,7 @@
         },
         {
             "type": "convention",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.test_TRY_shifting",
             "line": 130,
             "column": 4,
@@ -3049,7 +3049,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.test_TRY_shifting",
             "line": 133,
             "column": 8,
@@ -3060,7 +3060,7 @@
         },
         {
             "type": "convention",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.test_TRY_Old_vs_newWithoutShifting",
             "line": 169,
             "column": 4,
@@ -3071,7 +3071,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.test_TRY_Old_vs_newWithoutShifting",
             "line": 174,
             "column": 8,
@@ -3082,7 +3082,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.test_TRY_Old_vs_newWithoutShifting",
             "line": 175,
             "column": 8,
@@ -3093,7 +3093,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.test_TRY_Old_vs_newWithoutShifting",
             "line": 177,
             "column": 8,
@@ -3104,7 +3104,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.test_TRY_Old_vs_newWithoutShifting",
             "line": 191,
             "column": 8,
@@ -3115,7 +3115,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.test_TRY_Old_vs_newWithoutShifting",
             "line": 205,
             "column": 8,
@@ -3126,7 +3126,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.test_TRY_Old_vs_newWithoutShifting",
             "line": 219,
             "column": 8,
@@ -3137,7 +3137,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.test_TRY_Old_vs_newWithoutShifting",
             "line": 233,
             "column": 8,
@@ -3148,7 +3148,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.load_files",
             "line": 15,
             "column": 8,
@@ -3159,7 +3159,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.load_files",
             "line": 25,
             "column": 8,
@@ -3170,7 +3170,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.load_files",
             "line": 35,
             "column": 8,
@@ -3181,7 +3181,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.load_files",
             "line": 45,
             "column": 8,
@@ -3192,7 +3192,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.load_files",
             "line": 55,
             "column": 8,
@@ -3203,7 +3203,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.load_files",
             "line": 65,
             "column": 8,
@@ -3214,7 +3214,7 @@
         },
         {
             "type": "warning",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "TestDWDTRY.load_files",
             "line": 128,
             "column": 8,
@@ -3225,7 +3225,7 @@
         },
         {
             "type": "refactor",
-            "module": "compare_shifting",
+            "module": "test_files.static_checks.TRY.compare_shifting",
             "obj": "",
             "line": 1,
             "column": 0,
@@ -3576,7 +3576,7 @@
                 "statement": 0,
                 "warning": 0
             },
-            "compare_shifting": {
+            "test_files.static_checks.TRY.compare_shifting": {
                 "convention": 9,
                 "error": 1,
                 "fatal": 0,
@@ -3676,84 +3676,84 @@
                 "aixweather.project_class"
             ],
             "aixweather.core_data_format_2_output_file.to_epw_energyplus": [
-                "aixweather.project_class",
-                "aixweather.transformation_to_core_data.EPW"
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.project_class"
             ],
             "packaging.version": [
                 "aixweather"
             ],
             "aixweather.transformation_functions.auxiliary": [
                 "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
-                "aixweather.transformation_functions.pass_through_handling",
-                "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.transformation_to_core_data.DWD",
                 "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_to_core_data.TRY",
-                "aixweather.transformation_to_core_data.DWD"
+                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.transformation_functions.pass_through_handling",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
             ],
             "aixweather.imports.utils_import": [
-                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
-                "aixweather.transformation_functions.pass_through_handling",
-                "aixweather.imports.custom_file",
-                "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.imports.EPW",
                 "aixweather.imports.DWD",
-                "aixweather.imports.TRY",
-                "aixweather.transformation_functions.variable_transformations",
-                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
+                "aixweather.transformation_to_core_data.DWD",
                 "aixweather.transformation_to_core_data.EPW",
+                "aixweather.imports.TRY",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.transformation_functions.variable_transformations",
+                "aixweather.imports.custom_file",
                 "aixweather.transformation_to_core_data.TRY",
+                "aixweather.transformation_functions.pass_through_handling",
+                "aixweather.transformation_to_core_data.ERC",
                 "aixweather.core_data_format_2_output_file.unconverted_to_x",
+                "aixweather.imports.EPW",
                 "aixweather.imports.ERC",
-                "aixweather.transformation_to_core_data.DWD"
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
             ],
             "aixweather.definitions": [
-                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
-                "aixweather.transformation_to_core_data.custom_file",
-                "compare_shifting",
-                "aixweather.transformation_to_core_data.ERC",
                 "aixweather.imports.DWD",
+                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
+                "aixweather.transformation_to_core_data.DWD",
                 "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_to_core_data.TRY",
+                "test_files.static_checks.TRY.compare_shifting",
+                "aixweather.transformation_to_core_data.ERC",
                 "aixweather.core_data_format_2_output_file.unconverted_to_x",
-                "aixweather.transformation_to_core_data.DWD"
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
             ],
             "aixweather.transformation_functions.time_observation_transformations": [
                 "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
-                "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.transformation_to_core_data.ERC",
                 "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_to_core_data.TRY",
-                "aixweather.transformation_to_core_data.DWD"
+                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
             ],
             "aixweather.transformation_functions.variable_transformations": [
-                "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.transformation_to_core_data.ERC",
                 "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_to_core_data.TRY",
-                "aixweather.transformation_to_core_data.DWD"
+                "aixweather.transformation_to_core_data.ERC"
             ],
             "aixweather.transformation_functions.pass_through_handling": [
                 "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
-                "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.transformation_to_core_data.ERC",
                 "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_to_core_data.TRY",
-                "aixweather.transformation_to_core_data.DWD"
+                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
             ],
             "aixweather.transformation_functions.unit_conversions": [
+                "aixweather.transformation_to_core_data.DWD",
                 "aixweather.transformation_to_core_data.TRY",
                 "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.transformation_to_core_data.DWD"
+                "aixweather.transformation_to_core_data.custom_file"
             ],
             "aixweather.project_class": [
-                "compare_shifting"
+                "test_files.static_checks.TRY.compare_shifting"
             ]
         },
         "duplicated_lines": {

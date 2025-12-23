@@ -287,7 +287,7 @@ aixweather/core_data_format_2_output_file/to_mos_TMY3.py:68:0: R0914: Too many l
 aixweather/core_data_format_2_output_file/to_mos_TMY3.py:260:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
 ************* Module aixweather.core_data_format_2_output_file.__init__
 aixweather/core_data_format_2_output_file/__init__.py:8:0: C0304: Final newline missing (missing-final-newline)
-************* Module test_files.static_checks.TRY.compare_shifting
+************* Module compare_shifting
 tests/test_files/static_checks/TRY/compare_shifting.py:20:17: W1401: Anomalous backslash in string: '\s'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
 tests/test_files/static_checks/TRY/compare_shifting.py:30:17: W1401: Anomalous backslash in string: '\s'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
 tests/test_files/static_checks/TRY/compare_shifting.py:40:17: W1401: Anomalous backslash in string: '\s'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
