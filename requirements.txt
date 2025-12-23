@@ -1,4 +1,5 @@
 wetterdienst>=0.65.0,<=0.72.0
+marshmallow==3.0.0  # Required due to errors with wetterdienst and environs
 unidecode~=1.3.7
 parameterized~=0.9.0
 geopandas~=0.14.0
