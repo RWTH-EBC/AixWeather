@@ -76,6 +76,5 @@ jobs:
           pip install pytest
 
       - name: Run tests
-        if: steps.skip.outputs.skip == 'false'
         run: |
           python -m pytest ${{ inputs.TEST_PATH }} --dymola
