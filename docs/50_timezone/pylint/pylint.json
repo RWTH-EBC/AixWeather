@@ -3561,8 +3561,8 @@
                 "aixweather.project_class"
             ],
             "aixweather.transformation_to_core_data.EPW": [
-                "aixweather.project_class",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
+                "aixweather.project_class"
             ],
             "aixweather.transformation_to_core_data.custom_file": [
                 "aixweather.project_class"
@@ -3577,73 +3577,73 @@
                 "aixweather.project_class"
             ],
             "aixweather.transformation_functions.auxiliary": [
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
                 "aixweather.transformation_functions.pass_through_handling",
+                "aixweather.transformation_to_core_data.ERC",
                 "aixweather.transformation_to_core_data.EPW",
                 "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.DWD",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
-                "aixweather.transformation_to_core_data.TRY"
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
             ],
             "aixweather.imports.utils_import": [
-                "aixweather.core_data_format_2_output_file.unconverted_to_x",
-                "aixweather.imports.ERC",
-                "aixweather.transformation_functions.pass_through_handling",
                 "aixweather.imports.DWD",
+                "aixweather.imports.custom_file",
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.imports.TRY",
+                "aixweather.core_data_format_2_output_file.unconverted_to_x",
+                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
+                "aixweather.transformation_functions.pass_through_handling",
+                "aixweather.transformation_to_core_data.ERC",
                 "aixweather.transformation_to_core_data.EPW",
                 "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.transformation_functions.variable_transformations",
-                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.imports.TRY",
-                "aixweather.imports.EPW",
-                "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.DWD",
                 "aixweather.core_data_format_2_output_file.to_epw_energyplus",
-                "aixweather.imports.custom_file",
-                "aixweather.transformation_to_core_data.TRY"
+                "aixweather.imports.ERC",
+                "aixweather.transformation_functions.variable_transformations",
+                "aixweather.imports.EPW"
             ],
             "aixweather.definitions": [
-                "aixweather.core_data_format_2_output_file.unconverted_to_x",
                 "aixweather.imports.DWD",
-                "aixweather.transformation_to_core_data.EPW",
-                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.core_data_format_2_output_file.unconverted_to_x",
                 "aixweather.core_data_format_2_output_file.to_mos_TMY3",
                 "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.DWD",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
-                "aixweather.transformation_to_core_data.TRY"
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
             ],
             "aixweather.transformation_functions.time_observation_transformations": [
-                "aixweather.transformation_to_core_data.EPW",
-                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.TRY",
                 "aixweather.core_data_format_2_output_file.to_mos_TMY3",
                 "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.DWD",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
-                "aixweather.transformation_to_core_data.TRY"
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
             ],
             "aixweather.transformation_functions.variable_transformations": [
-                "aixweather.transformation_to_core_data.EPW",
-                "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.transformation_to_core_data.ERC",
                 "aixweather.transformation_to_core_data.DWD",
-                "aixweather.transformation_to_core_data.TRY"
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.custom_file"
             ],
             "aixweather.transformation_functions.pass_through_handling": [
-                "aixweather.transformation_to_core_data.EPW",
-                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.TRY",
                 "aixweather.core_data_format_2_output_file.to_mos_TMY3",
                 "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.DWD",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
-                "aixweather.transformation_to_core_data.TRY"
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
             ],
             "aixweather.transformation_functions.unit_conversions": [
                 "aixweather.transformation_to_core_data.DWD",
-                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.transformation_to_core_data.ERC",
                 "aixweather.transformation_to_core_data.TRY",
-                "aixweather.transformation_to_core_data.ERC"
+                "aixweather.transformation_to_core_data.custom_file"
             ]
         },
         "duplicated_lines": {
@@ -4010,8 +4010,8 @@
                 "aixweather.project_class"
             ],
             "aixweather.transformation_to_core_data.EPW": [
-                "aixweather.project_class",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
+                "aixweather.project_class"
             ],
             "aixweather.transformation_to_core_data.custom_file": [
                 "aixweather.project_class"
@@ -4026,73 +4026,73 @@
                 "aixweather.project_class"
             ],
             "aixweather.transformation_functions.auxiliary": [
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
                 "aixweather.transformation_functions.pass_through_handling",
+                "aixweather.transformation_to_core_data.ERC",
                 "aixweather.transformation_to_core_data.EPW",
                 "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.DWD",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
-                "aixweather.transformation_to_core_data.TRY"
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
             ],
             "aixweather.imports.utils_import": [
-                "aixweather.core_data_format_2_output_file.unconverted_to_x",
-                "aixweather.imports.ERC",
-                "aixweather.transformation_functions.pass_through_handling",
                 "aixweather.imports.DWD",
+                "aixweather.imports.custom_file",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.imports.TRY",
+                "aixweather.core_data_format_2_output_file.unconverted_to_x",
+                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
+                "aixweather.transformation_functions.pass_through_handling",
+                "aixweather.transformation_to_core_data.ERC",
                 "aixweather.transformation_to_core_data.EPW",
                 "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.transformation_functions.variable_transformations",
-                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.imports.TRY",
-                "aixweather.imports.EPW",
-                "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.DWD",
                 "aixweather.core_data_format_2_output_file.to_epw_energyplus",
-                "aixweather.imports.custom_file",
-                "aixweather.transformation_to_core_data.TRY"
+                "aixweather.imports.ERC",
+                "aixweather.transformation_functions.variable_transformations",
+                "aixweather.imports.EPW"
             ],
             "aixweather.definitions": [
-                "aixweather.core_data_format_2_output_file.unconverted_to_x",
                 "aixweather.imports.DWD",
-                "aixweather.transformation_to_core_data.EPW",
-                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.core_data_format_2_output_file.unconverted_to_x",
                 "aixweather.core_data_format_2_output_file.to_mos_TMY3",
                 "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.DWD",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
-                "aixweather.transformation_to_core_data.TRY"
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
             ],
             "aixweather.transformation_functions.time_observation_transformations": [
-                "aixweather.transformation_to_core_data.EPW",
-                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.TRY",
                 "aixweather.core_data_format_2_output_file.to_mos_TMY3",
                 "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.DWD",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
-                "aixweather.transformation_to_core_data.TRY"
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
             ],
             "aixweather.transformation_functions.variable_transformations": [
-                "aixweather.transformation_to_core_data.EPW",
-                "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.transformation_to_core_data.ERC",
                 "aixweather.transformation_to_core_data.DWD",
-                "aixweather.transformation_to_core_data.TRY"
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.custom_file"
             ],
             "aixweather.transformation_functions.pass_through_handling": [
-                "aixweather.transformation_to_core_data.EPW",
-                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.TRY",
                 "aixweather.core_data_format_2_output_file.to_mos_TMY3",
                 "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.DWD",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
-                "aixweather.transformation_to_core_data.TRY"
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
             ],
             "aixweather.transformation_functions.unit_conversions": [
-                "aixweather.transformation_to_core_data.DWD",
                 "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.TRY",
-                "aixweather.transformation_to_core_data.custom_file"
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.transformation_to_core_data.TRY"
             ]
         },
         "duplicated_lines": {
