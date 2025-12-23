@@ -29,7 +29,7 @@ def load_epw_meta_from_file(path: str) -> MetaData:
     meta.station_name = location_data[1]
     meta.latitude = float(location_data[6])
     meta.longitude = float(location_data[7])
-    meta.timezone = float(location_data[8])
+    meta.timezone = float(location_data[8])  # Used for import and export
     meta.altitude = float(location_data[9])
     meta.input_source = "EPW"
 
