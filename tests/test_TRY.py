@@ -7,6 +7,7 @@ import itertools
 import os
 import time
 import unittest
+from unittest.mock import patch
 import random
 from parameterized import parameterized_class
 
@@ -17,7 +18,7 @@ from tests import utils_4_tests
 
 class BaseTRY(unittest.TestCase):
     @classmethod
-    def init_and_run_TRY(cls, name: str, path: str, export_in_utc: bool):
+    def init_and_run_TRY(cls, name: str, path: str, export_in_utc: bool, city: str):
         # running the tests on the CI server with different python versions simultaneously causes,
         # connection timeouts to nominatim, which is used to get the coordinates of the station.
         # Therefore, we use a random timer to avoid this issue.
@@ -30,8 +31,10 @@ class BaseTRY(unittest.TestCase):
         cls.folder_tests = os.path.join(
             definitions.ROOT_DIR, f"tests/test_files/regular_tests/TRY/test_{name}"
         )
-
-        utils_4_tests.run_all_functions(project_class_instance=cls.c, export_in_utc=export_in_utc)
+        # Mock the external API requests to Nominatim to avoid http request errors.
+        with patch("aixweather.imports.TRY.get_city_from_location") as mock_get_city:
+            mock_get_city.return_value = city
+            utils_4_tests.run_all_functions(cls.c, export_in_utc=export_in_utc)
 
         cls.start_formatted = cls.c.start.strftime("%Y%m%d")
         cls.end_formatted = cls.c.end.strftime("%Y%m%d")
@@ -68,5 +71,6 @@ class TestDWDTRY(BaseTRY, utils_4_tests.RegressionTestsClass):
         cls.init_and_run_TRY(
             name=cls.name,
             path=os.path.join(definitions.ROOT_DIR, "tests", "test_files", "regular_tests", "TRY", cls.path),
-            export_in_utc=cls.export_in_utc
+            export_in_utc=cls.export_in_utc,
+            city="Aachen"
         )
