@@ -29,4 +29,4 @@ jobs:
     uses: ./.github/workflows/dymola_test.yml
     with:
       PYTHON_VERSION: "3.11"
-      TEST_DYMOLA: true
+      DYMOLA_TESTS: true
