@@ -1,12 +1,14 @@
 """
 includes unittests for different TRY datasets
 """
+import itertools
 # pylint: disable=all
 
 import os
 import time
 import unittest
 import random
+from parameterized import parameterized_class
 
 from aixweather import definitions
 from aixweather.project_class import ProjectClassTRY
@@ -42,57 +44,29 @@ class BaseTRY(unittest.TestCase):
         utils_4_tests.delete_created_result_files(cls.c.abs_result_folder_path)
 
 
-class TestDWDTRY2015(BaseTRY, utils_4_tests.RegressionTestsClass):
+NAMES_PATHS = [
+    ("TRY2015", "test_TRY2015/input/TRY2015_507931060546_Jahr.dat"),
+    ("TRY2015_Sommer", "test_TRY2015_Sommer/input/TRY2015_507931060546_Somm.dat"),
+    ("TRY2045", "test_TRY2045/input/TRY2045_507931060546_Jahr.dat"),
+]
+
+COMBINATIONS = [
+    dict(
+        path=name_path[1], export_in_utc=export_in_utc, name=name_path[0]
+    ) for name_path, export_in_utc in itertools.product(NAMES_PATHS, [True, False])
+]
+
+@parameterized_class(COMBINATIONS)
+class TestDWDTRY(BaseTRY, utils_4_tests.RegressionTestsClass):
+
+    path = None
+    export_in_utc = None
+    name = None
+
     @classmethod
     def setUpClass(cls):
         cls.init_and_run_TRY(
-            name="TRY2015",
-            path=os.path.join(
-                definitions.ROOT_DIR,
-                r"tests/test_files/regular_tests/TRY/"
-                "test_TRY2015/input/TRY2015_507931060546_Jahr.dat",
-            ),
-            export_in_utc=True
-        )
-
-
-class TestDWDTRY2015Sommer(BaseTRY, utils_4_tests.RegressionTestsClass):
-    @classmethod
-    def setUpClass(cls):
-        cls.init_and_run_TRY(
-            name="TRY2015_Sommer",
-            path=os.path.join(
-                definitions.ROOT_DIR,
-                r"tests/test_files/regular_tests/TRY/"
-                "test_TRY2015_Sommer/input/TRY2015_507931060546_Somm.dat",
-            ),
-            export_in_utc=True
-        )
-
-
-class TestDWDTRY2045(BaseTRY, utils_4_tests.RegressionTestsClass):
-    @classmethod
-    def setUpClass(cls):
-        cls.init_and_run_TRY(
-            name="TRY2045",
-            path=os.path.join(
-                definitions.ROOT_DIR,
-                r"tests/test_files/regular_tests/TRY/"
-                "test_TRY2045/input/TRY2045_507931060546_Jahr.dat",
-            ),
-            export_in_utc=True
-        )
-
-
-class TestDWDTRY2015TimeZoneExport(BaseTRY, utils_4_tests.RegressionTestsClass):
-    @classmethod
-    def setUpClass(cls):
-        cls.init_and_run_TRY(
-            name="TRY2015",
-            path=os.path.join(
-                definitions.ROOT_DIR,
-                r"tests/test_files/regular_tests/TRY/"
-                "test_TRY2015/input/TRY2015_507931060546_Jahr.dat",
-            ),
-            export_in_utc=False
+            name=cls.name,
+            path=os.path.join(definitions.ROOT_DIR, "tests", "test_files", "regular_tests", "TRY", cls.path),
+            export_in_utc=cls.export_in_utc
         )

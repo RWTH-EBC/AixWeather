@@ -1,5 +1,5 @@
 within ;
-model AixWeatherTestOnTiltedSurface
+model TestTiltedSurfaces
   "Test model to check impact on different tilted surfaces"
   AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface verWalDir[4](til={
         1.5707963267949,1.5707963267949,1.5707963267949,1.5707963267949}, azi={0,
@@ -89,10 +89,10 @@ equation
           -56},{106,-56},{106,-54},{110,-54}}, color={0,0,127}));
 
   annotation (
-    uses(AixLib(version="2.1.1"), Modelica(version="4.0.0")),
+    uses(                         Modelica(version="4.0.0"), AixLib(version=
+            "3.0.0")),
     experiment(
-      StartTime=5184000,
-      StopTime=5270400,
-      Interval=60.0001344,
+      StopTime=86400,
+      Interval=60.0001,
       __Dymola_Algorithm="Dassl"));
-end AixWeatherTestOnTiltedSurface;
+end TestTiltedSurfaces;

@@ -18,7 +18,7 @@ import utils_4_tests
 
 class BaseDWDForecast(unittest.TestCase):
     @classmethod
-    def init_and_run_DWD_forecast(cls, name: str, station):
+    def init_and_run_DWD_forecast(cls, name: str, station: str, export_in_utc: bool):
         abs_result_folder_path = os.path.join(definitions.result_folder_path(), name)
         cls.c = ProjectClassDWDForecast(
             station=station, abs_result_folder_path=abs_result_folder_path
@@ -27,7 +27,7 @@ class BaseDWDForecast(unittest.TestCase):
             definitions.ROOT_DIR, f"tests/test_files/regular_tests/DWD_forecast/test_{name}"
         )
 
-        utils_4_tests.run_all_functions(project_class_instance=cls.c, export_in_utc=True)
+        utils_4_tests.run_all_functions(project_class_instance=cls.c, export_in_utc=export_in_utc)
 
         cls.start_formatted = cls.c.start.strftime("%Y%m%d")
         cls.end_formatted = cls.c.end.strftime("%Y%m%d")
@@ -82,14 +82,12 @@ class TestDWDForecastFromImportedData(
 class TestDWDForecastNoAssert(BaseDWDForecast):
     @parameterized.expand(
         [
-            (
-                "06710_forecast",
-                "06710",
-            ),
+            ("06710_forecast", "06710", True),
+            ("06710_forecast", "06710", False),
         ]
     )
-    def test_imports_and_transformation_without_assert(self, name, station):
-        self.init_and_run_DWD_forecast(name, station)
+    def test_imports_and_transformation_without_assert(self, name, station, export_in_utc):
+        self.init_and_run_DWD_forecast(name, station, export_in_utc)
 
 
 def create_imported_data_for_unit_test():
