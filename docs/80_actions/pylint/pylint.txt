@@ -287,7 +287,7 @@ aixweather/core_data_format_2_output_file/to_mos_TMY3.py:68:0: R0914: Too many l
 aixweather/core_data_format_2_output_file/to_mos_TMY3.py:260:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
 ************* Module aixweather.core_data_format_2_output_file.__init__
 aixweather/core_data_format_2_output_file/__init__.py:8:0: C0304: Final newline missing (missing-final-newline)
-************* Module compare_shifting
+************* Module test_files.static_checks.TRY.compare_shifting
 tests/test_files/static_checks/TRY/compare_shifting.py:20:17: W1401: Anomalous backslash in string: '\s'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
 tests/test_files/static_checks/TRY/compare_shifting.py:30:17: W1401: Anomalous backslash in string: '\s'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
 tests/test_files/static_checks/TRY/compare_shifting.py:40:17: W1401: Anomalous backslash in string: '\s'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
@@ -323,15 +323,10 @@ tests/test_files/static_checks/TRY/compare_shifting.py:1:0: R0801: Similar lines
 ==aixweather.transformation_to_core_data.TRY:[96:104]
 ==aixweather.transformation_to_core_data.custom_file:[57:70]
         df = auxiliary.force_data_variable_convention(df, definitions.format_core_data)
-
         ### convert units
-        # insert unit conversions like desired (examples follow)
         df["TotalSkyCover"] = unit_conversions.eigth_to_tenth(df["TotalSkyCover"])
         df["AtmPressure"] = unit_conversions.hPa_to_Pa(df["AtmPressure"])
-
         ### impute missing variables from other available ones
-        # add additionaly required transformations to
-        # variable_transformations.variable_transform_all or apply them directly here
         df, calc_overview = variable_transformations.variable_transform_all(df, meta)
         return df, calc_overview
  (duplicate-code)
