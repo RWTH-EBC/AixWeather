@@ -11,6 +11,7 @@ from aixweather.imports.utils_import import MetaData
 
 logger = logging.getLogger(__name__)
 
+
 def _handle_TRY_type(path: str) -> tuple:
     """
     Determine the TRY format type based on the provided file path.
@@ -53,7 +54,7 @@ def _handle_TRY_type(path: str) -> tuple:
             for line_number, line in enumerate(file, start=1):
                 if "***" in line:
                     header_row = (
-                        line_number - 1 - 1
+                            line_number - 1 - 1
                     )  # -1 for header above *** and -1 for start to count at 0
                     break
 
@@ -189,7 +190,6 @@ def load_try_from_file(path: str) -> pd.DataFrame:
     Returns:
         pd.DataFrame: A DataFrame containing the imported data from the TRY file.
     """
-
 
     TRY_year, header_row = _handle_TRY_type(path)
 
