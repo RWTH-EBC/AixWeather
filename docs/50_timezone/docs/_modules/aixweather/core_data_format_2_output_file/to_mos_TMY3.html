@@ -80,6 +80,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">calendar</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">aixweather</span><span class="w"> </span><span class="kn">import</span> <span class="n">definitions</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.imports.utils_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetaData</span>
@@ -203,17 +204,20 @@
     <span class="c1">### select the desired columns</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">force_data_variable_convention</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">format_modelica_TMY3</span><span class="p">)</span>
 
+    <span class="n">first_utc_year</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">periods</span><span class="o">=</span><span class="n">timezone</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-    <span class="c1"># tmy3 data must start with 0 at the beginning of year (due to internal</span>
-    <span class="c1"># tmy3_reader sun inclination calculation)</span>
-    <span class="n">min_year</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+    <span class="c1"># In case the timezone-shift leads to year before the actual year of the data,</span>
+    <span class="c1"># the time index gets shifted. This way, the first day of simulation is always</span>
+    <span class="c1"># present in the data.</span>
     <span class="n">time_of_year</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="n">min_year</span><span class="p">)</span> <span class="o">*</span> <span class="mi">365</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3600</span>
-            <span class="o">+</span> <span class="n">calendar</span><span class="o">.</span><span class="n">leapdays</span><span class="p">(</span><span class="n">min_year</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span><span class="p">)</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3600</span>
+            <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="n">first_utc_year</span><span class="p">)</span> <span class="o">*</span> <span class="mi">365</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3600</span>
+            <span class="o">+</span> <span class="n">calendar</span><span class="o">.</span><span class="n">leapdays</span><span class="p">(</span><span class="n">first_utc_year</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span><span class="p">)</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3600</span>
             <span class="o">+</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">dayofyear</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3600</span>
             <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">hour</span> <span class="o">*</span> <span class="mi">3600</span>
     <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">((</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">time_of_year</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">time_of_year</span> <span class="o">&lt;=</span> <span class="mi">86400</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Logic error in timezone-shifted export, data does not pass the first day&quot;</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s2">&quot;timeOfYear&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_of_year</span>
 
     <span class="c1"># to avoid having the one-year duration between start and end of data as</span>
