@@ -30,17 +30,19 @@ def create_mos_files_to_simulate(result_folder):
         mock_get_city.return_value = "Aachen"
         project_class_instance.import_data()
         project_class_instance.data_2_core_data()
-        mos_files.append(project_class_instance.core_2_mos(export_in_utc=True))
         for timezone in range(-12, 13, 2):
             project_class_instance.meta_data.timezone = timezone
             project_class_instance.abs_result_folder_path = result_folder.joinpath(f"utc_{timezone}")
             mos_files.append(project_class_instance.core_2_mos(export_in_utc=False))
+        project_class_instance.abs_result_folder_path = result_folder.joinpath(f"utc_export")
+        mos_files.append(project_class_instance.core_2_mos(export_in_utc=True))
     return [Path(file) for file in mos_files]
 
 
 def simulate_mos_files(dym_api, mos_files, savepath):
     model_names = []
     result_names = []
+    savepath.mkdir(exist_ok=True)
     for mos_file in mos_files:
         model_names.append(
             f'TestTiltedSurfaces(filNam=Modelica.Utilities.Files.loadResource("{mos_file.as_posix()}"))'
@@ -91,9 +93,13 @@ def start_dymola(simulation_dir):
     return dym_api
 
 
-def create_results(simulation_dir, result_dir, create_plot: bool = False):
+def create_results(simulation_dir, result_dir, create_plot: bool = False, summer: bool = False):
     mos_files = create_mos_files_to_simulate(result_folder=simulation_dir)
     dym_api = start_dymola(simulation_dir=simulation_dir)
+    if summer:
+        dym_api.set_sim_setup({"start_time": 86400 * 150, "stop_time": 86400 * 151, "output_interval": 3600})
+    else:
+        dym_api.set_sim_setup({"start_time": 0, "stop_time": 86400, "output_interval": 3600})
     results = simulate_mos_files(
         dym_api=dym_api,
         mos_files=mos_files,
@@ -115,7 +121,7 @@ def create_results(simulation_dir, result_dir, create_plot: bool = False):
         fig, axes = plt.subplots(4, 1, sharex=True)
         for i, ax in zip(range(1, 5), axes):
             for label, df in dfs.items():
-                if not label.startswith("utc"):
+                if label.startswith("utc_export"):
                     label = "utc"
                     linestyle = "--"
                 else:
@@ -126,7 +132,7 @@ def create_results(simulation_dir, result_dir, create_plot: bool = False):
         axes[0].legend(ncol=6)
         axes[-1].set_xlabel("Time in h")
         fig.tight_layout()
-        fig.savefig(simulation_dir.joinpath(f"plots_{col}.png"))
+        fig.savefig(simulation_dir.joinpath(f"plots_summer={summer}_{col}.png"))
 
 
 @pytest.mark.dymola
@@ -137,14 +143,26 @@ class TestAnotherDymolaFeature(unittest.TestCase):
         self.model_name = "TestTiltedSurfaces"
         self.reference_path = Path(__file__).parent.joinpath("test_files", "modelica")
 
-    def test_reference_results(self):
+    def test_reference_results_first_day(self):
         results = create_results(
             simulation_dir=self.simulation_dir,
-            result_dir=self.simulation_dir.joinpath("results")
+            result_dir=self.simulation_dir.joinpath("results_first_day"),
+            summer=False
         )
         for file in results.values():
             df = pd.read_csv(file, sep=";")
-            df_ref = pd.read_csv(self.reference_path.joinpath(file.name))
+            df_ref = pd.read_csv(self.reference_path.joinpath("first_day", file.name))
+            self.assertEqual(df, df_ref)
+
+    def test_reference_results_summer(self):
+        results = create_results(
+            simulation_dir=self.simulation_dir,
+            result_dir=self.simulation_dir.joinpath("results_summer"),
+            summer=True
+        )
+        for file in results.values():
+            df = pd.read_csv(file, sep=";")
+            df_ref = pd.read_csv(self.reference_path.joinpath("summer", file.name))
             self.assertEqual(df, df_ref)
 
     def tearDown(self):
@@ -157,6 +175,13 @@ class TestAnotherDymolaFeature(unittest.TestCase):
 if __name__ == '__main__':
     create_results(
         simulation_dir=Path(r"D:\00_temp\tmp_aixweather"),
-        result_dir=Path(definitions.ROOT_DIR).joinpath("tests", "test_files", "modelica"),
-        create_plot=True
+        result_dir=Path(definitions.ROOT_DIR).joinpath("tests", "test_files", "modelica", "summer"),
+        create_plot=True,
+        summer=True
+    )
+    create_results(
+        simulation_dir=Path(r"D:\00_temp\tmp_aixweather"),
+        result_dir=Path(definitions.ROOT_DIR).joinpath("tests", "test_files", "modelica", "first_day"),
+        create_plot=True,
+        summer=False
     )
