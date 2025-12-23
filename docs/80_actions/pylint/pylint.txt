@@ -1,16 +1,10 @@
-************* Module setup
-setup.py:10:19: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
-setup.py:37:5: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
-setup.py:4:0: C0411: standard import "import sys" should be placed before "import setuptools" (wrong-import-order)
-setup.py:7:0: C0411: standard import "from pathlib import Path" should be placed before "import setuptools" (wrong-import-order)
-setup.py:4:0: W0611: Unused import sys (unused-import)
+************* Module aixweather
+aixweather/__init__.py:6:0: E0401: Unable to import 'pandas' (import-error)
 ************* Module aixweather.data_quality_checks
 aixweather/data_quality_checks.py:5:0: E0401: Unable to import 'matplotlib.pyplot' (import-error)
 aixweather/data_quality_checks.py:7:0: E0401: Unable to import 'seaborn' (import-error)
 ************* Module aixweather.project_class
 aixweather/project_class.py:5:0: E0401: Unable to import 'pandas' (import-error)
-************* Module aixweather
-aixweather/__init__.py:6:0: E0401: Unable to import 'pandas' (import-error)
 ************* Module aixweather.transformation_functions.time_observation_transformations
 aixweather/transformation_functions/time_observation_transformations.py:25:0: C0301: Line too long (112/100) (line-too-long)
 aixweather/transformation_functions/time_observation_transformations.py:83:0: C0301: Line too long (123/100) (line-too-long)
@@ -287,39 +281,7 @@ aixweather/core_data_format_2_output_file/to_mos_TMY3.py:68:0: R0914: Too many l
 aixweather/core_data_format_2_output_file/to_mos_TMY3.py:260:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
 ************* Module aixweather.core_data_format_2_output_file.__init__
 aixweather/core_data_format_2_output_file/__init__.py:8:0: C0304: Final newline missing (missing-final-newline)
-************* Module compare_shifting
-tests/test_files/static_checks/TRY/compare_shifting.py:20:17: W1401: Anomalous backslash in string: '\s'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
-tests/test_files/static_checks/TRY/compare_shifting.py:30:17: W1401: Anomalous backslash in string: '\s'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
-tests/test_files/static_checks/TRY/compare_shifting.py:40:17: W1401: Anomalous backslash in string: '\s'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
-tests/test_files/static_checks/TRY/compare_shifting.py:50:17: W1401: Anomalous backslash in string: '\s'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
-tests/test_files/static_checks/TRY/compare_shifting.py:60:17: W1401: Anomalous backslash in string: '\s'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
-tests/test_files/static_checks/TRY/compare_shifting.py:70:17: W1401: Anomalous backslash in string: '\s'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
-tests/test_files/static_checks/TRY/compare_shifting.py:7:0: E0401: Unable to import 'pandas' (import-error)
-tests/test_files/static_checks/TRY/compare_shifting.py:13:0: C0115: Missing class docstring (missing-class-docstring)
-tests/test_files/static_checks/TRY/compare_shifting.py:45:8: C0103: Attribute name "new_conv_without_shifting_new_NormDirRad" doesn't conform to snake_case naming style (invalid-name)
-tests/test_files/static_checks/TRY/compare_shifting.py:55:8: C0103: Attribute name "new_conv_with_shifting_new_NormDirRad" doesn't conform to snake_case naming style (invalid-name)
-tests/test_files/static_checks/TRY/compare_shifting.py:65:8: C0103: Attribute name "new_conv_passthrough_new_NormDirRad" doesn't conform to snake_case naming style (invalid-name)
-tests/test_files/static_checks/TRY/compare_shifting.py:14:4: C0116: Missing function or method docstring (missing-function-docstring)
-tests/test_files/static_checks/TRY/compare_shifting.py:115:8: C0103: Variable name "c" doesn't conform to snake_case naming style (invalid-name)
-tests/test_files/static_checks/TRY/compare_shifting.py:130:4: C0116: Missing function or method docstring (missing-function-docstring)
-tests/test_files/static_checks/TRY/compare_shifting.py:130:4: C0103: Method name "test_TRY_shifting" doesn't conform to snake_case naming style (invalid-name)
-tests/test_files/static_checks/TRY/compare_shifting.py:133:8: W0612: Unused variable 'shift_diff' (unused-variable)
-tests/test_files/static_checks/TRY/compare_shifting.py:169:4: C0103: Method name "test_TRY_Old_vs_newWithoutShifting" doesn't conform to snake_case naming style (invalid-name)
-tests/test_files/static_checks/TRY/compare_shifting.py:174:8: W0612: Unused variable 'diff_1' (unused-variable)
-tests/test_files/static_checks/TRY/compare_shifting.py:175:8: W0612: Unused variable 'diff_2' (unused-variable)
-tests/test_files/static_checks/TRY/compare_shifting.py:177:8: W0612: Unused variable 'value_compare_1' (unused-variable)
-tests/test_files/static_checks/TRY/compare_shifting.py:191:8: W0612: Unused variable 'value_compare_2' (unused-variable)
-tests/test_files/static_checks/TRY/compare_shifting.py:205:8: W0612: Unused variable 'value_compare_3' (unused-variable)
-tests/test_files/static_checks/TRY/compare_shifting.py:219:8: W0612: Unused variable 'value_compare_4' (unused-variable)
-tests/test_files/static_checks/TRY/compare_shifting.py:233:8: W0612: Unused variable 'value_compare_5' (unused-variable)
-tests/test_files/static_checks/TRY/compare_shifting.py:15:8: W0201: Attribute 'old_conv' defined outside __init__ (attribute-defined-outside-init)
-tests/test_files/static_checks/TRY/compare_shifting.py:25:8: W0201: Attribute 'new_conv_no_shifting' defined outside __init__ (attribute-defined-outside-init)
-tests/test_files/static_checks/TRY/compare_shifting.py:35:8: W0201: Attribute 'new_conv_with_shifting' defined outside __init__ (attribute-defined-outside-init)
-tests/test_files/static_checks/TRY/compare_shifting.py:45:8: W0201: Attribute 'new_conv_without_shifting_new_NormDirRad' defined outside __init__ (attribute-defined-outside-init)
-tests/test_files/static_checks/TRY/compare_shifting.py:55:8: W0201: Attribute 'new_conv_with_shifting_new_NormDirRad' defined outside __init__ (attribute-defined-outside-init)
-tests/test_files/static_checks/TRY/compare_shifting.py:65:8: W0201: Attribute 'new_conv_passthrough_new_NormDirRad' defined outside __init__ (attribute-defined-outside-init)
-tests/test_files/static_checks/TRY/compare_shifting.py:128:8: W0201: Attribute 'raw' defined outside __init__ (attribute-defined-outside-init)
-tests/test_files/static_checks/TRY/compare_shifting.py:1:0: R0801: Similar lines in 2 files
+aixweather/core_data_format_2_output_file/__init__.py:1:0: R0801: Similar lines in 2 files
 ==aixweather.transformation_to_core_data.TRY:[96:104]
 ==aixweather.transformation_to_core_data.custom_file:[57:70]
         df = auxiliary.force_data_variable_convention(df, definitions.format_core_data)
@@ -332,5 +294,5 @@ tests/test_files/static_checks/TRY/compare_shifting.py:1:0: R0801: Similar lines
  (duplicate-code)
 
 -----------------------------------
-Your code has been rated at 6.78/10
+Your code has been rated at 6.95/10
 

@@ -1,59 +1,15 @@
 {
     "messages": [
         {
-            "type": "warning",
-            "module": "setup",
+            "type": "error",
+            "module": "aixweather",
             "obj": "",
-            "line": 10,
-            "column": 19,
-            "path": "setup.py",
-            "symbol": "unspecified-encoding",
-            "message": "Using open without explicitly specifying an encoding",
-            "message-id": "W1514"
-        },
-        {
-            "type": "warning",
-            "module": "setup",
-            "obj": "",
-            "line": 37,
-            "column": 5,
-            "path": "setup.py",
-            "symbol": "unspecified-encoding",
-            "message": "Using open without explicitly specifying an encoding",
-            "message-id": "W1514"
-        },
-        {
-            "type": "convention",
-            "module": "setup",
-            "obj": "",
-            "line": 4,
+            "line": 6,
             "column": 0,
-            "path": "setup.py",
-            "symbol": "wrong-import-order",
-            "message": "standard import \"import sys\" should be placed before \"import setuptools\"",
-            "message-id": "C0411"
-        },
-        {
-            "type": "convention",
-            "module": "setup",
-            "obj": "",
-            "line": 7,
-            "column": 0,
-            "path": "setup.py",
-            "symbol": "wrong-import-order",
-            "message": "standard import \"from pathlib import Path\" should be placed before \"import setuptools\"",
-            "message-id": "C0411"
-        },
-        {
-            "type": "warning",
-            "module": "setup",
-            "obj": "",
-            "line": 4,
-            "column": 0,
-            "path": "setup.py",
-            "symbol": "unused-import",
-            "message": "Unused import sys",
-            "message-id": "W0611"
+            "path": "aixweather/__init__.py",
+            "symbol": "import-error",
+            "message": "Unable to import 'pandas'",
+            "message-id": "E0401"
         },
         {
             "type": "error",
@@ -84,17 +40,6 @@
             "line": 5,
             "column": 0,
             "path": "aixweather/project_class.py",
-            "symbol": "import-error",
-            "message": "Unable to import 'pandas'",
-            "message-id": "E0401"
-        },
-        {
-            "type": "error",
-            "module": "aixweather",
-            "obj": "",
-            "line": 6,
-            "column": 0,
-            "path": "aixweather/__init__.py",
             "symbol": "import-error",
             "message": "Unable to import 'pandas'",
             "message-id": "E0401"
@@ -2883,353 +2828,12 @@
             "message-id": "C0304"
         },
         {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "",
-            "line": 20,
-            "column": 17,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "anomalous-backslash-in-string",
-            "message": "Anomalous backslash in string: '\\s'. String constant might be missing an r prefix.",
-            "message-id": "W1401"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "",
-            "line": 30,
-            "column": 17,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "anomalous-backslash-in-string",
-            "message": "Anomalous backslash in string: '\\s'. String constant might be missing an r prefix.",
-            "message-id": "W1401"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "",
-            "line": 40,
-            "column": 17,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "anomalous-backslash-in-string",
-            "message": "Anomalous backslash in string: '\\s'. String constant might be missing an r prefix.",
-            "message-id": "W1401"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "",
-            "line": 50,
-            "column": 17,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "anomalous-backslash-in-string",
-            "message": "Anomalous backslash in string: '\\s'. String constant might be missing an r prefix.",
-            "message-id": "W1401"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "",
-            "line": 60,
-            "column": 17,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "anomalous-backslash-in-string",
-            "message": "Anomalous backslash in string: '\\s'. String constant might be missing an r prefix.",
-            "message-id": "W1401"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "",
-            "line": 70,
-            "column": 17,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "anomalous-backslash-in-string",
-            "message": "Anomalous backslash in string: '\\s'. String constant might be missing an r prefix.",
-            "message-id": "W1401"
-        },
-        {
-            "type": "error",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "",
-            "line": 7,
-            "column": 0,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "import-error",
-            "message": "Unable to import 'pandas'",
-            "message-id": "E0401"
-        },
-        {
-            "type": "convention",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY",
-            "line": 13,
-            "column": 0,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "missing-class-docstring",
-            "message": "Missing class docstring",
-            "message-id": "C0115"
-        },
-        {
-            "type": "convention",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.load_files",
-            "line": 45,
-            "column": 8,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "invalid-name",
-            "message": "Attribute name \"new_conv_without_shifting_new_NormDirRad\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "convention",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.load_files",
-            "line": 55,
-            "column": 8,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "invalid-name",
-            "message": "Attribute name \"new_conv_with_shifting_new_NormDirRad\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "convention",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.load_files",
-            "line": 65,
-            "column": 8,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "invalid-name",
-            "message": "Attribute name \"new_conv_passthrough_new_NormDirRad\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "convention",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.load_files",
-            "line": 14,
-            "column": 4,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.load_files",
-            "line": 115,
-            "column": 8,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "invalid-name",
-            "message": "Variable name \"c\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "convention",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.test_TRY_shifting",
-            "line": 130,
-            "column": 4,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "missing-function-docstring",
-            "message": "Missing function or method docstring",
-            "message-id": "C0116"
-        },
-        {
-            "type": "convention",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.test_TRY_shifting",
-            "line": 130,
-            "column": 4,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "invalid-name",
-            "message": "Method name \"test_TRY_shifting\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.test_TRY_shifting",
-            "line": 133,
-            "column": 8,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "unused-variable",
-            "message": "Unused variable 'shift_diff'",
-            "message-id": "W0612"
-        },
-        {
-            "type": "convention",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.test_TRY_Old_vs_newWithoutShifting",
-            "line": 169,
-            "column": 4,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "invalid-name",
-            "message": "Method name \"test_TRY_Old_vs_newWithoutShifting\" doesn't conform to snake_case naming style",
-            "message-id": "C0103"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.test_TRY_Old_vs_newWithoutShifting",
-            "line": 174,
-            "column": 8,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "unused-variable",
-            "message": "Unused variable 'diff_1'",
-            "message-id": "W0612"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.test_TRY_Old_vs_newWithoutShifting",
-            "line": 175,
-            "column": 8,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "unused-variable",
-            "message": "Unused variable 'diff_2'",
-            "message-id": "W0612"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.test_TRY_Old_vs_newWithoutShifting",
-            "line": 177,
-            "column": 8,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "unused-variable",
-            "message": "Unused variable 'value_compare_1'",
-            "message-id": "W0612"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.test_TRY_Old_vs_newWithoutShifting",
-            "line": 191,
-            "column": 8,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "unused-variable",
-            "message": "Unused variable 'value_compare_2'",
-            "message-id": "W0612"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.test_TRY_Old_vs_newWithoutShifting",
-            "line": 205,
-            "column": 8,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "unused-variable",
-            "message": "Unused variable 'value_compare_3'",
-            "message-id": "W0612"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.test_TRY_Old_vs_newWithoutShifting",
-            "line": 219,
-            "column": 8,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "unused-variable",
-            "message": "Unused variable 'value_compare_4'",
-            "message-id": "W0612"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.test_TRY_Old_vs_newWithoutShifting",
-            "line": 233,
-            "column": 8,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "unused-variable",
-            "message": "Unused variable 'value_compare_5'",
-            "message-id": "W0612"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.load_files",
-            "line": 15,
-            "column": 8,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'old_conv' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.load_files",
-            "line": 25,
-            "column": 8,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'new_conv_no_shifting' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.load_files",
-            "line": 35,
-            "column": 8,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'new_conv_with_shifting' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.load_files",
-            "line": 45,
-            "column": 8,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'new_conv_without_shifting_new_NormDirRad' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.load_files",
-            "line": 55,
-            "column": 8,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'new_conv_with_shifting_new_NormDirRad' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.load_files",
-            "line": 65,
-            "column": 8,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'new_conv_passthrough_new_NormDirRad' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
-            "type": "warning",
-            "module": "test_files.static_checks.TRY.compare_shifting",
-            "obj": "TestDWDTRY.load_files",
-            "line": 128,
-            "column": 8,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
-            "symbol": "attribute-defined-outside-init",
-            "message": "Attribute 'raw' defined outside __init__",
-            "message-id": "W0201"
-        },
-        {
             "type": "refactor",
-            "module": "test_files.static_checks.TRY.compare_shifting",
+            "module": "aixweather.core_data_format_2_output_file.__init__",
             "obj": "",
             "line": 1,
             "column": 0,
-            "path": "tests/test_files/static_checks/TRY/compare_shifting.py",
+            "path": "aixweather/core_data_format_2_output_file/__init__.py",
             "symbol": "duplicate-code",
             "message": "Similar lines in 2 files\n==aixweather.transformation_to_core_data.TRY:[96:104]\n==aixweather.transformation_to_core_data.custom_file:[57:70]\n        df = auxiliary.force_data_variable_convention(df, definitions.format_core_data)\n\n        ### convert units\n        # insert unit conversions like desired (examples follow)\n        df[\"TotalSkyCover\"] = unit_conversions.eigth_to_tenth(df[\"TotalSkyCover\"])\n        df[\"AtmPressure\"] = unit_conversions.hPa_to_Pa(df[\"AtmPressure\"])\n\n        ### impute missing variables from other available ones\n        # add additionaly required transformations to\n        # variable_transformations.variable_transform_all or apply them directly here\n        df, calc_overview = variable_transformations.variable_transform_all(df, meta)\n        return df, calc_overview\n",
             "message-id": "R0801"
@@ -3238,28 +2842,28 @@
     "stats": {
         "bad_names": {
             "argument": 0,
-            "attr": 3,
+            "attr": 0,
             "klass": 0,
             "class_attribute": 0,
             "class_const": 0,
             "const": 0,
             "inlinevar": 0,
             "function": 25,
-            "method": 2,
+            "method": 0,
             "module": 9,
-            "variable": 9,
+            "variable": 8,
             "typevar": 0,
             "typealias": 0
         },
         "by_module": {
-            "setup": {
-                "convention": 2,
-                "error": 0,
+            "aixweather": {
+                "convention": 0,
+                "error": 1,
                 "fatal": 0,
                 "info": 0,
                 "refactor": 0,
-                "statement": 13,
-                "warning": 3
+                "statement": 6,
+                "warning": 0
             },
             "aixweather.data_quality_checks": {
                 "convention": 0,
@@ -3286,15 +2890,6 @@
                 "info": 0,
                 "refactor": 0,
                 "statement": 130,
-                "warning": 0
-            },
-            "aixweather.__init__": {
-                "convention": 0,
-                "error": 1,
-                "fatal": 0,
-                "info": 0,
-                "refactor": 0,
-                "statement": 6,
                 "warning": 0
             },
             "aixweather.transformation_functions.time_observation_transformations": {
@@ -3500,117 +3095,35 @@
                 "error": 0,
                 "fatal": 0,
                 "info": 0,
-                "refactor": 0,
-                "statement": 0,
-                "warning": 0
-            },
-            "docs.source.conf": {
-                "convention": 0,
-                "error": 0,
-                "fatal": 0,
-                "info": 0,
-                "refactor": 0,
-                "statement": 0,
-                "warning": 0
-            },
-            "test_ERC": {
-                "convention": 0,
-                "error": 0,
-                "fatal": 0,
-                "info": 0,
-                "refactor": 0,
-                "statement": 0,
-                "warning": 0
-            },
-            "test_DWD_forecast": {
-                "convention": 0,
-                "error": 0,
-                "fatal": 0,
-                "info": 0,
-                "refactor": 0,
-                "statement": 0,
-                "warning": 0
-            },
-            "test_output_functions": {
-                "convention": 0,
-                "error": 0,
-                "fatal": 0,
-                "info": 0,
-                "refactor": 0,
-                "statement": 0,
-                "warning": 0
-            },
-            "utils_4_tests": {
-                "convention": 0,
-                "error": 0,
-                "fatal": 0,
-                "info": 0,
-                "refactor": 0,
-                "statement": 0,
-                "warning": 0
-            },
-            "test_EPW": {
-                "convention": 0,
-                "error": 0,
-                "fatal": 0,
-                "info": 0,
-                "refactor": 0,
-                "statement": 0,
-                "warning": 0
-            },
-            "test_TRY": {
-                "convention": 0,
-                "error": 0,
-                "fatal": 0,
-                "info": 0,
-                "refactor": 0,
-                "statement": 0,
-                "warning": 0
-            },
-            "test_DWD_historical": {
-                "convention": 0,
-                "error": 0,
-                "fatal": 0,
-                "info": 0,
-                "refactor": 0,
-                "statement": 0,
-                "warning": 0
-            },
-            "test_files.static_checks.TRY.compare_shifting": {
-                "convention": 9,
-                "error": 1,
-                "fatal": 0,
-                "info": 0,
                 "refactor": 1,
-                "statement": 41,
-                "warning": 21
+                "statement": 0,
+                "warning": 0
             }
         },
         "by_msg": {
-            "unspecified-encoding": 7,
-            "wrong-import-order": 6,
-            "unused-import": 1,
-            "import-error": 28,
+            "import-error": 27,
             "line-too-long": 101,
             "redefined-builtin": 3,
             "cell-var-from-loop": 1,
             "logging-fstring-interpolation": 1,
-            "unused-variable": 17,
+            "unused-variable": 9,
             "consider-using-max-builtin": 2,
             "pointless-string-statement": 6,
             "use-list-literal": 2,
             "inconsistent-return-statements": 3,
-            "invalid-name": 48,
+            "invalid-name": 42,
             "wildcard-import": 1,
             "assignment-from-no-return": 5,
+            "wrong-import-order": 4,
             "unused-wildcard-import": 1,
-            "missing-function-docstring": 6,
+            "missing-function-docstring": 4,
             "raise-missing-from": 3,
-            "anomalous-backslash-in-string": 7,
+            "anomalous-backslash-in-string": 1,
             "consider-using-dict-items": 1,
             "consider-iterating-dictionary": 3,
             "unnecessary-comprehension": 3,
             "consider-using-in": 2,
+            "unspecified-encoding": 5,
             "too-many-locals": 4,
             "import-outside-toplevel": 4,
             "f-string-without-interpolation": 1,
@@ -3624,8 +3137,6 @@
             "too-many-arguments": 2,
             "too-many-statements": 3,
             "deprecated-method": 2,
-            "missing-class-docstring": 1,
-            "attribute-defined-outside-init": 7,
             "duplicate-code": 1
         },
         "code_type_count": {
@@ -3636,8 +3147,8 @@
             "total": 0
         },
         "dependencies": {
-            "setuptools": [
-                "setup"
+            "packaging.version": [
+                "aixweather"
             ],
             "aixweather.imports.DWD": [
                 "aixweather.project_class"
@@ -3679,81 +3190,74 @@
                 "aixweather.transformation_to_core_data.EPW",
                 "aixweather.project_class"
             ],
-            "packaging.version": [
-                "aixweather"
-            ],
             "aixweather.transformation_functions.auxiliary": [
-                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.transformation_to_core_data.DWD",
-                "aixweather.transformation_to_core_data.EPW",
-                "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.transformation_to_core_data.TRY",
-                "aixweather.transformation_to_core_data.ERC",
                 "aixweather.transformation_functions.pass_through_handling",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.core_data_format_2_output_file.to_mos_TMY3"
             ],
             "aixweather.imports.utils_import": [
-                "aixweather.imports.DWD",
-                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.transformation_to_core_data.DWD",
-                "aixweather.transformation_to_core_data.EPW",
-                "aixweather.imports.TRY",
-                "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.transformation_functions.variable_transformations",
-                "aixweather.imports.custom_file",
-                "aixweather.transformation_to_core_data.TRY",
-                "aixweather.transformation_functions.pass_through_handling",
-                "aixweather.transformation_to_core_data.ERC",
-                "aixweather.core_data_format_2_output_file.unconverted_to_x",
-                "aixweather.imports.EPW",
                 "aixweather.imports.ERC",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
+                "aixweather.core_data_format_2_output_file.unconverted_to_x",
+                "aixweather.imports.DWD",
+                "aixweather.transformation_functions.pass_through_handling",
+                "aixweather.imports.EPW",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_functions.variable_transformations",
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.imports.custom_file",
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
+                "aixweather.imports.TRY"
             ],
             "aixweather.definitions": [
-                "aixweather.imports.DWD",
-                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.transformation_to_core_data.DWD",
-                "aixweather.transformation_to_core_data.EPW",
-                "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.transformation_to_core_data.TRY",
-                "test_files.static_checks.TRY.compare_shifting",
-                "aixweather.transformation_to_core_data.ERC",
                 "aixweather.core_data_format_2_output_file.unconverted_to_x",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
+                "aixweather.imports.DWD",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.core_data_format_2_output_file.to_mos_TMY3"
             ],
             "aixweather.transformation_functions.time_observation_transformations": [
-                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.transformation_to_core_data.EPW",
                 "aixweather.transformation_to_core_data.DWD",
-                "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_to_core_data.TRY",
+                "aixweather.transformation_to_core_data.EPW",
                 "aixweather.transformation_to_core_data.ERC",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.core_data_format_2_output_file.to_mos_TMY3"
             ],
             "aixweather.transformation_functions.variable_transformations": [
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.TRY",
                 "aixweather.transformation_to_core_data.EPW",
-                "aixweather.transformation_to_core_data.DWD",
-                "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.transformation_to_core_data.TRY",
-                "aixweather.transformation_to_core_data.ERC"
-            ],
-            "aixweather.transformation_functions.pass_through_handling": [
-                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.transformation_to_core_data.EPW",
-                "aixweather.transformation_to_core_data.DWD",
-                "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.transformation_to_core_data.TRY",
-                "aixweather.transformation_to_core_data.ERC",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
-            ],
-            "aixweather.transformation_functions.unit_conversions": [
-                "aixweather.transformation_to_core_data.DWD",
-                "aixweather.transformation_to_core_data.TRY",
                 "aixweather.transformation_to_core_data.ERC",
                 "aixweather.transformation_to_core_data.custom_file"
             ],
-            "aixweather.project_class": [
-                "test_files.static_checks.TRY.compare_shifting"
+            "aixweather.transformation_functions.pass_through_handling": [
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.core_data_format_2_output_file.to_mos_TMY3"
+            ],
+            "aixweather.transformation_functions.unit_conversions": [
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.transformation_to_core_data.DWD"
             ]
         },
         "duplicated_lines": {
@@ -3762,26 +3266,473 @@
         },
         "node_count": {
             "function": 90,
-            "klass": 9,
-            "method": 44,
-            "module": 29
+            "klass": 8,
+            "method": 41,
+            "module": 27
         },
         "undocumented": {
             "function": 0,
-            "klass": 1,
-            "method": 6,
+            "klass": 0,
+            "method": 4,
             "module": 2
         },
-        "convention": 175,
-        "error": 33,
+        "convention": 164,
+        "error": 32,
         "fatal": 0,
         "info": 0,
         "refactor": 26,
-        "statement": 1321,
-        "warning": 60,
+        "statement": 1267,
+        "warning": 36,
         "global_note": 0,
         "nb_duplicated_lines": 5,
-        "percent_duplicated_lines": 0.10895619960775768
+        "percent_duplicated_lines": 0.11764705882352941
     },
-    "previous": null
+    "previous": {
+        "bad_names": {
+            "argument": 0,
+            "attr": 0,
+            "klass": 0,
+            "class_attribute": 0,
+            "class_const": 0,
+            "const": 0,
+            "inlinevar": 0,
+            "function": 25,
+            "method": 0,
+            "module": 9,
+            "variable": 8,
+            "typevar": 0,
+            "typealias": 0
+        },
+        "by_module": {
+            "aixweather": {
+                "convention": 0,
+                "error": 1,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 6,
+                "warning": 0
+            },
+            "aixweather.data_quality_checks": {
+                "convention": 0,
+                "error": 2,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 22,
+                "warning": 0
+            },
+            "aixweather.definitions": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 13,
+                "warning": 0
+            },
+            "aixweather.project_class": {
+                "convention": 0,
+                "error": 1,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 130,
+                "warning": 0
+            },
+            "aixweather.transformation_functions.time_observation_transformations": {
+                "convention": 3,
+                "error": 1,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 43,
+                "warning": 0
+            },
+            "aixweather.transformation_functions.pass_through_handling": {
+                "convention": 6,
+                "error": 1,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 71,
+                "warning": 4
+            },
+            "aixweather.transformation_functions.variable_transformations": {
+                "convention": 7,
+                "error": 3,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 4,
+                "statement": 77,
+                "warning": 2
+            },
+            "aixweather.transformation_functions.auxiliary": {
+                "convention": 3,
+                "error": 2,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 1,
+                "statement": 54,
+                "warning": 1
+            },
+            "aixweather.transformation_functions.__init__": {
+                "convention": 2,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 0,
+                "warning": 0
+            },
+            "aixweather.transformation_functions.unit_conversions": {
+                "convention": 4,
+                "error": 1,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 35,
+                "warning": 0
+            },
+            "aixweather.imports.ERC": {
+                "convention": 5,
+                "error": 7,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 50,
+                "warning": 7
+            },
+            "aixweather.imports.utils_import": {
+                "convention": 4,
+                "error": 1,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 1,
+                "statement": 32,
+                "warning": 1
+            },
+            "aixweather.imports.TRY": {
+                "convention": 13,
+                "error": 1,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 4,
+                "statement": 87,
+                "warning": 5
+            },
+            "aixweather.imports.custom_file": {
+                "convention": 0,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 11,
+                "warning": 2
+            },
+            "aixweather.imports.DWD": {
+                "convention": 13,
+                "error": 1,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 6,
+                "statement": 138,
+                "warning": 3
+            },
+            "aixweather.imports.EPW": {
+                "convention": 1,
+                "error": 1,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 20,
+                "warning": 0
+            },
+            "aixweather.imports.__init__": {
+                "convention": 2,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 0,
+                "warning": 0
+            },
+            "aixweather.transformation_to_core_data.ERC": {
+                "convention": 11,
+                "error": 1,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 22,
+                "warning": 1
+            },
+            "aixweather.transformation_to_core_data.TRY": {
+                "convention": 7,
+                "error": 1,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 33,
+                "warning": 1
+            },
+            "aixweather.transformation_to_core_data.custom_file": {
+                "convention": 1,
+                "error": 1,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 23,
+                "warning": 1
+            },
+            "aixweather.transformation_to_core_data.DWD": {
+                "convention": 32,
+                "error": 1,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 60,
+                "warning": 1
+            },
+            "aixweather.transformation_to_core_data.EPW": {
+                "convention": 5,
+                "error": 1,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 1,
+                "statement": 55,
+                "warning": 1
+            },
+            "aixweather.transformation_to_core_data.__init__": {
+                "convention": 1,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 0,
+                "warning": 0
+            },
+            "aixweather.core_data_format_2_output_file.unconverted_to_x": {
+                "convention": 0,
+                "error": 1,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 0,
+                "statement": 45,
+                "warning": 2
+            },
+            "aixweather.core_data_format_2_output_file.to_epw_energyplus": {
+                "convention": 23,
+                "error": 2,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 6,
+                "statement": 193,
+                "warning": 3
+            },
+            "aixweather.core_data_format_2_output_file.to_mos_TMY3": {
+                "convention": 20,
+                "error": 1,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 2,
+                "statement": 47,
+                "warning": 1
+            },
+            "aixweather.core_data_format_2_output_file.__init__": {
+                "convention": 1,
+                "error": 0,
+                "fatal": 0,
+                "info": 0,
+                "refactor": 1,
+                "statement": 0,
+                "warning": 0
+            }
+        },
+        "by_msg": {
+            "import-error": 27,
+            "line-too-long": 101,
+            "redefined-builtin": 3,
+            "cell-var-from-loop": 1,
+            "logging-fstring-interpolation": 1,
+            "unused-variable": 9,
+            "consider-using-max-builtin": 2,
+            "pointless-string-statement": 6,
+            "use-list-literal": 2,
+            "inconsistent-return-statements": 3,
+            "invalid-name": 42,
+            "wildcard-import": 1,
+            "assignment-from-no-return": 5,
+            "wrong-import-order": 4,
+            "unused-wildcard-import": 1,
+            "missing-function-docstring": 4,
+            "raise-missing-from": 3,
+            "anomalous-backslash-in-string": 1,
+            "consider-using-dict-items": 1,
+            "consider-iterating-dictionary": 3,
+            "unnecessary-comprehension": 3,
+            "consider-using-in": 2,
+            "unspecified-encoding": 5,
+            "too-many-locals": 4,
+            "import-outside-toplevel": 4,
+            "f-string-without-interpolation": 1,
+            "unused-argument": 1,
+            "simplifiable-if-statement": 1,
+            "consider-using-with": 3,
+            "consider-using-enumerate": 1,
+            "broad-exception-caught": 1,
+            "missing-final-newline": 2,
+            "missing-module-docstring": 2,
+            "too-many-arguments": 2,
+            "too-many-statements": 3,
+            "deprecated-method": 2,
+            "duplicate-code": 1
+        },
+        "code_type_count": {
+            "code": 0,
+            "comment": 0,
+            "docstring": 0,
+            "empty": 0,
+            "total": 0
+        },
+        "dependencies": {
+            "packaging.version": [
+                "aixweather"
+            ],
+            "aixweather.imports.DWD": [
+                "aixweather.project_class"
+            ],
+            "aixweather.imports.ERC": [
+                "aixweather.project_class"
+            ],
+            "aixweather.imports.TRY": [
+                "aixweather.project_class"
+            ],
+            "aixweather.imports.EPW": [
+                "aixweather.project_class"
+            ],
+            "aixweather.imports.custom_file": [
+                "aixweather.project_class"
+            ],
+            "aixweather.transformation_to_core_data.DWD": [
+                "aixweather.project_class"
+            ],
+            "aixweather.transformation_to_core_data.ERC": [
+                "aixweather.project_class"
+            ],
+            "aixweather.transformation_to_core_data.TRY": [
+                "aixweather.project_class"
+            ],
+            "aixweather.transformation_to_core_data.EPW": [
+                "aixweather.project_class"
+            ],
+            "aixweather.transformation_to_core_data.custom_file": [
+                "aixweather.project_class"
+            ],
+            "aixweather.core_data_format_2_output_file.unconverted_to_x": [
+                "aixweather.project_class"
+            ],
+            "aixweather.core_data_format_2_output_file.to_mos_TMY3": [
+                "aixweather.project_class"
+            ],
+            "aixweather.core_data_format_2_output_file.to_epw_energyplus": [
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.project_class"
+            ],
+            "aixweather.transformation_functions.auxiliary": [
+                "aixweather.transformation_functions.pass_through_handling",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.core_data_format_2_output_file.to_mos_TMY3"
+            ],
+            "aixweather.imports.utils_import": [
+                "aixweather.imports.ERC",
+                "aixweather.imports.DWD",
+                "aixweather.transformation_functions.pass_through_handling",
+                "aixweather.imports.EPW",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_functions.variable_transformations",
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.imports.custom_file",
+                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.core_data_format_2_output_file.unconverted_to_x",
+                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
+                "aixweather.imports.TRY"
+            ],
+            "aixweather.definitions": [
+                "aixweather.imports.DWD",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
+                "aixweather.core_data_format_2_output_file.unconverted_to_x",
+                "aixweather.core_data_format_2_output_file.to_mos_TMY3"
+            ],
+            "aixweather.transformation_functions.time_observation_transformations": [
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.core_data_format_2_output_file.to_mos_TMY3"
+            ],
+            "aixweather.transformation_functions.variable_transformations": [
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.transformation_to_core_data.custom_file"
+            ],
+            "aixweather.transformation_functions.pass_through_handling": [
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.core_data_format_2_output_file.to_mos_TMY3"
+            ],
+            "aixweather.transformation_functions.unit_conversions": [
+                "aixweather.transformation_to_core_data.TRY",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.transformation_to_core_data.DWD"
+            ]
+        },
+        "duplicated_lines": {
+            "nb_duplicated_lines": 0,
+            "percent_duplicated_lines": 0.0
+        },
+        "node_count": {
+            "function": 90,
+            "klass": 8,
+            "method": 41,
+            "module": 27
+        },
+        "undocumented": {
+            "function": 0,
+            "klass": 0,
+            "method": 4,
+            "module": 2
+        },
+        "convention": 164,
+        "error": 32,
+        "fatal": 0,
+        "info": 0,
+        "refactor": 26,
+        "statement": 1267,
+        "warning": 36,
+        "global_note": 6.953433307024468,
+        "nb_duplicated_lines": 5,
+        "percent_duplicated_lines": 0.11764705882352941
+    }
 }
