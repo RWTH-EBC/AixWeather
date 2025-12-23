@@ -6,6 +6,7 @@ includes unittests for different TRY datasets
 import os
 import time
 import unittest
+from unittest.mock import patch
 import random
 
 from aixweather import definitions
@@ -15,7 +16,7 @@ from tests import utils_4_tests
 
 class BaseTRY(unittest.TestCase):
     @classmethod
-    def init_and_run_TRY(cls, name: str, path: str):
+    def init_and_run_TRY(cls, name: str, path: str, city: str):
         # running the tests on the CI server with different python versions simultaneously causes,
         # connection timeouts to nominatim, which is used to get the coordinates of the station.
         # Therefore, we use a random timer to avoid this issue.
@@ -28,8 +29,10 @@ class BaseTRY(unittest.TestCase):
         cls.folder_tests = os.path.join(
             definitions.ROOT_DIR, f"tests/test_files/regular_tests/TRY/test_{name}"
         )
-
-        utils_4_tests.run_all_functions(cls.c)
+        # Mock the external API requests to Nominatim to avoid http request errors.
+        with patch("aixweather.imports.TRY.get_city_from_location") as mock_get_city:
+            mock_get_city.return_value = city
+            utils_4_tests.run_all_functions(cls.c)
 
         cls.start_formatted = cls.c.start.strftime("%Y%m%d")
         cls.end_formatted = cls.c.end.strftime("%Y%m%d")
@@ -51,6 +54,7 @@ class TestDWDTRY2015(BaseTRY, utils_4_tests.RegressionTestsClass):
                 r"tests/test_files/regular_tests/TRY/"
                 "test_TRY2015/input/TRY2015_507931060546_Jahr.dat",
             ),
+            city="Aachen"
         )
 
 
@@ -64,6 +68,7 @@ class TestDWDTRY2015Sommer(BaseTRY, utils_4_tests.RegressionTestsClass):
                 r"tests/test_files/regular_tests/TRY/"
                 "test_TRY2015_Sommer/input/TRY2015_507931060546_Somm.dat",
             ),
+            city="Aachen"
         )
 
 
@@ -77,4 +82,5 @@ class TestDWDTRY2045(BaseTRY, utils_4_tests.RegressionTestsClass):
                 r"tests/test_files/regular_tests/TRY/"
                 "test_TRY2045/input/TRY2045_507931060546_Jahr.dat",
             ),
+            city="Aachen"
         )
