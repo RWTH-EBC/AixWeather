@@ -28,13 +28,2972 @@
 
         
         <h2>Score</h2>
-        10.00 / 10
+        6.95 / 10
             
-            (previous score: 10.00 / 10)
+            (previous score: 6.95 / 10)
             
         
 
         <h2>Messages</h2>
+        
+        <h3>Module <code>aixweather</code> (<code>aixweather/__init__.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>6</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pandas&#39;</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.core_data_format_2_output_file.__init__</code> (<code>aixweather/core_data_format_2_output_file/__init__.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>refactor</td>
+                <td><code>duplicate-code</code></td>
+                <td>R0801</td>
+                <td></td>
+                <td><pre>Similar lines in 2 files
+==aixweather.transformation_to_core_data.TRY:[96:104]
+==aixweather.transformation_to_core_data.custom_file:[57:70]
+        df = auxiliary.force_data_variable_convention(df, definitions.format_core_data)
+
+        ### convert units
+        # insert unit conversions like desired (examples follow)
+        df[&#34;TotalSkyCover&#34;] = unit_conversions.eigth_to_tenth(df[&#34;TotalSkyCover&#34;])
+        df[&#34;AtmPressure&#34;] = unit_conversions.hPa_to_Pa(df[&#34;AtmPressure&#34;])
+
+        ### impute missing variables from other available ones
+        # add additionaly required transformations to
+        # variable_transformations.variable_transform_all or apply them directly here
+        df, calc_overview = variable_transformations.variable_transform_all(df, meta)
+        return df, calc_overview
+</pre></td>
+            </tr>
+            
+            <tr>
+                <td>8</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>missing-final-newline</code></td>
+                <td>C0304</td>
+                <td></td>
+                <td><pre>Final newline missing</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.core_data_format_2_output_file.to_epw_energyplus</code> (<code>aixweather/core_data_format_2_output_file/to_epw_energyplus.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>9</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pandas&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>10</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;numpy&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>14</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (114/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>53</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (113/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>54</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (105/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>55</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (107/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>57</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (107/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>58</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (110/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>59</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (118/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>60</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (108/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>61</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (112/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>62</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (112/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>63</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (112/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>64</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (112/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>65</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (116/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>66</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (118/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>67</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (110/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>69</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (101/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>70</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (109/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>71</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (111/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>72</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (103/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>77</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (105/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>81</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (104/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>86</td>
+                <td>0</td>
+                <td>refactor</td>
+                <td><code>too-many-arguments</code></td>
+                <td>R0913</td>
+                <td>to_epw</td>
+                <td><pre>Too many arguments (7/5)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>86</td>
+                <td>0</td>
+                <td>refactor</td>
+                <td><code>too-many-locals</code></td>
+                <td>R0914</td>
+                <td>to_epw</td>
+                <td><pre>Too many local variables (25/15)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>86</td>
+                <td>0</td>
+                <td>refactor</td>
+                <td><code>too-many-statements</code></td>
+                <td>R0915</td>
+                <td>to_epw</td>
+                <td><pre>Too many statements (156/50)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>159</td>
+                <td>4</td>
+                <td>refactor</td>
+                <td><code>too-many-locals</code></td>
+                <td>R0914</td>
+                <td>to_epw.line3_typ_ext_period</td>
+                <td><pre>Too many local variables (42/15)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>159</td>
+                <td>4</td>
+                <td>refactor</td>
+                <td><code>too-many-statements</code></td>
+                <td>R0915</td>
+                <td>to_epw.line3_typ_ext_period</td>
+                <td><pre>Too many statements (64/50)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>192</td>
+                <td>23</td>
+                <td>warning</td>
+                <td><code>redefined-builtin</code></td>
+                <td>W0622</td>
+                <td>to_epw.line3_typ_ext_period.group_func</td>
+                <td><pre>Redefining built-in &#39;input&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>379</td>
+                <td>12</td>
+                <td>warning</td>
+                <td><code>deprecated-method</code></td>
+                <td>W4902</td>
+                <td>to_epw.line4_ground_temp</td>
+                <td><pre>Using deprecated method warn()</pre></td>
+            </tr>
+            
+            <tr>
+                <td>379</td>
+                <td>12</td>
+                <td>warning</td>
+                <td><code>deprecated-method</code></td>
+                <td>W4902</td>
+                <td>to_epw.line4_ground_temp</td>
+                <td><pre>Using deprecated method warn()</pre></td>
+            </tr>
+            
+            <tr>
+                <td>396</td>
+                <td>12</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>to_epw.line5_holiday_dl_saving</td>
+                <td><pre>Variable name &#34;isLeap&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>398</td>
+                <td>12</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>to_epw.line5_holiday_dl_saving</td>
+                <td><pre>Variable name &#34;isLeap&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>451</td>
+                <td>4</td>
+                <td>refactor</td>
+                <td><code>too-many-statements</code></td>
+                <td>R0915</td>
+                <td>to_epw.format_data</td>
+                <td><pre>Too many statements (58/50)</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.core_data_format_2_output_file.to_mos_TMY3</code> (<code>aixweather/core_data_format_2_output_file/to_mos_TMY3.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td></td>
+                <td><pre>Module name &#34;to_mos_TMY3&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>7</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pandas&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>11</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (114/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>36</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (105/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>37</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (107/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>39</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (105/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>40</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (108/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>41</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (116/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>42</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (103/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>43</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (107/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>44</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (107/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>45</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (107/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>46</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (108/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>47</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (112/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>48</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (114/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>49</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (108/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>52</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (108/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>53</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (110/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>54</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (101/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>59</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (104/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>63</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (105/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>68</td>
+                <td>0</td>
+                <td>refactor</td>
+                <td><code>too-many-arguments</code></td>
+                <td>R0913</td>
+                <td>to_mos</td>
+                <td><pre>Too many arguments (7/5)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>68</td>
+                <td>0</td>
+                <td>refactor</td>
+                <td><code>too-many-locals</code></td>
+                <td>R0914</td>
+                <td>to_mos</td>
+                <td><pre>Too many local variables (16/15)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>260</td>
+                <td>9</td>
+                <td>warning</td>
+                <td><code>unspecified-encoding</code></td>
+                <td>W1514</td>
+                <td>to_mos</td>
+                <td><pre>Using open without explicitly specifying an encoding</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.core_data_format_2_output_file.unconverted_to_x</code> (<code>aixweather/core_data_format_2_output_file/unconverted_to_x.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>8</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pandas&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>104</td>
+                <td>9</td>
+                <td>warning</td>
+                <td><code>unspecified-encoding</code></td>
+                <td>W1514</td>
+                <td>to_json</td>
+                <td><pre>Using open without explicitly specifying an encoding</pre></td>
+            </tr>
+            
+            <tr>
+                <td>146</td>
+                <td>9</td>
+                <td>warning</td>
+                <td><code>unspecified-encoding</code></td>
+                <td>W1514</td>
+                <td>to_csv</td>
+                <td><pre>Using open without explicitly specifying an encoding</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.data_quality_checks</code> (<code>aixweather/data_quality_checks.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>5</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;matplotlib.pyplot&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>7</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;seaborn&#39;</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.imports.DWD</code> (<code>aixweather/imports/DWD.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td></td>
+                <td><pre>Module name &#34;DWD&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>10</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pandas&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>19</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>import_DWD_historical</td>
+                <td><pre>Function name &#34;import_DWD_historical&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>47</td>
+                <td>4</td>
+                <td>refactor</td>
+                <td><code>simplifiable-if-statement</code></td>
+                <td>R1703</td>
+                <td>import_DWD_historical</td>
+                <td><pre>The if statement can be replaced with &#39;var = bool(test)&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>93</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>import_DWD_forecast</td>
+                <td><pre>Function name &#34;import_DWD_forecast&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>105</td>
+                <td>8</td>
+                <td>convention</td>
+                <td><code>import-outside-toplevel</code></td>
+                <td>C0415</td>
+                <td>import_DWD_forecast</td>
+                <td><pre>Import outside toplevel (wetterdienst.provider.dwd.mosmix.DwdMosmixRequest, wetterdienst.provider.dwd.mosmix.DwdMosmixType)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>107</td>
+                <td>8</td>
+                <td>warning</td>
+                <td><code>raise-missing-from</code></td>
+                <td>W0707</td>
+                <td>import_DWD_forecast</td>
+                <td><pre>Consider explicitly re-raising using &#39;except ImportError as exc&#39; and &#39;raise ImportError(&#34;Optional dependency &#39;DWD_forecast&#39; not installed, can&#39;t import data.&#34;) from exc&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>138</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>import_meta_DWD_historical</td>
+                <td><pre>Function name &#34;import_meta_DWD_historical&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>158</td>
+                <td>15</td>
+                <td>refactor</td>
+                <td><code>consider-using-with</code></td>
+                <td>R1732</td>
+                <td>import_meta_DWD_historical</td>
+                <td><pre>Consider using &#39;with&#39; for resource-allocating operations</pre></td>
+            </tr>
+            
+            <tr>
+                <td>170</td>
+                <td>4</td>
+                <td>convention</td>
+                <td><code>consider-using-enumerate</code></td>
+                <td>C0200</td>
+                <td>import_meta_DWD_historical</td>
+                <td><pre>Consider using enumerate instead of iterating with range and len</pre></td>
+            </tr>
+            
+            <tr>
+                <td>192</td>
+                <td>27</td>
+                <td>refactor</td>
+                <td><code>unnecessary-comprehension</code></td>
+                <td>R1721</td>
+                <td>import_meta_DWD_historical</td>
+                <td><pre>Unnecessary use of a comprehension, use dict(zip(header, values)) instead.</pre></td>
+            </tr>
+            
+            <tr>
+                <td>215</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>import_meta_DWD_forecast</td>
+                <td><pre>Function name &#34;import_meta_DWD_forecast&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>234</td>
+                <td>15</td>
+                <td>refactor</td>
+                <td><code>consider-using-with</code></td>
+                <td>R1732</td>
+                <td>import_meta_DWD_forecast</td>
+                <td><pre>Consider using &#39;with&#39; for resource-allocating operations</pre></td>
+            </tr>
+            
+            <tr>
+                <td>247</td>
+                <td>12</td>
+                <td>warning</td>
+                <td><code>redefined-builtin</code></td>
+                <td>W0622</td>
+                <td>import_meta_DWD_forecast.extract_info_for_station</td>
+                <td><pre>Redefining built-in &#39;id&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>247</td>
+                <td>12</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>import_meta_DWD_forecast.extract_info_for_station</td>
+                <td><pre>Variable name &#34;id&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>279</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>_pull_DWD_historical_data</td>
+                <td><pre>Function name &#34;_pull_DWD_historical_data&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>284</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (114/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>285</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (112/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>286</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (104/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>290</td>
+                <td>15</td>
+                <td>refactor</td>
+                <td><code>consider-using-with</code></td>
+                <td>R1732</td>
+                <td>_pull_DWD_historical_data</td>
+                <td><pre>Consider using &#39;with&#39; for resource-allocating operations</pre></td>
+            </tr>
+            
+            <tr>
+                <td>331</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>_download_DWD_file</td>
+                <td><pre>Function name &#34;_download_DWD_file&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>331</td>
+                <td>0</td>
+                <td>refactor</td>
+                <td><code>inconsistent-return-statements</code></td>
+                <td>R1710</td>
+                <td>_download_DWD_file</td>
+                <td><pre>Either all return statements in a function should return an expression, or none of them should.</pre></td>
+            </tr>
+            
+            <tr>
+                <td>362</td>
+                <td>15</td>
+                <td>warning</td>
+                <td><code>broad-exception-caught</code></td>
+                <td>W0718</td>
+                <td>_download_DWD_file</td>
+                <td><pre>Catching too general exception Exception</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.imports.EPW</code> (<code>aixweather/imports/EPW.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td></td>
+                <td><pre>Module name &#34;EPW&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>5</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pandas&#39;</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.imports.ERC</code> (<code>aixweather/imports/ERC.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td></td>
+                <td><pre>Module name &#34;ERC&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>5</td>
+                <td>0</td>
+                <td>warning</td>
+                <td><code>wildcard-import</code></td>
+                <td>W0401</td>
+                <td></td>
+                <td><pre>Wildcard import tkinter</pre></td>
+            </tr>
+            
+            <tr>
+                <td>5</td>
+                <td>0</td>
+                <td>warning</td>
+                <td><code>unused-wildcard-import</code></td>
+                <td>W0614</td>
+                <td></td>
+                <td><pre>Unused import(s) collections, enum, sys, types, TclError, re, wantobjects, TkVersion, TclVersion, READABLE, WRITABLE, EXCEPTION, EventType, Event, NoDefaultRoot, Variable, IntVar, DoubleVar, BooleanVar, mainloop, getint, getdouble, getboolean, Misc, CallWrapper, XView, YView, Wm, Tcl, Pack, Place, Grid, BaseWidget, Widget, Toplevel, Canvas, Checkbutton, Frame, Listbox, Menu, Menubutton, Message, Radiobutton, Scale, Scrollbar, Text, OptionMenu, Image, PhotoImage, BitmapImage, image_names, image_types, Spinbox, LabelFrame, PanedWindow, NO, FALSE, OFF, YES, TRUE, ON, N, S, W, E, NW, SW, NE, SE, NS, EW, NSEW, CENTER, NONE, X, Y, BOTH, LEFT, TOP, RIGHT, BOTTOM, RAISED, SUNKEN, FLAT, RIDGE, GROOVE, SOLID, HORIZONTAL, VERTICAL, NUMERIC, CHAR, WORD, BASELINE, INSIDE, OUTSIDE, SEL, SEL_FIRST, SEL_LAST, END, INSERT, CURRENT, ANCHOR, ALL, NORMAL, DISABLED, ACTIVE, HIDDEN, CASCADE, CHECKBUTTON, COMMAND, RADIOBUTTON, SEPARATOR, SINGLE, BROWSE, MULTIPLE, EXTENDED, DOTBOX, UNDERLINE, PIESLICE, CHORD, ARC, FIRST, LAST, BUTT, PROJECTING, ROUND, BEVEL, MITER, MOVETO, SCROLL, UNITS and PAGES from wildcard import of tkinter</pre></td>
+            </tr>
+            
+            <tr>
+                <td>7</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pandas&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>8</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>wrong-import-order</code></td>
+                <td>C0411</td>
+                <td></td>
+                <td><pre>standard import &#34;from datetime import datetime&#34; should be placed before &#34;import pandas as pd&#34;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>10</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;requests&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>26</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>load_credentials_ERC_weather_data</td>
+                <td><pre>Function name &#34;load_credentials_ERC_weather_data&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>42</td>
+                <td>4</td>
+                <td>error</td>
+                <td><code>assignment-from-no-return</code></td>
+                <td>E1111</td>
+                <td>load_credentials_ERC_weather_data</td>
+                <td><pre>Assigning result of a function call, where the function has no return</pre></td>
+            </tr>
+            
+            <tr>
+                <td>42</td>
+                <td>4</td>
+                <td>warning</td>
+                <td><code>unused-variable</code></td>
+                <td>W0612</td>
+                <td>load_credentials_ERC_weather_data</td>
+                <td><pre>Unused variable &#39;username_label&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>44</td>
+                <td>4</td>
+                <td>error</td>
+                <td><code>assignment-from-no-return</code></td>
+                <td>E1111</td>
+                <td>load_credentials_ERC_weather_data</td>
+                <td><pre>Assigning result of a function call, where the function has no return</pre></td>
+            </tr>
+            
+            <tr>
+                <td>44</td>
+                <td>4</td>
+                <td>warning</td>
+                <td><code>unused-variable</code></td>
+                <td>W0612</td>
+                <td>load_credentials_ERC_weather_data</td>
+                <td><pre>Unused variable &#39;username_entry&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>47</td>
+                <td>4</td>
+                <td>error</td>
+                <td><code>assignment-from-no-return</code></td>
+                <td>E1111</td>
+                <td>load_credentials_ERC_weather_data</td>
+                <td><pre>Assigning result of a function call, where the function has no return</pre></td>
+            </tr>
+            
+            <tr>
+                <td>47</td>
+                <td>4</td>
+                <td>warning</td>
+                <td><code>unused-variable</code></td>
+                <td>W0612</td>
+                <td>load_credentials_ERC_weather_data</td>
+                <td><pre>Unused variable &#39;password_label&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>49</td>
+                <td>4</td>
+                <td>error</td>
+                <td><code>assignment-from-no-return</code></td>
+                <td>E1111</td>
+                <td>load_credentials_ERC_weather_data</td>
+                <td><pre>Assigning result of a function call, where the function has no return</pre></td>
+            </tr>
+            
+            <tr>
+                <td>49</td>
+                <td>4</td>
+                <td>warning</td>
+                <td><code>unused-variable</code></td>
+                <td>W0612</td>
+                <td>load_credentials_ERC_weather_data</td>
+                <td><pre>Unused variable &#39;password_entry&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>53</td>
+                <td>4</td>
+                <td>error</td>
+                <td><code>assignment-from-no-return</code></td>
+                <td>E1111</td>
+                <td>load_credentials_ERC_weather_data</td>
+                <td><pre>Assigning result of a function call, where the function has no return</pre></td>
+            </tr>
+            
+            <tr>
+                <td>53</td>
+                <td>4</td>
+                <td>warning</td>
+                <td><code>unused-variable</code></td>
+                <td>W0612</td>
+                <td>load_credentials_ERC_weather_data</td>
+                <td><pre>Unused variable &#39;login_button&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>62</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>import_ERC</td>
+                <td><pre>Function name &#34;import_ERC&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>115</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>import_meta_from_ERC</td>
+                <td><pre>Function name &#34;import_meta_from_ERC&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.imports.TRY</code> (<code>aixweather/imports/TRY.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td></td>
+                <td><pre>Module name &#34;TRY&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>8</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pandas&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>14</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>_handle_TRY_type</td>
+                <td><pre>Function name &#34;_handle_TRY_type&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>28</td>
+                <td>4</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>_handle_TRY_type</td>
+                <td><pre>Variable name &#34;TRY_year&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>31</td>
+                <td>4</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>_handle_TRY_type</td>
+                <td><pre>Variable name &#34;TRY_file_naming&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>39</td>
+                <td>8</td>
+                <td>convention</td>
+                <td><code>consider-using-dict-items</code></td>
+                <td>C0206</td>
+                <td>_handle_TRY_type</td>
+                <td><pre>Consider iterating with .items()</pre></td>
+            </tr>
+            
+            <tr>
+                <td>39</td>
+                <td>19</td>
+                <td>convention</td>
+                <td><code>consider-iterating-dictionary</code></td>
+                <td>C0201</td>
+                <td>_handle_TRY_type</td>
+                <td><pre>Consider iterating the dictionary directly instead of calling .keys()</pre></td>
+            </tr>
+            
+            <tr>
+                <td>41</td>
+                <td>16</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>_handle_TRY_type</td>
+                <td><pre>Variable name &#34;TRY_year&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>46</td>
+                <td>25</td>
+                <td>refactor</td>
+                <td><code>unnecessary-comprehension</code></td>
+                <td>R1721</td>
+                <td>_handle_TRY_type</td>
+                <td><pre>Unnecessary use of a comprehension, use list(TRY_file_naming.keys()) instead.</pre></td>
+            </tr>
+            
+            <tr>
+                <td>46</td>
+                <td>41</td>
+                <td>convention</td>
+                <td><code>consider-iterating-dictionary</code></td>
+                <td>C0201</td>
+                <td>_handle_TRY_type</td>
+                <td><pre>Consider iterating the dictionary directly instead of calling .keys()</pre></td>
+            </tr>
+            
+            <tr>
+                <td>48</td>
+                <td>7</td>
+                <td>refactor</td>
+                <td><code>consider-using-in</code></td>
+                <td>R1714</td>
+                <td>_handle_TRY_type</td>
+                <td><pre>Consider merging these comparisons with &#39;in&#39; by using &#39;TRY_year in (2004, 2010)&#39;. Use a set instead if elements are hashable.</pre></td>
+            </tr>
+            
+            <tr>
+                <td>51</td>
+                <td>7</td>
+                <td>refactor</td>
+                <td><code>consider-using-in</code></td>
+                <td>R1714</td>
+                <td>_handle_TRY_type</td>
+                <td><pre>Consider merging these comparisons with &#39;in&#39; by using &#39;TRY_year in (2015, 2045)&#39;. Use a set instead if elements are hashable.</pre></td>
+            </tr>
+            
+            <tr>
+                <td>52</td>
+                <td>13</td>
+                <td>warning</td>
+                <td><code>unspecified-encoding</code></td>
+                <td>W1514</td>
+                <td>_handle_TRY_type</td>
+                <td><pre>Using open without explicitly specifying an encoding</pre></td>
+            </tr>
+            
+            <tr>
+                <td>63</td>
+                <td>0</td>
+                <td>refactor</td>
+                <td><code>too-many-locals</code></td>
+                <td>R0914</td>
+                <td>load_try_meta_from_file</td>
+                <td><pre>Too many local variables (22/15)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>75</td>
+                <td>4</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>load_try_meta_from_file</td>
+                <td><pre>Variable name &#34;TRY_year&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>79</td>
+                <td>9</td>
+                <td>warning</td>
+                <td><code>unspecified-encoding</code></td>
+                <td>W1514</td>
+                <td>load_try_meta_from_file</td>
+                <td><pre>Using open without explicitly specifying an encoding</pre></td>
+            </tr>
+            
+            <tr>
+                <td>103</td>
+                <td>8</td>
+                <td>convention</td>
+                <td><code>import-outside-toplevel</code></td>
+                <td>C0415</td>
+                <td>load_try_meta_from_file</td>
+                <td><pre>Import outside toplevel (geopandas)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>104</td>
+                <td>8</td>
+                <td>convention</td>
+                <td><code>import-outside-toplevel</code></td>
+                <td>C0415</td>
+                <td>load_try_meta_from_file</td>
+                <td><pre>Import outside toplevel (shapely.geometry.Point)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>106</td>
+                <td>8</td>
+                <td>warning</td>
+                <td><code>raise-missing-from</code></td>
+                <td>W0707</td>
+                <td>load_try_meta_from_file</td>
+                <td><pre>Consider explicitly re-raising using &#39;except ImportError as exc&#39; and &#39;raise ImportError(&#34;Optional dependency &#39;TRY&#39; not installed. Conversion of longitude and latitude not possible and hence no radiation transformation.&#34;) from exc&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>149</td>
+                <td>8</td>
+                <td>convention</td>
+                <td><code>import-outside-toplevel</code></td>
+                <td>C0415</td>
+                <td>get_city_from_location</td>
+                <td><pre>Import outside toplevel (geopy.geocoders.Nominatim)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>194</td>
+                <td>4</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>load_try_from_file</td>
+                <td><pre>Variable name &#34;TRY_year&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>194</td>
+                <td>4</td>
+                <td>warning</td>
+                <td><code>unused-variable</code></td>
+                <td>W0612</td>
+                <td>load_try_from_file</td>
+                <td><pre>Unused variable &#39;TRY_year&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>200</td>
+                <td>13</td>
+                <td>warning</td>
+                <td><code>anomalous-backslash-in-string</code></td>
+                <td>W1401</td>
+                <td></td>
+                <td><pre>Anomalous backslash in string: &#39;\s&#39;. String constant might be missing an r prefix.</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.imports.__init__</code> (<code>aixweather/imports/__init__.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>4</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (109/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>9</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>missing-final-newline</code></td>
+                <td>C0304</td>
+                <td></td>
+                <td><pre>Final newline missing</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.imports.custom_file</code> (<code>aixweather/imports/custom_file.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>16</td>
+                <td>24</td>
+                <td>warning</td>
+                <td><code>f-string-without-interpolation</code></td>
+                <td>W1309</td>
+                <td>load_custom_meta_data</td>
+                <td><pre>Using an f-string that does not have any interpolated variables</pre></td>
+            </tr>
+            
+            <tr>
+                <td>24</td>
+                <td>26</td>
+                <td>warning</td>
+                <td><code>unused-argument</code></td>
+                <td>W0613</td>
+                <td>load_custom_from_file</td>
+                <td><pre>Unused argument &#39;path&#39;</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.imports.utils_import</code> (<code>aixweather/imports/utils_import.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>5</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;unidecode&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>31</td>
+                <td>4</td>
+                <td>convention</td>
+                <td><code>missing-function-docstring</code></td>
+                <td>C0116</td>
+                <td>MetaData.station_name</td>
+                <td><pre>Missing function or method docstring</pre></td>
+            </tr>
+            
+            <tr>
+                <td>40</td>
+                <td>4</td>
+                <td>convention</td>
+                <td><code>missing-function-docstring</code></td>
+                <td>C0116</td>
+                <td>MetaData.altitude</td>
+                <td><pre>Missing function or method docstring</pre></td>
+            </tr>
+            
+            <tr>
+                <td>48</td>
+                <td>4</td>
+                <td>convention</td>
+                <td><code>missing-function-docstring</code></td>
+                <td>C0116</td>
+                <td>MetaData.latitude</td>
+                <td><pre>Missing function or method docstring</pre></td>
+            </tr>
+            
+            <tr>
+                <td>56</td>
+                <td>4</td>
+                <td>convention</td>
+                <td><code>missing-function-docstring</code></td>
+                <td>C0116</td>
+                <td>MetaData.longitude</td>
+                <td><pre>Missing function or method docstring</pre></td>
+            </tr>
+            
+            <tr>
+                <td>63</td>
+                <td>4</td>
+                <td>refactor</td>
+                <td><code>inconsistent-return-statements</code></td>
+                <td>R1710</td>
+                <td>MetaData._ensure_float</td>
+                <td><pre>Either all return statements in a function should return an expression, or none of them should.</pre></td>
+            </tr>
+            
+            <tr>
+                <td>68</td>
+                <td>16</td>
+                <td>warning</td>
+                <td><code>raise-missing-from</code></td>
+                <td>W0707</td>
+                <td>MetaData._ensure_float</td>
+                <td><pre>Consider explicitly re-raising using &#39;except Exception as exc&#39; and &#39;raise ValueError(f&#39;Value must be of type float, not {type(value)}&#39;) from exc&#39;</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.project_class</code> (<code>aixweather/project_class.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>5</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pandas&#39;</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.transformation_functions.__init__</code> (<code>aixweather/transformation_functions/__init__.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>4</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (115/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>5</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (104/100)</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.transformation_functions.auxiliary</code> (<code>aixweather/transformation_functions/auxiliary.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>5</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pandas&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>6</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;numpy&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>19</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (102/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>124</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (108/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>126</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (106/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>152</td>
+                <td>0</td>
+                <td>refactor</td>
+                <td><code>inconsistent-return-statements</code></td>
+                <td>R1710</td>
+                <td>select_entry_by_core_name</td>
+                <td><pre>Either all return statements in a function should return an expression, or none of them should.</pre></td>
+            </tr>
+            
+            <tr>
+                <td>163</td>
+                <td>8</td>
+                <td>warning</td>
+                <td><code>unused-variable</code></td>
+                <td>W0612</td>
+                <td>select_entry_by_core_name</td>
+                <td><pre>Unused variable &#39;key&#39;</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.transformation_functions.pass_through_handling</code> (<code>aixweather/transformation_functions/pass_through_handling.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>6</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pandas&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>18</td>
+                <td>4</td>
+                <td>warning</td>
+                <td><code>redefined-builtin</code></td>
+                <td>W0622</td>
+                <td>create_pass_through_variables</td>
+                <td><pre>Redefining built-in &#39;format&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>23</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (103/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>24</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (105/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>25</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (108/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>26</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (109/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>27</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (111/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>45</td>
+                <td>8</td>
+                <td>warning</td>
+                <td><code>unused-variable</code></td>
+                <td>W0612</td>
+                <td>create_pass_through_variables</td>
+                <td><pre>Unused variable &#39;key&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>81</td>
+                <td>55</td>
+                <td>warning</td>
+                <td><code>cell-var-from-loop</code></td>
+                <td>W0640</td>
+                <td>create_pass_through_variables.get_shifts_of_used_variables</td>
+                <td><pre>Cell variable get_shifts_of_used_variables defined in loop</pre></td>
+            </tr>
+            
+            <tr>
+                <td>100</td>
+                <td>12</td>
+                <td>warning</td>
+                <td><code>logging-fstring-interpolation</code></td>
+                <td>W1203</td>
+                <td>create_pass_through_variables</td>
+                <td><pre>Use lazy % formatting in logging functions</pre></td>
+            </tr>
+            
+            <tr>
+                <td>209</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (104/100)</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.transformation_functions.time_observation_transformations</code> (<code>aixweather/transformation_functions/time_observation_transformations.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>9</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pandas&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>25</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (112/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>83</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (123/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>91</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (117/100)</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.transformation_functions.unit_conversions</code> (<code>aixweather/transformation_functions/unit_conversions.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>6</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pandas&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>11</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>Jcm2_to_Whm2</td>
+                <td><pre>Function name &#34;Jcm2_to_Whm2&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>18</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>Jm2_to_Whm2</td>
+                <td><pre>Function name &#34;Jm2_to_Whm2&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>25</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>kJm2_to_Whm2</td>
+                <td><pre>Function name &#34;kJm2_to_Whm2&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>32</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>hPa_to_Pa</td>
+                <td><pre>Function name &#34;hPa_to_Pa&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.transformation_functions.variable_transformations</code> (<code>aixweather/transformation_functions/variable_transformations.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>7</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pandas&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>8</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;numpy&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>10</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pvlib&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>39</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (112/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>40</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (108/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>58</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (119/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>74</td>
+                <td>8</td>
+                <td>refactor</td>
+                <td><code>consider-using-max-builtin</code></td>
+                <td>R1731</td>
+                <td>calculate_direct_horizontal_radiation</td>
+                <td><pre>Consider using &#39;dir_hor_rad = max(dir_hor_rad, 0)&#39; instead of unnecessary if block</pre></td>
+            </tr>
+            
+            <tr>
+                <td>83</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (101/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>103</td>
+                <td>8</td>
+                <td>refactor</td>
+                <td><code>consider-using-max-builtin</code></td>
+                <td>R1731</td>
+                <td>calculate_global_horizontal_radiation</td>
+                <td><pre>Consider using &#39;glob_hor_rad = max(glob_hor_rad, 0)&#39; instead of unnecessary if block</pre></td>
+            </tr>
+            
+            <tr>
+                <td>139</td>
+                <td>4</td>
+                <td>warning</td>
+                <td><code>pointless-string-statement</code></td>
+                <td>W0105</td>
+                <td>calculate_horizontal_infrared_radiation</td>
+                <td><pre>String statement has no effect</pre></td>
+            </tr>
+            
+            <tr>
+                <td>146</td>
+                <td>4</td>
+                <td>warning</td>
+                <td><code>pointless-string-statement</code></td>
+                <td>W0105</td>
+                <td>calculate_horizontal_infrared_radiation</td>
+                <td><pre>String statement has no effect</pre></td>
+            </tr>
+            
+            <tr>
+                <td>206</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (107/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>207</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (106/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>216</td>
+                <td>19</td>
+                <td>refactor</td>
+                <td><code>use-list-literal</code></td>
+                <td>R1734</td>
+                <td>robust_transformation</td>
+                <td><pre>Consider using [] instead of list()</pre></td>
+            </tr>
+            
+            <tr>
+                <td>217</td>
+                <td>26</td>
+                <td>refactor</td>
+                <td><code>use-list-literal</code></td>
+                <td>R1734</td>
+                <td>robust_transformation</td>
+                <td><pre>Consider using [] instead of list()</pre></td>
+            </tr>
+            
+            <tr>
+                <td>270</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (103/100)</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.transformation_to_core_data.DWD</code> (<code>aixweather/transformation_to_core_data/DWD.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>missing-module-docstring</code></td>
+                <td>C0114</td>
+                <td></td>
+                <td><pre>Missing module docstring</pre></td>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td></td>
+                <td><pre>Module name &#34;DWD&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>2</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pandas&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>6</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (120/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>9</td>
+                <td>0</td>
+                <td>warning</td>
+                <td><code>pointless-string-statement</code></td>
+                <td>W0105</td>
+                <td></td>
+                <td><pre>String statement has no effect</pre></td>
+            </tr>
+            
+            <tr>
+                <td>28</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (127/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>29</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (119/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>30</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (120/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>31</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (106/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>33</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (138/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>35</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (138/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>37</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (140/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>39</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (116/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>40</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (124/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>42</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (139/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>44</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (123/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>45</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (125/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>46</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (125/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>47</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (125/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>48</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (124/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>50</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (115/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>63</td>
+                <td>73</td>
+                <td>convention</td>
+                <td><code>consider-iterating-dictionary</code></td>
+                <td>C0201</td>
+                <td></td>
+                <td><pre>Consider iterating the dictionary directly instead of calling .keys()</pre></td>
+            </tr>
+            
+            <tr>
+                <td>79</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (102/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>83</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (104/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>99</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (103/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>104</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (102/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>106</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (109/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>120</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>DWD_historical_to_core_data</td>
+                <td><pre>Function name &#34;DWD_historical_to_core_data&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>128</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (117/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>129</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (114/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>163</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (101/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>180</td>
+                <td>4</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>DWD_historical_to_core_data.transform_DWD_historical</td>
+                <td><pre>Function name &#34;transform_DWD_historical&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>211</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>DWD_forecast_2_core_data</td>
+                <td><pre>Function name &#34;DWD_forecast_2_core_data&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>244</td>
+                <td>4</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>DWD_forecast_2_core_data.transform_DWD_forecast</td>
+                <td><pre>Function name &#34;transform_DWD_forecast&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.transformation_to_core_data.EPW</code> (<code>aixweather/transformation_to_core_data/EPW.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td></td>
+                <td><pre>Module name &#34;EPW&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>5</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pandas&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>6</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>wrong-import-order</code></td>
+                <td>C0411</td>
+                <td></td>
+                <td><pre>standard import &#34;from copy import deepcopy&#34; should be placed before &#34;import pandas as pd&#34;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>7</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>wrong-import-order</code></td>
+                <td>C0411</td>
+                <td></td>
+                <td><pre>standard import &#34;import logging&#34; should be placed before &#34;import pandas as pd&#34;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>24</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>EPW_to_core_data</td>
+                <td><pre>Function name &#34;EPW_to_core_data&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>62</td>
+                <td>12</td>
+                <td>warning</td>
+                <td><code>unused-variable</code></td>
+                <td>W0612</td>
+                <td>EPW_to_core_data.epw_to_datetimeindex</td>
+                <td><pre>Unused variable &#39;index&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>79</td>
+                <td>4</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>EPW_to_core_data.if_TMY_convert_to_one_year</td>
+                <td><pre>Function name &#34;if_TMY_convert_to_one_year&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>114</td>
+                <td>17</td>
+                <td>refactor</td>
+                <td><code>unnecessary-comprehension</code></td>
+                <td>R1721</td>
+                <td>EPW_to_core_data</td>
+                <td><pre>Unnecessary use of a comprehension, use list(format_epw.keys()) instead.</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.transformation_to_core_data.ERC</code> (<code>aixweather/transformation_to_core_data/ERC.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td></td>
+                <td><pre>Module name &#34;ERC&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>5</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pandas&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>9</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (120/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>12</td>
+                <td>0</td>
+                <td>warning</td>
+                <td><code>pointless-string-statement</code></td>
+                <td>W0105</td>
+                <td></td>
+                <td><pre>String statement has no effect</pre></td>
+            </tr>
+            
+            <tr>
+                <td>29</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (118/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>30</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (124/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>31</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (123/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>32</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (114/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>33</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (122/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>34</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (116/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>35</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (114/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>41</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>ERC_to_core_data</td>
+                <td><pre>Function name &#34;ERC_to_core_data&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>74</td>
+                <td>4</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>ERC_to_core_data.transform_ERC</td>
+                <td><pre>Function name &#34;transform_ERC&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.transformation_to_core_data.TRY</code> (<code>aixweather/transformation_to_core_data/TRY.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>missing-module-docstring</code></td>
+                <td>C0114</td>
+                <td></td>
+                <td><pre>Missing module docstring</pre></td>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td></td>
+                <td><pre>Module name &#34;TRY&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pandas&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>2</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>wrong-import-order</code></td>
+                <td>C0411</td>
+                <td></td>
+                <td><pre>standard import &#34;import datetime as dt&#34; should be placed before &#34;import pandas as pd&#34;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>6</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (120/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>9</td>
+                <td>0</td>
+                <td>warning</td>
+                <td><code>pointless-string-statement</code></td>
+                <td>W0105</td>
+                <td></td>
+                <td><pre>String statement has no effect</pre></td>
+            </tr>
+            
+            <tr>
+                <td>43</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>TRY_to_core_data</td>
+                <td><pre>Function name &#34;TRY_to_core_data&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>60</td>
+                <td>4</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>TRY_to_core_data.TRY_to_datetimeindex</td>
+                <td><pre>Function name &#34;TRY_to_datetimeindex&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>95</td>
+                <td>4</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>TRY_to_core_data.transform_TRY</td>
+                <td><pre>Function name &#34;transform_TRY&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.transformation_to_core_data.__init__</code> (<code>aixweather/transformation_to_core_data/__init__.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>16</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (108/100)</pre></td>
+            </tr>
+            
+        </table>
+        
+        <h3>Module <code>aixweather.transformation_to_core_data.custom_file</code> (<code>aixweather/transformation_to_core_data/custom_file.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>6</td>
+                <td>0</td>
+                <td>error</td>
+                <td><code>import-error</code></td>
+                <td>E0401</td>
+                <td></td>
+                <td><pre>Unable to import &#39;pandas&#39;</pre></td>
+            </tr>
+            
+            <tr>
+                <td>10</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (120/100)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>13</td>
+                <td>0</td>
+                <td>warning</td>
+                <td><code>pointless-string-statement</code></td>
+                <td>W0105</td>
+                <td></td>
+                <td><pre>String statement has no effect</pre></td>
+            </tr>
+            
+        </table>
         
 
         <h2>Metrics</h2>
@@ -47,6 +3006,26 @@
                 <th>Count</th>
             </tr>
             
+            <tr>
+                <td>error</td>
+                <td>32</td>
+            </tr>
+            
+            <tr>
+                <td>convention</td>
+                <td>164</td>
+            </tr>
+            
+            <tr>
+                <td>warning</td>
+                <td>36</td>
+            </tr>
+            
+            <tr>
+                <td>refactor</td>
+                <td>26</td>
+            </tr>
+            
         </table>
         
 
@@ -55,6 +3034,191 @@
             <tr>
                 <th>Name</th>
                 <th>Count</th>
+            </tr>
+            
+            <tr>
+                <td>import-error</td>
+                <td>27</td>
+            </tr>
+            
+            <tr>
+                <td>line-too-long</td>
+                <td>101</td>
+            </tr>
+            
+            <tr>
+                <td>redefined-builtin</td>
+                <td>3</td>
+            </tr>
+            
+            <tr>
+                <td>cell-var-from-loop</td>
+                <td>1</td>
+            </tr>
+            
+            <tr>
+                <td>logging-fstring-interpolation</td>
+                <td>1</td>
+            </tr>
+            
+            <tr>
+                <td>unused-variable</td>
+                <td>9</td>
+            </tr>
+            
+            <tr>
+                <td>consider-using-max-builtin</td>
+                <td>2</td>
+            </tr>
+            
+            <tr>
+                <td>pointless-string-statement</td>
+                <td>6</td>
+            </tr>
+            
+            <tr>
+                <td>use-list-literal</td>
+                <td>2</td>
+            </tr>
+            
+            <tr>
+                <td>inconsistent-return-statements</td>
+                <td>3</td>
+            </tr>
+            
+            <tr>
+                <td>invalid-name</td>
+                <td>42</td>
+            </tr>
+            
+            <tr>
+                <td>wildcard-import</td>
+                <td>1</td>
+            </tr>
+            
+            <tr>
+                <td>assignment-from-no-return</td>
+                <td>5</td>
+            </tr>
+            
+            <tr>
+                <td>wrong-import-order</td>
+                <td>4</td>
+            </tr>
+            
+            <tr>
+                <td>unused-wildcard-import</td>
+                <td>1</td>
+            </tr>
+            
+            <tr>
+                <td>missing-function-docstring</td>
+                <td>4</td>
+            </tr>
+            
+            <tr>
+                <td>raise-missing-from</td>
+                <td>3</td>
+            </tr>
+            
+            <tr>
+                <td>anomalous-backslash-in-string</td>
+                <td>1</td>
+            </tr>
+            
+            <tr>
+                <td>consider-using-dict-items</td>
+                <td>1</td>
+            </tr>
+            
+            <tr>
+                <td>consider-iterating-dictionary</td>
+                <td>3</td>
+            </tr>
+            
+            <tr>
+                <td>unnecessary-comprehension</td>
+                <td>3</td>
+            </tr>
+            
+            <tr>
+                <td>consider-using-in</td>
+                <td>2</td>
+            </tr>
+            
+            <tr>
+                <td>unspecified-encoding</td>
+                <td>5</td>
+            </tr>
+            
+            <tr>
+                <td>too-many-locals</td>
+                <td>4</td>
+            </tr>
+            
+            <tr>
+                <td>import-outside-toplevel</td>
+                <td>4</td>
+            </tr>
+            
+            <tr>
+                <td>f-string-without-interpolation</td>
+                <td>1</td>
+            </tr>
+            
+            <tr>
+                <td>unused-argument</td>
+                <td>1</td>
+            </tr>
+            
+            <tr>
+                <td>simplifiable-if-statement</td>
+                <td>1</td>
+            </tr>
+            
+            <tr>
+                <td>consider-using-with</td>
+                <td>3</td>
+            </tr>
+            
+            <tr>
+                <td>consider-using-enumerate</td>
+                <td>1</td>
+            </tr>
+            
+            <tr>
+                <td>broad-exception-caught</td>
+                <td>1</td>
+            </tr>
+            
+            <tr>
+                <td>missing-final-newline</td>
+                <td>2</td>
+            </tr>
+            
+            <tr>
+                <td>missing-module-docstring</td>
+                <td>2</td>
+            </tr>
+            
+            <tr>
+                <td>too-many-arguments</td>
+                <td>2</td>
+            </tr>
+            
+            <tr>
+                <td>too-many-statements</td>
+                <td>3</td>
+            </tr>
+            
+            <tr>
+                <td>deprecated-method</td>
+                <td>2</td>
+            </tr>
+            
+            <tr>
+                <td>duplicate-code</td>
+                <td>1</td>
             </tr>
             
         </table>
@@ -67,6 +3231,136 @@
                 <th>Count</th>
             </tr>
             
+            <tr>
+                <td>aixweather</td>
+                <td>1</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.data_quality_checks</td>
+                <td>2</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.project_class</td>
+                <td>1</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.transformation_functions.time_observation_transformations</td>
+                <td>4</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.transformation_functions.pass_through_handling</td>
+                <td>11</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.transformation_functions.variable_transformations</td>
+                <td>16</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.transformation_functions.auxiliary</td>
+                <td>7</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.transformation_functions.__init__</td>
+                <td>2</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.transformation_functions.unit_conversions</td>
+                <td>5</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.imports.ERC</td>
+                <td>19</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.imports.utils_import</td>
+                <td>7</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.imports.TRY</td>
+                <td>23</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.imports.custom_file</td>
+                <td>2</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.imports.DWD</td>
+                <td>23</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.imports.EPW</td>
+                <td>2</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.imports.__init__</td>
+                <td>2</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.transformation_to_core_data.ERC</td>
+                <td>13</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.transformation_to_core_data.TRY</td>
+                <td>9</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.transformation_to_core_data.custom_file</td>
+                <td>3</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.transformation_to_core_data.DWD</td>
+                <td>34</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.transformation_to_core_data.EPW</td>
+                <td>8</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.transformation_to_core_data.__init__</td>
+                <td>1</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.core_data_format_2_output_file.unconverted_to_x</td>
+                <td>3</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.core_data_format_2_output_file.to_epw_energyplus</td>
+                <td>34</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.core_data_format_2_output_file.to_mos_TMY3</td>
+                <td>24</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather.core_data_format_2_output_file.__init__</td>
+                <td>2</td>
+            </tr>
+            
         </table>
         
 
@@ -75,6 +3369,136 @@
             <tr>
                 <th>Name</th>
                 <th>Count</th>
+            </tr>
+            
+            <tr>
+                <td>aixweather/__init__.py</td>
+                <td>1</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/data_quality_checks.py</td>
+                <td>2</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/project_class.py</td>
+                <td>1</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/transformation_functions/time_observation_transformations.py</td>
+                <td>4</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/transformation_functions/pass_through_handling.py</td>
+                <td>11</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/transformation_functions/variable_transformations.py</td>
+                <td>16</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/transformation_functions/auxiliary.py</td>
+                <td>7</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/transformation_functions/__init__.py</td>
+                <td>2</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/transformation_functions/unit_conversions.py</td>
+                <td>5</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/imports/ERC.py</td>
+                <td>19</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/imports/utils_import.py</td>
+                <td>7</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/imports/TRY.py</td>
+                <td>23</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/imports/custom_file.py</td>
+                <td>2</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/imports/DWD.py</td>
+                <td>23</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/imports/EPW.py</td>
+                <td>2</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/imports/__init__.py</td>
+                <td>2</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/transformation_to_core_data/ERC.py</td>
+                <td>13</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/transformation_to_core_data/TRY.py</td>
+                <td>9</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/transformation_to_core_data/custom_file.py</td>
+                <td>3</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/transformation_to_core_data/DWD.py</td>
+                <td>34</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/transformation_to_core_data/EPW.py</td>
+                <td>8</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/transformation_to_core_data/__init__.py</td>
+                <td>1</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/core_data_format_2_output_file/unconverted_to_x.py</td>
+                <td>3</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/core_data_format_2_output_file/to_epw_energyplus.py</td>
+                <td>34</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/core_data_format_2_output_file/to_mos_TMY3.py</td>
+                <td>24</td>
+            </tr>
+            
+            <tr>
+                <td>aixweather/core_data_format_2_output_file/__init__.py</td>
+                <td>2</td>
             </tr>
             
         </table>
