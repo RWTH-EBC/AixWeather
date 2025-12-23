@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>aixweather.imports.TRY &mdash; aixweather 0.1.8 documentation</title>
+  <title>aixweather.imports.TRY &mdash; aixweather 0.1.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
@@ -86,6 +86,7 @@
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">_handle_TRY_type</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Determine the TRY format type based on the provided file path.</span>
@@ -128,7 +129,7 @@
             <span class="k">for</span> <span class="n">line_number</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
                 <span class="k">if</span> <span class="s2">&quot;***&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
                     <span class="n">header_row</span> <span class="o">=</span> <span class="p">(</span>
-                        <span class="n">line_number</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span>
+                            <span class="n">line_number</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span>
                     <span class="p">)</span>  <span class="c1"># -1 for header above *** and -1 for start to count at 0</span>
                     <span class="k">break</span>
 
@@ -176,7 +177,6 @@
 
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">geopy.geocoders</span><span class="w"> </span><span class="kn">import</span> <span class="n">Nominatim</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Point</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;Optional dependency &#39;TRY&#39; not installed. Conversion of longitude and &quot;</span>
@@ -198,7 +198,38 @@
     <span class="n">longitude_wgs84</span> <span class="o">=</span> <span class="n">point_wgs84</span><span class="o">.</span><span class="n">x</span>
     <span class="n">latitude_wgs84</span> <span class="o">=</span> <span class="n">point_wgs84</span><span class="o">.</span><span class="n">y</span>
 
-    <span class="c1">### try to get city of location</span>
+    <span class="c1">### try to get city of the location</span>
+    <span class="n">city</span> <span class="o">=</span> <span class="n">get_city_from_location</span><span class="p">(</span>
+        <span class="n">longitude_wgs84</span><span class="o">=</span><span class="n">longitude_wgs84</span><span class="p">,</span>
+        <span class="n">latitude_wgs84</span><span class="o">=</span><span class="n">latitude_wgs84</span><span class="p">,</span>
+        <span class="n">meta</span><span class="o">=</span><span class="n">meta</span>
+    <span class="p">)</span>
+
+    <span class="n">meta</span><span class="o">.</span><span class="n">station_name</span> <span class="o">=</span> <span class="n">city</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">input_source</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;TRY</span><span class="si">{</span><span class="n">TRY_year</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">try_year</span> <span class="o">=</span> <span class="n">TRY_year</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">altitude</span> <span class="o">=</span> <span class="n">hoehenlage</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="n">longitude_wgs84</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="n">latitude_wgs84</span>
+
+    <span class="k">return</span> <span class="n">meta</span></div>
+
+
+<div class="viewcode-block" id="get_city_from_location"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.TRY.get_city_from_location">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_city_from_location</span><span class="p">(</span><span class="n">latitude_wgs84</span><span class="p">,</span> <span class="n">longitude_wgs84</span><span class="p">,</span> <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to get the city of the given latitue and longitude.</span>
+<span class="sd">    If the address is malformatted (i.e. not a city, town, village, o.s.),</span>
+<span class="sd">    the meta.station_name is used as a city.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">geopy.geocoders</span><span class="w"> </span><span class="kn">import</span> <span class="n">Nominatim</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s2">&quot;Optional dependency &#39;TRY&#39; not installed. &quot;</span>
+            <span class="s2">&quot;Not possible to extract city name, using station_name </span><span class="si">%s</span><span class="s2">.&quot;</span><span class="p">,</span>
+            <span class="n">meta</span><span class="o">.</span><span class="n">station_name</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">meta</span><span class="o">.</span><span class="n">station_name</span>
     <span class="c1"># Initialize Nominatim geolocator</span>
     <span class="n">user_agent</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;aixweather_</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="n">geolocator</span> <span class="o">=</span> <span class="n">Nominatim</span><span class="p">(</span><span class="n">user_agent</span><span class="o">=</span><span class="n">user_agent</span><span class="p">)</span>
@@ -221,15 +252,7 @@
         <span class="n">city</span> <span class="o">=</span> <span class="n">address</span><span class="p">[</span><span class="s2">&quot;locality&quot;</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">city</span> <span class="o">=</span> <span class="n">meta</span><span class="o">.</span><span class="n">station_name</span>
-
-    <span class="n">meta</span><span class="o">.</span><span class="n">station_name</span> <span class="o">=</span> <span class="n">city</span>
-    <span class="n">meta</span><span class="o">.</span><span class="n">input_source</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;TRY</span><span class="si">{</span><span class="n">TRY_year</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="n">meta</span><span class="o">.</span><span class="n">try_year</span> <span class="o">=</span> <span class="n">TRY_year</span>
-    <span class="n">meta</span><span class="o">.</span><span class="n">altitude</span> <span class="o">=</span> <span class="n">hoehenlage</span>
-    <span class="n">meta</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="n">longitude_wgs84</span>
-    <span class="n">meta</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="n">latitude_wgs84</span>
-
-    <span class="k">return</span> <span class="n">meta</span></div>
+    <span class="k">return</span> <span class="n">city</span></div>
 
 
 <div class="viewcode-block" id="load_try_from_file"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.TRY.load_try_from_file">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">load_try_from_file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
@@ -242,7 +265,6 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        pd.DataFrame: A DataFrame containing the imported data from the TRY file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
 
     <span class="n">TRY_year</span><span class="p">,</span> <span class="n">header_row</span> <span class="o">=</span> <span class="n">_handle_TRY_type</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
