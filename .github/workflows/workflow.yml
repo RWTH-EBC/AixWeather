@@ -22,4 +22,4 @@ jobs:
       EXECUTE_COVERAGE_TEST: true
       USE_DYMOLA: false
       CONVERT_EXAMPLES: true
-      PYTHON_TEST_MATRIX: '["3.9", "3.10", "3.11", "3.12", "3.13"]'
+      PYTHON_TEST_MATRIX: '["3.9", "3.10", "3.11", "3.12"]'  # 3.13 does not work yet due to wetterdienst lxml dependency
