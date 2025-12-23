@@ -54,6 +54,7 @@ COMBINATIONS = [
     ) for name_path, export_in_utc in itertools.product(NAMES_PATHS, [True, False])
 ]
 
+
 @parameterized_class(COMBINATIONS)
 class TestDWDTRY(BaseTRY, utils_4_tests.RegressionTestsClass):
 
@@ -63,6 +64,9 @@ class TestDWDTRY(BaseTRY, utils_4_tests.RegressionTestsClass):
 
     @classmethod
     def setUpClass(cls):
+        if cls.path is None:
+            raise unittest.SkipTest("Skipping base class TestDWDTRY")
+
         cls.init_and_run_TRY(
             name=cls.name,
             path=os.path.join(definitions.ROOT_DIR, "tests", "test_files", "regular_tests", "TRY", cls.path),

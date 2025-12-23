@@ -5,6 +5,7 @@ import logging
 import calendar
 import datetime as dt
 import pandas as pd
+import numpy as np
 
 from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
@@ -128,17 +129,20 @@ def to_mos(
     ### select the desired columns
     df = auxiliary.force_data_variable_convention(df, format_modelica_TMY3)
 
+    first_utc_year = min(df.index.year)
     df = df.shift(periods=timezone, freq="h", axis=0)
 
-    # tmy3 data must start with 0 at the beginning of year (due to internal
-    # tmy3_reader sun inclination calculation)
-    min_year = min(df.index.year)
+    # In case the timezone-shift leads to year before the actual year of the data,
+    # the time index gets shifted. This way, the first day of simulation is always
+    # present in the data.
     time_of_year = (
-            (df.index.year - min_year) * 365 * 24 * 3600
-            + calendar.leapdays(min_year, df.index.year) * 24 * 3600
+            (df.index.year - first_utc_year) * 365 * 24 * 3600
+            + calendar.leapdays(first_utc_year, df.index.year) * 24 * 3600
             + (df.index.dayofyear - 1) * 24 * 3600
             + df.index.hour * 3600
     )
+    if not np.any((0 <= time_of_year) & (time_of_year <= 86400)):
+        raise ValueError("Logic error in timezone-shifted export, data does not pass the first day")
     df["timeOfYear"] = time_of_year
 
     # to avoid having the one-year duration between start and end of data as

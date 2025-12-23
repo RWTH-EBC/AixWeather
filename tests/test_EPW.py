@@ -45,9 +45,10 @@ NAMES_PATHS = [
 
 COMBINATIONS = [
     dict(
-        city_input=city_name_path[0], path_to_file=city_name_path[2], export_in_utc=export_in_utc, name=city_name_path[1]
+        city_input=city_name_path[0], path=city_name_path[2], export_in_utc=export_in_utc, name=city_name_path[1]
     ) for city_name_path, export_in_utc in itertools.product(NAMES_PATHS, [True, False])
 ]
+
 
 @parameterized_class(COMBINATIONS)
 class TestEPW(BaseEPW, utils_4_tests.RegressionTestsClass):
@@ -55,13 +56,16 @@ class TestEPW(BaseEPW, utils_4_tests.RegressionTestsClass):
     city_input = None
     name = None
     export_in_utc = None
-    path_to_file = None
+    path = None
 
     @classmethod
     def setUpClass(cls):
+        if cls.path is None:
+            raise unittest.SkipTest("Skipping base class TestEPW")
+
         cls.city = cls.city_input
         cls.init_and_run_EPW(
             cls.name,
-            os.path.join(definitions.ROOT_DIR, "tests", "test_files", "regular_tests", "EPW", cls.path_to_file),
+            os.path.join(definitions.ROOT_DIR, "tests", "test_files", "regular_tests", "EPW", cls.path),
             export_in_utc=cls.export_in_utc
         )

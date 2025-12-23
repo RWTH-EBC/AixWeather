@@ -1,0 +1,81 @@
+name: Coverage Tests
+
+on:
+  workflow_call:
+    inputs:
+      PYTHON_VERSION:
+        required: true
+        type: string
+        default: "3.10"
+      TEST_PATH:
+        required: false
+        type: string
+        default: "tests"
+      EXTRA_REQUIREMENTS:
+        required: false
+        type: string
+        default: ""
+      INSTALL_REQUIREMENTS:
+        required: false
+        type: boolean
+        default: true
+      USE_UV:
+        required: false
+        type: boolean
+        default: false
+      DYMOLA_TESTS:
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  dymola_tests:
+    if: ${{ inputs.DYMOLA_TESTS }}
+    runs-on: [ dymola ]
+    container:
+      image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola2024xRefresh1-miniconda
+      options:
+        --user root
+      env:
+        DISPLAY: ":77.0"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Start Xvfb and set up Conda
+        shell: bash
+        run: |
+          Xvfb :77 -extension RANDR -extension GLX &
+          export DISPLAY=:77.0
+          PY_VER=$(echo "${{ inputs.PYTHON_VERSION }}" | grep -oE '[0-9]+\.[0-9]+')
+          conda create -n pyCITest python=$PY_VER -y
+          echo "CONDA_ENV=pyCITest" >> $GITHUB_ENV
+
+      - name: Install Project and Requirements
+        shell: bash
+        run: |
+          source activate $CONDA_ENV
+          pip install --upgrade pip
+          if [[ "${{ inputs.USE_UV }}" == "true" ]]; then
+            pip install uv
+            export INSTALL_CMD="uv pip install --system"
+          else
+            export INSTALL_CMD="pip install"
+          fi
+          if [[ "${{ inputs.INSTALL_REQUIREMENTS }}" == "true" ]] && [ -f requirements.txt ]; then
+            $INSTALL_CMD -r requirements.txt
+          fi
+          if [ -f setup.py ] || [ -f pyproject.toml ]; then
+            $INSTALL_CMD -e .${{ inputs.EXTRA_REQUIREMENTS }}
+          fi
+
+      - name: Install test dependencies
+        shell: bash
+        run: |
+          source activate $CONDA_ENV
+          pip install pytest
+
+      - name: Run tests
+        if: steps.skip.outputs.skip == 'false'
+        run: |
+          python -m pytest ${{ inputs.TEST_PATH }} --dymola
