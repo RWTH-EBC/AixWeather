@@ -52,7 +52,6 @@ def load_csv(folder_tests, result_folder, file_name):
 
 
 def delete_created_result_files(result_folder):
-    return
     # delete results folder
     if os.path.exists(result_folder):
         shutil.rmtree(result_folder)
