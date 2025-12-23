@@ -74,10 +74,7 @@ class TestDWDHistorical10Days(BaseDWDHistorical, utils_4_tests.RegressionTestsCl
         )
 
 
-@parameterized_class([dict(export_in_utc=export_in_utc) for export_in_utc in [True, False]])
 class TestDWDHistoricalNoAssert(BaseDWDHistorical):
-
-    export_in_utc = None
 
     @parameterized.expand(
         [
@@ -105,4 +102,4 @@ class TestDWDHistoricalNoAssert(BaseDWDHistorical):
     )
     def test_imports_and_transformation_without_assert(self, name, start, end):
         name = "TestDWDHistoricalNoAssert"  # enable teardown clean up through same result folder per parameter set
-        self.init_and_run_DWD_historical(name, start, end, export_in_utc=self.export_in_utc)
+        self.init_and_run_DWD_historical(name, start, end, export_in_utc=False)

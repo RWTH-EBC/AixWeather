@@ -8,7 +8,7 @@ import os.path
 import unittest
 import pandas as pd
 
-from parameterized import parameterized
+from parameterized import parameterized, parameterized_class
 
 from aixweather import definitions
 from aixweather.project_class import ProjectClassDWDForecast
@@ -39,9 +39,13 @@ class BaseDWDForecast(unittest.TestCase):
         utils_4_tests.delete_created_result_files(cls.c.abs_result_folder_path)
 
 
+@parameterized_class([dict(export_in_utc=export_in_utc) for export_in_utc in [True, False]])
 class TestDWDForecastFromImportedData(
     BaseDWDForecast, utils_4_tests.RegressionTestsClass
 ):
+
+    export_in_utc = None
+
     @classmethod
     def setUpClass(cls):
         station = "06710"
@@ -69,8 +73,8 @@ class TestDWDForecastFromImportedData(
         cls.c.data_2_core_data()
         cls.c.core_2_pickle()
         cls.c.core_2_json()
-        cls.c.core_2_mos(export_in_utc=True)
-        cls.c.core_2_epw(export_in_utc=True)
+        cls.c.core_2_mos(export_in_utc=cls.export_in_utc)
+        cls.c.core_2_epw(export_in_utc=cls.export_in_utc)
         cls.c.core_2_csv()
 
         cls.start_formatted = cls.c.start.strftime("%Y%m%d")
