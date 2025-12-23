@@ -217,7 +217,7 @@
             <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">hour</span> <span class="o">*</span> <span class="mi">3600</span>
     <span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">((</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">time_of_year</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">time_of_year</span> <span class="o">&lt;=</span> <span class="mi">86400</span><span class="p">)):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Logic error in timezone-shifted export, data does not pass the first day&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s2">&quot;Data does not pass the first day of simulation, carefully check simulation results.&quot;</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s2">&quot;timeOfYear&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_of_year</span>
 
     <span class="c1"># to avoid having the one-year duration between start and end of data as</span>

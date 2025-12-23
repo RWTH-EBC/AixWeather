@@ -3117,6 +3117,17 @@
             "type": "convention",
             "module": "aixweather.core_data_format_2_output_file.to_mos_TMY3",
             "obj": "",
+            "line": 145,
+            "column": 0,
+            "path": "aixweather/core_data_format_2_output_file/to_mos_TMY3.py",
+            "symbol": "line-too-long",
+            "message": "Line too long (110/100)",
+            "message-id": "C0301"
+        },
+        {
+            "type": "convention",
+            "module": "aixweather.core_data_format_2_output_file.to_mos_TMY3",
+            "obj": "",
             "line": 1,
             "column": 0,
             "path": "aixweather/core_data_format_2_output_file/to_mos_TMY3.py",
@@ -3478,7 +3489,7 @@
                 "warning": 3
             },
             "aixweather.core_data_format_2_output_file.to_mos_TMY3": {
-                "convention": 29,
+                "convention": 30,
                 "error": 2,
                 "fatal": 0,
                 "info": 0,
@@ -3499,7 +3510,7 @@
         "by_msg": {
             "import-error": 28,
             "too-few-public-methods": 6,
-            "line-too-long": 120,
+            "line-too-long": 121,
             "redefined-builtin": 3,
             "cell-var-from-loop": 1,
             "logging-fstring-interpolation": 1,
@@ -3588,73 +3599,73 @@
                 "aixweather.project_class"
             ],
             "aixweather.transformation_functions.auxiliary": [
-                "aixweather.transformation_functions.pass_through_handling",
-                "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
+                "aixweather.transformation_functions.pass_through_handling",
                 "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.transformation_to_core_data.TRY",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.TRY"
             ],
             "aixweather.imports.utils_import": [
-                "aixweather.core_data_format_2_output_file.unconverted_to_x",
-                "aixweather.transformation_functions.pass_through_handling",
-                "aixweather.transformation_to_core_data.EPW",
-                "aixweather.imports.EPW",
-                "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_functions.variable_transformations",
-                "aixweather.imports.ERC",
-                "aixweather.imports.TRY",
-                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.core_data_format_2_output_file.unconverted_to_x",
+                "aixweather.imports.EPW",
                 "aixweather.transformation_to_core_data.ERC",
-                "aixweather.imports.custom_file",
-                "aixweather.transformation_to_core_data.TRY",
-                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
                 "aixweather.imports.DWD",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
+                "aixweather.transformation_functions.pass_through_handling",
+                "aixweather.imports.ERC",
+                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
+                "aixweather.imports.custom_file",
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.imports.TRY",
+                "aixweather.transformation_to_core_data.TRY"
             ],
             "aixweather.definitions": [
                 "aixweather.core_data_format_2_output_file.unconverted_to_x",
-                "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
                 "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
+                "aixweather.imports.DWD",
                 "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.transformation_to_core_data.TRY",
-                "aixweather.imports.DWD"
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.TRY"
             ],
             "aixweather.transformation_functions.time_observation_transformations": [
-                "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
                 "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.transformation_to_core_data.TRY",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.TRY"
             ],
             "aixweather.transformation_functions.variable_transformations": [
-                "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_to_core_data.ERC",
                 "aixweather.transformation_to_core_data.EPW",
                 "aixweather.transformation_to_core_data.TRY"
             ],
             "aixweather.transformation_functions.pass_through_handling": [
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
+                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.TRY"
+            ],
+            "aixweather.transformation_functions.unit_conversions": [
                 "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_to_core_data.DWD",
                 "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.EPW",
-                "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.transformation_to_core_data.TRY",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
-            ],
-            "aixweather.transformation_functions.unit_conversions": [
-                "aixweather.transformation_to_core_data.DWD",
-                "aixweather.transformation_to_core_data.TRY",
-                "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.transformation_to_core_data.ERC"
+                "aixweather.transformation_to_core_data.TRY"
             ]
         },
         "duplicated_lines": {
@@ -3673,7 +3684,7 @@
             "method": 11,
             "module": 2
         },
-        "convention": 197,
+        "convention": 198,
         "error": 33,
         "fatal": 0,
         "info": 0,
@@ -3927,7 +3938,7 @@
                 "warning": 3
             },
             "aixweather.core_data_format_2_output_file.to_mos_TMY3": {
-                "convention": 29,
+                "convention": 30,
                 "error": 2,
                 "fatal": 0,
                 "info": 0,
@@ -3948,7 +3959,7 @@
         "by_msg": {
             "import-error": 28,
             "too-few-public-methods": 6,
-            "line-too-long": 120,
+            "line-too-long": 121,
             "redefined-builtin": 3,
             "cell-var-from-loop": 1,
             "logging-fstring-interpolation": 1,
@@ -4021,8 +4032,8 @@
                 "aixweather.project_class"
             ],
             "aixweather.transformation_to_core_data.EPW": [
-                "aixweather.project_class",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
+                "aixweather.project_class"
             ],
             "aixweather.transformation_to_core_data.custom_file": [
                 "aixweather.project_class"
@@ -4037,73 +4048,73 @@
                 "aixweather.project_class"
             ],
             "aixweather.transformation_functions.auxiliary": [
-                "aixweather.transformation_functions.pass_through_handling",
+                "aixweather.transformation_to_core_data.ERC",
                 "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_to_core_data.DWD",
-                "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
+                "aixweather.transformation_functions.pass_through_handling",
                 "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.transformation_to_core_data.TRY",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.TRY"
             ],
             "aixweather.imports.utils_import": [
-                "aixweather.core_data_format_2_output_file.unconverted_to_x",
-                "aixweather.transformation_functions.pass_through_handling",
-                "aixweather.imports.EPW",
-                "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
                 "aixweather.transformation_functions.variable_transformations",
-                "aixweather.imports.ERC",
-                "aixweather.imports.TRY",
-                "aixweather.imports.custom_file",
-                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.core_data_format_2_output_file.unconverted_to_x",
+                "aixweather.imports.EPW",
                 "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
+                "aixweather.imports.DWD",
+                "aixweather.transformation_functions.pass_through_handling",
+                "aixweather.imports.ERC",
                 "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.transformation_to_core_data.TRY",
-                "aixweather.imports.DWD"
+                "aixweather.imports.custom_file",
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.imports.TRY",
+                "aixweather.transformation_to_core_data.TRY"
             ],
             "aixweather.definitions": [
                 "aixweather.core_data_format_2_output_file.unconverted_to_x",
-                "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
-                "aixweather.transformation_to_core_data.DWD",
                 "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.custom_file",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
+                "aixweather.imports.DWD",
                 "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.transformation_to_core_data.TRY",
-                "aixweather.imports.DWD"
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.TRY"
             ],
             "aixweather.transformation_functions.time_observation_transformations": [
+                "aixweather.transformation_to_core_data.ERC",
                 "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_to_core_data.DWD",
-                "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
                 "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.transformation_to_core_data.TRY",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.TRY"
             ],
             "aixweather.transformation_functions.variable_transformations": [
-                "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_to_core_data.DWD",
                 "aixweather.transformation_to_core_data.ERC",
+                "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_to_core_data.EPW",
                 "aixweather.transformation_to_core_data.TRY"
             ],
             "aixweather.transformation_functions.pass_through_handling": [
+                "aixweather.transformation_to_core_data.ERC",
                 "aixweather.transformation_to_core_data.custom_file",
                 "aixweather.transformation_to_core_data.DWD",
-                "aixweather.transformation_to_core_data.ERC",
-                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.core_data_format_2_output_file.to_epw_energyplus",
                 "aixweather.core_data_format_2_output_file.to_mos_TMY3",
-                "aixweather.transformation_to_core_data.TRY",
-                "aixweather.core_data_format_2_output_file.to_epw_energyplus"
+                "aixweather.transformation_to_core_data.EPW",
+                "aixweather.transformation_to_core_data.TRY"
             ],
             "aixweather.transformation_functions.unit_conversions": [
-                "aixweather.transformation_to_core_data.DWD",
-                "aixweather.transformation_to_core_data.TRY",
                 "aixweather.transformation_to_core_data.custom_file",
-                "aixweather.transformation_to_core_data.ERC"
+                "aixweather.transformation_to_core_data.ERC",
+                "aixweather.transformation_to_core_data.DWD",
+                "aixweather.transformation_to_core_data.TRY"
             ]
         },
         "duplicated_lines": {
@@ -4122,14 +4133,14 @@
             "method": 11,
             "module": 2
         },
-        "convention": 197,
+        "convention": 198,
         "error": 33,
         "fatal": 0,
         "info": 0,
         "refactor": 30,
         "statement": 1302,
         "warning": 34,
-        "global_note": 6.728110599078341,
+        "global_note": 6.720430107526882,
         "nb_duplicated_lines": 5,
         "percent_duplicated_lines": 0.11488970588235294
     }

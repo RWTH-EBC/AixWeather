@@ -307,6 +307,7 @@ aixweather/core_data_format_2_output_file/to_mos_TMY3.py:64:0: C0301: Line too l
 aixweather/core_data_format_2_output_file/to_mos_TMY3.py:66:0: C0301: Line too long (104/100) (line-too-long)
 aixweather/core_data_format_2_output_file/to_mos_TMY3.py:68:0: C0301: Line too long (113/100) (line-too-long)
 aixweather/core_data_format_2_output_file/to_mos_TMY3.py:69:0: C0301: Line too long (101/100) (line-too-long)
+aixweather/core_data_format_2_output_file/to_mos_TMY3.py:145:0: C0301: Line too long (110/100) (line-too-long)
 aixweather/core_data_format_2_output_file/to_mos_TMY3.py:1:0: C0103: Module name "to_mos_TMY3" doesn't conform to snake_case naming style (invalid-name)
 aixweather/core_data_format_2_output_file/to_mos_TMY3.py:7:0: E0401: Unable to import 'pandas' (import-error)
 aixweather/core_data_format_2_output_file/to_mos_TMY3.py:8:0: E0401: Unable to import 'numpy' (import-error)
@@ -322,19 +323,14 @@ aixweather/core_data_format_2_output_file/__init__.py:1:0: R0801: Similar lines 
 ==aixweather.transformation_to_core_data.TRY:[103:111]
 ==aixweather.transformation_to_core_data.custom_file:[57:70]
         df = auxiliary.force_data_variable_convention(df, definitions.format_core_data)
-
         ### convert units
-        # insert unit conversions like desired (examples follow)
         df["TotalSkyCover"] = unit_conversions.eigth_to_tenth(df["TotalSkyCover"])
         df["AtmPressure"] = unit_conversions.hPa_to_Pa(df["AtmPressure"])
-
         ### impute missing variables from other available ones
-        # add additionaly required transformations to
-        # variable_transformations.variable_transform_all or apply them directly here
         df, calc_overview = variable_transformations.variable_transform_all(df, meta)
         return df, calc_overview
  (duplicate-code)
 
 -----------------------------------
-Your code has been rated at 6.73/10
+Your code has been rated at 6.72/10
 
