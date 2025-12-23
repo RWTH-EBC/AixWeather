@@ -1,0 +1,322 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>aixweather.transformation_to_core_data.EPW &mdash; aixweather 0.1.9 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../../../_static/jquery.js"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+      <script src="../../../_static/doctools.js"></script>
+      <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            aixweather
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Tutorial and Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">aixweather</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html">Contribute as a user</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../version_his.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">aixweather</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">aixweather.transformation_to_core_data.EPW</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for aixweather.transformation_to_core_data.EPW</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module includes a function to transform EPW data to core data format.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">aixweather</span><span class="w"> </span><span class="kn">import</span> <span class="n">definitions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.imports.utils_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetaData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.transformation_functions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">auxiliary</span><span class="p">,</span>
+    <span class="n">time_observation_transformations</span><span class="p">,</span>
+    <span class="n">variable_transformations</span><span class="p">,</span>
+    <span class="n">pass_through_handling</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="EPWFormat"><a class="viewcode-back" href="../../../code/aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.EPW.EPWFormat">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">EPWFormat</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Information on EPW format:</span>
+<span class="sd">    Online sources for EPW data: https://climate.onebuilding.org/default.html and</span>
+<span class="sd">    https://www.ladybug.tools/epwmap/</span>
+
+<span class="sd">    Format info:</span>
+<span class="sd">        - key = output data point name</span>
+<span class="sd">        - core_name = corresponding name matching the format_core_data</span>
+<span class="sd">        - time_of_meas_shift = desired 30min shifting+interpolation to convert the value that is &quot;at</span>
+<span class="sd">          indicated time&quot; to &quot;average of preceding hour&quot; (ind2prec).</span>
+<span class="sd">        - unit = unit of the output data following the naming convention of format_core_data</span>
+<span class="sd">        - nan = The default values stated from the format information, those values are</span>
+<span class="sd">          filled if nan.</span>
+
+<span class="sd">    All changes here automatically change the calculations.</span>
+<span class="sd">    Exception: unit conversions have to be added manually.</span>
+
+<span class="sd">    Information for shifting:</span>
+<span class="sd">        Hour: This is the hour of the data. (1 - 24). Hour 1 is 00:01 to 01:00.</span>
+<span class="sd">        Cannot be missing. but e.g.:</span>
+<span class="sd">        DryBulbTemp: This is the dry bulb temperature in C at the time indicated. and:</span>
+<span class="sd">        GlobHorRad: received on a horizontal surface during the hour preceding the time indicated.</span>
+<span class="sd">        ----&gt; Hence, we assume that hour 1 should show the DryBulbTemp from</span>
+<span class="sd">        0:30 to 1:30, i.e. the Temp at indicated time.</span>
+
+<span class="sd">    time of measurement checked by Martin Rätz (07.08.2023)</span>
+<span class="sd">    units checked by Martin Rätz (07.08.2023)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="EPWFormat.import_format"><a class="viewcode-back" href="../../../code/aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.EPW.EPWFormat.import_format">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">import_format</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inverts the export format from core2export to import2core</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">export_format</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">export_format</span><span class="p">()</span>
+        <span class="n">import_format</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">export_format</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">import_format</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">time_shift</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">time_shift</span> <span class="o">==</span> <span class="s2">&quot;ind2prec&quot;</span><span class="p">:</span>
+                <span class="n">value</span><span class="p">[</span><span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;prec2ind&quot;</span>
+            <span class="k">elif</span> <span class="n">time_shift</span> <span class="o">==</span> <span class="s2">&quot;ind2foll&quot;</span><span class="p">:</span>
+                <span class="n">value</span><span class="p">[</span><span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;foll2ind&quot;</span>
+        <span class="k">return</span> <span class="n">import_format</span></div>
+
+<div class="viewcode-block" id="EPWFormat.export_format"><a class="viewcode-back" href="../../../code/aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.EPW.EPWFormat.export_format">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export_format</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;Year&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+            <span class="s2">&quot;Month&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+            <span class="s2">&quot;Day&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+            <span class="s2">&quot;Hour&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;hour&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+            <span class="s2">&quot;Minute&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;minute&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+            <span class="s2">&quot;Data Source and Uncertainty Flags&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="s2">&quot;?&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;DryBulbTemp&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DryBulbTemp&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">99.9</span><span class="p">},</span>
+            <span class="s2">&quot;DewPointTemp&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DewPointTemp&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;degC&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">99.9</span><span class="p">},</span>
+            <span class="s2">&quot;RelHum&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;RelHum&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;percent&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">999.0</span><span class="p">},</span>
+            <span class="s2">&quot;AtmPressure&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AtmPressure&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Pa&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">999999.0</span><span class="p">},</span>
+            <span class="s2">&quot;ExtHorRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;ExtHorRad&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">9999.0</span><span class="p">},</span>
+            <span class="s2">&quot;ExtDirNormRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;ExtDirNormRad&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">9999.0</span><span class="p">},</span>
+            <span class="s2">&quot;HorInfra&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;HorInfra&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">9999.0</span><span class="p">},</span>
+            <span class="s2">&quot;GlobHorRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;GlobHorRad&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">9999.0</span><span class="p">},</span>
+            <span class="s2">&quot;DirNormRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DirNormRad&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">9999.0</span><span class="p">},</span>
+            <span class="s2">&quot;DiffHorRad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DiffHorRad&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Wh/m2&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">9999.0</span><span class="p">},</span>
+            <span class="s2">&quot;GlobHorIll&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;GlobHorIll&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;lux&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">999999.0</span><span class="p">},</span>
+            <span class="s2">&quot;DirecNormIll&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DirecNormIll&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;lux&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">999999.0</span><span class="p">},</span>
+            <span class="s2">&quot;DiffuseHorIll&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DiffuseHorIll&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;lux&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">999999.0</span><span class="p">},</span>
+            <span class="s2">&quot;ZenithLum&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;ZenithLum&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;Cd/m2&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="s1">&#39;ind2prec&#39;</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">9999.0</span><span class="p">},</span>
+            <span class="s2">&quot;WindDir&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;WindDir&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;deg&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">999.0</span><span class="p">},</span>
+            <span class="s2">&quot;WindSpeed&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;WindSpeed&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;m/s&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">999.0</span><span class="p">},</span>
+            <span class="s2">&quot;TotalSkyCover&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;TotalSkyCover&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;1tenth&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">99</span><span class="p">},</span>
+            <span class="s2">&quot;OpaqueSkyCover&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;OpaqueSkyCover&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;1tenth&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">99</span><span class="p">},</span>
+            <span class="s2">&quot;Visibility&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Visibility&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;km&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">9999.0</span><span class="p">},</span>
+            <span class="s2">&quot;CeilingH&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;CeilingH&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">99999</span><span class="p">},</span>
+            <span class="s2">&quot;WeatherObs&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>
+            <span class="s2">&quot;WeatherCode&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">999999999</span><span class="p">},</span>
+            <span class="s2">&quot;PrecWater&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;PrecWater&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;mm&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">999.0</span><span class="p">},</span>
+            <span class="s2">&quot;Aerosol&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Aerosol&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;1thousandth&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">0.999</span><span class="p">},</span>
+            <span class="s2">&quot;Snow&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;cm&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mf">999.0</span><span class="p">},</span>
+            <span class="s2">&quot;DaysSinceSnow&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;days&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">99</span><span class="p">},</span>
+            <span class="s2">&quot;Albedo&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">999</span><span class="p">},</span>
+            <span class="s2">&quot;LiquidPrecD&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;LiquidPrecD&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;mm/h&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">999</span><span class="p">},</span>
+            <span class="s2">&quot;LiquidPrepQuant&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;core_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;hours&quot;</span><span class="p">,</span> <span class="s2">&quot;time_of_meas_shift&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">99</span><span class="p">},</span>
+        <span class="p">}</span></div></div>
+
+
+<div class="viewcode-block" id="EPW_to_core_data"><a class="viewcode-back" href="../../../code/aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.EPW.EPW_to_core_data">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">EPW_to_core_data</span><span class="p">(</span><span class="n">df_import</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transform imported EPW (EnergyPlus Weather) data into core data format.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df_import (pd.DataFrame): The DataFrame containing imported EPW weather data.</span>
+<span class="sd">        meta (MetaData): Metadata associated with the data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: The transformed DataFrame in the core data format.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">format_epw</span> <span class="o">=</span> <span class="n">EPWFormat</span><span class="o">.</span><span class="n">import_format</span><span class="p">()</span>
+
+    <span class="c1"># evaluate correctness of format</span>
+    <span class="n">auxiliary</span><span class="o">.</span><span class="n">evaluate_transformations</span><span class="p">(</span>
+        <span class="n">core_format</span><span class="o">=</span><span class="n">definitions</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">,</span> <span class="n">other_format</span><span class="o">=</span><span class="n">format_epw</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">epw_to_datetimeindex</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Convert the first 4 columns of the DataFrame to a DatetimeIndex and set it as the</span>
+<span class="sd">        index.&#39;&#39;&#39;</span>
+        <span class="c1"># loop one by one to avoid faults with non-continuous data</span>
+        <span class="n">datetime_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">hour</span> <span class="o">=</span> <span class="n">row</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">hour</span> <span class="o">==</span> <span class="mi">24</span><span class="p">:</span>
+                <span class="n">hour</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="c1"># Increment the day by one for those rows where hour</span>
+                <span class="c1"># was originally 24</span>
+                <span class="n">row_datetime</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">hour</span><span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">row_datetime</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">hour</span><span class="p">)</span>
+            <span class="n">datetime_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row_datetime</span><span class="p">)</span>
+
+        <span class="c1"># Setting datetime column as index with name &#39;datetime&#39;</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">datetime_list</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;datetime&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">df</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">if_TMY_convert_to_one_year</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;TMY (typical meteorological year) data in .epw files often contains data for a period</span>
+<span class="sd">        of one year but each month is from a different year. This will lead to several years of</span>
+<span class="sd">        nan data in between. As the year is irrelevant in tmy data, we set all dates to the year</span>
+<span class="sd">        of februaries data. February is chosen to avoid leap year issues.</span>
+
+<span class="sd">        It is automatically detected whether it is a TMY through the following criteria:</span>
+<span class="sd">        - the available data covers exactly 8760 data points (one non-leap year)</span>
+<span class="sd">        - the period covered by the timestamps spans more than one year</span>
+<span class="sd">        - the first date is the first of January at hour 1</span>
+
+<span class="sd">        This will lead to an info log message if the data is transformed.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">==</span> <span class="mi">8760</span> <span class="c1"># exactly one year of data</span>
+            <span class="ow">and</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="c1"># spanning over more than one year</span>
+            <span class="ow">and</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="c1"># first month is January</span>
+            <span class="ow">and</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="c1"># first day is one</span>
+            <span class="ow">and</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="c1"># first hour is one</span>
+        <span class="p">):</span>
+            <span class="n">year_of_february</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c1"># Replace the year component with the year of February</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">year_of_february</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;The data was transformed to one year of data as it seems to be TMY data.&quot;</span>
+                <span class="s2">&quot;The year is irrelevant for TMY data.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">df</span>
+
+    <span class="c1">### preprocessing raw data for further operations</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_import</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">if_TMY_convert_to_one_year</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">epw_to_datetimeindex</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="c1"># Resample the DataFrame to make the DatetimeIndex complete and monotonic</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">asfreq</span><span class="p">()</span>
+    <span class="c1"># give names to columns according to documentation of import data</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">format_epw</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+    <span class="c1"># rename available variables to core data format</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">rename_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">format_epw</span><span class="p">)</span>
+    <span class="c1"># delete dummy values from EPW</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">replace_dummy_with_nan</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">format_epw</span><span class="p">)</span>
+
+    <span class="c1">### convert timezone to UTC+0</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">periods</span><span class="o">=-</span><span class="n">meta</span><span class="o">.</span><span class="n">timezone</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1">### shift and interpolate data forward 30mins or backward -30mins</span>
+    <span class="n">df_no_shift</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">time_observation_transformations</span><span class="o">.</span><span class="n">shift_time_by_dict</span><span class="p">(</span><span class="n">format_epw</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+        <span class="c1">### force variable naming format_core_data</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">force_data_variable_convention</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">definitions</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">)</span>
+        <span class="c1">### unit conversion</span>
+        <span class="c1"># all units correct</span>
+        <span class="c1">### impute missing variables from other available ones</span>
+        <span class="n">df</span><span class="p">,</span> <span class="n">calc_overview</span> <span class="o">=</span> <span class="n">variable_transformations</span><span class="o">.</span><span class="n">variable_transform_all</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">meta</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">calc_overview</span>
+
+    <span class="n">df</span><span class="p">,</span> <span class="n">meta</span><span class="o">.</span><span class="n">executed_transformations</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+    <span class="c1">### add unshifted data for possible later direct use (pass-through),</span>
+    <span class="c1">### to avoid back and forth interpolating</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pass_through_handling</span><span class="o">.</span><span class="n">create_pass_through_variables</span><span class="p">(</span>
+        <span class="n">df_shifted</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+        <span class="n">df_no_shift</span><span class="o">=</span><span class="n">df_no_shift</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="n">format_epw</span><span class="p">,</span>
+        <span class="n">transform_func</span><span class="o">=</span><span class="n">transform</span><span class="p">,</span>
+        <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, EON EBC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
