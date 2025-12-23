@@ -88,24 +88,24 @@ aixweather/imports/utils_import.py:63:4: R1710: Either all return statements in 
 aixweather/imports/TRY.py:200:13: W1401: Anomalous backslash in string: '\s'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
 aixweather/imports/TRY.py:1:0: C0103: Module name "TRY" doesn't conform to snake_case naming style (invalid-name)
 aixweather/imports/TRY.py:8:0: E0401: Unable to import 'pandas' (import-error)
-aixweather/imports/TRY.py:14:0: C0103: Function name "_handle_TRY_type" doesn't conform to snake_case naming style (invalid-name)
-aixweather/imports/TRY.py:28:4: C0103: Variable name "TRY_year" doesn't conform to snake_case naming style (invalid-name)
-aixweather/imports/TRY.py:31:4: C0103: Variable name "TRY_file_naming" doesn't conform to snake_case naming style (invalid-name)
-aixweather/imports/TRY.py:39:8: C0206: Consider iterating with .items() (consider-using-dict-items)
-aixweather/imports/TRY.py:39:19: C0201: Consider iterating the dictionary directly instead of calling .keys() (consider-iterating-dictionary)
-aixweather/imports/TRY.py:41:16: C0103: Variable name "TRY_year" doesn't conform to snake_case naming style (invalid-name)
-aixweather/imports/TRY.py:46:25: R1721: Unnecessary use of a comprehension, use list(TRY_file_naming.keys()) instead. (unnecessary-comprehension)
-aixweather/imports/TRY.py:46:41: C0201: Consider iterating the dictionary directly instead of calling .keys() (consider-iterating-dictionary)
-aixweather/imports/TRY.py:48:7: R1714: Consider merging these comparisons with 'in' by using 'TRY_year in (2004, 2010)'. Use a set instead if elements are hashable. (consider-using-in)
-aixweather/imports/TRY.py:51:7: R1714: Consider merging these comparisons with 'in' by using 'TRY_year in (2015, 2045)'. Use a set instead if elements are hashable. (consider-using-in)
-aixweather/imports/TRY.py:52:13: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
-aixweather/imports/TRY.py:63:0: R0914: Too many local variables (22/15) (too-many-locals)
-aixweather/imports/TRY.py:75:4: C0103: Variable name "TRY_year" doesn't conform to snake_case naming style (invalid-name)
-aixweather/imports/TRY.py:79:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
-aixweather/imports/TRY.py:103:8: C0415: Import outside toplevel (geopandas) (import-outside-toplevel)
-aixweather/imports/TRY.py:104:8: C0415: Import outside toplevel (shapely.geometry.Point) (import-outside-toplevel)
-aixweather/imports/TRY.py:106:8: W0707: Consider explicitly re-raising using 'except ImportError as exc' and 'raise ImportError("Optional dependency 'TRY' not installed. Conversion of longitude and latitude not possible and hence no radiation transformation.") from exc' (raise-missing-from)
-aixweather/imports/TRY.py:149:8: C0415: Import outside toplevel (geopy.geocoders.Nominatim) (import-outside-toplevel)
+aixweather/imports/TRY.py:15:0: C0103: Function name "_handle_TRY_type" doesn't conform to snake_case naming style (invalid-name)
+aixweather/imports/TRY.py:29:4: C0103: Variable name "TRY_year" doesn't conform to snake_case naming style (invalid-name)
+aixweather/imports/TRY.py:32:4: C0103: Variable name "TRY_file_naming" doesn't conform to snake_case naming style (invalid-name)
+aixweather/imports/TRY.py:40:8: C0206: Consider iterating with .items() (consider-using-dict-items)
+aixweather/imports/TRY.py:40:19: C0201: Consider iterating the dictionary directly instead of calling .keys() (consider-iterating-dictionary)
+aixweather/imports/TRY.py:42:16: C0103: Variable name "TRY_year" doesn't conform to snake_case naming style (invalid-name)
+aixweather/imports/TRY.py:47:25: R1721: Unnecessary use of a comprehension, use list(TRY_file_naming.keys()) instead. (unnecessary-comprehension)
+aixweather/imports/TRY.py:47:41: C0201: Consider iterating the dictionary directly instead of calling .keys() (consider-iterating-dictionary)
+aixweather/imports/TRY.py:49:7: R1714: Consider merging these comparisons with 'in' by using 'TRY_year in (2004, 2010)'. Use a set instead if elements are hashable. (consider-using-in)
+aixweather/imports/TRY.py:52:7: R1714: Consider merging these comparisons with 'in' by using 'TRY_year in (2015, 2045)'. Use a set instead if elements are hashable. (consider-using-in)
+aixweather/imports/TRY.py:53:13: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+aixweather/imports/TRY.py:64:0: R0914: Too many local variables (22/15) (too-many-locals)
+aixweather/imports/TRY.py:76:4: C0103: Variable name "TRY_year" doesn't conform to snake_case naming style (invalid-name)
+aixweather/imports/TRY.py:80:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+aixweather/imports/TRY.py:104:8: C0415: Import outside toplevel (geopandas) (import-outside-toplevel)
+aixweather/imports/TRY.py:105:8: C0415: Import outside toplevel (shapely.geometry.Point) (import-outside-toplevel)
+aixweather/imports/TRY.py:107:8: W0707: Consider explicitly re-raising using 'except ImportError as exc' and 'raise ImportError("Optional dependency 'TRY' not installed. Conversion of longitude and latitude not possible and hence no radiation transformation.") from exc' (raise-missing-from)
+aixweather/imports/TRY.py:150:8: C0415: Import outside toplevel (geopy.geocoders.Nominatim) (import-outside-toplevel)
 aixweather/imports/TRY.py:194:4: C0103: Variable name "TRY_year" doesn't conform to snake_case naming style (invalid-name)
 aixweather/imports/TRY.py:194:4: W0612: Unused variable 'TRY_year' (unused-variable)
 ************* Module aixweather.imports.custom_file
@@ -285,10 +285,15 @@ aixweather/core_data_format_2_output_file/__init__.py:1:0: R0801: Similar lines 
 ==aixweather.transformation_to_core_data.TRY:[96:104]
 ==aixweather.transformation_to_core_data.custom_file:[57:70]
         df = auxiliary.force_data_variable_convention(df, definitions.format_core_data)
+
         ### convert units
+        # insert unit conversions like desired (examples follow)
         df["TotalSkyCover"] = unit_conversions.eigth_to_tenth(df["TotalSkyCover"])
         df["AtmPressure"] = unit_conversions.hPa_to_Pa(df["AtmPressure"])
+
         ### impute missing variables from other available ones
+        # add additionaly required transformations to
+        # variable_transformations.variable_transform_all or apply them directly here
         df, calc_overview = variable_transformations.variable_transform_all(df, meta)
         return df, calc_overview
  (duplicate-code)
