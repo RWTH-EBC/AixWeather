@@ -323,10 +323,15 @@ aixweather/core_data_format_2_output_file/__init__.py:1:0: R0801: Similar lines 
 ==aixweather.transformation_to_core_data.TRY:[103:111]
 ==aixweather.transformation_to_core_data.custom_file:[57:70]
         df = auxiliary.force_data_variable_convention(df, definitions.format_core_data)
+
         ### convert units
+        # insert unit conversions like desired (examples follow)
         df["TotalSkyCover"] = unit_conversions.eigth_to_tenth(df["TotalSkyCover"])
         df["AtmPressure"] = unit_conversions.hPa_to_Pa(df["AtmPressure"])
+
         ### impute missing variables from other available ones
+        # add additionaly required transformations to
+        # variable_transformations.variable_transform_all or apply them directly here
         df, calc_overview = variable_transformations.variable_transform_all(df, meta)
         return df, calc_overview
  (duplicate-code)
