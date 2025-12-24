@@ -150,9 +150,9 @@ class TestTMY3MOSReaderImpactOfTimeZone(unittest.TestCase):
             summer=False
         )
         for file in results.values():
-            df = pd.read_csv(file, sep=";")
-            df_ref = pd.read_csv(self.reference_path.joinpath("first_day", file.name))
-            self.assertEqual(df, df_ref)
+            df = pd.read_csv(file, sep=";", index_col=0)
+            df_ref = pd.read_csv(self.reference_path.joinpath("first_day", file.name), sep=";", index_col=0)
+            self.assertTrue(df.equals(df_ref))
 
     def test_reference_results_summer(self):
         results = create_results(
