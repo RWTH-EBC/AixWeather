@@ -149,10 +149,7 @@ class TestTMY3MOSReaderImpactOfTimeZone(unittest.TestCase):
             result_dir=self.simulation_dir.joinpath("results_first_day"),
             summer=False
         )
-        for file in results.values():
-            df = pd.read_csv(file, sep=";", index_col=0)
-            df_ref = pd.read_csv(self.reference_path.joinpath("first_day", file.name), sep=";", index_col=0)
-            self.assertTrue(df.equals(df_ref))
+        self._compare_results(results, "first_day")
 
     def test_reference_results_summer(self):
         results = create_results(
@@ -160,9 +157,12 @@ class TestTMY3MOSReaderImpactOfTimeZone(unittest.TestCase):
             result_dir=self.simulation_dir.joinpath("results_summer"),
             summer=True
         )
+        self._compare_results(results, "summer")
+
+    def _compare_results(self, results, folder):
         for file in results.values():
             df = pd.read_csv(file, sep=";")
-            df_ref = pd.read_csv(self.reference_path.joinpath("summer", file.name))
+            df_ref = pd.read_csv(self.reference_path.joinpath(folder, file.name))
             self.assertEqual(df, df_ref)
 
     def tearDown(self):
