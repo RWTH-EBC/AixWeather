@@ -161,9 +161,9 @@ class TestTMY3MOSReaderImpactOfTimeZone(unittest.TestCase):
 
     def _compare_results(self, results, folder):
         for file in results.values():
-            df = pd.read_csv(file, sep=";")
-            df_ref = pd.read_csv(self.reference_path.joinpath(folder, file.name))
-            self.assertEqual(df, df_ref)
+            df = pd.read_csv(file, sep=";", index_col=0)
+            df_ref = pd.read_csv(self.reference_path.joinpath(folder, file.name), sep=";", index_col=0)
+            self.assertTrue(df.equals(df_ref))
 
     def tearDown(self):
         try:
