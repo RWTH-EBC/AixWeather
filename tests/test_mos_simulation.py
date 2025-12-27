@@ -9,6 +9,7 @@ import subprocess
 
 import matplotlib.pyplot as plt
 import pandas as pd
+from pandas import testing as pd_testing
 import pytest
 import unittest
 from unittest.mock import patch
@@ -160,10 +161,19 @@ class TestTMY3MOSReaderImpactOfTimeZone(unittest.TestCase):
         self._compare_results(results, "summer")
 
     def _compare_results(self, results, folder):
+        failures = {}
         for file in results.values():
             df = pd.read_csv(file, sep=";", index_col=0)
             df_ref = pd.read_csv(self.reference_path.joinpath(folder, file.name), sep=";", index_col=0)
-            self.assertTrue(df.equals(df_ref))
+            try:
+                pd_testing.assert_frame_equal(df, df_ref)
+            except AssertionError as err:
+                failures[file.name] = str(err)
+        if failures:
+            self.fail(
+                f"{len(failures)} failed cases:\n" +
+                f"\n\n".join([f'{name}:\n{msg}' for name, msg in failures])
+            )
 
     def tearDown(self):
         try:
