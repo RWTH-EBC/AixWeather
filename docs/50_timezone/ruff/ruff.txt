@@ -13,6 +13,6 @@ aixweather/imports/ERC.py:49:22: F405 `Entry` may be undefined, or defined from 
 aixweather/imports/ERC.py:53:5: F841 Local variable `login_button` is assigned to but never used
 aixweather/imports/ERC.py:53:20: F405 `Button` may be undefined, or defined from star imports
 aixweather/imports/custom_file.py:16:25: F541 [*] f-string without any placeholders
-aixweather/imports/utils_import.py:99:9: E722 Do not use bare `except`
+aixweather/imports/utils_import.py:98:9: E722 Do not use bare `except`
 Found 16 errors.
 [*] 1 fixable with the `--fix` option (5 hidden fixes can be enabled with the `--unsafe-fixes` option).

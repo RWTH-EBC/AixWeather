@@ -149,8 +149,7 @@
         <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_imported_timezone</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;You are changing the imported timezone by </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_imported_timezone</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">value</span><span class="si">}</span><span class="s2"> hours. &quot;</span>
-                <span class="s2">&quot;Carefully check resulting angles and radiation results, &quot;</span>
-                <span class="s2">&quot;as false combinations of time and location lead to wrong results.&quot;</span>
+                <span class="s2">&quot;Ensure your other simulation input times also use this shift and check results.&quot;</span>
             <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_timezone</span> <span class="o">=</span> <span class="n">value</span>
 

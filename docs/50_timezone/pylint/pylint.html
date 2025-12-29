@@ -83,10 +83,15 @@
 ==aixweather.transformation_to_core_data.TRY:[103:111]
 ==aixweather.transformation_to_core_data.custom_file:[57:70]
         df = auxiliary.force_data_variable_convention(df, definitions.format_core_data)
+
         ### convert units
+        # insert unit conversions like desired (examples follow)
         df[&#34;TotalSkyCover&#34;] = unit_conversions.eigth_to_tenth(df[&#34;TotalSkyCover&#34;])
         df[&#34;AtmPressure&#34;] = unit_conversions.hPa_to_Pa(df[&#34;AtmPressure&#34;])
+
         ### impute missing variables from other available ones
+        # add additionaly required transformations to
+        # variable_transformations.variable_transform_all or apply them directly here
         df, calc_overview = variable_transformations.variable_transform_all(df, meta)
         return df, calc_overview
 </pre></td>
@@ -1611,7 +1616,7 @@
             </tr>
             
             <tr>
-                <td>82</td>
+                <td>81</td>
                 <td>4</td>
                 <td>convention</td>
                 <td><code>missing-function-docstring</code></td>
@@ -1621,7 +1626,7 @@
             </tr>
             
             <tr>
-                <td>95</td>
+                <td>94</td>
                 <td>0</td>
                 <td>refactor</td>
                 <td><code>inconsistent-return-statements</code></td>
@@ -1631,7 +1636,7 @@
             </tr>
             
             <tr>
-                <td>100</td>
+                <td>99</td>
                 <td>12</td>
                 <td>warning</td>
                 <td><code>raise-missing-from</code></td>
