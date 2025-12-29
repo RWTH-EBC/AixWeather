@@ -79,14 +79,16 @@ aixweather/imports/ERC.py:115:0: C0103: Function name "import_meta_from_ERC" doe
 aixweather/imports/ERC.py:8:0: C0411: standard import "from datetime import datetime" should be placed before "import pandas as pd" (wrong-import-order)
 aixweather/imports/ERC.py:5:0: W0614: Unused import(s) collections, enum, sys, types, TclError, re, wantobjects, TkVersion, TclVersion, READABLE, WRITABLE, EXCEPTION, EventType, Event, NoDefaultRoot, Variable, IntVar, DoubleVar, BooleanVar, mainloop, getint, getdouble, getboolean, Misc, CallWrapper, XView, YView, Wm, Tcl, Pack, Place, Grid, BaseWidget, Widget, Toplevel, Canvas, Checkbutton, Frame, Listbox, Menu, Menubutton, Message, Radiobutton, Scale, Scrollbar, Text, OptionMenu, Image, PhotoImage, BitmapImage, image_names, image_types, Spinbox, LabelFrame, PanedWindow, NO, FALSE, OFF, YES, TRUE, ON, N, S, W, E, NW, SW, NE, SE, NS, EW, NSEW, CENTER, NONE, X, Y, BOTH, LEFT, TOP, RIGHT, BOTTOM, RAISED, SUNKEN, FLAT, RIDGE, GROOVE, SOLID, HORIZONTAL, VERTICAL, NUMERIC, CHAR, WORD, BASELINE, INSIDE, OUTSIDE, SEL, SEL_FIRST, SEL_LAST, END, INSERT, CURRENT, ANCHOR, ALL, NORMAL, DISABLED, ACTIVE, HIDDEN, CASCADE, CHECKBUTTON, COMMAND, RADIOBUTTON, SEPARATOR, SINGLE, BROWSE, MULTIPLE, EXTENDED, DOTBOX, UNDERLINE, PIESLICE, CHORD, ARC, FIRST, LAST, BUTT, PROJECTING, ROUND, BEVEL, MITER, MOVETO, SCROLL, UNITS and PAGES from wildcard import of tkinter (unused-wildcard-import)
 ************* Module aixweather.imports.utils_import
-aixweather/imports/utils_import.py:5:0: E0401: Unable to import 'unidecode' (import-error)
-aixweather/imports/utils_import.py:33:4: C0116: Missing function or method docstring (missing-function-docstring)
-aixweather/imports/utils_import.py:42:4: C0116: Missing function or method docstring (missing-function-docstring)
-aixweather/imports/utils_import.py:50:4: C0116: Missing function or method docstring (missing-function-docstring)
-aixweather/imports/utils_import.py:58:4: C0116: Missing function or method docstring (missing-function-docstring)
-aixweather/imports/utils_import.py:66:4: C0116: Missing function or method docstring (missing-function-docstring)
-aixweather/imports/utils_import.py:82:16: W0707: Consider explicitly re-raising using 'except Exception as exc' and 'raise ValueError(f'Value must be of type float, not {type(value)}') from exc' (raise-missing-from)
-aixweather/imports/utils_import.py:77:4: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+aixweather/imports/utils_import.py:76:0: C0301: Line too long (102/100) (line-too-long)
+aixweather/imports/utils_import.py:6:0: E0401: Unable to import 'unidecode' (import-error)
+aixweather/imports/utils_import.py:35:4: C0116: Missing function or method docstring (missing-function-docstring)
+aixweather/imports/utils_import.py:44:4: C0116: Missing function or method docstring (missing-function-docstring)
+aixweather/imports/utils_import.py:52:4: C0116: Missing function or method docstring (missing-function-docstring)
+aixweather/imports/utils_import.py:60:4: C0116: Missing function or method docstring (missing-function-docstring)
+aixweather/imports/utils_import.py:68:4: C0116: Missing function or method docstring (missing-function-docstring)
+aixweather/imports/utils_import.py:82:4: C0116: Missing function or method docstring (missing-function-docstring)
+aixweather/imports/utils_import.py:100:12: W0707: Consider explicitly re-raising using 'except Exception as exc' and 'raise ValueError(f'Value must be of type float, not {type(value)}') from exc' (raise-missing-from)
+aixweather/imports/utils_import.py:95:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
 ************* Module aixweather.imports.TRY
 aixweather/imports/TRY.py:201:13: W1401: Anomalous backslash in string: '\s'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
 aixweather/imports/TRY.py:1:0: C0103: Module name "TRY" doesn't conform to snake_case naming style (invalid-name)
@@ -323,19 +325,14 @@ aixweather/core_data_format_2_output_file/__init__.py:1:0: R0801: Similar lines 
 ==aixweather.transformation_to_core_data.TRY:[103:111]
 ==aixweather.transformation_to_core_data.custom_file:[57:70]
         df = auxiliary.force_data_variable_convention(df, definitions.format_core_data)
-
         ### convert units
-        # insert unit conversions like desired (examples follow)
         df["TotalSkyCover"] = unit_conversions.eigth_to_tenth(df["TotalSkyCover"])
         df["AtmPressure"] = unit_conversions.hPa_to_Pa(df["AtmPressure"])
-
         ### impute missing variables from other available ones
-        # add additionaly required transformations to
-        # variable_transformations.variable_transform_all or apply them directly here
         df, calc_overview = variable_transformations.variable_transform_all(df, meta)
         return df, calc_overview
  (duplicate-code)
 
 -----------------------------------
-Your code has been rated at 6.72/10
+Your code has been rated at 6.73/10
 

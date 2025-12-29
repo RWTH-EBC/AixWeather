@@ -28,9 +28,9 @@
 
         
         <h2>Score</h2>
-        6.72 / 10
+        6.73 / 10
             
-            (previous score: 6.72 / 10)
+            (previous score: 6.73 / 10)
             
         
 
@@ -83,15 +83,10 @@
 ==aixweather.transformation_to_core_data.TRY:[103:111]
 ==aixweather.transformation_to_core_data.custom_file:[57:70]
         df = auxiliary.force_data_variable_convention(df, definitions.format_core_data)
-
         ### convert units
-        # insert unit conversions like desired (examples follow)
         df[&#34;TotalSkyCover&#34;] = unit_conversions.eigth_to_tenth(df[&#34;TotalSkyCover&#34;])
         df[&#34;AtmPressure&#34;] = unit_conversions.hPa_to_Pa(df[&#34;AtmPressure&#34;])
-
         ### impute missing variables from other available ones
-        # add additionaly required transformations to
-        # variable_transformations.variable_transform_all or apply them directly here
         df, calc_overview = variable_transformations.variable_transform_all(df, meta)
         return df, calc_overview
 </pre></td>
@@ -1546,7 +1541,7 @@
             </tr>
             
             <tr>
-                <td>5</td>
+                <td>6</td>
                 <td>0</td>
                 <td>error</td>
                 <td><code>import-error</code></td>
@@ -1556,7 +1551,7 @@
             </tr>
             
             <tr>
-                <td>33</td>
+                <td>35</td>
                 <td>4</td>
                 <td>convention</td>
                 <td><code>missing-function-docstring</code></td>
@@ -1566,7 +1561,7 @@
             </tr>
             
             <tr>
-                <td>42</td>
+                <td>44</td>
                 <td>4</td>
                 <td>convention</td>
                 <td><code>missing-function-docstring</code></td>
@@ -1576,7 +1571,7 @@
             </tr>
             
             <tr>
-                <td>50</td>
+                <td>52</td>
                 <td>4</td>
                 <td>convention</td>
                 <td><code>missing-function-docstring</code></td>
@@ -1586,7 +1581,7 @@
             </tr>
             
             <tr>
-                <td>58</td>
+                <td>60</td>
                 <td>4</td>
                 <td>convention</td>
                 <td><code>missing-function-docstring</code></td>
@@ -1596,7 +1591,7 @@
             </tr>
             
             <tr>
-                <td>66</td>
+                <td>68</td>
                 <td>4</td>
                 <td>convention</td>
                 <td><code>missing-function-docstring</code></td>
@@ -1606,22 +1601,42 @@
             </tr>
             
             <tr>
-                <td>77</td>
-                <td>4</td>
-                <td>refactor</td>
-                <td><code>inconsistent-return-statements</code></td>
-                <td>R1710</td>
-                <td>MetaData._ensure_float</td>
-                <td><pre>Either all return statements in a function should return an expression, or none of them should.</pre></td>
+                <td>76</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>line-too-long</code></td>
+                <td>C0301</td>
+                <td></td>
+                <td><pre>Line too long (102/100)</pre></td>
             </tr>
             
             <tr>
                 <td>82</td>
-                <td>16</td>
+                <td>4</td>
+                <td>convention</td>
+                <td><code>missing-function-docstring</code></td>
+                <td>C0116</td>
+                <td>MetaData.set_imported_timezone</td>
+                <td><pre>Missing function or method docstring</pre></td>
+            </tr>
+            
+            <tr>
+                <td>95</td>
+                <td>0</td>
+                <td>refactor</td>
+                <td><code>inconsistent-return-statements</code></td>
+                <td>R1710</td>
+                <td>_ensure_float</td>
+                <td><pre>Either all return statements in a function should return an expression, or none of them should.</pre></td>
+            </tr>
+            
+            <tr>
+                <td>100</td>
+                <td>12</td>
                 <td>warning</td>
                 <td><code>raise-missing-from</code></td>
                 <td>W0707</td>
-                <td>MetaData._ensure_float</td>
+                <td>_ensure_float</td>
                 <td><pre>Consider explicitly re-raising using &#39;except Exception as exc&#39; and &#39;raise ValueError(f&#39;Value must be of type float, not {type(value)}&#39;) from exc&#39;</pre></td>
             </tr>
             
@@ -3402,7 +3417,7 @@
             
             <tr>
                 <td>convention</td>
-                <td>198</td>
+                <td>200</td>
             </tr>
             
             <tr>
@@ -3432,7 +3447,7 @@
             
             <tr>
                 <td>line-too-long</td>
-                <td>121</td>
+                <td>122</td>
             </tr>
             
             <tr>
@@ -3502,7 +3517,7 @@
             
             <tr>
                 <td>missing-function-docstring</td>
-                <td>13</td>
+                <td>14</td>
             </tr>
             
             <tr>
@@ -3677,7 +3692,7 @@
             
             <tr>
                 <td>aixweather.imports.utils_import</td>
-                <td>8</td>
+                <td>10</td>
             </tr>
             
             <tr>
@@ -3822,7 +3837,7 @@
             
             <tr>
                 <td>aixweather/imports/utils_import.py</td>
-                <td>8</td>
+                <td>10</td>
             </tr>
             
             <tr>
