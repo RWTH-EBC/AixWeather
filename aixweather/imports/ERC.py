@@ -126,7 +126,7 @@ def import_meta_from_ERC() -> MetaData:
     meta.altitude = 230  # ca. 200m + building height 30m
     meta.latitude = 50.7893
     meta.longitude = 6.0516
-    meta.timezone = 1  # Always in TRY, used for later export
+    meta.set_imported_timezone(1)  # Always in TRY, used for later export
     return meta
 
 
