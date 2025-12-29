@@ -74,8 +74,7 @@ class MetaData:
         if value != self._imported_timezone:
             warnings.warn(
                 f"You are changing the imported timezone by {self._imported_timezone - value} hours. "
-                "Carefully check resulting angles and radiation results, "
-                "as false combinations of time and location lead to wrong results."
+                "Ensure your other simulation input times also use this shift and check results."
             )
         self._timezone = value
 
