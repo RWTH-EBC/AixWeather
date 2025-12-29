@@ -7,6 +7,7 @@
     "input_source": "TRY2015",
     "try_year": 2015,
     "_timezone": 1,
+    "_imported_timezone": 1,
     "executed_transformations": {
         "OpaqueSkyCover": [
             "TotalSkyCover"

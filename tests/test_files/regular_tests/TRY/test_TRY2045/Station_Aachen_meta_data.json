@@ -7,6 +7,7 @@
     "input_source": "TRY2045",
     "try_year": 2045,
     "_timezone": 1,
+    "_imported_timezone": 1,
     "executed_transformations": {
         "OpaqueSkyCover": [
             "TotalSkyCover"
