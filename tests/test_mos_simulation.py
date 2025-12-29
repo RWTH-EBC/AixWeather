@@ -172,7 +172,7 @@ class TestTMY3MOSReaderImpactOfTimeZone(unittest.TestCase):
         if failures:
             self.fail(
                 f"{len(failures)} failed cases:\n" +
-                f"\n\n".join([f'{name}:\n{msg}' for name, msg in failures])
+                f"\n\n".join([f'{name}:\n{msg}' for name, msg in failures.items()])
             )
 
     def tearDown(self):
