@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>aixweather.core_data_format_2_output_file.to_mos_TMY3 &mdash; aixweather 0.1.8 documentation</title>
+  <title>aixweather.core_data_format_2_output_file.to_mos_TMY3 &mdash; aixweather 0.1.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
@@ -80,6 +80,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">calendar</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">aixweather</span><span class="w"> </span><span class="kn">import</span> <span class="n">definitions</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.imports.utils_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetaData</span>
@@ -151,21 +152,25 @@
     <span class="n">stop</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span>
     <span class="n">fillna</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="n">result_folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">export_in_utc</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a MOS file from the core data.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        core_df (pd.DataFrame): DataFrame containing core data.</span>
 <span class="sd">        meta (MetaData): Metadata associated with the weather data.</span>
-<span class="sd">        start (dt.datetime): Timestamp for the start of the MOS file.</span>
-<span class="sd">        stop (dt.datetime): Timestamp for the end of the MOS file.</span>
+<span class="sd">        start (dt.datetime): Timestamp for the start of the MOS file in UTC.</span>
+<span class="sd">        stop (dt.datetime): Timestamp for the end of the MOS file in UTC.</span>
 <span class="sd">        fillna (bool): Boolean indicating whether NaN values should be filled.</span>
 <span class="sd">        result_folder (str):</span>
 <span class="sd">            Path to the folder where to save the file. Default will use</span>
 <span class="sd">            the `results_file_path` method.</span>
 <span class="sd">        filename (str): Name of the file to be saved. The default is constructed</span>
 <span class="sd">            based on the meta-data as well as start and stop time</span>
+<span class="sd">        export_in_utc (bool): Timezone to be used for the export.</span>
+<span class="sd">            True (default) to use the core_df timezone, UTC+0,</span>
+<span class="sd">            False (default) to use timezone from metadata</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        pd.DataFrame: DataFrame containing the weather data formatted for MOS export,</span>
@@ -173,6 +178,8 @@
 <span class="sd">        str: Path to the exported file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">format_modelica_TMY3</span> <span class="o">=</span> <span class="n">ModelicaTMY3Format</span><span class="o">.</span><span class="n">export_format</span><span class="p">()</span>
+
+    <span class="n">timezone</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">export_in_utc</span> <span class="k">else</span> <span class="n">meta</span><span class="o">.</span><span class="n">timezone</span>
 
     <span class="c1">### evaluate correctness of format</span>
     <span class="n">auxiliary</span><span class="o">.</span><span class="n">evaluate_transformations</span><span class="p">(</span>
@@ -197,15 +204,20 @@
     <span class="c1">### select the desired columns</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">force_data_variable_convention</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">format_modelica_TMY3</span><span class="p">)</span>
 
-    <span class="c1"># tmy3 data must start with 0 at the beginning of year (due to internal</span>
-    <span class="c1"># tmy3_reader sun inclination calculation)</span>
-    <span class="n">min_year</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+    <span class="n">first_utc_year</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">periods</span><span class="o">=</span><span class="n">timezone</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># In case the timezone-shift leads to year before the actual year of the data,</span>
+    <span class="c1"># the time index gets shifted. This way, the first day of simulation is always</span>
+    <span class="c1"># present in the data.</span>
     <span class="n">time_of_year</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="n">min_year</span><span class="p">)</span> <span class="o">*</span> <span class="mi">365</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3600</span>
-            <span class="o">+</span> <span class="n">calendar</span><span class="o">.</span><span class="n">leapdays</span><span class="p">(</span><span class="n">min_year</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span><span class="p">)</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3600</span>
+            <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="n">first_utc_year</span><span class="p">)</span> <span class="o">*</span> <span class="mi">365</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3600</span>
+            <span class="o">+</span> <span class="n">calendar</span><span class="o">.</span><span class="n">leapdays</span><span class="p">(</span><span class="n">first_utc_year</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span><span class="p">)</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3600</span>
             <span class="o">+</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">dayofyear</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3600</span>
             <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">hour</span> <span class="o">*</span> <span class="mi">3600</span>
     <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">((</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">time_of_year</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">time_of_year</span> <span class="o">&lt;=</span> <span class="mi">86400</span><span class="p">)):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s2">&quot;Data does not pass the first day of simulation, carefully check simulation results.&quot;</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s2">&quot;timeOfYear&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_of_year</span>
 
     <span class="c1"># to avoid having the one-year duration between start and end of data as</span>
@@ -242,8 +254,8 @@
         <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
         <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
     <span class="p">)</span>
-    <span class="n">header_of</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#LOCATION,</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">station_name</span><span class="si">}</span><span class="s2">,,,,,</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">latitude</span><span class="p">)</span><span class="si">}</span><span class="s2">,&quot;</span> \
-                 <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">longitude</span><span class="p">)</span><span class="si">}</span><span class="s2">,0,something&quot;</span>
+    <span class="n">header_of</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#LOCATION,</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">station_name</span><span class="si">}</span><span class="s2">,,,,,</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">latitude</span><span class="si">}</span><span class="s2">,&quot;</span> \
+                 <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">longitude</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">timezone</span><span class="si">}</span><span class="s2">,something&quot;</span>
     <span class="n">header_of</span> <span class="o">+=</span> <span class="p">(</span>
         <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#Explanation of Location line:&quot;</span>
         <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#   Element 7: latitude&quot;</span>
@@ -322,9 +334,10 @@
 
     <span class="c1">### write to csv</span>
     <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_utc_flag</span> <span class="o">=</span> <span class="s2">&quot;_utc&quot;</span> <span class="k">if</span> <span class="n">export_in_utc</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
         <span class="n">filename</span> <span class="o">=</span> <span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">station_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">start</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">stop</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">station_name</span><span class="si">}</span><span class="s2">.mos&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">station_name</span><span class="si">}{</span><span class="n">_utc_flag</span><span class="si">}</span><span class="s2">.mos&quot;</span>
         <span class="p">)</span>
     <span class="n">filepath</span> <span class="o">=</span> <span class="n">definitions</span><span class="o">.</span><span class="n">results_file_path</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">result_folder</span><span class="p">)</span>
 
