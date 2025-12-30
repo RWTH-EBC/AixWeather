@@ -26,6 +26,7 @@ class TRYFormat:
     https://www.bbsr.bund.de/BBSR/DE/forschung/programme/zb/Auftragsforschung/5EnergieKlimaBauen/2013/testreferenzjahre/try-handbuch.pdf;jsessionid=9F928CDB6862224B04073332C2B1B620.live21301?__blob=publicationFile&v=1
     Der erste Eintrag im Datensatz bezieht sich auf den 1. Januar 01 Uhr MEZ und
     der letzte Eintrag auf den 31. Dezember 24 Uhr MEZ. Also UTC+1.
+    The data is in MEZ or UTC+1 the whole year, which was specified by DWD upon request.
     """
 
     @classmethod

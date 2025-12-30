@@ -24,7 +24,8 @@ def to_epw(
         stop: dt.datetime,
         fillna: bool,
         result_folder: str = None,
-        filename: str = None
+        filename: str = None,
+        export_in_utc: bool = False
 ) -> (pd.DataFrame, str):
     """Create an EPW file from the core data.
 
@@ -39,12 +40,16 @@ def to_epw(
             the `results_file_path` method.
         filename (str): Name of the file to be saved. The default is constructed
             based on the meta-data as well as start and stop time
+        export_in_utc (bool): Timezone to be used for the export.
+            True (default) to use the core_df timezone, UTC+0,
+            False (default) to use timezone from metadata
 
     Returns:
         pd.DataFrame: DataFrame containing the weather data formatted for EPW export,
                       excluding metadata.
         str: Path to the exported file.
     """
+    timezone = 0 if export_in_utc else meta.timezone
 
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
@@ -54,7 +59,9 @@ def to_epw(
     df = core_df.copy()
 
     # format data to epw
-    df_epw_as_list, df_epw = _format_data(df, start, stop, fillna)
+    df_epw_as_list, df_epw = _format_data(
+        df=df, start=start, stop=stop, timezone=timezone, fillna=fillna
+    )
 
     # get final start and stop time (differs from start, stop due to filling to full days)
     start_epw = pd.to_datetime(df_epw.iloc[[0]][['Year', 'Month', 'Day', 'Hour']]).iloc[0]
@@ -66,9 +73,10 @@ def to_epw(
 
     # keep regular start stop in the filename for the unit tests
     if filename is None:
+        _utc_flag = "_utc" if export_in_utc else ""
         filename = (
             f"{meta.station_id}_{start.strftime('%Y%m%d')}_{stop.strftime('%Y%m%d')}"
-            f"_{meta.station_name}.epw"
+            f"_{meta.station_name}{_utc_flag}.epw"
         )
     # get file path to safe data to
     file_path = definitions.results_file_path(filename, result_folder)
@@ -78,7 +86,7 @@ def to_epw(
         writer = csv.writer(file)
         writer.writerows(
             [
-                _line1_location(meta),
+                _line1_location(meta=meta, timezone=timezone),
                 _line2_design_cond(),
                 _line3_typ_ext_period(df_truncated),
                 _line4_ground_temp(df_truncated),
@@ -98,6 +106,7 @@ def to_epw(
 ### create header lines
 def _line1_location(
         meta: MetaData,
+        timezone: int
 ):
     """
     Get location metadata (station name, state, country, data_type,
@@ -108,7 +117,6 @@ def _line1_location(
     """
 
     data_type = ""
-    timezone = 0  # relative to UTC
 
     location = [
         "LOCATION",
@@ -437,15 +445,13 @@ def _line8_data_periods(df):
     ]
     return data_periods
 
-
-def _format_data(df, start, stop, fillna):
+def _format_data(df, start, stop, timezone, fillna):
     """
-    Parsen von weatherdata, für den export
+    Parse actual weatherdata, for export
 
     return:
         data_list:    List    Datasätze von epw Daten als List
     """
-
     ### measurement time conversion
     df = time_observation_transformations.shift_time_by_dict(EPWFormat.export_format(), df)
 
@@ -459,6 +465,9 @@ def _format_data(df, start, stop, fillna):
     df = time_observation_transformations.truncate_data_from_start_to_stop(
         df, start, stop
     )
+
+    ### Shift to desired timezone
+    df = df.shift(periods=timezone, freq="h", axis=0)
 
     ### select the desired columns
     df = auxiliary.force_data_variable_convention(df, EPWFormat.export_format())

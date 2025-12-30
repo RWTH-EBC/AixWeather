@@ -5,6 +5,7 @@ import logging
 import calendar
 import datetime as dt
 import pandas as pd
+import numpy as np
 
 from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
@@ -76,21 +77,25 @@ def to_mos(
     stop: dt.datetime,
     fillna: bool,
     result_folder: str = None,
-    filename: str = None
+    filename: str = None,
+    export_in_utc: bool = False
 ) -> (pd.DataFrame, str):
     """Create a MOS file from the core data.
 
     Args:
         core_df (pd.DataFrame): DataFrame containing core data.
         meta (MetaData): Metadata associated with the weather data.
-        start (dt.datetime): Timestamp for the start of the MOS file.
-        stop (dt.datetime): Timestamp for the end of the MOS file.
+        start (dt.datetime): Timestamp for the start of the MOS file in UTC.
+        stop (dt.datetime): Timestamp for the end of the MOS file in UTC.
         fillna (bool): Boolean indicating whether NaN values should be filled.
         result_folder (str):
             Path to the folder where to save the file. Default will use
             the `results_file_path` method.
         filename (str): Name of the file to be saved. The default is constructed
             based on the meta-data as well as start and stop time
+        export_in_utc (bool): Timezone to be used for the export.
+            True (default) to use the core_df timezone, UTC+0,
+            False (default) to use timezone from metadata
 
     Returns:
         pd.DataFrame: DataFrame containing the weather data formatted for MOS export,
@@ -98,6 +103,8 @@ def to_mos(
         str: Path to the exported file.
     """
     format_modelica_TMY3 = ModelicaTMY3Format.export_format()
+
+    timezone = 0 if export_in_utc else meta.timezone
 
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
@@ -122,15 +129,20 @@ def to_mos(
     ### select the desired columns
     df = auxiliary.force_data_variable_convention(df, format_modelica_TMY3)
 
-    # tmy3 data must start with 0 at the beginning of year (due to internal
-    # tmy3_reader sun inclination calculation)
-    min_year = min(df.index.year)
+    first_utc_year = min(df.index.year)
+    df = df.shift(periods=timezone, freq="h", axis=0)
+
+    # In case the timezone-shift leads to year before the actual year of the data,
+    # the time index gets shifted. This way, the first day of simulation is always
+    # present in the data.
     time_of_year = (
-            (df.index.year - min_year) * 365 * 24 * 3600
-            + calendar.leapdays(min_year, df.index.year) * 24 * 3600
+            (df.index.year - first_utc_year) * 365 * 24 * 3600
+            + calendar.leapdays(first_utc_year, df.index.year) * 24 * 3600
             + (df.index.dayofyear - 1) * 24 * 3600
             + df.index.hour * 3600
     )
+    if not np.any((0 <= time_of_year) & (time_of_year <= 86400)):
+        logger.critical("Data does not pass the first day of simulation, carefully check simulation results.")
     df["timeOfYear"] = time_of_year
 
     # to avoid having the one-year duration between start and end of data as
@@ -167,8 +179,8 @@ def to_mos(
         + str(int(df.columns.size))
         + ")"
     )
-    header_of += f"\n#LOCATION,{meta.station_name},,,,,{str(meta.latitude)}," \
-                 f"{str(meta.longitude)},0,something"
+    header_of += f"\n#LOCATION,{meta.station_name},,,,,{meta.latitude}," \
+                 f"{meta.longitude},{timezone},something"
     header_of += (
         "\n#Explanation of Location line:"
         + "\n#   Element 7: latitude"
@@ -247,9 +259,10 @@ def to_mos(
 
     ### write to csv
     if filename is None:
+        _utc_flag = "_utc" if export_in_utc else ""
         filename = (
             f"{meta.station_id}_{start.strftime('%Y%m%d')}_{stop.strftime('%Y%m%d')}"
-            f"_{meta.station_name}.mos"
+            f"_{meta.station_name}{_utc_flag}.mos"
         )
     filepath = definitions.results_file_path(filename, result_folder)
 

@@ -17,6 +17,7 @@ def load_custom_meta_data():
     meta.altitude = ""
     meta.longitude = ""
     meta.latitude = ""
+    meta.set_imported_timezone(0)
 
     return meta
 

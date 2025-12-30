@@ -44,9 +44,9 @@ class ProjectClassGeneral(ABC):
             in the output formats.
         abs_result_folder_path (str): Optionally define the absolute path to
             the desired export location.
-        start (pd.Timestamp or None): The start date of the project data
+        start (pd.Timestamp or None): The start date of the project data in UTC
             (sometimes inferred by the inheriting class).
-        end (pd.Timestamp or None): The end date of the project data.
+        end (pd.Timestamp or None): The end date of the project data in UTC.
 
     Properties:
         imported_data (pd.DataFrame): The imported weather data.
@@ -147,33 +147,40 @@ class ProjectClassGeneral(ABC):
         """Abstract function to convert the imported data to core data."""
 
     # core_data_format_2_output_file
-    def core_2_mos(self, filename: str = None) -> str:
+    def core_2_mos(self, filename: str = None, export_in_utc: bool = False) -> str:
         """
         Convert core data to .mos file
 
         filename (str): Name of the file to be saved. The default is constructed
             based on the meta-data as well as start and stop time
+        export_in_utc (bool): Timezone to be used for the export.
+            True (default) to use the core_df timezone, UTC+0,
+            False (default) to use timezone from metadata
 
         Returns:
             str: Path to the exported file.
         """
         self.output_data_df, filepath = to_mos(
-            self.core_data,
-            self.meta_data,
-            self.start,
-            self.end,
-            self.fillna,
-            self.abs_result_folder_path,
-            filename=filename
+            core_df=self.core_data,
+            meta=self.meta_data,
+            start=self.start,
+            stop=self.end,
+            fillna=self.fillna,
+            result_folder=self.abs_result_folder_path,
+            filename=filename,
+            export_in_utc=export_in_utc
         )
         return filepath
 
-    def core_2_epw(self, filename: str = None) -> str:
+    def core_2_epw(self, filename: str = None, export_in_utc: bool = False) -> str:
         """
         Convert core data to .epw file
 
         filename (str): Name of the file to be saved. The default is constructed
             based on the meta-data as well as start and stop time
+        export_in_utc (bool): Timezone to be used for the export.
+            True (default) to use the core_df timezone, UTC+0,
+            False (default) to use timezone from metadata
 
         Returns:
             str: Path to the exported file.
@@ -185,7 +192,8 @@ class ProjectClassGeneral(ABC):
             self.end,
             self.fillna,
             self.abs_result_folder_path,
-            filename=filename
+            filename=filename,
+            export_in_utc=export_in_utc
         )
         return filepath
 
