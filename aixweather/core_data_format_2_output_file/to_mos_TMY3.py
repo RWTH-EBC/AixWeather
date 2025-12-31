@@ -5,6 +5,7 @@ import logging
 import calendar
 import datetime as dt
 import pandas as pd
+import numpy as np
 
 from aixweather import definitions
 from aixweather.imports.utils_import import MetaData
@@ -13,56 +14,60 @@ from aixweather.transformation_functions import auxiliary, time_observation_tran
 
 logger = logging.getLogger(__name__)
 
-"""
-format_modelica_TMY3 information:
+class ModelicaTMY3Format:
+    """
+    Information on Modelicas TMY3 reader:
 
-Format info:
-key = output data point name
-core_name = corresponding name matching the format_core_data
-time_of_meas_shift = desired 30min shifting+interpolation to convert the value that is "at 
-indicated time" to "average of preceding hour" (ind2prec). 
-unit = unit of the output data following the naming convention of format_core_data
-nan = The default values stated from the AixLib TMY3 Reader, those values are 
-filled if nan.
+    Format info:
+    key = output data point name
+    core_name = corresponding name matching the format_core_data
+    time_of_meas_shift = desired 30min shifting+interpolation to convert the value that is "at
+    indicated time" to "average of preceding hour" (ind2prec).
+    unit = unit of the output data following the naming convention of format_core_data
+    nan = The default values stated from the AixLib TMY3 Reader, those values are
+    filled if nan.
 
-All changes here automatically change the calculations. 
-Exception: unit conversions have to be added manually.
+    All changes here automatically change the calculations.
+    Exception: unit conversions have to be added manually.
 
-time_of_meas_shift´s checked by Martin Rätz (07.08.2023)
-unit´s checked by Martin Rätz (07.08.2023)
-"""
-format_modelica_TMY3 = {
-    'timeOfYear': {'core_name': '', 'unit': 's', 'time_of_meas_shift': None, 'nan': None},
-    'DryBulbTemp': {'core_name': 'DryBulbTemp', 'unit': 'degC', 'time_of_meas_shift': None, 'nan': 20.0},
-    'DewPointTemp': {'core_name': 'DewPointTemp', 'unit': 'degC', 'time_of_meas_shift': None, 'nan': 10.0},
-    'RelHum': {'core_name': 'RelHum', 'unit': 'percent', 'time_of_meas_shift': None, 'nan': 50},
-    'AtmPressure': {'core_name': 'AtmPressure', 'unit': 'Pa', 'time_of_meas_shift': None, 'nan': 101325},
-    'ExtHorRad': {'core_name': 'ExtHorRad', 'unit': 'Wh/m2', 'time_of_meas_shift': 'ind2prec', 'nan': '-0'},
-    'ExtDirNormRad': {'core_name': 'ExtDirNormRad', 'unit': 'Wh/m2', 'time_of_meas_shift': 'ind2prec', 'nan': '-0'},
-    'HorInfra': {'core_name': 'HorInfra', 'unit': 'Wh/m2', 'time_of_meas_shift': 'ind2prec', 'nan': 0},
-    'GlobHorRad': {'core_name': 'GlobHorRad', 'unit': 'Wh/m2', 'time_of_meas_shift': 'ind2prec', 'nan': 0},
-    'DirNormRad': {'core_name': 'DirNormRad', 'unit': 'Wh/m2', 'time_of_meas_shift': 'ind2prec', 'nan': 0},
-    'DiffHorRad': {'core_name': 'DiffHorRad', 'unit': 'Wh/m2', 'time_of_meas_shift': 'ind2prec', 'nan': 0},
-    'GlobHorIll': {'core_name': 'GlobHorIll', 'unit': 'lux', 'time_of_meas_shift': 'ind2prec', 'nan': '-0'},
-    'DirecNormIll': {'core_name': 'DirecNormIll', 'unit': 'lux', 'time_of_meas_shift': 'ind2prec', 'nan': '-0'},
-    'DiffuseHorIll': {'core_name': 'DiffuseHorIll', 'unit': 'lux', 'time_of_meas_shift': 'ind2prec', 'nan': '-0'},
-    'ZenithLum': {'core_name': 'ZenithLum', 'unit': 'Cd/m2', 'time_of_meas_shift': 'ind2prec', 'nan': '-0'},
-    'WindDir': {'core_name': 'WindDir', 'unit': 'deg', 'time_of_meas_shift': None, 'nan': '-0'},
-    'WindSpeed': {'core_name': 'WindSpeed', 'unit': 'm/s', 'time_of_meas_shift': None, 'nan': '-0'},
-    'TotalSkyCover': {'core_name': 'TotalSkyCover', 'unit': '1tenth', 'time_of_meas_shift': None, 'nan': 5},
-    'OpaqueSkyCover': {'core_name': 'OpaqueSkyCover', 'unit': '1tenth', 'time_of_meas_shift': None, 'nan': 5},
-    'Visibility': {'core_name': 'Visibility', 'unit': 'km', 'time_of_meas_shift': None, 'nan': '-0'},
-    'CeilingH': {'core_name': 'CeilingH', 'unit': 'm', 'time_of_meas_shift': None, 'nan': 20000.0},
-    'WeatherObs': {'core_name': '', 'unit': '', 'time_of_meas_shift': None, 'nan': '-0'},
-    'WeatherCode': {'core_name': '', 'unit': '', 'time_of_meas_shift': None, 'nan': '-0'},
-    'PrecWater': {'core_name': 'PrecWater', 'unit': 'mm', 'time_of_meas_shift': None, 'nan': '-0'},
-    'Aerosol': {'core_name': 'Aerosol', 'unit': '1thousandth', 'time_of_meas_shift': None, 'nan': '-0'},
-    'Snow': {'core_name': '', 'unit': 'cm', 'time_of_meas_shift': None, 'nan': '-0'},
-    'DaysSinceSnow': {'core_name': '', 'unit': 'days', 'time_of_meas_shift': None, 'nan': '-0'},
-    'Albedo': {'core_name': '', 'unit': '', 'time_of_meas_shift': None, 'nan': '-0'},
-    'LiquidPrecD': {'core_name': 'LiquidPrecD', 'unit': 'mm/h', 'time_of_meas_shift': None, 'nan': '-0'},
-    'LiquidPrepQuant': {'core_name': '', 'unit': '', 'time_of_meas_shift': None, 'nan': '-0'}
-}
+    time_of_meas_shift´s checked by Martin Rätz (07.08.2023)
+    unit´s checked by Martin Rätz (07.08.2023)
+    """
+
+    @classmethod
+    def export_format(cls) -> dict:
+        return {
+            'timeOfYear': {'core_name': '', 'unit': 's', 'time_of_meas_shift': None, 'nan': None},
+            'DryBulbTemp': {'core_name': 'DryBulbTemp', 'unit': 'degC', 'time_of_meas_shift': None, 'nan': 20.0},
+            'DewPointTemp': {'core_name': 'DewPointTemp', 'unit': 'degC', 'time_of_meas_shift': None, 'nan': 10.0},
+            'RelHum': {'core_name': 'RelHum', 'unit': 'percent', 'time_of_meas_shift': None, 'nan': 50},
+            'AtmPressure': {'core_name': 'AtmPressure', 'unit': 'Pa', 'time_of_meas_shift': None, 'nan': 101325},
+            'ExtHorRad': {'core_name': 'ExtHorRad', 'unit': 'Wh/m2', 'time_of_meas_shift': 'ind2prec', 'nan': '-0'},
+            'ExtDirNormRad': {'core_name': 'ExtDirNormRad', 'unit': 'Wh/m2', 'time_of_meas_shift': 'ind2prec', 'nan': '-0'},
+            'HorInfra': {'core_name': 'HorInfra', 'unit': 'Wh/m2', 'time_of_meas_shift': 'ind2prec', 'nan': 0},
+            'GlobHorRad': {'core_name': 'GlobHorRad', 'unit': 'Wh/m2', 'time_of_meas_shift': 'ind2prec', 'nan': 0},
+            'DirNormRad': {'core_name': 'DirNormRad', 'unit': 'Wh/m2', 'time_of_meas_shift': 'ind2prec', 'nan': 0},
+            'DiffHorRad': {'core_name': 'DiffHorRad', 'unit': 'Wh/m2', 'time_of_meas_shift': 'ind2prec', 'nan': 0},
+            'GlobHorIll': {'core_name': 'GlobHorIll', 'unit': 'lux', 'time_of_meas_shift': 'ind2prec', 'nan': '-0'},
+            'DirecNormIll': {'core_name': 'DirecNormIll', 'unit': 'lux', 'time_of_meas_shift': 'ind2prec', 'nan': '-0'},
+            'DiffuseHorIll': {'core_name': 'DiffuseHorIll', 'unit': 'lux', 'time_of_meas_shift': 'ind2prec', 'nan': '-0'},
+            'ZenithLum': {'core_name': 'ZenithLum', 'unit': 'Cd/m2', 'time_of_meas_shift': 'ind2prec', 'nan': '-0'},
+            'WindDir': {'core_name': 'WindDir', 'unit': 'deg', 'time_of_meas_shift': None, 'nan': '-0'},
+            'WindSpeed': {'core_name': 'WindSpeed', 'unit': 'm/s', 'time_of_meas_shift': None, 'nan': '-0'},
+            'TotalSkyCover': {'core_name': 'TotalSkyCover', 'unit': '1tenth', 'time_of_meas_shift': None, 'nan': 5},
+            'OpaqueSkyCover': {'core_name': 'OpaqueSkyCover', 'unit': '1tenth', 'time_of_meas_shift': None, 'nan': 5},
+            'Visibility': {'core_name': 'Visibility', 'unit': 'km', 'time_of_meas_shift': None, 'nan': '-0'},
+            'CeilingH': {'core_name': 'CeilingH', 'unit': 'm', 'time_of_meas_shift': None, 'nan': 20000.0},
+            'WeatherObs': {'core_name': '', 'unit': '', 'time_of_meas_shift': None, 'nan': '-0'},
+            'WeatherCode': {'core_name': '', 'unit': '', 'time_of_meas_shift': None, 'nan': '-0'},
+            'PrecWater': {'core_name': 'PrecWater', 'unit': 'mm', 'time_of_meas_shift': None, 'nan': '-0'},
+            'Aerosol': {'core_name': 'Aerosol', 'unit': '1thousandth', 'time_of_meas_shift': None, 'nan': '-0'},
+            'Snow': {'core_name': '', 'unit': 'cm', 'time_of_meas_shift': None, 'nan': '-0'},
+            'DaysSinceSnow': {'core_name': '', 'unit': 'days', 'time_of_meas_shift': None, 'nan': '-0'},
+            'Albedo': {'core_name': '', 'unit': '', 'time_of_meas_shift': None, 'nan': '-0'},
+            'LiquidPrecD': {'core_name': 'LiquidPrecD', 'unit': 'mm/h', 'time_of_meas_shift': None, 'nan': '-0'},
+            'LiquidPrepQuant': {'core_name': '', 'unit': '', 'time_of_meas_shift': None, 'nan': '-0'}
+        }
 
 
 def to_mos(
@@ -72,27 +77,35 @@ def to_mos(
     stop: dt.datetime,
     fillna: bool,
     result_folder: str = None,
-    filename: str = None
+    filename: str = None,
+    export_in_utc: bool = False
 ) -> (pd.DataFrame, str):
     """Create a MOS file from the core data.
 
     Args:
         core_df (pd.DataFrame): DataFrame containing core data.
         meta (MetaData): Metadata associated with the weather data.
-        start (dt.datetime): Timestamp for the start of the MOS file.
-        stop (dt.datetime): Timestamp for the end of the MOS file.
+        start (dt.datetime): Timestamp for the start of the MOS file in UTC.
+        stop (dt.datetime): Timestamp for the end of the MOS file in UTC.
         fillna (bool): Boolean indicating whether NaN values should be filled.
         result_folder (str):
             Path to the folder where to save the file. Default will use
             the `results_file_path` method.
         filename (str): Name of the file to be saved. The default is constructed
             based on the meta-data as well as start and stop time
+        export_in_utc (bool): Timezone to be used for the export.
+            True (default) to use the core_df timezone, UTC+0,
+            False (default) to use timezone from metadata
 
     Returns:
         pd.DataFrame: DataFrame containing the weather data formatted for MOS export,
                       excluding metadata.
         str: Path to the exported file.
     """
+    format_modelica_TMY3 = ModelicaTMY3Format.export_format()
+
+    timezone = 0 if export_in_utc else meta.timezone
+
     ### evaluate correctness of format
     auxiliary.evaluate_transformations(
         core_format=definitions.format_core_data, other_format=format_modelica_TMY3
@@ -116,15 +129,20 @@ def to_mos(
     ### select the desired columns
     df = auxiliary.force_data_variable_convention(df, format_modelica_TMY3)
 
-    # tmy3 data must start with 0 at the beginning of year (due to internal
-    # tmy3_reader sun inclination calculation)
-    min_year = min(df.index.year)
+    first_utc_year = min(df.index.year)
+    df = df.shift(periods=timezone, freq="h", axis=0)
+
+    # In case the timezone-shift leads to year before the actual year of the data,
+    # the time index gets shifted. This way, the first day of simulation is always
+    # present in the data.
     time_of_year = (
-            (df.index.year - min_year) * 365 * 24 * 3600
-            + calendar.leapdays(min_year, df.index.year) * 24 * 3600
+            (df.index.year - first_utc_year) * 365 * 24 * 3600
+            + calendar.leapdays(first_utc_year, df.index.year) * 24 * 3600
             + (df.index.dayofyear - 1) * 24 * 3600
             + df.index.hour * 3600
     )
+    if not np.any((0 <= time_of_year) & (time_of_year <= 86400)):
+        logger.critical("Data does not pass the first day of simulation, carefully check simulation results.")
     df["timeOfYear"] = time_of_year
 
     # to avoid having the one-year duration between start and end of data as
@@ -161,8 +179,8 @@ def to_mos(
         + str(int(df.columns.size))
         + ")"
     )
-    header_of += f"\n#LOCATION,{meta.station_name},,,,,{str(meta.latitude)}," \
-                 f"{str(meta.longitude)},0,something"
+    header_of += f"\n#LOCATION,{meta.station_name},,,,,{meta.latitude}," \
+                 f"{meta.longitude},{timezone},something"
     header_of += (
         "\n#Explanation of Location line:"
         + "\n#   Element 7: latitude"
@@ -241,9 +259,10 @@ def to_mos(
 
     ### write to csv
     if filename is None:
+        _utc_flag = "_utc" if export_in_utc else ""
         filename = (
             f"{meta.station_id}_{start.strftime('%Y%m%d')}_{stop.strftime('%Y%m%d')}"
-            f"_{meta.station_name}.mos"
+            f"_{meta.station_name}{_utc_flag}.mos"
         )
     filepath = definitions.results_file_path(filename, result_folder)
 

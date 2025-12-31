@@ -7,7 +7,7 @@ import os.path
 import unittest
 import datetime as dt
 
-from parameterized import parameterized
+from parameterized import parameterized, parameterized_class
 
 from aixweather import definitions
 from aixweather.project_class import ProjectClassDWDHistorical
@@ -17,7 +17,7 @@ from tests import utils_4_tests
 class BaseDWDHistorical(unittest.TestCase):
     @classmethod
     def init_and_run_DWD_historical(
-        cls, name: str, start: dt.datetime, end: dt.datetime, station=15000
+        cls, name: str, start: dt.datetime, end: dt.datetime, station=15000, export_in_utc: bool = False
     ):
         abs_result_folder_path = os.path.join(definitions.result_folder_path(), name)
         cls.c = ProjectClassDWDHistorical(
@@ -32,7 +32,7 @@ class BaseDWDHistorical(unittest.TestCase):
         cls.start_formatted = start.strftime("%Y%m%d")
         cls.end_formatted = end.strftime("%Y%m%d")
 
-        utils_4_tests.run_all_functions(cls.c)
+        utils_4_tests.run_all_functions(project_class_instance=cls.c, export_in_utc=export_in_utc)
 
         cls.station_id = station
         cls.city = "Aachen-Orsbach"
@@ -42,33 +42,40 @@ class BaseDWDHistorical(unittest.TestCase):
         utils_4_tests.delete_created_result_files(cls.c.abs_result_folder_path)
 
 
+@parameterized_class([dict(export_in_utc=export_in_utc) for export_in_utc in [True, False]])
 class TestDWDHistorical1Year(BaseDWDHistorical, utils_4_tests.RegressionTestsClass):
     """
     Attention at some day this pull will move from recent folder
     to historic folder, update desired outcome with new dates
     """
+    export_in_utc = None
 
     @classmethod
     def setUpClass(cls):
         cls.init_and_run_DWD_historical(
-            "historical_1year", dt.datetime(2022, 1, 1), dt.datetime(2023, 1, 1)
+            "historical_1year", dt.datetime(2022, 1, 1), dt.datetime(2023, 1, 1),
+            export_in_utc=cls.export_in_utc
         )
 
 
+@parameterized_class([dict(export_in_utc=export_in_utc) for export_in_utc in [True, False]])
 class TestDWDHistorical10Days(BaseDWDHistorical, utils_4_tests.RegressionTestsClass):
     """
     Attention at some day this pull will move from recent folder
     to historic folder, update desired outcome with new dates
     """
+    export_in_utc = None
 
     @classmethod
     def setUpClass(cls):
         cls.init_and_run_DWD_historical(
-            "historical_10days", dt.datetime(2022, 1, 1), dt.datetime(2022, 1, 10)
+            "historical_10days", dt.datetime(2022, 1, 1), dt.datetime(2022, 1, 10),
+            export_in_utc=cls.export_in_utc
         )
 
 
 class TestDWDHistoricalNoAssert(BaseDWDHistorical):
+
     @parameterized.expand(
         [
             (
@@ -94,5 +101,5 @@ class TestDWDHistoricalNoAssert(BaseDWDHistorical):
         ]
     )
     def test_imports_and_transformation_without_assert(self, name, start, end):
-        name = "TestDWDHistoricalNoAssert" # enable teardown clean up through same result folder per parameter set
-        self.init_and_run_DWD_historical(name, start, end)
+        name = "TestDWDHistoricalNoAssert"  # enable teardown clean up through same result folder per parameter set
+        self.init_and_run_DWD_historical(name, start, end, export_in_utc=False)

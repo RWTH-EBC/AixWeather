@@ -17,10 +17,10 @@ from aixweather.imports.utils_import import MetaData
 logging.basicConfig(level="DEBUG")
 
 
-def load_mos(folder_tests, result_folder, file_name):
-    with open(os.path.join(folder_tests, file_name), "r") as file:
+def load_mos(folder_tests, result_folder, file_name_desired, file_name_created):
+    with open(os.path.join(folder_tests, file_name_desired), "r") as file:
         mos_desired = file.read()
-    with open(definitions.results_file_path(file_name, result_folder), "r") as file:
+    with open(definitions.results_file_path(file_name_created, result_folder), "r") as file:
         mos_created = file.read()
     # delete time of data pull
     pattern = r"\(collected at \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6}\)"
@@ -29,10 +29,10 @@ def load_mos(folder_tests, result_folder, file_name):
     return mos_desired, mos_created
 
 
-def load_epw(folder_tests, result_folder, file_name):
-    with open(os.path.join(folder_tests, file_name), "r") as file:
+def load_epw(folder_tests, result_folder, file_name_desired, file_name_created):
+    with open(os.path.join(folder_tests, file_name_desired), "r") as file:
         epw_desired = file.read()
-    with open(definitions.results_file_path(file_name, result_folder), "r") as file:
+    with open(definitions.results_file_path(file_name_created, result_folder), "r") as file:
         epw_created = file.read()
     return epw_desired, epw_created
 
@@ -57,8 +57,7 @@ def delete_created_result_files(result_folder):
         shutil.rmtree(result_folder)
 
 
-
-def run_all_functions(project_class_instance):
+def run_all_functions(project_class_instance, export_in_utc: bool):
     """
     This function runs a series of methods on a project class instance to import and process weather data. It is
     intended for testing and validation purposes.
@@ -72,8 +71,8 @@ def run_all_functions(project_class_instance):
     project_class_instance.core_2_pickle()
     project_class_instance.core_2_json()
     project_class_instance.core_2_csv()
-    project_class_instance.core_2_mos()
-    project_class_instance.core_2_epw()
+    project_class_instance.core_2_mos(export_in_utc=export_in_utc)
+    project_class_instance.core_2_epw(export_in_utc=export_in_utc)
 
 
 class RegressionTestsClass:
@@ -146,10 +145,22 @@ class RegressionTestsClass:
         )
         pd.testing.assert_frame_equal(csv_desired, csv_created)
 
+    def _get_name(self):
+        if hasattr(self, "export_in_utc"):
+            export_in_utc = self.export_in_utc
+        else:
+            export_in_utc = True
+        _base = f"{self.station_id}_{self.start_formatted}_{self.end_formatted}_{self.city}"
+        if export_in_utc:
+            return f"{_base}_utc"
+        return _base
+
     def test_output_mos(self):
         mos_desired, mos_created = load_mos(
-            self.folder_tests, self.c.abs_result_folder_path,
-            f"{self.station_id}_{self.start_formatted}_{self.end_formatted}_{self.city}.mos",
+            folder_tests=self.folder_tests,
+            result_folder=self.c.abs_result_folder_path,
+            file_name_created=f"{self._get_name()}.mos",
+            file_name_desired=f"{self._get_name()}.mos"
         )
         self.assertEqual(
             mos_desired[:1000], mos_created[:1000], "First 1000 characters don't match!"
@@ -163,8 +174,10 @@ class RegressionTestsClass:
 
     def test_output_epw(self):
         epw_desired, epw_created = load_epw(
-            self.folder_tests, self.c.abs_result_folder_path,
-            f"{self.station_id}_{self.start_formatted}_{self.end_formatted}_{self.city}.epw",
+            folder_tests=self.folder_tests,
+            result_folder=self.c.abs_result_folder_path,
+            file_name_created=f"{self._get_name()}.epw",
+            file_name_desired=f"{self._get_name()}.epw"
         )
         self.maxDiff = None
         self.assertEqual(

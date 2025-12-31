@@ -5,7 +5,8 @@
     "_latitude": 50.7983,
     "_longitude": 6.0244,
     "input_source": "EPW",
-    "timezone": 1.0,
+    "_timezone": 1.0,
+    "_imported_timezone": 1.0,
     "executed_transformations": {
         "DirHorRad": [
             "GlobHorRad",

@@ -131,8 +131,8 @@ def truncate_data_from_start_to_stop(
 
     Args:
         df (pd.DataFrame): The DataFrame containing timestamped data.
-        start (datetime): The start timestamp to include in the truncated DataFrame.
-        stop (datetime): The stop timestamp to include in the truncated DataFrame.
+        start (datetime): The start timestamp to include in the truncated DataFrame in UTC.
+        stop (datetime): The stop timestamp to include in the truncated DataFrame in UTC.
 
     Returns:
         pd.DataFrame: A new DataFrame containing data only within the specified time range.

@@ -208,6 +208,7 @@ def import_meta_DWD_historical(station: str) -> utils_import.MetaData:
     meta.station_exists_since = station_data["BEGINN"]
     meta.station_exists_until = station_data["ENDE"]
     meta.input_source = "DWD Historical"
+    meta.set_imported_timezone(1)  # Always in Germany, used for later export
 
     return meta
 
@@ -272,6 +273,7 @@ def import_meta_DWD_forecast(station: str) -> utils_import.MetaData:
     meta.longitude = station_data["LON"]
     meta.latitude = station_data["LAT"]
     meta.input_source = "DWD Forecast"
+    meta.set_imported_timezone(1)  # Always in Germany, used for later export
 
     return meta
 

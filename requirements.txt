@@ -8,3 +8,5 @@ pvlib~=0.10.2
 matplotlib~=3.8.1
 seaborn~=0.13.0
 shapely~=2.0.3
+# marshmallow<4.0 required because wetterdienst 0.72 has a loose requirement on marshmallow
+marshmallow<4.0

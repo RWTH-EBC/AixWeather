@@ -25,3 +25,8 @@ jobs:
       PYPI_RELEASE: true
       PYTHON_PACKAGE_NAME: aixweather
       PYTHON_TEST_MATRIX: '["3.9", "3.10", "3.11", "3.12"]'  # 3.13 does not work yet due to wetterdienst lxml dependency
+  dymola:
+    uses: ./.github/workflows/dymola_test.yml
+    with:
+      PYTHON_VERSION: "3.11"
+      DYMOLA_TESTS: true
