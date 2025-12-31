@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>aixweather.transformation_functions.time_observation_transformations &mdash; aixweather 0.1.9 documentation</title>
+  <title>aixweather.transformation_functions.time_observation_transformations &mdash; aixweather 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
@@ -206,8 +206,8 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        df (pd.DataFrame): The DataFrame containing timestamped data.</span>
-<span class="sd">        start (datetime): The start timestamp to include in the truncated DataFrame.</span>
-<span class="sd">        stop (datetime): The stop timestamp to include in the truncated DataFrame.</span>
+<span class="sd">        start (datetime): The start timestamp to include in the truncated DataFrame in UTC.</span>
+<span class="sd">        stop (datetime): The stop timestamp to include in the truncated DataFrame in UTC.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        pd.DataFrame: A new DataFrame containing data only within the specified time range.</span>

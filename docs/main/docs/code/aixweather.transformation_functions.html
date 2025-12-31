@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>aixweather.transformation_functions package &mdash; aixweather 0.1.9 documentation</title>
+  <title>aixweather.transformation_functions package &mdash; aixweather 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
@@ -310,8 +310,8 @@ backward (bool): If True, shift timestamps 30 minutes backward. If False, shift 
 <dd><p>Truncate a DataFrame to include data only between specified start and stop timestamps.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>df (pd.DataFrame): The DataFrame containing timestamped data.
-start (datetime): The start timestamp to include in the truncated DataFrame.
-stop (datetime): The stop timestamp to include in the truncated DataFrame.</p>
+start (datetime): The start timestamp to include in the truncated DataFrame in UTC.
+stop (datetime): The stop timestamp to include in the truncated DataFrame in UTC.</p>
 </dd>
 <dt>Returns:</dt><dd><p>pd.DataFrame: A new DataFrame containing data only within the specified time range.</p>
 </dd>
