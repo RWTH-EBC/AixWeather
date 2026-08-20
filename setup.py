@@ -21,9 +21,11 @@ EXTRAS_REQUIRE = {
         "geopy~=2.4.0",
         "shapely~=2.0.3"
     ],
-    "DWD_forecast": ["wetterdienst>=0.65.0,<=0.72.0"],
+    "DWD_forecast": ["wetterdienst>=0.65.0,<=0.72.0",
+                     "marshmallow<4.0"],
     "full": [
         "wetterdienst>=0.65.0,<=0.72.0",
+        "marshmallow<4.0",
         "geopandas~=0.14.0",
         "geopy~=2.4.0",
         "shapely~=2.0.3",
