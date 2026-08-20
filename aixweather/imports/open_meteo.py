@@ -348,8 +348,9 @@ def _response_to_meta(data: dict, input_source: str, station_name: str = None) -
     meta.latitude = data["latitude"]
     meta.longitude = data["longitude"]
     meta.altitude = data["elevation"]
-    # Open-Meteo has no station ids, identify the location by its grid point
-    meta.station_id = f"lat{meta.latitude:.4f}_lon{meta.longitude:.4f}"
+    # Open-Meteo has no station ids, identify the location by its grid point.
+    # The station id is used for file names, hence no dots are used.
+    meta.station_id = f"lat{meta.latitude:.4f}_lon{meta.longitude:.4f}".replace(".", "-")
     meta.station_name = station_name if station_name else "OpenMeteo"
     meta.input_source = input_source
     meta.set_imported_timezone(

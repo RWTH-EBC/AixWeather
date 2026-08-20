@@ -1,4 +1,4 @@
-LOCATION,Aachen,State,country,,lat50.7909_lon6.0854,50.79086,6.08541,0,200.0
+LOCATION,Aachen,State,country,,lat50-7909_lon6-0854,50.79086,6.08541,0,200.0
 DESIGN CONDITIONS,0
 TYPICAL/EXTREME PERIODS,2,Winter - Week Nearest Min Temperature For Period,Extreme,1/8,1/14,Winter - Week Nearest Average Temperature For Period,Typical,1/1,1/7
 GROUND TEMPERATURES,5,0.05,,,,8.5,0.1,,,,nan,0.2,,,,8.7,0.5,,,,nan,1,,,,nan

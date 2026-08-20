@@ -109,7 +109,8 @@ class TestOpenMeteoMetaData(unittest.TestCase):
             self.response, input_source="Open-Meteo Historical", station_name="Aachen"
         )
         self.assertEqual(meta.station_name, "Aachen")
-        self.assertEqual(meta.station_id, "lat50.7909_lon6.0854")
+        # the station id is used for file names, hence no dots
+        self.assertEqual(meta.station_id, "lat50-7909_lon6-0854")
         self.assertEqual(meta.latitude, 50.79086)
         self.assertEqual(meta.longitude, 6.08541)
         self.assertEqual(meta.altitude, 200.0)
