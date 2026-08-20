@@ -10,6 +10,7 @@ readme_path = Path(__file__).parent.joinpath("README.md")
 long_description = readme_path.read_text()
 
 INSTALL_REQUIRES = [
+    "requests~=2.28",
     "unidecode~=1.3.7",
     "pvlib~=0.10.2",
     "matplotlib~=3.8.1",

@@ -31,3 +31,5 @@
   - BugFix: TRY now works with negative coordinates (#61)
   - Feature: Now pulling wind speed and wind direction from 10 minutes DWD data as this is more often available (#63)
   - Feature: Added JOSS paper including enhanced documentation (#71)
+- v0.3.0:
+  - Feature: Added Open-Meteo as data source for worldwide historical and forecast weather data (#83)

@@ -69,6 +69,29 @@ def e1_pull_DWD_historical_to_all_output_formats():
         abs_result_folder_path=None,  # Optional: specify result path
     )
 
+    # For Open-Meteo, which provides worldwide data for any coordinate instead of weather stations
+    from aixweather.project_class import ProjectClassOpenMeteoHistorical
+
+    project = ProjectClassOpenMeteoHistorical(
+        start=dt.datetime(2022, 1, 1),
+        end=dt.datetime(2023, 1, 1),
+        latitude=50.7893,  # Example location: Aachen
+        longitude=6.0516,
+        station_name="Aachen",  # Optional: used for the file names of the exports
+        abs_result_folder_path=None,
+    )
+
+    # For Open-Meteo forecast data
+    from aixweather.project_class import ProjectClassOpenMeteoForecast
+
+    project = ProjectClassOpenMeteoForecast(
+        latitude=50.7893,
+        longitude=6.0516,
+        forecast_days=7,  # Optional: up to 16 days
+        past_days=0,  # Optional: up to 92 days of the recent past
+        abs_result_folder_path=None,
+    )
+
     # For EPW and TRY we need to import the .epw or .dat file, e.g. from your local drive. The
     # Readme provides information on where you can download your own EPW and TRY files. For this
     # example, we use the test files provided in the tests folder (be sure to have the full

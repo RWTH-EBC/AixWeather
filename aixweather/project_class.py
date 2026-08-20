@@ -11,6 +11,12 @@ from aixweather.imports.DWD import (
     import_meta_DWD_forecast,
 )
 from aixweather.imports.ERC import import_ERC, import_meta_from_ERC
+from aixweather.imports.open_meteo import (
+    import_open_meteo_historical,
+    import_open_meteo_forecast,
+    import_meta_open_meteo_historical,
+    import_meta_open_meteo_forecast,
+)
 from aixweather.imports.TRY import load_try_from_file, load_try_meta_from_file
 from aixweather.imports.EPW import load_epw_from_file, load_epw_meta_from_file
 from aixweather.imports.custom_file import load_custom_meta_data, load_custom_from_file
@@ -19,6 +25,10 @@ from aixweather.transformation_to_core_data.DWD import (
     DWD_forecast_2_core_data,
 )
 from aixweather.transformation_to_core_data.ERC import ERC_to_core_data
+from aixweather.transformation_to_core_data.open_meteo import (
+    open_meteo_historical_to_core_data,
+    open_meteo_forecast_to_core_data,
+)
 from aixweather.transformation_to_core_data.TRY import TRY_to_core_data
 from aixweather.transformation_to_core_data.EPW import EPW_to_core_data
 from aixweather.transformation_to_core_data.custom_file import custom_to_core_data
@@ -304,6 +314,130 @@ class ProjectClassDWDForecast(ProjectClassGeneral):
     def data_2_core_data(self):
         """override abstract function"""
         self.core_data = DWD_forecast_2_core_data(self.imported_data, self.meta_data)
+        self.start = self.core_data.index[0]
+        self.end = self.core_data.index[-1]
+
+
+class ProjectClassOpenMeteoHistorical(ProjectClassGeneral):
+    """
+    A class representing a project for importing and processing historical weather data
+    from Open-Meteo (https://open-meteo.com).
+
+    Open-Meteo provides worldwide reanalysis data (ERA5) for a grid point instead of
+    measurements of a weather station. Hence, the location is defined by coordinates.
+
+    For common attributes, properties, and methods, refer to the base class.
+
+    Attributes:
+        latitude (float): The latitude of the desired location in degree.
+        longitude (float): The longitude of the desired location in degree.
+        station_name (str): Optional name of the location, used for the file names
+            of the exports.
+        api_key (str): Optional Open-Meteo API key, required for commercial use.
+    """
+
+    def __init__(
+        self,
+        start: dt.datetime,
+        end: dt.datetime,
+        latitude: float,
+        longitude: float,
+        station_name: str = None,
+        api_key: str = None,
+        **kwargs,
+    ):
+        super().__init__(start=start, end=end, **kwargs)
+        self.latitude = latitude
+        self.longitude = longitude
+        self.station_name = station_name
+        self.api_key = api_key
+
+    # imports
+    def import_data(self):
+        """override abstract function"""
+        self.meta_data = import_meta_open_meteo_historical(
+            latitude=self.latitude,
+            longitude=self.longitude,
+            station_name=self.station_name,
+            api_key=self.api_key,
+        )
+        self.imported_data = import_open_meteo_historical(
+            self.start - dt.timedelta(days=1),
+            self.end + dt.timedelta(days=1),
+            self.latitude,
+            self.longitude,
+            api_key=self.api_key,
+        )  # pull more data for better interpolation
+
+    # transformation_2_core_data_open_meteo
+    def data_2_core_data(self):
+        """override abstract function"""
+        self.core_data = open_meteo_historical_to_core_data(
+            self.imported_data, self.meta_data
+        )
+
+
+class ProjectClassOpenMeteoForecast(ProjectClassGeneral):
+    """
+    A class representing a project for importing and processing weather forecast data
+    from Open-Meteo (https://open-meteo.com).
+
+    Open-Meteo provides worldwide forecasts for a grid point instead of a weather
+    station. Hence, the location is defined by coordinates.
+
+    For common attributes, properties, and methods, refer to the base class.
+
+    Attributes:
+        latitude (float): The latitude of the desired location in degree.
+        longitude (float): The longitude of the desired location in degree.
+        forecast_days (int): Number of days to be forecasted (0 to 16).
+        past_days (int): Number of past days to be pulled additionally (0 to 92).
+        station_name (str): Optional name of the location, used for the file names
+            of the exports.
+        api_key (str): Optional Open-Meteo API key, required for commercial use.
+    """
+
+    def __init__(
+        self,
+        latitude: float,
+        longitude: float,
+        forecast_days: int = 7,
+        past_days: int = 0,
+        station_name: str = None,
+        api_key: str = None,
+        **kwargs,
+    ):
+        super().__init__(**kwargs)
+        self.latitude = latitude
+        self.longitude = longitude
+        self.forecast_days = forecast_days
+        self.past_days = past_days
+        self.station_name = station_name
+        self.api_key = api_key
+
+    # imports
+    def import_data(self):
+        """override abstract function"""
+        self.meta_data = import_meta_open_meteo_forecast(
+            latitude=self.latitude,
+            longitude=self.longitude,
+            station_name=self.station_name,
+            api_key=self.api_key,
+        )
+        self.imported_data = import_open_meteo_forecast(
+            latitude=self.latitude,
+            longitude=self.longitude,
+            forecast_days=self.forecast_days,
+            past_days=self.past_days,
+            api_key=self.api_key,
+        )
+
+    # transformation_2_core_data_open_meteo
+    def data_2_core_data(self):
+        """override abstract function"""
+        self.core_data = open_meteo_forecast_to_core_data(
+            self.imported_data, self.meta_data
+        )
         self.start = self.core_data.index[0]
         self.end = self.core_data.index[-1]
 

@@ -1,0 +1,30 @@
+{
+    "_station_name": "Aachen",
+    "station_id": "lat50.7820_lon6.0610",
+    "_altitude": 200.0,
+    "_latitude": 50.782,
+    "_longitude": 6.061,
+    "_timezone": 1,
+    "_imported_timezone": 1,
+    "input_source": "Open-Meteo Forecast",
+    "executed_transformations": {
+        "OpaqueSkyCover": [
+            "TotalSkyCover"
+        ],
+        "HorInfra": [
+            "DryBulbTemp",
+            "DewPointTemp",
+            "OpaqueSkyCover"
+        ]
+    },
+    "executed_transformations_no_shift": {
+        "OpaqueSkyCover": [
+            "TotalSkyCover"
+        ],
+        "HorInfra": [
+            "DryBulbTemp",
+            "DewPointTemp",
+            "OpaqueSkyCover"
+        ]
+    }
+}

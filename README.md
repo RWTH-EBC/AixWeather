@@ -118,6 +118,14 @@ The DWD MOSMIX station IDs for the DWD forecast are listed [here](https://www.dw
 You may use the imported package [Wetterdienst](https://github.com/earthobservations/wetterdienst) to search for stations automatically, as described [here](https://bookdown.org/brry/rdwd/station-selection.html).
 
 
+# Open-Meteo coordinates
+
+Open-Meteo provides worldwide weather data for any location, hence no station ID but the coordinates 
+of the desired location are required. Aachen would be `latitude=50.7893, longitude=6.0516`. 
+Open-Meteo returns the data of the grid point closest to the given coordinates, which is stored 
+in the metadata together with the altitude of the given location.
+
+
 # Sources of information for corresponding data formats
 
 ## Input
@@ -140,6 +148,30 @@ and the global radiation!
 **DWD historical**: [open data website](https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/)
 
 **DWD forecasts (MOSMIX i.e. KML files)**: [open data website](https://opendata.dwd.de/weather/local_forecasts/) go to content.log.bz2.
+
+**Open-Meteo historical**: [historical weather API](https://open-meteo.com/en/docs/historical-weather-api)
+
+Worldwide reanalysis data (ERA5) from 1940 until a few days before today. Reanalysis data are no 
+measurements of a weather station but the best estimate for a grid point, computed from 
+measurements and weather models.
+
+**Open-Meteo forecasts**: [forecast API](https://open-meteo.com/en/docs)
+
+Worldwide forecasts of up to 16 days, combined from several weather models. Up to 92 past days can 
+be pulled additionally.
+
+Notes for both Open-Meteo sources:
+- The soil temperatures are provided for soil layers (historical) or depths (forecast) that do not 
+exactly match the depths of the core format. They are assigned to the core variable of the closest 
+depth. The deeper soil layers of the historical data are not pulled, as their layers are too thick 
+to be assigned to a core variable. Being layer averages of a land surface model, these soil 
+temperatures can deviate noticeably from a measurement at the respective depth.
+- The visibility is only provided by the forecast data.
+- Open-Meteo is free for non-commercial use, commercial use requires a 
+[subscription](https://open-meteo.com/en/pricing). Such an API key can be handed to the project 
+classes via `api_key`.
+- The data is provided under the [CC BY 4.0 license](https://open-meteo.com/en/license), i.e. 
+Open-Meteo and the used weather services must be credited when the data is published.
 
 **EnergyPlus (EPW)**: 
 

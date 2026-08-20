@@ -29,6 +29,18 @@ def kJm2_to_Whm2(radiation: pd.Series):
     return radiation
 
 
+def Wm2_to_Whm2(radiation: pd.Series):
+    """convert the mean irradiance in W/m^2 of one hour to the irradiation in Wh/m^2
+
+    As AixWeather uses hourly data, the mean irradiance of an hour, multiplied by
+    that hour, results in the same numeric value in Wh/m^2.
+    """
+    hours = 1  # hourly data
+    radiation = radiation * hours
+    logger.debug("%s transformed from from W/m2 to Wh/m2", radiation.name)
+    return radiation
+
+
 def hPa_to_Pa(pressure: pd.Series):
     """convert pressure unit from hPa to Pa"""
     pressure = pressure * 100
