@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About AixWeather &mdash; aixweather 0.3.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
+
+  
+      <script src="_static/jquery.js"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+      <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+      <script src="_static/doctools.js"></script>
+      <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tutorial and Example" href="examples.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            aixweather
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Tutorial and Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code/modules.html">aixweather</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contribution.html">Contribute as a user</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version_his.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">aixweather</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">About AixWeather</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="about-aixweather">
+<h1>About AixWeather<a class="headerlink" href="#about-aixweather" title="Permalink to this heading"></a></h1>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/source/_static/EBC_Logo.png"><img alt="E.ON EBC RWTH Aachen University" src="https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/source/_static/EBC_Logo.png" /></a>
+<a class="reference external image-reference" href="https://doi.org/10.21105/joss.07344"><img alt="DOI" src="https://joss.theoj.org/papers/10.21105/joss.07344/status.svg" /></a>
+<a class="reference external image-reference" href="https://rwth-ebc.github.io/AixWeather//main//docs/index.html"><img alt="documentation" src="https://rwth-ebc.github.io/AixWeather//main//docs/doc.svg" /></a>
+<a class="reference external image-reference" href="https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.html"><img alt="pylint" src="https://rwth-ebc.github.io/AixWeather//main//pylint/pylint.svg" /></a>
+<a class="reference external image-reference" href="https://rwth-ebc.github.io/AixWeather/main/coverage"><img alt="coverage" src="https://rwth-ebc.github.io/AixWeather/main/coverage/badge.svg" /></a>
+<a class="reference external image-reference" href="https://opensource.org/licenses/BSD-3-Clause"><img alt="License" src="https://img.shields.io/badge/License-BSD%203--Clause-blue.svg" /></a>
+<div align="center">
+  <img src="https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/aixweather_logo/AixWeather_Logo.png" alt="AixWeather Logo" width="50%">
+</div><section id="aixweather">
+<h2>AixWeather<a class="headerlink" href="#aixweather" title="Permalink to this heading"></a></h2>
+<p><strong>A weather data generation tool for building energy system simulations. Pull, Transform, Export.</strong></p>
+<p>AixWeather is a streamlined tool which will help you to generate weather data for building energy system simulations.
+The user can choose a data source and an output format, and the tool will take care of the rest.
+Read below to find out what input sources and output formats are currently supported.
+This tool is not designed as a library but as a standalone tool for generating weather
+data files.</p>
+<p>It is being developed at RWTH Aachen University, E.ON Energy Research Center,
+Institute for Energy Efficient Buildings and Indoor Climate (EBC) in Aachen, Germany.</p>
+<p>As the library is developed at RWTH Aachen University’s EBC, the library’s name AixWeather is derived from the
+city’s French name Aix-la-Chapelle, which the people of Aachen are very fond of and use a lot.
+With the name AixWeather we follow this local tradition.</p>
+<p>If you have any questions regarding AixWeather, feel free to contact us at <a class="reference external" href="mailto:ebc-tools&#37;&#52;&#48;eonerc&#46;rwth-aachen&#46;de">ebc-tools<span>&#64;</span>eonerc<span>&#46;</span>rwth-aachen<span>&#46;</span>de</a>.</p>
+<p>Available at PyPI as <a class="reference external" href="https://pypi.org/project/AixWeather/">AixWeather</a>.</p>
+</section>
+</section>
+<section id="webapp">
+<h1>WebApp<a class="headerlink" href="#webapp" title="Permalink to this heading"></a></h1>
+<p>For fast access without setup, use the <a class="reference external" href="https://aixweather.eonerc.rwth-aachen.de/">AixWeather-WebApp</a>.
+The <a class="reference external" href="https://github.com/RWTH-EBC/AixWeather-WebApp">AixWeather-WebApp-Repository</a> contains the corresponding WebApp for AixWeather.
+This repository here contains the functionalities useful for, e.g., automation of tasks.</p>
+</section>
+<section id="how-to-use-aixweather-locally">
+<h1>How to use AixWeather locally<a class="headerlink" href="#how-to-use-aixweather-locally" title="Permalink to this heading"></a></h1>
+<p>Simply install via:</p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">AixWeather</span></code></p>
+<p>Or, by cloning the repository:</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/RWTH-EBC/AixWeather.git</span> <span class="pre">AixWeather</span></code>
+<code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">AixWeather</span></code>
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code></p>
+<p>Then go to the <a class="reference external" href="https://rwth-ebc.github.io/AixWeather//main//docs/examples/e1_pull_DWD_historical_to_all_output_formats.html">example</a> and follow the descriptions.
+This example contains the streamlined process exemplary shown for pulling DWD historical data and exporting it to all available output formats.
+Use generic functions to execute the streamlined process to create the desired output file.
+You may then either run this example file as a standalone and just transfer the output
+files to your simulation environment or if the weather data shall be generated by means of your own script,
+just copy the same executive functions to your script.
+For each data origin, a class is defined.
+Choose the class according to the desired weather data origin.
+For background knowledge, check the below tool structure and overview.</p>
+</section>
+<section id="tool-structure-and-overview">
+<h1>Tool structure and overview<a class="headerlink" href="#tool-structure-and-overview" title="Permalink to this heading"></a></h1>
+<p>AixWeather is a tool for generating weather data for building energy system simulations.
+It retrieves, formats, enriches, and ultimately exports weather data in various file formats.</p>
+<p><strong>This tool consists of three layers that are executed as a pipeline for each run:</strong></p>
+<ol class="arabic">
+<li><p>Import raw weather data from several sources</p></li>
+<li><p>Transform the weather data to a defined core format with consideration of:</p>
+<blockquote>
+<div><p>2.1. Time zone</p>
+<p>2.2. Time of measurement (whether a value at a certain time stamp is for the indicated time or, e.g., the average of the preceding hour)</p>
+<p>2.3. Avoidance of smoothing through interpolation (pass through variables without interpolation if possible)</p>
+<p>2.4. Units</p>
+<p>2.5. Calculate missing variables from available ones, e.g., horizontal direct radiation from diffuse and global radiation</p>
+<p>2.6. Missing data.</p>
+</div></blockquote>
+</li>
+<li><p>Transform the core-format data to your desired output format</p></li>
+</ol>
+<p>Which transformations are executed, i.e. required, will always depend on the input data and the
+desired output format.
+The current set of implemented transformation functions can be found in <a class="reference external" href="https://rwth-ebc.github.io/AixWeather//main//docs/code/aixweather.transformation_functions.html">aixweather/transformation_functions</a>, e.g. the <a class="reference external" href="https://rwth-ebc.github.io/AixWeather//main//docs/code/aixweather.transformation_functions.html#module-aixweather.transformation_functions.unit_conversions">unit conversions</a> or the functions to calculate missing values: <a class="reference external" href="https://rwth-ebc.github.io/AixWeather//main//docs/code/aixweather.transformation_functions.html#module-aixweather.transformation_functions.variable_transformations">variable transformation</a>.
+Though, these function do not need be called explicitly, as they are called by the tool
+automatically based on the input data and the desired output format.
+Only if you plan to extend AixWeather by adding a new input or output format, you will need to specify which
+transformations are required specifically for your new format.
+The community will be happy to have such developments contributed back to the main repository.</p>
+<p><strong>Overview</strong></p>
+<p>The below diagram shows the tool’s structure and the data flow from the import to the output format.
+It also shows what kind of input and output formats are currently supported.
+Every input is first transformed to the core format, which is then transformed to the desired output format.
+This allows for a clear separation of concerns and a modular structure that is easy to extend.</p>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/Overview_WeatherTool.png"><img alt="Weather Data Tool Diagram" src="https://raw.githubusercontent.com/RWTH-EBC/AixWeather/main/docs/Overview_WeatherTool.png" /></a>
+<p><strong>Known limitations:</strong></p>
+<ul class="simple">
+<li><p>only hourly data</p></li>
+</ul>
+<p><strong>Chances:</strong></p>
+<ul class="simple">
+<li><p>generic code base that allows for fast and easy extensions to both other import formats and output formats</p></li>
+</ul>
+<section id="dwd-station-ids-and-dwd-mosmix-station-ids">
+<h2>DWD station IDs and DWD MOSMIX station IDs<a class="headerlink" href="#dwd-station-ids-and-dwd-mosmix-station-ids" title="Permalink to this heading"></a></h2>
+<p>The station IDs for the DWD weather stations to pull historical data from are listed <a class="reference external" href="https://www.dwd.de/DE/leistungen/klimadatendeutschland/stationsliste.html">here</a>. Only german stations available. Aachen would be 15000.</p>
+<p>The DWD MOSMIX station IDs for the DWD forecast are listed <a class="reference external" href="https://www.dwd.de/DE/leistungen/met_verfahren_mosmix/mosmix_stationskatalog.cfg?view=nasPublication&amp;nn=16102">here</a> or located on a map <a class="reference external" href="https://wettwarn.de/mosmix/mosmix.html">here</a>. Worldwide station available. Aachen would be 10505.</p>
+<p>You may use the imported package <a class="reference external" href="https://github.com/earthobservations/wetterdienst">Wetterdienst</a> to search for stations automatically, as described <a class="reference external" href="https://bookdown.org/brry/rdwd/station-selection.html">here</a>.</p>
+</section>
+<section id="open-meteo-coordinates">
+<h2>Open-Meteo coordinates<a class="headerlink" href="#open-meteo-coordinates" title="Permalink to this heading"></a></h2>
+<p>Open-Meteo provides worldwide weather data for any location, hence no station ID but the coordinates
+of the desired location are required. Aachen would be <code class="docutils literal notranslate"><span class="pre">latitude=50.7893,</span> <span class="pre">longitude=6.0516</span></code>.
+Open-Meteo returns the data of the grid point closest to the given coordinates, which is stored
+in the metadata together with the altitude of the given location.</p>
+</section>
+<section id="sources-of-information-for-corresponding-data-formats">
+<h2>Sources of information for corresponding data formats<a class="headerlink" href="#sources-of-information-for-corresponding-data-formats" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="input">
+<h1>Input<a class="headerlink" href="#input" title="Permalink to this heading"></a></h1>
+<p><strong>Test Reference Years (TRY)</strong>:</p>
+<p><a class="reference external" href="https://www.bbsr.bund.de/BBSR/DE/forschung/programme/zb/Auftragsforschung/5EnergieKlimaBauen/2013/testreferenzjahre/try-handbuch.pdf">Handbuch</a>.</p>
+<p>TRY data can be downloaded from the DWD (sign up required but for free) <a class="reference external" href="https://www.bbsr.bund.de/BBSR/DE/forschung/programme/zb/Auftragsforschung/5EnergieKlimaBauen/2013/testreferenzjahre/01-start.html;jsessionid=5D9912D230EB887C1F831671303A8A0F.live21304?nn=2544408&amp;pos=2">TRY data sets</a>.</p>
+<p>Additional information on the suitability of TRY data (last update: 2019):
+There are typical TRY datasets grouped by the year of publication:</p>
+<ul class="simple">
+<li><p>2004 datasets: (DWD; some errors in solar radiation; dataset should be avoided).</p></li>
+<li><p>2010 datasets: suitable for EnEV and GEG, not for solar thermal simulations.</p></li>
+<li><p>2015 datasets: not suitable for EnEV and GEG, but for solar thermal simulations</p></li>
+<li><p>Overall: Reliable quantities in TRYs are only the air temperature
+and the global radiation!</p></li>
+</ul>
+<p><strong>DWD historical</strong>: <a class="reference external" href="https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/">open data website</a></p>
+<p><strong>DWD forecasts (MOSMIX i.e. KML files)</strong>: <a class="reference external" href="https://opendata.dwd.de/weather/local_forecasts/">open data website</a> go to content.log.bz2.</p>
+<p><strong>Open-Meteo historical</strong>: <a class="reference external" href="https://open-meteo.com/en/docs/historical-weather-api">historical weather API</a></p>
+<p>Worldwide reanalysis data (ERA5) from 1940 until a few days before today. Reanalysis data are no
+measurements of a weather station but the best estimate for a grid point, computed from
+measurements and weather models.</p>
+<p><strong>Open-Meteo forecasts</strong>: <a class="reference external" href="https://open-meteo.com/en/docs">forecast API</a></p>
+<p>Worldwide forecasts of up to 16 days, combined from several weather models. Up to 92 past days can
+be pulled additionally.</p>
+<p>Notes for both Open-Meteo sources:</p>
+<ul class="simple">
+<li><p>The soil temperatures are provided for soil layers (historical) or depths (forecast) that do not
+exactly match the depths of the core format. They are assigned to the core variable of the closest
+depth. The deeper soil layers of the historical data are not pulled, as their layers are too thick
+to be assigned to a core variable. Being layer averages of a land surface model, these soil
+temperatures can deviate noticeably from a measurement at the respective depth.</p></li>
+<li><p>The visibility is only provided by the forecast data.</p></li>
+<li><p>Open-Meteo is free for non-commercial use, commercial use requires a
+<a class="reference external" href="https://open-meteo.com/en/pricing">subscription</a>. Such an API key can be handed to the project
+classes via <code class="docutils literal notranslate"><span class="pre">api_key</span></code>.</p></li>
+<li><p>The data is provided under the <a class="reference external" href="https://open-meteo.com/en/license">CC BY 4.0 license</a>, i.e.
+Open-Meteo and the used weather services must be credited when the data is published.</p></li>
+</ul>
+<p><strong>EnergyPlus (EPW)</strong>:</p>
+<p>For format information, see the corresponding output format description.</p>
+<p>Online sources for EPW data: <a class="reference external" href="https://climate.onebuilding.org/default.html">https://climate.onebuilding.org/default.html</a> and <a class="reference external" href="https://www.ladybug.tools/epwmap/">https://www.ladybug.tools/epwmap/</a></p>
+<p><strong>ERC data:</strong></p>
+<p>This data is from the weather station of the Institute for Energy Efficient Buildings and Indoor Climate (RWTH). Access requires user credentials. Such credentials are pre-defined if you use the WebApp.</p>
+</section>
+<section id="output-formats">
+<h1>Output formats<a class="headerlink" href="#output-formats" title="Permalink to this heading"></a></h1>
+<p><strong>EnergyPlus (EPW):</strong></p>
+<p><a class="reference external" href="https://designbuilder.co.uk/cahelp/Content/EnergyPlusWeatherFileFormat.htm">3rd party format description</a></p>
+<p><strong>Modelica ReaderTMY3:</strong></p>
+<p>TMY3 reader from the <a class="reference external" href="https://github.com/ibpsa/modelica-ibpsa">IBPSA</a> library used in the <a class="reference external" href="https://github.com/RWTH-EBC/AixLib">AixLib</a> library. Model info at <a class="reference external" href="https://build.openmodelica.org/Documentation/Buildings.BoundaryConditions.WeatherData.ReaderTMY3.html">OpenModelica</a>.
+It claims to use mainly <a class="reference external" href="https://www.nrel.gov/docs/fy08osti/43156.pdf">TMY3 data</a>, though we found that the pressure is used in mbar instead of Pa. Further deviations possible.</p>
+<p>Additional information for AixLib users.</p>
+<p>Weather data usage in the low order model (LOM):</p>
+<p>Used in LOM:</p>
+<ul class="simple">
+<li><p>TDryBul</p></li>
+<li><p>RelHum</p></li>
+<li><p>TBlaSky (calculated via HInfHor, TDryBul, TDewPoi, and OpaSkyCov)</p></li>
+<li><p>HGloHor</p></li>
+<li><p>HDifHor</p></li>
+<li><p>HDirNor</p></li>
+</ul>
+<p>Not used in the LOM:</p>
+<ul class="simple">
+<li><p>total sky cover</p></li>
+<li><p>ceiling height</p></li>
+<li><p>wind direction</p></li>
+<li><p>wind speed</p></li>
+<li><p>atmospheric pressure</p></li>
+</ul>
+<p><strong>Unconverted to x</strong></p>
+<p>exports the core data without conversion to .csv, .json, or .pickle files.</p>
+<section id="how-to-contribute-to-the-development">
+<h2>How to contribute to the development<a class="headerlink" href="#how-to-contribute-to-the-development" title="Permalink to this heading"></a></h2>
+<p>You are invited to contribute to the development of this weather tool.
+Issues can be reported using this site’s Issues section.
+Furthermore, you are welcome to contribute via Pull Requests.
+More info on how to contribute can be found <a class="reference external" href="docs/source/Contribution.md">here</a>.</p>
+</section>
+<section id="how-to-cite">
+<h2>How to cite<a class="headerlink" href="#how-to-cite" title="Permalink to this heading"></a></h2>
+<p>If you are using weather files created by AixWeather in your research, please cite the corresponding JOSS paper:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@article</span><span class="p">{</span><span class="n">Rätz2025</span><span class="p">,</span>
+   <span class="n">doi</span> <span class="o">=</span> <span class="p">{</span><span class="mf">10.21105</span><span class="o">/</span><span class="n">joss</span><span class="mf">.07344</span><span class="p">},</span>
+   <span class="n">url</span> <span class="o">=</span> <span class="p">{</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">doi</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="mf">10.21105</span><span class="o">/</span><span class="n">joss</span><span class="mf">.07344</span><span class="p">},</span>
+   <span class="n">year</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2025</span><span class="p">},</span>
+   <span class="n">publisher</span> <span class="o">=</span> <span class="p">{</span><span class="n">The</span> <span class="n">Open</span> <span class="n">Journal</span><span class="p">},</span>
+   <span class="n">volume</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">},</span>
+   <span class="n">number</span> <span class="o">=</span> <span class="p">{</span><span class="mi">107</span><span class="p">},</span>
+   <span class="n">pages</span> <span class="o">=</span> <span class="p">{</span><span class="mi">7344</span><span class="p">},</span>
+   <span class="n">author</span> <span class="o">=</span> <span class="p">{</span><span class="n">Martin</span> <span class="n">Rätz</span> <span class="ow">and</span> <span class="n">Fabian</span> <span class="n">Wüllhorst</span> <span class="ow">and</span> <span class="n">Rita</span> <span class="n">Streblow</span> <span class="ow">and</span> <span class="n">Dirk</span> <span class="n">Müller</span><span class="p">},</span>
+   <span class="n">title</span> <span class="o">=</span> <span class="p">{</span><span class="n">AixWeather</span><span class="p">:</span> <span class="n">A</span> <span class="n">Weather</span> <span class="n">Data</span> <span class="n">Generation</span> <span class="n">Tool</span> <span class="k">for</span> <span class="n">Building</span> <span class="n">Energy</span> <span class="n">System</span> <span class="n">Simulations</span><span class="o">.</span> <span class="n">Pull</span><span class="p">,</span> <span class="n">Transform</span><span class="p">,</span> <span class="n">Export</span><span class="o">.</span><span class="p">},</span>
+   <span class="n">journal</span> <span class="o">=</span> <span class="p">{</span><span class="n">Journal</span> <span class="n">of</span> <span class="n">Open</span> <span class="n">Source</span> <span class="n">Software</span><span class="p">}</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this heading"></a></h2>
+<p>The weather tool is released by RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficient Buildings and Indoor Climate and is available under a 3-clause BSD license.
+See <a class="reference external" href="LICENSE">license</a>.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Tutorial and Example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#e1-pull-dwd-historical-to-all-output-formats-py"><code class="docutils literal notranslate"><span class="pre">e1_pull_DWD_historical_to_all_output_formats.py</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="code/modules.html">aixweather</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="code/aixweather.html">aixweather package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Contribution.html">Contribute as a user</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contribution.html#contribute-as-a-developer">Contribute as a developer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Contribution.html#styleguide">Styleguide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Contribution.html#documentation">Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Contribution.html#unit-tests">Unit-Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Contribution.html#pylint">Pylint</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="version_his.html">Version History</a></li>
+</ul>
+</div>
+</section>
+<section id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="examples.html" class="btn btn-neutral float-right" title="Tutorial and Example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, EON EBC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

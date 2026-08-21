@@ -1,0 +1,577 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>aixweather.imports.open_meteo &mdash; aixweather 0.3.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../../../_static/jquery.js"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+      <script src="../../../_static/doctools.js"></script>
+      <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            aixweather
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Tutorial and Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">aixweather</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html">Contribute as a user</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../version_his.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">aixweather</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">aixweather.imports.open_meteo</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for aixweather.imports.open_meteo</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""</span>
+<span class="sd">imports weather data from the Open-Meteo API (https://open-meteo.com)</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">zoneinfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZoneInfo</span><span class="p">,</span> <span class="n">ZoneInfoNotFoundError</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.imports.utils_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetaData</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># API endpoints, see https://open-meteo.com/en/docs</span>
+<span class="n">ARCHIVE_URL</span> <span class="o">=</span> <span class="s2">"https://archive-api.open-meteo.com/v1/archive"</span>
+<span class="n">FORECAST_URL</span> <span class="o">=</span> <span class="s2">"https://api.open-meteo.com/v1/forecast"</span>
+<span class="c1"># Open-Meteo is free for non-commercial use. Commercial use requires a subscription</span>
+<span class="c1"># (api_key), which is served through separate endpoints, see</span>
+<span class="c1"># https://open-meteo.com/en/pricing</span>
+<span class="n">CUSTOMER_URLS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">ARCHIVE_URL</span><span class="p">:</span> <span class="s2">"https://customer-archive-api.open-meteo.com/v1/archive"</span><span class="p">,</span>
+    <span class="n">FORECAST_URL</span><span class="p">:</span> <span class="s2">"https://customer-api.open-meteo.com/v1/forecast"</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># first day the historical (ERA5 based) archive provides data for</span>
+<span class="n">ARCHIVE_FIRST_DAY</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">1940</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># limits of the forecast API</span>
+<span class="n">MAX_FORECAST_DAYS</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">MAX_PAST_DAYS</span> <span class="o">=</span> <span class="mi">92</span>
+
+<span class="c1"># request settings</span>
+<span class="n">_TIMEOUT</span> <span class="o">=</span> <span class="mi">60</span>  <span class="c1"># seconds until a request is considered as failed</span>
+<span class="n">_RETRIES</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># number of tries before the pull is given up</span>
+
+<span class="c1"># Hourly variables to be pulled. They must match the keys of the respective format</span>
+<span class="c1"># dictionary in aixweather.transformation_to_core_data.open_meteo, which is</span>
+<span class="c1"># ensured by a unit test.</span>
+<span class="n">HOURLY_VARIABLES_HISTORICAL</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"temperature_2m"</span><span class="p">,</span>
+    <span class="s2">"relative_humidity_2m"</span><span class="p">,</span>
+    <span class="s2">"dew_point_2m"</span><span class="p">,</span>
+    <span class="s2">"surface_pressure"</span><span class="p">,</span>
+    <span class="s2">"cloud_cover"</span><span class="p">,</span>
+    <span class="s2">"wind_speed_10m"</span><span class="p">,</span>
+    <span class="s2">"wind_direction_10m"</span><span class="p">,</span>
+    <span class="s2">"shortwave_radiation"</span><span class="p">,</span>
+    <span class="s2">"diffuse_radiation"</span><span class="p">,</span>
+    <span class="s2">"direct_radiation"</span><span class="p">,</span>
+    <span class="s2">"direct_normal_irradiance"</span><span class="p">,</span>
+    <span class="s2">"terrestrial_radiation"</span><span class="p">,</span>
+    <span class="s2">"precipitation"</span><span class="p">,</span>
+    <span class="s2">"soil_temperature_0_to_7cm"</span><span class="p">,</span>
+    <span class="s2">"soil_temperature_7_to_28cm"</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">HOURLY_VARIABLES_FORECAST</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"temperature_2m"</span><span class="p">,</span>
+    <span class="s2">"relative_humidity_2m"</span><span class="p">,</span>
+    <span class="s2">"dew_point_2m"</span><span class="p">,</span>
+    <span class="s2">"surface_pressure"</span><span class="p">,</span>
+    <span class="s2">"cloud_cover"</span><span class="p">,</span>
+    <span class="s2">"visibility"</span><span class="p">,</span>
+    <span class="s2">"wind_speed_10m"</span><span class="p">,</span>
+    <span class="s2">"wind_direction_10m"</span><span class="p">,</span>
+    <span class="s2">"shortwave_radiation"</span><span class="p">,</span>
+    <span class="s2">"diffuse_radiation"</span><span class="p">,</span>
+    <span class="s2">"direct_radiation"</span><span class="p">,</span>
+    <span class="s2">"direct_normal_irradiance"</span><span class="p">,</span>
+    <span class="s2">"terrestrial_radiation"</span><span class="p">,</span>
+    <span class="s2">"precipitation"</span><span class="p">,</span>
+    <span class="s2">"soil_temperature_6cm"</span><span class="p">,</span>
+    <span class="s2">"soil_temperature_18cm"</span><span class="p">,</span>
+    <span class="s2">"soil_temperature_54cm"</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="import_open_meteo_historical"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.open_meteo.import_open_meteo_historical">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">import_open_meteo_historical</span><span class="p">(</span>
+    <span class="n">start</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span>
+    <span class="n">end</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span>
+    <span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Pull historical (reanalysis) weather data from the Open-Meteo archive API</span>
+<span class="sd">    (https://open-meteo.com/en/docs/historical-weather-api) and format them into a dataframe.</span>
+
+<span class="sd">    The data is pulled in UTC, as required for the core data format.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        start: Datetime object defining the first day to be pulled.</span>
+<span class="sd">        end: Datetime object defining the last day to be pulled.</span>
+<span class="sd">        latitude: Latitude of the desired location in degree.</span>
+<span class="sd">        longitude: Longitude of the desired location in degree.</span>
+<span class="sd">        api_key: Optional Open-Meteo API key, required for commercial use.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: Weather data from Open-Meteo that is as raw as possible.</span>
+<span class="sd">    """</span>
+    <span class="n">_check_coordinates</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">)</span>
+    <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span> <span class="o">=</span> <span class="n">_limit_archive_dates</span><span class="p">(</span><span class="n">start</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="n">end</span><span class="o">.</span><span class="n">date</span><span class="p">())</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_request_open_meteo</span><span class="p">(</span>
+        <span class="n">url</span><span class="o">=</span><span class="n">ARCHIVE_URL</span><span class="p">,</span>
+        <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">"latitude"</span><span class="p">:</span> <span class="n">latitude</span><span class="p">,</span>
+            <span class="s2">"longitude"</span><span class="p">:</span> <span class="n">longitude</span><span class="p">,</span>
+            <span class="s2">"start_date"</span><span class="p">:</span> <span class="n">start_date</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s2">"end_date"</span><span class="p">:</span> <span class="n">end_date</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s2">"hourly"</span><span class="p">:</span> <span class="s2">","</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">HOURLY_VARIABLES_HISTORICAL</span><span class="p">),</span>
+            <span class="c1"># request UTC and m/s to match the core data format</span>
+            <span class="s2">"timezone"</span><span class="p">:</span> <span class="s2">"GMT"</span><span class="p">,</span>
+            <span class="s2">"wind_speed_unit"</span><span class="p">:</span> <span class="s2">"ms"</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_hourly_to_dataframe</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="import_open_meteo_forecast"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.open_meteo.import_open_meteo_forecast">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">import_open_meteo_forecast</span><span class="p">(</span>
+    <span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">forecast_days</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="n">past_days</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Pull weather forecast data from the Open-Meteo forecast API</span>
+<span class="sd">    (https://open-meteo.com/en/docs) and format them into a dataframe.</span>
+
+<span class="sd">    The data is pulled in UTC, as required for the core data format.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        latitude: Latitude of the desired location in degree.</span>
+<span class="sd">        longitude: Longitude of the desired location in degree.</span>
+<span class="sd">        forecast_days: Number of days to be forecasted (0 to 16).</span>
+<span class="sd">        past_days: Number of past days to be pulled additionally (0 to 92).</span>
+<span class="sd">        api_key: Optional Open-Meteo API key, required for commercial use.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: Weather forecast data from Open-Meteo that is as raw as possible.</span>
+<span class="sd">    """</span>
+    <span class="n">_check_coordinates</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">)</span>
+    <span class="n">_check_forecast_period</span><span class="p">(</span><span class="n">forecast_days</span><span class="p">,</span> <span class="n">past_days</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_request_open_meteo</span><span class="p">(</span>
+        <span class="n">url</span><span class="o">=</span><span class="n">FORECAST_URL</span><span class="p">,</span>
+        <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">"latitude"</span><span class="p">:</span> <span class="n">latitude</span><span class="p">,</span>
+            <span class="s2">"longitude"</span><span class="p">:</span> <span class="n">longitude</span><span class="p">,</span>
+            <span class="s2">"hourly"</span><span class="p">:</span> <span class="s2">","</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">HOURLY_VARIABLES_FORECAST</span><span class="p">),</span>
+            <span class="s2">"forecast_days"</span><span class="p">:</span> <span class="n">forecast_days</span><span class="p">,</span>
+            <span class="s2">"past_days"</span><span class="p">:</span> <span class="n">past_days</span><span class="p">,</span>
+            <span class="c1"># request UTC and m/s to match the core data format</span>
+            <span class="s2">"timezone"</span><span class="p">:</span> <span class="s2">"GMT"</span><span class="p">,</span>
+            <span class="s2">"wind_speed_unit"</span><span class="p">:</span> <span class="s2">"ms"</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_hourly_to_dataframe</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="import_meta_open_meteo_historical"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.open_meteo.import_meta_open_meteo_historical">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">import_meta_open_meteo_historical</span><span class="p">(</span>
+    <span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">station_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">api_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MetaData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Get the metadata of the Open-Meteo archive grid point closest to the given coordinates.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        latitude: Latitude of the desired location in degree.</span>
+<span class="sd">        longitude: Longitude of the desired location in degree.</span>
+<span class="sd">        station_name: Optional name of the location, used for the file names of the exports.</span>
+<span class="sd">        api_key: Optional Open-Meteo API key, required for commercial use.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        MetaData: An object of the MetaData class with populated attributes.</span>
+<span class="sd">    """</span>
+    <span class="n">_check_coordinates</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">)</span>
+
+    <span class="c1"># the requested day is irrelevant for the metadata, use a day that always exists</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_request_open_meteo</span><span class="p">(</span>
+        <span class="n">url</span><span class="o">=</span><span class="n">ARCHIVE_URL</span><span class="p">,</span>
+        <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">"latitude"</span><span class="p">:</span> <span class="n">latitude</span><span class="p">,</span>
+            <span class="s2">"longitude"</span><span class="p">:</span> <span class="n">longitude</span><span class="p">,</span>
+            <span class="s2">"start_date"</span><span class="p">:</span> <span class="n">ARCHIVE_FIRST_DAY</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s2">"end_date"</span><span class="p">:</span> <span class="n">ARCHIVE_FIRST_DAY</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="c1"># let Open-Meteo resolve the local timezone of the location</span>
+            <span class="s2">"timezone"</span><span class="p">:</span> <span class="s2">"auto"</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_response_to_meta</span><span class="p">(</span>
+        <span class="n">data</span><span class="p">,</span> <span class="n">input_source</span><span class="o">=</span><span class="s2">"Open-Meteo Historical"</span><span class="p">,</span> <span class="n">station_name</span><span class="o">=</span><span class="n">station_name</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="import_meta_open_meteo_forecast"><a class="viewcode-back" href="../../../code/aixweather.imports.html#aixweather.imports.open_meteo.import_meta_open_meteo_forecast">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">import_meta_open_meteo_forecast</span><span class="p">(</span>
+    <span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">station_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">api_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MetaData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Get the metadata of the Open-Meteo forecast grid point closest to the given coordinates.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        latitude: Latitude of the desired location in degree.</span>
+<span class="sd">        longitude: Longitude of the desired location in degree.</span>
+<span class="sd">        station_name: Optional name of the location, used for the file names of the exports.</span>
+<span class="sd">        api_key: Optional Open-Meteo API key, required for commercial use.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        MetaData: An object of the MetaData class with populated attributes.</span>
+<span class="sd">    """</span>
+    <span class="n">_check_coordinates</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_request_open_meteo</span><span class="p">(</span>
+        <span class="n">url</span><span class="o">=</span><span class="n">FORECAST_URL</span><span class="p">,</span>
+        <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">"latitude"</span><span class="p">:</span> <span class="n">latitude</span><span class="p">,</span>
+            <span class="s2">"longitude"</span><span class="p">:</span> <span class="n">longitude</span><span class="p">,</span>
+            <span class="s2">"forecast_days"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="c1"># let Open-Meteo resolve the local timezone of the location</span>
+            <span class="s2">"timezone"</span><span class="p">:</span> <span class="s2">"auto"</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_response_to_meta</span><span class="p">(</span>
+        <span class="n">data</span><span class="p">,</span> <span class="n">input_source</span><span class="o">=</span><span class="s2">"Open-Meteo Forecast"</span><span class="p">,</span> <span class="n">station_name</span><span class="o">=</span><span class="n">station_name</span>
+    <span class="p">)</span></div>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_request_open_meteo</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">api_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Request data from Open-Meteo and return the json response as dictionary.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        url: URL of the Open-Meteo endpoint.</span>
+<span class="sd">        params: Parameters of the request.</span>
+<span class="sd">        api_key: Optional Open-Meteo API key, required for commercial use.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: The json response of Open-Meteo.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">api_key</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">CUSTOMER_URLS</span><span class="p">[</span><span class="n">url</span><span class="p">]</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">params</span><span class="p">,</span> <span class="s2">"apikey"</span><span class="p">:</span> <span class="n">api_key</span><span class="p">}</span>
+
+    <span class="n">last_exception</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">_RETRIES</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">_TIMEOUT</span><span class="p">)</span>
+
+            <span class="c1"># retrying an exceeded rate limit would not help either</span>
+            <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">429</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"The request limit of Open-Meteo is exceeded: "</span>
+                    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">_error_reason</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="si">}</span><span class="s2">. Wait until the limit is reset or "</span>
+                    <span class="sa">f</span><span class="s2">"use an api key (see https://open-meteo.com/en/pricing)."</span>
+                <span class="p">)</span>
+
+            <span class="c1"># Open-Meteo describes invalid requests (e.g. unavailable time</span>
+            <span class="c1"># periods) in the json body, retrying would not help</span>
+            <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">400</span><span class="p">:</span>
+                <span class="c1"># do not expose the api key in the error message</span>
+                <span class="n">requested</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">"apikey"</span><span class="p">}</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"Open-Meteo rejected the request: "</span>
+                    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">_error_reason</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="si">}</span><span class="s2"> (requested: </span><span class="si">{</span><span class="n">requested</span><span class="si">}</span><span class="s2">)"</span>
+                <span class="p">)</span>
+
+            <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">excep</span><span class="p">:</span>
+            <span class="n">last_exception</span> <span class="o">=</span> <span class="n">excep</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="s2">"Pulling data from Open-Meteo failed (try </span><span class="si">%s</span><span class="s2"> of </span><span class="si">%s</span><span class="s2">): </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span>
+                <span class="n">attempt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">_RETRIES</span><span class="p">,</span> <span class="n">excep</span>
+            <span class="p">)</span>
+
+    <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"Could not pull data from Open-Meteo (</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">) within </span><span class="si">{</span><span class="n">_RETRIES</span><span class="si">}</span><span class="s2"> tries. "</span>
+        <span class="sa">f</span><span class="s2">"Last error: </span><span class="si">{</span><span class="n">last_exception</span><span class="si">}</span><span class="s2">"</span>
+    <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">last_exception</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_error_reason</span><span class="p">(</span><span class="n">response</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">Response</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Extract the error description that Open-Meteo returns for invalid requests."""</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">RequestException</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_hourly_to_dataframe</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert the hourly values of an Open-Meteo response to a dataframe</span>
+<span class="sd">    with a datetime index in UTC.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data: The json response of Open-Meteo as dictionary.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: Dataframe with one column per pulled variable.</span>
+<span class="sd">    """</span>
+    <span class="n">hourly</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hourly"</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">hourly</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Open-Meteo did not return any weather data for the request. "</span>
+            <span class="sa">f</span><span class="s2">"Response: </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">hourly</span><span class="p">)</span>
+    <span class="c1"># timestamps are in UTC as the data is requested with timezone=GMT</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"time"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"time"</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"time"</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s2">"Open-Meteo returned only missing values. The requested time period "</span>
+            <span class="s2">"is likely not (yet) available for the requested location."</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_response_to_meta</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">input_source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">station_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MetaData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert the location information of an Open-Meteo response to the MetaData class.</span>
+
+<span class="sd">    Open-Meteo does not provide weather stations but grid points. Hence, the coordinates</span>
+<span class="sd">    and the altitude of the grid point used by Open-Meteo are stored as metadata, which</span>
+<span class="sd">    may slightly differ from the requested coordinates.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data: The json response of Open-Meteo as dictionary.</span>
+<span class="sd">        input_source: Name of the data source to be stored in the metadata.</span>
+<span class="sd">        station_name: Optional name of the location, used for the file names of the exports.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        MetaData: An object of the MetaData class with populated attributes.</span>
+<span class="sd">    """</span>
+    <span class="n">meta</span> <span class="o">=</span> <span class="n">MetaData</span><span class="p">()</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"latitude"</span><span class="p">]</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"longitude"</span><span class="p">]</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">altitude</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"elevation"</span><span class="p">]</span>
+    <span class="c1"># Open-Meteo has no station ids, identify the location by its grid point.</span>
+    <span class="c1"># The station id is used for file names, hence no dots are used.</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">station_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"lat</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">latitude</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">_lon</span><span class="si">{</span><span class="n">meta</span><span class="o">.</span><span class="n">longitude</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">)</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">station_name</span> <span class="o">=</span> <span class="n">station_name</span> <span class="k">if</span> <span class="n">station_name</span> <span class="k">else</span> <span class="s2">"OpenMeteo"</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">input_source</span> <span class="o">=</span> <span class="n">input_source</span>
+    <span class="n">meta</span><span class="o">.</span><span class="n">set_imported_timezone</span><span class="p">(</span>
+        <span class="n">_standard_utc_offset</span><span class="p">(</span>
+            <span class="n">timezone_name</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"timezone"</span><span class="p">),</span>
+            <span class="n">utc_offset_seconds</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"utc_offset_seconds"</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">meta</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_standard_utc_offset</span><span class="p">(</span><span class="n">timezone_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">utc_offset_seconds</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Get the standard (non-daylight-saving) UTC offset in full hours of the location.</span>
+
+<span class="sd">    The offset is only used to export the data in local time. Daylight saving time is</span>
+<span class="sd">    excluded, as the weather data covers time periods with and without daylight saving.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        timezone_name: Name of the timezone as returned by Open-Meteo, e.g. 'Europe/Berlin'.</span>
+<span class="sd">        utc_offset_seconds: UTC offset in seconds as returned by Open-Meteo. Used as</span>
+<span class="sd">            fallback if the timezone name can not be resolved.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: The UTC offset of the location in full hours.</span>
+<span class="sd">    """</span>
+    <span class="n">offset_hours</span> <span class="o">=</span> <span class="n">utc_offset_seconds</span> <span class="o">/</span> <span class="mi">3600</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">local_time</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">ZoneInfo</span><span class="p">(</span><span class="n">timezone_name</span><span class="p">))</span>
+        <span class="c1"># subtracting the daylight saving time results in the standard offset,</span>
+        <span class="c1"># independent of the current season and hemisphere</span>
+        <span class="n">offset_hours</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">local_time</span><span class="o">.</span><span class="n">utcoffset</span><span class="p">()</span> <span class="o">-</span> <span class="n">local_time</span><span class="o">.</span><span class="n">dst</span><span class="p">()</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">/</span> <span class="mi">3600</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">ZoneInfoNotFoundError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">excep</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s2">"Could not resolve the timezone '</span><span class="si">%s</span><span class="s2">' (</span><span class="si">%s</span><span class="s2">). Using the UTC offset "</span>
+            <span class="s2">"returned by Open-Meteo, which may include daylight saving time."</span><span class="p">,</span>
+            <span class="n">timezone_name</span><span class="p">,</span> <span class="n">excep</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">offset_hours</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">(</span><span class="n">offset_hours</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s2">"The timezone of the requested location deviates by </span><span class="si">%s</span><span class="s2"> hours from UTC. "</span>
+            <span class="s2">"As only full hours are supported, the exports use UTC</span><span class="si">%+d</span><span class="s2"> instead."</span><span class="p">,</span>
+            <span class="n">offset_hours</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">offset_hours</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">offset_hours</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_coordinates</span><span class="p">(</span><span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Make sure the coordinates are given and within the valid range."""</span>
+    <span class="k">if</span> <span class="n">latitude</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">longitude</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"Latitude and longitude are required to pull data from Open-Meteo."</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="o">-</span><span class="mi">90</span> <span class="o">&lt;=</span> <span class="n">latitude</span> <span class="o">&lt;=</span> <span class="mi">90</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The latitude </span><span class="si">{</span><span class="n">latitude</span><span class="si">}</span><span class="s2"> is outside -90 and 90 degree."</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="o">-</span><span class="mi">180</span> <span class="o">&lt;=</span> <span class="n">longitude</span> <span class="o">&lt;=</span> <span class="mi">180</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The longitude </span><span class="si">{</span><span class="n">longitude</span><span class="si">}</span><span class="s2"> is outside -180 and 180 degree."</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_forecast_period</span><span class="p">(</span><span class="n">forecast_days</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">past_days</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Make sure the requested forecast period is supported by Open-Meteo."""</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">forecast_days</span> <span class="o">&lt;=</span> <span class="n">MAX_FORECAST_DAYS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Open-Meteo provides forecasts for up to </span><span class="si">{</span><span class="n">MAX_FORECAST_DAYS</span><span class="si">}</span><span class="s2"> days, "</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">forecast_days</span><span class="si">}</span><span class="s2"> days are requested."</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">past_days</span> <span class="o">&lt;=</span> <span class="n">MAX_PAST_DAYS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"The Open-Meteo forecast API provides up to </span><span class="si">{</span><span class="n">MAX_PAST_DAYS</span><span class="si">}</span><span class="s2"> past days, "</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">past_days</span><span class="si">}</span><span class="s2"> days are requested. Use the historical data instead."</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">forecast_days</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">past_days</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"Either forecast_days or past_days must be greater than zero."</span>
+        <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_limit_archive_dates</span><span class="p">(</span><span class="n">start_date</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">date</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Limit the requested days to the period the Open-Meteo archive provides data for,</span>
+<span class="sd">    as requests outside that period are rejected.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        start_date: First day to be pulled.</span>
+<span class="sd">        end_date: Last day to be pulled.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: The limited start and end day.</span>
+<span class="sd">    """</span>
+    <span class="c1"># the archive is based on reanalysis data and therefore never covers future days</span>
+    <span class="n">last_available_day</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">start_date</span> <span class="o">&lt;</span> <span class="n">ARCHIVE_FIRST_DAY</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s2">"The Open-Meteo archive starts at </span><span class="si">%s</span><span class="s2">, the requested start </span><span class="si">%s</span><span class="s2"> is ignored."</span><span class="p">,</span>
+            <span class="n">ARCHIVE_FIRST_DAY</span><span class="p">,</span> <span class="n">start_date</span>
+        <span class="p">)</span>
+        <span class="n">start_date</span> <span class="o">=</span> <span class="n">ARCHIVE_FIRST_DAY</span>
+    <span class="k">if</span> <span class="n">end_date</span> <span class="o">&gt;</span> <span class="n">last_available_day</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s2">"The Open-Meteo archive provides data until </span><span class="si">%s</span><span class="s2">, the requested end </span><span class="si">%s</span><span class="s2"> "</span>
+            <span class="s2">"is ignored. Use the forecast data for more recent data."</span><span class="p">,</span>
+            <span class="n">last_available_day</span><span class="p">,</span> <span class="n">end_date</span>
+        <span class="p">)</span>
+        <span class="n">end_date</span> <span class="o">=</span> <span class="n">last_available_day</span>
+
+    <span class="k">if</span> <span class="n">end_date</span> <span class="o">&lt;</span> <span class="n">start_date</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"The requested time period is outside the period provided by the "</span>
+            <span class="sa">f</span><span class="s2">"Open-Meteo archive (</span><span class="si">{</span><span class="n">ARCHIVE_FIRST_DAY</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">last_available_day</span><span class="si">}</span><span class="s2">)."</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, EON EBC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

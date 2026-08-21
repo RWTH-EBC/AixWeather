@@ -1,0 +1,321 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>aixweather.transformation_to_core_data.open_meteo &mdash; aixweather 0.3.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../../../_static/jquery.js"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+      <script src="../../../_static/doctools.js"></script>
+      <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            aixweather
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Tutorial and Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">aixweather</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html">Contribute as a user</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contribution.html#contribute-as-a-developer">Contribute as a developer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../version_his.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">aixweather</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">aixweather.transformation_to_core_data.open_meteo</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for aixweather.transformation_to_core_data.open_meteo</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""</span>
+<span class="sd">This module includes functions to transform Open-Meteo data to core data format.</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">aixweather</span><span class="w"> </span><span class="kn">import</span> <span class="n">definitions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.imports.utils_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetaData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aixweather.transformation_functions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">auxiliary</span><span class="p">,</span>
+    <span class="n">time_observation_transformations</span><span class="p">,</span>
+    <span class="n">variable_transformations</span><span class="p">,</span>
+    <span class="n">pass_through_handling</span><span class="p">,</span>
+    <span class="n">unit_conversions</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="OpenMeteoHistoricalFormat"><a class="viewcode-back" href="../../../code/aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.open_meteo.OpenMeteoHistoricalFormat">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">OpenMeteoHistoricalFormat</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Information on the Open-Meteo historical (archive) data:</span>
+<span class="sd">    https://open-meteo.com/en/docs/historical-weather-api</span>
+
+<span class="sd">    The historical data is reanalysis data (ERA5 and ERA5-Land), i.e. no measurements</span>
+<span class="sd">    of a weather station but the best estimate of a grid point.</span>
+
+<span class="sd">    Format info:</span>
+<span class="sd">    key = raw data point name</span>
+<span class="sd">    core_name = corresponding name matching the format_core_data</span>
+<span class="sd">    time_of_meas_shift = desired 30min shifting+interpolation to convert a value that is e.g. the</span>
+<span class="sd">    "average of preceding hour" to "indicated time" (prec2ind).</span>
+<span class="sd">    unit = unit of the raw data following the naming convention of format_core_data</span>
+<span class="sd">    nan = values or value ranges that are considered as missing values</span>
+
+<span class="sd">    All changes here automatically change the calculations.</span>
+<span class="sd">    Exception: unit conversions have to be added manually.</span>
+
+<span class="sd">    Time of measurement and units as documented by Open-Meteo:</span>
+<span class="sd">    all variables are valid for the indicated time, except the radiation and the</span>
+<span class="sd">    precipitation, which are the mean respectively the sum of the preceding hour.</span>
+<span class="sd">    """</span>
+
+<div class="viewcode-block" id="OpenMeteoHistoricalFormat.import_format"><a class="viewcode-back" href="../../../code/aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.open_meteo.OpenMeteoHistoricalFormat.import_format">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">import_format</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">"temperature_2m"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"core_name"</span><span class="p">:</span> <span class="s2">"DryBulbTemp"</span><span class="p">,</span> <span class="s2">"time_of_meas_shift"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"degC"</span><span class="p">},</span>
+            <span class="s2">"relative_humidity_2m"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"core_name"</span><span class="p">:</span> <span class="s2">"RelHum"</span><span class="p">,</span> <span class="s2">"time_of_meas_shift"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"percent"</span><span class="p">,</span> <span class="s2">"nan"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"&lt;"</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="s2">"&gt;"</span><span class="p">:</span> <span class="mi">100</span><span class="p">}]},</span>
+            <span class="s2">"dew_point_2m"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"core_name"</span><span class="p">:</span> <span class="s2">"DewPointTemp"</span><span class="p">,</span> <span class="s2">"time_of_meas_shift"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"degC"</span><span class="p">},</span>
+            <span class="s2">"surface_pressure"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"core_name"</span><span class="p">:</span> <span class="s2">"AtmPressure"</span><span class="p">,</span> <span class="s2">"time_of_meas_shift"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"hPa"</span><span class="p">,</span> <span class="s2">"nan"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"&lt;"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}]},</span>
+            <span class="s2">"cloud_cover"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"core_name"</span><span class="p">:</span> <span class="s2">"TotalSkyCover"</span><span class="p">,</span> <span class="s2">"time_of_meas_shift"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"percent"</span><span class="p">,</span> <span class="s2">"nan"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"&lt;"</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="s2">"&gt;"</span><span class="p">:</span> <span class="mi">100</span><span class="p">}]},</span>
+            <span class="s2">"wind_speed_10m"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"core_name"</span><span class="p">:</span> <span class="s2">"WindSpeed"</span><span class="p">,</span> <span class="s2">"time_of_meas_shift"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"m/s"</span><span class="p">,</span> <span class="s2">"nan"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"&lt;"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}]},</span>
+            <span class="s2">"wind_direction_10m"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"core_name"</span><span class="p">:</span> <span class="s2">"WindDir"</span><span class="p">,</span> <span class="s2">"time_of_meas_shift"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"deg"</span><span class="p">,</span> <span class="s2">"nan"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"&lt;"</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="s2">"&gt;"</span><span class="p">:</span> <span class="mi">360</span><span class="p">}]},</span>
+            <span class="s2">"shortwave_radiation"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"core_name"</span><span class="p">:</span> <span class="s2">"GlobHorRad"</span><span class="p">,</span> <span class="s2">"time_of_meas_shift"</span><span class="p">:</span> <span class="s2">"prec2ind"</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"W/m2"</span><span class="p">,</span> <span class="s2">"nan"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"&lt;"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}]},</span>
+            <span class="s2">"diffuse_radiation"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"core_name"</span><span class="p">:</span> <span class="s2">"DiffHorRad"</span><span class="p">,</span> <span class="s2">"time_of_meas_shift"</span><span class="p">:</span> <span class="s2">"prec2ind"</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"W/m2"</span><span class="p">,</span> <span class="s2">"nan"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"&lt;"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}]},</span>
+            <span class="s2">"direct_radiation"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"core_name"</span><span class="p">:</span> <span class="s2">"DirHorRad"</span><span class="p">,</span> <span class="s2">"time_of_meas_shift"</span><span class="p">:</span> <span class="s2">"prec2ind"</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"W/m2"</span><span class="p">,</span> <span class="s2">"nan"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"&lt;"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}]},</span>
+            <span class="s2">"direct_normal_irradiance"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"core_name"</span><span class="p">:</span> <span class="s2">"DirNormRad"</span><span class="p">,</span> <span class="s2">"time_of_meas_shift"</span><span class="p">:</span> <span class="s2">"prec2ind"</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"W/m2"</span><span class="p">,</span> <span class="s2">"nan"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"&lt;"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}]},</span>
+            <span class="c1"># radiation at the top of the atmosphere on a horizontal plane</span>
+            <span class="s2">"terrestrial_radiation"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"core_name"</span><span class="p">:</span> <span class="s2">"ExtHorRad"</span><span class="p">,</span> <span class="s2">"time_of_meas_shift"</span><span class="p">:</span> <span class="s2">"prec2ind"</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"W/m2"</span><span class="p">,</span> <span class="s2">"nan"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"&lt;"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}]},</span>
+            <span class="c1"># sum of the preceding hour in mm, which equals mm/h</span>
+            <span class="s2">"precipitation"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"core_name"</span><span class="p">:</span> <span class="s2">"LiquidPrecD"</span><span class="p">,</span> <span class="s2">"time_of_meas_shift"</span><span class="p">:</span> <span class="s2">"prec2ind"</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"mm/h"</span><span class="p">,</span> <span class="s2">"nan"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"&lt;"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}]},</span>
+            <span class="c1"># ERA5 provides soil temperatures as average of a soil layer. They are</span>
+            <span class="c1"># assigned to the core variable of the closest depth. Deeper layers</span>
+            <span class="c1"># (28 to 100cm and 100 to 255cm) are not pulled, as their layers are too</span>
+            <span class="c1"># thick to be assigned to a core variable.</span>
+            <span class="s2">"soil_temperature_0_to_7cm"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"core_name"</span><span class="p">:</span> <span class="s2">"Soil_Temperature_5cm"</span><span class="p">,</span> <span class="s2">"time_of_meas_shift"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"degC"</span><span class="p">},</span>
+            <span class="s2">"soil_temperature_7_to_28cm"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"core_name"</span><span class="p">:</span> <span class="s2">"Soil_Temperature_20cm"</span><span class="p">,</span> <span class="s2">"time_of_meas_shift"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"degC"</span><span class="p">},</span>
+        <span class="p">}</span></div></div>
+
+
+<div class="viewcode-block" id="OpenMeteoForecastFormat"><a class="viewcode-back" href="../../../code/aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.open_meteo.OpenMeteoForecastFormat">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">OpenMeteoForecastFormat</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Information on the Open-Meteo forecast data: https://open-meteo.com/en/docs</span>
+
+<span class="sd">    Open-Meteo combines the forecasts of several weather models to a forecast for the</span>
+<span class="sd">    grid point closest to the requested coordinates.</span>
+
+<span class="sd">    For the format info see OpenMeteoHistoricalFormat.</span>
+
+<span class="sd">    Compared to the historical data, the forecast additionally provides the visibility</span>
+<span class="sd">    and uses other soil depths.</span>
+<span class="sd">    """</span>
+
+<div class="viewcode-block" id="OpenMeteoForecastFormat.import_format"><a class="viewcode-back" href="../../../code/aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.open_meteo.OpenMeteoForecastFormat.import_format">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">import_format</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">format_dict</span> <span class="o">=</span> <span class="n">OpenMeteoHistoricalFormat</span><span class="o">.</span><span class="n">import_format</span><span class="p">()</span>
+
+        <span class="c1"># soil temperatures are given for other depths than in the historical data,</span>
+        <span class="c1"># they are assigned to the core variable of the closest depth</span>
+        <span class="k">del</span> <span class="n">format_dict</span><span class="p">[</span><span class="s2">"soil_temperature_0_to_7cm"</span><span class="p">]</span>
+        <span class="k">del</span> <span class="n">format_dict</span><span class="p">[</span><span class="s2">"soil_temperature_7_to_28cm"</span><span class="p">]</span>
+
+        <span class="n">format_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">"visibility"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"core_name"</span><span class="p">:</span> <span class="s2">"Visibility"</span><span class="p">,</span> <span class="s2">"time_of_meas_shift"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"m"</span><span class="p">,</span> <span class="s2">"nan"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"&lt;"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}]},</span>
+                <span class="s2">"soil_temperature_6cm"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"core_name"</span><span class="p">:</span> <span class="s2">"Soil_Temperature_5cm"</span><span class="p">,</span> <span class="s2">"time_of_meas_shift"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"degC"</span><span class="p">},</span>
+                <span class="s2">"soil_temperature_18cm"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"core_name"</span><span class="p">:</span> <span class="s2">"Soil_Temperature_20cm"</span><span class="p">,</span> <span class="s2">"time_of_meas_shift"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"degC"</span><span class="p">},</span>
+                <span class="s2">"soil_temperature_54cm"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"core_name"</span><span class="p">:</span> <span class="s2">"Soil_Temperature_50cm"</span><span class="p">,</span> <span class="s2">"time_of_meas_shift"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"degC"</span><span class="p">},</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">format_dict</span></div></div>
+
+
+<div class="viewcode-block" id="open_meteo_historical_to_core_data"><a class="viewcode-back" href="../../../code/aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.open_meteo.open_meteo_historical_to_core_data">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">open_meteo_historical_to_core_data</span><span class="p">(</span>
+    <span class="n">df_import</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Transform imported historical weather data from Open-Meteo into core data format.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df_import (pd.DataFrame): The DataFrame containing imported weather data from Open-Meteo.</span>
+<span class="sd">        meta (MetaData): Metadata associated with the data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: The transformed DataFrame in the core data format.</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">_open_meteo_to_core_data</span><span class="p">(</span>
+        <span class="n">df_import</span><span class="o">=</span><span class="n">df_import</span><span class="p">,</span>
+        <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
+        <span class="n">format_open_meteo</span><span class="o">=</span><span class="n">OpenMeteoHistoricalFormat</span><span class="o">.</span><span class="n">import_format</span><span class="p">(),</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="open_meteo_forecast_to_core_data"><a class="viewcode-back" href="../../../code/aixweather.transformation_to_core_data.html#aixweather.transformation_to_core_data.open_meteo.open_meteo_forecast_to_core_data">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">open_meteo_forecast_to_core_data</span><span class="p">(</span>
+    <span class="n">df_import</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Transform imported weather forecast data from Open-Meteo into core data format.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df_import (pd.DataFrame): The DataFrame containing imported weather forecast data</span>
+<span class="sd">            from Open-Meteo.</span>
+<span class="sd">        meta (MetaData): Metadata associated with the data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: The transformed DataFrame in the core data format.</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">_open_meteo_to_core_data</span><span class="p">(</span>
+        <span class="n">df_import</span><span class="o">=</span><span class="n">df_import</span><span class="p">,</span>
+        <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
+        <span class="n">format_open_meteo</span><span class="o">=</span><span class="n">OpenMeteoForecastFormat</span><span class="o">.</span><span class="n">import_format</span><span class="p">(),</span>
+    <span class="p">)</span></div>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_open_meteo_to_core_data</span><span class="p">(</span>
+    <span class="n">df_import</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">meta</span><span class="p">:</span> <span class="n">MetaData</span><span class="p">,</span> <span class="n">format_open_meteo</span><span class="p">:</span> <span class="nb">dict</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Transform imported Open-Meteo data into core data format. The historical and the</span>
+<span class="sd">    forecast data only differ in their format dictionary.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df_import (pd.DataFrame): The DataFrame containing imported weather data from Open-Meteo.</span>
+<span class="sd">        meta (MetaData): Metadata associated with the data.</span>
+<span class="sd">        format_open_meteo (dict): The format of the imported data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: The transformed DataFrame in the core data format.</span>
+<span class="sd">    """</span>
+
+    <span class="c1">### evaluate correctness of format</span>
+    <span class="n">auxiliary</span><span class="o">.</span><span class="n">evaluate_transformations</span><span class="p">(</span>
+        <span class="n">core_format</span><span class="o">=</span><span class="n">definitions</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">,</span> <span class="n">other_format</span><span class="o">=</span><span class="n">format_open_meteo</span>
+    <span class="p">)</span>
+
+    <span class="c1">### format raw data for further operations</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_import</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="c1"># variables that are entirely missing are returned as strings by the API</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"coerce"</span><span class="p">)</span>
+    <span class="c1"># make the DatetimeIndex complete and monotonic</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">"h"</span><span class="p">)</span><span class="o">.</span><span class="n">asfreq</span><span class="p">()</span>
+    <span class="c1"># delete implausible values</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">replace_dummy_with_nan</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">format_open_meteo</span><span class="p">)</span>
+    <span class="c1"># rename available variables to core data format</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">rename_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">format_open_meteo</span><span class="p">)</span>
+
+    <span class="c1">### convert timezone to UTC</span>
+    <span class="c1"># the data is pulled in UTC (timezone=GMT), see aixweather.imports.open_meteo</span>
+
+    <span class="c1">### shift and interpolate data forward 30mins or backward -30mins</span>
+    <span class="n">df_no_shift</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">time_observation_transformations</span><span class="o">.</span><span class="n">shift_time_by_dict</span><span class="p">(</span><span class="n">format_open_meteo</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">transform_open_meteo</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+        <span class="c1"># drop unnecessary variables</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">force_data_variable_convention</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">definitions</span><span class="o">.</span><span class="n">format_core_data</span><span class="p">)</span>
+
+        <span class="c1">### convert units</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">"AtmPressure"</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">hPa_to_Pa</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"AtmPressure"</span><span class="p">])</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">"TotalSkyCover"</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">percent_to_tenth</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"TotalSkyCover"</span><span class="p">])</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">"ExtHorRad"</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">Wm2_to_Whm2</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"ExtHorRad"</span><span class="p">])</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">"GlobHorRad"</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">Wm2_to_Whm2</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"GlobHorRad"</span><span class="p">])</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">"DirHorRad"</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">Wm2_to_Whm2</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"DirHorRad"</span><span class="p">])</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">"DirNormRad"</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">Wm2_to_Whm2</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"DirNormRad"</span><span class="p">])</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">"DiffHorRad"</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">Wm2_to_Whm2</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"DiffHorRad"</span><span class="p">])</span>
+        <span class="c1"># only given by the forecast data, nan otherwise</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">"Visibility"</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_conversions</span><span class="o">.</span><span class="n">divide_by_1000</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"Visibility"</span><span class="p">])</span>
+
+        <span class="c1">### impute missing variables from other available ones</span>
+        <span class="n">df</span><span class="p">,</span> <span class="n">calc_overview</span> <span class="o">=</span> <span class="n">variable_transformations</span><span class="o">.</span><span class="n">variable_transform_all</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">meta</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">calc_overview</span>
+
+    <span class="n">df</span><span class="p">,</span> <span class="n">meta</span><span class="o">.</span><span class="n">executed_transformations</span> <span class="o">=</span> <span class="n">transform_open_meteo</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+    <span class="c1">### add unshifted data for possible later direct use (pass-through),</span>
+    <span class="c1">### to avoid back and forth interpolating</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pass_through_handling</span><span class="o">.</span><span class="n">create_pass_through_variables</span><span class="p">(</span>
+        <span class="n">df_shifted</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+        <span class="n">df_no_shift</span><span class="o">=</span><span class="n">df_no_shift</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="n">format_open_meteo</span><span class="p">,</span>
+        <span class="n">transform_func</span><span class="o">=</span><span class="n">transform_open_meteo</span><span class="p">,</span>
+        <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, EON EBC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
